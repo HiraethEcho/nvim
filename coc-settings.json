@@ -1,10 +1,16 @@
 {
 	"coc.preferences.extensionUpdateCheck": "weekly",
+  "session.directory": "D:/Hiraeth/nvim-data/session",
+  "snippets.shortcut": "Snip",
 	"snippets.ultisnips.directories": [
-		"UltiSnips",
-    "D:/Hiraeth/nvim/UltiSnips"
+    "UltiSnips",
+    "MySnips"
 	],
 	"explorer.presets": {
+	   "hiraeth": {
+      "position": "floating",
+	    "root-uri": "D:/Hiraeth"
+	   },
 	   "nvim": {
       "position": "floating",
 	    "root-uri": "~/AppData/Local/nvim"

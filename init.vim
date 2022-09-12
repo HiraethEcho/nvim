@@ -1,29 +1,39 @@
 " ui-special {{{ "
-
 if exists("g:neovide")
 " Put anything you want to happen only in Neovide here
-  colorscheme solarized8_high
-  set background=light
 	let g:neovide_refresh_rate=30
 	let g:neovide_refresh_rate_idle=5
 	let g:neovide_transparency=1
 	let g:neovide_scroll_animation_length = 0.9
 	let g:neovide_remember_window_size = v:true
 	let g:neovide_cursor_trail_length=0.8
+  let g:neovide_cursor_vfx_mode = "railgun"
 	command -nargs=0 NeovideToggleFullscreen :let g:neovide_fullscreen = !g:neovide_fullscreen
   nnoremap <M-CR> :NeovideToggleFullscreen<CR>
-  else
+  let s:fontsize = 16
+  set guifont=CodeNewRoman_NF:h16
+  function! AdjustFontSize(amount)
+    let s:fontsize = s:fontsize+a:amount
+    :execute "set guifont=CodeNewRoman_NF:h" . s:fontsize 
+  endfunction
+  nnoremap <C-up> :call AdjustFontSize(1)<CR> 
+  nnoremap <C-down> :call AdjustFontSize(-1)<CR>
+else
   if exists("g:nvui")
+  let s:fontsize = 16
+  function! AdjustFontSize(amount)
+    let s:fontsize = s:fontsize+a:amount
+    :execute "set guifont=CodeNewRoman_NF:h" . s:fontsize 
+  endfunction
+  nnoremap <C-up> :call AdjustFontSize(1)<CR> 
+  nnoremap <C-down> :call AdjustFontSize(-1)<CR>
   nnoremap <M-CR> :NvuiToggleFullscreen<CR> 
   NvuiFrameless v:true
   NvuiOpacity 0.95
   NvuiCursorHideWhileTyping v:true
-  "NvuiCmdline v:true
 	NvuiCmdFontFamily CodeNewRoman_NF
-  endif
+  else
 " Terminal
-  colorscheme solarized8_high
-  set background=light
   let &t_ut=''
  " Set cursor shape and color
     " INSERT mode
@@ -40,6 +50,7 @@ if exists("g:neovide")
 " 6 -> solid vertical bar  不闪烁的竖线" 
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   set termguicolors
+  endif
 endif
 " }}} ui-special "
 "General{{{
@@ -50,9 +61,9 @@ set cursorline
 set clipboard+=unnamedplus
 set mouse=a
 
-
 set nocompatible
 set nobackup
+set hidden
 set noswapfile
 set noerrorbells
 set novisualbell
@@ -82,16 +93,30 @@ set showmatch          " 高亮显示匹配的括号
 set showmode           " 在底部显示，当前处于命令模式还是插入模式
 set showcmd            " 命令模式下，在底部显示，当前键入的指令
 set showtabline=1      "  only if there are at least two tab pages
-set laststatus=3      " always and ONLY the last window
 
+set laststatus=3      " always and ONLY the last window
+	" function! StatusDiagnostic() abort
+	"   let info = get(b:, 'coc_diagnostic_info', {})
+	"   if empty(info) | return '' | endif
+	"   let msgs = []
+	"   if get(info, 'error', 0)
+	"     call add(msgs, 'E' . info['error'])
+	"   endif
+	"   if get(info, 'warning', 0)
+	"     call add(msgs, 'W' . info['warning'])
+	"   endif
+	"   return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
+	" endfunction
+" set statusline^=%{coc#status()}
 set statusline=
 set statusline+=\ %t
 set statusline+=%m\|
-set statusline+=%=
+" set statusline+=\%{StatusDiagnostic()}
+set statusline+=%=\|
+set statusline+=\%{coc#status()}
 set statusline+=\ %F\|
 set statusline+=\ %l/%L\|%c
 set statusline+=\ 
-
 set number
 set relativenumber
 
@@ -126,11 +151,11 @@ syntax enable
 syntax on
 "}}}
 "Keymappings{{{
-nnoremap <Esc><Esc> :noh<CR>
-nnoremap <F5>       :w<CR> :source $MYVIMRC<CR>
-nnoremap <C-s>      :w<CR>
-nnoremap Q          :q<CR>
-nnoremap <C-Q>      :qa<CR>
+nnoremap mm    :noh<CR>
+nnoremap <F5>  :w<CR>   :source $MYVIMRC<CR>
+nnoremap <C-s> :w<CR>
+nnoremap Q     :q<CR>
+nnoremap U <C-r>
 let mapleader=" "
 vnoremap D "_d
 nnoremap D "_d
@@ -138,12 +163,14 @@ nnoremap DD V"_d
 nnoremap x "_x
 inoremap <C-v> <Esc>"+pa
 " Move {{{
-noremap <silent> k gk
-noremap <silent> j gj
-noremap <silent> K 5k
-noremap <silent> J 5j
-noremap H ^
-noremap L $
+nnoremap <silent> k gk
+nnoremap <silent> j gj
+nnoremap <silent> K 5k
+nnoremap <silent> J 5j
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L $
 "move in insert mode
 inoremap <M-h> <left>
 inoremap <M-j> <down>
@@ -151,7 +178,7 @@ inoremap <M-k> <up>
 inoremap <M-l> <right>
 inoremap <M-w> <Esc>wa
 inoremap <M-e> <Esc>ea
-inoremap <M-b>  <Esc>ba
+inoremap <M-b> <Esc>ba
 inoremap <M-W> <Esc>Wa
 inoremap <M-E> <Esc>Ea
 inoremap <M-B> <Esc>Ba
@@ -193,79 +220,54 @@ nnoremap <C-S-tab> <Esc>:tabprevious <CR>
 " Modes {{{ "
 " === insert mode=====
 inoremap jk <Esc>
-inoremap jj <Esc>
-inoremap <M-x> <BS>
-inoremap <M-X> <DEL>
+inoremap <C-d> <BS>
+inoremap <C-D> <DEL>
 " === command mode=====
 nnoremap ; :
 vnoremap ; :
+cnoremap jk <Esc>
 " === visual mode=====
 "vnoremap jk <Esc>
 " }}} Modes "
 "}}}keymaping
 "Plugs{{{
 " list of backup plugs{{{
-"Plug 'github/copilot.vim'
 "Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
-"Git{{{
-"Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
-"Plug 'theniceboy/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
-"Plug 'mhinz/vim-signify'
-"Plug 'airblade/vim-gitgutter'
-"Plug 'cohama/agit.vim'
-"Plug 'kdheepak/lazygit.nvim'
-"}}}
-"miscellaneous{{{
 "Plug 'voldikss/vim-translator', { 'on':'<Plug>Translate' }
-" }}}
 " }}}
 "call plug{{{
 call plug#begin('~/AppData/Local/nvim/plugged')
-"Theme{{{
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'mhinz/vim-startify'
-Plug 'feline-nvim/feline.nvim'
-Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-"}}}
-"edit{{{
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lervag/vimtex'
-Plug 'tpope/vim-surround' " type ysiw' to wrap the word with '' or type cs'` to change 'word' to `word`
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'windwp/nvim-autopairs'
 Plug 'godlygeek/tabular' "必要插件，安装在vim-markdown前面
-" Markdown
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'}
-"}}}
-"completion{{{
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
-"}}}
-" fuzzy find {{{ "
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-"Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-" }}} fuzzy find "
-"miscellaneous{{{
 "Plug 'MattesGroeger/vim-bookmarks'
 Plug 'crusj/bookmarks.nvim'
 Plug 'easymotion/vim-easymotion'
-"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 function! UpdateRemotePlugins(...)
   " Needed to refresh runtime files
   let &rtp=&rtp
   UpdateRemotePlugins
 endfunction
 Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
-" }}}
+Plug 'voldikss/vim-floaterm'
+Plug 'kazhala/close-buffers.nvim'
 call plug#end()
 "}}}
 "Plug settings{{{
 "themes{{{
+colorscheme solarized8_high
+set background=light
 let g:indentLine_fileTypeExclude = ['*.txt','startify']
-"lua require('feline').setup()
-"lua require('bufferline').setup()
 " startify {{{ "
 let g:startify_custom_header=startify#pad(split(system('figlet -w 100 Life is Wonderful'), '\n'))
 let g:startify_custom_footer=startify#pad(split(system('figlet -w 100 And Sucks'), '\n'))
@@ -285,53 +287,46 @@ let g:startify_lists= [
       \ ]
 "}}} startify "
 "}}}
-"coc-settings {{{
-let g:coc_global_extensions=['coc-snippets','coc-json','coc-typos','coc-vimlsp','coc-marketplace','coc-lists','coc-lists','coc-pairs','coc-explorer',]
+"
+"coc settings {{{
+let g:coc_global_extensions=['coc-snippets','coc-json','coc-typos','coc-vimlsp','coc-marketplace','coc-lists','coc-pairs','coc-explorer','coc-yank']
 let g:coc_node_path = 'D:\Program\scoop\apps\nodejs\current\node.exe'
+" Triggers{{{
 inoremap <silent><expr> <tab>
       \ coc#pum#visible() ? coc#pum#next(1):
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
+
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-"inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab"
-"inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 function! CheckBackspace() abort
 	let col = col('.') - 1
 	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-"inoremap <silent><expr> <C-p> coc#refresh()
-" completion colors {{{ "
+inoremap <silent><expr> <C-o> coc#refresh()
+vnoremap <BS> <Plug>(coc-snippets-select)
+" inoremap <M-tab> <Plug>(coc-snippets-next)
+"  let g:coc_snippet_next = '<tab>'
+vnoremap <leader>s <Plug>(coc-convert-snippet)
+" }}}
+" completion colors {{{ 
 highlight Pmenu     guibg=#fdf6e3 guifg=LightBlue
-highlight PmenuSel  guibg=#f4f7dc guifg=LightRed
+highlight PmenuSel  guibg=lightyellow guifg=green
+
 " }}} completion colors "
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 "nnoremap <leader>md :CocCommand markdown-preview-enhanced.openPreview<CR>
 nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
 nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Use U to show documentation in preview window.
-nnoremap <silent> U :call ShowDocumentation()<CR>
-
-
-" 	if CocAction('hasProvider', 'hover')
-" 		call CocActionAsync('doHover')
-" 	else
-" 		call feedkeys('U', 'in')
-" 	endif
-" endfunction
-
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-"}}}
 " Mappings for CoCList {{{
 " Show all diagnostics.
 nnoremap <silent><nowait> <leader>la : <C-u>CocList diagnostics<cr>
 " Manage extensions.
 nnoremap <silent><nowait> <leader>le : <C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <leader>lc : <C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>lc : <C-u>CocList --normal commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <leader>lo : <C-u>CocList outline<cr>
 " Search workspace symbols.
@@ -342,27 +337,19 @@ nnoremap <silent><nowait> <leader>lo : <C-u>CocList outline<cr>
 nnoremap <silent><nowait> <leader>lt : <c-u>CocList typos<CR>
 " Show registers
 nnoremap <silent><nowait> <leader>lr :<c-u>CocList registers<CR>
+" show yank list
+nnoremap <silent><nowait> <leader>li :<C-u>CocList yank<cr>
 " Show all lists
 nnoremap <silent><nowait> <leader>ll :<c-u>CocList lists<CR>
 "	}}}
 " coc typos {{{ 
-" Move to next misspelled word after the cursor, 'wrapscan' applies.
 nnoremap ]s <Plug>(coc-typos-next)
-" Move to previous misspelled word after the cursor, 'wrapscan' applies.
 nnoremap [s <Plug>(coc-typos-prev)
-" Fix typo at cursor position
 nnoremap S <Plug>(coc-typos-fix)
+inoremap <C-s> <Esc>S<cr>A
+
 " }}} coc typos "
-"pairs{{{
-"let g:coc_pairs = [["$", "$"]]
-"let g:coc_pairs_enableCharacters=[[ "(", "[", "{", "<", "'", "\\" , "`","\$"]]
-lua << EOF
-require("nvim-autopairs").setup {}
-    local Rule = require('nvim-autopairs.rule')
-    local npairs = require('nvim-autopairs')
-    npairs.add_rule(Rule("$","$","vim"))
-EOF
-"}}}
+" }}}
 " Directors {{{
 " Telescope {{{ "
 "lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.5}})
@@ -410,10 +397,9 @@ nnoremap <silent><nowait> <leader>et :CocCommand explorer --position tab:0<CR>
 nnoremap <silent><nowait> <Leader>ef :CocCommand explorer --preset floating<CR>
 nnoremap <silent><nowait> <Leader>ed :CocCommand explorer --preset Documents<CR>
 nnoremap <silent><nowait> <Leader>eb :CocCommand explorer --preset buffer<CR>
-nnoremap <silent><nowait> <Leader>en :CocCommand explorer --preset nvim<CR>
+nnoremap <silent><nowait> <Leader>eh :CocCommand explorer --preset hiraeth<CR>
 nnoremap <silent><nowait> <leader>,  :CocCommand explorer --preset nvim<CR>
 " }}} coc-explorer "
-" }}}
 " }}}
 " edit {{{
 " markdown {{{
@@ -480,4 +466,5 @@ call wilder#set_option('renderer', wilder#renderer_mux({
 			\ }))
 "}}}
 "}}} miscellaneous "
+"}}}
 "}}}

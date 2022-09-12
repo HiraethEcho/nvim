@@ -1,0 +1,64 @@
+Python global functions can be stored in a python module and then imported.
+This makes global functions easily accessible to all snippet files. You can
+just drop python files into ~/.vim/pythonx and import them directly inside
+your snippets. For example to use
+~/.vim/pythonx/my_snippets_helpers.py  >
+
+   global !p
+   from my_snippet_helpers import *
+   endglobal
+The 'snip' object provides some properties as well: >
+
+    snip.rv:
+        'rv' is the return value, the text that will replace the python block
+        in the snippet definition. It is initialized to the empty string. This
+        deprecates the 'res' variable.
+    snip.c:
+        The text currently in the python block's position within the snippet.
+        It is set to empty string as soon as interpolation is completed. Thus
+        you can check if snip.c is != "" to make sure that the interpolation
+        is only done once. This deprecates the "cur" variable.
+    snip.v:
+         Data related to the ${VISUAL} placeholder. This has two attributes:
+             snip.v.mode   ('v', 'V', '^V', see |visual-mode| )
+             snip.v.text   The text that was selected.
+    snip.fn:
+        The current filename.
+    snip.basename:
+        The current filename with the extension removed.
+    snip.ft:
+        The current filetype.
+    snip.p:
+        Last selected placeholder. Will contain placeholder object with
+        following properties:
+        'current_text' - text in the placeholder on the moment of selection;
+        'start' - placeholder start on the moment of selection;
+        'end' - placeholder end on the moment of selection;
+
+The 'snip' object provides some properties as well: >
+
+    snip.rv:
+        'rv' is the return value, the text that will replace the python block
+        in the snippet definition. It is initialized to the empty string. This
+        deprecates the 'res' variable.
+    snip.c:
+        The text currently in the python block's position within the snippet.
+        It is set to empty string as soon as interpolation is completed. Thus
+        you can check if snip.c is != "" to make sure that the interpolation
+        is only done once. This deprecates the "cur" variable.
+    snip.v:
+         Data related to the ${VISUAL} placeholder. This has two attributes:
+             snip.v.mode   ('v', 'V', '^V', see |visual-mode| )
+             snip.v.text   The text that was selected.
+    snip.fn:
+        The current filename.
+    snip.basename:
+        The current filename with the extension removed.
+    snip.ft:
+        The current filetype.
+    snip.p:
+        Last selected placeholder. Will contain placeholder object with
+        following properties:
+        'current_text' - text in the placeholder on the moment of selection;
+        'start' - placeholder start on the moment of selection;
+        'end' - placeholder end on the moment of selection;
