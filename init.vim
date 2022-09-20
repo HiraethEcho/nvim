@@ -1,56 +1,68 @@
 " ui-special {{{ "
 if exists("g:neovide")
-" Put anything you want to happen only in Neovide here
-	let g:neovide_refresh_rate=30
-	let g:neovide_refresh_rate_idle=5
-	let g:neovide_transparency=1
-	let g:neovide_scroll_animation_length = 0.9
-	let g:neovide_remember_window_size = v:true
-	let g:neovide_cursor_trail_length=0.8
-  let g:neovide_cursor_vfx_mode = "railgun"
-	command -nargs=0 NeovideToggleFullscreen :let g:neovide_fullscreen = !g:neovide_fullscreen
-  nnoremap <M-CR> :NeovideToggleFullscreen<CR>
-  let s:fontsize = 16
-  set guifont=CodeNewRoman_NF:h16
-  function! AdjustFontSize(amount)
-    let s:fontsize = s:fontsize+a:amount
-    :execute "set guifont=CodeNewRoman_NF:h" . s:fontsize 
-  endfunction
-  nnoremap <C-up> :call AdjustFontSize(1)<CR> 
-  nnoremap <C-down> :call AdjustFontSize(-1)<CR>
+colorscheme solarized8_high
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_indent_levels = 30
+set background=light
+let g:neovide_refresh_rate=30
+let g:neovide_refresh_rate_idle=5
+let g:neovide_transparency=1
+let g:neovide_scroll_animation_length = 0.9
+let g:neovide_remember_window_size = v:true
+let g:neovide_cursor_trail_length=0.8
+let g:neovide_cursor_vfx_mode = "railgun"
+command -nargs=0 NeovideToggleFullscreen :let g:neovide_fullscreen = !g:neovide_fullscreen
+nnoremap <M-CR> :NeovideToggleFullscreen<CR>
+let s:fontsize = 16
+set guifont=CodeNewRoman_NF:h16
+function! AdjustFontSize(amount)
+  let s:fontsize = s:fontsize+a:amount
+  :execute "set guifont=CodeNewRoman_NF:h" . s:fontsize 
+endfunction
+nnoremap <C-up> :call AdjustFontSize(1)<CR> 
+nnoremap <C-down> :call AdjustFontSize(-1)<CR>
 else
-  if exists("g:nvui")
-  let s:fontsize = 16
-  function! AdjustFontSize(amount)
-    let s:fontsize = s:fontsize+a:amount
-    :execute "set guifont=CodeNewRoman_NF:h" . s:fontsize 
-  endfunction
-  nnoremap <C-up> :call AdjustFontSize(1)<CR> 
-  nnoremap <C-down> :call AdjustFontSize(-1)<CR>
-  nnoremap <M-CR> :NvuiToggleFullscreen<CR> 
-  NvuiFrameless v:true
-  NvuiOpacity 0.95
-  NvuiCursorHideWhileTyping v:true
-	NvuiCmdFontFamily CodeNewRoman_NF
-  else
-" Terminal
-  let &t_ut=''
- " Set cursor shape and color
-    " INSERT mode
-  let &t_SI = "\<Esc>[6 q" . "\<Esc>]12;blue\x7"
-    " REPLACE mode
-  let &t_SR = "\<Esc>[3 q" . "\<Esc>]12;black\x7"
-    " NORMAL mode
-  let &t_EI = "\<Esc>[2 q" . "\<Esc>]12;green\x7"
-" 1 -> blinking block  闪烁的方块
-" 2 -> solid block  不闪烁的方块
-" 3 -> blinking underscore  闪烁的下划线
-" 4 -> solid underscore  不闪烁的下划线
-" 5 -> blinking vertical bar  闪烁的竖线
-" 6 -> solid vertical bar  不闪烁的竖线" 
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  set termguicolors
-  endif
+if exists("g:nvui")
+colorscheme solarized8_high
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_indent_levels = 30
+set background=light
+let s:fontsize = 16
+function! AdjustFontSize(amount)
+  let s:fontsize = s:fontsize+a:amount
+  :execute "set guifont=FiraCode_NF:h" . s:fontsize 
+endfunction
+nnoremap <C-up> :call AdjustFontSize(1)<CR> 
+nnoremap <C-down> :call AdjustFontSize(-1)<CR>
+nnoremap <M-CR> :NvuiToggleFullscreen<CR> 
+NvuiFrameless v:true
+NvuiOpacity 0.95
+NvuiCursorHideWhileTyping v:true
+" NvuiCmdFontFamily CodeNewRoman_NF
+else
+" Terminal and nvim-qt
+colorscheme solarized8_high
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 1
+let g:neovide_refresh_rate=30
+set background=dark
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
+  " INSERT mode
+    let &t_SI = "\<Esc>[6 q"
+  " REPLACE mode
+    let &t_SR = "\<Esc>[3 q"
+  " NORMAL mode
+    let &t_EI = "\<Esc>[1 q"
+" " 1 -> blinking block  闪烁的方块 "
+" " 2 -> solid block  不闪烁的方块 "
+" " 3 -> blinking underscore  闪烁的下划线 "
+" " 4 -> solid underscore  不闪烁的下划线 "
+" " 5 -> blinking vertical bar  闪烁的竖线 "
+" " 6 -> solid vertical bar  不闪烁的竖线 "
+endif
 endif
 " }}} ui-special "
 "General{{{
@@ -75,7 +87,7 @@ set shiftwidth=2  " 设置tab键和自动缩进
 set softtabstop=2 " 设置显示行尾的空格和制表符/空格和tab的样式
 set expandtab     " expand tab to space
 set list
-set listchars=tab:>\ ,eol:¬,trail:·,extends:>,precedes:<
+set listchars=eol:¬,trail:·,extends:>,precedes:<
 set autoindent " 自动缩进/下一行和上一行的格式相同
 set cindent
 "  fold
@@ -87,6 +99,8 @@ highlight FoldColumn guibg=darkgrey guifg=white
 set autochdir         " auto chance director
 
 set hlsearch           " 搜索高亮
+autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=1000}
+exec "nohlsearch"
 set ignorecase         " 搜索忽略大小写
 set smartcase          "只有一个大写字母的搜索词，将大小写敏感；其他情况都是写不敏感
 set showmatch          " 高亮显示匹配的括号
@@ -95,18 +109,18 @@ set showcmd            " 命令模式下，在底部显示，当前键入的指�
 set showtabline=1      "  only if there are at least two tab pages
 
 set laststatus=3      " always and ONLY the last window
-	" function! StatusDiagnostic() abort
-	"   let info = get(b:, 'coc_diagnostic_info', {})
-	"   if empty(info) | return '' | endif
-	"   let msgs = []
-	"   if get(info, 'error', 0)
-	"     call add(msgs, 'E' . info['error'])
-	"   endif
-	"   if get(info, 'warning', 0)
-	"     call add(msgs, 'W' . info['warning'])
-	"   endif
-	"   return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
-	" endfunction
+" function! StatusDiagnostic() abort
+"   let info = get(b:, 'coc_diagnostic_info', {})
+"   if empty(info) | return '' | endif
+"   let msgs = []
+"   if get(info, 'error', 0)
+"     call add(msgs, 'E' . info['error'])
+"   endif
+"   if get(info, 'warning', 0)
+"     call add(msgs, 'W' . info['warning'])
+"   endif
+"   return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
+" endfunction
 " set statusline^=%{coc#status()}
 set statusline=
 set statusline+=\ %t
@@ -151,10 +165,15 @@ syntax enable
 syntax on
 "}}}
 "Keymappings{{{
-nnoremap mm    :noh<CR>
-nnoremap <F5>  :w<CR>   :source $MYVIMRC<CR>
-nnoremap <C-s> :w<CR>
-nnoremap Q     :q<CR>
+" general {{{ "
+nnoremap <leader>, :e $MYVIMRC<CR>
+nnoremap <leader>SS :Startify<CR>:BWipeout other<CR>
+nnoremap s <nop> 
+nnoremap mn   : noh<CR>
+nnoremap <F5> : w<CR> : source $MYVIMRC<CR>
+nnoremap <F4> : PlugInstall<CR>
+nnoremap S    : w<CR>
+nnoremap Q    : q<CR>
 nnoremap U <C-r>
 let mapleader=" "
 vnoremap D "_d
@@ -162,6 +181,7 @@ nnoremap D "_d
 nnoremap DD V"_d
 nnoremap x "_x
 inoremap <C-v> <Esc>"+pa
+" }}} general "
 " Move {{{
 nnoremap <silent> k gk
 nnoremap <silent> j gj
@@ -210,18 +230,17 @@ nnoremap <C-n> <C-W>T
 nnoremap rh <C-w>b<C-w>K
 nnoremap rv <C-w>b<C-w>H
 " Move the tabs with tmn and tmi
-nnoremap tmn :-tabmove<CR>
-nnoremap tmi :+tabmove<CR>
+" nnoremap tmn :-tabmove<CR>
+" nnoremap tmi :+tabmove<CR>
 " tab
 nnoremap <C-t> <Esc>:tabnew<CR>
-nnoremap <C-tab> <Esc>:tabnext<CR>
-nnoremap <C-S-tab> <Esc>:tabprevious <CR>
+nnoremap t <Esc>:tabnext<CR>
+nnoremap T <Esc>:tabprevious <CR>
 " }}}
 " Modes {{{ "
 " === insert mode=====
 inoremap jk <Esc>
-inoremap <C-d> <BS>
-inoremap <C-D> <DEL>
+
 " === command mode=====
 nnoremap ; :
 vnoremap ; :
@@ -231,28 +250,39 @@ cnoremap jk <Esc>
 " }}} Modes "
 "}}}keymaping
 "Plugs{{{
-" list of backup plugs{{{
-"Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
-"Plug 'voldikss/vim-translator', { 'on':'<Plug>Translate' }
-" }}}
 "call plug{{{
 call plug#begin('~/AppData/Local/nvim/plugged')
-Plug 'lukas-reineke/indent-blankline.nvim'
+" themes
+" Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'mhinz/vim-startify'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'lervag/vimtex'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'godlygeek/tabular' "必要插件，安装在vim-markdown前面
-Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'}
+Plug 'luochen1990/rainbow'
+" edit
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
+" Plug 'stpope/vim-surrounds'
+Plug 'machakann/vim-sandwich'
+Plug 'wellle/targets.vim'
+" Plug 'gcmt/wildfire.vim'
+Plug 'tpope/vim-commentary'
+Plug 'godlygeek/tabular' "必要插件，安装在vim-markdown前面
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'mbbill/undotree'
+Plug 'easymotion/vim-easymotion'
+" Plug 'phaazon/hop.nvim'
+" editor
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'}
+Plug 'lervag/vimtex'
+Plug 'vimwiki/vimwiki'
+" director
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-"Plug 'MattesGroeger/vim-bookmarks'
-Plug 'crusj/bookmarks.nvim'
-Plug 'easymotion/vim-easymotion'
+Plug 'kshenoy/vim-signature'
+Plug 'MattesGroeger/vim-bookmarks'
+"Plug 'crusj/bookmarks.nvim'
+"miscellaneous
 function! UpdateRemotePlugins(...)
   " Needed to refresh runtime files
   let &rtp=&rtp
@@ -263,11 +293,9 @@ Plug 'voldikss/vim-floaterm'
 Plug 'kazhala/close-buffers.nvim'
 call plug#end()
 "}}}
-"Plug settings{{{
-"themes{{{
-colorscheme solarized8_high
-set background=light
-let g:indentLine_fileTypeExclude = ['*.txt','startify']
+"Plug settings{{{ 
+"themes{{{ 
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 " startify {{{ "
 let g:startify_custom_header=startify#pad(split(system('figlet -w 100 Life is Wonderful'), '\n'))
 let g:startify_custom_footer=startify#pad(split(system('figlet -w 100 And Sucks'), '\n'))
@@ -286,12 +314,37 @@ let g:startify_lists= [
       \ { 'type': 'commands'  , 'header': ['   Commands'  ] } ,
       \ ]
 "}}} startify "
+" rainbow {{{ "
+let g:rainbow_conf = {
+\'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+\'guis': [''],
+\'cterms': [''],
+\'operators': '_,_',
+\'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\'separately': {
+\	'*': {},
+\	'markdown': {
+\		'parentheses_options': 'containedin=markdownCode contained', },
+\	'vim': {
+\		'parentheses_options': 'containedin=vimFuncBody', 
+\	},
+\	'stylus': {
+\		'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup'], 
+\	}
+\}
+\}
+" }}} rainbow "
 "}}}
-"
 "coc settings {{{
-let g:coc_global_extensions=['coc-snippets','coc-json','coc-typos','coc-vimlsp','coc-marketplace','coc-lists','coc-pairs','coc-explorer','coc-yank']
+" general {{{ "
+let g:coc_global_extensions=['coc-snippets','coc-json','coc-typos','coc-vimlsp','coc-marketplace','coc-lists','coc-pairs','coc-explorer','coc-yank','coc-word','coc-dictionary']
 let g:coc_node_path = 'D:\Program\scoop\apps\nodejs\current\node.exe'
-" Triggers{{{
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
+nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
+
 inoremap <silent><expr> <tab>
       \ coc#pum#visible() ? coc#pum#next(1):
       \ CheckBackspace() ? "\<Tab>" :
@@ -306,21 +359,19 @@ function! CheckBackspace() abort
 endfunction
 inoremap <silent><expr> <C-o> coc#refresh()
 vnoremap <BS> <Plug>(coc-snippets-select)
-" inoremap <M-tab> <Plug>(coc-snippets-next)
+" inoremap <Space> <Plug>(coc-snippets-next)
 "  let g:coc_snippet_next = '<tab>'
 vnoremap <leader>s <Plug>(coc-convert-snippet)
-" }}}
-" completion colors {{{ 
+
 highlight Pmenu     guibg=#fdf6e3 guifg=LightBlue
 highlight PmenuSel  guibg=lightyellow guifg=green
-
-" }}} completion colors "
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-"nnoremap <leader>md :CocCommand markdown-preview-enhanced.openPreview<CR>
-nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
-nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
-" Mappings for CoCList {{{
+" }}} general "
+" coc typos {{{ 
+" nnoremap ]s <Plug>(coc-typos-next)
+" nnoremap [s <Plug>(coc-typos-prev)
+" nnoremap S <Plug>(coc-typos-fix)
+" }}} coc typos "
+" CoCList {{{
 " Show all diagnostics.
 nnoremap <silent><nowait> <leader>la : <C-u>CocList diagnostics<cr>
 " Manage extensions.
@@ -342,13 +393,6 @@ nnoremap <silent><nowait> <leader>li :<C-u>CocList yank<cr>
 " Show all lists
 nnoremap <silent><nowait> <leader>ll :<c-u>CocList lists<CR>
 "	}}}
-" coc typos {{{ 
-nnoremap ]s <Plug>(coc-typos-next)
-nnoremap [s <Plug>(coc-typos-prev)
-nnoremap S <Plug>(coc-typos-fix)
-inoremap <C-s> <Esc>S<cr>A
-
-" }}} coc typos "
 " }}}
 " Directors {{{
 " Telescope {{{ "
@@ -361,33 +405,59 @@ nnoremap <leader>fc <cmd>Telescope commands<cr>
 "nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " }}} Telescope "
 " bookmarks {{{ "
-lua <<EOF
-require("bookmarks").setup({
-	keymap = {
-		toggle = "<leader>mm", -- toggle bookmarks
-		add = "<leader>ma", -- add bookmarks
-		jump = "<CR>", -- jump from bookmarks
-		delete = "dd", -- delete bookmarks
-		order = "<leader>ml", -- order bookmarks by frequency or updated_time
-	},
-    width = 0.8, -- bookmarks window width:  (0, 1]
-    height = 0.6, -- bookmarks window height: (0, 1]
-    preview_ratio = 0.4, -- bookmarks preview window ratio (0, 1]
-    preview_ext_enable = false, 
-    hl_cursorline = "guibg=Gray guifg=White" -- hl bookmarsk window cursorline
+" bookmarks-backup {{{ "
+" lua <<EOF
+" require("bookmarks").setup({
+" 	keymap = {
+" 		toggle = "<leader>mm", -- toggle bookmarks
+" 		add = "<leader>ma", -- add bookmarks
+" 		jump = "<CR>", -- jump from bookmarks
+" 		delete = "dd", -- delete bookmarks
+" 		order = "<leader>ml", -- order bookmarks by frequency or updated_time
+" 	},
+"     width = 0.8, -- bookmarks window width:  (0, 1]
+"     height = 0.6, -- bookmarks window height: (0, 1]
+"     preview_ratio = 0.4, -- bookmarks preview window ratio (0, 1]
+"     preview_ext_enable = false, 
+"     hl_cursorline = "guibg=Gray guifg=White" -- hl bookmarks window cursorline
     
-})
-EOF
-  " let g:bookmark_no_default_key_mappings = 1
-  " nmap <Leader>mm <Plug>BookmarkToggle
-  " nmap <Leader>mi <Plug>BookmarkAnnotate
-  " nmap <Leader>ma <Plug>BookmarkShowAll
-  " nmap <Leader>mj <Plug>BookmarkNext
-  " nmap <Leader>mk <Plug>BookmarkPrev
-  " nmap <Leader>mc <Plug>BookmarkClear
-  " nmap <Leader>mx <Plug>BookmarkClearAll
-  " nmap <Leader>mK <Plug>BookmarkMoveUp
-  " nmap <Leader>mJ <Plug>BookmarkMoveDown
+" })
+" EOF
+" }}} bookmarks-backup "
+  let g:bookmark_no_default_key_mappings = 1
+  nmap <Leader>mm <Plug>BookmarkToggle
+  nmap <Leader>mi <Plug>BookmarkAnnotate
+  nmap <Leader>ma <Plug>BookmarkShowAll
+  nmap <Leader>mj <Plug>BookmarkNext
+  nmap <Leader>mk <Plug>BookmarkPrev
+  nmap <Leader>mc <Plug>BookmarkClear
+  nmap <Leader>mx <Plug>BookmarkClearAll
+  nmap <Leader>mK <Plug>BookmarkMoveUp
+  nmap <Leader>mJ <Plug>BookmarkMoveDown
+
+  let g:SignatureMap = {
+    \ 'Leader'             :  "m",
+    \ 'PlaceNextMark'      :  "m,",
+    \ 'ToggleMarkAtLine'   :  "m.",
+    \ 'PurgeMarksAtLine'   :  "m-",
+    \ 'DeleteMark'         :  "dm",
+    \ 'PurgeMarks'         :  "m<Space>",
+    \ 'PurgeMarkers'       :  "m<BS>",
+    \ 'GotoNextLineAlpha'  :  "']",
+    \ 'GotoPrevLineAlpha'  :  "'[",
+    \ 'GotoNextSpotAlpha'  :  "`]",
+    \ 'GotoPrevSpotAlpha'  :  "`[",
+    \ 'GotoNextLineByPos'  :  "]'",
+    \ 'GotoPrevLineByPos'  :  "['",
+    \ 'GotoNextSpotByPos'  :  "]`",
+    \ 'GotoPrevSpotByPos'  :  "[`",
+    \ 'GotoNextMarker'     :  "]-",
+    \ 'GotoPrevMarker'     :  "[-",
+    \ 'GotoNextMarkerAny'  :  "]=",
+    \ 'GotoPrevMarkerAny'  :  "[=",
+    \ 'ListBufferMarks'    :  "m/",
+    \ 'ListBufferMarkers'  :  "m?"
+    \ }
 " }}} bookmarks "
 " coc-explorer {{{ "
 highlight CocExplorerNormalFloatBorder guifg=#f4f7dc guibg=#ddd6c1
@@ -398,10 +468,10 @@ nnoremap <silent><nowait> <Leader>ef :CocCommand explorer --preset floating<CR>
 nnoremap <silent><nowait> <Leader>ed :CocCommand explorer --preset Documents<CR>
 nnoremap <silent><nowait> <Leader>eb :CocCommand explorer --preset buffer<CR>
 nnoremap <silent><nowait> <Leader>eh :CocCommand explorer --preset hiraeth<CR>
-nnoremap <silent><nowait> <leader>,  :CocCommand explorer --preset nvim<CR>
+nnoremap <silent><nowait> <leader>en :CocCommand explorer --preset nvim<CR>
 " }}} coc-explorer "
 " }}}
-" edit {{{
+" editor {{{ "
 " markdown {{{
 let g:vim_markdown_math = 1
 let g:vmt_auto_update_on_save = 0
@@ -431,11 +501,44 @@ let g:vimtex_toc_config = {
 			\ 'split_width'  : 40,
 			\ 'todo_sorted'  : 0,
 			\ 'show_help'    : 1,
-			\ 'show_numbers' : 1,
+			\ 'show_numbers' : 2,
 			\}
-"======}}}= vimtex setting ends====
+"}}}vimtex
+" vimwiki {{{ "
+let wiki_1 = {}
+let wiki_1.path = 'D:/my_docs/'
+let wiki_1.html_template = '~/public_html/template.tpl'
+let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+
+let wiki_2 = {}
+let wiki_2.path = 'D:/project_docs/'
+let wiki_2.index = 'main'
+
+let g:vimwiki_list = [wiki_1, wiki_2]
+
+" }}} vimwiki "
+" }}} editor "
+" edit {{{
+" " wildfire {{{ "
+"     let g:wildfire_objects = {
+"         \ "*" : ["i'", 'i"', "i)", "i]", "i}","i$"],
+"         \ "html,xml" : ["at"], 
+"         \}
+" " }}} wildfire "
+" hop {{{ "
+" lua << EOF
+" require'hop'.setup()
+" EOF
+" }}} hop "
+" undotree {{{ "
+let g:undotree_WindowLayout=2
+nnoremap <C-u> :UndotreeToggle<cr>
+" }}} undotree 
 "}}} edit
+"}}} plug setting
+" }}} plug "
 " miscellaneous {{{ "
+" nnoremap <C-a> :r !figlet 
 " wilder{{{
 call wilder#setup({'modes': [':', '/','?']})
 call wilder#set_option('renderer', wilder#renderer_mux({
@@ -459,12 +562,10 @@ call wilder#set_option('renderer', wilder#renderer_mux({
       \ })),
       \ '/'           : wilder#wildmenu_renderer({
       \ 'highlighter' : wilder#basic_highlighter(),
-      \ 'separator'   : ' · ',
+      \ 'Separator'   : ' · ',
       \ 'left'        : [' ', wilder#wildmenu_spinner(), ' '],
       \ 'right'       : [' ', wilder#wildmenu_index()],
       \ })
 			\ }))
 "}}}
 "}}} miscellaneous "
-"}}}
-"}}}
