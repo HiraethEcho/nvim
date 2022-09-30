@@ -7,11 +7,11 @@ let g:indent_guides_indent_levels = 30
 set background=light
 let g:neovide_refresh_rate=30
 let g:neovide_refresh_rate_idle=5
-let g:neovide_transparency=1
+let g:neovide_transparency=0.9
 let g:neovide_scroll_animation_length = 0.9
 let g:neovide_remember_window_size = v:true
 let g:neovide_cursor_trail_length=0.8
-let g:neovide_cursor_vfx_mode = "railgun"
+" let g:neovide_cursor_vfx_mode = "railgun"
 command -nargs=0 NeovideToggleFullscreen :let g:neovide_fullscreen = !g:neovide_fullscreen
 nnoremap <M-CR> :NeovideToggleFullscreen<CR>
 let s:fontsize = 16
@@ -23,31 +23,31 @@ endfunction
 nnoremap <C-up> :call AdjustFontSize(1)<CR> 
 nnoremap <C-down> :call AdjustFontSize(-1)<CR>
 else
-if exists("g:nvui")
-colorscheme solarized8_high
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 1
-let g:indent_guides_indent_levels = 30
-set background=light
-let s:fontsize = 16
-function! AdjustFontSize(amount)
-  let s:fontsize = s:fontsize+a:amount
-  :execute "set guifont=FiraCode_NF:h" . s:fontsize 
-endfunction
-nnoremap <C-up> :call AdjustFontSize(1)<CR> 
-nnoremap <C-down> :call AdjustFontSize(-1)<CR>
-nnoremap <M-CR> :NvuiToggleFullscreen<CR> 
-NvuiFrameless v:true
-NvuiOpacity 0.95
-NvuiCursorHideWhileTyping v:true
-" NvuiCmdFontFamily CodeNewRoman_NF
-else
+    if exists("g:nvui")
+    colorscheme solarized8_high
+    let g:indent_guides_enable_on_vim_startup = 1
+    let g:indent_guides_auto_colors = 1
+    let g:indent_guides_indent_levels = 30
+    set background=light
+    let s:fontsize = 16
+    function! AdjustFontSize(amount)
+      let s:fontsize = s:fontsize+a:amount
+      :execute "set guifont=FiraCode_NF:h" . s:fontsize 
+    endfunction
+    nnoremap <C-up> :call AdjustFontSize(1)<CR> 
+    nnoremap <C-down> :call AdjustFontSize(-1)<CR>
+    nnoremap <M-CR> :NvuiToggleFullscreen<CR> 
+    NvuiFrameless v:true
+    NvuiOpacity 0.95
+    NvuiCursorHideWhileTyping v:true
+    " NvuiCmdFontFamily CodeNewRoman_NF
+    else
 " Terminal and nvim-qt
 colorscheme solarized8_high
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 1
 let g:neovide_refresh_rate=30
-set background=dark
+set background=light
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
   " INSERT mode
@@ -159,20 +159,22 @@ set wildignorecase
 set wildignore+=.git,.hg,.svn,.stversions,*.pyc,*.spl,*.o,*.out,*~,%*
 set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
 
+syntax on
 filetype on
 filetype plugin indent on " 针对不同文件类型加载对应插件
 syntax enable
-syntax on
 "}}}
 "Keymappings{{{
 " general {{{ "
-nnoremap <leader>, :e $MYVIMRC<CR>
-nnoremap <leader>SS :Startify<CR>:BWipeout other<CR>
-nnoremap s <nop> 
+nnoremap <C-.> :e $MYVIMRC<CR>
+nnoremap <leader>ss :Startify<CR>:BWipeout other<CR>
+nnoremap s <Nop>
 nnoremap mn   : noh<CR>
-nnoremap <F5> : w<CR> : source $MYVIMRC<CR>
+nnoremap <F5> : w<CR> :source $MYVIMRC<CR>
 nnoremap <F4> : PlugInstall<CR>
 nnoremap S    : w<CR>
+nnoremap <C-s>    : w<CR>
+
 nnoremap Q    : q<CR>
 nnoremap U <C-r>
 let mapleader=" "
@@ -266,27 +268,28 @@ Plug 'machakann/vim-sandwich'
 Plug 'wellle/targets.vim'
 " Plug 'gcmt/wildfire.vim'
 Plug 'tpope/vim-commentary'
+Plug 'junegunn/vim-peekaboo'
 Plug 'godlygeek/tabular' "必要插件，安装在vim-markdown前面
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mbbill/undotree'
-Plug 'easymotion/vim-easymotion'
-" Plug 'phaazon/hop.nvim'
+" Plug 'easymotion/vim-easymotion'
+Plug 'phaazon/hop.nvim'
 " editor
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'}
 Plug 'lervag/vimtex'
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 " director
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-Plug 'kshenoy/vim-signature'
-Plug 'MattesGroeger/vim-bookmarks'
-"Plug 'crusj/bookmarks.nvim'
+" Plug 'kshenoy/vim-signature'
+ Plug 'MattesGroeger/vim-bookmarks'
+" Plug 'crusj/bookmarks.nvim'
 "miscellaneous
 function! UpdateRemotePlugins(...)
-  " Needed to refresh runtime files
-  let &rtp=&rtp
-  UpdateRemotePlugins
+" Needed to refresh runtime files
+let &rtp=&rtp
+UpdateRemotePlugins
 endfunction
 Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 Plug 'voldikss/vim-floaterm'
@@ -306,7 +309,7 @@ let g:startify_commands=[
       \ { 'E': 'CocCommand explorer --position tab:0' },
       \ { 'D': 'CocCommand explorer D:/' },
       \ { 'H': 'CocCommand explorer D:/Hiraeth' },
-      \ { 'N': 'CocCommand explorer D:/Documents/MyNotes' },
+      \ { 'P': 'CocCommand explorer D:/Documents/Projects' },
       \ ]
 let g:startify_lists= [
       \ { 'type': 'files'     , 'header': ['   Recent'    ] } ,
@@ -323,15 +326,15 @@ let g:rainbow_conf = {
 \'operators': '_,_',
 \'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
 \'separately': {
-\	'*': {},
-\	'markdown': {
-\		'parentheses_options': 'containedin=markdownCode contained', },
-\	'vim': {
-\		'parentheses_options': 'containedin=vimFuncBody', 
-\	},
-\	'stylus': {
-\		'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup'], 
-\	}
+\  '*': {},
+\  'markdown': {
+\    'parentheses_options': 'containedin=markdownCode contained', },
+\  'vim': {
+\    'parentheses_options': 'containedin=vimFuncBody', 
+\  },
+\  'stylus': {
+\    'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup'], 
+\  }
 \}
 \}
 " }}} rainbow "
@@ -352,10 +355,10 @@ inoremap <silent><expr> <tab>
 
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 function! CheckBackspace() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 inoremap <silent><expr> <C-o> coc#refresh()
 vnoremap <BS> <Plug>(coc-snippets-select)
@@ -392,7 +395,7 @@ nnoremap <silent><nowait> <leader>lr :<c-u>CocList registers<CR>
 nnoremap <silent><nowait> <leader>li :<C-u>CocList yank<cr>
 " Show all lists
 nnoremap <silent><nowait> <leader>ll :<c-u>CocList lists<CR>
-"	}}}
+"  }}}
 " }}}
 " Directors {{{
 " Telescope {{{ "
@@ -408,13 +411,13 @@ nnoremap <leader>fc <cmd>Telescope commands<cr>
 " bookmarks-backup {{{ "
 " lua <<EOF
 " require("bookmarks").setup({
-" 	keymap = {
-" 		toggle = "<leader>mm", -- toggle bookmarks
-" 		add = "<leader>ma", -- add bookmarks
-" 		jump = "<CR>", -- jump from bookmarks
-" 		delete = "dd", -- delete bookmarks
-" 		order = "<leader>ml", -- order bookmarks by frequency or updated_time
-" 	},
+" keymap = {
+" toggle = "<leader>mm", -- toggle bookmarks
+" add = "<leader>ma", -- add bookmarks
+" jump = "<CR>", -- jump from bookmarks
+" delete = "dd", -- delete bookmarks
+" order = "<leader>ml", -- order bookmarks by frequency or updated_time
+" },
 "     width = 0.8, -- bookmarks window width:  (0, 1]
 "     height = 0.6, -- bookmarks window height: (0, 1]
 "     preview_ratio = 0.4, -- bookmarks preview window ratio (0, 1]
@@ -435,29 +438,31 @@ nnoremap <leader>fc <cmd>Telescope commands<cr>
   nmap <Leader>mK <Plug>BookmarkMoveUp
   nmap <Leader>mJ <Plug>BookmarkMoveDown
 
-  let g:SignatureMap = {
-    \ 'Leader'             :  "m",
-    \ 'PlaceNextMark'      :  "m,",
-    \ 'ToggleMarkAtLine'   :  "m.",
-    \ 'PurgeMarksAtLine'   :  "m-",
-    \ 'DeleteMark'         :  "dm",
-    \ 'PurgeMarks'         :  "m<Space>",
-    \ 'PurgeMarkers'       :  "m<BS>",
-    \ 'GotoNextLineAlpha'  :  "']",
-    \ 'GotoPrevLineAlpha'  :  "'[",
-    \ 'GotoNextSpotAlpha'  :  "`]",
-    \ 'GotoPrevSpotAlpha'  :  "`[",
-    \ 'GotoNextLineByPos'  :  "]'",
-    \ 'GotoPrevLineByPos'  :  "['",
-    \ 'GotoNextSpotByPos'  :  "]`",
-    \ 'GotoPrevSpotByPos'  :  "[`",
-    \ 'GotoNextMarker'     :  "]-",
-    \ 'GotoPrevMarker'     :  "[-",
-    \ 'GotoNextMarkerAny'  :  "]=",
-    \ 'GotoPrevMarkerAny'  :  "[=",
-    \ 'ListBufferMarks'    :  "m/",
-    \ 'ListBufferMarkers'  :  "m?"
-    \ }
+  "signature {{{ "
+  " let g:SignatureMap = {
+  "   \ 'Leader'             :  "m",
+  "   \ 'PlaceNextMark'      :  "m,",
+  "   \ 'ToggleMarkAtLine'   :  "m.",
+  "   \ 'PurgeMarksAtLine'   :  "m-",
+  "   \ 'DeleteMark'         :  "dm",
+  "   \ 'PurgeMarks'         :  "m<Space>",
+  "   \ 'PurgeMarkers'       :  "m<BS>",
+  "   \ 'GotoNextLineAlpha'  :  "']",
+  "   \ 'GotoPrevLineAlpha'  :  "'[",
+  "   \ 'GotoNextSpotAlpha'  :  "`]",
+  "   \ 'GotoPrevSpotAlpha'  :  "`[",
+  "   \ 'GotoNextLineByPos'  :  "]'",
+  "   \ 'GotoPrevLineByPos'  :  "['",
+  "   \ 'GotoNextSpotByPos'  :  "]`",
+  "   \ 'GotoPrevSpotByPos'  :  "[`",
+  "   \ 'GotoNextMarker'     :  "]-",
+  "   \ 'GotoPrevMarker'     :  "[-",
+  "   \ 'GotoNextMarkerAny'  :  "]=",
+  "   \ 'GotoPrevMarkerAny'  :  "[=",
+  "   \ 'ListBufferMarks'    :  "m/",
+  "   \ 'ListBufferMarkers'  :  "m?"
+  "   \ }
+  " }}} signature "
 " }}} bookmarks "
 " coc-explorer {{{ "
 highlight CocExplorerNormalFloatBorder guifg=#f4f7dc guibg=#ddd6c1
@@ -466,6 +471,7 @@ nnoremap <silent><nowait> <leader>ee :CocCommand explorer<CR>
 nnoremap <silent><nowait> <leader>et :CocCommand explorer --position tab:0<CR>
 nnoremap <silent><nowait> <Leader>ef :CocCommand explorer --preset floating<CR>
 nnoremap <silent><nowait> <Leader>ed :CocCommand explorer --preset Documents<CR>
+nnoremap <silent><nowait> <Leader>ep :CocCommand explorer --preset Projects<CR>
 nnoremap <silent><nowait> <Leader>eb :CocCommand explorer --preset buffer<CR>
 nnoremap <silent><nowait> <Leader>eh :CocCommand explorer --preset hiraeth<CR>
 nnoremap <silent><nowait> <leader>en :CocCommand explorer --preset nvim<CR>
@@ -485,36 +491,46 @@ let g:vimtex_view_general_viewer = 'SumatraPDF'
 let g:vimtex_view_general_options='-reuse-instance -forward-search @tex @line @pdf'
 " 设置 LaTeX 编译器
 let g:vimtex_compiler_latexmk = {
-			\ 'executable' : 'latexmk',
-			\ 'options' : [
-			\   '-xelatex',
-			\   '-file-line-error',
-			\   '-synctex=1',
-			\   '-interaction=nonstopmode',
-			\ ]
-			\}
+      \ 'executable' : 'latexmk',
+      \ 'options' : [
+      \   '-xelatex',
+      \   '-file-line-error',
+      \   '-synctex=1',
+      \   '-interaction=nonstopmode',
+      \ ]
+      \}
 "     \ 'build_dir' : {-> 'out'},     
 " 设置目录显示内容和显示宽度，并设置目录的自动刷新，设置后使用快捷键 \ +l+t (即敲入\lt)就可以打开目录。
 let g:vimtex_toc_config = {
-			\ 'name'         : 'TOC',
-			\ 'layers'       : ['content', 'todo', 'include'],
-			\ 'split_width'  : 40,
-			\ 'todo_sorted'  : 0,
-			\ 'show_help'    : 1,
-			\ 'show_numbers' : 2,
-			\}
+      \ 'name'         : 'TOC',
+      \ 'layers'       : ['content', 'todo', 'include'],
+      \ 'split_width'  : 40,
+      \ 'todo_sorted'  : 0,
+      \ 'show_help'    : 1,
+      \ 'show_numbers' : 2,
+      \}
+" set foldmethod=expr
+" set foldexpr=vimtex#fold#level(v:lnum)
+" set foldtext=vimtex#fold#text()
+" let g:vimtex_fold_enabled= 1
+" let g:vimtex_fold_manual=0
+" let g:vimtex_fold_levelmarker      =1
+" let g:vimtex_fold_types            =1
+" let g:vimtex_fold_types_defaults   =1
+" let g:vimtex_fold_bib_enabled      =1
+" let g:vimtex_fold_bib_max_key_width=1
 "}}}vimtex
 " vimwiki {{{ "
-let wiki_1 = {}
-let wiki_1.path = 'D:/my_docs/'
-let wiki_1.html_template = '~/public_html/template.tpl'
-let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+" let wiki_1 = {}
+" let wiki_1.path = 'D:/my_docs/'
+" let wiki_1.html_template = '~/public_html/template.tpl'
+" let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
 
-let wiki_2 = {}
-let wiki_2.path = 'D:/project_docs/'
-let wiki_2.index = 'main'
+" let wiki_2 = {}
+" let wiki_2.path = 'D:/project_docs/'
+" let wiki_2.index = 'main'
 
-let g:vimwiki_list = [wiki_1, wiki_2]
+" let g:vimwiki_list = [wiki_1, wiki_2]
 
 " }}} vimwiki "
 " }}} editor "
@@ -525,10 +541,19 @@ let g:vimwiki_list = [wiki_1, wiki_2]
 "         \ "html,xml" : ["at"], 
 "         \}
 " " }}} wildfire "
-" hop {{{ "
-" lua << EOF
-" require'hop'.setup()
-" EOF
+" hop {{{ 
+lua << EOF
+require'hop'.setup()
+keys = 'qweruioasdfjkl'
+vim.api.nvim_set_keymap('', '<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>", {})
+vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1()<cr>", {})
+EOF
+" vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1()<cr>", {})
+" jump_on_sole_occurrence = true,
+" multi_windows = true,
+" case_insensitive = false,
+" vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
+
 " }}} hop "
 " undotree {{{ "
 let g:undotree_WindowLayout=2
@@ -566,6 +591,6 @@ call wilder#set_option('renderer', wilder#renderer_mux({
       \ 'left'        : [' ', wilder#wildmenu_spinner(), ' '],
       \ 'right'       : [' ', wilder#wildmenu_index()],
       \ })
-			\ }))
+      \ }))
 "}}}
 "}}} miscellaneous "

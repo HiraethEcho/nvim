@@ -22,7 +22,7 @@ endsnippet
 
 snippet fp "Insert a vim fold marker pair" b
 `!p snip.rv = get_comment_format()[0]` ${1:Fold description} `!p snip.rv = foldmarker()[0]` `!p snip.rv = get_comment_format()[2]`
-${2:${VISUAL:Content}}
+${2:${VISUAL}}
 `!p snip.rv = get_comment_format()[0]` `!p snip.rv = foldmarker()[1]` $1 `!p snip.rv = get_comment_format()[2]`
 endsnippet
 

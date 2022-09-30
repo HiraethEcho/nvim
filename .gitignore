@@ -1,1 +1,5 @@
 test.tex
+ftplugin/tex.vim
+pythonx/__pycache__/javascript_snippets.cpython-310.pyc
+pythonx/__pycache__/mypy.cpython-310.pyc
+pythonx/__pycache__/vimsnippets.cpython-310.pyc

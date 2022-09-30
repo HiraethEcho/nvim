@@ -21,10 +21,7 @@
 	   },
     "floating": {
       "position": "floating",
-			"sources": [{
-					"name": "bookmark",
-					"expand": true
-				},
+			"sources": [
 				{
 					"name": "buffer",
 					"expand": true
@@ -36,6 +33,10 @@
 			],
 			"open-action-strategy": "sourceWindow"
 			},
+		"Projects":{
+			"position": "floating",
+			"root-uri": "D:/Documents/Projects"
+		},
 		"Documents":{
 			"position": "floating",
 			"root-uri": "D:/Documents"
@@ -59,7 +60,7 @@
 	"explorer.file.column.indent.indentLine": true,
 	"explorer.file.showHiddenFiles": false,
 	"explorer.file.hiddenRules": {
-		"extensions": ["o", "a", "obj", "pyc","aux","fls","toc","gz","log","fdb_latexmk"],
+		"extensions": ["o", "a", "obj", "pyc","aux","fls","toc","gz","log","fdb_latexmk","pdf"],
 		"filenames": [".git","*.pdf","*.dvi"],
 		"patternMatches": ["^\\."]
 	},
