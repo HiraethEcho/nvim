@@ -90,8 +90,8 @@ set list
 set listchars=eol:¬,trail:·,extends:>,precedes:<
 set autoindent " 自动缩进/下一行和上一行的格式相同
 set cindent
-"  fold
-set foldmethod=marker
+"fold
+" set foldmethod=marker
 set foldlevel=100
 highlight Folded guibg=lightgrey guifg=Purple
 highlight FoldColumn guibg=darkgrey guifg=white
@@ -122,15 +122,15 @@ set laststatus=3      " always and ONLY the last window
 "   return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
 " endfunction
 " set statusline^=%{coc#status()}
-set statusline=
-set statusline+=\ %t
-set statusline+=%m\|
-" set statusline+=\%{StatusDiagnostic()}
-set statusline+=%=\|
-set statusline+=\%{coc#status()}
-set statusline+=\ %F\|
-set statusline+=\ %l/%L\|%c
-set statusline+=\ 
+" set statusline=
+" set statusline+=\ %t
+" set statusline+=%m\|
+" " set statusline+=\%{StatusDiagnostic()}
+" set statusline+=%=\|
+" set statusline+=\%{coc#status()}
+" set statusline+=\ %F\|
+" set statusline+=\ %l/%L\|%c
+" set statusline+=\ 
 set number
 set relativenumber
 
@@ -240,6 +240,8 @@ nnoremap t <Esc>:tabnext<CR>
 nnoremap T <Esc>:tabprevious <CR>
 " }}}
 " Modes {{{ "
+" === normal map===
+nnoremap () sai$(
 " === insert mode=====
 inoremap jk <Esc>
 
@@ -257,6 +259,8 @@ call plug#begin('~/AppData/Local/nvim/plugged')
 " themes
 " Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'luochen1990/rainbow'
@@ -298,8 +302,29 @@ call plug#end()
 "}}}
 "Plug settings{{{ 
 "themes{{{ 
+" airline {{{ "
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.whitespace = 'Ξ'
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+ " let g:airline#extensions#tabline#left_sep = '▶'
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#buffer_nr_show = 1        "显示buffer编号
+let g:airline#extensions#tabline#buffer_nr_format = '%s:'
+let g:airline#extensions#battery#enabled = 1
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_theme='onedark' 
+" }}} airline "
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
-" startify {{{ "
+"startify {{{ "
 let g:startify_custom_header=startify#pad(split(system('figlet -w 100 Life is Wonderful'), '\n'))
 let g:startify_custom_footer=startify#pad(split(system('figlet -w 100 And Sucks'), '\n'))
 let g:startify_session_autoload= 1
