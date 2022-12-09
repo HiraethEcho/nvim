@@ -19,6 +19,10 @@
       "position": "floating",
       "root-uri": "D:/Hiraeth"
      },
+     "github": {
+      "position": "floating",
+      "root-uri": "D:/Github"
+     },
      "nvim": {
       "position": "floating",
       "root-uri": "~/AppData/Local/nvim"

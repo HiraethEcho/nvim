@@ -64,6 +64,7 @@ set termguicolors
 " " 6 -> solid vertical bar  不闪烁的竖线 "
 endif
 endif
+
 " }}} ui-special "
 "General{{{
 set whichwrap+=<,>,h,l      " 允许backspace和光标键跨越行边界
@@ -166,14 +167,15 @@ syntax enable
 "}}}
 "Keymappings{{{
 " general {{{ "
-nnoremap <C-.> :e $MYVIMRC<CR>
-nnoremap <leader>ss :Startify<CR>:BWipeout other<CR>
+" nnoremap <C-.> :e $MYVIMRC<CR>
+" nnoremap <leader>ss :Startify<CR>:BWipeout other<CR>
 nnoremap s <Nop>
 nnoremap mn   : noh<CR>
 nnoremap <F5> : w<CR> :source $MYVIMRC<CR>
 nnoremap <F4> : PlugInstall<CR>
-nnoremap S    : w<CR>
+" nnoremap S    : w<CR>
 nnoremap <C-s>    : w<CR>
+nnoremap <C-a> mzggVG
 
 nnoremap Q    : q<CR>
 nnoremap U <C-r>
@@ -205,7 +207,7 @@ inoremap <M-W> <Esc>Wa
 inoremap <M-E> <Esc>Ea
 inoremap <M-B> <Esc>Ba
 inoremap <M-H> <Esc>^i
-inoremap <M-L> <End>
+inoremap <M-L> <End>a
 " }}}
 " Windows and tabs{{{
 "buffers
@@ -241,7 +243,7 @@ nnoremap T <Esc>:tabprevious <CR>
 " }}}
 " Modes {{{ "
 " === normal map===
-nnoremap () sai$(
+" nnoremap () sai$(
 " === insert mode=====
 inoremap jk <Esc>
 
@@ -258,15 +260,15 @@ cnoremap jk <Esc>
 call plug#begin('~/AppData/Local/nvim/plugged')
 " themes
 " Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'luochen1990/rainbow'
+" Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'luochen1990/rainbow'
 " edit
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 " Plug 'stpope/vim-surrounds'
 Plug 'machakann/vim-sandwich'
 Plug 'wellle/targets.vim'
@@ -274,8 +276,8 @@ Plug 'wellle/targets.vim'
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-peekaboo'
 Plug 'godlygeek/tabular' "必要插件，安装在vim-markdown前面
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'mbbill/undotree'
+" Plug 'dhruvasagar/vim-table-mode'
+" Plug 'mbbill/undotree'
 " Plug 'easymotion/vim-easymotion'
 Plug 'phaazon/hop.nvim'
 " editor
@@ -284,10 +286,10 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'}
 Plug 'lervag/vimtex'
 " Plug 'vimwiki/vimwiki'
 " director
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 " Plug 'kshenoy/vim-signature'
- Plug 'MattesGroeger/vim-bookmarks'
+" Plug 'MattesGroeger/vim-bookmarks'
 " Plug 'crusj/bookmarks.nvim'
 "miscellaneous
 function! UpdateRemotePlugins(...)
@@ -296,8 +298,8 @@ let &rtp=&rtp
 UpdateRemotePlugins
 endfunction
 Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
-Plug 'voldikss/vim-floaterm'
-Plug 'kazhala/close-buffers.nvim'
+" Plug 'voldikss/vim-floaterm'
+" Plug 'kazhala/close-buffers.nvim'
 call plug#end()
 "}}}
 "Plug settings{{{ 
@@ -325,8 +327,10 @@ let g:airline_theme='onedark'
 " }}} airline "
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 "startify {{{ "
-let g:startify_custom_header=startify#pad(split(system('figlet -w 100 Life is Wonderful'), '\n'))
-let g:startify_custom_footer=startify#pad(split(system('figlet -w 100 And Sucks'), '\n'))
+" let g:startify_custom_header=startify#pad(split(system('figlet -w 100 Life is Wonderful'), '\n'))
+ let g:startify_custom_header=startify#pad(split(system('figlet -w 50 NeoVim '), '\n'))
+" let g:startify_custom_footer=startify#pad(split(system('figlet -w 100 And Sucks'), '\n'))
+ let g:startify_custom_footer=startify#pad(split(system('figlet -w 100 Awesome'), '\n'))
 let g:startify_session_autoload= 1
 "nnoremap <C-S> :SSave<cr>
 let g:startify_files_number= 4
@@ -342,27 +346,27 @@ let g:startify_lists= [
       \ { 'type': 'commands'  , 'header': ['   Commands'  ] } ,
       \ ]
 "}}} startify "
-" rainbow {{{ "
-let g:rainbow_conf = {
-\'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-\'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-\'guis': [''],
-\'cterms': [''],
-\'operators': '_,_',
-\'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-\'separately': {
-\  '*': {},
-\  'markdown': {
-\    'parentheses_options': 'containedin=markdownCode contained', },
-\  'vim': {
-\    'parentheses_options': 'containedin=vimFuncBody', 
-\  },
-\  'stylus': {
-\    'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup'], 
-\  }
-\}
-\}
-" }}} rainbow "
+" " rainbow {{{ "
+" let g:rainbow_conf = {
+" \'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+" \'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+" \'guis': [''],
+" \'cterms': [''],
+" \'operators': '_,_',
+" \'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+" \'separately': {
+" \  '*': {},
+" \  'markdown': {
+" \    'parentheses_options': 'containedin=markdownCode contained', },
+" \  'vim': {
+" \    'parentheses_options': 'containedin=vimFuncBody', 
+" \  },
+" \  'stylus': {
+" \    'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup'], 
+" \  }
+" \}
+" \}
+" " }}} rainbow "
 "}}}
 "coc settings {{{
 " general {{{ "
@@ -407,13 +411,13 @@ nnoremap <silent><nowait> <leader>le : <C-u>CocList extensions<cr>
 " Show commands.
 nnoremap <silent><nowait> <leader>lc : <C-u>CocList --normal commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <leader>lo : <C-u>CocList outline<cr>
+" nnoremap <silent><nowait> <leader>lo : <C-u>CocList outline<cr>
 " Search workspace symbols.
 "nnoremap <silent><nowait> <leader>ls : <C-u>CocList -I symbols<cr>
 " Resume latest coc list.
 "nnoremap <silent><nowait> <leader>ll : <C-u>CocListResume<CR>
 " Show Typos
-nnoremap <silent><nowait> <leader>lt : <c-u>CocList typos<CR>
+" nnoremap <silent><nowait> <leader>lt : <c-u>CocList typos<CR>
 " Show registers
 nnoremap <silent><nowait> <leader>lr :<c-u>CocList registers<CR>
 " show yank list
@@ -496,6 +500,7 @@ nnoremap <silent><nowait> <leader>ee :CocCommand explorer<CR>
 nnoremap <silent><nowait> <leader>et :CocCommand explorer --position tab:0<CR>
 nnoremap <silent><nowait> <Leader>ef :CocCommand explorer --preset floating<CR>
 nnoremap <silent><nowait> <Leader>ed :CocCommand explorer --preset Documents<CR>
+nnoremap <silent><nowait> <Leader>eg :CocCommand explorer --preset github<CR>
 nnoremap <silent><nowait> <Leader>ep :CocCommand explorer --preset Projects<CR>
 nnoremap <silent><nowait> <Leader>eb :CocCommand explorer --preset buffer<CR>
 nnoremap <silent><nowait> <Leader>eh :CocCommand explorer --preset hiraeth<CR>
@@ -571,8 +576,9 @@ lua << EOF
 require'hop'.setup()
 keys = 'qweruioasdfjkl'
 vim.api.nvim_set_keymap('', '<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>", {})
-vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1()<cr>", {})
+vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_char1()<cr>", {})
 EOF
+nnoremap f :HopChar1CurrentLine<cr>
 " vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1()<cr>", {})
 " jump_on_sole_occurrence = true,
 " multi_windows = true,
