@@ -169,11 +169,11 @@ syntax enable
 " general {{{ "
 " nnoremap <C-.> :e $MYVIMRC<CR>
 " nnoremap <leader>ss :Startify<CR>:BWipeout other<CR>
-nnoremap s <Nop>
+" nnoremap s <Nop>
 nnoremap mn   : noh<CR>
 nnoremap <F5> : w<CR> :source $MYVIMRC<CR>
 nnoremap <F4> : PlugInstall<CR>
-" nnoremap S    : w<CR>
+ nnoremap S    : w<CR>
 nnoremap <C-s>    : w<CR>
 nnoremap <C-a> mzggVG
 
@@ -185,6 +185,8 @@ nnoremap D "_d
 nnoremap DD V"_d
 nnoremap x "_x
 inoremap <C-v> <Esc>"+pa
+nnoremap <leader>lg :tabe<cr>:term lazygit<cr>i
+nnoremap <leader>vs :!code .<cr>
 " }}} general "
 " Move {{{
 nnoremap <silent> k gk
@@ -200,14 +202,14 @@ inoremap <M-h> <left>
 inoremap <M-j> <down>
 inoremap <M-k> <up>
 inoremap <M-l> <right>
-inoremap <M-w> <Esc>wa
-inoremap <M-e> <Esc>ea
-inoremap <M-b> <Esc>ba
-inoremap <M-W> <Esc>Wa
-inoremap <M-E> <Esc>Ea
-inoremap <M-B> <Esc>Ba
-inoremap <M-H> <Esc>^i
-inoremap <M-L> <End>a
+" inoremap <M-w> <Esc>wa
+" inoremap <M-e> <Esc>ea
+" inoremap <M-b> <Esc>ba
+" inoremap <M-W> <Esc>Wa
+" inoremap <M-E> <Esc>Ea
+" inoremap <M-B> <Esc>Ba
+" inoremap <M-H> <Esc>^i
+" inoremap <M-L> <End>a
 " }}}
 " Windows and tabs{{{
 "buffers
@@ -333,16 +335,17 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
  let g:startify_custom_footer=startify#pad(split(system('figlet -w 100 Awesome'), '\n'))
 let g:startify_session_autoload= 1
 "nnoremap <C-S> :SSave<cr>
-let g:startify_files_number= 4
+let g:startify_files_number= 3
 let g:startify_commands=[
       \ { 'E': 'CocCommand explorer --position tab:0' },
       \ { 'D': 'CocCommand explorer D:/' },
       \ { 'H': 'CocCommand explorer D:/Hiraeth' },
       \ { 'P': 'CocCommand explorer D:/Documents/Projects' },
+      \ { 'G': 'CocCommand explorer D:/GitHub' },
       \ ]
 let g:startify_lists= [
-      \ { 'type': 'files'     , 'header': ['   Recent'    ] } ,
       \ { 'type': 'sessions'  , 'header': ['   Sessions'  ] } ,
+      \ { 'type': 'files'     , 'header': ['   Recent'    ] } ,
       \ { 'type': 'commands'  , 'header': ['   Commands'  ] } ,
       \ ]
 "}}} startify "
@@ -370,6 +373,7 @@ let g:startify_lists= [
 "}}}
 "coc settings {{{
 " general {{{ "
+" let g:coc_global_extensions=['coc-snippets','coc-json','coc-typos','coc-vimlsp','coc-marketplace','coc-lists','coc-pairs','coc-explorer','coc-yank','coc-word','coc-dictionary']
 let g:coc_global_extensions=['coc-snippets','coc-json','coc-typos','coc-vimlsp','coc-marketplace','coc-lists','coc-pairs','coc-explorer','coc-yank','coc-word','coc-dictionary']
 let g:coc_node_path = 'D:\Program\scoop\apps\nodejs\current\node.exe'
 " Use `[g` and `]g` to navigate diagnostics
@@ -430,11 +434,11 @@ nnoremap <silent><nowait> <leader>ll :<c-u>CocList lists<CR>
 " Telescope {{{ "
 "lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.5}})
 
-nnoremap <leader>ff <cmd>Telescope find_files<CR>lsp
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fc <cmd>Telescope commands<cr>
-"nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" nnoremap <leader>ff <cmd>Telescope find_files<CR>lsp
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fc <cmd>Telescope commands<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " }}} Telescope "
 " bookmarks {{{ "
 " bookmarks-backup {{{ "
@@ -456,16 +460,16 @@ nnoremap <leader>fc <cmd>Telescope commands<cr>
 " })
 " EOF
 " }}} bookmarks-backup "
-  let g:bookmark_no_default_key_mappings = 1
-  nmap <Leader>mm <Plug>BookmarkToggle
-  nmap <Leader>mi <Plug>BookmarkAnnotate
-  nmap <Leader>ma <Plug>BookmarkShowAll
-  nmap <Leader>mj <Plug>BookmarkNext
-  nmap <Leader>mk <Plug>BookmarkPrev
-  nmap <Leader>mc <Plug>BookmarkClear
-  nmap <Leader>mx <Plug>BookmarkClearAll
-  nmap <Leader>mK <Plug>BookmarkMoveUp
-  nmap <Leader>mJ <Plug>BookmarkMoveDown
+  " let g:bookmark_no_default_key_mappings = 1
+  " nmap <Leader>mm <Plug>BookmarkToggle
+  " nmap <Leader>mi <Plug>BookmarkAnnotate
+  " nmap <Leader>ma <Plug>BookmarkShowAll
+  " nmap <Leader>mj <Plug>BookmarkNext
+  " nmap <Leader>mk <Plug>BookmarkPrev
+  " nmap <Leader>mc <Plug>BookmarkClear
+  " nmap <Leader>mx <Plug>BookmarkClearAll
+  " nmap <Leader>mK <Plug>BookmarkMoveUp
+  " nmap <Leader>mJ <Plug>BookmarkMoveDown
 
   "signature {{{ "
   " let g:SignatureMap = {
@@ -587,8 +591,8 @@ nnoremap f :HopChar1CurrentLine<cr>
 
 " }}} hop "
 " undotree {{{ "
-let g:undotree_WindowLayout=2
-nnoremap <C-u> :UndotreeToggle<cr>
+" let g:undotree_WindowLayout=2
+" nnoremap <C-u> :UndotreeToggle<cr>
 " }}} undotree 
 "}}} edit
 "}}} plug setting
