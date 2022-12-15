@@ -14,6 +14,8 @@
     "UltiSnips",
     "MySnips"
   ],
+  "suggest.noselect": true,
+  "suggest.enablePreselect": false,
   "explorer.presets": {
      "hiraeth": {
       "position": "floating",
@@ -63,19 +65,25 @@
     {
       "name": "file",
       "expand": true
-    },
-    {
-      "name": "bookmark",
-      "expand": true
     }
   ],
   "explorer.file.column.indent.indentLine": true,
-  "explorer.file.showHiddenFiles": false,
+  "explorer.file.showHiddenFiles": true,
   "explorer.file.hiddenRules": {
     "extensions": ["o", "a","xdv", "obj", "pyc","aux","fls","toc","gz","log","fdb_latexmk","gz","out","toc"],
     "filenames": [".git","*.pdf","*.dvi"],
     "patternMatches": ["^\\."]
   },
+  "explorer.git.icon.status.added": "A",
+  "explorer.git.icon.status.modified": "M",
+  "explorer.git.icon.status.renamed": "R",
+  "explorer.git.icon.status.mixed": "*",
+  "explorer.git.icon.status.deleted": "D",
+  "explorer.git.icon.status.untracked": "?",
+  "explorer.git.icon.status.unmerged": "U",
+  "explorer.git.icon.status.copied": "C",
+  "explorer.git.icon.status.ignored": "!",
+  "explorer.git.enable": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.keyMappingMode": "none",
   "explorer.buffer.showHiddenBuffers": true,
@@ -127,7 +135,7 @@
     "?": "help",
     "q": "quit",
     "<esc>": "quit",
-    "X": "systemExecute",
+    "x": "systemExecute",
     "gd": "listDrive",
 
     "f": "search",

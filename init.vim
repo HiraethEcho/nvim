@@ -268,6 +268,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 " Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'luochen1990/rainbow'
+" git
+Plug 'tpope/vim-fugitive' "git
+Plug 'airblade/vim-gitgutter' "git
 " edit
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'honza/vim-snippets'
@@ -374,7 +377,7 @@ let g:startify_lists= [
 "coc settings {{{
 " general {{{ "
 " let g:coc_global_extensions=['coc-snippets','coc-json','coc-typos','coc-vimlsp','coc-marketplace','coc-lists','coc-pairs','coc-explorer','coc-yank','coc-word','coc-dictionary']
-let g:coc_global_extensions=['coc-snippets','coc-json','coc-typos','coc-vimlsp','coc-marketplace','coc-lists','coc-pairs','coc-explorer','coc-yank','coc-word','coc-dictionary']
+let g:coc_global_extensions=['coc-snippets','coc-json','coc-typos','coc-vimlsp','coc-marketplace','coc-lists','coc-pairs','coc-explorer','coc-yank','coc-word']
 let g:coc_node_path = 'D:\Program\scoop\apps\nodejs\current\node.exe'
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
