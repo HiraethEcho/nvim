@@ -268,18 +268,28 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 " Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'luochen1990/rainbow'
+" general
+function! UpdateRemotePlugins(...)
+" Needed to refresh runtime files
+let &rtp=&rtp
+UpdateRemotePlugins
+endfunction
+Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
+" Plug 'voldikss/vim-floaterm'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dpretet/vim-leader-mapper'
 " git
 Plug 'tpope/vim-fugitive' "git
 Plug 'airblade/vim-gitgutter' "git
 " edit
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'honza/vim-snippets'
 " Plug 'stpope/vim-surrounds'
 Plug 'machakann/vim-sandwich'
 Plug 'wellle/targets.vim'
+Plug 'gennaro-tedesco/nvim-peekup'
 " Plug 'gcmt/wildfire.vim'
 Plug 'tpope/vim-commentary'
-Plug 'junegunn/vim-peekaboo'
+" Plug 'junegunn/vim-peekaboo'
 Plug 'godlygeek/tabular' "必要插件，安装在vim-markdown前面
 " Plug 'dhruvasagar/vim-table-mode'
 " Plug 'mbbill/undotree'
@@ -297,13 +307,6 @@ Plug 'lervag/vimtex'
 " Plug 'MattesGroeger/vim-bookmarks'
 " Plug 'crusj/bookmarks.nvim'
 "miscellaneous
-function! UpdateRemotePlugins(...)
-" Needed to refresh runtime files
-let &rtp=&rtp
-UpdateRemotePlugins
-endfunction
-Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
-" Plug 'voldikss/vim-floaterm'
 " Plug 'kazhala/close-buffers.nvim'
 call plug#end()
 "}}}
@@ -374,6 +377,41 @@ let g:startify_lists= [
 " \}
 " " }}} rainbow "
 "}}}
+" vim-leader-map {{{ "
+let ExplorerMenu = {'name':  "Explorer Menu",
+             \'f': [":CocCommand explorer --preset floating"  , "float explorer"           ] ,
+             \'t': ["CocCommand explorer --position tab:0"    , "new tab explorer"         ] ,
+             \'e': [":CocCommand explorer"                    , "explorer"                 ] ,
+             \'d': [":CocCommand explorer --preset Documents" , "D:/Documents explorer"    ] ,
+             \'g': [":CocCommand explorer --preset github"    , "D:/GitHub explorer"       ] ,
+             \'n': [":CocCommand explorer --preset nvim"      , "D:/Hiraeth/nvim explorer" ] ,
+             \}
+
+let ListMenu = {'name':  "List Menu",
+             \'a': [":CocList diagnostics"       , "diagnostics list"     ] ,
+             \'e': [":CocList extensions"        , "coc extensions list"  ] ,
+             \'c': [":CocList --normal commands" , "normal commonds list" ] ,
+             \'r': [":CocList registers"         , "registers list"       ] ,
+             \'y': [":CocList yank"              , "yank list"            ] ,
+             \'l': [":CocList lists"             , "lists list"           ] ,
+             \}
+" Define the menu content including the above menu
+" nnoremap <C-a> :r !figlet 
+let g:leaderMenu = {'name':  "Global Menu",
+      \'e': [ExplorerMenu                           , "Explorer Menu"                       ] ,
+      \'l': [ListMenu                               , "Lists list"                          ] ,
+      \'v': [':vsplit'                              , 'Split buffer vertically'             ] ,
+      \'b': [':CocCommand explorer --preset buffer' , 'List opened buffers'                 ] ,
+      \'d': [':bd'                                  , 'Close buffer'                        ] ,
+      \'r': [':so $MYVIMRC'                         , 'Reload vimrc without restarting Vim' ] ,
+      \'o': [':normal gf'                           , 'Open file under cursor'              ] ,
+      \}
+" Define leader key to space and call vim-leader-mapper
+nnoremap <Space> <Nop>
+let mapleader = "\<Space>"
+nnoremap <silent> <leader> :LeaderMapper "<Space>"<CR>
+vnoremap <silent> <leader> :LeaderMapper "<Space>"<CR>
+" }}} vim-leader-map "
 "coc settings {{{
 " general {{{ "
 " let g:coc_global_extensions=['coc-snippets','coc-json','coc-typos','coc-vimlsp','coc-marketplace','coc-lists','coc-pairs','coc-explorer','coc-yank','coc-word','coc-dictionary']
@@ -412,11 +450,11 @@ highlight PmenuSel  guibg=lightyellow guifg=green
 " }}} coc typos "
 " CoCList {{{
 " Show all diagnostics.
-nnoremap <silent><nowait> <leader>la : <C-u>CocList diagnostics<cr>
+" nnoremap <silent><nowait> <leader>la : <C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <leader>le : <C-u>CocList extensions<cr>
+" nnoremap <silent><nowait> <leader>le : <C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <leader>lc : <C-u>CocList --normal commands<cr>
+" nnoremap <silent><nowait> <leader>lc : <C-u>CocList --normal commands<cr>
 " Find symbol of current document.
 " nnoremap <silent><nowait> <leader>lo : <C-u>CocList outline<cr>
 " Search workspace symbols.
@@ -426,93 +464,93 @@ nnoremap <silent><nowait> <leader>lc : <C-u>CocList --normal commands<cr>
 " Show Typos
 " nnoremap <silent><nowait> <leader>lt : <c-u>CocList typos<CR>
 " Show registers
-nnoremap <silent><nowait> <leader>lr :<c-u>CocList registers<CR>
+" nnoremap <silent><nowait> <leader>lr :<c-u>CocList registers<CR>
 " show yank list
-nnoremap <silent><nowait> <leader>li :<C-u>CocList yank<cr>
+" nnoremap <silent><nowait> <leader>li :<C-u>CocList yank<cr>
 " Show all lists
-nnoremap <silent><nowait> <leader>ll :<c-u>CocList lists<CR>
+" nnoremap <silent><nowait> <leader>ll :<c-u>CocList lists<CR>
 "  }}}
 " }}}
 " Directors {{{
-" Telescope {{{ "
-"lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.5}})
+  " Telescope {{{ "
+  "lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.5}})
 
-" nnoremap <leader>ff <cmd>Telescope find_files<CR>lsp
-" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-" nnoremap <leader>fb <cmd>Telescope buffers<cr>
-" nnoremap <leader>fc <cmd>Telescope commands<cr>
-" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-" }}} Telescope "
-" bookmarks {{{ "
-" bookmarks-backup {{{ "
-" lua <<EOF
-" require("bookmarks").setup({
-" keymap = {
-" toggle = "<leader>mm", -- toggle bookmarks
-" add = "<leader>ma", -- add bookmarks
-" jump = "<CR>", -- jump from bookmarks
-" delete = "dd", -- delete bookmarks
-" order = "<leader>ml", -- order bookmarks by frequency or updated_time
-" },
-"     width = 0.8, -- bookmarks window width:  (0, 1]
-"     height = 0.6, -- bookmarks window height: (0, 1]
-"     preview_ratio = 0.4, -- bookmarks preview window ratio (0, 1]
-"     preview_ext_enable = false, 
-"     hl_cursorline = "guibg=Gray guifg=White" -- hl bookmarks window cursorline
-    
-" })
-" EOF
-" }}} bookmarks-backup "
-  " let g:bookmark_no_default_key_mappings = 1
-  " nmap <Leader>mm <Plug>BookmarkToggle
-  " nmap <Leader>mi <Plug>BookmarkAnnotate
-  " nmap <Leader>ma <Plug>BookmarkShowAll
-  " nmap <Leader>mj <Plug>BookmarkNext
-  " nmap <Leader>mk <Plug>BookmarkPrev
-  " nmap <Leader>mc <Plug>BookmarkClear
-  " nmap <Leader>mx <Plug>BookmarkClearAll
-  " nmap <Leader>mK <Plug>BookmarkMoveUp
-  " nmap <Leader>mJ <Plug>BookmarkMoveDown
+  " nnoremap <leader>ff <cmd>Telescope find_files<CR>lsp
+  " nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+  " nnoremap <leader>fb <cmd>Telescope buffers<cr>
+  " nnoremap <leader>fc <cmd>Telescope commands<cr>
+  " nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+  " }}} Telescope "
+  " bookmarks {{{ "
+  " bookmarks-backup {{{ "
+  " lua <<EOF
+  " require("bookmarks").setup({
+  " keymap = {
+  " toggle = "<leader>mm", -- toggle bookmarks
+  " add = "<leader>ma", -- add bookmarks
+  " jump = "<CR>", -- jump from bookmarks
+  " delete = "dd", -- delete bookmarks
+  " order = "<leader>ml", -- order bookmarks by frequency or updated_time
+  " },
+  "     width = 0.8, -- bookmarks window width:  (0, 1]
+  "     height = 0.6, -- bookmarks window height: (0, 1]
+  "     preview_ratio = 0.4, -- bookmarks preview window ratio (0, 1]
+  "     preview_ext_enable = false, 
+  "     hl_cursorline = "guibg=Gray guifg=White" -- hl bookmarks window cursorline
+      
+  " })
+  " EOF
+  " }}} bookmarks-backup "
+    " let g:bookmark_no_default_key_mappings = 1
+    " nmap <Leader>mm <Plug>BookmarkToggle
+    " nmap <Leader>mi <Plug>BookmarkAnnotate
+    " nmap <Leader>ma <Plug>BookmarkShowAll
+    " nmap <Leader>mj <Plug>BookmarkNext
+    " nmap <Leader>mk <Plug>BookmarkPrev
+    " nmap <Leader>mc <Plug>BookmarkClear
+    " nmap <Leader>mx <Plug>BookmarkClearAll
+    " nmap <Leader>mK <Plug>BookmarkMoveUp
+    " nmap <Leader>mJ <Plug>BookmarkMoveDown
 
-  "signature {{{ "
-  " let g:SignatureMap = {
-  "   \ 'Leader'             :  "m",
-  "   \ 'PlaceNextMark'      :  "m,",
-  "   \ 'ToggleMarkAtLine'   :  "m.",
-  "   \ 'PurgeMarksAtLine'   :  "m-",
-  "   \ 'DeleteMark'         :  "dm",
-  "   \ 'PurgeMarks'         :  "m<Space>",
-  "   \ 'PurgeMarkers'       :  "m<BS>",
-  "   \ 'GotoNextLineAlpha'  :  "']",
-  "   \ 'GotoPrevLineAlpha'  :  "'[",
-  "   \ 'GotoNextSpotAlpha'  :  "`]",
-  "   \ 'GotoPrevSpotAlpha'  :  "`[",
-  "   \ 'GotoNextLineByPos'  :  "]'",
-  "   \ 'GotoPrevLineByPos'  :  "['",
-  "   \ 'GotoNextSpotByPos'  :  "]`",
-  "   \ 'GotoPrevSpotByPos'  :  "[`",
-  "   \ 'GotoNextMarker'     :  "]-",
-  "   \ 'GotoPrevMarker'     :  "[-",
-  "   \ 'GotoNextMarkerAny'  :  "]=",
-  "   \ 'GotoPrevMarkerAny'  :  "[=",
-  "   \ 'ListBufferMarks'    :  "m/",
-  "   \ 'ListBufferMarkers'  :  "m?"
-  "   \ }
-  " }}} signature "
-" }}} bookmarks "
-" coc-explorer {{{ "
-highlight CocExplorerNormalFloatBorder guifg=#f4f7dc guibg=#ddd6c1
-highlight CocExplorerNormalFloat guibg=#fdf6e3
-nnoremap <silent><nowait> <leader>ee :CocCommand explorer<CR>
-nnoremap <silent><nowait> <leader>et :CocCommand explorer --position tab:0<CR>
-nnoremap <silent><nowait> <Leader>ef :CocCommand explorer --preset floating<CR>
-nnoremap <silent><nowait> <Leader>ed :CocCommand explorer --preset Documents<CR>
-nnoremap <silent><nowait> <Leader>eg :CocCommand explorer --preset github<CR>
-nnoremap <silent><nowait> <Leader>ep :CocCommand explorer --preset Projects<CR>
-nnoremap <silent><nowait> <Leader>eb :CocCommand explorer --preset buffer<CR>
-nnoremap <silent><nowait> <Leader>eh :CocCommand explorer --preset hiraeth<CR>
-nnoremap <silent><nowait> <leader>en :CocCommand explorer --preset nvim<CR>
-" }}} coc-explorer "
+    "signature {{{ "
+    " let g:SignatureMap = {
+    "   \ 'Leader'             :  "m",
+    "   \ 'PlaceNextMark'      :  "m,",
+    "   \ 'ToggleMarkAtLine'   :  "m.",
+    "   \ 'PurgeMarksAtLine'   :  "m-",
+    "   \ 'DeleteMark'         :  "dm",
+    "   \ 'PurgeMarks'         :  "m<Space>",
+    "   \ 'PurgeMarkers'       :  "m<BS>",
+    "   \ 'GotoNextLineAlpha'  :  "']",
+    "   \ 'GotoPrevLineAlpha'  :  "'[",
+    "   \ 'GotoNextSpotAlpha'  :  "`]",
+    "   \ 'GotoPrevSpotAlpha'  :  "`[",
+    "   \ 'GotoNextLineByPos'  :  "]'",
+    "   \ 'GotoPrevLineByPos'  :  "['",
+    "   \ 'GotoNextSpotByPos'  :  "]`",
+    "   \ 'GotoPrevSpotByPos'  :  "[`",
+    "   \ 'GotoNextMarker'     :  "]-",
+    "   \ 'GotoPrevMarker'     :  "[-",
+    "   \ 'GotoNextMarkerAny'  :  "]=",
+    "   \ 'GotoPrevMarkerAny'  :  "[=",
+    "   \ 'ListBufferMarks'    :  "m/",
+    "   \ 'ListBufferMarkers'  :  "m?"
+    "   \ }
+    " }}} signature "
+  " }}} bookmarks "
+  " coc-explorer {{{ "
+  highlight CocExplorerNormalFloatBorder guifg=#f4f7dc guibg=#ddd6c1
+  highlight CocExplorerNormalFloat guibg=#fdf6e3
+  " nnoremap <silent><nowait> <leader>ee :CocCommand explorer<CR>
+  " nnoremap <silent><nowait> <leader>et :CocCommand explorer --position tab:0<CR>
+  " nnoremap <silent><nowait> <Leader>ef :CocCommand explorer --preset floating<CR>
+  " nnoremap <silent><nowait> <Leader>ed :CocCommand explorer --preset Documents<CR>
+  " nnoremap <silent><nowait> <Leader>eg :CocCommand explorer --preset github<CR>
+  " nnoremap <silent><nowait> <Leader>ep :CocCommand explorer --preset Projects<CR>
+  " nnoremap <silent><nowait> <Leader>eb :CocCommand explorer --preset buffer<CR>
+  " nnoremap <silent><nowait> <Leader>eh :CocCommand explorer --preset hiraeth<CR>
+  " nnoremap <silent><nowait> <leader>en :CocCommand explorer --preset nvim<CR>
+  " }}} coc-explorer "
 " }}}
 " editor {{{ "
 " markdown {{{
@@ -525,6 +563,7 @@ let g:tex_flavor = 'latex'      " 设置 Tex 文档是 LaTeX 语法风格的文�
 let g:vimtex_quickfix_mode = 0 " 设置不自动弹出报错窗口，可以通过 :copen 来手动打开
 " 设置预览 PDF 的工具是 sumatra 阅读器
 let g:vimtex_view_general_viewer = 'SumatraPDF'
+" let g:vimtex_view_general_viewer = 'sioyek'
 let g:vimtex_view_general_options='-reuse-instance -forward-search @tex @line @pdf'
 " 设置 LaTeX 编译器
 let g:vimtex_compiler_latexmk = {
@@ -572,6 +611,7 @@ let g:vimtex_toc_config = {
 " }}} vimwiki "
 " }}} editor "
 " edit {{{
+let g:peekup_open = '<leader>"'
 " " wildfire {{{ "
 "     let g:wildfire_objects = {
 "         \ "*" : ["i'", 'i"', "i)", "i]", "i}","i$"],
