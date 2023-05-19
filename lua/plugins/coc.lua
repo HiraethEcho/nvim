@@ -16,7 +16,6 @@ return{
     { "<leader>le" , ":<C-u>CocList extensions<cr>"               } ,
     -- { "<leader>ly" , ":<C-u>CocList yank<cr>"                     } ,
   },
-  event=BufRead,
   branch='release',
   config=function()
     vim.g.coc_global_extensions = {
@@ -36,7 +35,7 @@ return{
       -- "coc-pyright",
       -- "coc-texlab",
     }
-    vim.g.coc_node_path = "D:/Downloads/apps/nodejs/current/node.exe"
+    -- vim.g.coc_node_path = "D:/Downloads/apps/nodejs/current/node.exe"
     function _G.check_back_space()
       local col = vim.fn.col('.') - 1
       return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
