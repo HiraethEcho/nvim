@@ -65,6 +65,13 @@ local color={
     })
   end,
   },
+  {
+'norcalli/nvim-colorizer.lua',
+lazy=false,
+config=function()
+require 'colorizer'.setup()
+end,
+},
 }
 
 local line={
@@ -336,6 +343,6 @@ local indentline={
   }
 }
 
-local spec={transparent,line,indentline,start}
+local spec={color,transparent,line,indentline,start}
 
 return spec
