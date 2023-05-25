@@ -99,7 +99,7 @@ keymap("v", "K", ":m .-2<CR>==gv", opts)
 -- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 -- Visual Block --
 -- Move text up and down
-keymap("n","<C-x>","<C-v>",opts)
+-- keymap("n","<C-x>","<C-v>",opts)
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 -- keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)

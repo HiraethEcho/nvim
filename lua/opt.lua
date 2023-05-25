@@ -18,7 +18,7 @@ vim.opt.splitright = true          -- force all vertical splits to go to the rig
 
 vim.opt.timeoutlen = 400           -- time to wait for a mapped sequence to complete (in milliseconds)
 -- vim.opt.undofile = true            -- enable persistent undo
-vim.opt.updatetime = 100           -- faster completion (4000ms default)
+vim.opt.updatetime = 50           -- faster completion (4000ms default)
 
 vim.opt.expandtab = true           -- convert tabs to spaces
 vim.opt.shiftwidth = 2             -- the number of spaces inserted for each indentation
@@ -37,17 +37,15 @@ vim.opt.signcolumn = "yes"         -- always show the sign column, otherwise it 
 
 vim.opt.wrap = false                -- display lines as one long line
 vim.opt.linebreak = true           -- companion to wrap, don't split words
-vim.opt.whichwrap = "bs<>[]hl"     -- which "horizontal" keys are allowed to travel to prev/next line
+vim.opt.whichwrap = "bs<>[]"     -- which "horizontal" keys are allowed to travel to prev/next line
+-- vim.opt.whichwrap = "bs<>[]hl"     -- which "horizontal" keys are allowed to travel to prev/next line
 
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5 
-vim.opt.whichwrap = "bs<>[]hl"     -- which "horizontal" keys are allowed to travel to prev/next line
 vim.opt.list = true
-vim.opt.listchars:append "eol:↴"
+-- vim.opt.listchars:append "eol:↴"
 
-
-
--- vim.wo.colorcolumn = "80"-- 右侧参考线，超过表示代码太长了，考虑换行
+vim.wo.colorcolumn = "80"-- 右侧参考线，超过表示代码太长了，考虑换行
 vim.o.hidden = true -- 允许隐藏被修改过的buffer
 
 vim.opt.termguicolors = true
@@ -86,10 +84,9 @@ vim.o.swapfile = false
 vim.cmd([[
 set viminfo='10,\"100,:20,%,n~/AppData/Local/nvim/.viminfo
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-
-syntax on
-filetype on
-filetype plugin indent on " 针对不同文件类型加载对应插件
-syntax enable
 ]])
+-- filetype on
+-- filetype plugin indent on " 针对不同文件类型加载对应插件
+-- syntax on
+-- syntax enable
 -- }}} vimscript --
