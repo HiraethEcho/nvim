@@ -4,9 +4,6 @@ local tex={
   config = function ()
     -- vim.g.vimtex_view_general_viewer = 'sioyek'
     -- vim.g.vimtex_view_general_options = ''
-    -- vim.g.vimtex_compiler_latexmk_engines = {
-      --   _ = '-xelatex'
-      -- }
       vim.g.tex_comment_nospell = 1
       vim.g.vimtex_fold_enabled = 1
       -- g:vimtex_mappings_prefix
@@ -31,27 +28,6 @@ local tex={
         'Package hyperref Warning: Token not allowed in a PDF string',
       }
       -- let g:vimtex_view_general_viewer = 'sioyek'
-      -- vim.cmd([[
-      -- let g:vimtex_quickfix_ignore_filters = [
-      --     \ 'Underfull \\hbox',
-      --     \ 'Overfull \\hbox',
-      --     \ 'LaTeX Warning: .\+ float specifier changed to',
-      --     \ 'LaTeX Warning: The counter will not be printed',
-      --     \ 'LaTeX Warning: Marginpair on page ',
-      --     \ 'LaTeX Font Warning: Font shape ',
-      --     \ 'LaTeX hooks Warning',
-      --     \ 'Package siunitx Warning: Detected the "physics" package:',
-      --     \ 'Package hyperref Warning: Token not allowed in a PDF string',
-      --     \]
-      -- let g:vimtex_toc_config = {
-        --       \ 'name'         : 'TOC',
-        --       \ 'layers'       : ['content', 'todo', 'include'],
-        --       \ 'split_width'  : 30,
-        --       \ 'todo_sorted'  : 1,
-        --       \ 'show_help'    : 1,
-        --       \ 'show_numbers' : 2,
-        --       \ }
-        -- ]])
       end,
     }
 

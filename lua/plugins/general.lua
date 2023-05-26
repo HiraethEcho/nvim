@@ -93,9 +93,6 @@ local whichkey={
       e={
         name="explorer",
       },
-      g={
-        name="git",
-      },
       f = {
         name = "find", -- optional group name
         -- f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
@@ -248,6 +245,7 @@ local term={
 
 local aerial={
   'stevearc/aerial.nvim',
+  -- enabled=false,
   cmd={"AerialToggle"},
   opts = {},
   -- Optional dependencies
@@ -446,10 +444,10 @@ require("aerial").setup({
   nerd_font = "auto",
 
   -- Call this function when aerial attaches to a buffer.
-  on_attach = function(bufnr) end,
+  -- on_attach = function(bufnr) end,
 
   -- Call this function when aerial first sets symbols on a buffer.
-  on_first_symbols = function(bufnr) end,
+  -- on_first_symbols = function(bufnr) end,
 
   -- Automatically open aerial when entering supported buffers.
   -- This can be a function (see :help aerial-open-automatic)
@@ -510,10 +508,6 @@ require("aerial").setup({
     whitespace = "  ",
   },
 
-  -- Set this function to override the highlight groups for certain symbols
-  get_highlight = function(symbol, is_icon)
-    -- return "MyHighlight" .. symbol.kind
-  end,
 
   -- Options for opening aerial in a floating win
   float = {
@@ -533,12 +527,6 @@ require("aerial").setup({
     max_height = 0.9,
     height = nil,
     min_height = { 8, 0.1 },
-
-    override = function(conf, source_winid)
-      -- This is the config that will be passed to nvim_open_win.
-      -- Change values here to customize the layout
-      return conf
-    end,
   },
 
   -- Options for the floating nav windows
@@ -608,6 +596,6 @@ end,
 }
 
 
-local spec={term,whichkey,wildernvim,miscellaneous,aerial}
+local spec={whichkey,wildernvim,miscellaneous}
 
 return spec

@@ -1,6 +1,6 @@
 local tools={
   {
-    "tpope/vim-commentary",
+   "tpope/vim-commentary",
     event = "BufReadPost",
   },
   {
@@ -8,8 +8,8 @@ local tools={
     -- event = "VeryLazy",
     -- lazy=false,
     enabled=false,
-    config = function(_, opts)
-      require("mini.pairs").setup(opts)
+    config = function()
+      require("mini.pairs").setup()
     end,
   },
   {
@@ -77,7 +77,7 @@ local hop ={
   },
   config = function()
     require('hop').setup()
-    keys = 'qweruioasdfjkl'
+    keys = 'asdfghjkl'
   end,
 }
 

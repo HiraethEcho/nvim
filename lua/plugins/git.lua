@@ -3,17 +3,16 @@ local lazygit={
   cmd= "LazyGit",
   keys = {
     -- { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-  }, 
+  },
   config=function()
 -- let g:lazygit_floating_window_winblend = 0 " transparency of floating window
-vim.g.lazygit_floating_window_winblend = 0.9 
-vim.g.lazygit_floating_window_scaling_factor = 0.8 
-vim.g.lazygit_floating_window_use_plenary = 1 
+vim.g.lazygit_floating_window_winblend = 20
+vim.g.lazygit_floating_window_scaling_factor = 0.8
+vim.g.lazygit_floating_window_use_plenary = 1
   end,
 }
 
 local gutter={
-  
     "airblade/vim-gitgutter",
     -- enable=false,
     keys = {
@@ -26,7 +25,7 @@ local gutter={
       { "<leader>hh" , "<cmd>GitGutterToggle<cr><cmd>GitGutterLineNrHighlightsToggle<cr>"    , desc = "GitGutter Sign Toggle" } ,
       { "<leader>hl" , "<cmd>GitGutterLineHighlightsToggle<cr>"    , desc = "GitGutter highlight line Toggle" } ,
       { "<leader>hp" , "<cmd>GitGutterPreviewHunk<cr>"    , desc = "Preview a Hunk" } ,
-    }, 
+    },
     config=function()
       vim.g.gitgutter_highlight_linenrs=1
       vim.g.gitgutter_signs=1
@@ -50,7 +49,7 @@ local gitsigns ={
     { "<leader>hw" , "<cmd>Gitsigns toggle_word_diff<cr>"    , desc = "Toggle Word Diff" } ,
     -- { "<leader>hh" , "<cmd>Gitsigns get_hunks<cr>"    , desc = "get hunk list" } ,
     -- { "<leader>gm", "<cmd>GitMessenger<cr>", desc = "GitMessenger" },
-  }, 
+  },
   config=function()
     require('gitsigns').setup {
       signs = {
@@ -98,10 +97,10 @@ local gitsigns ={
 }
 
 local confict={
-  lazy=false,
-  'akinsho/git-conflict.nvim', 
-  version = "*", 
-  config =function() 
+  -- lazy=false,
+  'akinsho/git-conflict.nvim',
+  version = "*",
+  config =function()
     require('git-conflict').setup({
       default_mappings = true, -- disable buffer local mapping created by this plugin
       default_commands = true, -- disable commands created by this plugin
@@ -116,9 +115,9 @@ end,
 
 
 local spec={
-  -- lazygit,
+  lazygit,
   gitsigns,
-  -- confict,
+  confict,
   gutter,
 }
 

@@ -1,26 +1,25 @@
 local transparent={
-    "xiyaowong/nvim-transparent",
-    cmd="TransparentEnable",
-    -- lazy=false,
-    config=function()
-      require("transparent").setup({
-        -- enable = true, -- boolean: enable transparent
-        extra_groups = { -- table/string: additional groups that should be cleared
-        -- In particular, when you set it to 'all', that means all available groups
+  "xiyaowong/nvim-transparent",
+  cmd="TransparentEnable",
+  -- lazy=false,
+  config=function()
+    require("transparent").setup({
+      -- enable = true, -- boolean: enable transparent
+      extra_groups = { -- table/string: additional groups that should be cleared
+      -- In particular, when you set it to 'all', that means all available groups
 
-        -- example of akinsho/nvim-bufferline.lua
-        -- "BufferLineTabClose",
-        -- "BufferlineBufferSelected",
-        -- "BufferLineFill",
-        -- "BufferLineBackground",
-        -- "BufferLineSeparator",
-        -- "BufferLineIndicatorSelected",
-      },
-      -- exclude = {}, -- table: groups you don't want to clear
-      -- ignore_linked_group = true, -- boolean: don't clear a group that links to another group
-    })
-  end,
-
+      -- example of akinsho/nvim-bufferline.lua
+      "BufferLineTabClose",
+      "BufferlineBufferSelected",
+      "BufferLineFill",
+      "BufferLineBackground",
+      "BufferLineSeparator",
+      "BufferLineIndicatorSelected",
+    },
+    -- exclude = {}, -- table: groups you don't want to clear
+    -- ignore_linked_group = true, -- boolean: don't clear a group that links to another group
+  })
+end,
 }
 
 local color={
@@ -35,43 +34,20 @@ local color={
   },
   {
     "folke/tokyonight.nvim",
-    enabled=false,
-    lazy =true, -- make sure we load this during startup if it is your main colorscheme
+    -- enabled=false,
+    lazy =false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       vim.cmd([[colorscheme tokyonight]])
     end,
   },
   {
-    "xiyaowong/nvim-transparent",
-    -- cmd="TransparentToggle",
-    lazy=false,
+    'norcalli/nvim-colorizer.lua',
+    cmd="ColorizerToggle",
     config=function()
-      require("transparent").setup({
-        -- enable = true, -- boolean: enable transparent
-        extra_groups = { -- table/string: additional groups that should be cleared
-        -- In particular, when you set it to 'all', that means all available groups
-
-        -- example of akinsho/nvim-bufferline.lua
-        -- "BufferLineTabClose",
-        -- "BufferlineBufferSelected",
-        -- "BufferLineFill",
-        -- "BufferLineBackground",
-        -- "BufferLineSeparator",
-        -- "BufferLineIndicatorSelected",
-      },
-      -- exclude = {}, -- table: groups you don't want to clear
-      -- ignore_linked_group = true, -- boolean: don't clear a group that links to another group
-    })
-  end,
+      require 'colorizer'.setup()
+    end,
   },
-  {
-'norcalli/nvim-colorizer.lua',
-cmd="ColorizerToggle",
-config=function()
-require 'colorizer'.setup()
-end,
-},
 }
 
 local line={
@@ -84,13 +60,13 @@ local line={
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        disabled_filetypes = {'coc-explorer'},
-        theme = 'onedark',
+        -- disabled_filetypes = {'coc-explorer'},
+        theme = 'nord',
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
         disabled_filetypes = {
           statusline = {},
-          winbar = {},
+          -- winbar = {},
         },
         ignore_focus = {},
         always_divide_middle = true,
@@ -102,8 +78,7 @@ local line={
         }
       },
       sections = {
-        lualine_a = {'branch'},
-        lualine_b = {
+        lualine_a = {
           {
             'filename',
             file_status = true,      -- Displays file status (readonly status, modified status)
@@ -121,36 +96,20 @@ local line={
               newfile = '[New]',     -- Text to show for newly created file before first write
             }
           },
-          'diff'
+        },
+        lualine_b = {
+          'branch',
+          -- 'diff',
         },
         -- lualine_c = {'g:coc_status'},
-lualine_c = {{ "aerial",
-      -- The separator to be used to separate symbols in status line.
-      sep = ' ) ',
-
-      -- The number of symbols to render top-down. In order to render only 'N' last
-      -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
-      -- be used in order to render only current symbol.
-      depth = nil,
-
-      -- When 'dense' mode is on, icons are not rendered near their symbols. Only
-      -- a single icon that represents the kind of current symbol is rendered at
-      -- the beginning of status line.
-      dense = false,
-
-      -- The separator to be used to separate symbols in dense mode.
-      dense_sep = '.',
-
-      -- Color the symbol icons.
-      colored = true,
-    }},
+        lualine_c = {'diff'},
         lualine_x = {'filetype'},
-        lualine_y = {'progress'},
-        lualine_z = {}
+        -- lualine_y = {'progress','location'},
+        -- lualine_z = {'location'}
       },
       inactive_sections = {
-        lualine_a = {
-          'branch',
+        lualine_a = {},
+        lualine_b = {
           {
             'filename',
             file_status = true,      -- Displays file status (readonly status, modified status)
@@ -167,13 +126,13 @@ lualine_c = {{ "aerial",
               unnamed = '[No Name]', -- Text to show for unnamed buffers.
               newfile = '[New]',     -- Text to show for newly created file before first write
             }
-          }
+          },
+          'branch',
         },
-        lualine_b = {},
         lualine_c = {},
         lualine_x = {'progress'},
-        lualine_y = {},
-        lualine_z = {}
+        lualine_y = {'Location'},
+        lualine_z = {'filetype'}
       },
       tabline = {
         lualine_a = {
@@ -188,7 +147,7 @@ lualine_c = {{ "aerial",
           }
         },
         lualine_b = {
-          { 
+          {
             'buffers',
             show_filename_only = true,   -- Shows shortened relative path when set to false.
             show_modified_status = true, -- Shows indicator when the buffer is modified.
@@ -220,15 +179,35 @@ lualine_c = {{ "aerial",
           }
         }
       },
-      winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {}
-      },
-      inactive_winbar = {},
+      -- winbar = {
+      -- lualine_a = {{ "aerial",
+      --   -- The separator to be used to separate symbols in status line.
+      --   sep = '>',
+
+      --   -- The number of symbols to render top-down. In order to render only 'N' last
+      --   -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
+      --   -- be used in order to render only current symbol.
+      --   depth = nil,
+
+      --   -- When 'dense' mode is on, icons are not rendered near their symbols. Only
+      --   -- a single icon that represents the kind of current symbol is rendered at
+      --   -- the beginning of status line.
+      --   dense = true,
+
+      --   -- The separator to be used to separate symbols in dense mode.
+      --   dense_sep = '.',
+
+      --   -- Color the symbol icons.
+      --   colored = true,
+      -- },
+      -- },
+      -- lualine_b = {},
+      -- lualine_c = {},
+      -- lualine_x = {},
+      -- lualine_y = {},
+      -- lualine_z = {},
+      -- },
+      -- inactive_winbar = {},
       extensions = {}
     }
     -- vim.keymap.set("n", "<A-1>", "<cmd>LualineBuffersJump! 1<CR>", { noremap = true, silent = true })
@@ -285,7 +264,7 @@ local start={
     version = false, -- wait till new 0.7.0 release to put it back on semver
     -- event = "VimEnter",
     config=function()
-      require('mini.starter').setup() 
+      require('mini.starter').setup()
     end,
   },
 }
@@ -296,17 +275,11 @@ local indentline={
     -- enabled=false,
     event = "BufRead",
     config = function()
-      -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-      -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-      -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-      -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-      -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-      -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-      use_treesitter = false,
+      use_treesitter = true,
       require("indent_blankline").setup({
         -- for example, context is off by default, use this to turn it on
         char = "¦", -- ['|', '¦', '┆', '┊']
-        show_end_of_line = true,
+        show_end_of_line = false,
         space_char_blankline = " ",
         -- show_current_context = true,
         show_first_indent_level = false,
@@ -330,14 +303,6 @@ local indentline={
           "starify",
           "txt"
         },
-        -- char_highlight_list = {
-        --   "IndentBlanklineIndent1",
-        --   "IndentBlanklineIndent2",
-        --   "IndentBlanklineIndent3",
-        --   "IndentBlanklineIndent4",
-        --   "IndentBlanklineIndent5",
-        --   "IndentBlanklineIndent6",
-        -- },
       })
     end,
   },
@@ -361,6 +326,59 @@ local indentline={
       require("mini.indentscope").setup(opts)
     end,
   }
+}
+local animate={
+  'echasnovski/mini.animate', version = '*' ,
+  event="CursorMoved",
+  config=function ()
+    require('mini.animate').setup({
+      -- No need to copy this inside `setup()`. Will be used automatically.
+      -- Cursor path
+      cursor = {
+        -- Whether to enable this animation
+        enable = true,
+
+        -- Timing of animation (how steps will progress in time)
+        -- timing = --<function: implements linear total 250ms animation duration>,
+
+        -- Path generator for visualized cursor movement
+        -- path = --<function: implements shortest line path>,
+      },
+
+      -- Vertical scroll
+      scroll = {
+        -- Whether to enable this animation
+        enable = true,
+
+        -- Timing of animation (how steps will progress in time)
+        -- timing = --<function: implements linear total 250ms animation duration>,
+
+        -- Subscroll generator based on total scroll
+        -- subscroll = --<function: implements equal scroll with at most 60 steps>,
+      },
+
+      -- Window resize
+      resize = {
+        -- Whether to enable this animation
+        enable = true,
+      },
+
+      -- Window open
+      open = {
+        -- Whether to enable this animation
+        enable = true,
+
+      },
+
+      -- Window close
+      close = {
+        -- Whether to enable this animation
+        enable = true,
+
+        -- Timing of animation (how steps will progress in time)
+      }
+    })
+  end,
 }
 
 local spec={color,transparent,line,indentline,start}
