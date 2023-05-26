@@ -4,21 +4,6 @@ local tools={
     event = "BufReadPost",
   },
   {
-    "echasnovski/mini.pairs",
-    -- event = "VeryLazy",
-    -- lazy=false,
-    enabled=false,
-    config = function()
-      require("mini.pairs").setup()
-    end,
-  },
-  {
-    "wellle/targets.vim",
-    event = "BufReadPost",
-    enabled=false,
-    -- lazy = false,
-  },
-  {
     "machakann/vim-sandwich",
     -- lazy=false,
     event = "BufReadPost",
@@ -35,36 +20,6 @@ local tools={
   },
 }
 
-local undo ={
-  "jiaoshijie/undotree",
-  event = "BufReadPost",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
-  keys={
-    {'<leader>u', ":lua require('undotree').toggle()<cr>",  mode="n"},
-  },
-  config=function()
-    local undotree = require('undotree')
-    undotree.setup({
-      float_diff = true,  -- using float window previews diff, set this `true` will disable layout option
-      layout = "left_bottom", -- "left_bottom", "left_left_bottom"
-      ignore_filetype = { 'Undotree', 'UndotreeDiff', 'qf', 'TelescopePrompt', 'spectre_panel', 'tsplayground' },
-      window = {
-        winblend = 30,
-      },
-      keymaps = {
-        ['j'] = "move_next",
-        ['k'] = "move_prev",
-        ['J'] = "move_change_next",
-        ['K'] = "move_change_prev",
-        ['<cr>'] = "action_enter",
-        ['p'] = "enter_diffbuf",
-        ['q'] = "quit",
-      },
-    })
-  end,
-}
 
 local hop ={
   "phaazon/hop.nvim",

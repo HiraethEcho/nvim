@@ -1,6 +1,6 @@
 local tele={
   "nvim-telescope/telescope.nvim",
-  -- lazy=false,
+  lazy=false,
   keys = {
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "files" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "old files" },
@@ -22,15 +22,20 @@ local tele={
     { "<leader>lm", "<cmd>Telescope marks<cr>", desc = "marks" },
     { "<leader>lj", "<cmd>Telescope jumplist<cr>", desc = "jump list" },
     { "<leader>lh", "<cmd>Telescope help_tags<cr>", desc = "help tags" },
-    { "<leader>lw", "<cmd>Telescope spell_suggest<cr>", desc = "spell suggest" },
+    { "<leader>w", "<cmd>Telescope spell_suggest<cr>", desc = "spell suggest" },
   },
   dependencies = {
     {"nvim-lua/plenary.nvim"},
+    -- {"nvim-telescope/telescope-project.nvim"},
+    {'jedrzejboczar/possession.nvim'}
   },
 
   -- apply the config and additionally load fzf-native
   config = function()
     -- require('telescope').load_extension('aerial')
+    -- require'telescope'.load_extension('project')
+    require('telescope').load_extension('possession')
+-- local project_actions = require("telescope._extensions.project.actions")
     require('telescope').setup{
       defaults = {
         winblend = 30,
@@ -141,14 +146,6 @@ local tele={
           override_file_sorter = true,
           case_mode = "smart_case",
         },
-        -- aerial = {
-        --       -- Display symbols as <root>.<parent>.<symbol>
-        --       show_nesting = {
-        --         ['_'] = false, -- This key will be the default
-        --         json = true,   -- You can set the option for specific filetypes
-        --         yaml = true,
-        --       }
-        --     },
       },
     }
   end,
@@ -194,7 +191,7 @@ local neotree={
   },
   config=function()
     -- Unless you are still migrating, remove the deprecated commands from v1.x
-    vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+    -- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
     require("neo-tree").setup({
       close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
       popup_border_style = "rounded",
@@ -421,8 +418,67 @@ window = {
 
     end,
   }
-
-
-  local spec ={tele,neotree}
+local possession ={
+    'jedrzejboczar/possession.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function ()
+      require('possession').setup {
+    -- session_dir = (Path:new(vim.fn.stdpath('data')) / 'possession'):absolute(),
+    session_dir = vim.fn.stdpath("config") .. "/posession",
+    silent = false,
+    load_silent = true,
+    debug = false,
+    logfile = false,
+    prompt_no_cr = false,
+    autosave = {
+        current = false,  -- or fun(name): boolean
+        tmp = false,  -- or fun(): boolean
+        tmp_name = 'tmp',
+        on_load = true,
+        on_quit = true,
+    },
+    commands = {
+        save = 'PossessionSave',
+        load = 'PossessionLoad',
+        rename = 'PossessionRename',
+        close = 'PossessionClose',
+        delete = 'PossessionDelete',
+        show = 'PossessionShow',
+        list = 'PossessionList',
+        migrate = 'PossessionMigrate',
+    },
+    hooks = {
+        before_save = function(name) return {} end,
+        after_save = function(name, user_data, aborted) end,
+        before_load = function(name, user_data) return user_data end,
+        after_load = function(name, user_data) end,
+    },
+    plugins = {
+        close_windows = {
+            hooks = {'before_save', 'before_load'},
+            preserve_layout = true,  -- or fun(win): boolean
+            match = {
+                floating = true,
+                buftype = {},
+                filetype = {},
+                custom = false,  -- or fun(win): boolean
+            },
+        },
+        delete_hidden_buffers = {
+            hooks = {
+                'before_load',
+                vim.o.sessionoptions:match('buffer') and 'before_save',
+            },
+            force = false,  -- or fun(buf): boolean
+        },
+        nvim_tree = true,
+        tabby = true,
+        dap = true,
+        delete_buffers = false,
+    },
+}
+    end,
+}
+  local spec ={tele,neotree,possession}
 
   return spec

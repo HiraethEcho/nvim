@@ -57,6 +57,9 @@ local line={
   },
   event = "BufReadPost",
   config = function()
+local function session_name()
+    return require('possession.session').session_name or ''
+end
     require('lualine').setup {
       options = {
         icons_enabled = true,
@@ -135,7 +138,8 @@ local line={
         lualine_z = {'filetype'}
       },
       tabline = {
-        lualine_a = {
+        lualine_a = {session_name},
+        lualine_b = {
           {
             'filename',
             symbols = {
@@ -146,7 +150,7 @@ local line={
             }
           }
         },
-        lualine_b = {
+        lualine_c = {
           {
             'buffers',
             show_filename_only = true,   -- Shows shortened relative path when set to false.
@@ -163,7 +167,6 @@ local line={
             },
           }
         },
-        lualine_c = {},
         lualine_x = {},
         lualine_y = {},
         lualine_z = {
@@ -224,17 +227,6 @@ local line={
 }
 
 
-local bar={
-  "utilyre/barbecue.nvim",
-  enabled=false,
-  dependencies = {
-    "neovim/nvim-lspconfig",
-    "SmiteshP/nvim-navic",
-  },
-  config = function()
-    require("barbecue").setup()
-  end,
-}
 
 
 local start={
@@ -327,60 +319,52 @@ local indentline={
     end,
   }
 }
-local animate={
-  'echasnovski/mini.animate', version = '*' ,
-  event="CursorMoved",
-  config=function ()
-    require('mini.animate').setup({
-      -- No need to copy this inside `setup()`. Will be used automatically.
-      -- Cursor path
-      cursor = {
-        -- Whether to enable this animation
-        enable = true,
 
-        -- Timing of animation (how steps will progress in time)
-        -- timing = --<function: implements linear total 250ms animation duration>,
-
-        -- Path generator for visualized cursor movement
-        -- path = --<function: implements shortest line path>,
-      },
-
-      -- Vertical scroll
-      scroll = {
-        -- Whether to enable this animation
-        enable = true,
-
-        -- Timing of animation (how steps will progress in time)
-        -- timing = --<function: implements linear total 250ms animation duration>,
-
-        -- Subscroll generator based on total scroll
-        -- subscroll = --<function: implements equal scroll with at most 60 steps>,
-      },
-
-      -- Window resize
-      resize = {
-        -- Whether to enable this animation
-        enable = true,
-      },
-
-      -- Window open
-      open = {
-        -- Whether to enable this animation
-        enable = true,
-
-      },
-
-      -- Window close
-      close = {
-        -- Whether to enable this animation
-        enable = true,
-
-        -- Timing of animation (how steps will progress in time)
-      }
-    })
-  end,
+local notify={
+'rcarriga/nvim-notify',
+lazy=false,
+config=function ()
+  require("notify").setup({
+    background_colour = "NotifyBackground",
+    fps = 30,
+    icons = {
+      DEBUG = "",
+      ERROR = "",
+      INFO = "",
+      TRACE = "✎",
+      WARN = ""
+    },
+    level = 2,
+    minimum_width = 50,
+    render = "default",
+    stages = "slide",
+    timeout = 2000,
+    top_down = true
+  })
+vim.notify = require("notify")
+-- highlight NotifyERRORBorder guifg=#8A1F1F
+-- highlight NotifyWARNBorder guifg=#79491D
+-- highlight NotifyINFOBorder guifg=#4F6752
+-- highlight NotifyDEBUGBorder guifg=#8B8B8B
+-- highlight NotifyTRACEBorder guifg=#4F3552
+-- highlight NotifyERRORIcon guifg=#F70067
+-- highlight NotifyWARNIcon guifg=#F79000
+-- highlight NotifyINFOIcon guifg=#A9FF68
+-- highlight NotifyDEBUGIcon guifg=#8B8B8B
+-- highlight NotifyTRACEIcon guifg=#D484FF
+-- highlight NotifyERRORTitle  guifg=#F70067
+-- highlight NotifyWARNTitle guifg=#F79000
+-- highlight NotifyINFOTitle guifg=#A9FF68
+-- highlight NotifyDEBUGTitle  guifg=#8B8B8B
+-- highlight NotifyTRACETitle  guifg=#D484FF
+-- highlight link NotifyERRORBody Normal
+-- highlight link NotifyWARNBody Normal
+-- highlight link NotifyINFOBody Normal
+-- highlight link NotifyDEBUGBody Normal
+-- highlight link NotifyTRACEBody Normal
+end
 }
 
-local spec={color,transparent,line,indentline,start}
+local spec={color,transparent,line,indentline,start,notify}
 
 return spec

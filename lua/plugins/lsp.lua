@@ -112,12 +112,16 @@ local lspconfig={
   },
   config=function()
     require'lspconfig'.texlab.setup{}
-    require'lspconfig'.lua_ls.setup{}
-    -- 
-    -- require'lspconfig'.latexindent.setup{}
-    require'lspconfig'.ltex_ls.setup{}
+    require'lspconfig'.grammarly.setup{}
+    require'lspconfig'.prosemd_lsp.setup{}
+    require'lspconfig'.ltex.setup{}
     require'lspconfig'.marksman.setup{}
     require'lspconfig'.remark_ls.setup{}
+    require'lspconfig'.lua_ls.setup{
+      settings={
+        checkThirdParty = false,
+      },
+    }
   end,
 }
 
@@ -156,7 +160,9 @@ local lspsaga={
     --Please make sure you install markdown and markdown_inline parser
     {"nvim-treesitter/nvim-treesitter"},
   },
-
+  keys={
+    { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "hover doc" },
+  },
   config = function()
     require("lspsaga").setup({
       preview = {
@@ -215,19 +221,58 @@ local lspsaga={
           quit = "q",
         },
       },
-  lightbulb = {
-    enable = false,
-  },
-  symbol_in_winbar = {
-    enable = true,
-    separator = "",
-    ignore_patterns={},
-    hide_keyword = true,
-    show_file = true,
-    folder_level = 2,
-    respect_root = false,
-    color_mode = true,
-  },
+      lightbulb = {
+        enable = false,
+      },
+      symbol_in_winbar = {
+        enable = true,
+        separator = "",
+        ignore_patterns={},
+        hide_keyword = true,
+        show_file = true,
+        folder_level = 2,
+        respect_root = false,
+        color_mode = true,
+      },
+      hover = {
+        max_width = 0.6,
+        open_link = 'gw',
+        open_browser = '!msedge',
+      },
+      diagnostic = {
+        on_insert = false,
+        on_insert_follow = false,
+        insert_winblend = 40,
+        show_code_action = true,
+        show_source = true,
+        jump_num_shortcut = true,
+        max_width = 0.7,
+        max_height = 0.6,
+        max_show_width = 0.9,
+        max_show_height = 0.6,
+        text_hl_follow = true,
+        border_follow = true,
+        extend_relatedInformation = false,
+        keys = {
+          exec_action = 'o',
+          quit = 'q',
+          expand_or_jump = '<CR>',
+          quit_in_show = { 'q', '<ESC>' },
+        },
+      },
+      ui = {
+        -- This option only works in Neovim 0.9
+        title = true,
+        -- Border type can be single, double, rounded, solid, shadow.
+        border = "single",
+        winblend = 0,
+        expand = "",
+        collapse = "",
+        code_action = "💡",
+        -- incoming = " ",
+        -- outgoing = " ",
+        hover = ' ',
+      },
     })
   end,
 }

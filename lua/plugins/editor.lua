@@ -64,17 +64,6 @@ local md={
     vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
   end,
 }
-local firenvim={
-  'glacambre/firenvim',
-lazy=false,
-  -- Lazy load firenvim
-  -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
-  cond = not not vim.g.started_by_firenvim,
-  build = function()
-    require("lazy").load({ plugins = "firenvim", wait = true })
-    vim.fn["firenvim#install"](0)
-  end
-}
-local spec={tex,firenvim}
+local spec={tex}
 
 return spec
