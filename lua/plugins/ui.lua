@@ -135,11 +135,10 @@ end
         lualine_c = {},
         lualine_x = {'progress'},
         lualine_y = {'Location'},
-        lualine_z = {'filetype'}
+        lualine_z = {}
       },
       tabline = {
-        lualine_a = {session_name},
-        lualine_b = {
+        lualine_a = {
           {
             'filename',
             symbols = {
@@ -150,12 +149,12 @@ end
             }
           }
         },
-        lualine_c = {
+        lualine_b = {
           {
             'buffers',
             show_filename_only = true,   -- Shows shortened relative path when set to false.
             show_modified_status = true, -- Shows indicator when the buffer is modified.
-            mode = 2, -- 0: Shows buffer name
+            mode = 0, -- 0: Shows buffer name
             -- 1: Shows buffer index
             -- 2: Shows buffer name + buffer index
             -- 3: Shows buffer number
@@ -167,9 +166,10 @@ end
             },
           }
         },
+        lualine_c = {},
+
         lualine_x = {},
-        lualine_y = {},
-        lualine_z = {
+        lualine_y = {
           {
             'tabs',
             max_length = vim.o.columns / 3, -- Maximum width of tabs component.
@@ -180,7 +180,8 @@ end
             -- 1: Shows tab_name
             -- 2: Shows tab_nr + tab_name
           }
-        }
+        },
+        lualine_z = {session_name},
       },
       -- winbar = {
       -- lualine_a = {{ "aerial",
@@ -259,6 +260,95 @@ local start={
       require('mini.starter').setup()
     end,
   },
+}
+local alpha={  -- lazy.nvim
+ "goolord/alpha-nvim",
+  event = "VimEnter",
+  opts = function()
+    local dashboard = require("alpha.themes.dashboard")
+    local logo = [[
+      ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
+      ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z
+      ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z
+      ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z
+      ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
+      ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
+      ]]
+
+    dashboard.section.header.val = vim.split(logo, "\n")
+    dashboard.section.buttons.val = {
+
+      -- Session list
+      -- Guide from https://github.com/jedrzejboczar/possession.nvim#startup-screen increases startuptime heavily. I rewrite by reading session files directly.
+      (function()
+        local group = { type = "group", opts = { spacing = 0 } }
+        group.val = {
+          {
+            type = "text",
+            val = "Sessions",
+            opts = {
+              position = "center"
+            }
+          }
+        }
+        local path = vim.fn.stdpath("config") .. "/sessions"
+        local files = vim.split(vim.fn.glob(path .. "/*.json"), "\n")
+        local i = 1
+        for _, file in pairs(files) do
+          local basename = vim.fs.basename(file):gsub("%.json", "")
+          if basename ~= "config" then
+            local button = dashboard.button(tostring(i), "● " .. basename, "<cmd>PossessionLoad " .. basename .. "<cr>")
+            table.insert(group.val, button)
+            i = i + 1
+          end
+        end
+        return group
+      end)(),
+      dashboard.button("f", " " .. " Find Files",
+        [[<cmd>lua Util.telescope("find_files", { prompt_title = "Find Files (cwd)", })() <CR>]]),
+      dashboard.button("e", " " .. " New Files", ":ene <BAR> startinsert <CR>"),
+      -- dashboard.button("o", " " .. " Recent Files", ":Telescope frecency <CR>"),
+      dashboard.button("g", " " .. " Find Text", ":Telescope live_grep <CR>"),
+      dashboard.button("c", " " .. " Nvim Config", [[<cmd>PossessionLoad config<CR>]]),
+      dashboard.button("l", "󰒲" .. " Lazy", ":Lazy<CR>"),
+      dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+    }
+    for _, button in ipairs(dashboard.section.buttons.val) do
+      button.opts.hl = "AlphaButtons"
+      button.opts.hl_shortcut = "AlphaShortcut"
+    end
+    dashboard.section.footer.opts.hl = "Type"
+    dashboard.section.header.opts.hl = "AlphaHeader"
+    dashboard.section.buttons.opts.hl = "AlphaButtons"
+    dashboard.opts.layout[1].val = 8
+    return dashboard
+  end,
+  config = function(_, dashboard)
+    -- vim.b.miniindentscope_disable = true
+
+    -- close Lazy and re-open when the dashboard is ready
+    if vim.o.filetype == "lazy" then
+      vim.cmd.close()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "AlphaReady",
+        callback = function()
+          require("lazy").show()
+        end,
+      })
+    end
+
+    require("alpha").setup(dashboard.opts)
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "LazyVimStarted",
+      callback = function()
+        local stats = require("lazy").stats()
+        local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+        dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+        pcall(vim.cmd.AlphaRedraw)
+      end,
+    })
+  end,
 }
 
 local indentline={
@@ -365,6 +455,6 @@ vim.notify = require("notify")
 end
 }
 
-local spec={color,transparent,line,indentline,start,notify}
+local spec={color,transparent,line,indentline,alpha,notify}
 
 return spec

@@ -1,3 +1,4 @@
+-- TODO: lazyload config, and order, and dependencies
 local tree={
   'nvim-treesitter/nvim-treesitter',
   build = ":TSUpdate",
@@ -63,7 +64,7 @@ local tree={
       highlight = {
         enable = true,
 
-        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+        -- note: these are the names of the parsers and not the filetype. (for example if you want to
         -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
         -- the name of the parser)
         -- list of language that will be disabled
@@ -82,7 +83,7 @@ local tree={
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = true,
+        additional_vim_regex_highlighting = false,
       },
       incremental_selection = {
         enable = true,
@@ -92,6 +93,7 @@ local tree={
           scope_incremental = "gic",
           node_decremental = "gim",
         },
+        -- QUES: what is this?
         indent = {
           enable = true
         },
@@ -155,6 +157,7 @@ local lspsaga={
   "glepnir/lspsaga.nvim",
   -- lazy=false,
   event = "LspAttach",
+  -- TODO: keys
   dependencies = {
     {"nvim-tree/nvim-web-devicons"},
     --Please make sure you install markdown and markdown_inline parser

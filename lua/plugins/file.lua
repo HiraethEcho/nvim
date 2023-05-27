@@ -33,9 +33,7 @@ local tele={
   -- apply the config and additionally load fzf-native
   config = function()
     -- require('telescope').load_extension('aerial')
-    -- require'telescope'.load_extension('project')
     require('telescope').load_extension('possession')
--- local project_actions = require("telescope._extensions.project.actions")
     require('telescope').setup{
       defaults = {
         winblend = 30,
@@ -140,12 +138,6 @@ local tele={
         },
       },
       extensions = {
-        fzf = {
-          fuzzy = true,
-          override_generic_sorter = true,
-          override_file_sorter = true,
-          case_mode = "smart_case",
-        },
       },
     }
   end,
@@ -418,67 +410,67 @@ window = {
 
     end,
   }
-local possession ={
+  local possession ={
     'jedrzejboczar/possession.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function ()
       require('possession').setup {
-    -- session_dir = (Path:new(vim.fn.stdpath('data')) / 'possession'):absolute(),
-    session_dir = vim.fn.stdpath("config") .. "/posession",
-    silent = false,
-    load_silent = true,
-    debug = false,
-    logfile = false,
-    prompt_no_cr = false,
-    autosave = {
-        current = false,  -- or fun(name): boolean
-        tmp = false,  -- or fun(): boolean
-        tmp_name = 'tmp',
-        on_load = true,
-        on_quit = true,
-    },
-    commands = {
-        save = 'PossessionSave',
-        load = 'PossessionLoad',
-        rename = 'PossessionRename',
-        close = 'PossessionClose',
-        delete = 'PossessionDelete',
-        show = 'PossessionShow',
-        list = 'PossessionList',
-        migrate = 'PossessionMigrate',
-    },
-    hooks = {
-        before_save = function(name) return {} end,
-        after_save = function(name, user_data, aborted) end,
-        before_load = function(name, user_data) return user_data end,
-        after_load = function(name, user_data) end,
-    },
-    plugins = {
-        close_windows = {
+        -- session_dir = (Path:new(vim.fn.stdpath('data')) / 'possession'):absolute(),
+        session_dir = vim.fn.stdpath("config") .. "/sessions",
+        silent = false,
+        load_silent = true,
+        debug = false,
+        logfile = false,
+        prompt_no_cr = false,
+        autosave = {
+          current = true,  -- or fun(name): boolean
+          tmp = false,  -- or fun(): boolean
+          tmp_name = 'tmp',
+          on_load = true,
+          on_quit = true,
+        },
+        commands = {
+          save = 'PossessionSave',
+          load = 'PossessionLoad',
+          rename = 'PossessionRename',
+          close = 'PossessionClose',
+          delete = 'PossessionDelete',
+          show = 'PossessionShow',
+          list = 'PossessionList',
+          migrate = 'PossessionMigrate',
+        },
+        hooks = {
+          before_save = function(name) return {} end,
+          after_save = function(name, user_data, aborted) end,
+          before_load = function(name, user_data) return user_data end,
+          after_load = function(name, user_data) end,
+        },
+        plugins = {
+          close_windows = {
             hooks = {'before_save', 'before_load'},
             preserve_layout = true,  -- or fun(win): boolean
             match = {
-                floating = true,
-                buftype = {},
-                filetype = {},
-                custom = false,  -- or fun(win): boolean
+              floating = true,
+              buftype = {},
+              filetype = {},
+              custom = false,  -- or fun(win): boolean
             },
-        },
-        delete_hidden_buffers = {
+          },
+          delete_hidden_buffers = {
             hooks = {
-                'before_load',
-                vim.o.sessionoptions:match('buffer') and 'before_save',
+              'before_load',
+              vim.o.sessionoptions:match('buffer') and 'before_save',
             },
             force = false,  -- or fun(buf): boolean
+          },
+          nvim_tree = true,
+          tabby = true,
+          dap = true,
+          delete_buffers = false,
         },
-        nvim_tree = true,
-        tabby = true,
-        dap = true,
-        delete_buffers = false,
-    },
-}
+      }
     end,
-}
+  }
   local spec ={tele,neotree,possession}
 
   return spec
