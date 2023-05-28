@@ -43,7 +43,8 @@ vim.opt.whichwrap = "bs<>[]"     -- which "horizontal" keys are allowed to trave
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5 
 vim.opt.list = true
--- vim.opt.listchars:append "eol:↴"
+vim.opt.listchars:append "eol:↴"
+vim.opt.listchars:append "space:⋅"
 
 vim.wo.colorcolumn = "80"-- 右侧参考线，超过表示代码太长了，考虑换行
 vim.o.hidden = true -- 允许隐藏被修改过的buffer

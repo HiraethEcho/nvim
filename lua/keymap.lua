@@ -22,7 +22,7 @@ keymap("n", "S", ":wa<cr>", opts)
 keymap("n", "Q", ":q<cr>", opts)
 keymap("n", "U", "<C-r>", opts)
 keymap("n", "<C-s>", ":w<cr>", opts)
-keymap("n","<leader>q",":wqa<cr>", opts)
+keymap("n","<leader>q",":quitall<cr>", opts)
 -- }}} general --
 --
 -- modes {{{ --

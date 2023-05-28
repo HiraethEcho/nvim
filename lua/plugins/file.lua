@@ -220,7 +220,7 @@ local neotree={
         icon = {
           folder_closed = "",
           folder_open = "",
-          -- folder_empty = "ﰊ",
+          folder_empty = "󰉖",
           -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
           -- then these will never be used.
           default = "*",
@@ -424,7 +424,7 @@ window = {
         prompt_no_cr = false,
         autosave = {
           current = true,  -- or fun(name): boolean
-          tmp = false,  -- or fun(): boolean
+          tmp = true,  -- or fun(): boolean
           tmp_name = 'tmp',
           on_load = true,
           on_quit = true,

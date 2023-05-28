@@ -116,7 +116,7 @@ local lspconfig={
     require'lspconfig'.texlab.setup{}
     require'lspconfig'.grammarly.setup{}
     require'lspconfig'.prosemd_lsp.setup{}
-    require'lspconfig'.ltex.setup{}
+    -- require'lspconfig'.ltex.setup{}
     require'lspconfig'.marksman.setup{}
     require'lspconfig'.remark_ls.setup{}
     require'lspconfig'.lua_ls.setup{

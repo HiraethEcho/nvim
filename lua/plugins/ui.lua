@@ -352,63 +352,61 @@ local alpha={  -- lazy.nvim
 }
 
 local indentline={
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    -- enabled=false,
-    event = "BufRead",
-    config = function()
-      use_treesitter = true,
-      require("indent_blankline").setup({
-        -- for example, context is off by default, use this to turn it on
-        char = "¦", -- ['|', '¦', '┆', '┊']
-        show_end_of_line = false,
-        space_char_blankline = " ",
-        -- show_current_context = true,
-        show_first_indent_level = false,
-        -- show_current_context_start = false,
-        buftype_exclude = {
-          "terminal",
-          "[No Name]",
-          "prompt",
-          "nofile",
-          "help",
-          -- "TelescopePrompt",
-        },
-        filetype_exclude = {
-          "packer",
-          "log",
-          "markdown",
-          "org",
-          "lspinfo",
-          "plugin",
-          "text",
-          "starify",
-          "txt"
-        },
-      })
-    end,
-  },
-
-  {
-    "echasnovski/mini.indentscope",
-    version = false, -- wait till new 0.7.0 release to put it back on semver
-    event = "BufReadPre",
-    opts = {
-      -- symbol = "▏",
-      symbol = "│",
-      options = { try_as_border = true },
-    },
-    config = function(_, opts)
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
-        callback = function()
-          vim.b.miniindentscope_disable = true
-        end,
-      })
-      require("mini.indentscope").setup(opts)
-    end,
-  }
+  "lukas-reineke/indent-blankline.nvim",
+  -- enabled=false,
+  event = "BufRead",
+  config = function()
+    vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+    vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+    vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+    vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+    vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+    vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent7 guibg=#555555 gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent8 guibg=#696969 gui=nocombine]]  
+    -- vim.cmd [[highlight IndentBlanklineIndent7 guibg=#2c1608 gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent8 guibg=#848482 gui=nocombine]]
+    require("indent_blankline").setup({
+      indent_blankline_use_treesitter=true,
+      space_char_blankline = " ",
+      char_highlight_list = {
+        "IndentBlanklineIndent1",
+        "IndentBlanklineIndent2",
+        "IndentBlanklineIndent3",
+        "IndentBlanklineIndent4",
+        "IndentBlanklineIndent5",
+        "IndentBlanklineIndent6",
+      },
+      -- space_char_highlight_list = {
+      --   "IndentBlanklineIndent7",
+      --   "IndentBlanklineIndent8",
+      -- },
+      show_end_of_line = false,
+      show_current_context = true,
+      show_current_context_start = true,
+      show_first_indent_level = false,
+      show_trailing_blankline_indent = true,
+      buftype_exclude = {
+        "terminal",
+        "[No Name]",
+        "prompt",
+        "nofile",
+        "help",
+      },
+      filetype_exclude = {
+        "log",
+        "markdown",
+        "org",
+        "lspinfo",
+        "plugin",
+        "text",
+        "txt"
+      },
+    })
+  end,
 }
+
+
 
 local notify={
 'rcarriga/nvim-notify',
@@ -455,6 +453,60 @@ vim.notify = require("notify")
 end
 }
 
-local spec={color,transparent,line,indentline,alpha,notify}
+local minimap={
+  {
+    'echasnovski/mini.map', version = false ,
+    enabled=false,
+    -- lazy=false,
+    config =function ()
+      require('mini.map').setup({
+        -- Highlight integrations (none by default)
+        integrations = nil,
+        symbols = {
+          -- Encode symbols. See `:h MiniMap.config` for specification and
+          -- `:h MiniMap.gen_encode_symbols` for pre-built ones.
+          -- Default: solid blocks with 3x2 resolution.
+          -- encode = nil,
+          -- Scrollbar parts for view and line. Use empty string to disable any.
+          scroll_line = '█',
+          scroll_view = '┃',
+        },
+
+        window = {
+          -- Whether window is focusable in normal way (with `wincmd` or mouse)
+          focusable = false,
+          -- Whether to show count of multiple integration highlights
+          show_integration_count = false,
+          width = 40,
+          winblend = 25,
+        },
+      })
+
+      -- vim.api.nvim_create_user_command('MiniMapOpen',MiniMap.open(), { bang = true })
+      -- vim.api.nvim_create_user_command('MiniMapClose', MiniMap.close(), { bang = true })
+    end,
+  },
+  {
+    'wfxr/minimap.vim',
+    -- lazy=false,
+    keys={
+      { "<leader>m", "<cmd>MinimapToggle<cr>", desc = "Minimap Toggle" },
+    },
+    cmd={
+      "MinimapOpen",
+      "MinimapClose",
+      "MinimapToggle",
+    },
+    config=function ()
+      vim.g.minimap_width = 20
+      vim.g.minimap_auto_start = 0
+      vim.g.minimap_auto_start_win_enter = 0
+      vim.g.minimap_highlight_search=1
+      vim.g.minimap_git_colors=1
+    end,
+  },
+}
+
+local spec={color,transparent,line,indentline,alpha,notify,minimap}
 
 return spec
