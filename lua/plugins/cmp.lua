@@ -9,7 +9,7 @@ local nvimcmp={
     "f3fora/cmp-spell",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
-    "fhill2/telescope-ultisnips.nvim",
+    -- "fhill2/telescope-ultisnips.nvim",
     -- "hrsh7th/cmp-cmdline",
     {
       "quangnguyen30192/cmp-nvim-ultisnips",

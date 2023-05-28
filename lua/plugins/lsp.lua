@@ -107,8 +107,8 @@ local lspconfig={
   -- lazy=false,
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-    { "folke/neodev.nvim", opts = {} },
+    -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
+    -- { "folke/neodev.nvim", opts = {} },
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
   },

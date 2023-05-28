@@ -19,7 +19,7 @@
   "minimap.vim": { "branch": "master", "commit": "726746ed02eab2eef137a7ecceda7214fbeeec41" },
   "neo-tree.nvim": { "branch": "v2.x", "commit": "8c89efb93b8383666a6f989762c2f610f5f2c930" },
   "neoconf.nvim": { "branch": "main", "commit": "279c27f418f35397fe5b913d9d61d529cc038493" },
-  "neodev.nvim": { "branch": "main", "commit": "ffa5f73f243954afb96fc19a512a24d7b8b0bb63" },
+  "neodev.nvim": { "branch": "main", "commit": "da3e9e05c60250984f1bf069d517d9fca5315453" },
   "neuims": { "branch": "master", "commit": "d8efc81d75773e7ccb1d1634f40f23b56dc48cb7" },
   "nui.nvim": { "branch": "main", "commit": "2b2732528e4a79eb8542568bd51d25f710395bd6" },
   "nvim-autopairs": { "branch": "master", "commit": "59df87a84c80a357ca8d8fe86e451b93ac476ccc" },
