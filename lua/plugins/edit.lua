@@ -1,6 +1,6 @@
 local tools={
   {
-   "tpope/vim-commentary",
+    "tpope/vim-commentary",
     event = "BufReadPost",
   },
   {
@@ -17,6 +17,11 @@ local tools={
   {
     "Neur1n/neuims",
     cmd="IMSToggle",
+  },
+  {
+    "windwp/nvim-autopairs",
+    event="InsertEnter",
+    config = function() require("nvim-autopairs").setup {} end
   },
 }
 
@@ -82,7 +87,7 @@ local todo={
         default = { "Identifier", "#7C3AED" },
         test = { "Identifier", "#FF00FF" }
       },
--- TODO: colors and hightlighs
+      -- TODO: colors and hightlighs
       search = {
         command = "rg",
         args = {
