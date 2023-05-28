@@ -35,7 +35,7 @@ local wiki={
   "vimwiki/vimwiki",
   ft={"md"},
 }
-
+-- TODO: markdown preview and editor
 local md={
   -- use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
   "toppair/peek.nvim",

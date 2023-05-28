@@ -178,9 +178,6 @@ local lspsaga={
       },
       request_timeout = 2000,
 
-      -- See Customizing Lspsaga's Appearance
-      -- ui = { ... },
-
       -- For default options for each command, see below
       finder = {
         max_height = 0.5,
@@ -189,8 +186,8 @@ local lspsaga={
         keys = {
           jump_to = 'p',
           expand_or_jump = 'o',
-          vsplit = 's',
-          split = 'i',
+          vsplit = 'v',
+          split = 's',
           tabe = 't',
           tabnew = 'r',
           quit = { 'q', '<ESC>' },
@@ -263,6 +260,8 @@ local lspsaga={
           quit_in_show = { 'q', '<ESC>' },
         },
       },
+    -- TODO:ui
+      -- See Customizing Lspsaga's Appearance
       ui = {
         -- This option only works in Neovim 0.9
         title = true,

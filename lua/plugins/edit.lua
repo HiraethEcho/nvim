@@ -82,6 +82,7 @@ local todo={
         default = { "Identifier", "#7C3AED" },
         test = { "Identifier", "#FF00FF" }
       },
+-- TODO: colors and hightlighs
       search = {
         command = "rg",
         args = {

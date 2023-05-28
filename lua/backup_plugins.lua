@@ -1,3 +1,66 @@
+  local minimap={
+    'echasnovski/mini.map', version = false ,
+    enabled=false,
+    -- lazy=false,
+    config =function ()
+      require('mini.map').setup({
+        -- Highlight integrations (none by default)
+        integrations = nil,
+        symbols = {
+          -- Encode symbols. See `:h MiniMap.config` for specification and
+          -- `:h MiniMap.gen_encode_symbols` for pre-built ones.
+          -- Default: solid blocks with 3x2 resolution.
+          -- encode = nil,
+          -- Scrollbar parts for view and line. Use empty string to disable any.
+          scroll_line = '█',
+          scroll_view = '┃',
+        },
+
+        window = {
+          -- Whether window is focusable in normal way (with `wincmd` or mouse)
+          focusable = false,
+          -- Whether to show count of multiple integration highlights
+          show_integration_count = false,
+          width = 40,
+          winblend = 25,
+        },
+      })
+
+      -- vim.api.nvim_create_user_command('MiniMapOpen',MiniMap.open(), { bang = true })
+      -- vim.api.nvim_create_user_command('MiniMapClose', MiniMap.close(), { bang = true })
+    end,
+  },
+local start={
+  {
+    "mhinz/vim-startify",
+    event = "VimEnter",
+    -- lazy=false,
+
+    config=function()
+      vim.g.startify_session_dir = "~/AppData/Local/nvim/session/"
+      vim.g.startify_files_number= 3
+      vim.cmd([[
+      let g:startify_lists= [
+      \ { 'type': 'sessions'  , 'header': ['   Sessions'  ] } ,
+      \ { 'type': 'files'     , 'header': ['   Recent'    ] } ,
+      \ ]
+      ]])
+      -- let g:startify_custom_header=startify#pad(split(system('figlet -w 100 Carpe diem'), '\n'))
+      -- let g:startify_custom_footer=startify#pad(split(system('figlet -w 100 Seize the day'), '\n'))
+    end,
+  },
+
+  {
+    "echasnovski/mini.starter",
+    enabled=false,
+    -- lazy=false,
+    version = false, -- wait till new 0.7.0 release to put it back on semver
+    -- event = "VimEnter",
+    config=function()
+      require('mini.starter').setup()
+    end,
+  },
+}
 local animate={
   'echasnovski/mini.animate', version = '*' ,
   event="CursorMoved",

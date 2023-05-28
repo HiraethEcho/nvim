@@ -93,11 +93,13 @@ local gitsigns ={
         enable = false
       },
     }
+require("scrollbar.handlers.gitsigns").setup()
   end,
 }
 
 local confict={
   -- lazy=false,
+  -- TODO: lazyload, and keybings
   'akinsho/git-conflict.nvim',
   version = "*",
   config =function()
@@ -120,5 +122,5 @@ local spec={
   confict,
   gutter,
 }
-
+-- TODO:gutter or gitsings?
 return spec

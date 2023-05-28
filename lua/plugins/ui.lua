@@ -39,6 +39,21 @@ local color={
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       vim.cmd([[colorscheme tokyonight]])
+local colors = require("tokyonight.colors").setup()
+
+require("scrollbar").setup({
+    handle = {
+        color = colors.bg_highlight,
+    },
+    marks = {
+        Search = { color = colors.orange },
+        Error = { color = colors.error },
+        Warn = { color = colors.warning },
+        Info = { color = colors.info },
+        Hint = { color = colors.hint },
+        Misc = { color = colors.purple },
+    }
+})
     end,
   },
   {
@@ -183,89 +198,20 @@ end
         },
         lualine_z = {session_name},
       },
-      -- winbar = {
-      -- lualine_a = {{ "aerial",
-      --   -- The separator to be used to separate symbols in status line.
-      --   sep = '>',
-
-      --   -- The number of symbols to render top-down. In order to render only 'N' last
-      --   -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
-      --   -- be used in order to render only current symbol.
-      --   depth = nil,
-
-      --   -- When 'dense' mode is on, icons are not rendered near their symbols. Only
-      --   -- a single icon that represents the kind of current symbol is rendered at
-      --   -- the beginning of status line.
-      --   dense = true,
-
-      --   -- The separator to be used to separate symbols in dense mode.
-      --   dense_sep = '.',
-
-      --   -- Color the symbol icons.
-      --   colored = true,
-      -- },
-      -- },
-      -- lualine_b = {},
-      -- lualine_c = {},
-      -- lualine_x = {},
-      -- lualine_y = {},
-      -- lualine_z = {},
-      -- },
-      -- inactive_winbar = {},
       extensions = {}
     }
-    -- vim.keymap.set("n", "<A-1>", "<cmd>LualineBuffersJump! 1<CR>", { noremap = true, silent = true })
-    -- vim.keymap.set("n", "<A-2>", "<cmd>LualineBuffersJump! 2<CR>", { noremap = true, silent = true })
-    -- vim.keymap.set("n", "<A-3>", "<cmd>LualineBuffersJump! 3<CR>", { noremap = true, silent = true })
-    -- vim.keymap.set("n", "<A-4>", "<cmd>LualineBuffersJump! 4<CR>", { noremap = true, silent = true })
-    -- vim.keymap.set("n", "<A-5>", "<cmd>LualineBuffersJump! 5<CR>", { noremap = true, silent = true })
-    -- vim.keymap.set("n", "<A-6>", "<cmd>LualineBuffersJump! 6<CR>", { noremap = true, silent = true })
-    -- vim.keymap.set("n", "<A-7>", "<cmd>LualineBuffersJump! 7<CR>", { noremap = true, silent = true })
-    -- vim.keymap.set("n", "<A-8>", "<cmd>LualineBuffersJump! 8<CR>", { noremap = true, silent = true })
-    -- vim.keymap.set("n", "<A-9>", "<cmd>LualineBuffersJump! 9<CR>", { noremap = true, silent = true })
-    -- vim.keymap.set("n", "<A-$>", "<cmd>LualineBuffersJump! $<CR>", { noremap = true, silent = true })
   end,
 }
 
 
 
 
-local start={
-  {
-    "mhinz/vim-startify",
-    event = "VimEnter",
-    -- lazy=false,
-
-    config=function()
-      vim.g.startify_session_dir = "~/AppData/Local/nvim/session/"
-      vim.g.startify_files_number= 3
-      vim.cmd([[
-      let g:startify_lists= [
-      \ { 'type': 'sessions'  , 'header': ['   Sessions'  ] } ,
-      \ { 'type': 'files'     , 'header': ['   Recent'    ] } ,
-      \ ]
-      ]])
-      -- let g:startify_custom_header=startify#pad(split(system('figlet -w 100 Carpe diem'), '\n'))
-      -- let g:startify_custom_footer=startify#pad(split(system('figlet -w 100 Seize the day'), '\n'))
-    end,
-  },
-
-  {
-    "echasnovski/mini.starter",
-    enabled=false,
-    -- lazy=false,
-    version = false, -- wait till new 0.7.0 release to put it back on semver
-    -- event = "VimEnter",
-    config=function()
-      require('mini.starter').setup()
-    end,
-  },
-}
 local alpha={  -- lazy.nvim
  "goolord/alpha-nvim",
   event = "VimEnter",
   opts = function()
     local dashboard = require("alpha.themes.dashboard")
+    -- TODO: start logo <28-05-23, > 
     local logo = [[
       ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
       ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z
@@ -356,12 +302,12 @@ local indentline={
   -- enabled=false,
   event = "BufRead",
   config = function()
-    vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-    vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-    vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-    vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-    vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-    vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
     -- vim.cmd [[highlight IndentBlanklineIndent7 guibg=#555555 gui=nocombine]]
     -- vim.cmd [[highlight IndentBlanklineIndent8 guibg=#696969 gui=nocombine]]  
     -- vim.cmd [[highlight IndentBlanklineIndent7 guibg=#2c1608 gui=nocombine]]
@@ -381,7 +327,7 @@ local indentline={
       --   "IndentBlanklineIndent7",
       --   "IndentBlanklineIndent8",
       -- },
-      show_end_of_line = false,
+      show_end_of_line = true,
       show_current_context = true,
       show_current_context_start = true,
       show_first_indent_level = false,
@@ -414,8 +360,9 @@ lazy=false,
 config=function ()
   require("notify").setup({
     background_colour = "NotifyBackground",
-    fps = 30,
+    fps = 60,
     icons = {
+      -- TODO:icons here
       DEBUG = "",
       ERROR = "",
       INFO = "",
@@ -430,6 +377,8 @@ config=function ()
     top_down = true
   })
 vim.notify = require("notify")
+-- TODO:notify color
+--
 -- highlight NotifyERRORBorder guifg=#8A1F1F
 -- highlight NotifyWARNBorder guifg=#79491D
 -- highlight NotifyINFOBorder guifg=#4F6752
@@ -450,43 +399,10 @@ vim.notify = require("notify")
 -- highlight link NotifyINFOBody Normal
 -- highlight link NotifyDEBUGBody Normal
 -- highlight link NotifyTRACEBody Normal
-end
+end,
 }
 
 local minimap={
-  {
-    'echasnovski/mini.map', version = false ,
-    enabled=false,
-    -- lazy=false,
-    config =function ()
-      require('mini.map').setup({
-        -- Highlight integrations (none by default)
-        integrations = nil,
-        symbols = {
-          -- Encode symbols. See `:h MiniMap.config` for specification and
-          -- `:h MiniMap.gen_encode_symbols` for pre-built ones.
-          -- Default: solid blocks with 3x2 resolution.
-          -- encode = nil,
-          -- Scrollbar parts for view and line. Use empty string to disable any.
-          scroll_line = '█',
-          scroll_view = '┃',
-        },
-
-        window = {
-          -- Whether window is focusable in normal way (with `wincmd` or mouse)
-          focusable = false,
-          -- Whether to show count of multiple integration highlights
-          show_integration_count = false,
-          width = 40,
-          winblend = 25,
-        },
-      })
-
-      -- vim.api.nvim_create_user_command('MiniMapOpen',MiniMap.open(), { bang = true })
-      -- vim.api.nvim_create_user_command('MiniMapClose', MiniMap.close(), { bang = true })
-    end,
-  },
-  {
     'wfxr/minimap.vim',
     -- lazy=false,
     keys={
@@ -503,10 +419,31 @@ local minimap={
       vim.g.minimap_auto_start_win_enter = 0
       vim.g.minimap_highlight_search=1
       vim.g.minimap_git_colors=1
+      -- TODO:coloer here
     end,
-  },
+  }
+
+local scrollbar={
+  -- "kevinhwang91/nvim-hlslens",
+  'petertriho/nvim-scrollbar',
+  dependencies=
+{
+  "kevinhwang91/nvim-hlslens",
+  config = function()
+    -- require('hlslens').setup() is not required
+    require("scrollbar.handlers.search").setup({
+        -- hlslens config overrides
+    })
+  end,
+},
+  lazy =false,
+  config = function()
+    -- require('hlslens').setup() is not required
+require("scrollbar").setup()
+-- TODO:color and symbols
+  end,
 }
 
-local spec={color,transparent,line,indentline,alpha,notify,minimap}
+local spec={color,transparent,line,indentline,alpha,notify,minimap,scrollbar}
 
 return spec

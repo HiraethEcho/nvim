@@ -113,6 +113,7 @@ local whichkey={
       },
     },
     { prefix = "<leader>" })
+    -- TODO: other names
   end,
 }
 
