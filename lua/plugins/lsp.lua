@@ -2,10 +2,7 @@
 local tree={
   'nvim-treesitter/nvim-treesitter',
   build = ":TSUpdate",
-  event = { "BufReadPost", "BufNewFile" },
-  -- lazy=false,
-  -- ft={'lua','md','latex','tex','bib'},
-  -- 'do': ':TSUpdate'
+  ft={'md','latex','tex','bib'},
   dependencies = {
     {
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -14,10 +11,8 @@ local tree={
           textobjects = {
             select = {
               enable = true,
-
               -- Automatically jump forward to textobjects, similar to targets.vim
               lookahead = true,
-
               keymaps = {
                 -- You can use the capture groups defined in textobjects.scm
                 ["af"] = "@function.outer",
@@ -47,53 +42,18 @@ local tree={
     require'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all" (the five listed parsers should always be installed)
       ensure_installed = { "c", "lua", "latex","markdown"},
-
-      -- Install parsers synchronously (only applied to `ensure_installed`)
-      sync_install = true,
-
-      -- Automatically install missing parsers when entering buffer
-      -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-      auto_install = true,
-
-      -- List of parsers to ignore installing (for "all")
-      -- ignore_install = { "javascript" },
-
-      ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-      -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
       highlight = {
         enable = true,
-
-        -- note: these are the names of the parsers and not the filetype. (for example if you want to
-        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-        -- the name of the parser)
-        -- list of language that will be disabled
-        -- disable = { "c", "rust" },
-        -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-        --
-        -- disable = function(lang, buf)
-        --     local max_filesize = 100 * 1024 -- 100 KB
-        --     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        --     if ok and stats and stats.size > max_filesize then
-        --         return true
-        --     end
-        -- end,
-
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
       },
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "gnn", -- set to `false` to disable one of the mappings
-          node_incremental = "gin",
-          scope_incremental = "gic",
-          node_decremental = "gim",
+          init_selection    = "<cr><cr>", -- set to `false` to disable one of the mappings
+          node_incremental  = "[",
+          -- scope_incremental = "]",
+          node_decremental  = "]",
         },
-        -- QUES: what is this?
         indent = {
           enable = true
         },
@@ -105,18 +65,22 @@ local tree={
 local lspconfig={
   "neovim/nvim-lspconfig",
   -- lazy=false,
-  event = { "BufReadPre", "BufNewFile" },
+  -- event = { "BufReadPre", "BufNewFile" },
+  cmd="LspStart",
+  keys={
+    { "<leader>ll", "<cmd>LspStart<cr>", desc = "Start lsp" },
+  },
   dependencies = {
     -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-    -- { "folke/neodev.nvim", opts = {} },
+    {"folke/neodev.nvim", opts = {} },
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    'nvim-treesitter/nvim-treesitter',
   },
   config=function()
     require'lspconfig'.texlab.setup{}
     require'lspconfig'.grammarly.setup{}
     require'lspconfig'.prosemd_lsp.setup{}
-    -- require'lspconfig'.ltex.setup{}
     require'lspconfig'.marksman.setup{}
     require'lspconfig'.remark_ls.setup{}
     require'lspconfig'.lua_ls.setup{
@@ -153,18 +117,25 @@ local lsp_server={
   },
 }
 
-local lspsaga={
+local lspsaga = {
   "glepnir/lspsaga.nvim",
-  -- lazy=false,
   event = "LspAttach",
-  -- TODO: keys
   dependencies = {
     {"nvim-tree/nvim-web-devicons"},
     --Please make sure you install markdown and markdown_inline parser
     {"nvim-treesitter/nvim-treesitter"},
   },
+  -- TODO: keys
   keys={
     { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "hover doc" },
+    { "<leader>lo", "<cmd>Lspsaga outline<cr>", desc = "lsp outline" },
+    { "<leader>ld", "<cmd>Lspsaga show_workspace_diagnostics<cr>", desc = "lsp diagnostic" },
+    { "<leader>ld", "<cmd>Lspsaga lsp_finder<cr>", desc = "lsp finder" },
+    { "gp", "<cmd>Lspsaga peek_definition<cr>", desc = "lsp peek definition" },
+    { "<leader>t", "<cmd>Lspsaga term_toggle<cr>", desc = "lsp terminal" },
+    { "gd", "<cmd>Lspsaga goto_definition<cr>", desc = "go to definition" },
+    { "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "previous diagnostic" },
+    { "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "next diagnostic" },
   },
   config = function()
     require("lspsaga").setup({
@@ -194,17 +165,6 @@ local lspsaga={
           close_in_preview = '<ESC>',
         },
       },
-      code_action = {
-        num_shortcut = true,
-        show_server_name = false,
-        extend_gitsigns = true,
-        keys = {
-          -- string | table type
-          quit = "q",
-          exec = "<CR>",
-        },
-      },
-      -- etc.
       outline = {
         win_position = "right",
         win_with = "",
@@ -217,7 +177,7 @@ local lspsaga={
         auto_resize = false,
         custom_sort = nil,
         keys = {
-          expand_or_jump = 'o',
+          expand_or_jump = '<cr>',
           quit = "q",
         },
       },
@@ -260,14 +220,14 @@ local lspsaga={
           quit_in_show = { 'q', '<ESC>' },
         },
       },
-    -- TODO:ui
+      -- TODO:ui
       -- See Customizing Lspsaga's Appearance
       ui = {
         -- This option only works in Neovim 0.9
         title = true,
         -- Border type can be single, double, rounded, solid, shadow.
         border = "single",
-        winblend = 0,
+        winblend = 30,
         expand = "",
         collapse = "",
         code_action = "💡",

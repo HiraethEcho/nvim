@@ -15,8 +15,8 @@ local whichkey={
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
         -- No actual key bindings are created
         presets = {
-          operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-          motions = true, -- adds help for motions
+          operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+          motions = false, -- adds help for motions
           text_objects = false, -- help for text objects triggered after entering an operator
           windows = true, -- default bindings on <c-w>
           nav = true, -- misc bindings to work with windows
@@ -28,8 +28,6 @@ local whichkey={
       -- to enable all native operators, set the preset / operators plugin above
       -- operators = { gc = "Comments" },
       key_labels = {
-        -- override the label used to display some keys. It doesn't effect WK in any other way.
-        -- For example:
         ["<space>"] = "SPC",
         ["<cr>"] = "RET",
         ["<tab>"] = "TAB",
@@ -48,13 +46,13 @@ local whichkey={
         position = "bottom", -- bottom, top
         margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
         padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-        winblend = 0
+        winblend = 20,
       },
       layout = {
-        height = { min = 4, max = 25 }, -- min and max height of the columns
+        height = { min = 4, max = 45 }, -- min and max height of the columns
         width = { min = 20, max = 50 }, -- min and max width of the columns
         spacing = 3, -- spacing between columns
-        align = "left", -- align columns left, center or right
+        align = "center", -- align columns left, center or right
       },
       ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
       hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
@@ -87,7 +85,7 @@ local whichkey={
     -- and hide <leader>1
 
     wk.register({
-      l={
+      i={
         name="list",
       },
       e={
@@ -95,101 +93,99 @@ local whichkey={
       },
       f = {
         name = "find", -- optional group name
-        -- f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
-        -- r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap=false, buffer = 123 }, -- additional options for creating the keymap
-        -- n = { "New File" }, -- just a label. don't create any mapping
-        -- e = "Edit File", -- same as above
-        -- ["1"] = "which_key_ignore",  -- special label to hide it in the popup
-        -- b = { function() print("bar") end, "Foobar" } -- you can also pass functions!
       },
       g={
         name="git",
       },
-      t={
-        name="terminal",
+      l={
+        name="lsp",
       },
-      h={
-        name="hunk",
+      -- t={
+        --   name="terminal",
+        -- },
+        h={
+          name="hunk",
+        },
       },
-    },
-    { prefix = "<leader>" })
-    -- TODO: other names
-  end,
-}
-
-local miscellaneous={
-  {
-    "tweekmonster/startuptime.vim",
-    cmd = "StartupTime",
-  },
-  {
-    "lambdalisue/suda.vim",
-    cmd = { "SudaRead", "SudaWrite" },
-    config=function()
-
+      { prefix = "<leader>" })
     end,
-  },
-}
+  }
 
-local wildernvim={
-  "gelguy/wilder.nvim",
-  event = 'CmdlineEnter',
-  config = function()
-    local wilder = require('wilder')
-    -- wilder.set_option('use_python_remote_plugin', 0)
-    wilder.setup({modes = {':', '/', '?'}})
+  local miscellaneous={
+    {
+      "tweekmonster/startuptime.vim",
+      cmd = "StartupTime",
+    },
+    {
+      "lambdalisue/suda.vim",
+      cmd = { "SudaRead", "SudaWrite" },
+      config=function()
 
-    wilder.set_option('pipeline', {
-      wilder.branch(
-      wilder.cmdline_pipeline({
-        fuzzy = 1,
-        set_pcre2_pattern = 1,
-      }),
-      wilder.python_search_pipeline({
-        pattern = 'fuzzy',
+      end,
+    },
+  }
+
+  local wildernvim={
+    "gelguy/wilder.nvim",
+    event = 'CmdlineEnter',
+    config = function()
+      local wilder = require('wilder')
+      -- wilder.set_option('use_python_remote_plugin', 0)
+      wilder.setup({modes = {':', '/', '?'}})
+
+      wilder.set_option('pipeline', {
+        wilder.branch(
+        wilder.cmdline_pipeline({
+          fuzzy = 1,
+          set_pcre2_pattern = 1,
+        }),
+        wilder.python_search_pipeline({
+          pattern = 'fuzzy',
+        })
+        ),
       })
-      ),
-    })
 
-    local popupmenu_palette= wilder.popupmenu_renderer(
-    wilder.popupmenu_palette_theme({
-      border = 'rounded',
-      max_height = '75%',      -- max height of the palette
-      min_height = 0,          -- set to the same as 'max_height' for a fixed height window
-      prompt_position = 'top', -- 'top' or 'bottom' to set the location of the prompt
-      pumblend=20,
-      reverse = 0,             -- set to 1 to reverse the order of the list, use in combination with 'prompt_position'
-      left = {' ', wilder.popupmenu_devicons()},
-      right = {' ', wilder.popupmenu_scrollbar()},
-    })
-    )
+      local popupmenu_palette= wilder.popupmenu_renderer(
+      wilder.popupmenu_palette_theme({
+        border = 'rounded',
+        max_height = '75%',      -- max height of the palette
+        min_height = 0,          -- set to the same as 'max_height' for a fixed height window
+        prompt_position = 'top', -- 'top' or 'bottom' to set the location of the prompt
+        pumblend=20,
+        reverse = 0,             -- set to 1 to reverse the order of the list, use in combination with 'prompt_position'
+        winblend=30,
+        left = {' ', wilder.popupmenu_devicons()},
+        right = {' ', wilder.popupmenu_scrollbar()},
+      })
+      )
 
-    local popupmenu_renderer = wilder.popupmenu_renderer(
-    wilder.popupmenu_border_theme({
-      border = 'rounded',
-      pumblend=20,
-      -- highlighter = highlighters,
-      left = {' ', wilder.popupmenu_devicons()},
-      right = {' ', wilder.popupmenu_scrollbar()},
-    })
-    -- pumblend=20,
-  )
+      local popupmenu_renderer = wilder.popupmenu_renderer(
+      wilder.popupmenu_border_theme({
+        border = 'rounded',
+        pumblend=20,
+        -- highlighter = highlighters,
+        left = {' ', wilder.popupmenu_devicons()},
+        right = {' ', wilder.popupmenu_scrollbar()},
+      })
+      -- pumblend=20,
+      )
 
-    local wildmenu_renderer = wilder.wildmenu_renderer({
-      -- highlighter = highlighters,
-      separator = ' · ',
-      left = {' ', wilder.wildmenu_spinner(), ' '},
-      right = {' ', wilder.wildmenu_index()},
-    })
+      local wildmenu_renderer = wilder.wildmenu_renderer({
+        -- highlighter = highlighters,
+        separator = ' · ',
+        left = {' ', wilder.wildmenu_spinner(), ' '},
+        right = {' ', wilder.wildmenu_index()},
+      })
 
-    wilder.set_option('renderer', wilder.renderer_mux({
-      [':'] = popupmenu_renderer,
-      ['/'] = wildmenu_renderer,
-      substitute = wildmenu_renderer,
-    }))
-  end,
-}
+      wilder.set_option('renderer', wilder.renderer_mux({
+        -- [':'] = popupmenu_renderer,
+        [':'] =popupmenu_palette,
+        ['/'] = wildmenu_renderer,
+        substitute = wildmenu_renderer,
+      }))
+    end,
+  }
 
-local spec={whichkey,wildernvim,miscellaneous}
+  local spec={whichkey,wildernvim,miscellaneous}
 
-return spec
+  return spec

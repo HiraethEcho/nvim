@@ -30,7 +30,7 @@ keymap("n","<leader>q",":quitall<cr>", opts)
 keymap("n", ";", ":", opts)
 
 keymap("n", "<C-a>", "mzggVG", opts)
-keymap("n", "mn", ":noh<cr>",opts)
+keymap("n", "<leader>n", ":noh<cr>",opts)
 
 keymap("n", "x", "\"_x", opts)
 
@@ -72,7 +72,7 @@ keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
-keymap("n", "<leader>v", ":vs<CR>", opts)
+-- keymap("n", "<leader>v", ":vs<CR>", opts)
  -- Rotate screens
 -- keymap("n", "rh", "<C-w>b<C-w>K", opts)
 -- keymap("n", "rv", "<C-w>b<C-w>H", opts)

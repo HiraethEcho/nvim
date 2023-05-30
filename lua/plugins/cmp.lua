@@ -9,7 +9,6 @@ local nvimcmp={
     "f3fora/cmp-spell",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
-    -- "fhill2/telescope-ultisnips.nvim",
     -- "hrsh7th/cmp-cmdline",
     {
       "quangnguyen30192/cmp-nvim-ultisnips",
@@ -75,13 +74,12 @@ local nvimcmp={
       sources = cmp.config.sources({
         { name = 'ultisnips' }, -- For ultisnips users.
         { name = 'nvim_lsp' },
-        -- { name = 'luasnip' },
-        -- { name = 'orgmode' },
         { name = 'buffer' },
         { name = 'path' },
         { name = 'spell' },
       }),
     })
+
     local lspkind = require('lspkind')
     lspkind.init({
       -- defines how annotations are shown
@@ -143,7 +141,6 @@ local nvimcmp={
         })
       }
     }
-    require('telescope').load_extension('ultisnips')
     -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
     -- cmp.setup.cmdline({ "/", "?" }, {
     --   mapping = cmp.mapping.preset.cmdline(),

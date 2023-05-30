@@ -41,19 +41,20 @@ local color={
       vim.cmd([[colorscheme tokyonight]])
 local colors = require("tokyonight.colors").setup()
 -- TODO: color of scrollbar for tokyonight
--- require("scrollbar").setup({
---     handle = {
---         color = colors.bg_highlight,
---     },
---     marks = {
---         Search = { color = colors.orange },
---         Error = { color = colors.error },
---         Warn = { color = colors.warning },
---         Info = { color = colors.info },
---         Hint = { color = colors.hint },
---         Misc = { color = colors.purple },
---     }
--- })
+
+require("scrollbar").setup({
+    handle = {
+        color = colors.bg_highlight,
+    },
+    marks = {
+        Error = { color = colors.error },
+        Search = { color = colors.orange },
+        Warn = { color = colors.warning },
+        Info = { color = colors.info },
+        Hint = { color = colors.hint },
+        Misc = { color = colors.purple },
+    }
+})
     end,
   },
   {
@@ -224,8 +225,6 @@ local alpha={  -- lazy.nvim
     dashboard.section.header.val = vim.split(logo, "\n")
     dashboard.section.buttons.val = {
 
-      -- Session list
-      -- Guide from https://github.com/jedrzejboczar/possession.nvim#startup-screen increases startuptime heavily. I rewrite by reading session files directly.
       (function()
         local group = { type = "group", opts = { spacing = 0 } }
         group.val = {
@@ -252,9 +251,9 @@ local alpha={  -- lazy.nvim
       end)(),
       dashboard.button("f", " " .. " Find Files",
         [[<cmd>lua Util.telescope("find_files", { prompt_title = "Find Files (cwd)", })() <CR>]]),
-      dashboard.button("e", " " .. " New Files", ":ene <BAR> startinsert <CR>"),
+      -- dashboard.button("e", " " .. " New Files", ":ene <BAR> startinsert <CR>"),
       -- dashboard.button("o", " " .. " Recent Files", ":Telescope frecency <CR>"),
-      dashboard.button("g", " " .. " Find Text", ":Telescope live_grep <CR>"),
+      -- dashboard.button("g", " " .. " Find Text", ":Telescope live_grep <CR>"),
       dashboard.button("c", " " .. " Nvim Config", [[<cmd>PossessionLoad config<CR>]]),
       dashboard.button("l", "󰒲" .. " Lazy", ":Lazy<CR>"),
       dashboard.button("q", " " .. " Quit", ":qa<CR>"),
@@ -270,8 +269,6 @@ local alpha={  -- lazy.nvim
     return dashboard
   end,
   config = function(_, dashboard)
-    -- vim.b.miniindentscope_disable = true
-
     -- close Lazy and re-open when the dashboard is ready
     if vim.o.filetype == "lazy" then
       vim.cmd.close()
@@ -299,19 +296,11 @@ local alpha={  -- lazy.nvim
 
 local indentline={
   "lukas-reineke/indent-blankline.nvim",
+  -- TODO: better ui lazyload
+
   -- enabled=false,
   event = "BufRead",
   config = function()
-    -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent7 guibg=#555555 gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent8 guibg=#696969 gui=nocombine]]  
-    -- vim.cmd [[highlight IndentBlanklineIndent7 guibg=#2c1608 gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent8 guibg=#848482 gui=nocombine]]
     require("indent_blankline").setup({
       indent_blankline_use_treesitter=true,
       space_char_blankline = " ",
@@ -356,7 +345,19 @@ local indentline={
 
 local notify={
 'rcarriga/nvim-notify',
-lazy=false,
+-- lazy=false,
+-- TODO: better ui lazyload
+
+    -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent7 guibg=#555555 gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent8 guibg=#696969 gui=nocombine]]  
+    -- vim.cmd [[highlight IndentBlanklineIndent7 guibg=#2c1608 gui=nocombine]]
+    -- vim.cmd [[highlight IndentBlanklineIndent8 guibg=#848482 gui=nocombine]]
 config=function ()
   require("notify").setup({
     background_colour = "NotifyBackground",
@@ -424,7 +425,6 @@ local minimap={
   }
 
 local scrollbar={
-  -- "kevinhwang91/nvim-hlslens",
   'petertriho/nvim-scrollbar',
   dependencies=
 {
