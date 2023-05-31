@@ -78,16 +78,37 @@ local lspconfig={
     'nvim-treesitter/nvim-treesitter',
   },
   config=function()
-    require'lspconfig'.texlab.setup{}
-    require'lspconfig'.grammarly.setup{}
-    require'lspconfig'.prosemd_lsp.setup{}
-    require'lspconfig'.marksman.setup{}
-    require'lspconfig'.remark_ls.setup{}
+    -- require'lspconfig'.texlab.setup{}
+    -- require'lspconfig'.grammarly.setup{}
+    -- require'lspconfig'.prosemd_lsp.setup{}
+    -- require'lspconfig'.marksman.setup{}
+    -- require'lspconfig'.remark_ls.setup{}
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local lsp_defaults = require('lspconfig').util.default_config
+    lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, capabilities)
+
+    local servers = {
+      -- "lua_ls",
+      "html",
+      "texlab",
+      "grammarly",
+      "prosemd_lsp",
+      "marksman",
+      "remark_ls",
+    }
+
+    for _, lsp in pairs(servers) do
+      require'lspconfig'[lsp].setup({
+        on_attach = on_attach,
+      })
+    end
+
     require'lspconfig'.lua_ls.setup{
       settings={
         checkThirdParty = false,
       },
     }
+
   end,
 }
 
@@ -130,7 +151,7 @@ local lspsaga = {
     { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "hover doc" },
     { "<leader>lo", "<cmd>Lspsaga outline<cr>", desc = "lsp outline" },
     { "<leader>ld", "<cmd>Lspsaga show_workspace_diagnostics<cr>", desc = "lsp diagnostic" },
-    { "<leader>ld", "<cmd>Lspsaga lsp_finder<cr>", desc = "lsp finder" },
+    { "<leader>lf", "<cmd>Lspsaga lsp_finder<cr>", desc = "lsp finder" },
     { "gp", "<cmd>Lspsaga peek_definition<cr>", desc = "lsp peek definition" },
     { "<leader>t", "<cmd>Lspsaga term_toggle<cr>", desc = "lsp terminal" },
     { "gd", "<cmd>Lspsaga goto_definition<cr>", desc = "go to definition" },
@@ -236,6 +257,33 @@ local lspsaga = {
         hover = ' ',
       },
     })
+
+local sign = function(opts)
+		vim.fn.sign_define(opts.name, {
+			texthl = opts.name,
+			text = opts.text,
+			numhl = "",
+		})
+	end
+  sign({ name = "DiagnosticSignError", text = "✘" })
+	sign({ name = "DiagnosticSignWarn", text = "" })
+	sign({ name = "DiagnosticSignHint", text = "⚑" })
+	sign({ name = "DiagnosticSignInfo", text = "" })
+-- test
+	vim.diagnostic.config({
+		virtual_text = true,
+		-- virtual_text = false,
+		severity_sort = true,
+		signs = true,
+		update_in_insert = false,
+		underline = true,
+		float = {
+			border = "rounded",
+			source = "always",
+			header = "",
+			prefix = "",
+		},
+	})
   end,
 }
 
