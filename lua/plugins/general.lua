@@ -1,6 +1,7 @@
 local whichkey={
   "folke/which-key.nvim",
-  lazy=false,
+  -- lazy=false,
+  cmd="WhichKey",
   config = function()
     vim.o.timeout = true
     vim.o.timeoutlen = 300

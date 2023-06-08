@@ -1,8 +1,7 @@
--- TODO: lazyload config, and order, and dependencies
 local tree={
   'nvim-treesitter/nvim-treesitter',
   build = ":TSUpdate",
-  ft={'md','latex','tex','bib'},
+  -- ft={'md','latex','tex','bib'},
   dependencies = {
     {
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -42,6 +41,9 @@ local tree={
     require'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all" (the five listed parsers should always be installed)
       ensure_installed = { "c", "lua", "latex","markdown"},
+      fold={
+        enable=true,
+      },
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
@@ -50,9 +52,9 @@ local tree={
         enable = true,
         keymaps = {
           init_selection    = "<cr><cr>", -- set to `false` to disable one of the mappings
-          node_incremental  = "[",
+          node_incremental  = "<cr>",
           -- scope_incremental = "]",
-          node_decremental  = "]",
+          node_decremental  = "<BS>",
         },
         indent = {
           enable = true
@@ -145,8 +147,8 @@ local lspsaga = {
     {"nvim-tree/nvim-web-devicons"},
     --Please make sure you install markdown and markdown_inline parser
     {"nvim-treesitter/nvim-treesitter"},
+    "neovim/nvim-lspconfig",
   },
-  -- TODO: keys
   keys={
     { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "hover doc" },
     { "<leader>lo", "<cmd>Lspsaga outline<cr>", desc = "lsp outline" },
@@ -177,7 +179,7 @@ local lspsaga = {
         force_max_height = false,
         keys = {
           jump_to = 'p',
-          expand_or_jump = 'o',
+          expand_or_jump = '<cr>',
           vsplit = 'v',
           split = 's',
           tabe = 't',
@@ -207,10 +209,10 @@ local lspsaga = {
       },
       symbol_in_winbar = {
         enable = true,
-        separator = "",
+        separator = " ",
         ignore_patterns={},
         hide_keyword = true,
-        show_file = true,
+        show_file = false,
         folder_level = 2,
         respect_root = false,
         color_mode = true,
@@ -241,8 +243,6 @@ local lspsaga = {
           quit_in_show = { 'q', '<ESC>' },
         },
       },
-      -- TODO:ui
-      -- See Customizing Lspsaga's Appearance
       ui = {
         -- This option only works in Neovim 0.9
         title = true,

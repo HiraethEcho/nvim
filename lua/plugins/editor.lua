@@ -1,9 +1,9 @@
-local tex={
+local tex = {
   "lervag/vimtex",
   ft= {"bib","tex"},
   config = function ()
-    -- vim.g.vimtex_view_general_viewer = 'sioyek'
-    -- vim.g.vimtex_view_general_options = ''
+    vim.g.vimtex_view_general_viewer = 'sioyek'
+    vim.g.vimtex_view_general_options = ''
     vim.g.tex_comment_nospell = 1
     vim.g.vimtex_fold_enabled = 1
     -- g:vimtex_mappings_prefix
@@ -31,39 +31,25 @@ local tex={
   end,
 }
 
-local wiki={
-  "vimwiki/vimwiki",
-  ft={"md"},
-}
--- TODO: markdown preview and editor
-local md={
-  -- use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
-  "toppair/peek.nvim",
-  enabled = false,
-  build ="deno task --quiet build:fast",
-  ft="md",
-  lazy=false,
-  config = function()
-    require('peek').setup({
-      auto_load = false,         -- whether to automatically load preview when
-      -- entering another markdown buffer
-      close_on_bdelete = true,  -- close preview window on buffer delete
-      syntax = true,            -- enable syntax highlighting, affects performance
-      theme = 'dark',           -- 'dark' or 'light'
-      update_on_change = true,
-      app = 'browser',          -- 'webview', 'browser', string or a table of strings
-      -- explained below
-      filetype = { 'markdown' } -- list of filetypes to recognize as markdown
-      -- relevant if update_on_change is true
-      -- throttle_at = 200000,     -- start throttling when file exceeds this
-      -- amount of bytes in size
-      -- throttle_time = 'auto',   -- minimum amount of time in milliseconds
-      -- that has to pass before starting new render
-    })
-    vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-    vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+
+local md = {
+  "iamcco/markdown-preview.nvim",
+  build = "cd app && npm install",
+  ft = { "markdown" },
+  config=function()
+    -- vim.g.mkdp_browser = 'surf'
+    -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. '/colors/markdown.css'
+    -- vim.g.mkdp_theme = 'dark'
+    vim.g.mkdp_auto_start = 1
+    vim.g.mkdp_auto_close = 0
+    vim.g.mkdp_page_title = '「${name}」'
+    vim.g.mkdp_filetypes = {'markdown','md'}
   end,
 }
-local spec={tex}
+
+local spec={
+  tex,
+  md,
+}
 
 return spec

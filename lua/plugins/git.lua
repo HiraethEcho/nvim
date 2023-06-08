@@ -1,8 +1,8 @@
 local lazygit={
   "kdheepak/lazygit.nvim",
-  cmd= "Lazygit",
+  cmd= "LazyGit",
   keys = {
-    { "<leader>gg", "<cmd>lazygit<cr>", desc = "lazygit" },
+    { "<leader>gg", "<cmd>LazyGit<cr>", desc = "lazygit" },
   },
   config=function()
     -- let g:lazygit_floating_window_winblend = 0 " transparency of floating window
@@ -17,14 +17,14 @@ local gutter={
   -- enable=false,
   keys = {
     { "<leader>hf" , "<cmd>GitGutterFold<cr>"      , desc ="gitfold"          } ,
-    -- { "<leader>hj" , "<cmd>GitGutterNextHunk<cr>"  , desc = "next hunk"       } ,
-    -- { "<leader>hk" , "<cmd>GitGutterPrevHunk<cr>"  , desc = "previous hunk"   } ,
-    -- { "<leader>hd" , "<cmd>GitGutterDiffOrig<cr>"  , desc = "gitdifforig"     } ,
-    -- { "<leader>hu" , "<cmd>GitGutterUndoHunk<cr>"  , desc = "undohunk"        } ,
-    -- { "<leader>ha" , "<cmd>GitGutterStageHunk<cr>" , desc = "stagehunk"       } ,
-    -- { "<leader>hh" , "<cmd>GitGutterToggle<cr><cmd>GitGutterLineNrHighlightsToggle<cr>"    , desc = "gitgutter sign toggle" } ,
-    -- { "<leader>hl" , "<cmd>GitGutterLineHighlightsToggle<cr>"    , desc = "gitgutter highlight line toggle" } ,
-    -- { "<leader>hp" , "<cmd>GitGutterPreviewHunk<cr>"    , desc = "preview a hunk" } ,
+    { "<leader>hj" , "<cmd>GitGutterNextHunk<cr>"  , desc = "next hunk"       } ,
+    { "<leader>hk" , "<cmd>GitGutterPrevHunk<cr>"  , desc = "previous hunk"   } ,
+    { "<leader>hd" , "<cmd>GitGutterDiffOrig<cr>"  , desc = "gitdifforig"     } ,
+    { "<leader>hu" , "<cmd>GitGutterUndoHunk<cr>"  , desc = "undohunk"        } ,
+    { "<leader>ha" , "<cmd>GitGutterStageHunk<cr>" , desc = "stagehunk"       } ,
+    { "<leader>hh" , "<cmd>GitGutterToggle<cr><cmd>GitGutterLineNrHighlightsToggle<cr>"    , desc = "gitgutter sign toggle" } ,
+    { "<leader>hl" , "<cmd>GitGutterLineHighlightsToggle<cr>"    , desc = "gitgutter highlight line toggle" } ,
+    { "<leader>hp" , "<cmd>GitGutterPreviewHunk<cr>"    , desc = "preview a hunk" } ,
   },
   config=function()
     vim.g.gitgutter_highlight_linenrs=1
@@ -38,13 +38,15 @@ local gitsigns ={
   keys = {
     { "<leader>hj" , "<cmd>Gitsigns next_hunk <cr>"  , desc = "nexthunk"        } ,
     { "<leader>hk" , "<cmd>Gitsigns prev_hunk<cr>"      , desc = "prevhunk"        } ,
-    -- { "<leader>hd" , "<cmd>Gitsigns diffthis<cr>"  , desc = "gitdiff"     } ,
+    { "<leader>hD" , "<cmd>Gitsigns diffthis<cr>"  , desc = "gitdiff"     } ,
+    { "<leader>hd" , "<cmd>Gitsigns toggle_deleted<cr>"  , desc = "toggle deleted"     } ,
     { "<leader>hu" , "<cmd>Gitsigns reset_hunk<cr>"  , desc = "undohunk"        } ,
     { "<leader>ha" , "<cmd>Gitsigns stage_hunk<cr>" , desc = "stage hunk"       } ,
-    { "<leader>ha" , "<cmd>Gitsigns undo_stage_hunk<cr>" , desc = "undo stage hunk"       } ,
+    { "<leader>hA" , "<cmd>Gitsigns undo_stage_hunk<cr>" , desc = "undo stage hunk"       } ,
     { "<leader>hh" , "<cmd>Gitsigns toggle_numhl<cr><cmd>Gitsigns toggle_signs<cr>"    , desc = "toggle gitgutter sign " } ,
     { "<leader>hl" , "<cmd>Gitsigns toggle_linehl<cr>"    , desc = "toggle gitgutter line " } ,
-    { "<leader>hp" , "<cmd>Gitsigns preview_hunk<cr>"    , desc = "preview a hunk" } ,
+    { "<leader>hP" , "<cmd>Gitsigns preview_hunk<cr>"    , desc = "preview a hunk" } ,
+    { "<leader>hp" , "<cmd>Gitsigns preview_hunk_inline<cr>"    , desc = "preview a hunk" } ,
     { "<leader>hb" , "<cmd>Gitsigns toggle_current_line_blame<cr>"    , desc = "toggle blame inline" } ,
     { "<leader>hw" , "<cmd>Gitsigns toggle_word_diff<cr>"    , desc = "toggle word diff" } ,
     -- { "<leader>hh" , "<cmd>Gitsigns get_hunks<cr>"    , desc = "get hunk list" } ,
@@ -53,8 +55,8 @@ local gitsigns ={
   config=function()
     require('gitsigns').setup {
       signs = {
-        add          = { text = '│' },
-        change       = { text = '│' },
+        add          = { text = '+' },
+        change       = { text = '~' },
         delete       = { text = '_' },
         topdelete    = { text = '‾' },
         changedelete = { text = '~' },
@@ -120,7 +122,7 @@ local spec={
   lazygit,
   gitsigns,
   confict,
-  gutter,
+  -- gutter,
 }
 -- todo:gutter or gitsings?
 return spec

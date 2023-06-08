@@ -34,7 +34,7 @@ keymap("n", "<leader>n", ":noh<cr>",opts)
 
 keymap("n", "x", "\"_x", opts)
 
-keymap("n","<leader>vs",":!code .<cr>", opts)
+-- keymap("n","<leader>vs",":!code .<cr>", opts)
 -- Insert --
 keymap("i", "jk", "<ESC>", opts)
 -- keymap("i", "kj", "<ESC>", opts)

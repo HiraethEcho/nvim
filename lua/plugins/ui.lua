@@ -6,15 +6,15 @@ local transparent={
     require("transparent").setup({
       -- enable = true, -- boolean: enable transparent
       extra_groups = { -- table/string: additional groups that should be cleared
+      "all",
       -- In particular, when you set it to 'all', that means all available groups
-
       -- example of akinsho/nvim-bufferline.lua
-      "BufferLineTabClose",
-      "BufferlineBufferSelected",
-      "BufferLineFill",
-      "BufferLineBackground",
-      "BufferLineSeparator",
-      "BufferLineIndicatorSelected",
+      -- "BufferLineTabClose",
+      -- "BufferlineBufferSelected",
+      -- "BufferLineFill",
+      -- "BufferLineBackground",
+      -- "BufferLineSeparator",
+      -- "BufferLineIndicatorSelected",
     },
     -- exclude = {}, -- table: groups you don't want to clear
     -- ignore_linked_group = true, -- boolean: don't clear a group that links to another group
@@ -25,8 +25,9 @@ end,
 local color={
   {
     'shaunsingh/nord.nvim',
-    enabled=false,
+    -- enabled=false,
     -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
+    -- event="VimEnter",
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- vim.cmd([[colorscheme nord]])
@@ -35,26 +36,11 @@ local color={
   {
     "folke/tokyonight.nvim",
     -- enabled=false,
-    lazy =false, -- make sure we load this during startup if it is your main colorscheme
+    -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
+    event="VimEnter",
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       vim.cmd([[colorscheme tokyonight]])
-local colors = require("tokyonight.colors").setup()
--- TODO: color of scrollbar for tokyonight
-
-require("scrollbar").setup({
-    handle = {
-        color = colors.bg_highlight,
-    },
-    marks = {
-        Error = { color = colors.error },
-        Search = { color = colors.orange },
-        Warn = { color = colors.warning },
-        Info = { color = colors.info },
-        Hint = { color = colors.hint },
-        Misc = { color = colors.purple },
-    }
-})
     end,
   },
   {
@@ -73,13 +59,13 @@ local line={
   },
   event = "BufReadPost",
   config = function()
-local function session_name()
-    return require('possession.session').session_name or ''
-end
+    local function session_name()
+      return require('possession.session').session_name or ''
+    end
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        -- disabled_filetypes = {'coc-explorer'},
+        disabled_filetypes = {'neo-tree','MINIMAP'},
         theme = 'nord',
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
@@ -208,23 +194,25 @@ end
 
 
 local alpha={  -- lazy.nvim
- "goolord/alpha-nvim",
+  "goolord/alpha-nvim",
+  dependencies={
+    'jedrzejboczar/possession.nvim',
+  },
   event = "VimEnter",
   opts = function()
     local dashboard = require("alpha.themes.dashboard")
     -- TODO: start logo <28-05-23, > 
     local logo = [[
-      ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-      ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z
-      ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z
-      ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z
-      ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
-      ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
-      ]]
+    ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
+    ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z
+    ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z
+    ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z
+    ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
+    ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
+    ]]
 
     dashboard.section.header.val = vim.split(logo, "\n")
     dashboard.section.buttons.val = {
-
       (function()
         local group = { type = "group", opts = { spacing = 0 } }
         group.val = {
@@ -249,9 +237,9 @@ local alpha={  -- lazy.nvim
         end
         return group
       end)(),
-      dashboard.button("f", " " .. " Find Files",
-        [[<cmd>lua Util.telescope("find_files", { prompt_title = "Find Files (cwd)", })() <CR>]]),
-      -- dashboard.button("e", " " .. " New Files", ":ene <BAR> startinsert <CR>"),
+      -- dashboard.button("f", " " .. " Find Files",
+      -- [[<cmd>lua Util.telescope("find_files", { prompt_title = "Find Files (cwd)", })() <CR>]]),
+      dashboard.button("e", " " .. " New Files", ":enew<CR>"),
       -- dashboard.button("o", " " .. " Recent Files", ":Telescope frecency <CR>"),
       -- dashboard.button("g", " " .. " Find Text", ":Telescope live_grep <CR>"),
       dashboard.button("c", " " .. " Nvim Config", [[<cmd>PossessionLoad config<CR>]]),
@@ -267,7 +255,7 @@ local alpha={  -- lazy.nvim
     dashboard.section.buttons.opts.hl = "AlphaButtons"
     dashboard.opts.layout[1].val = 8
     return dashboard
-  end,
+    end,
   config = function(_, dashboard)
     -- close Lazy and re-open when the dashboard is ready
     if vim.o.filetype == "lazy" then
@@ -276,33 +264,31 @@ local alpha={  -- lazy.nvim
         pattern = "AlphaReady",
         callback = function()
           require("lazy").show()
-        end,
-      })
-    end
-
-    require("alpha").setup(dashboard.opts)
-
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "LazyVimStarted",
-      callback = function()
-        local stats = require("lazy").stats()
-        local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-        dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-        pcall(vim.cmd.AlphaRedraw)
       end,
-    })
-  end,
+      })
+  end
+
+  require("alpha").setup(dashboard.opts)
+
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "LazyVimStarted",
+    callback = function()
+      local stats = require("lazy").stats()
+      local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+      dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+      pcall(vim.cmd.AlphaRedraw)
+    end,
+  })
+end,
 }
 
-local indentline={
+local indentline = {
   "lukas-reineke/indent-blankline.nvim",
   -- TODO: better ui lazyload
-
   -- enabled=false,
   event = "BufRead",
   config = function()
     require("indent_blankline").setup({
-      indent_blankline_use_treesitter=true,
       space_char_blankline = " ",
       char_highlight_list = {
         "IndentBlanklineIndent1",
@@ -313,9 +299,9 @@ local indentline={
         "IndentBlanklineIndent6",
       },
       -- space_char_highlight_list = {
-      --   "IndentBlanklineIndent7",
-      --   "IndentBlanklineIndent8",
-      -- },
+        --   "IndentBlanklineIndent7",
+        --   "IndentBlanklineIndent8",
+        -- },
       show_end_of_line = true,
       show_current_context = true,
       show_current_context_start = true,
@@ -341,107 +327,73 @@ local indentline={
   end,
 }
 
-
-
 local notify={
-'rcarriga/nvim-notify',
--- lazy=false,
--- TODO: better ui lazyload
-
-    -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent7 guibg=#555555 gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent8 guibg=#696969 gui=nocombine]]  
-    -- vim.cmd [[highlight IndentBlanklineIndent7 guibg=#2c1608 gui=nocombine]]
-    -- vim.cmd [[highlight IndentBlanklineIndent8 guibg=#848482 gui=nocombine]]
-config=function ()
-  require("notify").setup({
-    background_colour = "NotifyBackground",
-    fps = 60,
-    icons = {
-      -- TODO:icons here
-      DEBUG = "",
-      ERROR = "",
-      INFO = "",
-      TRACE = "✎",
-      WARN = ""
-    },
-    level = 2,
-    minimum_width = 50,
-    render = "default",
-    stages = "slide",
-    timeout = 2000,
-    top_down = true
-  })
-vim.notify = require("notify")
--- TODO:notify color
---
--- highlight NotifyERRORBorder guifg=#8A1F1F
--- highlight NotifyWARNBorder guifg=#79491D
--- highlight NotifyINFOBorder guifg=#4F6752
--- highlight NotifyDEBUGBorder guifg=#8B8B8B
--- highlight NotifyTRACEBorder guifg=#4F3552
--- highlight NotifyERRORIcon guifg=#F70067
--- highlight NotifyWARNIcon guifg=#F79000
--- highlight NotifyINFOIcon guifg=#A9FF68
--- highlight NotifyDEBUGIcon guifg=#8B8B8B
--- highlight NotifyTRACEIcon guifg=#D484FF
--- highlight NotifyERRORTitle  guifg=#F70067
--- highlight NotifyWARNTitle guifg=#F79000
--- highlight NotifyINFOTitle guifg=#A9FF68
--- highlight NotifyDEBUGTitle  guifg=#8B8B8B
--- highlight NotifyTRACETitle  guifg=#D484FF
--- highlight link NotifyERRORBody Normal
--- highlight link NotifyWARNBody Normal
--- highlight link NotifyINFOBody Normal
--- highlight link NotifyDEBUGBody Normal
--- highlight link NotifyTRACEBody Normal
-end,
+  'rcarriga/nvim-notify',
+  -- lazy=false,
+  -- TODO: better ui lazyload
+  config=function ()
+    require("notify").setup({
+      background_colour = "NotifyBackground",
+      fps = 60,
+      icons = {
+        -- NOTE:icons here
+        DEBUG = "",
+        ERROR = "",
+        INFO = "",
+        TRACE = "✎",
+        WARN = ""
+      },
+      level = 2,
+      minimum_width = 50,
+      render = "default",
+      stages = "slide",
+      timeout = 2000,
+      top_down = true
+    })
+    vim.notify = require("notify")
+  end,
 }
 
 local minimap={
-    'wfxr/minimap.vim',
-    -- lazy=false,
-    keys={
-      { "<leader>m", "<cmd>MinimapToggle<cr>", desc = "Minimap Toggle" },
-    },
-    cmd={
-      "MinimapOpen",
-      "MinimapClose",
-      "MinimapToggle",
-    },
-    config=function ()
-      vim.g.minimap_width = 20
-      vim.g.minimap_auto_start = 0
-      vim.g.minimap_auto_start_win_enter = 0
-      vim.g.minimap_highlight_search=1
-      vim.g.minimap_git_colors=1
-      -- TODO:coloer here
-    end,
-  }
+  'wfxr/minimap.vim',
+  -- lazy=false,
+  dependencies={
+  'rcarriga/nvim-notify',
+  'petertriho/nvim-scrollbar',
+  },
+  keys={
+    { "<leader>m", "<cmd>MinimapToggle<cr>", desc = "Minimap Toggle" },
+  },
+  cmd={
+    "MinimapOpen",
+    "MinimapClose",
+    "MinimapToggle",
+  },
+  config=function ()
+    vim.g.minimap_width = 20
+    vim.g.minimap_auto_start = 0
+    vim.g.minimap_auto_start_win_enter = 0
+    vim.g.minimap_highlight_search=1
+    vim.g.minimap_git_colors=1
+  end,
+}
 
 local scrollbar={
   'petertriho/nvim-scrollbar',
-  dependencies=
-{
-  "kevinhwang91/nvim-hlslens",
-  config = function()
-    -- require('hlslens').setup() is not required
-    require("scrollbar.handlers.search").setup({
+  dependencies ={
+    "kevinhwang91/nvim-hlslens",
+    config = function()
+      -- require('hlslens').setup() is not required
+      require("scrollbar.handlers.search").setup({
         -- hlslens config overrides
-    })
-  end,
-},
+      })
+    end,
+  },
   -- lazy =false,
   cmd = "ScrollbarToggle",
   config = function()
     -- require('hlslens').setup() is not required
-require("scrollbar").setup()
--- TODO:color and symbols
+    require("scrollbar").setup()
   end,
 }
 
