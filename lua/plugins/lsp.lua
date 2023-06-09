@@ -90,13 +90,14 @@ local lspconfig={
     lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, capabilities)
 
     local servers = {
-      -- "lua_ls",
+      "lua_ls",
       "html",
       "texlab",
       "grammarly",
       "prosemd_lsp",
       "marksman",
       "remark_ls",
+      "clangd",
     }
 
     for _, lsp in pairs(servers) do

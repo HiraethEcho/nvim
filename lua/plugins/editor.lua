@@ -47,9 +47,35 @@ local md = {
   end,
 }
 
+local knapnvim={
+  -- lazy = false,
+  ft={"latex","tex"},
+  "frabjous/knap",
+  config=function ()
+    local gknapsettings = {
+      textopdfviewerlaunch= "sioyek --new-window %outputfile%",
+      mdoutputext = "html",
+      textopdfforwardjump= "sioyek --reuse-window --forward-search-file %srcfile% --forward-search-line %line% %outputfile%",
+      texoutputext = "pdf",
+      textopdf = "pdflatex -synctex=1 -halt-on-error -interaction=batchmode %docroot%",
+      textopdfviewerrefresh = "kill -HUP %pid%",
+      htmltohtmlviewerlaunch= "live-server --quiet --browser=surf --open=%outputfile% --watch=%outputfile% --wait=800",
+      htmltohtmlviewerrefresh= "none",
+      mdtohtmlviewerlaunch= "live-server --quiet --browser=microsoft-edge-beta --open=%outputfile% --watch=%outputfile% --wait=800",
+      mdtohtmlviewerrefresh= "none",
+    }
+    vim.g.knap_settings = gknapsettings
+
+    vim.api.nvim_create_user_command('KnapProcess',require('knap').process_once,{})
+    vim.api.nvim_create_user_command('KnapCloseViewer',require('knap').close_viewer,{})
+    vim.api.nvim_create_user_command('KnapToggleAutoPreviewing', require('knap').toggle_autopreviewing,{})
+    vim.api.nvim_create_user_command('KnapJumpForward',require('knap').forward_jump,{})
+  end
+}
+
 local spec={
   tex,
   md,
+  knapnvim,
 }
-
 return spec

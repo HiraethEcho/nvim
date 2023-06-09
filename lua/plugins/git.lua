@@ -51,7 +51,7 @@ local gitsigns ={
     { "<leader>hw" , "<cmd>Gitsigns toggle_word_diff<cr>"    , desc = "toggle word diff" } ,
     -- { "<leader>hh" , "<cmd>Gitsigns get_hunks<cr>"    , desc = "get hunk list" } ,
   },
-  dependencies = { "petertriho/nvim-scrollbar" },
+  dependencies = { "akinsho/git-conflict.nvim" },
   config=function()
     require('gitsigns').setup {
       signs = {
