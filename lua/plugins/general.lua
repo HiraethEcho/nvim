@@ -2,6 +2,7 @@ local whichkey={
   "folke/which-key.nvim",
   -- lazy=false,
   cmd="WhichKey",
+  event="BufRead",
   config = function()
     vim.o.timeout = true
     vim.o.timeoutlen = 300

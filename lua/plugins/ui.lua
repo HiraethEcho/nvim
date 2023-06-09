@@ -65,12 +65,12 @@ local line={
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        disabled_filetypes = {'neo-tree','MINIMAP'},
+        -- disabled_filetypes = {'neo-tree','MINIMAP'},
         theme = 'nord',
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
         disabled_filetypes = {
-          statusline = {},
+          statusline = {'neo-tree','minimap'},
           -- winbar = {},
         },
         ignore_focus = {},
@@ -230,7 +230,7 @@ local alpha={  -- lazy.nvim
         for _, file in pairs(files) do
           local basename = vim.fs.basename(file):gsub("%.json", "")
           if basename ~= "config" then
-            local button = dashboard.button(tostring(i), "● " .. basename, "<cmd>PossessionLoad " .. basename .. "<cr>")
+            local button = dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
             table.insert(group.val, button)
             i = i + 1
           end
@@ -242,7 +242,7 @@ local alpha={  -- lazy.nvim
       dashboard.button("e", " " .. " New Files", ":enew<CR>"),
       -- dashboard.button("o", " " .. " Recent Files", ":Telescope frecency <CR>"),
       -- dashboard.button("g", " " .. " Find Text", ":Telescope live_grep <CR>"),
-      dashboard.button("c", " " .. " Nvim Config", [[<cmd>PossessionLoad config<CR>]]),
+      dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
       dashboard.button("l", "󰒲" .. " Lazy", ":Lazy<CR>"),
       dashboard.button("q", " " .. " Quit", ":qa<CR>"),
     }
@@ -371,8 +371,6 @@ local minimap={
   },
   config=function ()
     vim.g.minimap_width = 20
-    vim.g.minimap_auto_start = 0
-    vim.g.minimap_auto_start_win_enter = 0
     vim.g.minimap_highlight_search=1
     vim.g.minimap_git_colors=1
   end,
