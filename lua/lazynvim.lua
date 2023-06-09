@@ -34,7 +34,7 @@ local opts = {
     },
     dev = {
         -- directory where you store your local plugin projects
-        path = "~/AppData/Local/nvim/localplugin",
+        path = vim.fn.stdpath("config").."/localplugin",
         ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
         patterns = {}, -- For example {"folke"}
     },

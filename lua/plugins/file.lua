@@ -153,9 +153,12 @@ local neotree={
     { "<leader>ef", "<cmd>NeoTreeFloatToggle<cr>", desc = "File tree float" },
     { "<leader>eb", "<cmd>Neotree toggle=true float source=buffers<cr>", desc = "buffers float" },
     { "<leader>en", "<cmd>Neotree toggle=true float dir="..vim.fn.stdpath("config").." <cr>", desc = "nvim file float" },
-    { "<leader>eg", "<cmd>Neotree toggle=true float dir=~/github<cr>", desc = "github file float" },
+    { "<leader>eg", "<cmd>Neotree toggle=true float dir=~/github<cr>", desc = "win github file float" },
+    { "<leader>eG", "<cmd>Neotree toggle=true float dir=~/Github_arch<cr>", desc = "arch Github file float" },
     { "<leader>ep", "<cmd>Neotree toggle=true float dir=~/documents/Projects <cr>", desc = "Projects file float" },
     { "<leader>ed", "<cmd>Neotree toggle=true float dir=~/documents<cr>", desc = "documents file float" },
+    { "<leader>eh", "<cmd>Neotree toggle=true float dir=~<cr>", desc = "home file float" },
+    { "<leader>eo", "<cmd>Neotree toggle=true float dir=~<cr>", desc = "obsidian file float" },
     { "<leader>gs", "<cmd>Neotree source=git_status <cr>", desc = "git_status" },
   },
   dependencies = {

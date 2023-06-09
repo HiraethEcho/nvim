@@ -87,10 +87,10 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
 -- vim.o.shell = 'powershell'
 -- vimscript {{{ --
-vim.cmd([[
-set viminfo='10,\"100,:20,%,n~/AppData/Local/nvim/.viminfo
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-]])
+-- vim.cmd([[
+-- set viminfo='10,\"100,:20,%,n~/AppData/Local/nvim/.viminfo
+-- au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+-- ]])
 -- filetype on
 -- filetype plugin indent on " 针对不同文件类型加载对应插件
 -- syntax on

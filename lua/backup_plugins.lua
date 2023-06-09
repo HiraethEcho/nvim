@@ -37,7 +37,7 @@ local start={
     -- lazy=false,
 
     config=function()
-      vim.g.startify_session_dir = "~/AppData/Local/nvim/session/"
+      vim.g.startify_session_dir = vim.fn.stdpath("config").."/session/")
       vim.g.startify_files_number= 3
       vim.cmd([[
       let g:startify_lists= [
