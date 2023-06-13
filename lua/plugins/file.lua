@@ -20,6 +20,7 @@ local tele={
     { "<leader>ic", "<cmd>Telescope commands<cr>", desc = "commands" },
     { "<leader>i;", "<cmd>Telescope command_history<cr>", desc = "commands history" },
     { "<leader>i/", "<cmd>Telescope search_history<cr>", desc = "search history" },
+    { "<leader>is", "<cmd>Telescope possession list<cr>", desc = "sessions" },
     { "<leader>im", "<cmd>Telescope marks<cr>", desc = "marks" },
     { "<leader>ij", "<cmd>Telescope jumplist<cr>", desc = "jump list" },
     { "<leader>ih", "<cmd>Telescope help_tags<cr>", desc = "help tags" },

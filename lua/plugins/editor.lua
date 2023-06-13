@@ -50,6 +50,7 @@ local md = {
 local knapnvim={
   -- lazy = false,
   ft={"latex","tex"},
+  cmd="KnapProcess",
   "frabjous/knap",
   config=function ()
     local gknapsettings = {
@@ -61,7 +62,7 @@ local knapnvim={
       textopdfviewerrefresh = "kill -HUP %pid%",
       htmltohtmlviewerlaunch= "live-server --quiet --browser=surf --open=%outputfile% --watch=%outputfile% --wait=800",
       htmltohtmlviewerrefresh= "none",
-      mdtohtmlviewerlaunch= "live-server --quiet --browser=microsoft-edge-beta --open=%outputfile% --watch=%outputfile% --wait=800",
+      -- mdtohtmlviewerlaunch= "live-server --quiet --browser=microsoft-edge-beta --open=%outputfile% --watch=%outputfile% --wait=800",
       mdtohtmlviewerrefresh= "none",
     }
     vim.g.knap_settings = gknapsettings

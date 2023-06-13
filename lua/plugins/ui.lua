@@ -230,9 +230,11 @@ local alpha={  -- lazy.nvim
         for _, file in pairs(files) do
           local basename = vim.fs.basename(file):gsub("%.json", "")
           if basename ~= "config" then
+            if basename ~= "tmp" then
             local button = dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
             table.insert(group.val, button)
             i = i + 1
+            end
           end
         end
         return group
@@ -242,6 +244,7 @@ local alpha={  -- lazy.nvim
       dashboard.button("e", " " .. " New Files", ":enew<CR>"),
       -- dashboard.button("o", " " .. " Recent Files", ":Telescope frecency <CR>"),
       -- dashboard.button("g", " " .. " Find Text", ":Telescope live_grep <CR>"),
+      dashboard.button("t", " " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
       dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
       dashboard.button("l", "󰒲" .. " Lazy", ":Lazy<CR>"),
       dashboard.button("q", " " .. " Quit", ":qa<CR>"),
