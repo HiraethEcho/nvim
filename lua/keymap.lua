@@ -22,14 +22,15 @@ keymap("n", "S", ":wa<cr>", opts)
 keymap("n", "Q", ":q<cr>", opts)
 keymap("n", "U", "<C-r>", opts)
 keymap("n", "<C-s>", ":w<cr>", opts)
-keymap("n","<leader>q",":quitall<cr>", opts)
+keymap("n", "cd", ":cd %/..<cr>", opts)
+keymap("n","<leader>qq",":wa<cr>:quitall<cr>", opts)
 -- }}} general --
 --
 -- modes {{{ --
 -- Normal --
 keymap("n", ";", ":", opts)
 
-keymap("n", "<C-a>", "mzggVG", opts)
+-- keymap("n", "<C-a>", "mzggVG", opts)
 keymap("n", "<leader>n", ":noh<cr>",opts)
 
 keymap("n", "x", "\"_x", opts)

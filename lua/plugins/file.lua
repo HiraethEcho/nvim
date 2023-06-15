@@ -3,6 +3,7 @@ local tele={
   -- lazy=false,
   keys = {
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "files" },
+    { "<leader>fc", "<cmd>lua require('material.functions').find_style()<cr>", desc = "color scheme" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "old files" },
     { "<leader>fs", "<cmd>Telescope live_grep<cr>", desc = "live grep" },
     { "<leader>fg", "<cmd>Telescope grep_string<cr>", desc = "grep string" },
@@ -142,6 +143,7 @@ local tele={
           extensions = {
           },
         }
+
       end,
     }
 

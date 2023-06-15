@@ -2,12 +2,13 @@ local tex = {
   "lervag/vimtex",
   ft= {"bib","tex"},
   config = function ()
-    vim.g.vimtex_view_general_viewer = 'sioyek'
+    -- vim.g.vimtex_view_general_viewer = 'sioyek'
+    vim.g.vimtex_view_method = 'sioyek'
     vim.g.vimtex_view_general_options = ''
     vim.g.tex_comment_nospell = 1
     vim.g.vimtex_fold_enabled = 1
     -- g:vimtex_mappings_prefix
-    -- vim.g.vimtex_quickfix_enabled = 0
+    vim.g.vimtex_quickfix_enabled = 0
     vim.g.vimtex_toc_config = {
       name        =  'TOC',
       layers      =  {'label', 'todo', 'include'},
@@ -27,7 +28,6 @@ local tex = {
       'Package siunitx Warning: Detected the "physics" package:',
       'Package hyperref Warning: Token not allowed in a PDF string',
     }
-    -- let g:vimtex_view_general_viewer = 'sioyek'
   end,
 }
 
