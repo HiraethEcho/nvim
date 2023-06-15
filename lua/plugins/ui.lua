@@ -224,7 +224,7 @@ local alpha={  -- lazy.nvim
             }
           }
         }
-        local path = vim.fn.stdpath("config") .. "/sessions"
+        local path = vim.fn.stdpath("data") .. "/sessions"
         local files = vim.split(vim.fn.glob(path .. "/*.json"), "\n")
         local i = 1
         for _, file in pairs(files) do

@@ -1,4 +1,4 @@
-local lazypath = vim.fn.stdpath("config") .. "/lazyplugin/lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 
 
 local opts = {
-    root = vim.fn.stdpath("config") .. "/lazyplugin", -- directory where plugins will be installed
+    root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
     defaults = {
         lazy = true, -- should plugins be lazy-loaded?
         version = nil,
@@ -34,7 +34,7 @@ local opts = {
     },
     dev = {
         -- directory where you store your local plugin projects
-        path = vim.fn.stdpath("config").."/localplugin",
+        path = vim.fn.stdpath("data").."/localplugin",
         ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
         patterns = {}, -- For example {"folke"}
     },
