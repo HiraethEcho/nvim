@@ -24,19 +24,18 @@ end,
 
 local color={
   {
-'marko-cerovac/material.nvim',
-event= 'VimEnter',
-config=function()
-require('material').setup({
-
-    contrast = {
-        terminal = true, -- Enable contrast for the built-in terminal default=false
-        sidebars = true, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree ) default=false
-        floating_windows = true, -- Enable contrast for floating windows default=false
-        cursor_line = true, -- Enable darker background for the cursor line default=false
-        non_current_windows = true, -- Enable contrasted background for non-current windows default=false
-    },
-    plugins = { -- Uncomment the plugins that you use to highlight them
+    'marko-cerovac/material.nvim',
+    event= 'VimEnter',
+    config=function()
+      require('material').setup({
+        contrast = {
+          terminal = false, -- Enable contrast for the built-in terminal default=false
+          sidebars = true, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree ) default=false
+          floating_windows = false, -- Enable contrast for floating windows default=false
+          cursor_line = true, -- Enable darker background for the cursor line default=false
+          non_current_windows = false, -- Enable contrasted background for non-current windows default=false
+        },
+        plugins = { -- Uncomment the plugins that you use to highlight them
         -- Available plugins:
         -- "dap",
         -- "dashboard",
@@ -55,37 +54,33 @@ require('material').setup({
         "telescope",
         -- "trouble",
         -- "which-key",
-    },
+      },
 
-    -- disable = {
-    --     colored_cursor = false, -- Disable the colored cursor
-    --     borders = false, -- Disable borders between verticaly split windows
-    --     background = false, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
-    --     term_colors = false, -- Prevent the theme from setting terminal colors
-    --     eob_lines = false -- Hide the end-of-buffer lines
-    -- },
-
-    -- high_visibility = {
-    --     darker = false -- Enable higher contrast text for darker style
-    -- },
-
-    lualine_style = "default", -- Lualine style ( can be 'stealth' or 'default' )
-
-    async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
-})
-vim.cmd 'colorscheme material'
-end,
-
+      -- disable = {
+        --     colored_cursor = false, -- Disable the colored cursor
+        --     borders = false, -- Disable borders between verticaly split windows
+        --     background = false, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
+        --     term_colors = false, -- Prevent the theme from setting terminal colors
+        --     eob_lines = false -- Hide the end-of-buffer lines
+        -- },
+        -- high_visibility = {
+          --     darker = false -- Enable higher contrast text for darker style
+          -- },
+          -- lualine_style = "default", -- Lualine style ( can be 'stealth' or 'default' )
+          async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
+        })
+        vim.cmd 'colorscheme material'
+      end,
   },
   {
-    'shaunsingh/nord.nvim',
-    -- enabled=false,
-    -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
-    -- event="VimEnter",
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      -- vim.cmd([[colorscheme nord]])
-    end,
+      'shaunsingh/nord.nvim',
+      -- enabled=false,
+      -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
+      -- event="VimEnter",
+      priority = 1000, -- make sure to load this before all the other start plugins
+      config = function()
+        -- vim.cmd([[colorscheme nord]])
+      end,
   },
   {
     "folke/tokyonight.nvim",

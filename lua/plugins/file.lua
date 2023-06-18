@@ -333,7 +333,7 @@ local possession ={
   config = function ()
     require('possession').setup {
       -- session_dir = (Path:new(vim.fn.stdpath('data')) / 'possession'):absolute(),
-      session_dir = vim.fn.stdpath("config") .. "/sessions",
+      session_dir = vim.fn.stdpath("data") .. "/sessions",
       silent = false,
       load_silent = true,
       debug = false,
