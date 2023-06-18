@@ -161,7 +161,7 @@ local neotree={
     { "<leader>ep", "<cmd>Neotree toggle=true float dir=~/documents/Projects <cr>", desc = "Projects file float" },
     { "<leader>ed", "<cmd>Neotree toggle=true float dir=~/documents<cr>", desc = "documents file float" },
     { "<leader>eh", "<cmd>Neotree toggle=true float dir=~<cr>", desc = "home file float" },
-    { "<leader>eo", "<cmd>Neotree toggle=true float dir=~<cr>", desc = "obsidian file float" },
+    { "<leader>eo", "<cmd>Neotree toggle=true float dir=~/documents/obsidian<cr>", desc = "obsidian file float" },
     { "<leader>gs", "<cmd>Neotree source=git_status <cr>", desc = "git_status" },
   },
   dependencies = {

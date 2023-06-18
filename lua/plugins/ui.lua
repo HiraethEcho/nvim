@@ -54,7 +54,7 @@ require('material').setup({
         -- "sneak",
         "telescope",
         -- "trouble",
-        "which-key",
+        -- "which-key",
     },
 
     -- disable = {
