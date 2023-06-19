@@ -5,8 +5,7 @@ local lazygit={
     { "<leader>gg", "<cmd>LazyGit<cr>", desc = "lazygit" },
   },
   config=function()
-    -- let g:lazygit_floating_window_winblend = 0 " transparency of floating window
-    vim.g.lazygit_floating_window_winblend = 30
+    vim.g.lazygit_floating_window_winblend = 80  -- transparency of floating window
     vim.g.lazygit_floating_window_scaling_factor = 0.8
     vim.g.lazygit_floating_window_use_plenary = 1
   end,

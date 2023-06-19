@@ -39,7 +39,7 @@ local tele={
     require('telescope').load_extension('possession')
     require('telescope').setup{
       defaults = {
-        winblend = 30,
+        -- winblend = 0,
         initial_mode="normal",
         scroll_strategy="limit",
         mappings = {

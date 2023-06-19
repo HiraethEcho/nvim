@@ -48,7 +48,7 @@ local whichkey={
         position = "bottom", -- bottom, top
         margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
         padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-        winblend = 20,
+        -- winblend =1 ,
       },
       layout = {
         height = { min = 4, max = 45 }, -- min and max height of the columns
@@ -155,7 +155,7 @@ local whichkey={
         prompt_position = 'top', -- 'top' or 'bottom' to set the location of the prompt
         pumblend=20,
         reverse = 0,             -- set to 1 to reverse the order of the list, use in combination with 'prompt_position'
-        winblend=30,
+        winblend=0,
         left = {' ', wilder.popupmenu_devicons()},
         right = {' ', wilder.popupmenu_scrollbar()},
       })
@@ -165,11 +165,11 @@ local whichkey={
       wilder.popupmenu_border_theme({
         border = 'rounded',
         pumblend=20,
+        winblend=0,
         -- highlighter = highlighters,
         left = {' ', wilder.popupmenu_devicons()},
         right = {' ', wilder.popupmenu_scrollbar()},
       })
-      -- pumblend=20,
       )
 
       local wildmenu_renderer = wilder.wildmenu_renderer({
@@ -180,8 +180,8 @@ local whichkey={
       })
 
       wilder.set_option('renderer', wilder.renderer_mux({
-        -- [':'] = popupmenu_renderer,
-        [':'] =popupmenu_palette,
+        -- [':'] =popupmenu_palette,
+        [':'] =popupmenu_renderer,
         ['/'] = wildmenu_renderer,
         substitute = wildmenu_renderer,
       }))

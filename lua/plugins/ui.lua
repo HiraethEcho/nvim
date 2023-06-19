@@ -6,7 +6,7 @@ local transparent={
     require("transparent").setup({
       -- enable = true, -- boolean: enable transparent
       extra_groups = { -- table/string: additional groups that should be cleared
-      "all",
+      -- "all",
       -- In particular, when you set it to 'all', that means all available groups
       -- example of akinsho/nvim-bufferline.lua
       -- "BufferLineTabClose",
@@ -25,7 +25,7 @@ end,
 local color={
   {
     'marko-cerovac/material.nvim',
-    event= 'VimEnter',
+    -- event= 'VimEnter',
     config=function()
       require('material').setup({
         contrast = {
@@ -69,17 +69,17 @@ local color={
           -- lualine_style = "default", -- Lualine style ( can be 'stealth' or 'default' )
           async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
         })
-        vim.cmd 'colorscheme material'
+        -- vim.cmd 'colorscheme material'
       end,
   },
   {
       'shaunsingh/nord.nvim',
       -- enabled=false,
       -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
-      -- event="VimEnter",
+      event="VimEnter",
       priority = 1000, -- make sure to load this before all the other start plugins
       config = function()
-        -- vim.cmd([[colorscheme nord]])
+        vim.cmd([[colorscheme nord]])
       end,
   },
   {
@@ -89,7 +89,7 @@ local color={
     event="VimEnter",
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-      vim.cmd([[colorscheme tokyonight]])
+      -- vim.cmd([[colorscheme tokyonight]])
     end,
   },
   {
@@ -335,7 +335,6 @@ end,
 
 local indentline = {
   "lukas-reineke/indent-blankline.nvim",
-  -- TODO: better ui lazyload
   -- enabled=false,
   event = "BufRead",
   config = function()
@@ -381,7 +380,6 @@ local indentline = {
 local notify={
   'rcarriga/nvim-notify',
   -- lazy=false,
-  -- TODO: better ui lazyload
   config=function ()
     require("notify").setup({
       background_colour = "NotifyBackground",

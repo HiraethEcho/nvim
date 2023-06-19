@@ -181,6 +181,6 @@ local spec={
   tex,
   md,
   knapnvim,
-  mkdnflow,
+  -- mkdnflow,
 }
 return spec
