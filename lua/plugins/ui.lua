@@ -25,15 +25,15 @@ end,
 local color={
   {
     'marko-cerovac/material.nvim',
-    -- event= 'VimEnter',
+    event= 'VimEnter',
     config=function()
       require('material').setup({
         contrast = {
           terminal = false, -- Enable contrast for the built-in terminal default=false
           sidebars = true, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree ) default=false
-          floating_windows = false, -- Enable contrast for floating windows default=false
+          floating_windows = true, -- Enable contrast for floating windows default=false
           cursor_line = true, -- Enable darker background for the cursor line default=false
-          non_current_windows = false, -- Enable contrasted background for non-current windows default=false
+          non_current_windows = true, -- Enable contrasted background for non-current windows default=false
         },
         plugins = { -- Uncomment the plugins that you use to highlight them
         -- Available plugins:
@@ -49,11 +49,11 @@ local color={
         "nvim-cmp",
         -- "nvim-navic",
         -- "nvim-tree",
-        -- "nvim-web-devicons",
+        "nvim-web-devicons",
         -- "sneak",
         "telescope",
         -- "trouble",
-        -- "which-key",
+        "which-key",
       },
 
       -- disable = {
@@ -63,23 +63,21 @@ local color={
         --     term_colors = false, -- Prevent the theme from setting terminal colors
         --     eob_lines = false -- Hide the end-of-buffer lines
         -- },
-        -- high_visibility = {
-          --     darker = false -- Enable higher contrast text for darker style
-          -- },
           -- lualine_style = "default", -- Lualine style ( can be 'stealth' or 'default' )
           async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
         })
-        -- vim.cmd 'colorscheme material'
+        vim.cmd 'colorscheme material'
       end,
   },
   {
       'shaunsingh/nord.nvim',
       -- enabled=false,
+    -- event="VimEnter",
       -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
       event="VimEnter",
       priority = 1000, -- make sure to load this before all the other start plugins
       config = function()
-        vim.cmd([[colorscheme nord]])
+        -- vim.cmd([[colorscheme nord]])
       end,
   },
   {
@@ -106,7 +104,7 @@ local line={
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  event = "BufReadPost",
+  event = "BufRead",
   config = function()
     local function session_name()
       return require('possession.session').session_name or ''
@@ -277,12 +275,12 @@ local alpha={  -- lazy.nvim
         local i = 1
         for _, file in pairs(files) do
           local basename = vim.fs.basename(file):gsub("%.json", "")
-          if basename ~= "config" then
-            if basename ~= "tmp" then
+          if basename ~= "config" and basename ~= "tmp" and basename ~="blog" then
+            -- if basename ~= "tmp" then
             local button = dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
             table.insert(group.val, button)
             i = i + 1
-            end
+            -- end
           end
         end
         return group
@@ -292,8 +290,9 @@ local alpha={  -- lazy.nvim
       dashboard.button("e", " " .. " New Files", ":enew<CR>"),
       -- dashboard.button("o", " " .. " Recent Files", ":Telescope frecency <CR>"),
       -- dashboard.button("g", " " .. " Find Text", ":Telescope live_grep <CR>"),
-      dashboard.button("t", " " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
+      dashboard.button("t", "󰃨 " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
       dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
+      dashboard.button("b", "󰖟 " .. " blog", [[<cmd>PLoad blog<CR>]]),
       dashboard.button("l", "󰒲" .. " Lazy", ":Lazy<CR>"),
       dashboard.button("q", " " .. " Quit", ":qa<CR>"),
     }

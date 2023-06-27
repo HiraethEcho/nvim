@@ -72,8 +72,16 @@ local nvimcmp={
       
       sources = cmp.config.sources({
         { name = 'ultisnips' }, -- For ultisnips users.
+        {
+            name = 'spell',
+            option = {
+                keep_all_entries = false,
+                enable_in_context = function()
+                    return true
+                end,
+            },
+        },
         { name = 'nvim_lsp' },
-        { name = 'spell' },
         { name = 'buffer' },
         { name = 'path' },
         { name = 'treesitter' },
@@ -115,20 +123,6 @@ local nvimcmp={
         format = lspkind.cmp_format({
           mode = 'symbol', -- show only symbol annotations
           maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-
-          -- before = function(entry, vim_item)
-          --   vim_item.menu = ({
-          --     nvim_lsp = "ﲳ",
-          --     nvim_lua = "",
-          --     treesitter = "",
-          --     path = "ﱮ",
-          --     buffer = "﬘",
-          --     zsh = "",
-          --     luasnip = "",
-          --     spell = "",
-          --   })[entry.source.name]
-          --     return vim_item
-          -- end,
         })
       }
     }

@@ -39,7 +39,7 @@ local tele={
     require('telescope').load_extension('possession')
     require('telescope').setup{
       defaults = {
-        -- winblend = 0,
+        winblend = 10,
         initial_mode="normal",
         scroll_strategy="limit",
         mappings = {
@@ -267,6 +267,7 @@ local neotree={
           ["<bs>"] = "navigate_up",
           ["."] = "set_root",
           ["H"] = "toggle_hidden",
+          ["zh"] = "toggle_hidden",
           ["/"] = "fuzzy_finder",
           ["D"] = "fuzzy_finder_directory",
           ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
