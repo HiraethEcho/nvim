@@ -1,4 +1,5 @@
-local dropbar= {
+local M={}
+M.dropbar= {
 	"Bekaboo/dropbar.nvim",
   lazy=false,
 	commit = "19011d96959cd40a7173485ee54202589760caae",
@@ -74,6 +75,6 @@ local dropbar= {
 	end,
 }
 local spec={
-  dropbar,
+  -- dropbar,
 }
 return spec

@@ -1,6 +1,7 @@
 local tree={
   'nvim-treesitter/nvim-treesitter',
   build = ":TSUpdate",
+  lazy=false,
   -- ft={'md','latex','tex','bib'},
   dependencies = {
     {
@@ -74,6 +75,17 @@ local lspconfig={
   },
   dependencies = {
     -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
+        {
+            "SmiteshP/nvim-navbuddy",
+  keys={
+    { "<leader>j", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
+  },
+            dependencies = {
+                "SmiteshP/nvim-navic",
+                "MunifTanjim/nui.nvim"
+            },
+            opts = { lsp = { auto_attach = true } }
+        },
     {"folke/neodev.nvim", opts = {} },
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -213,7 +225,7 @@ local lspsaga = {
         separator = " ",
         ignore_patterns={},
         hide_keyword = true,
-        show_file = false,
+        show_file = true,
         folder_level = 2,
         respect_root = false,
         color_mode = true,
