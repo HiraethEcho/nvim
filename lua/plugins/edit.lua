@@ -118,6 +118,10 @@ local hop ={
 }
 
 
-local spec={tools, hop,todo}
+local spec={
+  tools,
+  hop,
+  todo,
+}
 
 return spec

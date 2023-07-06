@@ -4,20 +4,6 @@ local transparent={
   -- lazy=false,
   config=function()
     require("transparent").setup({
-      -- enable = true, -- boolean: enable transparent
-      extra_groups = { -- table/string: additional groups that should be cleared
-      -- "all",
-      -- In particular, when you set it to 'all', that means all available groups
-      -- example of akinsho/nvim-bufferline.lua
-      -- "BufferLineTabClose",
-      -- "BufferlineBufferSelected",
-      -- "BufferLineFill",
-      -- "BufferLineBackground",
-      -- "BufferLineSeparator",
-      -- "BufferLineIndicatorSelected",
-    },
-    -- exclude = {}, -- table: groups you don't want to clear
-    -- ignore_linked_group = true, -- boolean: don't clear a group that links to another group
   })
 end,
 }
@@ -74,7 +60,7 @@ local color={
       -- enabled=false,
     -- event="VimEnter",
       -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
-      event="VimEnter",
+      -- event="VimEnter",
       priority = 1000, -- make sure to load this before all the other start plugins
       config = function()
         -- vim.cmd([[colorscheme nord]])
@@ -84,7 +70,7 @@ local color={
     "folke/tokyonight.nvim",
     -- enabled=false,
     -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
-    event="VimEnter",
+    -- event="VimEnter",
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- vim.cmd([[colorscheme tokyonight]])
@@ -248,16 +234,52 @@ local alpha={  -- lazy.nvim
   opts = function()
     local dashboard = require("alpha.themes.dashboard")
     -- TODO: start logo <28-05-23, > 
-    local logo = [[
-    ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-    ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z
-    ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z
-    ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z
-    ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
-    ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
-    ]]
+    --local logo = [[
+----:::::::::..::::::..:..........::-==..-+-:-+==+---
+---=-:::-::::..:::::..::..:.         .:..-=--+=++*=+*
+--**=::--:::......:...   ..  .         ..::..:-+*++*+
+--=-=------=-:::-:..    :=+=:           .::..:---===+
+----===-----=--:..     :-=++=:.          .-:.::::-:--
+---=++===+=-:..       ..-:==-=-.           ...-+:-===
+----:-=---:           .:-.=+=++:         .:..::-:-+=:
+---::-===:--:          :-:=++**.       .:::..:-=+==+-
+---=--=++--==-:         ---=+*+       .:::..-==*+++##
+--=+*=++=-=-:----:.     :-=+*##- ..   :::. .-----=++*
+-----===+----------::..:-==+*####*=-.:::  .::::-----=
+-----::-+=-::::::=+=++++++***#####%###*===-:::-:::---
+--::-::--:-:::-+**##+=++**######%%#++****+::-:--:-==-
+--:::::::::--:=**###+======+**#%#****+=-+#:::--=::--=
+----:::.--==-:=+++=--==+++++++*++*+=---+#%=--:-------
+----:::::::::-=++=-::::::--===+===-:=+*###=-+=-------
+--::-::::-----==+=:::..::::---=+=::+*+*##*-:=+===----
+--:::::.:::::--=-::-::==++=--=++++#%*=*##*:::::----==
+--:::::.:::::-===::==+**##%*=-==+**#==*##*=--:-==--==
+--::::::::::::==-:-===+*##%%+=--=+##==**#+:---==+=---
+--:-::...::::-=---==-=+*##%%*=---=+#%%%##=::::::----=
+--:--::::.:::----===-=+*##%%%++=-:-=+*###-::::::-:-:-
+--::-::::....:::===--=+*##%%%#*+=-:--=++=:::::::::-:-
+--..:::::.....:====--===*#%%%%***+..::::::::::::::---
+--::::.:::.:..-=====--==+##%%%###*:...:::::::::::::::
+--:::--.::.::-======---==*##%%%##%= ::::::::::::::-::
+--::.:::-:.:-=======---=-=*#%%%##%*:-:.:::..::.:::=-:
+--:..:.::..:=====-----=++-+##%%###%=::....:::::::::-:
+--:.:..:::::----------=*#==*##%%%%%#:::::::.:.:::::..
+--...::::---:---------==-=+=*##%%%%%-::::...:::::--::
+--:::-:-----:::::::::::.-+*==*##%%%%+::.:::.::::::-::
+--::::::::--:....::::..=####++**#%##*+-::::.::::::::-
+--.::::::::..... ...  :**##%%*+**##**++=:::..::-:::::
+--::::::........     .-+*#%%%%=+*#%#+++=+-::::-::::::
+--:::::-:::::........ =*#%%%%%+-+**%%**+++=.:::::::::
+--:----------:::::...-*%%%%%#%+:+**#%%*+++=-::::::..:
+--..:::::---------=+#%%#%####*:.+#**###+++=+=::..::::
+--.:::::::---=+##%%%%%%###*++:::-=+***##+++++=:::::::
+------:-----:::+*+*##%##*::--=--=::-====**++==-::::::
+--==:--::--:------+-===**-====:.:-=--===+*++-==-:-::-
+    --]]
 
-    dashboard.section.header.val = vim.split(logo, "\n")
+    --local logo = [[
+    --]]
+    -- dashboard.section.header.val = vim.split(logo, "\n")
     dashboard.section.buttons.val = {
       (function()
         local group = { type = "group", opts = { spacing = 0 } }
@@ -376,6 +398,33 @@ local indentline = {
   end,
 }
 
+local hlchunk={
+  "shellRaining/hlchunk.nvim",
+  event = "BufRead",
+  init = function()
+    -- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, { pattern = "*", command = "EnableHL", })
+    require('hlchunk').setup({
+      chunk = {
+        enable = true,
+        use_treesitter = true,
+        style = {
+          { fg = "#806d9c" },
+        },
+      },
+      indent = {
+        chars = { "│", "¦", "┆", "┊", },
+        use_treesitter = false,
+      },
+      blank = {
+        enable = false,
+      },
+      line_num = {
+        use_treesitter = true,
+      },
+    })
+  end,
+}
+
 local notify={
   'rcarriga/nvim-notify',
   -- lazy=false,
@@ -444,6 +493,16 @@ local scrollbar={
   end,
 }
 
-local spec={color,transparent,line,indentline,alpha,notify,minimap,scrollbar}
+local spec={
+  color,
+  transparent,
+  line,
+  hlchunk,
+  alpha,
+  notify,
+  minimap,
+  scrollbar,
+}
+
 
 return spec

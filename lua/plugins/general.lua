@@ -188,6 +188,9 @@ local whichkey={
     end,
   }
 
-  local spec={whichkey,wildernvim,miscellaneous}
-
+  local spec={
+  whichkey,
+  wildernvim,
+  miscellaneous,
+}
   return spec

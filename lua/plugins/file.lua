@@ -390,6 +390,10 @@ local possession ={
   end,
 }
 
-local spec ={tele,neotree,possession}
+local spec ={
+  tele,
+  neotree,
+  possession,
+}
 
 return spec
