@@ -344,7 +344,7 @@ local possession ={
         current = true,  -- or fun(name): boolean
         tmp = true,  -- or fun(): boolean
         tmp_name = 'tmp',
-        on_load = false,
+        on_load = true,
         on_quit = true,
       },
       commands = {

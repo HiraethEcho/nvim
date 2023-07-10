@@ -315,7 +315,7 @@ local alpha={  -- lazy.nvim
       dashboard.button("t", "󰃨 " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
       dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
       dashboard.button("b", "󰖟 " .. " blog", [[<cmd>PLoad blog<CR>]]),
-      dashboard.button("l", "󰒲" .. " Lazy", ":Lazy<CR>"),
+      dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
       dashboard.button("q", " " .. " Quit", ":qa<CR>"),
     }
     for _, button in ipairs(dashboard.section.buttons.val) do
@@ -400,7 +400,7 @@ local indentline = {
 
 local hlchunk={
   "shellRaining/hlchunk.nvim",
-  event = "BufRead",
+  event = "BufReadPost",
   init = function()
     -- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, { pattern = "*", command = "EnableHL", })
     require('hlchunk').setup({
