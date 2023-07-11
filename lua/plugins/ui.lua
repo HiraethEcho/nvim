@@ -476,15 +476,15 @@ local minimap={
 
 local scrollbar={
   'petertriho/nvim-scrollbar',
-  dependencies ={
-    "kevinhwang91/nvim-hlslens",
-    config = function()
-      -- require('hlslens').setup() is not required
-      require("scrollbar.handlers.search").setup({
-        -- hlslens config overrides
-      })
-    end,
-  },
+  -- dependencies ={
+  --   "kevinhwang91/nvim-hlslens",
+  --   config = function()
+  --     -- require('hlslens').setup() is not required
+  --     require("scrollbar.handlers.search").setup({
+  --       -- hlslens config overrides
+  --     })
+  --   end,
+  -- },
   -- lazy =false,
   cmd = "ScrollbarToggle",
   config = function()
@@ -493,6 +493,33 @@ local scrollbar={
   end,
 }
 
+local scrollview={
+  'dstein64/nvim-scrollview',
+  -- dependencies ={
+  --   "kevinhwang91/nvim-hlslens",
+  --   config = function()
+  --     -- require('hlslens').setup() is not required
+  --     require("scrollbar.handlers.search").setup({
+  --       -- hlslens config overrides
+  --     })
+  --   end,
+  -- },
+  -- lazy =false,
+  cmd = "ScrollViewToggle",
+  config = function()
+    require('scrollview').setup({
+      current_only = true,
+      winblend = 75,
+      base = 'buffer',
+      signs_on_startup = {'all'},
+      diagnostics_severities = {vim.diagnostic.severity.ERROR}
+    })
+    vim.g.scrollview_current_only = true
+    vim.g.scrollview_winblend = 75
+    vim.g.scrollview_base = 'buffer'
+    vim.g.scrollview_column = 80
+  end,
+}
 local codewindow={
   'gorbit99/codewindow.nvim',
   keys={
@@ -565,7 +592,8 @@ local spec={
   alpha,
   notify,
   -- minimap,
-  -- scrollbar,
+  scrollbar,
+  -- scrollview,
   codewindow,
   -- satellite,
 }
