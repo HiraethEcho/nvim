@@ -18,3 +18,4 @@ require('keymap')
 require('gui')
 require('lazynvim')
 
+-- require('ltex')

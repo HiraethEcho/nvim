@@ -936,3 +936,35 @@ local indentline = {
     })
   end,
 }
+
+
+local grammar_guard={
+  "brymer-meneses/grammar-guard.nvim",
+  dependencies = {
+    "neovim/nvim-lspconfig",
+    -- "williamboman/nvim-lsp-installer"
+  },
+  config = function()
+-- hook to nvim-lspconfig
+    require("grammar-guard").init()
+    require("lspconfig").grammar_guard.setup({
+      -- cmd="D:/Desktop/nvim-data/mason/packages/ltex-ls/ltex-ls-16.0.0",
+      settings = {
+        ltex = {
+          enabled = { "latex", "tex", "bib", "markdown" },
+          language = "en",
+          diagnosticSeverity = "information",
+          setenceCacheSize = 2000,
+          additionalRules = {
+            enablePickyRules = true,
+            motherTongue = "en",
+          },
+          trace = { server = "verbose" },
+          dictionary = {},
+          disabledRules = {},
+          hiddenFalsePositives = {},
+        },
+      },
+    })
+  end,
+}

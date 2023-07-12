@@ -102,14 +102,14 @@ local lspconfig={
     lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, capabilities)
 
     local servers = {
-      "lua_ls",
       "html",
       "yamlls",
       "texlab",
+      "typst_lsp",
       "grammarly",
-      "prosemd_lsp",
+      -- "prosemd_lsp",
       "marksman",
-      "remark_ls",
+      -- "remark_ls",
       "clangd",
     }
 
@@ -144,6 +144,7 @@ local lsp_server={
       })
     end,
   },
+
   {
     "williamboman/mason-lspconfig.nvim",
     -- lazy=false,
@@ -165,7 +166,7 @@ local lspsaga = {
   keys={
     { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "hover doc" },
     { "<leader>lo", "<cmd>Lspsaga outline<cr>", desc = "lsp outline" },
-    { "<leader>ld", "<cmd>Lspsaga show_workspace_diagnostics<cr>", desc = "lsp diagnostic" },
+    { "<leader>ld", "<cmd>Lspsaga show_buf_diagnostics<cr>", desc = "lsp diagnostic" },
     { "<leader>lf", "<cmd>Lspsaga lsp_finder<cr>", desc = "lsp finder" },
     { "gp", "<cmd>Lspsaga peek_definition<cr>", desc = "lsp peek definition" },
     { "<leader>t", "<cmd>Lspsaga term_toggle<cr>", desc = "lsp terminal" },
@@ -299,11 +300,29 @@ local lspsaga = {
   end,
 }
 
+local ltex = {
+    "barreiroleo/ltex_extra.nvim",
+    ft = { "markdown", "tex" },
+    dependencies = { "neovim/nvim-lspconfig" },
+    -- yes, you can use the opts field, just I'm showing the setup explicitly
+    config = function()
+        require("ltex_extra").setup {
+            server_opts = {
+                on_attach=on_attach,
+                settings = {
+                    ltex = {}
+                }
+            },
+        }
+    end
+}
+
 local spec={
   tree,
   lsp_server,
   lspconfig,
   lspsaga,
+  -- ltex,
 }
 
 return spec
