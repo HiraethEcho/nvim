@@ -35,7 +35,7 @@ vim.opt.relativenumber = false      -- set relative numbered lines
 vim.opt.numberwidth = 2            -- set number column width to 2 {default 4}
 vim.opt.signcolumn = "yes"         -- always show the sign column, otherwise it would shift the text each time
 
-vim.opt.wrap = false                -- display lines as one long line
+vim.opt.wrap = true                -- display lines as one long line
 vim.opt.linebreak = true           -- companion to wrap, don't split words
 vim.opt.whichwrap = "bs<>[]"     -- which "horizontal" keys are allowed to travel to prev/next line
 -- vim.opt.whichwrap = "bs<>[]hl"     -- which "horizontal" keys are allowed to travel to prev/next line
@@ -79,20 +79,7 @@ vim.o.swapfile = false
 -- vim.opt.iskeyword:append "-"      -- hyphenated words recognized by searches
 -- vim.opt.formatoptions:remove({ "c", "r", "o" })        -- don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode.
 --
---
-
-
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
 -- vim.o.shell = 'powershell'
--- vimscript {{{ --
--- vim.cmd([[
--- set viminfo='10,\"100,:20,%,n~/AppData/Local/nvim/.viminfo
--- au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
--- ]])
--- filetype on
--- filetype plugin indent on " 针对不同文件类型加载对应插件
--- syntax on
--- syntax enable
--- }}} vimscript --

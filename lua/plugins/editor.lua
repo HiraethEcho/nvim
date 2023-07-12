@@ -37,7 +37,9 @@ local md = {
   build = "cd app && npm install",
   ft = { "markdown" },
   config=function()
+-- if  vim.g.islinux then
     -- vim.g.mkdp_browser = 'surf'
+-- end
     vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. '/colors/markdown.css'
     vim.g.mkdp_theme = 'dark'
     vim.g.mkdp_auto_start = 1

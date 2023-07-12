@@ -1,43 +1,43 @@
-  local minimap={
-    'echasnovski/mini.map', version = false ,
-    enabled=false,
-    -- lazy=false,
-    config =function ()
-      require('mini.map').setup({
-        -- Highlight integrations (none by default)
-        integrations = nil,
-        symbols = {
-          -- Encode symbols. See `:h MiniMap.config` for specification and
-          -- `:h MiniMap.gen_encode_symbols` for pre-built ones.
-          -- Default: solid blocks with 3x2 resolution.
-          -- encode = nil,
-          -- Scrollbar parts for view and line. Use empty string to disable any.
-          scroll_line = '█',
-          scroll_view = '┃',
-        },
+local minimap={
+  'echasnovski/mini.map', version = false ,
+  enabled=false,
+  -- lazy=false,
+  config =function ()
+    require('mini.map').setup({
+      -- Highlight integrations (none by default)
+      integrations = nil,
+      symbols = {
+        -- Encode symbols. See `:h MiniMap.config` for specification and
+        -- `:h MiniMap.gen_encode_symbols` for pre-built ones.
+        -- Default: solid blocks with 3x2 resolution.
+        -- encode = nil,
+        -- Scrollbar parts for view and line. Use empty string to disable any.
+        scroll_line = '█',
+        scroll_view = '┃',
+      },
 
-        window = {
-          -- Whether window is focusable in normal way (with `wincmd` or mouse)
-          focusable = false,
-          -- Whether to show count of multiple integration highlights
-          show_integration_count = false,
-          width = 40,
-          winblend = 25,
-        },
-      })
+      window = {
+        -- Whether window is focusable in normal way (with `wincmd` or mouse)
+        focusable = false,
+        -- Whether to show count of multiple integration highlights
+        show_integration_count = false,
+        width = 40,
+        winblend = 25,
+      },
+    })
 
-      -- vim.api.nvim_create_user_command('MiniMapOpen',MiniMap.open(), { bang = true })
-      -- vim.api.nvim_create_user_command('MiniMapClose', MiniMap.close(), { bang = true })
-    end,
-  },
+    -- vim.api.nvim_create_user_command('MiniMapOpen',MiniMap.open(), { bang = true })
+    -- vim.api.nvim_create_user_command('MiniMapClose', MiniMap.close(), { bang = true })
+  end,
+}
+
 local start={
   {
     "mhinz/vim-startify",
     event = "VimEnter",
     -- lazy=false,
-
     config=function()
-      vim.g.startify_session_dir = vim.fn.stdpath("config").."/session/")
+      vim.g.startify_session_dir = vim.fn.stdpath("config").."/session/"
       vim.g.startify_files_number= 3
       vim.cmd([[
       let g:startify_lists= [
@@ -646,5 +646,266 @@ local md={
     })
     vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
     vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+  end,
+}
+
+local dropbar= {
+	"Bekaboo/dropbar.nvim",
+  lazy=false,
+	commit = "19011d96959cd40a7173485ee54202589760caae",
+	config = function()
+		local api = require("dropbar.api")
+		vim.keymap.set('n', '<Leader>;', api.pick)
+		-- vim.keymap.set('n', '[c', api.goto_context_start)
+		-- vim.keymap.set('n', ']c', api.select_next_context)
+
+		local confirm = function()
+			local menu = api.get_current_dropbar_menu()
+			if not menu then
+				return
+			end
+			local cursor = vim.api.nvim_win_get_cursor(menu.win)
+			local component = menu.entries[cursor[1]]:first_clickable(cursor[2])
+			if component then
+				menu:click_on(component)
+			end
+		end
+
+		local quit_curr = function()
+			local menu = api.get_current_dropbar_menu()
+			if menu then
+				menu:close()
+			end
+		end
+
+		require("dropbar").setup({
+			menu = {
+				-- When on, automatically set the cursor to the closest previous/next
+				-- clickable component in the direction of cursor movement on CursorMoved
+				quick_navigation = true,
+				---@type table<string, string|function|table<string, string|function>>
+				keymaps = {
+					['<LeftMouse>'] = function()
+						local menu = api.get_current_dropbar_menu()
+						if not menu then
+							return
+						end
+						local mouse = vim.fn.getmousepos()
+						if mouse.winid ~= menu.win then
+							local parent_menu = api.get_dropbar_menu(mouse.winid)
+							if parent_menu and parent_menu.sub_menu then
+								parent_menu.sub_menu:close()
+							end
+							if vim.api.nvim_win_is_valid(mouse.winid) then
+								vim.api.nvim_set_current_win(mouse.winid)
+							end
+							return
+						end
+						menu:click_at({ mouse.line, mouse.column }, nil, 1, 'l')
+					end,
+					['<CR>'] = confirm,
+					-- ['i'] = confirm,
+					['<esc>'] = quit_curr,
+					['q'] = quit_curr,
+					-- ['n'] = quit_curr,
+					['<MouseMove>'] = function()
+						local menu = api.get_current_dropbar_menu()
+						if not menu then
+							return
+						end
+						local mouse = vim.fn.getmousepos()
+						if mouse.winid ~= menu.win then
+							return
+						end
+						menu:update_hover_hl({ mouse.line, mouse.column - 1 })
+					end,
+				},
+			},
+		})
+	end,
+}
+
+local coc={
+  'neoclide/coc.nvim',
+  event="InsertEnter",
+  -- lazy=false,
+  keys ={
+    -- {"<Leader>ef" , ":CocCommand explorer --preset floating<CR>"  } ,
+    -- {"<Leader>ed" , ":CocCommand explorer --preset Documents<CR>" } ,
+    -- {"<Leader>eg" , ":CocCommand explorer --preset github<CR>"    } ,
+    -- {"<Leader>ep" , ":CocCommand explorer --preset Projects<CR>"  } ,
+    -- {"<Leader>eh" , ":CocCommand explorer --preset hiraeth<CR>"   } ,
+    -- {"<leader>en" , ":CocCommand explorer --preset nvim<CR>"      } ,
+    -- { "<leader>ee" , ":CocCommand explorer<CR>"                   } ,
+    { "<leader>ll" , ":<C-u>CocList<cr>"                          } ,
+    { "<leader>le" , ":<C-u>CocList extensions<cr>"               } ,
+    -- { "<leader>ly" , ":<C-u>CocList yank<cr>"                     } ,
+  },
+  branch='release',
+  config=function()
+    vim.g.coc_global_extensions = {
+      "coc-snippets",
+      "coc-yank",
+      "coc-lists",
+      "coc-marketplace",
+      "coc-json",
+      -- "coc-explorer",
+      -- "coc-webview",
+      -- "coc-typos",
+      -- "coc-git",
+      -- "coc-highlight",
+      -- "coc-lightbulb",
+      -- "coc-cmake",
+      -- "coc-vimtex",
+      -- "coc-pyright",
+      -- "coc-texlab",
+    }
+    -- vim.g.coc_node_path = "D:/Downloads/apps/nodejs/current/node.exe"
+    function _G.check_back_space()
+      local col = vim.fn.col('.') - 1
+      return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+    end
+    vim.keymap.set("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', {silent = true, noremap = true, expr = true, replace_keycodes = false})
+    vim.keymap.set("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], {silent = true, noremap = true, expr = true, replace_keycodes = false})
+    vim.keymap.set("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], {silent = true, noremap = true, expr = true, replace_keycodes = false})
+  end,
+}
+
+local coq ={
+  "ms-jpq/coq_nvim",
+  branch = "coq",
+  event="InsertEnter",
+  dependencies = {
+    {
+      "ms-jpq/coq.artifacts",
+      branch = "artifacts",
+    },
+    {
+      "ms-jpq/coq.thirdparty",
+      branch = "3p",
+      config = function()
+        require "coq_3p" {
+          { src = "nvimlua", short_name = "", conf_only = false },
+
+          { src = "vimtex",  short_name = "TEX" },
+        }
+      end,
+    },
+  },
+  config = function()
+    vim.g.coq_settings = {
+      display = {
+        icons = {
+          mode = "short",
+          spacing = 0,
+        },
+      },
+      keymap = {
+        recommended = false,
+      },
+    }
+    local coq = require "coq"
+    coq.Now() -- Start coq
+    local remap = vim.api.nvim_set_keymap
+    remap('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
+    -- remap('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
+    remap('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
+    remap('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
+  end,
+}
+
+local gutter={
+  "airblade/vim-gitgutter",
+  -- enable=false,
+  keys = {
+    { "<leader>hf" , "<cmd>GitGutterFold<cr>"      , desc ="gitfold"          } ,
+    { "<leader>hj" , "<cmd>GitGutterNextHunk<cr>"  , desc = "next hunk"       } ,
+    { "<leader>hk" , "<cmd>GitGutterPrevHunk<cr>"  , desc = "previous hunk"   } ,
+    { "<leader>hd" , "<cmd>GitGutterDiffOrig<cr>"  , desc = "gitdifforig"     } ,
+    { "<leader>hu" , "<cmd>GitGutterUndoHunk<cr>"  , desc = "undohunk"        } ,
+    { "<leader>ha" , "<cmd>GitGutterStageHunk<cr>" , desc = "stagehunk"       } ,
+    { "<leader>hh" , "<cmd>GitGutterToggle<cr><cmd>GitGutterLineNrHighlightsToggle<cr>"    , desc = "gitgutter sign toggle" } ,
+    { "<leader>hl" , "<cmd>GitGutterLineHighlightsToggle<cr>"    , desc = "gitgutter highlight line toggle" } ,
+    { "<leader>hp" , "<cmd>GitGutterPreviewHunk<cr>"    , desc = "preview a hunk" } ,
+  },
+  config=function()
+    vim.g.gitgutter_highlight_linenrs=1
+    vim.g.gitgutter_signs=1
+    vim.g.gitgutter_close_preview_on_escape=1
+  end,
+}
+
+local color={
+  {
+      'shaunsingh/nord.nvim',
+      -- enabled=false,
+    -- event="VimEnter",
+      -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
+      -- event="VimEnter",
+      priority = 1000, -- make sure to load this before all the other start plugins
+      config = function()
+        -- vim.cmd([[colorscheme nord]])
+      end,
+  },
+  {
+    "folke/tokyonight.nvim",
+    -- enabled=false,
+    -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
+    -- event="VimEnter",
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      -- vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
+  {
+    'norcalli/nvim-colorizer.lua',
+    cmd="ColorizerToggle",
+    config=function()
+      require 'colorizer'.setup()
+    end,
+  },
+}
+
+local indentline = {
+  "lukas-reineke/indent-blankline.nvim",
+  -- enabled=false,
+  event = "BufRead",
+  config = function()
+    require("indent_blankline").setup({
+      space_char_blankline = " ",
+      char_highlight_list = {
+        "IndentBlanklineIndent1",
+        "IndentBlanklineIndent2",
+        "IndentBlanklineIndent3",
+        "IndentBlanklineIndent4",
+        "IndentBlanklineIndent5",
+        "IndentBlanklineIndent6",
+      },
+      -- space_char_highlight_list = {
+        --   "IndentBlanklineIndent7",
+        --   "IndentBlanklineIndent8",
+        -- },
+      show_end_of_line = true,
+      show_current_context = true,
+      show_current_context_start = true,
+      show_first_indent_level = false,
+      show_trailing_blankline_indent = true,
+      buftype_exclude = {
+        "terminal",
+        "[No Name]",
+        "prompt",
+        "nofile",
+        "help",
+      },
+      filetype_exclude = {
+        "log",
+        "markdown",
+        "org",
+        "lspinfo",
+        "plugin",
+        "text",
+        "txt"
+      },
+    })
   end,
 }

@@ -24,16 +24,15 @@ local color={
         plugins = { -- Uncomment the plugins that you use to highlight them
         -- Available plugins:
         -- "dap",
-        -- "dashboard",
         "gitsigns",
         "hop",
-        "indent-blankline",
+        -- "indent-blankline",
         "lspsaga",
         -- "mini",
         -- "neogit",
         -- "neorg",
         "nvim-cmp",
-        -- "nvim-navic",
+        "nvim-navic",
         -- "nvim-tree",
         "nvim-web-devicons",
         -- "sneak",
@@ -41,40 +40,9 @@ local color={
         -- "trouble",
         "which-key",
       },
-
-      -- disable = {
-        --     colored_cursor = false, -- Disable the colored cursor
-        --     borders = false, -- Disable borders between verticaly split windows
-        --     background = false, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
-        --     term_colors = false, -- Prevent the theme from setting terminal colors
-        --     eob_lines = false -- Hide the end-of-buffer lines
-        -- },
-          -- lualine_style = "default", -- Lualine style ( can be 'stealth' or 'default' )
-          async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
         })
         vim.cmd 'colorscheme material'
       end,
-  },
-  {
-      'shaunsingh/nord.nvim',
-      -- enabled=false,
-    -- event="VimEnter",
-      -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
-      -- event="VimEnter",
-      priority = 1000, -- make sure to load this before all the other start plugins
-      config = function()
-        -- vim.cmd([[colorscheme nord]])
-      end,
-  },
-  {
-    "folke/tokyonight.nvim",
-    -- enabled=false,
-    -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
-    -- event="VimEnter",
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      -- vim.cmd([[colorscheme tokyonight]])
-    end,
   },
   {
     'norcalli/nvim-colorizer.lua',
@@ -102,7 +70,7 @@ local line={
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
         disabled_filetypes = {
-          statusline = {'neo-tree','minimap'},
+          statusline = {'neo-tree'},
           -- winbar = {},
         },
         ignore_focus = {},
@@ -111,7 +79,6 @@ local line={
         refresh = {
           statusline = 1000,
           tabline = 1000,
-          winbar = 1000,
         }
       },
       sections = {
@@ -136,7 +103,7 @@ local line={
         },
         lualine_b = {
           'branch',
-          -- 'diff',
+          'diff',
         },
         -- lualine_c = {'g:coc_status'},
         lualine_c = {'diff'},
@@ -221,9 +188,6 @@ local line={
     }
   end,
 }
-
-
-
 
 local alpha={  -- lazy.nvim
   "goolord/alpha-nvim",
@@ -354,55 +318,10 @@ local alpha={  -- lazy.nvim
 end,
 }
 
-local indentline = {
-  "lukas-reineke/indent-blankline.nvim",
-  -- enabled=false,
-  event = "BufRead",
-  config = function()
-    require("indent_blankline").setup({
-      space_char_blankline = " ",
-      char_highlight_list = {
-        "IndentBlanklineIndent1",
-        "IndentBlanklineIndent2",
-        "IndentBlanklineIndent3",
-        "IndentBlanklineIndent4",
-        "IndentBlanklineIndent5",
-        "IndentBlanklineIndent6",
-      },
-      -- space_char_highlight_list = {
-        --   "IndentBlanklineIndent7",
-        --   "IndentBlanklineIndent8",
-        -- },
-      show_end_of_line = true,
-      show_current_context = true,
-      show_current_context_start = true,
-      show_first_indent_level = false,
-      show_trailing_blankline_indent = true,
-      buftype_exclude = {
-        "terminal",
-        "[No Name]",
-        "prompt",
-        "nofile",
-        "help",
-      },
-      filetype_exclude = {
-        "log",
-        "markdown",
-        "org",
-        "lspinfo",
-        "plugin",
-        "text",
-        "txt"
-      },
-    })
-  end,
-}
-
 local hlchunk={
   "shellRaining/hlchunk.nvim",
   event = "BufReadPost",
   init = function()
-    -- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, { pattern = "*", command = "EnableHL", })
     require('hlchunk').setup({
       chunk = {
         enable = true,
@@ -451,60 +370,17 @@ local notify={
   end,
 }
 
-local minimap={
-  'wfxr/minimap.vim',
-  -- lazy=false,
-  dependencies={
-  'rcarriga/nvim-notify',
-  'petertriho/nvim-scrollbar',
-  'lewis6991/gitsigns.nvim',
-  },
-  keys={
-    { "<leader>m", "<cmd>MinimapToggle<cr>", desc = "Minimap Toggle" },
-  },
-  cmd={
-    "MinimapOpen",
-    "MinimapClose",
-    "MinimapToggle",
-  },
-  config=function ()
-    vim.g.minimap_width = 20
-    vim.g.minimap_highlight_search=1
-    vim.g.minimap_git_colors=1
-  end,
-}
-
 local scrollbar={
   'petertriho/nvim-scrollbar',
-  -- dependencies ={
-  --   "kevinhwang91/nvim-hlslens",
-  --   config = function()
-  --     -- require('hlslens').setup() is not required
-  --     require("scrollbar.handlers.search").setup({
-  --       -- hlslens config overrides
-  --     })
-  --   end,
-  -- },
   -- lazy =false,
   cmd = "ScrollbarToggle",
   config = function()
-    -- require('hlslens').setup() is not required
     require("scrollbar").setup()
   end,
 }
 
 local scrollview={
   'dstein64/nvim-scrollview',
-  -- dependencies ={
-  --   "kevinhwang91/nvim-hlslens",
-  --   config = function()
-  --     -- require('hlslens').setup() is not required
-  --     require("scrollbar.handlers.search").setup({
-  --       -- hlslens config overrides
-  --     })
-  --   end,
-  -- },
-  -- lazy =false,
   cmd = "ScrollViewToggle",
   config = function()
     require('scrollview').setup({
@@ -520,16 +396,17 @@ local scrollview={
     vim.g.scrollview_column = 80
   end,
 }
+
 local codewindow={
   'gorbit99/codewindow.nvim',
   keys={
     { "<leader>m", function() require('codewindow').toggle_minimap() end , desc = "Minimap Toggle" },
     { "<leader>M", function() require('codewindow').toggle_focus() end , desc = "Minimap Toggle" },
   },
--- codewindow.open_minimap()
--- codewindow.close_minimap()
--- codewindow.toggle_minimap()
--- codewindow.toggle_focus()
+  -- codewindow.open_minimap()
+  -- codewindow.close_minimap()
+  -- codewindow.toggle_minimap()
+  -- codewindow.toggle_focus()
   config = function()
     local codewindow = require('codewindow')
     codewindow.setup({
@@ -591,12 +468,10 @@ local spec={
   hlchunk,
   alpha,
   notify,
-  -- minimap,
   scrollbar,
   -- scrollview,
   codewindow,
   -- satellite,
 }
-
 
 return spec

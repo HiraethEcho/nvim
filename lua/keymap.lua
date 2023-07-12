@@ -108,12 +108,10 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 -- }}} text --
 
 -- terminal {{{ --
-function _G.set_terminal_keymaps()
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], term_opts)
-  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], term_opts)
-end
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+-- function _G.set_terminal_keymaps()
+--   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], term_opts)
+--   vim.keymap.set('t', 'jk', [[<C-\><C-n>]], term_opts)
+-- end
+-- vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 -- }}} terminal --
 
--- coc<Plug>(coc-snippets-jump) {{{ --
--- }}} coc<Plug>(coc-snippets-jump) --

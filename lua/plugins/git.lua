@@ -11,26 +11,6 @@ local lazygit={
   end,
 }
 
-local gutter={
-  "airblade/vim-gitgutter",
-  -- enable=false,
-  keys = {
-    { "<leader>hf" , "<cmd>GitGutterFold<cr>"      , desc ="gitfold"          } ,
-    { "<leader>hj" , "<cmd>GitGutterNextHunk<cr>"  , desc = "next hunk"       } ,
-    { "<leader>hk" , "<cmd>GitGutterPrevHunk<cr>"  , desc = "previous hunk"   } ,
-    { "<leader>hd" , "<cmd>GitGutterDiffOrig<cr>"  , desc = "gitdifforig"     } ,
-    { "<leader>hu" , "<cmd>GitGutterUndoHunk<cr>"  , desc = "undohunk"        } ,
-    { "<leader>ha" , "<cmd>GitGutterStageHunk<cr>" , desc = "stagehunk"       } ,
-    { "<leader>hh" , "<cmd>GitGutterToggle<cr><cmd>GitGutterLineNrHighlightsToggle<cr>"    , desc = "gitgutter sign toggle" } ,
-    { "<leader>hl" , "<cmd>GitGutterLineHighlightsToggle<cr>"    , desc = "gitgutter highlight line toggle" } ,
-    { "<leader>hp" , "<cmd>GitGutterPreviewHunk<cr>"    , desc = "preview a hunk" } ,
-  },
-  config=function()
-    vim.g.gitgutter_highlight_linenrs=1
-    vim.g.gitgutter_signs=1
-    vim.g.gitgutter_close_preview_on_escape=1
-  end,
-}
 
 local gitsigns ={
   'lewis6991/gitsigns.nvim',
@@ -113,7 +93,7 @@ local confict={
       current = 'diffadd',
     }
   })
-end,
+  end,
 }
 
 
@@ -121,7 +101,6 @@ local spec={
   lazygit,
   gitsigns,
   confict,
-  -- gutter,
 }
 -- todo:gutter or gitsings?
 return spec

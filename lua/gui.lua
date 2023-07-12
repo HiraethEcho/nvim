@@ -16,12 +16,6 @@
 -- highlight NotifyDEBUGTitle  guifg=#8B8B8B
 -- highlight NotifyTRACETitle  guifg=#D484FF
 
-    vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-    vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-    vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-    vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-    vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-    vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 if vim.g.neovide then
     -- Put anything you want to happen only in Neovide here
 vim.o.guifont = "CodeNewRoman Nerd Font:h14" -- text below applies for VimScript

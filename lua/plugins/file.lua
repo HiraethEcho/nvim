@@ -1,6 +1,5 @@
 local tele={
   "nvim-telescope/telescope.nvim",
-  -- lazy=false,
   keys = {
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "files" },
     { "<leader>fc", "<cmd>lua require('material.functions').find_style()<cr>", desc = "color scheme" },
@@ -30,12 +29,9 @@ local tele={
   dependencies = {
     {"nvim-lua/plenary.nvim"},
     -- {"nvim-telescope/telescope-project.nvim"},
-    {'jedrzejboczar/possession.nvim'}
+    -- {'jedrzejboczar/possession.nvim'}
   },
-
-  -- apply the config and additionally load fzf-native
   config = function()
-    -- require('telescope').load_extension('aerial')
     require('telescope').load_extension('possession')
     require('telescope').setup{
       defaults = {
@@ -62,7 +58,7 @@ local tele={
         color_devicons = true,
         -- file_ignore_patterns = { "node_modules" },
         -- theme
-        layout_strategy = "bottom_pane",
+        -- layout_strategy = "bottom_pane",
         -- config
         layout_config = {
           bottom_pane = {
@@ -90,62 +86,54 @@ local tele={
         },
         find_files = {
           initial_mode="insert",
+        },
+        buffers = {
+          initial_mode="normal",
           mappings = {
-            --     i = {
-              --       ["<c-d>"] = "delete_buffer",
-              --     },
-              -- n = {
-                -- },
-              },
+            i = {
+              ["<c-d>"] = "delete_buffer",
             },
-            buffers = {
-              initial_mode="normal",
-              mappings = {
-                i = {
-                  ["<c-d>"] = "delete_buffer",
-                },
-                n = {
-                  ["d"] = "delete_buffer",
-                },
-              },
-            },
-            git_branches={
-              initial_mode="normal",
-              mappings = {
-                n = {
-                  ["<space>"] = "git_checkout",
-                  ["n"] = "git_create_branch",
-                  ["d"] = "git_delete_branch",
-                  ["m"] = "git_merge_branch",
-                  ["r"] = "git_rebase_branch",
-                },
-              },
-            },
-            git_commits={
-              initial_mode="normal",
-              mappings = {
-                n = {
-                  ["gm"] = "git_reset_mixed",
-                  ["gs"] = "git_reset_soft",
-                  ["gh"] = "git_reset_hard",
-                },
-              },
-            },
-            git_status={
-              initial_mode="normal",
-              mappings = {
-                n = {
-                  ["<space>"] = "git_staging_toggle",
-                },
-              },
+            n = {
+              ["d"] = "delete_buffer",
             },
           },
-          extensions = {
+        },
+        git_branches={
+          initial_mode="normal",
+          mappings = {
+            n = {
+              ["<space>"] = "git_checkout",
+              ["n"] = "git_create_branch",
+              ["d"] = "git_delete_branch",
+              ["m"] = "git_merge_branch",
+              ["r"] = "git_rebase_branch",
+            },
           },
-        }
-
-      end,
+        },
+        git_commits={
+          initial_mode="normal",
+          mappings = {
+            n = {
+              ["gm"] = "git_reset_mixed",
+              ["gs"] = "git_reset_soft",
+              ["gh"] = "git_reset_hard",
+            },
+          },
+        },
+        git_status={
+          initial_mode="normal",
+          mappings = {
+            n = {
+              ["<space>"] = "git_staging_toggle",
+            },
+          },
+        },
+      },
+      extensions = {
+      },
     }
+  end,
+}
 
 local neotree={
   "nvim-neo-tree/neo-tree.nvim",
@@ -179,11 +167,8 @@ local neotree={
   },
   config=function()
     require("neo-tree").setup({
-      close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
       enable_git_status = true,
       enable_diagnostics = true,
-      open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
-      sort_case_insensitive = false, -- used when sorting files and directories in the tree
       default_component_configs = {
         container = {
           enable_character_fade = true
@@ -200,7 +185,6 @@ local neotree={
         },
         git_status = {
           symbols = {
-            -- Change type
             added     = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
             modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
             deleted   = "✖",-- this can only be used in the git_status source

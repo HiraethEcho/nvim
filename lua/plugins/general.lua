@@ -34,17 +34,12 @@ local whichkey={
         ["<cr>"] = "RET",
         ["<tab>"] = "TAB",
       },
-      icons = {
-        breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-        separator = "➜", -- symbol used between a key and it's label
-        group = "+", -- symbol prepended to a group
-      },
       popup_mappings = {
         scroll_down = '<c-d>', -- binding to scroll down inside the popup
         scroll_up = '<c-u>', -- binding to scroll up inside the popup
       },
       window = {
-        border = "single", -- none, single, double, shadow
+        border = "shadow", -- none, single, double, shadow
         position = "bottom", -- bottom, top
         margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
         padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
@@ -56,8 +51,6 @@ local whichkey={
         spacing = 3, -- spacing between columns
         align = "center", -- align columns left, center or right
       },
-      ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
-      hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
       show_help = true, -- show help message on the command line when the popup is visible
       show_keys = true, -- show the currently pressed key and its label as a message in the command line
       triggers = "auto", -- automatically setup triggers
@@ -189,8 +182,8 @@ local whichkey={
   }
 
   local spec={
-  whichkey,
-  wildernvim,
-  miscellaneous,
-}
+    whichkey,
+    wildernvim,
+    miscellaneous,
+  }
   return spec

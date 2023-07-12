@@ -75,17 +75,17 @@ local lspconfig={
   },
   dependencies = {
     -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-        {
-            "SmiteshP/nvim-navbuddy",
-  keys={
-    { "<leader>j", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
-  },
-            dependencies = {
-                "SmiteshP/nvim-navic",
-                "MunifTanjim/nui.nvim"
-            },
-            opts = { lsp = { auto_attach = true } }
-        },
+    {
+      "SmiteshP/nvim-navbuddy",
+      keys={
+        { "<leader>j", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
+      },
+      dependencies = {
+        "SmiteshP/nvim-navic",
+        "MunifTanjim/nui.nvim"
+      },
+      opts = { lsp = { auto_attach = true } }
+    },
     {"folke/neodev.nvim", opts = {} },
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -124,7 +124,6 @@ local lspconfig={
         checkThirdParty = false,
       },
     }
-
   end,
 }
 
@@ -226,9 +225,9 @@ local lspsaga = {
         separator = " ",
         ignore_patterns={},
         hide_keyword = true,
-        show_file = true,
-        folder_level = 2,
-        respect_root = false,
+        show_file = false,
+        -- folder_level = 2,
+        -- respect_root = false,
         color_mode = true,
       },
       hover = {
@@ -272,18 +271,17 @@ local lspsaga = {
       },
     })
 
-local sign = function(opts)
-		vim.fn.sign_define(opts.name, {
-			texthl = opts.name,
-			text = opts.text,
-			numhl = "",
-		})
-	end
-  sign({ name = "DiagnosticSignError", text = "✘" })
-	sign({ name = "DiagnosticSignWarn", text = "" })
-	sign({ name = "DiagnosticSignHint", text = "⚑" })
-	sign({ name = "DiagnosticSignInfo", text = "" })
--- test
+  local sign = function(opts)
+      vim.fn.sign_define(opts.name, {
+        texthl = opts.name,
+        text = opts.text,
+        numhl = "",
+      })
+    end
+    sign({ name = "DiagnosticSignError", text = "✘" })
+    sign({ name = "DiagnosticSignWarn", text = "" })
+    sign({ name = "DiagnosticSignHint", text = "⚑" })
+    sign({ name = "DiagnosticSignInfo", text = "" })
 	vim.diagnostic.config({
 		virtual_text = true,
 		-- virtual_text = false,
@@ -300,7 +298,6 @@ local sign = function(opts)
 	})
   end,
 }
-
 
 local spec={
   tree,
