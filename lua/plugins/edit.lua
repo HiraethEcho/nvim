@@ -116,7 +116,7 @@ vim.keymap.set('v', '<C-e>', ":lua require('markdowny').code()<cr>", { buffer = 
     dependencies = "nvim-treesitter/nvim-treesitter",
     -- ft={'md','markdown'},
     config = true, -- or `opts = {}`
-  }
+  },
 }
 
 local spec={
