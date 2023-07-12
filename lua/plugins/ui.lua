@@ -82,7 +82,8 @@ local line={
         }
       },
       sections = {
-        lualine_a = {
+        lualine_a={'mode'},
+        lualine_b = {
           {
             'filename',
             file_status = true,      -- Displays file status (readonly status, modified status)
@@ -101,13 +102,8 @@ local line={
             }
           },
         },
-        lualine_b = {
-          'branch',
-          'diff',
-        },
-        -- lualine_c = {'g:coc_status'},
-        lualine_c = {'diff'},
-        lualine_x = {'filetype'},
+        lualine_c = {'branch','diff'},
+        lualine_x = {'selectioncount','filetype','filesize'},
         -- lualine_y = {'progress','location'},
         -- lualine_z = {'location'}
       },
@@ -169,7 +165,7 @@ local line={
         },
         lualine_c = {},
 
-        lualine_x = {},
+        lualine_x = {'windows'},
         lualine_y = {
           {
             'tabs',

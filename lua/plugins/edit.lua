@@ -11,7 +11,7 @@ local tools={
   {
     "godlygeek/tabular",
     keys={
-      {"<leader>t",":Tabularize /",mode="v"},
+      {"<leader>t",":Tabularize /",mode="v",desc='tabularize'},
     },
   },
   {
@@ -73,10 +73,40 @@ local hop ={
   end,
 }
 
+local md={
+  {"ellisonleao/glow.nvim", config = true, cmd = "Glow"},
+  {
+    "gaoDean/autolist.nvim",
+    ft = {
+        "markdown",
+        "text",
+        "tex",
+        "plaintex",
+        "norg",
+    },
+
+    keys={
+      {'o', "o<cmd>AutolistNewBullet<cr>"},
+      {'O', "O<cmd>AutolistNewBulletBefore<cr>"},
+      { "X", "<cmd>AutolistToggleCheckbox<cr><CR>"},
+      {mode="i", "<c-l>", "<cmd>AutolistTab<cr>"},
+      {mode="i", "<c-h>", "<cmd>AutolistShiftTab<cr>"},
+      {mode="i", "<c-o>", "<CR><cmd>AutolistNewBullet<cr>"},
+      {mode="i", "<c-O>", "<CR><cmd>AutolistNewBulletBefore<cr>"},
+    },
+    config = function()
+      require("autolist").setup()
+      vim.keymap.set("n", "<leader>ii", require("autolist").cycle_next_dr, { expr = true })
+      vim.keymap.set("n", "<leader>iI", require("autolist").cycle_prev_dr, { expr = true })
+      end,
+  },
+}
+
 local spec={
   tools,
   hop,
   todo,
+  md,
 }
 
 return spec

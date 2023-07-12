@@ -49,134 +49,109 @@ local md = {
   end,
 }
 
-local knapnvim={
-  -- lazy = false,
-  -- ft={"latex","tex"},
-  cmd="KnapProcess",
-  "frabjous/knap",
-  config=function ()
-    local gknapsettings = {
-      textopdfviewerlaunch= "sioyek --new-window %outputfile%",
-      -- mdoutputext = "html",
-      textopdfforwardjump= "sioyek --reuse-window --forward-search-file %srcfile% --forward-search-line %line% %outputfile%",
-      texoutputext = "pdf",
-      textopdf = "pdflatex -synctex=1 -halt-on-error -interaction=batchmode %docroot%",
-      textopdfviewerrefresh = "kill -HUP %pid%",
-      htmltohtmlviewerlaunch= "live-server --quiet --browser=surf --open=%outputfile% --watch=%outputfile% --wait=800",
-      htmltohtmlviewerrefresh= "none",
-      -- mdtohtmlviewerlaunch= "live-server --quiet --browser=microsoft-edge-beta --open=%outputfile% --watch=%outputfile% --wait=800",
-      mdtohtmlviewerrefresh= "none",
-    }
-    vim.g.knap_settings = gknapsettings
 
-    vim.api.nvim_create_user_command('KnapProcess',require('knap').process_once,{})
-    vim.api.nvim_create_user_command('KnapCloseViewer',require('knap').close_viewer,{})
-    vim.api.nvim_create_user_command('KnapToggleAutoPreviewing', require('knap').toggle_autopreviewing,{})
-    vim.api.nvim_create_user_command('KnapJumpForward',require('knap').forward_jump,{})
-  end
-}
 local mkdnflow={
-'jakewvincent/mkdnflow.nvim',
-cmd={"Mkdnflow"},
-lazy=false,
-config=function()
-  require('mkdnflow').setup({
-  modules = {
-      bib = true,
-      buffers = true,
-      conceal = true,
-      cursor = true,
-      folds = true,
-      links = true,
-      lists = true,
-      maps = true,
-      paths = true,
-      tables = true,
-      yaml = false
-  },
-  -- filetypes = {md = true, rmd = true, markdown = true},
-  create_dirs = true,             
-  perspective = {
-      priority = 'first',
-      fallback = 'current',
-      root_tell = false,
-      nvim_wd_heel = false,
-      update = true
-  },    
-  wrap = false,
-  bib = {
-      default_path = nil,
-      find_in_root = true
-  },
-  silent = false,
-  links = {
-      style = 'markdown',
-      conceal = false,
-      context = 0,
-      implicit_extension = nil,
-      transform_implicit = false,
-      transform_explicit = function(text)
+  'jakewvincent/mkdnflow.nvim',
+  cmd={"Mkdnflow"},
+  lazy=false,
+  config=function()
+    require('mkdnflow').setup({
+      modules = {
+        bib = true,
+        buffers = true,
+        conceal = true,
+        cursor = true,
+        folds = true,
+        links = true,
+        lists = true,
+        maps = true,
+        paths = true,
+        tables = true,
+        yaml = false
+      },
+      -- filetypes = {md = true, rmd = true, markdown = true},
+      create_dirs = true,             
+      perspective = {
+        priority = 'first',
+        fallback = 'current',
+        root_tell = false,
+        nvim_wd_heel = false,
+        update = true
+      },    
+      wrap = false,
+      bib = {
+        default_path = nil,
+        find_in_root = true
+      },
+      silent = false,
+      links = {
+        style = 'markdown',
+        conceal = false,
+        context = 0,
+        implicit_extension = nil,
+        transform_implicit = false,
+        transform_explicit = function(text)
           text = text:gsub(" ", "-")
           text = text:lower()
           text = os.date('%Y-%m-%d_')..text
           return(text)
-      end
-  },
-  to_do = {
-      symbols = {' ', '-', 'X'},
-      update_parents = true,
-      not_started = ' ',
-      in_progress = '-',
-      complete = 'X'
-  },
-  tables = {
-      trim_whitespace = true,
-      format_on_move = true,
-      auto_extend_rows = false,
-      auto_extend_cols = false
-  },
-  yaml = {
-      bib = { override = false }
-  },
-  mappings = {
-      -- MkdnEnter = {{'n', 'v', 'i'}, '<CR>'},
-      MkdnEnter = {'n', '<CR>'},
-      MkdnTab = true,
-      MkdnSTab = true,
-      MkdnNextLink = {'n', '<Tab>'},
-      MkdnPrevLink = {'n', '<S-Tab>'},
-      MkdnNextHeading = {'n', ']]'},
-      MkdnPrevHeading = {'n', '[['},
-      MkdnGoBack = {'n', '<BS>'},
-      MkdnGoForward = {'n', '<Del>'},
-      MkdnFollowLink = false, -- see MkdnEnter
-      MkdnCreateLink = false, -- see MkdnEnter
-      MkdnCreateLinkFromClipboard = {{'n', 'v'}, '<leader>p'}, -- see MkdnEnter
-      MkdnDestroyLink = {'n', '<leader><CR>'},
-      MkdnMoveSource = {'n', '<F2>'},
-      MkdnYankAnchorLink = {'n', 'ya'},
-      MkdnYankFileAnchorLink = {'n', 'yfa'},
-      MkdnIncreaseHeading = {'n', '+'},
-      MkdnDecreaseHeading = {'n', '-'},
-      MkdnToggleToDo = {{'n', 'v'}, '<C-Space>'},
-      MkdnNewListItem = false,
-      MkdnNewListItemBelowInsert = {'n', 'o'},
-      MkdnNewListItemAboveInsert = {'n', 'O'},
-      MkdnExtendList = false,
-      MkdnUpdateNumbering = {'n', '<leader>nn'},
-      MkdnTableNextCell = {'i', '<Tab>'},
-      MkdnTablePrevCell = {'i', '<S-Tab>'},
-      MkdnTableNextRow = false,
-      MkdnTablePrevRow = {'i', '<M-CR>'},
-      MkdnTableNewRowBelow = {'n', '<leader>ir'},
-      MkdnTableNewRowAbove = {'n', '<leader>iR'},
-      MkdnTableNewColAfter = {'n', '<leader>ic'},
-      MkdnTableNewColBefore = {'n', '<leader>iC'},
-      MkdnFoldSection = {'n', '<leader>f'},
-      MkdnUnfoldSection = {'n', '<leader>F'}
-  }
-})
-end,
+        end
+      },
+      to_do = {
+        symbols = {' ', '-', 'X'},
+        update_parents = true,
+        not_started = ' ',
+        in_progress = '-',
+        complete = 'X'
+      },
+      tables = {
+        trim_whitespace = true,
+        format_on_move = true,
+        auto_extend_rows = false,
+        auto_extend_cols = false
+      },
+      yaml = {
+        bib = { override = false }
+      },
+      mappings = {
+        -- MkdnEnter = {{'n', 'v', 'i'}, '<CR>'},
+        MkdnEnter = {'n', '<CR>'},
+        MkdnTab = true,
+        MkdnSTab = true,
+        MkdnNextLink = {'n', '<Tab>'},
+        MkdnPrevLink = {'n', '<S-Tab>'},
+        MkdnNextHeading = {'n', ']]'},
+        MkdnPrevHeading = {'n', '[['},
+        MkdnGoBack = {'n', '<BS>'},
+        MkdnGoForward = {'n', '<Del>'},
+        MkdnFollowLink = false, -- see MkdnEnter
+        MkdnCreateLink = false, -- see MkdnEnter
+        MkdnCreateLinkFromClipboard = {{'n', 'v'}, '<leader>p'}, -- see MkdnEnter
+        MkdnDestroyLink = {'n', '<leader><CR>'},
+        MkdnMoveSource = {'n', '<F2>'},
+        MkdnYankAnchorLink = {'n', 'ya'},
+        MkdnYankFileAnchorLink = {'n', 'yfa'},
+        MkdnIncreaseHeading = {'n', '+'},
+        MkdnDecreaseHeading = {'n', '-'},
+        MkdnToggleToDo = {{'n', 'v'}, '<C-Space>'},
+        MkdnNewListItem = false,
+        MkdnNewListItemBelowInsert = {'n', 'o'},
+        MkdnNewListItemAboveInsert = {'n', 'O'},
+        MkdnExtendList = false,
+        MkdnUpdateNumbering = {'n', '<leader>nn'},
+        MkdnTableNextCell = {'i', '<Tab>'},
+        MkdnTablePrevCell = {'i', '<S-Tab>'},
+        MkdnTableNextRow = false,
+        MkdnTablePrevRow = {'i', '<M-CR>'},
+        MkdnTableNewRowBelow = {'n', '<leader>ir'},
+        MkdnTableNewRowAbove = {'n', '<leader>iR'},
+        MkdnTableNewColAfter = {'n', '<leader>ic'},
+        MkdnTableNewColBefore = {'n', '<leader>iC'},
+        MkdnFoldSection = {'n', '<leader>f'},
+        MkdnUnfoldSection = {'n', '<leader>F'}
+      }
+    })
+  end,
 }
 
 local spec={
@@ -185,4 +160,5 @@ local spec={
   knapnvim,
   -- mkdnflow,
 }
+
 return spec
