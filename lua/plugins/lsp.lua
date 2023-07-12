@@ -41,7 +41,7 @@ local tree={
   config=function()
     require'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all" (the five listed parsers should always be installed)
-      ensure_installed = { "c", "lua", "latex","markdown"},
+      ensure_installed = { "c", "lua", "latex","markdown","yaml"},
       fold={
         enable=true,
       },
@@ -104,6 +104,7 @@ local lspconfig={
     local servers = {
       "lua_ls",
       "html",
+      "yamlls",
       "texlab",
       "grammarly",
       "prosemd_lsp",
