@@ -98,8 +98,25 @@ local md={
       require("autolist").setup()
       vim.keymap.set("n", "<leader>ii", require("autolist").cycle_next_dr, { expr = true })
       vim.keymap.set("n", "<leader>iI", require("autolist").cycle_prev_dr, { expr = true })
-      end,
+    end,
   },
+  {
+    'antonk52/markdowny.nvim',
+    ft={'md','markdown'},
+    config = function()
+      require('markdowny').setup()
+vim.keymap.set('v', '<C-b>', ":lua require('markdowny').bold()<cr>", { buffer = 0 })
+vim.keymap.set('v', '<C-i>', ":lua require('markdowny').italic()<cr>", { buffer = 0 })
+vim.keymap.set('v', '<C-k>', ":lua require('markdowny').link()<cr>", { buffer = 0 })
+vim.keymap.set('v', '<C-e>', ":lua require('markdowny').code()<cr>", { buffer = 0 })
+    end
+  },
+  {
+    'lukas-reineke/headlines.nvim',
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    -- ft={'md','markdown'},
+    config = true, -- or `opts = {}`
+  }
 }
 
 local spec={

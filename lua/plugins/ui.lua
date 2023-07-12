@@ -319,6 +319,11 @@ local hlchunk={
   event = "BufReadPost",
   init = function()
     require('hlchunk').setup({
+      exclude_filetypes = {
+        aerial = true,
+        dashboard = true,
+        glow = true,
+      },
       chunk = {
         enable = true,
         use_treesitter = true,
