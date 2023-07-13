@@ -89,6 +89,9 @@ local whichkey={
       f = {
         name = "find", -- optional group name
       },
+      o={
+        name="obsidian",
+      },
       g={
         name="git",
       },

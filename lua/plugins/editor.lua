@@ -53,7 +53,7 @@ local md = {
 local mkdnflow={
   'jakewvincent/mkdnflow.nvim',
   cmd={"Mkdnflow"},
-  lazy=false,
+  -- lazy=false,
   config=function()
     require('mkdnflow').setup({
       modules = {
@@ -154,10 +154,61 @@ local mkdnflow={
   end,
 }
 
+local obsidian ={
+  "epwalsh/obsidian.nvim",
+  -- lazy=false,
+  event = { "BufRead " .. vim.fn.expand "~" .. "/obsidian/**.md" },
+  keys ={
+
+    { "<leader>oo" , "<cmd>ObsidianOpen<cr>" , desc = "Open Obsidian" } ,
+    { "<leader>os" , "<cmd>ObsidianSearch<cr>" , desc = "Search in Obsidian" } ,
+    { "<leader>ot" , "<cmd>ObsidianTemplate<cr>" , desc = "Templates in Obsidian" } ,
+    { "<leader>ob" , "<cmd>ObsidianBacklink<cr>" , desc = "Backlink" } ,
+    { "<leader>ol" , "<cmd>ObsidianFollowLink<cr>" , desc = "Follow link" } ,
+  },
+  cmd = {
+    "ObsidianOpen",
+  },
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+  },
+  opts = {
+    dir = "~/obsidian/",  -- no need to call 'vim.fn.expand' here
+    -- Optional, if you keep notes in a specific subdirectory of your vault.
+    notes_subdir = "notes",
+    daily_notes = {
+      folder = "dailies",
+      date_format = "%Y-%m-%d",
+    },
+    -- Optional, completion.
+    completion = {
+      -- If using nvim-cmp, otherwise set to false
+      nvim_cmp = true,
+      -- Trigger completion at 2 chars
+      min_chars = 2,
+      new_notes_location = "current_dir"
+    },
+    -- Optional, set to true if you don't want Obsidian to manage frontmatter.
+    disable_frontmatter = true,
+    templates = {
+      subdir = "templates",
+      date_format = "%Y-%m-%d",
+      time_format = "%H:%M",
+    },
+    open_app_foreground = true,
+    finder = "telescope.nvim",
+  },
+  config = function(_, opts)
+    require("obsidian").setup(opts)
+    -- see also: 'follow_url_func' config option above.
+  end,
+}
+
 local spec={
-  tex,
+  -- tex,
   md,
-  knapnvim,
+  obsidian,
+  -- knapnvim,
   -- mkdnflow,
 }
 

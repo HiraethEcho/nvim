@@ -102,7 +102,11 @@ local line={
             }
           },
         },
-        lualine_c = {'branch','diff'},
+        lualine_c = {
+          'branch',
+          'diff',
+          'diagnostics',
+        },
         lualine_x = {'selectioncount','filetype','filesize'},
         -- lualine_y = {'progress','location'},
         -- lualine_z = {'location'}
@@ -167,6 +171,9 @@ local line={
 
         lualine_x = {'windows'},
         lualine_y = {
+          'windows',
+        },
+        lualine_z = {
           {
             'tabs',
             max_length = vim.o.columns / 3, -- Maximum width of tabs component.
@@ -176,9 +183,9 @@ local line={
             mode = 2, -- 0: Shows tab_nr
             -- 1: Shows tab_name
             -- 2: Shows tab_nr + tab_name
-          }
+          },
+          session_name
         },
-        lualine_z = {session_name},
       },
       extensions = {}
     }
