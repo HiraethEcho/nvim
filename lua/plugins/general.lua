@@ -90,7 +90,7 @@ local whichkey={
         name = "find", -- optional group name
       },
       o={
-        name="obsidian",
+        name="md",
       },
       g={
         name="git",
@@ -98,16 +98,13 @@ local whichkey={
       l={
         name="lsp",
       },
-      -- t={
-        --   name="terminal",
-        -- },
-        h={
-          name="hunk",
-        },
+      h={
+        name="hunk",
       },
+    },
       { prefix = "<leader>" })
-    end,
-  }
+  end,
+}
 
   local miscellaneous={
     {

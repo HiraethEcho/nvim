@@ -76,39 +76,14 @@ local hop ={
 local md={
   {"ellisonleao/glow.nvim", config = true, cmd = "Glow"},
   {
-    "gaoDean/autolist.nvim",
-    ft = {
-        "markdown",
-        "text",
-        "tex",
-        "plaintex",
-        "norg",
-    },
-
-    keys={
-      {'o', "o<cmd>AutolistNewBullet<cr>"},
-      {'O', "O<cmd>AutolistNewBulletBefore<cr>"},
-      { "X", "<cmd>AutolistToggleCheckbox<cr><CR>"},
-      {mode="i", "<c-l>", "<cmd>AutolistTab<cr>"},
-      {mode="i", "<c-h>", "<cmd>AutolistShiftTab<cr>"},
-      {mode="i", "<c-o>", "<CR><cmd>AutolistNewBullet<cr>"},
-      {mode="i", "<c-O>", "<CR><cmd>AutolistNewBulletBefore<cr>"},
-    },
-    config = function()
-      require("autolist").setup()
-      vim.keymap.set("n", "<leader>ii", require("autolist").cycle_next_dr, { expr = true })
-      vim.keymap.set("n", "<leader>iI", require("autolist").cycle_prev_dr, { expr = true })
-    end,
-  },
-  {
     'antonk52/markdowny.nvim',
     ft={'md','markdown'},
     config = function()
       require('markdowny').setup()
-vim.keymap.set('v', '<C-b>', ":lua require('markdowny').bold()<cr>", { buffer = 0 })
-vim.keymap.set('v', '<C-i>', ":lua require('markdowny').italic()<cr>", { buffer = 0 })
-vim.keymap.set('v', '<C-k>', ":lua require('markdowny').link()<cr>", { buffer = 0 })
-vim.keymap.set('v', '<C-e>', ":lua require('markdowny').code()<cr>", { buffer = 0 })
+        vim.keymap.set('v', '<C-b>', ":lua require('markdowny').bold()<cr>", { buffer = 0 })
+        vim.keymap.set('v', '<C-i>', ":lua require('markdowny').italic()<cr>", { buffer = 0 })
+        vim.keymap.set('v', '<C-k>', ":lua require('markdowny').link()<cr>", { buffer = 0 })
+        vim.keymap.set('v', '<C-e>', ":lua require('markdowny').code()<cr>", { buffer = 0 })
     end
   },
   {
@@ -123,7 +98,7 @@ local spec={
   tools,
   hop,
   todo,
-  md,
+  -- md,
 }
 
 return spec

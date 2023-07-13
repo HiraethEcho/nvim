@@ -984,3 +984,28 @@ local trans = {
             -- your configuration there
         }
     }
+local autolist = {
+    "gaoDean/autolist.nvim",
+    ft = {
+        "markdown",
+        "text",
+        "tex",
+        "plaintex",
+        "norg",
+    },
+
+    keys={
+      {'o', "o<cmd>AutolistNewBullet<cr>"},
+      {'O', "O<cmd>AutolistNewBulletBefore<cr>"},
+      { "X", "<cmd>AutolistToggleCheckbox<cr><CR>"},
+      {mode="i", "<c-l>", "<cmd>AutolistTab<cr>"},
+      {mode="i", "<c-h>", "<cmd>AutolistShiftTab<cr>"},
+      {mode="i", "<c-o>", "<CR><cmd>AutolistNewBullet<cr>"},
+      {mode="i", "<c-O>", "<CR><cmd>AutolistNewBulletBefore<cr>"},
+    },
+    config = function()
+      require("autolist").setup()
+      vim.keymap.set("n", "<leader>ii", require("autolist").cycle_next_dr, { expr = true })
+      vim.keymap.set("n", "<leader>iI", require("autolist").cycle_prev_dr, { expr = true })
+    end,
+  },

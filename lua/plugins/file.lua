@@ -167,7 +167,7 @@ local neotree={
   config=function()
     require("neo-tree").setup({
       enable_git_status = true,
-      enable_diagnostics = true,
+      enable_diagnostics = false,
       default_component_configs = {
         container = {
           enable_character_fade = true

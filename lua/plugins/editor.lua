@@ -31,8 +31,7 @@ local tex = {
   end,
 }
 
-
-local md = {
+local mdpre = {
   "iamcco/markdown-preview.nvim",
   build = "cd app && npm install",
   ft = { "markdown" },
@@ -49,10 +48,12 @@ local md = {
   end,
 }
 
-
 local mkdnflow={
   'jakewvincent/mkdnflow.nvim',
-  cmd={"Mkdnflow"},
+  ft = "markdown",
+  cmd={
+    "Mkdnflow",
+  },
   -- lazy=false,
   config=function()
     require('mkdnflow').setup({
@@ -61,23 +62,23 @@ local mkdnflow={
         buffers = true,
         conceal = true,
         cursor = true,
-        folds = true,
+        folds = false,
         links = true,
         lists = true,
         maps = true,
         paths = true,
         tables = true,
-        yaml = false
+        yaml = true
       },
-      -- filetypes = {md = true, rmd = true, markdown = true},
-      create_dirs = true,             
+      filetypes = {md = true, rmd = true, markdown = true},
+      create_dirs = true,
       perspective = {
-        priority = 'first',
+        priority = 'root',
         fallback = 'current',
-        root_tell = false,
+        root_tell = 'README.md',
         nvim_wd_heel = false,
         update = true
-      },    
+      },
       wrap = false,
       bib = {
         default_path = nil,
@@ -93,7 +94,7 @@ local mkdnflow={
         transform_explicit = function(text)
           text = text:gsub(" ", "-")
           text = text:lower()
-          text = os.date('%Y-%m-%d_')..text
+          -- text = text..os.date('_%Y-%m-%d')
           return(text)
         end
       },
@@ -114,41 +115,44 @@ local mkdnflow={
         bib = { override = false }
       },
       mappings = {
-        -- MkdnEnter = {{'n', 'v', 'i'}, '<CR>'},
-        MkdnEnter = {'n', '<CR>'},
-        MkdnTab = true,
-        MkdnSTab = true,
-        MkdnNextLink = {'n', '<Tab>'},
-        MkdnPrevLink = {'n', '<S-Tab>'},
-        MkdnNextHeading = {'n', ']]'},
-        MkdnPrevHeading = {'n', '[['},
-        MkdnGoBack = {'n', '<BS>'},
-        MkdnGoForward = {'n', '<Del>'},
-        MkdnFollowLink = false, -- see MkdnEnter
-        MkdnCreateLink = false, -- see MkdnEnter
-        MkdnCreateLinkFromClipboard = {{'n', 'v'}, '<leader>p'}, -- see MkdnEnter
-        MkdnDestroyLink = {'n', '<leader><CR>'},
-        MkdnMoveSource = {'n', '<F2>'},
-        MkdnYankAnchorLink = {'n', 'ya'},
-        MkdnYankFileAnchorLink = {'n', 'yfa'},
-        MkdnIncreaseHeading = {'n', '+'},
-        MkdnDecreaseHeading = {'n', '-'},
-        MkdnToggleToDo = {{'n', 'v'}, '<C-Space>'},
-        MkdnNewListItem = false,
-        MkdnNewListItemBelowInsert = {'n', 'o'},
-        MkdnNewListItemAboveInsert = {'n', 'O'},
-        MkdnExtendList = false,
-        MkdnUpdateNumbering = {'n', '<leader>nn'},
-        MkdnTableNextCell = {'i', '<Tab>'},
-        MkdnTablePrevCell = {'i', '<S-Tab>'},
-        MkdnTableNextRow = false,
-        MkdnTablePrevRow = {'i', '<M-CR>'},
-        MkdnTableNewRowBelow = {'n', '<leader>ir'},
-        MkdnTableNewRowAbove = {'n', '<leader>iR'},
-        MkdnTableNewColAfter = {'n', '<leader>ic'},
-        MkdnTableNewColBefore = {'n', '<leader>iC'},
-        MkdnFoldSection = {'n', '<leader>f'},
-        MkdnUnfoldSection = {'n', '<leader>F'}
+        MkdnTab                     = {'i','<c-l>'},
+        MkdnSTab                    = {'i','<c-h>'},
+        MkdnNextLink                = {'n', ']l'},
+        MkdnPrevLink                = {'n', '[l'},
+        MkdnFollowLink              = {{'n','v'},'<leader>oa'},
+        MkdnCreateLink              = {'v','<leader>oA'},
+        MkdnCreateLinkFromClipboard = {{'n', 'v'}, '<leader>op'},
+        MkdnDestroyLink             = {'n', '<leader>od'},
+        MkdnMoveSource              = {'n', '<leader>om'},
+        MkdnYankAnchorLink          = {'n', 'ya'},
+        MkdnYankFileAnchorLink      = {'n', 'yfa'},
+        MkdnIncreaseHeading         = {'n', '-'},
+        MkdnDecreaseHeading         = {'n','='},
+        MkdnToggleToDo              = {{'n'}, 'X'},
+        MkdnNewListItem             = {'i','<c-o>'},
+        MkdnNewListItemBelowInsert  = {'n', 'o'},
+        MkdnNewListItemAboveInsert  = {'n', 'O'},
+        MkdnUpdateNumbering         = {'n', '<leader>on'},
+        MkdnTableNextRow            = {'i', '<c-j>'},
+        MkdnTablePrevRow            = {'i', '<c-k>'},
+        MkdnTableNewRowBelow        = {'n', '<leader>oJ'},
+        MkdnTableNewRowAbove        = {'n', '<leader>oK'},
+        MkdnTableNewColAfter        = {'n', '<leader>oL'},
+        MkdnTableNewColBefore       = {'n', '<leader>oH'},
+        -- MkdnNextHeading             = {'n', ']]'},
+        -- MkdnPrevHeading             = {'n', '[['},
+        -- MkdnGoBack                  = {'n', '<BS>'},
+        -- MkdnGoForward               = {'n', '<Del>'},
+        MkdnEnter                   = false,
+        MkdnNextHeading             = false,
+        MkdnPrevHeading             = false,
+        MkdnGoBack                  = false,
+        MkdnGoForward               = false,
+        MkdnFoldSection             = false,
+        MkdnExtendList              = false,
+        MkdnTableNextCell           = false,
+        MkdnTablePrevCell           = false,
+        MkdnUnfoldSection           = false,
       }
     })
   end,
@@ -159,12 +163,11 @@ local obsidian ={
   -- lazy=false,
   event = { "BufRead " .. vim.fn.expand "~" .. "/obsidian/**.md" },
   keys ={
-
-    { "<leader>oo" , "<cmd>ObsidianOpen<cr>" , desc = "Open Obsidian" } ,
-    { "<leader>os" , "<cmd>ObsidianSearch<cr>" , desc = "Search in Obsidian" } ,
-    { "<leader>ot" , "<cmd>ObsidianTemplate<cr>" , desc = "Templates in Obsidian" } ,
-    { "<leader>ob" , "<cmd>ObsidianBacklink<cr>" , desc = "Backlink" } ,
-    { "<leader>ol" , "<cmd>ObsidianFollowLink<cr>" , desc = "Follow link" } ,
+    { "<leader>oo" , "<cmd>ObsidianOpen<cr>"       , desc = "Open Obsidian"         } ,
+    { "<leader>os" , "<cmd>ObsidianSearch<cr>"     , desc = "Search in Obsidian"    } ,
+    { "<leader>ot" , "<cmd>ObsidianTemplate<cr>"   , desc = "Templates in Obsidian" } ,
+    { "<leader>ob" , "<cmd>ObsidianBacklink<cr>"   , desc = "Backlink"              } ,
+    { "<leader>ol" , "<cmd>ObsidianFollowLink<cr>" , desc = "Follow link"           } ,
   },
   cmd = {
     "ObsidianOpen",
@@ -206,10 +209,9 @@ local obsidian ={
 
 local spec={
   -- tex,
-  md,
+  mdpre,
   obsidian,
-  -- knapnvim,
-  -- mkdnflow,
+  mkdnflow,
 }
 
 return spec
