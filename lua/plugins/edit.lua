@@ -98,7 +98,7 @@ local spec={
   tools,
   hop,
   todo,
-  -- md,
+  md,
 }
 
 return spec

@@ -65,71 +65,10 @@ local tree={
   end,
 }
 
-local lspconfig={
-  "neovim/nvim-lspconfig",
-  -- lazy=false,
-  -- event = { "BufReadPre", "BufNewFile" },
-  cmd="LspStart",
-  keys={
-    { "<leader>ll", "<cmd>LspStart<cr>", desc = "Start lsp" },
-  },
-  dependencies = {
-    -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-    {
-      "SmiteshP/nvim-navbuddy",
-      keys={
-        { "<leader>j", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
-      },
-      dependencies = {
-        "SmiteshP/nvim-navic",
-        "MunifTanjim/nui.nvim"
-      },
-      opts = { lsp = { auto_attach = true } }
-    },
-    {"folke/neodev.nvim", opts = {} },
-    "mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    'nvim-treesitter/nvim-treesitter',
-  },
-  config=function()
-    -- require'lspconfig'.texlab.setup{}
-    -- require'lspconfig'.grammarly.setup{}
-    -- require'lspconfig'.prosemd_lsp.setup{}
-    -- require'lspconfig'.marksman.setup{}
-    -- require'lspconfig'.remark_ls.setup{}
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
-    local lsp_defaults = require('lspconfig').util.default_config
-    lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, capabilities)
-
-    local servers = {
-      "html",
-      "yamlls",
-      "texlab",
-      "typst_lsp",
-      "grammarly",
-      -- "prosemd_lsp",
-      "marksman",
-      -- "remark_ls",
-      "clangd",
-    }
-
-    for _, lsp in pairs(servers) do
-      require'lspconfig'[lsp].setup({
-        on_attach = on_attach,
-      })
-    end
-
-    require'lspconfig'.lua_ls.setup{
-      settings={
-        checkThirdParty = false,
-      },
-    }
-  end,
-}
-
 local lsp_server={
   {
     "williamboman/mason.nvim",
+    lazy=false,
     -- cmd = "Mason",
     build = ":MasonUpdate" ,-- :MasonUpdate updates registry contents
     config=function()
@@ -147,11 +86,61 @@ local lsp_server={
 
   {
     "williamboman/mason-lspconfig.nvim",
-    -- lazy=false,
+    lazy=false,
     config=function()
       require("mason-lspconfig").setup()
     end,
   },
+}
+
+
+local lspconfig = {
+  lazy =false,
+  "neovim/nvim-lspconfig",
+  -- lazy=false,
+  -- event = { "BufReadPre", "BufNewFile" },
+  cmd="LspStart",
+  keys={
+    { "<leader>ll", "<cmd>LspStart<cr>", desc = "Start lsp" },
+  },
+  dependencies = {
+    -- "folke/neodev.nvim",
+    -- "mason.nvim",
+    -- "williamboman/mason-lspconfig.nvim",
+    'nvim-treesitter/nvim-treesitter',
+  },
+  config=function()
+    -- require'lspconfig'.texlab.setup{}
+    -- require'lspconfig'.grammarly.setup{}
+    -- require'lspconfig'.marksman.setup{}
+    -- require'lspconfig'.clangd.setup{}
+    -- require'lspconfig'.yamlls.setup{}
+    require'lspconfig'.lua_ls.setup{
+      settings={
+        checkThirdParty = false,
+      },
+    }
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local lsp_defaults = require('lspconfig').util.default_config
+    -- lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, capabilities)
+    local servers = {
+      -- "html",
+      "yamlls",
+      "texlab",
+      -- "typst_lsp",
+      -- "grammarly",
+      -- "prosemd_lsp",
+      "marksman",
+      -- "remark_ls",
+      "clangd",
+    }
+    for _, lsp in pairs(servers) do
+      require'lspconfig'[lsp].setup({
+        on_attach = on_attach,
+        -- capabilities = capabilities,
+      })
+    end
+  end,
 }
 
 local lspsaga = {
@@ -317,12 +306,26 @@ local ltex = {
     end
 }
 
+local nav = {
+  "SmiteshP/nvim-navbuddy",
+  keys={
+    { "<leader>j", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
+  },
+  cmd = "Navbuddy",
+  dependencies = {
+    "SmiteshP/nvim-navic",
+    "MunifTanjim/nui.nvim",
+    "neovim/nvim-lspconfig",
+  },
+  opts = { lsp = { auto_attach = true } }
+}
+
 local spec={
   tree,
   lsp_server,
   lspconfig,
   lspsaga,
-  -- ltex,
+  nav,
 }
 
 return spec
