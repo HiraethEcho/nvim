@@ -68,8 +68,8 @@ local tree={
 local lsp_server={
   {
     "williamboman/mason.nvim",
-    lazy=false,
-    -- cmd = "Mason",
+    -- lazy=false,
+    cmd = "Mason",
     build = ":MasonUpdate" ,-- :MasonUpdate updates registry contents
     config=function()
       require("mason").setup({
@@ -86,7 +86,7 @@ local lsp_server={
 
   {
     "williamboman/mason-lspconfig.nvim",
-    lazy=false,
+    -- lazy=false,
     config=function()
       require("mason-lspconfig").setup()
     end,
@@ -95,7 +95,6 @@ local lsp_server={
 
 
 local lspconfig = {
-  lazy =false,
   "neovim/nvim-lspconfig",
   -- lazy=false,
   -- event = { "BufReadPre", "BufNewFile" },
@@ -105,8 +104,8 @@ local lspconfig = {
   },
   dependencies = {
     -- "folke/neodev.nvim",
-    -- "mason.nvim",
-    -- "williamboman/mason-lspconfig.nvim",
+    "mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
     'nvim-treesitter/nvim-treesitter',
   },
   config=function()
@@ -120,9 +119,8 @@ local lspconfig = {
         checkThirdParty = false,
       },
     }
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
-    local lsp_defaults = require('lspconfig').util.default_config
-    -- lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, capabilities)
+    -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    -- local lsp_defaults = require('lspconfig').util.default_config
     local servers = {
       -- "html",
       "yamlls",
@@ -289,22 +287,6 @@ local lspsaga = {
   end,
 }
 
-local ltex = {
-    "barreiroleo/ltex_extra.nvim",
-    ft = { "markdown", "tex" },
-    dependencies = { "neovim/nvim-lspconfig" },
-    -- yes, you can use the opts field, just I'm showing the setup explicitly
-    config = function()
-        require("ltex_extra").setup {
-            server_opts = {
-                on_attach=on_attach,
-                settings = {
-                    ltex = {}
-                }
-            },
-        }
-    end
-}
 
 local nav = {
   "SmiteshP/nvim-navbuddy",

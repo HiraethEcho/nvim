@@ -208,7 +208,7 @@ local obsidian ={
 }
 
 local spec={
-  -- tex,
+  tex,
   mdpre,
   obsidian,
   mkdnflow,
