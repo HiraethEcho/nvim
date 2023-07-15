@@ -73,10 +73,10 @@ local mkdnflow={
       filetypes = {md = true, rmd = true, markdown = true},
       create_dirs = true,
       perspective = {
-        priority = 'root',
+        priority = 'current',
         fallback = 'current',
-        root_tell = 'README.md',
-        nvim_wd_heel = false,
+        root_tell = false,
+        nvim_wd_heel = true,
         update = true
       },
       wrap = false,
@@ -210,7 +210,7 @@ local obsidian ={
 local spec={
   tex,
   mdpre,
-  obsidian,
+  -- obsidian,
   mkdnflow,
 }
 

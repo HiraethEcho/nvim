@@ -375,7 +375,7 @@ local possession ={
 
 local spec ={
   tele,
-  neotree,
+  -- neotree,
   possession,
 }
 

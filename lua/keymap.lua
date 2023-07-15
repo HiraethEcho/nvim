@@ -11,7 +11,6 @@ local term_opts = { silent = true }
 --   term_mode = "t",
 --   command_mode = "c",
 
--- general {{{ --
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
@@ -24,7 +23,6 @@ keymap("n", "U", "<C-r>", opts)
 keymap("n", "<C-s>", ":w<cr>", opts)
 keymap("n", "cd", ":cd %/..<cr>", opts)
 keymap("n","<leader>qq",":wa<cr>:quitall<cr>", opts)
--- }}} general --
 --
 -- modes {{{ --
 -- Normal --
@@ -89,29 +87,27 @@ keymap("n", "<C-t>", ":tabnew<CR>", opts)
 keymap("n", "<C-n>", "<C-W>T", opts)
 -- }}} buffer window and tab --
 
--- text {{{ --
--- Move text up and down
-keymap("v", "J", ":m .+1<CR>==gv", opts)
-keymap("v", "K", ":m .-2<CR>==gv", opts)
--- keymap("v", "p", '"_dP', opts)
 
--- Move text up and down
--- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
--- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
--- Visual Block --
--- Move text up and down
--- keymap("n","<C-x>","<C-v>",opts)
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
--- keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
--- keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
--- }}} text --
+local Util = require("config.util")
 
--- terminal {{{ --
--- function _G.set_terminal_keymaps()
---   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], term_opts)
---   vim.keymap.set('t', 'jk', [[<C-\><C-n>]], term_opts)
--- end
--- vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
--- }}} terminal --
+local function map(mode, lhs, rhs, opts)
+    opts = opts or {}
+    opts.silent = opts.silent ~= false
+    if opts.remap and not vim.g.vscode then
+      opts.remap = nil
+    end
+    vim.keymap.set(mode, lhs, rhs, opts)
+end
 
+
+map("n", "<leader>uw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
+map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
+map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
+local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
+map("n", "<leader>uc", function() Util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
+
+map("n", "<leader>G", function() Util.float_term({ "lazygit" }, {esc_esc = false, ctrl_hjkl = false}) end, { desc = "Lazygit (cwd)" })
+
+local lazyterm = function() Util.float_term("powershell", {esc_esc = false, ctrl_hjkl = false}) end
+map("n", "<leader>ft", lazyterm, { desc = "Terminal" })
