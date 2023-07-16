@@ -6,14 +6,8 @@ vim.cmd([[
     endif
 ]])
 
--- if vim.g.iswindows then
--- print("windows")
--- end
--- if  vim.g.islinux then
---   print("linux")
--- end
-
-require('opt')
-require('keymap')
-require('gui')
-require('lazynvim')
+require('config.options')
+require('config.lazy')
+require('config.keymaps')
+require('config.util')
+require('config.gui')

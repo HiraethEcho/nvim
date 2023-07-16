@@ -1,5 +1,5 @@
 local M = {}
--- local Util = require("lazy.core.util")
+local Util = require("lazy.core.util")
 
 -- local icons = require("config").icons.diagnostics
 M.icons = {
@@ -61,7 +61,7 @@ M.icons = {
 }
 
 function M.toggle(option, silent, values)
-local Util = require("lazy.core.util")
+-- local Util = require("lazy.core.util")
   if values then
     if vim.opt_local[option]:get() == values[1] then
       vim.opt_local[option] = values[2]
@@ -82,7 +82,7 @@ end
 
 local enabled = true
 function M.toggle_diagnostics()
-local Util = require("lazy.core.util")
+-- local Util = require("lazy.core.util")
   enabled = not enabled
   if enabled then
     vim.diagnostic.enable()
