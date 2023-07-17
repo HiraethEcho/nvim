@@ -1,4 +1,5 @@
-local tools={
+local vim = vim
+return {
   {
     "tpope/vim-commentary",
     event = "BufReadPost",
@@ -34,44 +35,39 @@ local tools={
     event="InsertEnter",
     config = function() require("nvim-autopairs").setup {} end
   },
-}
-
-local todo={
-  "folke/todo-comments.nvim",
-  dependencies = { "nvim-lua/plenary.nvim" },
-  keys={
-    {']t', function() require("todo-comments").jump_next() end, desc="Next todo comments",   mode={"n"}},
-    {'[t', function() require("todo-comments").jump_prev() end, desc="Previous todo comments",   mode={"n"}},
-    {']f', function() require("todo-comments").jump_next({keywords={"FIX","WARN"}}) end, desc="Next error/warning comments",   mode={"n"}},
-    {'[f', function() require("todo-comments").jump_prev({keywords={"FIX","WARN"}}) end, desc="Previous error/warning comments",   mode={"n"}},
-    {']q', function() require("todo-comments").jump_next({keywords={"QUES"}}) end, desc="Next question",   mode={"n"}},
-    {'[q', function() require("todo-comments").jump_prev({keywords={"QUES"}}) end, desc="Previous question",   mode={"n"}},
-    {']n', function() require("todo-comments").jump_next({keywords={"NOTE"}}) end, desc="Next question",   mode={"n"}},
-    {'[n', function() require("todo-comments").jump_prev({keywords={"NOTE"}}) end, desc="Previous question",   mode={"n"}},
-  },
-  cmd={"TodoLocList","TodoTelescope","TodoQuickFix"},
-  config = function ()
-    require("todo-comments").setup({
-      signs = true, -- show icons in the signs column
-      sign_priority = 8, -- sign priority
-      keywords = {
-        FIX = {
-          icon = " ", -- icon used for the sign, and in search results
-          color = "error", -- can be a hex color, or a named color (see below)
-          alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
-          -- signs = false, -- configure signs for some keywords individually
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys={
+      {']t', function() require("todo-comments").jump_next() end, desc="Next todo comments",   mode={"n"}},
+      {'[t', function() require("todo-comments").jump_prev() end, desc="Previous todo comments",   mode={"n"}},
+      {']f', function() require("todo-comments").jump_next({keywords={"FIX","WARN"}}) end, desc="Next error/warning comments",   mode={"n"}},
+      {'[f', function() require("todo-comments").jump_prev({keywords={"FIX","WARN"}}) end, desc="Previous error/warning comments",   mode={"n"}},
+      {']q', function() require("todo-comments").jump_next({keywords={"QUES"}}) end, desc="Next question",   mode={"n"}},
+      {'[q', function() require("todo-comments").jump_prev({keywords={"QUES"}}) end, desc="Previous question",   mode={"n"}},
+      {']n', function() require("todo-comments").jump_next({keywords={"NOTE"}}) end, desc="Next question",   mode={"n"}},
+      {'[n', function() require("todo-comments").jump_prev({keywords={"NOTE"}}) end, desc="Previous question",   mode={"n"}},
+    },
+    cmd={"TodoLocList","TodoTelescope","TodoQuickFix"},
+    config = function ()
+      require("todo-comments").setup({
+        signs = true, -- show icons in the signs column
+        sign_priority = 8, -- sign priority
+        keywords = {
+          FIX = {
+            icon = " ", -- icon used for the sign, and in search results
+            color = "error", -- can be a hex color, or a named color (see below)
+            alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+            -- signs = false, -- configure signs for some keywords individually
+          },
+          TODO = { icon = " ", color = "todo" },
+          QUES = { icon = " ", color = "ques" },
+          WARN = { icon = " ", color = "warning", alt = {"XXX" } },
+          NOTE = { icon = " ", color = "note"},
         },
-        TODO = { icon = " ", color = "todo" },
-        QUES = { icon = " ", color = "ques" },
-        WARN = { icon = " ", color = "warning", alt = {"XXX" } },
-        NOTE = { icon = " ", color = "note"},
-      },
-    })
-  end,
-}
-
-
-local md={
+      })
+    end,
+  },
   {"ellisonleao/glow.nvim", config = true, cmd = "Glow"},
   {
     'antonk52/markdowny.nvim',
@@ -84,18 +80,4 @@ local md={
         vim.keymap.set('v', '<C-e>', ":lua require('markdowny').code()<cr>", { buffer = 0 })
     end
   },
-  {
-    'lukas-reineke/headlines.nvim',
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    -- ft={'md','markdown'},
-    config = true, -- or `opts = {}`
-  },
 }
-
-local spec={
-  tools,
-  todo,
-  md,
-}
-
-return spec

@@ -11,12 +11,14 @@
 global !p
 
 import re
+
 def math():
 	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
 endglobal
 # }}} glob py #
 
+# return vim.fn['vimtex#syntax#in_mathzone']() == 1
 # chapters and sections {{{ #
 
 # template {{{ #
@@ -159,7 +161,7 @@ snippet dm "Math" bA
 $0
 endsnippet
 
-snippet $ "double dollar" wA
+snippet $ "double dollar" A
 \$${1:${VISUAL}}\$$0
 endsnippet
 
@@ -191,9 +193,9 @@ else:
 endsnippet
 
 # environment in math environment {{{ #
-context "math()"
+# context "math()"
 snippet xym "xymatrix" wA
-\xymatrix{
+\\xymatrix{
   $1& & \\\\
   & &
 }
@@ -201,7 +203,7 @@ endsnippet
 
 context "math()"
 snippet flip "flip" wA
-\xymatrix{
+\\xymatrix{
   X\ar[rd] \ar[rr]$1 & & Y\ar[ld]$2 \\\\
   & S &
 }
@@ -388,7 +390,7 @@ snippet __ "subscript" iA
 _{$1}$0
 endsnippet
 
-context "math()"
+# context "math()"
 snippet "([A-Za-z])(\d)" "auto subscript" irA
 `!p snip.rv = match.group(1)`_{`!p snip.rv= match.group(2)`}
 endsnippet
@@ -408,15 +410,15 @@ endsnippet
 # `
 # endsnippet
 
-context "math()"
+# context "math()"
 snippet "([A-Za-z\]}'])([A-Za-z])\2{1}" "auto subscript" irA
 `!p snip.rv = match.group(1)+'_{'+match.group(2)+'}'`
 endsnippet
 
 # context "math()"
-# snippet "([A-Za-z])(ii)" "auto subscript" irA
-# `!p snip.rv = match.group(1)`_{i}
-# endsnippet
+snippet "([A-Za-z])(ii)" "auto subscript" irA
+`!p snip.rv = match.group(1)`_{i}
+endsnippet
 
 # context "math()"
 # snippet pf "pushforward" iA
@@ -707,9 +709,6 @@ snippet Qdiv "Q-divisor" wA
 $\mathbb{Q}$-divisor
 endsnippet
 
-snippet Rdiv "R-divisor" wA
-$\mathbb{R}$-divisor
-endsnippet
 
 snippet lcd "log canonical divisor" w
 $(K_{X$1}+B)$$0

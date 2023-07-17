@@ -190,7 +190,7 @@ else:
 endsnippet
 
 # environment in math environment {{{ #
-context "math()"
+# context "math()"
 snippet xym "xymatrix" wA
 \xymatrix{
   $1& & \\\\
@@ -413,9 +413,9 @@ snippet "([A-Za-z\]}'])([A-Za-z])\2{1}" "auto subscript" irA
 endsnippet
 
 # context "math()"
-# snippet "([A-Za-z])(ii)" "auto subscript" irA
-# `!p snip.rv = match.group(1)`_{i}
-# endsnippet
+snippet "([A-Za-z])(ii)" "auto subscript" irA
+`!p snip.rv = match.group(1)`_{i}
+endsnippet
 
 # context "math()"
 # snippet pf "pushforward" iA
@@ -706,9 +706,6 @@ snippet Qdiv "Q-divisor" wA
 $\mathbb{Q}$-divisor
 endsnippet
 
-snippet Rdiv "R-divisor" wA
-$\mathbb{R}$-divisor
-endsnippet
 
 snippet lcd "log canonical divisor" w
 $(K_{X$1}+B)$$0

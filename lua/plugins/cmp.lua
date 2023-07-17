@@ -7,6 +7,7 @@ return{
     "f3fora/cmp-spell",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+    "hrsh7th/cmp-omni",
     "nvim-treesitter/nvim-treesitter",
     {
       "SirVer/ultisnips",
@@ -72,6 +73,12 @@ return{
         },
         { name = "path" },
         { name = "nvim_lua" },
+        {
+          name = 'omni',
+          option = {
+            -- disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' }
+          }
+        },
       }),
       experimental = {
         ghost_text = {
