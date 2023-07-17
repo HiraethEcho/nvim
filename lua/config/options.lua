@@ -1,3 +1,5 @@
+local vim = vim
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -54,21 +56,19 @@ opt.linebreak = true   -- companion to wrap, don't split words
 
 opt.listchars:append "eol:↴"
 opt.listchars:append "space:⋅"
-opt.listchars:append "eol:↴"
-opt.listchars:append "space:⋅"
 
-
-
-
--- vim.o.hidden = true -- 允许隐藏被修改过的buffer
+opt.hidden = true -- 允许隐藏被修改过的buffer
 
 --
-vim.opt.cmdheight = 1              -- more space in the neovim command line for displaying messages
+-- vim.opt.cmdheight = 1              -- more space in the neovim command line for displaying messages
 
-vim.opt.autoread = true-- 当文件被外部程序修改时，自动加载
--- 禁止创建备份文件
-vim.o.backup = false
-vim.o.writebackup = false
-vim.o.swapfile = false
+opt.autoread = true-- 当文件被外部程序修改时，自动加载
+opt.backup = false
+opt.writebackup = false
+opt.swapfile = false
 
 -- vim.o.shell = 'powershell'
+
+opt.foldmethod = "expr"
+opt.foldlevel = 99
+opt.foldexpr = "nvim_treesitter#foldexpr()"

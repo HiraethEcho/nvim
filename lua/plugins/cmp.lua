@@ -20,11 +20,11 @@ return{
   opts = function ()
     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
-      local defaults = require("cmp.config.default")()
       return {
-        completion = {
-          completeopt = "menu,menuone,noinsert",
-        },
+        -- completion = {
+      
+        --   completeopt = "menu,menuone,noinsert",
+        -- },
         snippet = {
           expand = function(args)
             vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
@@ -47,13 +47,12 @@ return{
               fallback()
             end
           end,
-          ['<C-p>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
           { name = 'ultisnips' }, -- For ultisnips users.
+          { name = "nvim_lsp" },
           { name = "buffer" },
           {
               name = 'spell',
@@ -66,15 +65,6 @@ return{
           },
           { name = "path" },
         }),
-        formatting = {
-          format = function(_, item)
-            local icons = require("config.util").icons.kinds
-            if icons[item.kind] then
-              item.kind = icons[item.kind] .. item.kind
-            end
-            return item
-          end,
-        },
         experimental = {
           ghost_text = {
             hl_group = "CmpGhostText",
@@ -83,3 +73,4 @@ return{
       }
   end
 }
+
