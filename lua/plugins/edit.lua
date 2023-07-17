@@ -4,6 +4,17 @@ local tools={
     event = "BufReadPost",
   },
   {
+    "lambdalisue/suda.vim",
+    cmd = { "SudaRead", "SudaWrite" },
+    enabled = function()
+      if vim.g.is_linux then
+        return true
+      else
+        return false
+      end
+    end,
+  },
+  {
     "machakann/vim-sandwich",
     -- lazy=false,
     event = "BufReadPost",
@@ -59,19 +70,6 @@ local todo={
   end,
 }
 
-local hop ={
-  "phaazon/hop.nvim",
-  -- event = "BufRead",
-  keys={
-    -- {'<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>",  mode={"n","v"}},
-    -- {'F', "<cmd>lua require'hop'.hint_char1()<cr>", mode={"n","v"}},
-    -- {'f', ":HopChar1CurrentLine<cr>", {noremap= true,silent=true}},
-    {'<leader><leader>', ":HopWord<cr>",desc="Hop Word", {noremap= true,silent=true}},
-  },
-  config = function()
-    require('hop').setup()
-  end,
-}
 
 local md={
   {"ellisonleao/glow.nvim", config = true, cmd = "Glow"},
@@ -96,7 +94,6 @@ local md={
 
 local spec={
   tools,
-  hop,
   todo,
   md,
 }

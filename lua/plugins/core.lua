@@ -3,17 +3,6 @@ local vim = vim
 return {
   { "folke/lazy.nvim", version = "*" },
   {
-    "lambdalisue/suda.vim",
-    cmd = { "SudaRead", "SudaWrite" },
-    enabled = function()
-      if vim.g.is_linux then
-        return true
-      else
-        return false
-      end
-    end,
-  },
-  {
     "gelguy/wilder.nvim",
     event = 'CmdlineEnter',
     config = function()
