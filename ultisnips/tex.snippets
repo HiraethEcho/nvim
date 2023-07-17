@@ -11,14 +11,34 @@
 global !p
 
 import re
+texMathZones = ['texMathZone'+x for x in ['A', 'AS', 'B', 'BS', 'C',
+'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS',
+'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z']]
+
+texIgnoreMathZones = ['texMathText']
+
+texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+
+ignore = texIgnoreMathZoneIds[0]
+
 def math():
-	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+  synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+  try:
+    first = next(
+      i for i in reversed(synstackids)
+      if i in texIgnoreMathZoneIds or i in texMathZoneIds
+    )
+    return first != ignore
+  except StopIteration:
+    return False
 
 endglobal
+# def math():
+# 	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+  # return vim.fn['vimtex#syntax#in_mathzone']() == 1
 # }}} glob py #
-
 # chapters and sections {{{ #
-
 # template {{{ #
 snippet template(basic) "Basic template" b
 %!TeX program = xelatex
@@ -190,7 +210,7 @@ else:
 endsnippet
 
 # environment in math environment {{{ #
-# context "math()"
+context "math()"
 snippet xym "xymatrix" wA
 \xymatrix{
   $1& & \\\\
@@ -387,25 +407,11 @@ snippet __ "subscript" iA
 _{$1}$0
 endsnippet
 
-context "math()"
-snippet "([A-Za-z])(\d)" "auto subscript" irA
-`!p snip.rv = match.group(1)`_{`!p snip.rv= match.group(2)`}
+# context "math()"
+snippet '([A-Za-z])([\d])' "auto subscript" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
 
-# snippet pb "pullback" i
-# ^{*}
-# endsnippet
-# snippet "(pb\w)" "pullback" irA
-# ^{i}$0
-# endsnippet
-
-# context "math()"
-# snippet "([A-Za-z])([A-Za-z])([A-Za-z])" "auto subscript" irA
-# `!p
-# if match.group(2)==match.group(3) 
-# snip.rv= 
-# `
-# endsnippet
 
 context "math()"
 snippet "([A-Za-z\]}'])([A-Za-z])\2{1}" "auto subscript" irA
