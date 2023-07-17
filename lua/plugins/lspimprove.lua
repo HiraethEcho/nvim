@@ -1,7 +1,8 @@
+local vim = vim
 return {
   {
     "glepnir/lspsaga.nvim",
-    -- event = "LspAttach",
+    event = "LspAttach",
     dependencies = {
       {"nvim-tree/nvim-web-devicons"},
       --Please make sure you install markdown and markdown_inline parser
@@ -9,7 +10,7 @@ return {
       "neovim/nvim-lspconfig",
     },
     keys={
-      { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "hover doc" },
+      -- { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "hover doc" },
       { "<leader>lo", "<cmd>Lspsaga outline<cr>", desc = "lsp outline" },
       { "<leader>ld", "<cmd>Lspsaga show_buf_diagnostics<cr>", desc = "lsp diagnostic" },
       { "<leader>lf", "<cmd>Lspsaga lsp_finder<cr>", desc = "lsp finder" },
@@ -124,10 +125,10 @@ return {
           numhl = "",
         })
       end
-      sign({ name = "DiagnosticSignError", text = "✘" })
-      sign({ name = "DiagnosticSignWarn", text = "" })
-      sign({ name = "DiagnosticSignHint", text = "⚑" })
-      sign({ name = "DiagnosticSignInfo", text = "" })
+      sign({ name = "DiagnosticSignError", text = "" })
+      sign({ name = "DiagnosticSignWarn", text = "" })
+      sign({ name = "DiagnosticSignHint", text = "" })
+      sign({ name = "DiagnosticSignInfo", text = "" })
     vim.diagnostic.config({
       virtual_text = true,
       severity_sort = true,

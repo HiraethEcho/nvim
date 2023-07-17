@@ -1,3 +1,4 @@
+local vim = vim
 return{
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
@@ -16,61 +17,78 @@ return{
         end,
       }
     },
+    "onsails/lspkind-nvim",
   },
-  opts = function ()
-    vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-      local cmp = require("cmp")
-      return {
-        -- completion = {
-      
-        --   completeopt = "menu,menuone,noinsert",
-        -- },
-        snippet = {
-          expand = function(args)
-            vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<Tab>'] = function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
+  config = function ()
+    local cmp = require("cmp")
+    cmp.setup{
+      completion = {
+        completeopt = "menu,menuone,noinsert,noselect",
+      },
+      snippet = {
+        expand = function(args)
+          vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+        end,
+      },
+      mapping = cmp.mapping.preset.insert({
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),
+        ['<Tab>'] = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback()
+          end
+        end,
+        ['<S-Tab>'] = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
+        end,
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      }),
+      sources = cmp.config.sources({
+        { name = 'ultisnips' }, -- For ultisnips users.
+        { name = "nvim_lsp" },
+        {
+          name = 'buffer',
+          option = {
+            get_bufnrs = function()
+              return vim.api.nvim_list_bufs()
             end
-          end,
-          ['<S-Tab>'] = function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end,
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        }),
-        sources = cmp.config.sources({
-          { name = 'ultisnips' }, -- For ultisnips users.
-          { name = "nvim_lsp" },
-          { name = "buffer" },
-          {
-              name = 'spell',
-              option = {
-                  keep_all_entries = true,
-                  enable_in_context = function()
-                      return true
-                  end,
-              },
-          },
-          { name = "path" },
-        }),
-        experimental = {
-          ghost_text = {
-            hl_group = "CmpGhostText",
-          },
+          }
         },
-      }
+        {
+            name = 'spell',
+            option = {
+                keep_all_entries = false,
+                enable_in_context = function()
+                    return true
+                end,
+            },
+        },
+        { name = "path" },
+        { name = "nvim_lua" },
+      }),
+      experimental = {
+        ghost_text = {
+          hl_group = "CmpGhostText",
+        },
+      },
+      formatting = {
+        format = require'lspkind'.cmp_format({
+          with_text = true, -- do not show text alongside icons
+          maxwidth = 50,    -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          before = function(entry, vim_item)
+            -- Source 显示提示来源
+            vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
+            return vim_item
+          end
+        })
+      },
+    }
   end
 }
-

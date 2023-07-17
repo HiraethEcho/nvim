@@ -1,3 +1,4 @@
+local vim = vim
 local lazygit={
   "kdheepak/lazygit.nvim",
   cmd= "LazyGit",
@@ -98,7 +99,7 @@ local confict={
 
 
 local spec={
-  lazygit,
+  -- lazygit,
   gitsigns,
   confict,
 }

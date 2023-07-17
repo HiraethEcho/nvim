@@ -1,4 +1,3 @@
-local load_textobjects = false
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -7,6 +6,7 @@ return {
     build = ":TSUpdate",
     -- event = { "BufReadPost", "BufNewFile" },
     dependencies = {
+      'kevinhwang91/nvim-ufo',
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
         config=function ()
@@ -82,5 +82,37 @@ return {
       end
       require("nvim-treesitter.configs").setup(opts)
     end,
+  },
+  {
+    'kevinhwang91/nvim-ufo',
+    dependencies = 'kevinhwang91/promise-async',
+    config = function ()
+      require('ufo').setup({
+        provider_selector = function(bufnr, filetype, buftype)
+              return {'treesitter', 'indent'}
+        end,
+        open_fold_hl_timeout = 100,
+        preview = {
+          win_config = {
+            border = {'', '─', '', '', '', '─', '', ''},
+            winhighlight = 'Normal:Folded',
+            winblend = 0
+          },
+          mappings = {
+            scrollU = '<C-u>',
+            scrollD = '<C-d>',
+            jumpTop = '[',
+            jumpBot = ']'
+          }
+        }
+      })
+    end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    cmd = "TSContextEnable",
+    opts = {
+      max_lines = 3,
+    }
   },
 }

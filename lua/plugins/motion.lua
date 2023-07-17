@@ -2,7 +2,7 @@ return{
   {
     "SmiteshP/nvim-navbuddy",
     keys={
-      { "<leader>j", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
+      { "<leader>ln", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
     },
     cmd = "Navbuddy",
     dependencies = {

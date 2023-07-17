@@ -4,7 +4,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
+    -- event = { "BufReadPost", "BufNewFile" },
+    event = "BufRead",
     dependencies = {
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
