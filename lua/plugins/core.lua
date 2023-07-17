@@ -1,3 +1,5 @@
+local vim = vim
+
 local whichkey={
   "folke/which-key.nvim",
   -- lazy=false,

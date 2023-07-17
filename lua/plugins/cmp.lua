@@ -1,3 +1,4 @@
+local vim = vim
 return{
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
@@ -16,12 +17,13 @@ return{
         end,
       }
     },
+    "onsails/lspkind-nvim",
   },
   config = function ()
     local cmp = require("cmp")
     cmp.setup{
       completion = {
-        completeopt = "menu,menuone,noinsert",
+        completeopt = "menu,menuone,noinsert,noselect",
       },
       snippet = {
         expand = function(args)
@@ -51,7 +53,14 @@ return{
       sources = cmp.config.sources({
         { name = 'ultisnips' }, -- For ultisnips users.
         { name = "nvim_lsp" },
-        { name = "buffer" },
+        {
+          name = 'buffer',
+          option = {
+            get_bufnrs = function()
+              return vim.api.nvim_list_bufs()
+            end
+          }
+        },
         {
             name = 'spell',
             option = {
@@ -68,7 +77,18 @@ return{
         ghost_text = {
           hl_group = "CmpGhostText",
         },
-      }
+      },
+      formatting = {
+        format = require'lspkind'.cmp_format({
+          with_text = true, -- do not show text alongside icons
+          maxwidth = 50,    -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          before = function(entry, vim_item)
+            -- Source 显示提示来源
+            vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
+            return vim_item
+          end
+        })
+      },
     }
   end
 }

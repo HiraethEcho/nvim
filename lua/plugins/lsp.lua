@@ -2,56 +2,61 @@ local vim = vim
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    -- event = { "BufReadPre", "BufNewFile" },
     -- lazy=false,
     cmd="LspStart",
     keys={
       { "<leader>ll", "<cmd>LspStart<cr>", desc = "Start lsp" },
+      { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
     dependencies = {
-      -- "folke/neodev.nvim",
      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
-      -- "glepnir/lspsaga.nvim",
-      -- 'nvim-treesitter/nvim-treesitter',
+      "SmiteshP/nvim-navbuddy",
+      "jose-elias-alvarez/null-ls.nvim",
     },
     config = function()
       -- local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
       -- local lsp_defaults = require('lspconfig').util.default_config
-      -- require'lspconfig'.texlab.setup{
-      --   settings = {
-      --     texlab = {
-      --       forwardSearch = {
-      --         executable = 'Sioyek',
-      --         args = {
-      --           '--reuse-window',
-      --           '--execute-command', 'toggle_synctex', -- Open Sioyek in synctex mode.
-      --           -- '--inverse-search',
-      --           -- [[nvim-texlabconfig -file %%%1 -line %%%2 -server ]] .. vim.v.servername,
-      --           '--forward-search-file', '%f',
-      --           '--forward-search-line', '%l', '%p'
-      --         },
-      --       },
-      --       chktex = {
-      --         onOpenAndSave = false,
-      --         onEdit = false,
-      --       },
-      --       bibtexFormatter = 'texlab',
-      --       latexFormatter = 'texlab',
-      --       formatterLineLength = 80,
-      --     },
-      --   },
-      -- }
-      -- require'lspconfig'.grammarly.setup{}
+      require'lspconfig'.texlab.setup{
+        settings = {
+          texlab = {
+            forwardSearch = {
+              executable = 'Sioyek',
+              args = {
+                '--reuse-window',
+                '--execute-command', 'toggle_synctex', -- Open Sioyek in synctex mode.
+                -- '--inverse-search',
+                -- [[nvim-texlabconfig -file %%%1 -line %%%2 -server ]] .. vim.v.servername,
+                '--forward-search-file', '%f',
+                '--forward-search-line', '%l', '%p'
+              },
+            },
+            chktex = {
+              onOpenAndSave = false,
+              onEdit = false,
+            },
+            bibtexFormatter = 'texlab',
+            latexFormatter = 'texlab',
+            formatterLineLength = 80,
+          },
+        },
+      }
+
+      require'lspconfig'.grammarly.setup{
+        filetypes = {'tex','plaintex','markdown'}
+      }
+      -- require'lspconfig'.ltex.setup{}
+
       require'lspconfig'.lua_ls.setup{
         settings={
           checkThirdParty = false,
         },
       }
       -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      local lsp_defaults = require('lspconfig').util.default_config
+      -- local lsp_defaults = require('lspconfig').util.default_config
       local servers = {
         "html",
         "yamlls",
@@ -59,21 +64,47 @@ return {
         "marksman",
         "clangd",
       }
-      -- for _, lsp in pairs(servers) do
-      --   require'lspconfig'[lsp].setup({
-      --     on_attach = on_attach,
-      --   })
-      -- end
+      for _, lsp in pairs(servers) do
+        require'lspconfig'[lsp].setup({
+          on_attach = on_attach,
+        })
+      end
     end,
   },
   {
     "williamboman/mason.nvim",
     -- lazy=false,
     cmd = "Mason",
+    keys = { { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate" ,-- :MasonUpdate updates registry contents
-    config = function()
-      require("mason").setup({
-      })
+    opts = {
+      ensure_installed = {
+        -- "flake8",
+        "texlab",
+        "grammarly-languageserver",
+        "lua-language-server",
+        "clangd",
+        "marksman",
+        "ltex-ls",
+        "html-lsp",
+      },
+    },
+    config = function(_, opts)
+      require("mason").setup(opts)
+      local mr = require("mason-registry")
+      local function ensure_installed()
+        for _, tool in ipairs(opts.ensure_installed) do
+          local p = mr.get_package(tool)
+          if not p:is_installed() then
+            p:install()
+          end
+        end
+      end
+      if mr.refresh then
+        mr.refresh(ensure_installed)
+      else
+        ensure_installed()
+      end
     end,
   },
   {
@@ -83,5 +114,21 @@ return {
       require("mason-lspconfig").setup()
     end,
   },
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    dependencies = { "mason.nvim" },
+    opts = function()
+      local nls = require("null-ls")
+      return {
+        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
+        sources = {
+          nls.builtins.formatting.fish_indent,
+          nls.builtins.diagnostics.fish,
+          nls.builtins.formatting.stylua,
+          nls.builtins.formatting.shfmt,
+          -- nls.builtins.diagnostics.flake8,
+        },
+      }
+    end,
+  },
 }
-

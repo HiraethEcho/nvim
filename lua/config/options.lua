@@ -1,7 +1,7 @@
 local vim = vim
 
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "\\"
 
 local opt = vim.opt
 
@@ -11,6 +11,7 @@ opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 3 -- Hide * markup for bold and italic
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
+opt.cursorcolumn = true -- Enable highlighting of the current line
 opt.expandtab = true -- Use spaces instead of tabs
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
@@ -36,7 +37,7 @@ opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift t
 opt.smartcase = true -- Don't ignore case with capitals
 opt.smartindent = true -- Insert indents automatically
 -- opt.autoindent = true
-opt.spell= true
+opt.spell= false
 opt.spelllang = { "en_US" }
 opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows right of current

@@ -1,3 +1,4 @@
+local vim = vim
 local transparent={
   "xiyaowong/nvim-transparent",
   cmd="TransparentEnable",
@@ -22,27 +23,21 @@ local color={
           non_current_windows = true, -- Enable contrasted background for non-current windows default=false
         },
         plugins = { -- Uncomment the plugins that you use to highlight them
-        -- Available plugins:
-        -- "dap",
-        "gitsigns",
-        "hop",
-        -- "indent-blankline",
-        "lspsaga",
-        -- "mini",
-        -- "neogit",
-        -- "neorg",
-        "nvim-cmp",
-        "nvim-navic",
-        -- "nvim-tree",
-        "nvim-web-devicons",
-        -- "sneak",
-        "telescope",
-        -- "trouble",
-        "which-key",
-      },
-        })
-        vim.cmd 'colorscheme material'
-      end,
+          -- Available plugins:
+          "gitsigns",
+          "hop",
+          "lspsaga",
+          "nvim-cmp",
+          "nvim-navic",
+          "nvim-web-devicons",
+          "telescope",
+          "which-key",
+          -- "dap",
+          -- "trouble",
+        },
+      })
+      vim.cmd 'colorscheme material'
+    end,
   },
   {
     'norcalli/nvim-colorizer.lua',
@@ -70,7 +65,10 @@ local line={
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
         disabled_filetypes = {
-          statusline = {'neo-tree'},
+          statusline = {
+            'neo-tree',
+            'sagaoutline',
+          },
           -- winbar = {},
         },
         ignore_focus = {},
@@ -105,9 +103,8 @@ local line={
         lualine_c = {
           'branch',
           'diff',
-          'diagnostics',
         },
-        lualine_x = {'selectioncount','filetype','filesize'},
+        lualine_x = {'diagnostic','filetype'},
         -- lualine_y = {'progress','location'},
         -- lualine_z = {'location'}
       },
@@ -280,7 +277,7 @@ end,
 
 local hlchunk={
   "shellRaining/hlchunk.nvim",
-  event = "BufReadPost",
+  event = "BufRead",
   init = function()
     require('hlchunk').setup({
       exclude_filetypes = {
@@ -365,26 +362,22 @@ local scrollview={
 local codewindow={
   'gorbit99/codewindow.nvim',
   keys={
-    { "<leader>m", function() require('codewindow').toggle_minimap() end , desc = "Minimap Toggle" },
-    { "<leader>M", function() require('codewindow').toggle_focus() end , desc = "Minimap Toggle" },
+    { "<leader>um", function() require('codewindow').toggle_minimap() end , desc = "Minimap Toggle" },
+    { "<leader>uM", function() require('codewindow').toggle_focus() end , desc = "Minimap Toggle" },
   },
-  -- codewindow.open_minimap()
-  -- codewindow.close_minimap()
-  -- codewindow.toggle_minimap()
-  -- codewindow.toggle_focus()
   config = function()
     local codewindow = require('codewindow')
     codewindow.setup({
       active_in_terminals = false, -- Should the minimap activate for terminal buffers
-      auto_enable = false, -- Automatically open the minimap when entering a (non-excluded) buffer (accepts a table of filetypes)
+      auto_enable = true, -- Automatically open the minimap when entering a (non-excluded) buffer (accepts a table of filetypes)
       exclude_filetypes = { 'help' }, -- Choose certain filetypes to not show minimap on
       max_minimap_height = nil, -- The maximum height the minimap can take (including borders)
       max_lines = nil, -- If auto_enable is true, don't open the minimap for buffers which have more than this many lines.
-      minimap_width = 20, -- The width of the text part of the minimap
+      minimap_width = 5, -- The width of the text part of the minimap
       use_lsp = true, -- Use the builtin LSP to show errors and warnings
       use_treesitter = true, -- Use nvim-treesitter to highlight the code
       use_git = true, -- Show small dots to indicate git additions and deletions
-      width_multiplier = 4, -- How many characters one dot represents
+      width_multiplier = 8, -- How many characters one dot represents
       z_index = 1, -- The z-index the floating window will be on
       show_cursor = true, -- Show the cursor position in the minimap
       window_border = 'single', -- The border style of the floating window (accepts all usual options)

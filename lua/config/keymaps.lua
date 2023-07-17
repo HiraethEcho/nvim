@@ -27,7 +27,7 @@ map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
-map("n", "Q", ":q<cr>",{ desc = "Close window"})
+map("n", "Q", "<c-w>q",{ desc = "Close window"})
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
@@ -90,7 +90,6 @@ map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
 map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 map("n", "<leader>ul", function() Util.toggle("relativenumber", true) Util.toggle("number") end, { desc = "Toggle Line Numbers" })
-map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 map("n", "<leader>uc", function() Util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
 if vim.lsp.inlay_hint then
@@ -98,7 +97,7 @@ if vim.lsp.inlay_hint then
 end
 
 -- lazygit
-map("n", "<leader>G", function() Util.float_term({ "lazygit" }, {esc_esc = false, ctrl_hjkl = false}) end, { desc = "Lazygit (cwd)" })
+map("n", "<leader>gg", function() Util.float_term({ "lazygit" }, {esc_esc = false, ctrl_hjkl = false}) end, { desc = "Lazygit " })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
@@ -113,7 +112,7 @@ end
 
 -- floating terminal
 local lazyterm = function() Util.float_term("powershell", {esc_esc = false, ctrl_hjkl = false}) end
-map("n", "<leader>ft", lazyterm, { desc = "Terminal" })
+map("n", "<leader>t", lazyterm, { desc = "Float Terminal" })
 map("n", "<c-/>", lazyterm, { desc = "which_key_ignore" })
 
 -- Terminal Mappings
@@ -123,7 +122,6 @@ map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
 map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
 map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 
 -- tabs
