@@ -1,4 +1,3 @@
-local vim = vim
 return {
   {
     "neovim/nvim-lspconfig",
@@ -23,13 +22,16 @@ return {
       require'lspconfig'.texlab.setup{
         settings = {
           texlab = {
+            build = {
+              forwardSearchAfter = true,
+            },
             forwardSearch = {
               executable = 'Sioyek',
               args = {
                 '--reuse-window',
                 '--execute-command', 'toggle_synctex', -- Open Sioyek in synctex mode.
-                -- '--inverse-search',
-                -- [[nvim-texlabconfig -file %%%1 -line %%%2 -server ]] .. vim.v.servername,
+                '--inverse-search',
+                [[nvim --server ]] .. vim.v.servername .. [[ --remote-send ":e %%%1<cr>:%%%2<cr>"]],
                 '--forward-search-file', '%f',
                 '--forward-search-line', '%l', '%p'
               },
@@ -46,12 +48,26 @@ return {
       }
 
       require'lspconfig'.grammarly.setup{
-        filetypes = {'tex','plaintex','markdown'}
+        on_attach = on_attach,
+        filetypes = {'tex','plaintex','markdown'},
+        settings = {
+          grammarly = {
+            config = {
+              documentDomain = "academic",
+            }
+          }
+
+        }
       }
-      -- require'lspconfig'.ltex.setup{}
 
       require'lspconfig'.lua_ls.setup{
         settings={
+          lua = {
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = {'vim'},
+            },
+          },
           checkThirdParty = false,
         },
       }
