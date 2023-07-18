@@ -6,6 +6,7 @@ return {
     cmd="LspStart",
     keys={
       { "<leader>ll", "<cmd>LspStart<cr>", desc = "Start lsp" },
+      { "<leader>li", "<cmd>LspInfo<cr>", desc = "lsp info" },
       { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
     dependencies = {
@@ -14,7 +15,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "SmiteshP/nvim-navbuddy",
-      "jose-elias-alvarez/null-ls.nvim",
+      -- "jose-elias-alvarez/null-ls.nvim",
     },
     config = function()
       -- local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -68,24 +69,24 @@ return {
           checkThirdParty = false,
         },
       }
-      require'lspconfig'.ltex.setup{
-        settings={
-          ltex = {
-            enabled = { "latex", "tex", "bib", "markdown" },
-            language = "en",
-            diagnosticSeverity = "information",
-            setenceCacheSize = 2000,
-            additionalRules = {
-              enablePickyRules = true,
-              motherTongue = "en",
-            },
-            trace = { server = "verbose" },
-            dictionary = {},
-            disabledRules = {},
-            hiddenFalsePositives = {},
-          },
-        },
-      }
+      -- require'lspconfig'.ltex.setup{
+      --   settings={
+      --     ltex = {
+      --       enabled = { "latex", "tex", "bib", "markdown" },
+      --       language = "en",
+      --       diagnosticSeverity = "information",
+      --       setenceCacheSize = 2000,
+      --       additionalRules = {
+      --         enablePickyRules = true,
+      --         motherTongue = "en",
+      --       },
+      --       trace = { server = "verbose" },
+      --       dictionary = {},
+      --       disabledRules = {},
+      --       hiddenFalsePositives = {},
+      --     },
+      --   },
+      -- }
       -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
       -- local lsp_defaults = require('lspconfig').util.default_config
       local servers = {
@@ -163,11 +164,3 @@ return {
     end,
   },
 }
-------------
---  fuck  --
-------------
-------------
---  hell  --
-------------
-
-

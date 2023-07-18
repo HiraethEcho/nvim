@@ -69,12 +69,11 @@ return {
         },
         symbol_in_winbar = {
           enable = true,
-          separator = " ",
+          separator = "",
           ignore_patterns={},
           hide_keyword = true,
           show_file = false,
-          -- folder_level = 2,
-          -- respect_root = false,
+          folder_level = 5,
           color_mode = true,
         },
         hover = {

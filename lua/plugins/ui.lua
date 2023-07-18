@@ -275,15 +275,18 @@ local alpha={  -- lazy.nvim
 end,
 }
 
-local hlchunk={
+local hlchunk = {
   "shellRaining/hlchunk.nvim",
-  event = "BufRead",
-  init = function()
+  -- event = "BufRead",
+  keys = {
+    { "<leader>uh", "<cmd>EnableHL<cr>" , desc = "Minimap Toggle" },
+  },
+  config = function()
     require('hlchunk').setup({
       exclude_filetypes = {
         aerial = true,
         dashboard = true,
-        glow = true,
+        Glow = true,
       },
       chunk = {
         enable = true,
@@ -293,11 +296,12 @@ local hlchunk={
         },
       },
       indent = {
+        enable = false,
         chars = { "│", "¦", "┆", "┊", },
         use_treesitter = false,
       },
       blank = {
-        enable = false,
+        enable = fals
       },
       line_num = {
         use_treesitter = true,

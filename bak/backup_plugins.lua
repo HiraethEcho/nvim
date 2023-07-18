@@ -1008,4 +1008,4 @@ local autolist = {
       vim.keymap.set("n", "<leader>ii", require("autolist").cycle_next_dr, { expr = true })
       vim.keymap.set("n", "<leader>iI", require("autolist").cycle_prev_dr, { expr = true })
     end,
-  },
+  }

@@ -242,7 +242,6 @@ If you rather use leap/flit instead, you can add the leap extra:
     "folke/flash.nvim",
     event = "VeryLazy",
     vscode = true,
-    ---@type Flash.Config
     opts = {},
     -- stylua: ignore
     keys = {
