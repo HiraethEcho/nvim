@@ -56,7 +56,7 @@ opt.linebreak = true   -- companion to wrap, don't split words
 -- opt.whichwrap = "bs<>[]"     -- which "horizontal" keys are allowed to travel to prev/next line
 
 opt.listchars:append "eol:↴"
-opt.listchars:append "space:⋅"
+-- opt.listchars:append "space:⋅"
 
 opt.hidden = true -- 允许隐藏被修改过的buffer
 

@@ -95,5 +95,23 @@ return {
     config = function(_, opts)
       require("illuminate").configure(opts)
     end,
-  }
+  },
+  {
+    "folke/zen-mode.nvim",
+    keys = {
+      {'<leader>z', "<cmd>ZenMode<cr>"  , desc="toggle illuminate",},
+    },
+    opts = {
+      window = {
+        backdrop = 0.90, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+        width = 100, -- width of the Zen window
+        height = 1, -- height of the Zen window
+      },
+      plugins = {
+        -- disable some global vim options (vim.o...)
+        -- comment the lines to not apply the options
+        twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+      },
+    },
+  },
 }
