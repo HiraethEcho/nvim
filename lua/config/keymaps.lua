@@ -106,25 +106,26 @@ map("n", "<leader>qq", "<cmd>wa<cr><cmd>qa<cr>", { desc = "Quit all" })
 -- map("n", "<leader>L", Util.changelog, {desc = "LazyVim Changelog"})
 
 -- floating terminal
-local lazyterm = function() Util.float_term("powershell", {esc_esc = false, ctrl_hjkl = false}) end
+local lazyterm = function() Util.float_term("powershell", {esc_esc = true, ctrl_hjkl = false}) end
 map("n", "<leader>t", lazyterm, { desc = "Float Terminal" })
-map("n", "<c-/>", lazyterm, { desc = "which_key_ignore" })
+-- map("n", "<c-/>", lazyterm, { desc = "which_key_ignore" })
 
 -- Terminal Mappings
-map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+-- map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
 map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
 map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
 map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
-map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+map("t", "<esc><esc>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 
 -- tabs
-map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+-- map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<c-t>", "<cmd>tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>j", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-map("n", "<leader><tab>k", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+-- map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+-- map("n", "<leader><tab>j", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+-- map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+-- map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+-- map("n", "<leader><tab>k", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader><tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<C-n>", "<C-W>T", { desc = "Window to new tab"})
