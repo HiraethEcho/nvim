@@ -101,7 +101,7 @@ snippet ol "Enumerate" b
 \end{enumerate}
 endsnippet
 
-snippet ul "Itemize" bA
+snippet ul "Itemize" b
 \begin{itemize}
 	\item $0
 \end{itemize}
@@ -194,31 +194,31 @@ endsnippet
 
 # environment in math environment {{{ #
 # context "math()"
-snippet xym "xymatrix" wA
+snippet xym "xymatrix" w
 \\xymatrix{
   $1& & \\\\
   & &
 }
 endsnippet
 
-context "math()"
-snippet flip "flip" wA
+# context "math()"
+snippet flip "flip" w 
 \\xymatrix{
   X\ar[rd] \ar[rr]$1 & & Y\ar[ld]$2 \\\\
   & S &
 }
 endsnippet
 
-context "math()"
-snippet rof "commonresolution" wA
+# context "math()"
+snippet rof "commonresolution" w
 \xymatrix{
   & W$1 \ar[ld]\ar[rd] &\\\\
   X\ar[rr]$2 & &Y$3 
 }
 endsnippet
 
-context "math()"
-snippet tt "text" wA
+# context "math()"
+snippet tt "text" w
 \text{$1}$0
 endsnippet
 
@@ -229,13 +229,9 @@ snippet Fun "Big function" i
 .\end{align*}
 endsnippet
 
-# context "math()"
-# snippet frac "Fraction" wA
-# \frac{$1}{$2}$0
-# endsnippet
 
-context "math()"
-snippet // "Fraction" wA
+# context "math()"
+snippet // "Fraction" w
 \\frac{$1}{$2}$0
 endsnippet
 
@@ -269,20 +265,20 @@ snippet case "cases" wA
 $0
 endsnippet
 
-context "math()"
-snippet ali "Align" bA
+# context "math()"
+snippet ali "Align" b
 \begin{align*}
 	${1:${VISUAL}}
 .\end{align*}
 endsnippet
 
-context "math()"
-snippet ceil "Ceil" wA
+# context "math()"
+snippet ceil "Ceil" w
 \left\lceil $1 \right\rceil $0
 endsnippet
 
-context "math()"
-snippet flor "Floor" wA
+# context "math()"
+snippet floor "Floor" w
 \left\lfloor $1 \right\rfloor$0
 endsnippet
 
@@ -291,18 +287,18 @@ endsnippet
 # \sum_{n=${1:1}}^{${2:\infty}} ${3:a_n z^n}
 # endsnippet
 
-context "math()"
-snippet pmat "pmat" iA
+# context "math()"
+snippet pmat "pmat" i
 \begin{pmatrix} $1 \end{pmatrix} $0
 endsnippet
 
-context "math()"
-snippet bmat "bmat" iA
+# context "math()"
+snippet bmat "bmat" i
 \begin{bmatrix} $1 \end{bmatrix} $0
 endsnippet
 
-context "math()"
-snippet set "set" wA
+# context "math()"
+snippet set "set" w
 \\{$1\\} $0
 endsnippet
 # }}} environment in math environment #
@@ -310,82 +306,50 @@ endsnippet
 # }}} environment #
 
 # single letter{{{ #
-snippet FF "FF" wA
-$\mathbb{F}_{${1:n}}$0$
-endsnippet
-
-snippet RR "Real number" wA
-$\mathbb{R}$
-endsnippet
-
-snippet NN "Natural number" wA
-$\mathbb{N}$
-endsnippet
-
-snippet ZZ "integers" wA
-$\mathbb{Z}$
-endsnippet
-
-snippet Aa "Affine space" wA
-$\mathbb{A}^{${1:n}}$
-endsnippet
-
-snippet PP "Projectiv space" wA
-$\mathbb{P}^{${1:n}}$
-endsnippet
-
-snippet QQ "Rational number" wA
-$\mathbb{Q}$
-endsnippet
-
-snippet CC "Complex number" wA
-$\mathbb{C}$
-endsnippet
-
-context "math()"
+# context "math()"
 snippet Aa "Affine space" wA
 \mathbb{A}^{${1:n}}
 endsnippet
 
-context "math()"
+# context "math()"
 snippet RR "Real number" wA
 \mathbb{R}
 endsnippet
 
-context "math()"
+# context "math()"
 snippet FF "FF" wA
 \mathbb{F}_{${1:n}}$0
 endsnippet
 
-context "math()"
+# context "math()"
 snippet NN "Natural number" wA
 \mathbb{N}
 endsnippet
 
-context "math()"
+# context "math()"
 snippet ZZ "integers" wA
 \mathbb{Z}
 endsnippet
 
-context "math()"
+# context "math()"
 snippet QQ "Rational number" wA
 \mathbb{Q}
 endsnippet
 
 
-context "math()"
+# context "math()"
 snippet PP "Projectiv space" wA
 \mathbb{P}^{${1:n}}
 endsnippet
 
-context "math()"
+# context "math()"
 snippet CC "Complex number" wA
 \mathbb{C}
 endsnippet
 # }}} single letter #
 
 # sup and sub {{{ #
-context "math()"
+# context "math()"
 snippet __ "subscript" iA
 _{$1}$0
 endsnippet
@@ -395,20 +359,6 @@ snippet "([A-Za-z])(\d)" "auto subscript" irA
 `!p snip.rv = match.group(1)`_{`!p snip.rv= match.group(2)`}
 endsnippet
 
-# snippet pb "pullback" i
-# ^{*}
-# endsnippet
-# snippet "(pb\w)" "pullback" irA
-# ^{i}$0
-# endsnippet
-
-# context "math()"
-# snippet "([A-Za-z])([A-Za-z])([A-Za-z])" "auto subscript" irA
-# `!p
-# if match.group(2)==match.group(3) 
-# snip.rv= 
-# `
-# endsnippet
 
 # context "math()"
 snippet "([A-Za-z\]}'])([A-Za-z])\2{1}" "auto subscript" irA
@@ -420,52 +370,51 @@ snippet "([A-Za-z])(ii)" "auto subscript" irA
 `!p snip.rv = match.group(1)`_{i}
 endsnippet
 
-# context "math()"
-# snippet pf "pushforward" iA
-# _{*}$0
-# endsnippet
+snippet "([A-Za-z])(jj)" "auto subscript" irA
+`!p snip.rv = match.group(1)`_{i}
+endsnippet
 
 # context "math()"
-# snippet "([A-Za-z])(kk)" "auto subscript" irA
-# `!p snip.rv = match.group(1)`_{k}
-# endsnippet
+snippet "([A-Za-z])(kk)" "auto subscript" irA
+`!p snip.rv = match.group(1)`_{k}
+endsnippet
 
-context "math()"
+# context "math()"
 snippet ^^ "super script" iA
 ^{$1}$0
 endsnippet
 
-context "math()"
+# context "math()"
 snippet inv "inverse" iA
 ^{-1$1}$0
 endsnippet
 
-context "math()"
+# context "math()"
 snippet over "overset" wA
 \overset{$1}{${VISUAL}}$0
 endsnippet
 
-context "math()"
+# context "math()"
 snippet "([^\s]*)~~" "widetilde" riA
 \widetilde{`!p snip.rv=match.group(1)`${VISUAL}}$0
 endsnippet
 
-context "math()"
+# context "math()"
 snippet "([^\s]*)Bar" "Bar" riA
 \overline{`!p snip.rv=match.group(1)`${VISUAL}}$0
 endsnippet
 
-context "math()"
+# context "math()"
 snippet "([\w]*)bar" "bar" riA
 \bar{`!p snip.rv=match.group(1)`${VISUAL}}$0
 endsnippet
 
-context "math()"
+# context "math()"
 snippet "([^\s]*)Hat" "hat" riA
 \widehat{`!p snip.rv=match.group(1)`${VISUAL}}$0
 endsnippet
 
-context "math()"
+# context "math()"
 snippet "([\w]*)hat" "hat" riA
 \hat{`!p snip.rv=match.group(1)`${VISUAL}}$0
 endsnippet
@@ -473,136 +422,125 @@ endsnippet
 # }}} sup and sub #
 
 # Auto Symbol {{{ #
-context "math()"
+# context "math()"
 snippet \\\ "setminus" iA
 \setminus
 endsnippet
 
-context "math()"
+# context "math()"
 snippet >> ">>" iA
 \gg
 endsnippet
 
-context "math()"
+# context "math()"
 snippet ++ "direct sum" iA
 \oplus
 endsnippet
 
-context "math()"
+# context "math()"
 snippet << "<<" iA
 \ll
 endsnippet
 
-context "math()"
+# context "math()"
 snippet ~~ "~" wA
 \sim 
 endsnippet
 
-# context "math()"
-# snippet Tt "Rotation" iA
-# ^{\mathrm{T}}
-# endsnippet
 
-context "math()"
-snippet oo "\infty" wA
+# context "math()"
+snippet oo "\infty" w
 \infty
 endsnippet
 
-context "math()"
+# context "math()"
 snippet => "implies" iA
 \implies
 endsnippet
 
-context "math()"
+# context "math()"
 snippet ... "ldots" iA
 \ldots 
 endsnippet
 
 
-context "math()"
+# context "math()"
 snippet *** "cdots" iA
 \cdots
 endsnippet
 
-context "math()"
+# context "math()"
 snippet xx "cross" wA
 \times 
 endsnippet
 
-context "math()"
+# context "math()"
 snippet >= "greater equal" iA
 \geqslant 
 endsnippet
 
-context "math()"
-snippet "(\bin)" "\in" wrA
-\in
-endsnippet
 
-context "math()"
+# context "math()"
 snippet -< "dashleftarrow" iA
 \dashlefrarrow 
 endsnippet
 
-context "math()"
+# context "math()"
 snippet -> "dashrightarrow" iA
 \dashrightarrow 
 endsnippet
 
-context "math()"
-snippet Ee "geq" wA
+# context "math()"
+snippet Ee "geq" w
 \exists 
 endsnippet
 
-# context "math()"
-# snippet AA "forall" wA
-# \forall 
-# endsnippet
 
-context "math()"
-snippet R+ "R+" wA
+# context "math()"
+snippet R+ "R+" w
 \mathbb{R}_{\geqslant 0}
 endsnippet
 
-context "math()"
-snippet cc "subset" wA
+# context "math()"
+snippet cc "subset" w
 \subset
 endsnippet
-context "math()"
-snippet nn "cap" wA
+
+# context "math()"
+snippet nn "cap" w
 \cap 
 endsnippet
 
-context "math()"
-snippet uu "cup" wA
+# context "math()"
+snippet uu "cup" w
 \cup 
 endsnippet
 
-context "math()"
-snippet Uu "bigcup" wA
+# context "math()"
+snippet Uu "bigcup" w
 \bigcup_{${1:i \in  I} }} $0
 endsnippet
 
-context "math()"
-snippet Nn "bigcap" wA
+# context "math()"
+snippet Nn "bigcap" w
 \bigcap_{${1:i \in ${2: I}} } $0
 endsnippet
 
-context "math()"
-snippet vv "Vee" iA
+# context "math()"
+snippet vv "Vee" i
 \vee
 endsnippet
 
 context "math()"
-snippet xr "xrightarrow" wA
+snippet xr "xrightarrow" w
 \xrightarrow{$1}$0
 endsnippet
 # }}} Auto Symbol #
 
 # Fonts {{{ #
 # math font {{{ #
-context "math()"
-snippet op "operatorname" wA
+# context "math()"
+snippet op "operatorname" w
 \operatorname{${1: ${VISUAL} }}$0
 endsnippet
 
@@ -612,7 +550,7 @@ snippet "([A-Z])(mb)" "auto mathbb" irA
 \mathbb{`!p snip.rv = match.group(1)`}
 endsnippet
 
-context "math()"
+# context "math()"
 snippet "([a-zA-Z])(rm)" "auto mathrm" irA
 \mathrm{`!p snip.rv = match.group(1)`}
 endsnippet
@@ -663,21 +601,21 @@ snippet gt "general type" w
 general type$0
 endsnippet
 
-snippet wrt "with respect to" wA
+snippet wrt "with respect to" w
 with respect to
 endsnippet
 snippet wma "we may assume" w
 we may assume
 endsnippet
 
-snippet tm "\item" bA
+snippet tm "\item" b
 \item 
 endsnippet
 # }}} abbre #
 
 # Birational geometry {{{ 
 snippet pair "(X,B)" w
-$(X$1,B)$$0 
+$(X$1, B)$$0 
 endsnippet
 
 snippet mm "minimal model" w

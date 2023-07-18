@@ -37,7 +37,7 @@ return {
               },
             },
             chktex = {
-              onOpenAndSave = false,
+              onOpenAndSave = true,
               onEdit = false,
             },
             bibtexFormatter = 'texlab',
@@ -46,9 +46,7 @@ return {
           },
         },
       }
-
       require'lspconfig'.grammarly.setup{
-        on_attach = on_attach,
         filetypes = {'tex','plaintex','markdown'},
         settings = {
           grammarly = {
@@ -59,7 +57,6 @@ return {
 
         }
       }
-
       require'lspconfig'.lua_ls.setup{
         settings={
           lua = {
@@ -69,6 +66,24 @@ return {
             },
           },
           checkThirdParty = false,
+        },
+      }
+      require'lspconfig'.ltex.setup{
+        settings={
+          ltex = {
+            enabled = { "latex", "tex", "bib", "markdown" },
+            language = "en",
+            diagnosticSeverity = "information",
+            setenceCacheSize = 2000,
+            additionalRules = {
+              enablePickyRules = true,
+              motherTongue = "en",
+            },
+            trace = { server = "verbose" },
+            dictionary = {},
+            disabledRules = {},
+            hiddenFalsePositives = {},
+          },
         },
       }
       -- local capabilities = require('cmp_nvim_lsp').default_capabilities()

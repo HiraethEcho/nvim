@@ -80,4 +80,20 @@ return {
         vim.keymap.set('v', '<C-e>', ":lua require('markdowny').code()<cr>", { buffer = 0 })
     end
   },
+  {
+    "RRethy/vim-illuminate",
+    keys = {
+      {'<leader>ui', "<cmd>IlluminateToggle<cr>"  , desc="toggle illuminate",},
+    },
+    opts = {
+      delay = 200,
+      large_file_cutoff = 2000,
+      large_file_overrides = {
+        providers = { "lsp" },
+      },
+    },
+    config = function(_, opts)
+      require("illuminate").configure(opts)
+    end,
+  }
 }
