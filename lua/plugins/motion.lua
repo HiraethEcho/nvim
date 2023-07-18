@@ -24,5 +24,36 @@ return{
     config = function()
       require('hop').setup()
     end,
-  }
+  },
+  {
+    'echasnovski/mini.files', version = false ,
+    keys = {
+      {'<leader>E', ":lua MiniFiles.open()<cr>",desc="mini file " },
+    },
+    opts = {
+      mappings = {
+        close       = 'q',
+        go_in       = 'l',
+        go_in_plus  = '',
+        go_out      = 'h',
+        go_out_plus = '',
+        reset       = '<BS>',
+        show_help   = '?',
+        synchronize = '=',
+        trim_left   = '<',
+        trim_right  = '>',
+      },
+      options = {
+        use_as_default_explorer = true,
+      },
+      windows = {
+        preview = true,
+        width_focus = 50,
+        -- Width of non-focused window
+        width_nofocus = 25,
+        -- Width of preview window
+        width_preview = 45,
+      },
+    },
+  },
 }
