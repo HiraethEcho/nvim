@@ -13,7 +13,7 @@ return {
       -- { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "hover doc" },
       { "<leader>lo", "<cmd>Lspsaga outline<cr>", desc = "lsp outline" },
       { "<leader>ld", "<cmd>Lspsaga show_buf_diagnostics<cr>", desc = "lsp diagnostic" },
-      { "<leader>lf", "<cmd>Lspsaga lsp_finder<cr>", desc = "lsp finder" },
+      { "<leader>lf", "<cmd>Lspsaga finder<cr>", desc = "lsp finder" },
       { "gp", "<cmd>Lspsaga peek_definition<cr>", desc = "lsp peek definition" },
       { "<leader>t", "<cmd>Lspsaga term_toggle<cr>", desc = "lsp terminal" },
       { "gd", "<cmd>Lspsaga goto_definition<cr>", desc = "go to definition" },

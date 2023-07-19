@@ -2,9 +2,6 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn't work on Windows
-    keys = {
-      {"<leader>lt","<cmd>TSToggle<cr>",  desc = "toggle treesitter" },
-    },
     -- lazy = false,
     build = ":TSUpdate",
     -- event = { "BufReadPost", "BufNewFile" },
@@ -44,7 +41,6 @@ return {
         end,
       },
     },
-    cmd = { "TSUpdateSync" },
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
@@ -53,7 +49,6 @@ return {
         "html",
         "lua",
         "latex",
-        "luadoc",
         "markdown",
         "markdown_inline",
       },
@@ -109,6 +104,9 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-context",
     cmd = "TSContextEnable",
+    keys = {
+      {"<leader>ut","<cmd>TSContextEnable<cr>",  desc = "toggle treesitter" },
+    },
     opts = {
       max_lines = 3,
     }
