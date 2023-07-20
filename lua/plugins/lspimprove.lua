@@ -13,7 +13,7 @@ return {
       -- { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "hover doc" },
       { "<leader>lo", "<cmd>Lspsaga outline<cr>", desc = "lsp outline" },
       { "<leader>ld", "<cmd>Lspsaga show_buf_diagnostics<cr>", desc = "lsp diagnostic" },
-      { "<leader>lf", "<cmd>Lspsaga finder<cr>", desc = "lsp finder" },
+      { "<leader>lf", "<cmd>Lspsaga _finder<cr>", desc = "lsp finder" },
       { "gp", "<cmd>Lspsaga peek_definition<cr>", desc = "lsp peek definition" },
       { "<leader>t", "<cmd>Lspsaga term_toggle<cr>", desc = "lsp terminal" },
       { "gd", "<cmd>Lspsaga goto_definition<cr>", desc = "go to definition" },
@@ -65,7 +65,7 @@ return {
           },
         },
         lightbulb = {
-          enable = false,
+          enable = true,
         },
         symbol_in_winbar = {
           enable = true,
@@ -103,17 +103,7 @@ return {
           },
         },
         ui = {
-          -- This option only works in Neovim 0.9
-          title = true,
-          -- Border type can be single, double, rounded, solid, shadow.
-          border = "single",
           winblend = 30,
-          expand = "",
-          collapse = "",
-          code_action = "💡",
-          -- incoming = " ",
-          -- outgoing = " ",
-          hover = ' ',
         },
       })
 
@@ -132,15 +122,8 @@ return {
       virtual_text = true,
       severity_sort = true,
       signs = true,
-      underline = true,
-      float = {
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
-      },
+      underline = false,
     })
     end,
   },
 }
-
