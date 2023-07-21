@@ -11,8 +11,28 @@ end,
 
 local color={
   {
-    'marko-cerovac/material.nvim',
+    "neanias/everforest-nvim",
+    version = false,
     event= 'VimEnter',
+    config = function()
+      require("everforest").setup({
+        ---Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
+        background = "medium",
+        transparent_background_level = 0,
+        italics = true,
+        sign_column_background = "grey",
+        dim_inactive_windows = true,
+        diagnostic_virtual_text = "grey",
+        ---Some plugins support highlighting error/warning/info/hint lines, but this
+        ---feature is disabled by default in this colour scheme.
+        diagnostic_line_highlight = true,
+      })
+      vim.cmd 'colorscheme everforest'
+    end,
+  },
+  {
+    'marko-cerovac/material.nvim',
+    -- event= 'VimEnter',
     config=function()
       require('material').setup({
         contrast = {
@@ -105,8 +125,12 @@ local line={
           'diff',
         },
         lualine_x = {'diagnostic','filetype'},
-        -- lualine_y = {'progress','location'},
-        -- lualine_z = {'location'}
+        lualine_y = {'progress','location'},
+        lualine_z = {
+          function()
+            return " " .. os.date("%R")
+          end,
+        },
       },
       inactive_sections = {
         lualine_a = {},
@@ -279,7 +303,7 @@ local hlchunk = {
   "shellRaining/hlchunk.nvim",
   -- event = "BufRead",
   keys = {
-    { "<leader>uh", "<cmd>EnableHL<cr>" , desc = "Minimap Toggle" },
+    { "<leader>uh", "<cmd>EnableHL<cr>" , desc = "Enable hlchunk" },
   },
   config = function()
     require('hlchunk').setup({
