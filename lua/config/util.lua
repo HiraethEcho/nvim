@@ -2,6 +2,19 @@ local vim = vim
 local M = {}
 local Util = require("lazy.core.util")
 
+
+function M.system_open(path)
+  -- TODO: REMOVE WHEN DROPPING NEOVIM <0.10
+  if vim.ui.open then return vim.ui.open(path) end
+  local cmd
+  if vim.fn.has "win32" == 1 and vim.fn.executable "explorer" == 1 then
+    cmd = { "cmd.exe", "/K", "explorer" }
+  elseif vim.fn.has "unix" == 1 and vim.fn.executable "xdg-open" == 1 then
+    cmd = { "xdg-open" }
+  end
+  vim.fn.jobstart(vim.fn.extend(cmd, { path or vim.fn.expand "<cfile>" }), { detach = true })
+end
+
 M.has = function(feat)
   if vim.fn.has(feat) == 1 then
     return true

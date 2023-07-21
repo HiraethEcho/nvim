@@ -45,15 +45,51 @@ return {
       follow_current_file = true,
       use_libuv_file_watcher = true,
     },
-    sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+    sources = { "filesystem", "buffers", "git_status", "document_symbols", "diagnostics" },
+    commands = {
+      system_open = function(state)
+        require("config.util").system_open(state.tree:get_node():get_id())
+      end,
+      copy_selector = function(state)
+        local node = state.tree:get_node()
+        local filepath = node:get_id()
+        local filename = node.name
+        local modify = vim.fn.fnamemodify
+
+        local results = {
+          e = { val = modify(filename, ":e"), msg = "Extension only" },
+          f = { val = filename, msg = "Filename" },
+          F = { val = modify(filename, ":r"), msg = "Filename w/o extension" },
+          h = { val = modify(filepath, ":~"), msg = "Path relative to Home" },
+          p = { val = modify(filepath, ":."), msg = "Path relative to CWD" },
+          P = { val = filepath, msg = "Absolute path" },
+        }
+
+        local messages = {
+          { "\nChoose to copy to clipboard:\n", "Normal" },
+        }
+        for i, result in pairs(results) do
+          if result.val and result.val ~= "" then
+            vim.list_extend(messages, {
+              { ("%s."):format(i), "Identifier" },
+              { (" %s: "):format(result.msg) },
+              { result.val, "String" },
+              { "\n" },
+            })
+          end
+        end
+        vim.api.nvim_echo(messages, false, {})
+        local result = results[vim.fn.getcharstr()]
+        if result and result.val and result.val ~= "" then
+          utils.notify(("Copied: `%s`"):format(result.val))
+          vim.fn.setreg("+", result.val)
+        end
+      end,
+    },
     window = {
-      position = "left",
-      width = 30,
-      mapping_options = {
-        noremap = true,
-        nowait = true,
-      },
       mappings = {
+        o = "system_open",
+        Y = "copy_selector",
         ["l"] = {
           "toggle_node",
           nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 
@@ -104,17 +140,11 @@ return {
         ["<c-x>"] = "clear_filter",
         ["[g"] = "prev_git_modified",
         ["]g"] = "next_git_modified",
+        ["[b"] = "prev_source",
+        ["]b"] = "next_source",
       }
     },
     default_component_configs = {
-      indent = {
-        with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-        expander_collapsed = "",
-        expander_expanded = "",
-        expander_highlight = "NeoTreeExpander",
-        indent_size = 2,
-        padding = 1, -- extra padding on left hand side
-      },
       icon = {
         folder_closed = "",
         folder_open = "",
@@ -122,9 +152,9 @@ return {
       },
       git_status = {
         symbols = {
-          added     = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
-          modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-          deleted   = "✖",-- this can only be used in the git_status source
+          added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+          modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
+          deleted   = "",-- this can only be used in the git_status source
           renamed = "󰁕",
           -- Status type
           untracked = "",
