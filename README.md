@@ -2,14 +2,13 @@
 
 ## usage
 
-test
-what
+
 ```zsh
 nvim 
 ```
 ## todo
 ### plugins:
-- [ ] comment.nvim
+- [X] comment.nvim
 - [ ] session-manager
 - [ ] 
 

@@ -2,7 +2,14 @@ local vim = vim
 return {
   {
     "tpope/vim-commentary",
+    -- event = "BufReadPost",
+  },
+  {
+    'numToStr/Comment.nvim',
     event = "BufReadPost",
+    config = function()
+      require('Comment').setup()
+    end
   },
   {
     "lambdalisue/suda.vim",
