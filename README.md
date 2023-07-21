@@ -23,7 +23,6 @@ test
    - hell
 4. ok
 
-test
 ### ulti
 
 - [x] for neo-tree, using cmd, explorer file.name
@@ -70,7 +69,7 @@ GitSign = "▎",
 GitStaged = "✓",
 GitUnstaged = "✗",
 GitUntracked = "★",
-LSPLoaded = "", -- TODO: Remove unused icon in AstroNvim v4
+LSPLoaded = "",
 LSPLoading1 = "",
 LSPLoading2 = "󰀚",
 LSPLoading3 = "",

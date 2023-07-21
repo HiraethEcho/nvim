@@ -41,6 +41,7 @@ local line = {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
+    "meuter/lualine-so-fancy.nvim",
   },
   event = "BufRead",
   config = function()
@@ -82,18 +83,18 @@ local line = {
             shorting_target = 40, -- Shortens path to leave 40 spaces in the window
             -- for other components. (terrible name, any suggestions?)
             symbols = {
-              modified = "●", -- Text to show when the file is modified.
-              readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-              unnamed = "[No Name]", -- Text to show for unnamed buffers.
-              newfile = "[New]", -- Text to show for newly created file before first write
+              modified = "", -- Text to show when the file is modified.
+              readonly = "", -- Text to show when the file is non-modifiable or readonly.
+              unnamed = "", -- Text to show for unnamed buffers.
+              newfile = "", -- Text to show for newly created file before first write
             },
           },
         },
         lualine_c = {
           "branch",
-          "diff",
+          "fancy_diff",
         },
-        lualine_x = { "diagnostic", "filetype" },
+        lualine_x = { "fancy_diagnostics", "fancy_lsp_servers", "filetype" },
         lualine_y = { "progress", "location" },
         lualine_z = {
           function()
@@ -115,10 +116,10 @@ local line = {
             shorting_target = 40, -- Shortens path to leave 40 spaces in the window
             -- for other components. (terrible name, any suggestions?)
             symbols = {
-              modified = " ●", -- Text to show when the file is modified.
-              readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-              unnamed = "[No Name]", -- Text to show for unnamed buffers.
-              newfile = "[New]", -- Text to show for newly created file before first write
+              modified = "", -- Text to show when the file is modified.
+              readonly = "", -- Text to show when the file is non-modifiable or readonly.
+              unnamed = "", -- Text to show for unnamed buffers.
+              newfile = "", -- Text to show for newly created file before first write
             },
           },
           "branch",
@@ -133,10 +134,10 @@ local line = {
           {
             "filename",
             symbols = {
-              modified = "●", -- Text to show when the file is modified.
-              readonly = "-", -- Text to show when the file is non-modifiable or readonly.
-              unnamed = "[unnamed]", -- Text to show for unnamed buffers.
-              newfile = "[New]", -- Text to show for newly created file before first write
+              modified = "", -- Text to show when the file is modified.
+              readonly = "", -- Text to show when the file is non-modifiable or readonly.
+              unnamed = "", -- Text to show for unnamed buffers.
+              newfile = "", -- Text to show for newly created file before first write
             },
           },
         },
@@ -151,7 +152,7 @@ local line = {
             -- 3: Shows buffer number
             -- 4: Shows buffer name + buffer number
             symbols = {
-              modified = " ●", -- Text to show when the buffer is modified
+              modified = "", -- Text to show when the buffer is modified
               alternate_file = "", -- Text to show to identify the alternate file
               directory = "", -- Text to show when the buffer is a directory
             },
@@ -177,7 +178,7 @@ local line = {
           session_name,
         },
       },
-      extensions = {},
+      extensions = { "neo-tree", "lazy" },
     })
   end,
 }

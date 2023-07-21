@@ -1,22 +1,11 @@
-local vim = vim
-local lazygit = {
-  "kdheepak/lazygit.nvim",
-  cmd = "LazyGit",
-  keys = {
-    { "<leader>gg", "<cmd>LazyGit<cr>", desc = "lazygit" },
-  },
-  config = function()
-    vim.g.lazygit_floating_window_winblend = 80 -- transparency of floating window
-    vim.g.lazygit_floating_window_scaling_factor = 0.8
-    vim.g.lazygit_floating_window_use_plenary = 1
-  end,
-}
 
 local gitsigns = {
   "lewis6991/gitsigns.nvim",
   keys = {
     { "<leader>hj", "<cmd>Gitsigns next_hunk <cr>",      desc = "nexthunk" },
     { "<leader>hk", "<cmd>Gitsigns prev_hunk<cr>",       desc = "prevhunk" },
+    { "]h",         "<cmd>Gitsigns next_hunk <cr>",      desc = "nexthunk" },
+    { "[h",         "<cmd>Gitsigns prev_hunk<cr>",       desc = "prevhunk" },
     { "<leader>hD", "<cmd>Gitsigns diffthis<cr>",        desc = "gitdiff" },
     { "<leader>hd", "<cmd>Gitsigns toggle_deleted<cr>",  desc = "toggle deleted" },
     { "<leader>hu", "<cmd>Gitsigns reset_hunk<cr>",      desc = "undohunk" },
@@ -43,7 +32,6 @@ local gitsigns = {
         delete = { text = "_" },
         topdelete = { text = "‾" },
         changedelete = { text = "~" },
-        untracked = { text = "┆" },
       },
       signcolumn = false, -- toggle with `:gitsigns toggle_signs`
       numhl = false,   -- toggle with `:gitsigns toggle_numhl`
@@ -62,21 +50,6 @@ local gitsigns = {
         ignore_whitespace = true,
       },
       current_line_blame_formatter = "<author>, <author_time:%y-%m-%d> - <summary>",
-      sign_priority = 6,
-      update_debounce = 100,
-      status_formatter = nil, -- use default
-      max_file_length = 40000, -- disable if file is longer than this (in lines)
-      preview_config = {
-        -- options passed to nvim_open_win
-        border = "single",
-        style = "minimal",
-        relative = "cursor",
-        row = 0,
-        col = 1,
-      },
-      yadm = {
-        enable = false,
-      },
     })
     require("scrollbar.handlers.gitsigns").setup()
   end,
@@ -101,9 +74,7 @@ local confict = {
 }
 
 local spec = {
-  -- lazygit,
   gitsigns,
   confict,
 }
--- todo:gutter or gitsings?
 return spec
