@@ -1,5 +1,5 @@
 local vim = vim
-return{
+return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
@@ -16,15 +16,15 @@ return{
       dependencies = {
         "quangnguyen30192/cmp-nvim-ultisnips",
         config = function()
-        require("cmp_nvim_ultisnips").setup{}
+          require("cmp_nvim_ultisnips").setup({})
         end,
-      }
+      },
     },
     "onsails/lspkind-nvim",
   },
-  config = function ()
+  config = function()
     local cmp = require("cmp")
-    cmp.setup{
+    cmp.setup({
       completion = {
         completeopt = "menu,menuone,noinsert,noselect",
       },
@@ -34,55 +34,55 @@ return{
         end,
       },
       mapping = cmp.mapping.preset.insert({
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-d>'] = cmp.mapping.scroll_docs(4),
-        ['<Tab>'] = function(fallback)
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),
+        ["<Tab>"] = function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
           else
             fallback()
           end
         end,
-        ['<S-Tab>'] = function(fallback)
+        ["<S-Tab>"] = function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           else
             fallback()
           end
         end,
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       }),
       sources = cmp.config.sources({
-        { name = 'ultisnips' }, -- For ultisnips users.
+        { name = "ultisnips" }, -- For ultisnips users.
         { name = "nvim_lsp" },
         {
-          name = 'buffer',
+          name = "buffer",
           option = {
             get_bufnrs = function()
               return vim.api.nvim_list_bufs()
-            end
-          }
+            end,
+          },
         },
         {
-            name = 'spell',
-            option = {
-                keep_all_entries = false,
-                enable_in_context = function()
-                    return true
-                end,
-            },
+          name = "spell",
+          option = {
+            keep_all_entries = false,
+            enable_in_context = function()
+              return true
+            end,
+          },
         },
         { name = "path" },
         { name = "nvim_lua" },
         {
-          name = 'look',
+          name = "look",
           keyword_length = 2,
           option = {
             convert_case = true,
-            loud = true
+            loud = true,
             --dict = '/usr/share/dict/words'
-          }
+          },
         },
       }),
       experimental = {
@@ -91,16 +91,16 @@ return{
         },
       },
       formatting = {
-        format = require'lspkind'.cmp_format({
+        format = require("lspkind").cmp_format({
           with_text = true, -- do not show text alongside icons
-          maxwidth = 50,    -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
           before = function(entry, vim_item)
             -- Source 显示提示来源
             vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
             return vim_item
-          end
-        })
+          end,
+        }),
       },
-    }
-  end
+    })
+  end,
 }

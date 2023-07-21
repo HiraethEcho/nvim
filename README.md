@@ -5,16 +5,16 @@
 ```zsh
 nvim
 ```
-
+test
 ## todo
 
-### plugins:
+### plugins
 
 - [x] comment.nvim
 - [ ] session-manager
 - [ ]
 
-### ulti:
+### ulti
 
 - [x] for neo-tree, using cmd, explorer file.name
 

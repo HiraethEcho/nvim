@@ -6,11 +6,11 @@ return {
     build = ":TSUpdate",
     -- event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      'kevinhwang91/nvim-ufo',
+      "kevinhwang91/nvim-ufo",
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        config=function ()
-          require'nvim-treesitter.configs'.setup {
+        config = function()
+          require("nvim-treesitter.configs").setup({
             textobjects = {
               select = {
                 enable = true,
@@ -26,9 +26,9 @@ return {
                 },
                 -- You can choose the select mode (default is charwise 'v')
                 selection_modes = {
-                  ['@parameter.outer'] = 'v', -- charwise
-                  ['@function.outer'] = 'V', -- linewise
-                  ['@class.outer'] = '<c-v>', -- blockwise
+                  ["@parameter.outer"] = "v", -- charwise
+                  ["@function.outer"] = "V", -- linewise
+                  ["@class.outer"] = "<c-v>", -- blockwise
                 },
                 -- If you set this to `true` (default is `false`) then any textobject is
                 -- extended to include preceding or succeeding whitespace. Succeeding
@@ -37,7 +37,7 @@ return {
                 -- include_surrounding_whitespace = false,
               },
             },
-          }
+          })
         end,
       },
     },
@@ -77,27 +77,27 @@ return {
     end,
   },
   {
-    'kevinhwang91/nvim-ufo',
-    dependencies = 'kevinhwang91/promise-async',
-    config = function ()
-      require('ufo').setup({
+    "kevinhwang91/nvim-ufo",
+    dependencies = "kevinhwang91/promise-async",
+    config = function()
+      require("ufo").setup({
         provider_selector = function(bufnr, filetype, buftype)
-              return {'treesitter', 'indent'}
+          return { "treesitter", "indent" }
         end,
         open_fold_hl_timeout = 100,
         preview = {
           win_config = {
-            border = {'', '─', '', '', '', '─', '', ''},
-            winhighlight = 'Normal:Folded',
-            winblend = 0
+            border = { "", "─", "", "", "", "─", "", "" },
+            winhighlight = "Normal:Folded",
+            winblend = 0,
           },
           mappings = {
-            scrollU = '<C-u>',
-            scrollD = '<C-d>',
-            jumpTop = '[',
-            jumpBot = ']'
-          }
-        }
+            scrollU = "<C-u>",
+            scrollD = "<C-d>",
+            jumpTop = "[",
+            jumpBot = "]",
+          },
+        },
       })
     end,
   },
@@ -105,10 +105,10 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
     cmd = "TSContextEnable",
     keys = {
-      {"<leader>ut","<cmd>TSContextEnable<cr>",  desc = "toggle treesitter context" },
+      { "<leader>ut", "<cmd>TSContextEnable<cr>", desc = "toggle treesitter context" },
     },
     opts = {
       max_lines = 3,
-    }
+    },
   },
 }

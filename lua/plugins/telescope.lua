@@ -4,53 +4,62 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "files" },
+      { "<leader>ff", "<cmd>Telescope find_files<cr>",   desc = "files" },
       { "<leader>fF", "<cmd>Telescope file_browser<cr>", desc = "files" },
-      { "<leader>fc", "<cmd>lua require('material.functions').find_style()<cr>", desc = "color scheme" },
-      { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "old files" },
-      { "<leader>fs", "<cmd>Telescope live_grep<cr>", desc = "live grep" },
-      { "<leader>?", "<cmd>Telescope live_grep<cr>", desc = "live grep" },
-      { "<leader>fg", "<cmd>Telescope grep_string<cr>", desc = "grep string" },
-      { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "buffers" },
-
-      { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "current buffer fuzzy find" },
-      { "<leader>`", "<cmd>Telescope marks<cr>", desc = "marks" },
-
+      { "<leader>fo", "<cmd>Telescope oldfiles<cr>",     desc = "old files" },
+      { "<leader>fs", "<cmd>Telescope live_grep<cr>",    desc = "live grep" },
+      { "<leader>?",  "<cmd>Telescope live_grep<cr>",    desc = "live grep" },
+      { "<leader>fg", "<cmd>Telescope grep_string<cr>",  desc = "grep string" },
+      { "<leader>b",  "<cmd>Telescope buffers<cr>",      desc = "buffers" },
+      {
+        "<leader>/",
+        "<cmd>Telescope current_buffer_fuzzy_find<cr>",
+        desc = "current buffer fuzzy find",
+      },
+      { "<leader>`",  "<cmd>Telescope marks<cr>",        desc = "marks" },
       { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "git branch" },
-      { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "git commits" },
-      { "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "git status" },
-      { "<leader>gS", "<cmd>Telescope git_stash<cr>", desc = "git stash" },
-      { "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "git files" },
+      { "<leader>gc", "<cmd>Telescope git_commits<cr>",  desc = "git commits" },
+      { "<leader>gs", "<cmd>Telescope git_status<cr>",   desc = "git status" },
+      { "<leader>gS", "<cmd>Telescope git_stash<cr>",    desc = "git stash" },
+      { "<leader>gf", "<cmd>Telescope git_files<cr>",    desc = "git files" },
 
-      { "<leader>id", ":lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>", desc = "current buffer diagnostics" },
+      {
+        "<leader>id",
+        ":lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>",
+        desc = "current buffer diagnostics",
+      },
       { "<leader>iD", ":lua require'telescope.builtin'.diagnostics{}<cr>", desc = "workspace diagnostics" },
-      { "<leader>ib", ":lua require'telescope.builtin'.builtin<cr>", desc = "telescope builtin" },
-      { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
+      { "<leader>ib", ":lua require'telescope.builtin'.builtin<cr>",       desc = "telescope builtin" },
+      {
+        "<leader>uC",
+        Util.telescope("colorscheme", { enable_preview = true }),
+        desc = "Colorscheme with preview",
+      },
 
-      { "<leader>ir", "<cmd>Telescope registers<cr>", desc = "registers" },
-      { "<leader>it", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-      { "<leader>ic", "<cmd>Telescope commands<cr>", desc = "commands" },
-      { "<leader>;", "<cmd>Telescope command_history<cr>", desc = "commands history" },
-      { "<leader>i/", "<cmd>Telescope search_history<cr>", desc = "search history" },
+      { "<leader>ir", "<cmd>Telescope registers<cr>",       desc = "registers" },
+      { "<leader>it", "<cmd>TodoTelescope<cr>",             desc = "Todo" },
+      { "<leader>ic", "<cmd>Telescope commands<cr>",        desc = "commands" },
+      { "<leader>;",  "<cmd>Telescope command_history<cr>", desc = "commands history" },
+      { "<leader>i/", "<cmd>Telescope search_history<cr>",  desc = "search history" },
       { "<leader>is", "<cmd>Telescope possession list<cr>", desc = "sessions" },
-      { "<leader>im", "<cmd>Telescope marks<cr>", desc = "marks" },
-      { "<leader>ij", "<cmd>Telescope jumplist<cr>", desc = "jump list" },
-      { "<leader>ih", "<cmd>Telescope help_tags<cr>", desc = "help tags" },
-      { "<leader>w", "<cmd>Telescope spell_suggest<cr>", desc = "spell suggest" },
+      { "<leader>im", "<cmd>Telescope marks<cr>",           desc = "marks" },
+      { "<leader>ij", "<cmd>Telescope jumplist<cr>",        desc = "jump list" },
+      { "<leader>ih", "<cmd>Telescope help_tags<cr>",       desc = "help tags" },
+      { "<leader>w",  "<cmd>Telescope spell_suggest<cr>",   desc = "spell suggest" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-project.nvim",
-      'nvim-telescope/telescope-ui-select.nvim',
+      "nvim-telescope/telescope-ui-select.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
     },
     config = function()
-      local fb_actions = require "telescope._extensions.file_browser.actions"
-      require('telescope').setup{
+      local fb_actions = require("telescope._extensions.file_browser.actions")
+      require("telescope").setup({
         defaults = {
           winblend = 10,
-          initial_mode="normal",
-          scroll_strategy="limit",
+          initial_mode = "normal",
+          scroll_strategy = "limit",
           mappings = {
             i = {
               --       ["<c-d>"] = "delete_buffer",
@@ -80,28 +89,28 @@ return {
         },
         pickers = {
           current_buffer_fuzzy_find = {
-            initial_mode="insert",
+            initial_mode = "insert",
           },
           spell_suggest = {
             theme = "cursor",
           },
           help_tags = {
-            initial_mode="insert",
+            initial_mode = "insert",
           },
           commands = {
-            initial_mode="insert",
+            initial_mode = "insert",
           },
           live_grep = {
-            initial_mode="insert",
+            initial_mode = "insert",
           },
           grep_string = {
-            initial_mode="insert",
+            initial_mode = "insert",
           },
           find_files = {
-            initial_mode="insert",
+            initial_mode = "insert",
           },
           buffers = {
-            initial_mode="normal",
+            initial_mode = "normal",
             mappings = {
               i = {
                 ["<c-d>"] = "delete_buffer",
@@ -111,8 +120,8 @@ return {
               },
             },
           },
-          git_branches={
-            initial_mode="normal",
+          git_branches = {
+            initial_mode = "normal",
             mappings = {
               n = {
                 ["<space>"] = "git_checkout",
@@ -123,8 +132,8 @@ return {
               },
             },
           },
-          git_commits={
-            initial_mode="normal",
+          git_commits = {
+            initial_mode = "normal",
             mappings = {
               n = {
                 ["gm"] = "git_reset_mixed",
@@ -133,8 +142,8 @@ return {
               },
             },
           },
-          git_status={
-            initial_mode="normal",
+          git_status = {
+            initial_mode = "normal",
             mappings = {
               n = {
                 ["<space>"] = "git_staging_toggle",
@@ -188,22 +197,21 @@ return {
             },
           },
           ["ui-select"] = {
-            require("telescope.themes").get_dropdown {
-            }
-          }
+            require("telescope.themes").get_dropdown({}),
+          },
         },
-      }
-      require('telescope').load_extension('possession')
-      require('telescope').load_extension('file_browser')
-      require('telescope').load_extension('ui-select')
-      require'telescope'.load_extension('project')
+      })
+      require("telescope").load_extension("possession")
+      require("telescope").load_extension("file_browser")
+      require("telescope").load_extension("ui-select")
+      require("telescope").load_extension("project")
     end,
   },
   {
-    'jedrzejboczar/possession.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function ()
-      require('possession').setup {
+    "jedrzejboczar/possession.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("possession").setup({
         -- session_dir = (Path:new(vim.fn.stdpath('data')) / 'possession'):absolute(),
         session_dir = vim.fn.stdpath("data") .. "/sessions",
         silent = false,
@@ -212,52 +220,56 @@ return {
         logfile = false,
         prompt_no_cr = false,
         autosave = {
-          current = true,  -- or fun(name): boolean
-          tmp = true,  -- or fun(): boolean
-          tmp_name = 'tmp',
+          current = true, -- or fun(name): boolean
+          tmp = true, -- or fun(): boolean
+          tmp_name = "tmp",
           on_load = true,
           on_quit = true,
         },
         commands = {
-          save    = 'PSave',
-          load    = 'PLoad',
-          rename  = 'PRename',
-          close   = 'PClose',
-          delete  = 'PDelete',
-          show    = 'PShow',
-          list    = 'PList',
-          migrate = 'PMigrate',
+          save = "PSave",
+          load = "PLoad",
+          rename = "PRename",
+          close = "PClose",
+          delete = "PDelete",
+          show = "PShow",
+          list = "PList",
+          migrate = "PMigrate",
         },
         hooks = {
-          before_save = function(name) return {} end,
+          before_save = function(name)
+            return {}
+          end,
           after_save = function(name, user_data, aborted) end,
-          before_load = function(name, user_data) return user_data end,
+          before_load = function(name, user_data)
+            return user_data
+          end,
           after_load = function(name, user_data) end,
         },
         plugins = {
           close_windows = {
-            hooks = {'before_save', 'before_load'},
-            preserve_layout = true,  -- or fun(win): boolean
+            hooks = { "before_save", "before_load" },
+            preserve_layout = true, -- or fun(win): boolean
             match = {
               floating = true,
               buftype = {},
               filetype = {},
-              custom = false,  -- or fun(win): boolean
+              custom = false, -- or fun(win): boolean
             },
           },
           delete_hidden_buffers = {
             hooks = {
-              'before_load',
-              vim.o.sessionoptions:match('buffer') and 'before_save',
+              "before_load",
+              vim.o.sessionoptions:match("buffer") and "before_save",
             },
-            force = false,  -- or fun(buf): boolean
+            force = false, -- or fun(buf): boolean
           },
           nvim_tree = true,
           tabby = true,
           dap = true,
           delete_buffers = false,
         },
-      }
+      })
     end,
   },
 }

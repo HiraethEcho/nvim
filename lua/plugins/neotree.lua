@@ -1,26 +1,74 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   keys = {
-    { "<leader>ee" , "<cmd>Neotree position=left toggle=true<cr>"                             , desc = "File tree"              } ,
-    { "<leader>ef" , "<cmd>Neotree float toggle=true<cr>"                                     , desc = "File tree float"        } ,
-    { "<leader>eb" , "<cmd>Neotree toggle=true float source=buffers<cr>"                      , desc = "buffers float"          } ,
-    { "<leader>en" , "<cmd>Neotree toggle=true float dir="..vim.fn.stdpath("config").." <cr>" , desc = "nvim file float"        } ,
-    { "<leader>eg" , "<cmd>Neotree toggle=true float dir=~/github<cr>"                        , desc = "win github file float"  } ,
-    { "<leader>eG" , "<cmd>Neotree toggle=true float dir=~/Github_arch<cr>"                   , desc = "arch Github file float" } ,
-    { "<leader>ep" , "<cmd>Neotree toggle=true float dir=~/documents/Projects <cr>"           , desc = "Projects file float"    } ,
-    { "<leader>ed" , "<cmd>Neotree toggle=true float dir=~/documents<cr>"                     , desc = "documents file float"   } ,
-    { "<leader>eo" , "<cmd>Neotree toggle=true float dir=~/obsidian<cr>"                      , desc = "obsidian file float"    } ,
-    { "<leader>es" , "<cmd>Neotree toggle=true float dir=~/site<cr>"                          , desc = "site file float"        } ,
-    { "<leader>eh" , "<cmd>Neotree toggle=true float dir=~<cr>"                               , desc = "home file float"        } ,
-    { "<leader>gs" , "<cmd>Neotree source=git_status <cr>"                                    , desc = "git_status"             } ,
+    {
+      "<leader>ee",
+      "<cmd>Neotree position=left toggle=true<cr>",
+      desc = "File tree",
+    },
+    {
+      "<leader>ef",
+      "<cmd>Neotree float toggle=true<cr>",
+      desc = "File tree float",
+    },
+    {
+      "<leader>eb",
+      "<cmd>Neotree toggle=true float source=buffers<cr>",
+      desc = "buffers float",
+    },
+    {
+      "<leader>en",
+      "<cmd>Neotree toggle=true float dir=" .. vim.fn.stdpath("config") .. " <cr>",
+      desc = "nvim file float",
+    },
+    {
+      "<leader>eg",
+      "<cmd>Neotree toggle=true float dir=~/github<cr>",
+      desc = "win github file float",
+    },
+    {
+      "<leader>eG",
+      "<cmd>Neotree toggle=true float dir=~/Github_arch<cr>",
+      desc = "arch Github file float",
+    },
+    {
+      "<leader>ep",
+      "<cmd>Neotree toggle=true float dir=~/documents/Projects <cr>",
+      desc = "Projects file float",
+    },
+    {
+      "<leader>ed",
+      "<cmd>Neotree toggle=true float dir=~/documents<cr>",
+      desc = "documents file float",
+    },
+    {
+      "<leader>eo",
+      "<cmd>Neotree toggle=true float dir=~/obsidian<cr>",
+      desc = "obsidian file float",
+    },
+    {
+      "<leader>es",
+      "<cmd>Neotree toggle=true float dir=~/site<cr>",
+      desc = "site file float",
+    },
+    {
+      "<leader>eh",
+      "<cmd>Neotree toggle=true float dir=~<cr>",
+      desc = "home file float",
+    },
+    {
+      "<leader>gs",
+      "<cmd>Neotree source=git_status <cr>",
+      desc = "git_status",
+    },
   },
   dependencies = {
-    {"nvim-lua/plenary.nvim"},
-    {"MunifTanjim/nui.nvim"},
+    { "nvim-lua/plenary.nvim" },
+    { "MunifTanjim/nui.nvim" },
     {
-      's1n7ax/nvim-window-picker',
+      "s1n7ax/nvim-window-picker",
       config = function()
-        require'window-picker'.setup({
+        require("window-picker").setup({
           autoselect_one = true,
           include_current = false,
         })
@@ -71,9 +119,9 @@ return {
         for i, result in pairs(results) do
           if result.val and result.val ~= "" then
             vim.list_extend(messages, {
-              { ("%s."):format(i), "Identifier" },
+              { ("%s."):format(i),           "Identifier" },
               { (" %s: "):format(result.msg) },
-              { result.val, "String" },
+              { result.val,                  "String" },
               { "\n" },
             })
           end
@@ -92,7 +140,7 @@ return {
         Y = "copy_selector",
         ["l"] = {
           "toggle_node",
-          nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 
+          nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
         },
         ["<2-LeftMouse>"] = "open",
         ["<cr>"] = "open",
@@ -110,8 +158,8 @@ return {
         ["a"] = {
           "add",
           config = {
-            show_path = "none" -- "none", "relative", "absolute"
-          }
+            show_path = "none", -- "none", "relative", "absolute"
+          },
         },
         ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
         ["D"] = "delete",
@@ -142,7 +190,7 @@ return {
         ["]g"] = "next_git_modified",
         ["[b"] = "prev_source",
         ["]b"] = "next_source",
-      }
+      },
     },
     default_component_configs = {
       icon = {
@@ -152,18 +200,18 @@ return {
       },
       git_status = {
         symbols = {
-          added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-          modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-          deleted   = "",-- this can only be used in the git_status source
+          added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+          modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+          deleted = "", -- this can only be used in the git_status source
           renamed = "󰁕",
           -- Status type
           untracked = "",
-          ignored   = "◌",
-          unstaged  = "✗",
-          staged    = "✓",
-          conflict  = "",
-        }
+          ignored = "◌",
+          unstaged = "✗",
+          staged = "✓",
+          conflict = "",
+        },
       },
     },
-  }
+  },
 }

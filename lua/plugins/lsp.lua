@@ -10,8 +10,8 @@ return {
       { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
     dependencies = {
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
-        "williamboman/mason.nvim",
+      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+      "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "SmiteshP/nvim-navbuddy",
@@ -23,7 +23,7 @@ return {
           lua = {
             diagnostics = {
               -- Get the language server to recognize the `vim` global
-              globals = { 'vim' },
+              globals = { "vim" },
             },
           },
           checkThirdParty = false,
@@ -35,8 +35,8 @@ return {
           grammarly = {
             config = {
               documentDomain = "academic",
-            }
-          }
+            },
+          },
         },
         texlab = {
           texlab = {
@@ -44,23 +44,27 @@ return {
               forwardSearchAfter = true,
             },
             forwardSearch = {
-              executable = 'Sioyek',
+              executable = "Sioyek",
               args = {
-                '--reuse-window',
-                '--execute-command', 'toggle_synctex', -- Open Sioyek in synctex mode.
-                '--inverse-search',
+                "--reuse-window",
+                "--execute-command",
+                "toggle_synctex", -- Open Sioyek in synctex mode.
+                "--inverse-search",
                 [[nvim --server ]] .. vim.v.servername .. [[ --remote-send ":e %%%1<cr>:%%%2<cr>"]],
                 -- [[nvim --server ]] .. vim.v.servername .. [[ --remote-send ":%%%2<cr>"]],
-                '--forward-search-file', '%f',
-                '--forward-search-line', '%l', '%p'
+                "--forward-search-file",
+                "%f",
+                "--forward-search-line",
+                "%l",
+                "%p",
               },
             },
             chktex = {
               onOpenAndSave = true,
               onEdit = false,
             },
-            bibtexFormatter = 'texlab',
-            latexFormatter = 'texlab',
+            bibtexFormatter = "texlab",
+            latexFormatter = "texlab",
             formatterLineLength = 80,
           },
         },
@@ -72,12 +76,12 @@ return {
         ensure_installed = vim.tbl_keys(servers),
         handlers = {
           function(server_name) -- default handler (optional)
-            require("lspconfig")[server_name].setup {
-              capabilities = require('cmp_nvim_lsp').default_capabilities(),
+            require("lspconfig")[server_name].setup({
+              capabilities = require("cmp_nvim_lsp").default_capabilities(),
               settings = servers[server_name],
-            }
+            })
           end,
-        }
+        },
       })
     end,
   },
@@ -86,14 +90,15 @@ return {
     cmd = "Mason",
     keys = { { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
-    config = function ()
+    config = function()
       require("mason").setup()
       require("mason-null-ls").setup({
         ensure_installed = {
           -- Opt to list sources here, when available in mason.
-          'prettier',
-          'stylua',
-          'latexindent',
+          "prettier",
+          "markdownlint",
+          "stylua",
+          "latexindent",
         },
         automatic_installation = true,
         handlers = {},
@@ -101,9 +106,9 @@ return {
       require("null-ls").setup({
         sources = {
           -- Anything not supported by mason.
-        }
+        },
       })
-    end
+    end,
   },
   {
     "jose-elias-alvarez/null-ls.nvim",

@@ -4,8 +4,7 @@ local transparent = {
   cmd = "TransparentEnable",
   -- lazy=false,
   config = function()
-    require("transparent").setup({
-    })
+    require("transparent").setup({})
   end,
 }
 
@@ -13,7 +12,7 @@ local color = {
   {
     "neanias/everforest-nvim",
     version = false,
-    event = 'VimEnter',
+    event = "VimEnter",
     config = function()
       require("everforest").setup({
         ---Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
@@ -27,22 +26,22 @@ local color = {
         ---feature is disabled by default in this colour scheme.
         diagnostic_line_highlight = true,
       })
-      vim.cmd 'colorscheme everforest'
+      vim.cmd("colorscheme everforest")
     end,
   },
   {
-    'marko-cerovac/material.nvim',
+    "marko-cerovac/material.nvim",
     -- event= 'VimEnter',
     config = function()
-      require('material').setup({
+      require("material").setup({
         contrast = {
-          terminal = false,           -- Enable contrast for the built-in terminal default=false
-          sidebars = true,            -- Enable contrast for sidebar-like windows ( for example Nvim-Tree ) default=false
-          floating_windows = true,    -- Enable contrast for floating windows default=false
-          cursor_line = true,         -- Enable darker background for the cursor line default=false
+          terminal = false,      -- Enable contrast for the built-in terminal default=false
+          sidebars = true,       -- Enable contrast for sidebar-like windows ( for example Nvim-Tree ) default=false
+          floating_windows = true, -- Enable contrast for floating windows default=false
+          cursor_line = true,    -- Enable darker background for the cursor line default=false
           non_current_windows = true, -- Enable contrasted background for non-current windows default=false
         },
-        plugins = {                   -- Uncomment the plugins that you use to highlight them
+        plugins = {              -- Uncomment the plugins that you use to highlight them
           -- Available plugins:
           "gitsigns",
           "hop",
@@ -56,14 +55,14 @@ local color = {
           -- "trouble",
         },
       })
-      vim.cmd 'colorscheme material'
+      vim.cmd("colorscheme material")
     end,
   },
   {
-    'norcalli/nvim-colorizer.lua',
+    "norcalli/nvim-colorizer.lua",
     cmd = "ColorizerToggle",
     config = function()
-      require 'colorizer'.setup()
+      require("colorizer").setup()
     end,
   },
 }
@@ -76,18 +75,18 @@ local line = {
   event = "BufRead",
   config = function()
     local function session_name()
-      return require('possession.session').session_name or ''
+      return require("possession.session").session_name or ""
     end
-    require('lualine').setup {
+    require("lualine").setup({
       options = {
         icons_enabled = true,
-        theme = 'nord',
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
+        theme = "nord",
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         disabled_filetypes = {
           statusline = {
-            'neo-tree',
-            'sagaoutline',
+            "neo-tree",
+            "sagaoutline",
           },
           -- winbar = {},
         },
@@ -97,35 +96,35 @@ local line = {
         refresh = {
           statusline = 1000,
           tabline = 1000,
-        }
+        },
       },
       sections = {
-        lualine_a = { 'mode' },
+        lualine_a = { "mode" },
         lualine_b = {
           {
-            'filename',
-            file_status = true,    -- Displays file status (readonly status, modified status)
+            "filename",
+            file_status = true, -- Displays file status (readonly status, modified status)
             newfile_status = true, -- Display new file status (new file means no write after created)
-            path = 1,              -- 0: Just the filename
+            path = 1,        -- 0: Just the filename
             -- 1: Relative path
             -- 2: Absolute path
             -- 3: Absolute path, with tilde as the home directory
             shorting_target = 40, -- Shortens path to leave 40 spaces in the window
             -- for other components. (terrible name, any suggestions?)
             symbols = {
-              modified = '●',      -- Text to show when the file is modified.
-              readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
-              unnamed = '[No Name]', -- Text to show for unnamed buffers.
-              newfile = '[New]',     -- Text to show for newly created file before first write
-            }
+              modified = "●", -- Text to show when the file is modified.
+              readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+              unnamed = "[No Name]", -- Text to show for unnamed buffers.
+              newfile = "[New]", -- Text to show for newly created file before first write
+            },
           },
         },
         lualine_c = {
-          'branch',
-          'diff',
+          "branch",
+          "diff",
         },
-        lualine_x = { 'diagnostic', 'filetype' },
-        lualine_y = { 'progress', 'location' },
+        lualine_x = { "diagnostic", "filetype" },
+        lualine_y = { "progress", "location" },
         lualine_z = {
           function()
             return " " .. os.date("%R")
@@ -136,67 +135,67 @@ local line = {
         lualine_a = {},
         lualine_b = {
           {
-            'filename',
-            file_status = true,    -- Displays file status (readonly status, modified status)
+            "filename",
+            file_status = true, -- Displays file status (readonly status, modified status)
             newfile_status = true, -- Display new file status (new file means no write after created)
-            path = 1,              -- 0: Just the filename
+            path = 1,        -- 0: Just the filename
             -- 1: Relative path
             -- 2: Absolute path
             -- 3: Absolute path, with tilde as the home directory
             shorting_target = 40, -- Shortens path to leave 40 spaces in the window
             -- for other components. (terrible name, any suggestions?)
             symbols = {
-              modified = ' ●',     -- Text to show when the file is modified.
-              readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
-              unnamed = '[No Name]', -- Text to show for unnamed buffers.
-              newfile = '[New]',     -- Text to show for newly created file before first write
-            }
+              modified = " ●", -- Text to show when the file is modified.
+              readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+              unnamed = "[No Name]", -- Text to show for unnamed buffers.
+              newfile = "[New]", -- Text to show for newly created file before first write
+            },
           },
-          'branch',
+          "branch",
         },
         lualine_c = {},
-        lualine_x = { 'progress' },
-        lualine_y = { 'Location' },
-        lualine_z = {}
+        lualine_x = { "progress" },
+        lualine_y = { "Location" },
+        lualine_z = {},
       },
       tabline = {
         lualine_a = {
           {
-            'filename',
+            "filename",
             symbols = {
-              modified = '●',      -- Text to show when the file is modified.
-              readonly = '-',        -- Text to show when the file is non-modifiable or readonly.
-              unnamed = '[unnamed]', -- Text to show for unnamed buffers.
-              newfile = '[New]',     -- Text to show for newly created file before first write
-            }
-          }
+              modified = "●", -- Text to show when the file is modified.
+              readonly = "-", -- Text to show when the file is non-modifiable or readonly.
+              unnamed = "[unnamed]", -- Text to show for unnamed buffers.
+              newfile = "[New]", -- Text to show for newly created file before first write
+            },
+          },
         },
         lualine_b = {
           {
-            'buffers',
-            show_filename_only = true,   -- Shows shortened relative path when set to false.
+            "buffers",
+            show_filename_only = true, -- Shows shortened relative path when set to false.
             show_modified_status = true, -- Shows indicator when the buffer is modified.
-            mode = 0,                    -- 0: Shows buffer name
+            mode = 0,              -- 0: Shows buffer name
             -- 1: Shows buffer index
             -- 2: Shows buffer name + buffer index
             -- 3: Shows buffer number
             -- 4: Shows buffer name + buffer number
             symbols = {
-              modified = ' ●',   -- Text to show when the buffer is modified
-              alternate_file = '', -- Text to show to identify the alternate file
-              directory = '',   -- Text to show when the buffer is a directory
+              modified = " ●", -- Text to show when the buffer is modified
+              alternate_file = "", -- Text to show to identify the alternate file
+              directory = "", -- Text to show when the buffer is a directory
             },
-          }
+          },
         },
         lualine_c = {},
 
         lualine_x = {},
         lualine_y = {
-          'windows',
+          "windows",
         },
         lualine_z = {
           {
-            'tabs',
+            "tabs",
             max_length = vim.o.columns / 3, -- Maximum width of tabs component.
             -- Note:
             -- It can also be a function that returns
@@ -205,18 +204,18 @@ local line = {
             -- 1: Shows tab_name
             -- 2: Shows tab_nr + tab_name
           },
-          session_name
+          session_name,
         },
       },
-      extensions = {}
-    }
+      extensions = {},
+    })
   end,
 }
 
 local alpha = { -- lazy.nvim
   "goolord/alpha-nvim",
   dependencies = {
-    'jedrzejboczar/possession.nvim',
+    "jedrzejboczar/possession.nvim",
   },
   event = "VimEnter",
   opts = function()
@@ -233,9 +232,9 @@ local alpha = { -- lazy.nvim
             type = "text",
             val = "Sessions",
             opts = {
-              position = "center"
-            }
-          }
+              position = "center",
+            },
+          },
         }
         local path = vim.fn.stdpath("data") .. "/sessions"
         local files = vim.split(vim.fn.glob(path .. "/*.json"), "\n")
@@ -244,7 +243,8 @@ local alpha = { -- lazy.nvim
           local basename = vim.fs.basename(file):gsub("%.json", "")
           if basename ~= "config" and basename ~= "tmp" and basename ~= "blog" then
             -- if basename ~= "tmp" then
-            local button = dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
+            local button =
+                dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
             table.insert(group.val, button)
             i = i + 1
             -- end
@@ -306,7 +306,7 @@ local hlchunk = {
     { "<leader>uh", "<cmd>EnableHL<cr>", desc = "Enable hlchunk" },
   },
   config = function()
-    require('hlchunk').setup({
+    require("hlchunk").setup({
       exclude_filetypes = {
         aerial = true,
         dashboard = true,
@@ -320,7 +320,7 @@ local hlchunk = {
       },
       indent = {
         enable = false,
-        chars = { "│", "¦", "┆", "┊", },
+        chars = { "│", "¦", "┆", "┊" },
         use_treesitter = false,
       },
       blank = {
@@ -341,7 +341,7 @@ local hlchunk = {
 }
 
 local notify = {
-  'rcarriga/nvim-notify',
+  "rcarriga/nvim-notify",
   -- lazy=false,
   config = function()
     require("notify").setup({
@@ -353,21 +353,21 @@ local notify = {
         ERROR = "",
         INFO = "",
         TRACE = "✎",
-        WARN = ""
+        WARN = "",
       },
       level = 2,
       minimum_width = 50,
       render = "default",
       stages = "slide",
       timeout = 2000,
-      top_down = true
+      top_down = true,
     })
     vim.notify = require("notify")
   end,
 }
 
 local scrollbar = {
-  'petertriho/nvim-scrollbar',
+  "petertriho/nvim-scrollbar",
   -- lazy =false,
   cmd = "ScrollbarToggle",
   config = function()
@@ -376,39 +376,51 @@ local scrollbar = {
 }
 
 local codewindow = {
-  'gorbit99/codewindow.nvim',
+  "gorbit99/codewindow.nvim",
   keys = {
-    { "<leader>um", function() require('codewindow').toggle_minimap() end,  desc = "Minimap Toggle" },
-    { "<leader>uM", function() require('codewindow').toggle_focus() end,    desc = "Minimap Toggle" },
+    {
+      "<leader>um",
+      function()
+        require("codewindow").toggle_minimap()
+      end,
+      desc = "Minimap Toggle",
+    },
+    {
+      "<leader>uM",
+      function()
+        require("codewindow").toggle_focus()
+      end,
+      desc = "Minimap Toggle",
+    },
   },
   config = function()
-    local codewindow = require('codewindow')
+    local codewindow = require("codewindow")
     codewindow.setup({
-      active_in_terminals = false,                                                     -- Should the minimap activate for terminal buffers
-      auto_enable = false,                                                             -- Automatically open the minimap when entering a (non-excluded) buffer (accepts a table of filetypes)
-      exclude_filetypes = { 'help' },                                                  -- Choose certain filetypes to not show minimap on
-      max_minimap_height = nil,                                                        -- The maximum height the minimap can take (including borders)
-      max_lines = nil,                                                                 -- If auto_enable is true, don't open the minimap for buffers which have more than this many lines.
-      minimap_width = 5,                                                               -- The width of the text part of the minimap
-      use_lsp = true,                                                                  -- Use the builtin LSP to show errors and warnings
-      use_treesitter = true,                                                           -- Use nvim-treesitter to highlight the code
-      use_git = true,                                                                  -- Show small dots to indicate git additions and deletions
-      width_multiplier = 8,                                                            -- How many characters one dot represents
-      z_index = 1,                                                                     -- The z-index the floating window will be on
-      show_cursor = true,                                                              -- Show the cursor position in the minimap
-      window_border = 'single',                                                        -- The border style of the floating window (accepts all usual options)
-      relative = "win",                                                                -- What will be the minimap be placed relative to, "win": the current window, "editor": the entire editor
-      events = { 'TextChanged', 'InsertLeave', 'DiagnosticChanged', 'FileWritePost' }, -- Events that update the code window
+      active_in_terminals = false,                                                  -- Should the minimap activate for terminal buffers
+      auto_enable = false,                                                          -- Automatically open the minimap when entering a (non-excluded) buffer (accepts a table of filetypes)
+      exclude_filetypes = { "help" },                                               -- Choose certain filetypes to not show minimap on
+      max_minimap_height = nil,                                                     -- The maximum height the minimap can take (including borders)
+      max_lines = nil,                                                              -- If auto_enable is true, don't open the minimap for buffers which have more than this many lines.
+      minimap_width = 5,                                                            -- The width of the text part of the minimap
+      use_lsp = true,                                                               -- Use the builtin LSP to show errors and warnings
+      use_treesitter = true,                                                        -- Use nvim-treesitter to highlight the code
+      use_git = true,                                                               -- Show small dots to indicate git additions and deletions
+      width_multiplier = 8,                                                         -- How many characters one dot represents
+      z_index = 1,                                                                  -- The z-index the floating window will be on
+      show_cursor = true,                                                           -- Show the cursor position in the minimap
+      window_border = "single",                                                     -- The border style of the floating window (accepts all usual options)
+      relative = "win",                                                             -- What will be the minimap be placed relative to, "win": the current window, "editor": the entire editor
+      events = { "TextChanged", "InsertLeave", "DiagnosticChanged", "FileWritePost" }, -- Events that update the code window
     })
     -- codewindow.apply_default_keybinds()
   end,
 }
 
 local satellite = {
-  'lewis6991/satellite.nvim',
-  cmd = 'SatelliteEnable',
+  "lewis6991/satellite.nvim",
+  cmd = "SatelliteEnable",
   config = function()
-    require('satellite').setup {
+    require("satellite").setup({
       winblend = 50,
       zindex = 40,
       excluded_filetypes = {},
@@ -417,7 +429,7 @@ local satellite = {
         cursor = {
           enable = true,
           -- Supports any number of symbols
-          symbols = { '⎺', '⎻', '⎼', '⎽' }
+          symbols = { "⎺", "⎻", "⎼", "⎽" },
           -- symbols = { '⎻', '⎼' }
           -- Highlights:
           -- - SatelliteCursor (default links to NonText
@@ -431,7 +443,7 @@ local satellite = {
           },
         },
       },
-    }
+    })
   end,
 }
 
