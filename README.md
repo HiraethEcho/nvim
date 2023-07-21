@@ -5,15 +5,25 @@
 ```zsh
 nvim
 ```
+
 test
+
 ## todo
 
 ### plugins
 
 - [x] comment.nvim
-- [ ] session-manager
-- [ ]
+- [-] session-manager
+  - [x] another test
 
+1. test
+2. sdkfj
+3. lksdjafkl
+   - another
+   - hell
+4. ok
+
+test
 ### ulti
 
 - [x] for neo-tree, using cmd, explorer file.name

@@ -94,7 +94,7 @@ return {
         function()
           require("todo-comments").jump_next({ keywords = { "NOTE" } })
         end,
-        desc = "Next question",
+        desc = "Next note",
         mode = { "n" },
       },
       {
@@ -102,7 +102,7 @@ return {
         function()
           require("todo-comments").jump_prev({ keywords = { "NOTE" } })
         end,
-        desc = "Previous question",
+        desc = "Previous note",
         mode = { "n" },
       },
     },

@@ -112,10 +112,9 @@ return {
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = {
-      "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPost", "BufNewFile" }, dependencies = {
+      "jay-babu/mason-null-ls.nvim",   
     },
-    config = true,
+    config = true,  
   },
 }

@@ -148,13 +148,16 @@ return {
           name = "find", -- optional group name
         },
         o = {
-          name = "md",
+          name = "obsidian",
         },
         g = {
           name = "git",
         },
         l = {
           name = "lsp",
+        },
+        m = {
+          name = "markdown",
         },
         h = {
           name = "hunk",

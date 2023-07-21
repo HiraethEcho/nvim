@@ -1,4 +1,3 @@
-local vim = vim
 local transparent = {
   "xiyaowong/nvim-transparent",
   cmd = "TransparentEnable",
@@ -19,7 +18,7 @@ local color = {
         background = "soft",
         transparent_background_level = 0,
         italics = true,
-        sign_column_background = "grey",
+        sign_column_background = "none",
         dim_inactive_windows = true,
         diagnostic_virtual_text = "grey",
         ---Some plugins support highlighting error/warning/info/hint lines, but this
@@ -27,35 +26,6 @@ local color = {
         diagnostic_line_highlight = true,
       })
       vim.cmd("colorscheme everforest")
-    end,
-  },
-  {
-    "marko-cerovac/material.nvim",
-    -- event= 'VimEnter',
-    config = function()
-      require("material").setup({
-        contrast = {
-          terminal = false,      -- Enable contrast for the built-in terminal default=false
-          sidebars = true,       -- Enable contrast for sidebar-like windows ( for example Nvim-Tree ) default=false
-          floating_windows = true, -- Enable contrast for floating windows default=false
-          cursor_line = true,    -- Enable darker background for the cursor line default=false
-          non_current_windows = true, -- Enable contrasted background for non-current windows default=false
-        },
-        plugins = {              -- Uncomment the plugins that you use to highlight them
-          -- Available plugins:
-          "gitsigns",
-          "hop",
-          "lspsaga",
-          "nvim-cmp",
-          "nvim-navic",
-          "nvim-web-devicons",
-          "telescope",
-          "which-key",
-          -- "dap",
-          -- "trouble",
-        },
-      })
-      vim.cmd("colorscheme material")
     end,
   },
   {
@@ -80,7 +50,7 @@ local line = {
     require("lualine").setup({
       options = {
         icons_enabled = true,
-        theme = "nord",
+        theme = "everforest",
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         disabled_filetypes = {
