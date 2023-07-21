@@ -5,7 +5,9 @@ return{
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "f3fora/cmp-spell",
+    "octaltree/cmp-look",
     "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-nvim-lua",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-omni",
     "nvim-treesitter/nvim-treesitter",
@@ -74,9 +76,12 @@ return{
         { name = "path" },
         { name = "nvim_lua" },
         {
-          name = 'omni',
+          name = 'look',
+          keyword_length = 2,
           option = {
-            -- disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' }
+            convert_case = true,
+            loud = true
+            --dict = '/usr/share/dict/words'
           }
         },
       }),

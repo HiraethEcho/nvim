@@ -1,22 +1,17 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    -- event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     -- lazy=false,
-    cmd="LspStart",
-    keys={
-      { "<leader>ll", "<cmd>LspStart<cr>", desc = "Start lsp" },
-      { "<leader>li", "<cmd>LspInfo<cr>", desc = "lsp info" },
+    cmd = "LspStart",
+    keys = {
+      { "<leader>ll", "<cmd>LspStart<cr>",   desc = "Start lsp" },
+      { "<leader>li", "<cmd>LspInfo<cr>",    desc = "lsp info" },
       { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
     dependencies = {
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
-      {
         "williamboman/mason.nvim",
-        cmd = "Mason",
-        keys = { { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" } },
-        build = ":MasonUpdate" ,
-      },
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "SmiteshP/nvim-navbuddy",
@@ -28,7 +23,7 @@ return {
           lua = {
             diagnostics = {
               -- Get the language server to recognize the `vim` global
-              globals = {'vim'},
+              globals = { 'vim' },
             },
           },
           checkThirdParty = false,
@@ -87,24 +82,35 @@ return {
     end,
   },
   {
+    "williamboman/mason.nvim",
+    cmd = "Mason",
+    keys = { { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" } },
+    build = ":MasonUpdate",
+    config = function ()
+      require("mason").setup()
+      require("mason-null-ls").setup({
+        ensure_installed = {
+          -- Opt to list sources here, when available in mason.
+          'prettier',
+          'stylua',
+          'latexindent',
+        },
+        automatic_installation = true,
+        handlers = {},
+      })
+      require("null-ls").setup({
+        sources = {
+          -- Anything not supported by mason.
+        }
+      })
+    end
+  },
+  {
     "jose-elias-alvarez/null-ls.nvim",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "jay-babu/mason-null-ls.nvim",
     },
-    config = function()
-      local linters = {
-        "black"
-      }
-      require("mason-null-ls").setup({
-        ensure_installed = linters,
-        handlers = {},
-      })
-      local null_ls = require("null-ls")
-
-      null_ls.setup({
-        sources = {},
-      })
-    end
+    config = true,
   },
 }
