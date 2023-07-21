@@ -39,7 +39,10 @@ return {
       { "<leader>w", "<cmd>Telescope spell_suggest<cr>", desc = "spell suggest" },
     },
     dependencies = {
-      {"nvim-lua/plenary.nvim"},
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-project.nvim",
+      'nvim-telescope/telescope-ui-select.nvim',
+      "nvim-telescope/telescope-file-browser.nvim",
     },
     config = function()
       local fb_actions = require "telescope._extensions.file_browser.actions"
@@ -63,13 +66,11 @@ return {
             },
           },
           prompt_prefix = " ",
+          sorting_strategy = "ascending",
           selection_caret = " ",
           entry_prefix = " ",
-          color_devicons = true,
-          -- theme
-          -- layout_strategy = "bottom_pane",
-          -- config
           layout_config = {
+            horizontal = { prompt_position = "top", preview_width = 0.55 },
             bottom_pane = {
               height = 15,
               preview_cutoff = 100,
@@ -94,9 +95,6 @@ return {
             initial_mode="insert",
           },
           grep_string = {
-            initial_mode="insert",
-          },
-          file_browser = {
             initial_mode="insert",
           },
           find_files = {
@@ -146,19 +144,10 @@ return {
         },
         extensions = {
           file_browser = {
-            -- path
-            -- cwd
-            cwd_to_path = false,
-            grouped = false,
-            depth = 1,
-            auto_depth = false,
+            grouped = true,
+            auto_depth = true,
             select_buffer = false,
-            hidden = { file_browser = false, folder_browser = false },
-            -- respect_gitignore
-            -- browse_files
-            -- browse_folders
-            hide_parent_dir = false,
-            prompt_path = false,
+            hidden = { file_browser = true, folder_browser = true },
             dir_icon = "",
             use_fd = true,
             git_status = true,
@@ -207,14 +196,8 @@ return {
       require('telescope').load_extension('possession')
       require('telescope').load_extension('file_browser')
       require('telescope').load_extension('ui-select')
+      require'telescope'.load_extension('project')
     end,
-  },
--- packer
-
---lazy
-  {
-      "nvim-telescope/telescope-file-browser.nvim",
-      dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   },
   {
     'jedrzejboczar/possession.nvim',
@@ -277,6 +260,4 @@ return {
       }
     end,
   },
-
-  {'nvim-telescope/telescope-ui-select.nvim' }
 }

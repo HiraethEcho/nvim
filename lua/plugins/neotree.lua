@@ -45,7 +45,7 @@ return {
       follow_current_file = true,
       use_libuv_file_watcher = true,
     },
-    sources = { "filesystem", "buffers", "git_status", "document_symbols", "diagnostics" },
+    sources = { "filesystem", "buffers", "git_status", "document_symbols" },
     commands = {
       system_open = function(state)
         require("config.util").system_open(state.tree:get_node():get_id())

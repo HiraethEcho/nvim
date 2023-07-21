@@ -14,8 +14,7 @@ nvim
 - [ ] 
 
 ### ulti:
-- [ ] for neo-tree, using cmd, explorer file.name
-- [ ] 
+- [X] for neo-tree, using cmd, explorer file.name
 
 
 #### some icons
