@@ -3,9 +3,8 @@ local vim = vim
 return {
   {
     "lervag/vimtex",
-    ft= {"bib","tex"},
+    ft = {"bib","tex"},
     config = function ()
-      -- vim.g.vimtex_view_general_viewer = 'sioyek'
       vim.g.vimtex_view_method = 'sioyek'
       vim.g.vimtex_view_general_options = ''
       vim.g.tex_comment_nospell = 1
@@ -36,6 +35,9 @@ return {
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
     ft = { "markdown" },
+    keys = {
+      {'<leader>mP', "<cmd>MarkdownPreviewToggle<cr>"  , desc="markdown Html Preview"},
+    },
     config=function()
       if  vim.g.is_linux then
           vim.g.mkdp_browser = 'surf'

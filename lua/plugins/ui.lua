@@ -286,7 +286,6 @@ local hlchunk = {
       exclude_filetypes = {
         aerial = true,
         dashboard = true,
-        Glow = true,
       },
       chunk = {
         enable = true,
@@ -342,24 +341,6 @@ local scrollbar={
   cmd = "ScrollbarToggle",
   config = function()
     require("scrollbar").setup()
-  end,
-}
-
-local scrollview={
-  'dstein64/nvim-scrollview',
-  cmd = "ScrollViewToggle",
-  config = function()
-    require('scrollview').setup({
-      current_only = true,
-      winblend = 75,
-      base = 'buffer',
-      signs_on_startup = {'all'},
-      diagnostics_severities = {vim.diagnostic.severity.ERROR}
-    })
-    vim.g.scrollview_current_only = true
-    vim.g.scrollview_winblend = 75
-    vim.g.scrollview_base = 'buffer'
-    vim.g.scrollview_column = 80
   end,
 }
 

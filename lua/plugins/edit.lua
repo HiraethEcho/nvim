@@ -1,10 +1,6 @@
 local vim = vim
 return {
   {
-    "tpope/vim-commentary",
-    -- event = "BufReadPost",
-  },
-  {
     'numToStr/Comment.nvim',
     event = "BufReadPost",
     config = function()
@@ -24,23 +20,22 @@ return {
   },
   {
     "machakann/vim-sandwich",
-    -- lazy=false,
     event = "BufReadPost",
   },
   {
     "godlygeek/tabular",
-    keys={
+    keys = {
       {"<leader>t",":Tabularize /",mode="v",desc='tabularize'},
     },
   },
   {
     "Neur1n/neuims",
-    cmd="IMSToggle",
+    cmd = "IMSToggle",
   },
   {
     "windwp/nvim-autopairs",
     event="InsertEnter",
-    config = function() require("nvim-autopairs").setup {} end
+    config = true,
   },
   {
     "folke/todo-comments.nvim",
@@ -55,7 +50,7 @@ return {
       {']n', function() require("todo-comments").jump_next({keywords={"NOTE"}}) end, desc="Next question",   mode={"n"}},
       {'[n', function() require("todo-comments").jump_prev({keywords={"NOTE"}}) end, desc="Previous question",   mode={"n"}},
     },
-    cmd={"TodoLocList","TodoTelescope","TodoQuickFix"},
+    cmd = {"TodoLocList","TodoTelescope","TodoQuickFix"},
     config = function ()
       require("todo-comments").setup({
         signs = true, -- show icons in the signs column
@@ -75,7 +70,14 @@ return {
       })
     end,
   },
-  {"ellisonleao/glow.nvim", config = true, cmd = "Glow"},
+  {
+    "ellisonleao/glow.nvim",
+    config = true,
+    cmd = "Glow",
+    keys = {
+      {'<leader>mp', "<cmd>Glow<cr>"  , desc="markdown Glow Preview",},
+    },
+  },
   {
     'antonk52/markdowny.nvim',
     ft={'md','markdown'},

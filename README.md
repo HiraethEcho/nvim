@@ -2,7 +2,6 @@
 
 ## usage
 
-
 ```zsh
 nvim 
 ```
