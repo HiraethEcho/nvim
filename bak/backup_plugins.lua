@@ -1,36 +1,10 @@
-local knapnvim= {
-  -- lazy = false,
-  -- ft={"latex","tex"},
-  cmd="KnapProcess",
-  "frabjous/knap",
-  config=function ()
-    local gknapsettings = {
-      textopdfviewerlaunch= "sioyek --new-window %outputfile%",
-      -- mdoutputext = "html",
-      textopdfforwardjump= "sioyek --reuse-window --forward-search-file %srcfile% --forward-search-line %line% %outputfile%",
-      texoutputext = "pdf",
-      textopdf = "pdflatex -synctex=1 -halt-on-error -interaction=batchmode %docroot%",
-      textopdfviewerrefresh = "kill -HUP %pid%",
-      htmltohtmlviewerlaunch= "live-server --quiet --browser=surf --open=%outputfile% --watch=%outputfile% --wait=800",
-      htmltohtmlviewerrefresh= "none",
-      -- mdtohtmlviewerlaunch= "live-server --quiet --browser=microsoft-edge-beta --open=%outputfile% --watch=%outputfile% --wait=800",
-      mdtohtmlviewerrefresh= "none",
-    }
-    vim.g.knap_settings = gknapsettings
-
-    vim.api.nvim_create_user_command('KnapProcess',require('knap').process_once,{})
-    vim.api.nvim_create_user_command('KnapCloseViewer',require('knap').close_viewer,{})
-    vim.api.nvim_create_user_command('KnapToggleAutoPreviewing', require('knap').toggle_autopreviewing,{})
-    vim.api.nvim_create_user_command('KnapJumpForward',require('knap').forward_jump,{})
-  end
-}
-
-local minimap={
-  'echasnovski/mini.map', version = false ,
-  enabled=false,
+local minimap = {
+  "echasnovski/mini.map",
+  version = false,
+  enabled = false,
   -- lazy=false,
-  config =function ()
-    require('mini.map').setup({
+  config = function()
+    require("mini.map").setup({
       -- Highlight integrations (none by default)
       integrations = nil,
       symbols = {
@@ -39,8 +13,8 @@ local minimap={
         -- Default: solid blocks with 3x2 resolution.
         -- encode = nil,
         -- Scrollbar parts for view and line. Use empty string to disable any.
-        scroll_line = '█',
-        scroll_view = '┃',
+        scroll_line = "█",
+        scroll_view = "┃",
       },
 
       window = {
@@ -58,14 +32,14 @@ local minimap={
   end,
 }
 
-local start={
+local start = {
   {
     "mhinz/vim-startify",
     event = "VimEnter",
     -- lazy=false,
-    config=function()
-      vim.g.startify_session_dir = vim.fn.stdpath("config").."/session/"
-      vim.g.startify_files_number= 3
+    config = function()
+      vim.g.startify_session_dir = vim.fn.stdpath("config") .. "/session/"
+      vim.g.startify_files_number = 3
       vim.cmd([[
       let g:startify_lists= [
       \ { 'type': 'sessions'  , 'header': ['   Sessions'  ] } ,
@@ -79,20 +53,22 @@ local start={
 
   {
     "echasnovski/mini.starter",
-    enabled=false,
+    enabled = false,
     -- lazy=false,
     version = false, -- wait till new 0.7.0 release to put it back on semver
     -- event = "VimEnter",
-    config=function()
-      require('mini.starter').setup()
+    config = function()
+      require("mini.starter").setup()
     end,
   },
 }
-local animate={
-  'echasnovski/mini.animate', version = '*' ,
-  event="CursorMoved",
-  config=function ()
-    require('mini.animate').setup({
+
+local animate = {
+  "echasnovski/mini.animate",
+  version = "*",
+  event = "CursorMoved",
+  config = function()
+    require("mini.animate").setup({
       -- No need to copy this inside `setup()`. Will be used automatically.
       -- Cursor path
       cursor = {
@@ -128,7 +104,6 @@ local animate={
       open = {
         -- Whether to enable this animation
         enable = true,
-
       },
 
       -- Window close
@@ -137,29 +112,29 @@ local animate={
         enable = true,
 
         -- Timing of animation (how steps will progress in time)
-      }
+      },
     })
   end,
 }
 
-local targets= {
+local targets = {
   "wellle/targets.vim",
   event = "BufReadPost",
-  enabled=false,
+  enabled = false,
   -- lazy = false,
 }
 
-local aerial={
-  'stevearc/aerial.nvim',
+local aerial = {
+  "stevearc/aerial.nvim",
   -- enabled=false,
-  cmd={"AerialToggle"},
+  cmd = { "AerialToggle" },
   opts = {},
   -- Optional dependencies
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
-    "nvim-tree/nvim-web-devicons"
+    "nvim-tree/nvim-web-devicons",
   },
-  config=function()
+  config = function()
     -- Call the setup function to change the default behavior
     require("aerial").setup({
       -- Priority list of preferred backends for aerial.
@@ -414,7 +389,6 @@ local aerial={
         whitespace = "  ",
       },
 
-
       -- Options for opening aerial in a floating win
       float = {
         -- Controls border appearance. Passed to nvim_open_win
@@ -497,24 +471,24 @@ local aerial={
         update_delay = 300,
       },
     })
-
   end,
 }
-local term={
+
+local term = {
   "numToStr/FTerm.nvim",
   -- lazy=false,
   keys = {
-    { "<leader>tt", "<cmd>FTermToggle<cr>", desc = "toggle float terminal" },
-    { "<leader>tc", "<cmd>FTermClose<cr>", desc = "close float terminal" },
-    { "<leader>to", "<cmd>FTermOpen<cr>", desc = "open float terminal" },
-    { "<leader>te", "<cmd>FTermExit<cr>", desc = "exit float terminal" },
-    { "<leader>tg", "<cmd>FTermGitui<cr>", desc = "float terminal: Gitui" },
+    { "<leader>tt", "<cmd>FTermToggle<cr>",  desc = "toggle float terminal" },
+    { "<leader>tc", "<cmd>FTermClose<cr>",   desc = "close float terminal" },
+    { "<leader>to", "<cmd>FTermOpen<cr>",    desc = "open float terminal" },
+    { "<leader>te", "<cmd>FTermExit<cr>",    desc = "exit float terminal" },
+    { "<leader>tg", "<cmd>FTermGitui<cr>",   desc = "float terminal: Gitui" },
     { "<leader>gg", "<cmd>FTermLazygit<cr>", desc = "float terminal: Lazygit" },
     -- { "q", "<cmd>FTermToggle<cr>",mode="t", desc = "float terminal" },
   },
-  config=function()
-    require'FTerm'.setup({
-      ft = 'FTerm',
+  config = function()
+    require("FTerm").setup({
+      ft = "FTerm",
       cmd = "pwsh",
       auto_close = true,
       ---Transparency of the floating window. See `:h winblend`
@@ -522,94 +496,89 @@ local term={
 
       dimensions = {
         height = 0.9, -- Height of the terminal window
-        width = 0.9, -- Width of the terminal window
-        x = 0.5, -- X axis of the terminal window
-        y = 0.5, -- Y axis of the terminal window
+        width = 0.9,  -- Width of the terminal window
+        x = 0.5,      -- X axis of the terminal window
+        y = 0.5,      -- Y axis of the terminal window
       },
     })
 
-    vim.api.nvim_create_user_command('FTermToggle', require('FTerm').toggle, { bang = true })
-    vim.api.nvim_create_user_command('FTermOpen', require('FTerm').open, { bang = true })
+    vim.api.nvim_create_user_command("FTermToggle", require("FTerm").toggle, { bang = true })
+    vim.api.nvim_create_user_command("FTermOpen", require("FTerm").open, { bang = true })
     -- This will close the terminal window but preserves the actual terminal session
-    vim.api.nvim_create_user_command('FTermClose', require('FTerm').close, { bang = true })
+    vim.api.nvim_create_user_command("FTermClose", require("FTerm").close, { bang = true })
     -- Unlike closing, this will remove the terminal session
-    vim.api.nvim_create_user_command('FTermExit', require('FTerm').exit, { bang = true })
+    vim.api.nvim_create_user_command("FTermExit", require("FTerm").exit, { bang = true })
 
     local fterm = require("FTerm")
     local gitui = fterm:new({
-      ft = 'fterm_gitui', -- You can also override the default filetype, if you want
+      ft = "fterm_gitui", -- You can also override the default filetype, if you want
       cmd = "gitui",
       dimensions = {
         height = 0.9,
-        width = 0.9
-      }
+        width = 0.9,
+      },
     })
-    vim.api.nvim_create_user_command('FTermGitui', function()gitui:toggle()end , { bang = true })
+    vim.api.nvim_create_user_command("FTermGitui", function()
+      gitui:toggle()
+    end, { bang = true })
     local ftermlazygit = fterm:new({
-      ft = 'fterm_lazygit', -- You can also override the default filetype, if you want
+      ft = "fterm_lazygit", -- You can also override the default filetype, if you want
       cmd = "lazygit",
       dimensions = {
         height = 0.9,
-        width = 0.9
-      }
+        width = 0.9,
+      },
     })
-    vim.api.nvim_create_user_command('FTermLazygit', function()ftermlazygit:toggle()end , { bang = true })
+    vim.api.nvim_create_user_command("FTermLazygit", function()
+      ftermlazygit:toggle()
+    end, { bang = true })
   end,
 }
-local minipair={
+
+local minipair = {
   "echasnovski/mini.pairs",
   -- event = "VeryLazy",
   -- lazy=false,
-  enabled=false,
+  enabled = false,
   config = function()
     require("mini.pairs").setup()
   end,
 }
-local undo ={
+
+local undo = {
   "jiaoshijie/undotree",
   event = "BufReadPost",
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
-  keys={
-    {'<leader>u', ":lua require('undotree').toggle()<cr>",  mode="n"},
+  keys = {
+    { "<leader>u", ":lua require('undotree').toggle()<cr>", mode = "n" },
   },
-  config=function()
-    local undotree = require('undotree')
+  config = function()
+    local undotree = require("undotree")
     undotree.setup({
-      float_diff = true,  -- using float window previews diff, set this `true` will disable layout option
+      float_diff = true,      -- using float window previews diff, set this `true` will disable layout option
       layout = "left_bottom", -- "left_bottom", "left_left_bottom"
-      ignore_filetype = { 'Undotree', 'UndotreeDiff', 'qf', 'TelescopePrompt', 'spectre_panel', 'tsplayground' },
+      ignore_filetype = { "Undotree", "UndotreeDiff", "qf", "TelescopePrompt", "spectre_panel", "tsplayground" },
       window = {
         winblend = 30,
       },
       keymaps = {
-        ['j'] = "move_next",
-        ['k'] = "move_prev",
-        ['J'] = "move_change_next",
-        ['K'] = "move_change_prev",
-        ['<cr>'] = "action_enter",
-        ['p'] = "enter_diffbuf",
-        ['q'] = "quit",
+        ["j"] = "move_next",
+        ["k"] = "move_prev",
+        ["J"] = "move_change_next",
+        ["K"] = "move_change_prev",
+        ["<cr>"] = "action_enter",
+        ["p"] = "enter_diffbuf",
+        ["q"] = "quit",
       },
     })
   end,
 }
-local firenvim={
-  'glacambre/firenvim',
-  lazy=false,
-  -- Lazy load firenvim
-  -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
-  cond = not not vim.g.started_by_firenvim,
-  build = function()
-    require("lazy").load({ plugins = "firenvim", wait = true })
-    vim.fn["firenvim#install"](0)
-  end
-}
 
-local bar={
+local bar = {
   "utilyre/barbecue.nvim",
-  enabled=false,
+  enabled = false,
   dependencies = {
     "neovim/nvim-lspconfig",
     "SmiteshP/nvim-navic",
@@ -619,70 +588,47 @@ local bar={
   end,
 }
 
-
-
-local mini_indentscope={
-  "echasnovski/mini.indentscope",
-  enabled=false,
-  version = false, -- wait till new 0.7.0 release to put it back on semver
-  event = "BufRead",
-  opts = {
-    -- symbol = "▏",
-    symbol = "│",
-    options = { try_as_border = true },
-  },
-  config = function(_, opts)
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
-      callback = function()
-        vim.b.miniindentscope_disable = true
-      end,
-    })
-    require("mini.indentscope").setup(opts)
-  end,
-}
-
-
-local wiki={
+local wiki = {
   "vimwiki/vimwiki",
-  ft={"md"},
+  ft = { "md" },
 }
-local md={
+
+local md = {
   -- use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
   "toppair/peek.nvim",
   enabled = false,
-  build ="deno task --quiet build:fast",
-  ft="md",
-  lazy=false,
+  build = "deno task --quiet build:fast",
+  ft = "md",
+  lazy = false,
   config = function()
-    require('peek').setup({
+    require("peek").setup({
       auto_load = false,         -- whether to automatically load preview when
       -- entering another markdown buffer
-      close_on_bdelete = true,  -- close preview window on buffer delete
-      syntax = true,            -- enable syntax highlighting, affects performance
-      theme = 'dark',           -- 'dark' or 'light'
+      close_on_bdelete = true,   -- close preview window on buffer delete
+      syntax = true,             -- enable syntax highlighting, affects performance
+      theme = "dark",            -- 'dark' or 'light'
       update_on_change = true,
-      app = 'browser',          -- 'webview', 'browser', string or a table of strings
+      app = "browser",           -- 'webview', 'browser', string or a table of strings
       -- explained below
-      filetype = { 'markdown' } -- list of filetypes to recognize as markdown
+      filetype = { "markdown" }, -- list of filetypes to recognize as markdown
       -- relevant if update_on_change is true
       -- throttle_at = 200000,     -- start throttling when file exceeds this
       -- amount of bytes in size
       -- throttle_time = 'auto',   -- minimum amount of time in milliseconds
       -- that has to pass before starting new render
     })
-    vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-    vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+    vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+    vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
   end,
 }
 
-local dropbar= {
+local dropbar = {
   "Bekaboo/dropbar.nvim",
-  lazy=false,
+  lazy = false,
   commit = "19011d96959cd40a7173485ee54202589760caae",
   config = function()
     local api = require("dropbar.api")
-    vim.keymap.set('n', '<Leader>;', api.pick)
+    vim.keymap.set("n", "<Leader>;", api.pick)
     -- vim.keymap.set('n', '[c', api.goto_context_start)
     -- vim.keymap.set('n', ']c', api.select_next_context)
 
@@ -712,7 +658,7 @@ local dropbar= {
         quick_navigation = true,
         ---@type table<string, string|function|table<string, string|function>>
         keymaps = {
-          ['<LeftMouse>'] = function()
+          ["<LeftMouse>"] = function()
             local menu = api.get_current_dropbar_menu()
             if not menu then
               return
@@ -728,14 +674,14 @@ local dropbar= {
               end
               return
             end
-            menu:click_at({ mouse.line, mouse.column }, nil, 1, 'l')
+            menu:click_at({ mouse.line, mouse.column }, nil, 1, "l")
           end,
-          ['<CR>'] = confirm,
+          ["<CR>"] = confirm,
           -- ['i'] = confirm,
-          ['<esc>'] = quit_curr,
-          ['q'] = quit_curr,
+          ["<esc>"] = quit_curr,
+          ["q"] = quit_curr,
           -- ['n'] = quit_curr,
-          ['<MouseMove>'] = function()
+          ["<MouseMove>"] = function()
             local menu = api.get_current_dropbar_menu()
             if not menu then
               return
@@ -752,11 +698,11 @@ local dropbar= {
   end,
 }
 
-local coc={
-  'neoclide/coc.nvim',
-  event="InsertEnter",
+local coc = {
+  "neoclide/coc.nvim",
+  event = "InsertEnter",
   -- lazy=false,
-  keys ={
+  keys = {
     -- {"<Leader>ef" , ":CocCommand explorer --preset floating<CR>"  } ,
     -- {"<Leader>ed" , ":CocCommand explorer --preset Documents<CR>" } ,
     -- {"<Leader>eg" , ":CocCommand explorer --preset github<CR>"    } ,
@@ -764,12 +710,12 @@ local coc={
     -- {"<Leader>eh" , ":CocCommand explorer --preset hiraeth<CR>"   } ,
     -- {"<leader>en" , ":CocCommand explorer --preset nvim<CR>"      } ,
     -- { "<leader>ee" , ":CocCommand explorer<CR>"                   } ,
-    { "<leader>ll" , ":<C-u>CocList<cr>"                          } ,
-    { "<leader>le" , ":<C-u>CocList extensions<cr>"               } ,
+    { "<leader>ll", ":<C-u>CocList<cr>" },
+    { "<leader>le", ":<C-u>CocList extensions<cr>" },
     -- { "<leader>ly" , ":<C-u>CocList yank<cr>"                     } ,
   },
-  branch='release',
-  config=function()
+  branch = "release",
+  config = function()
     vim.g.coc_global_extensions = {
       "coc-snippets",
       "coc-yank",
@@ -789,19 +735,35 @@ local coc={
     }
     -- vim.g.coc_node_path = "D:/Downloads/apps/nodejs/current/node.exe"
     function _G.check_back_space()
-      local col = vim.fn.col('.') - 1
-      return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+      local col = vim.fn.col(".") - 1
+      return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
     end
-    vim.keymap.set("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', {silent = true, noremap = true, expr = true, replace_keycodes = false})
-    vim.keymap.set("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], {silent = true, noremap = true, expr = true, replace_keycodes = false})
-    vim.keymap.set("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], {silent = true, noremap = true, expr = true, replace_keycodes = false})
+
+    vim.keymap.set(
+      "i",
+      "<TAB>",
+      'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
+      { silent = true, noremap = true, expr = true, replace_keycodes = false }
+    )
+    vim.keymap.set(
+      "i",
+      "<S-TAB>",
+      [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]],
+      { silent = true, noremap = true, expr = true, replace_keycodes = false }
+    )
+    vim.keymap.set(
+      "i",
+      "<cr>",
+      [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]],
+      { silent = true, noremap = true, expr = true, replace_keycodes = false }
+    )
   end,
 }
 
-local coq ={
+local coq = {
   "ms-jpq/coq_nvim",
   branch = "coq",
-  event="InsertEnter",
+  event = "InsertEnter",
   dependencies = {
     {
       "ms-jpq/coq.artifacts",
@@ -811,11 +773,11 @@ local coq ={
       "ms-jpq/coq.thirdparty",
       branch = "3p",
       config = function()
-        require "coq_3p" {
+        require("coq_3p")({
           { src = "nvimlua", short_name = "", conf_only = false },
 
           { src = "vimtex",  short_name = "TEX" },
-        }
+        })
       end,
     },
   },
@@ -831,40 +793,73 @@ local coq ={
         recommended = false,
       },
     }
-    local coq = require "coq"
+    local coq = require("coq")
     coq.Now() -- Start coq
     local remap = vim.api.nvim_set_keymap
-    remap('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
+    remap("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
     -- remap('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
-    remap('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
-    remap('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
+    remap("i", "<tab>", [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
+    remap("i", "<s-tab>", [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
   end,
 }
 
-local gutter={
+local gutter = {
   "airblade/vim-gitgutter",
   -- enable=false,
   keys = {
-    { "<leader>hf" , "<cmd>GitGutterFold<cr>"      , desc ="gitfold"          } ,
-    { "<leader>hj" , "<cmd>GitGutterNextHunk<cr>"  , desc = "next hunk"       } ,
-    { "<leader>hk" , "<cmd>GitGutterPrevHunk<cr>"  , desc = "previous hunk"   } ,
-    { "<leader>hd" , "<cmd>GitGutterDiffOrig<cr>"  , desc = "gitdifforig"     } ,
-    { "<leader>hu" , "<cmd>GitGutterUndoHunk<cr>"  , desc = "undohunk"        } ,
-    { "<leader>ha" , "<cmd>GitGutterStageHunk<cr>" , desc = "stagehunk"       } ,
-    { "<leader>hh" , "<cmd>GitGutterToggle<cr><cmd>GitGutterLineNrHighlightsToggle<cr>"    , desc = "gitgutter sign toggle" } ,
-    { "<leader>hl" , "<cmd>GitGutterLineHighlightsToggle<cr>"    , desc = "gitgutter highlight line toggle" } ,
-    { "<leader>hp" , "<cmd>GitGutterPreviewHunk<cr>"    , desc = "preview a hunk" } ,
+    { "<leader>hf", "<cmd>GitGutterFold<cr>",      desc = "gitfold" },
+    { "<leader>hj", "<cmd>GitGutterNextHunk<cr>",  desc = "next hunk" },
+    { "<leader>hk", "<cmd>GitGutterPrevHunk<cr>",  desc = "previous hunk" },
+    { "<leader>hd", "<cmd>GitGutterDiffOrig<cr>",  desc = "gitdifforig" },
+    { "<leader>hu", "<cmd>GitGutterUndoHunk<cr>",  desc = "undohunk" },
+    { "<leader>ha", "<cmd>GitGutterStageHunk<cr>", desc = "stagehunk" },
+    {
+      "<leader>hh",
+      "<cmd>GitGutterToggle<cr><cmd>GitGutterLineNrHighlightsToggle<cr>",
+      desc = "gitgutter sign toggle",
+    },
+    { "<leader>hl", "<cmd>GitGutterLineHighlightsToggle<cr>", desc = "gitgutter highlight line toggle" },
+    { "<leader>hp", "<cmd>GitGutterPreviewHunk<cr>",          desc = "preview a hunk" },
   },
-  config=function()
-    vim.g.gitgutter_highlight_linenrs=1
-    vim.g.gitgutter_signs=1
-    vim.g.gitgutter_close_preview_on_escape=1
+  config = function()
+    vim.g.gitgutter_highlight_linenrs = 1
+    vim.g.gitgutter_signs = 1
+    vim.g.gitgutter_close_preview_on_escape = 1
   end,
 }
 
-local color={
+local color = {
   {
-    'shaunsingh/nord.nvim',
+    "marko-cerovac/material.nvim",
+    -- event= 'VimEnter',
+    config = function()
+      require("material").setup({
+        contrast = {
+          terminal = false,           -- Enable contrast for the built-in terminal default=false
+          sidebars = true,            -- Enable contrast for sidebar-like windows ( for example Nvim-Tree ) default=false
+          floating_windows = true,    -- Enable contrast for floating windows default=false
+          cursor_line = true,         -- Enable darker background for the cursor line default=false
+          non_current_windows = true, -- Enable contrasted background for non-current windows default=false
+        },
+        plugins = {                   -- Uncomment the plugins that you use to highlight them
+          -- Available plugins:
+          "gitsigns",
+          "hop",
+          "lspsaga",
+          "nvim-cmp",
+          "nvim-navic",
+          "nvim-web-devicons",
+          "telescope",
+          "which-key",
+          -- "dap",
+          -- "trouble",
+        },
+      })
+      vim.cmd("colorscheme material")
+    end,
+  }
+  {
+    "shaunsingh/nord.nvim",
     -- enabled=false,
     -- event="VimEnter",
     -- lazy =false, -- make sure we load this during startup if it is your main colorscheme
@@ -884,18 +879,18 @@ local color={
       -- vim.cmd([[colorscheme tokyonight]])
     end,
   },
-  {
-    'norcalli/nvim-colorizer.lua',
-    cmd="ColorizerToggle",
-    config=function()
-      require 'colorizer'.setup()
-    end,
-  },
 }
 
-local indentline = {
+local colorizer = {
+  "norcalli/nvim-colorizer.lua",
+  cmd = "ColorizerToggle",
+  config = function()
+    require("colorizer").setup()
+  end,
+}
+
+local indent = {
   "lukas-reineke/indent-blankline.nvim",
-  -- enabled=false,
   event = "BufRead",
   config = function()
     require("indent_blankline").setup({
@@ -908,10 +903,6 @@ local indentline = {
         "IndentBlanklineIndent5",
         "IndentBlanklineIndent6",
       },
-      -- space_char_highlight_list = {
-      --   "IndentBlanklineIndent7",
-      --   "IndentBlanklineIndent8",
-      -- },
       show_end_of_line = true,
       show_current_context = true,
       show_current_context_start = true,
@@ -931,14 +922,13 @@ local indentline = {
         "lspinfo",
         "plugin",
         "text",
-        "txt"
+        "txt",
       },
     })
   end,
 }
 
-
-local grammar_guard={
+local grammar_guard = {
   "brymer-meneses/grammar-guard.nvim",
   dependencies = {
     "neovim/nvim-lspconfig",
@@ -971,19 +961,22 @@ local grammar_guard={
 
 local trans = {
   "JuanZoran/Trans.nvim",
-  build = function () require'Trans'.install() end,
+  build = function()
+    require("Trans").install()
+  end,
   keys = {
     -- 可以换成其他你想映射的键
-    { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = ' Translate' },
-    { 'mk', mode = { 'n', 'x' }, '<Cmd>TransPlay<CR>', desc = ' Auto Play' },
+    { "mm", mode = { "n", "x" },       "<Cmd>Translate<CR>",             desc = " Translate" },
+    { "mk", mode = { "n", "x" },       "<Cmd>TransPlay<CR>",             desc = " Auto Play" },
     -- 目前这个功能的视窗还没有做好，可以在配置里将view.i改成hover
-    { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
+    { "mi", "<Cmd>TranslateInput<CR>", desc = " Translate From Input" },
   },
-  dependencies = { 'kkharji/sqlite.lua', },
+  dependencies = { "kkharji/sqlite.lua" },
   opts = {
     -- your configuration there
-  }
+  },
 }
+
 local autolist = {
   "gaoDean/autolist.nvim",
   ft = {
@@ -994,14 +987,14 @@ local autolist = {
     "norg",
   },
 
-  keys={
-    {'o', "o<cmd>AutolistNewBullet<cr>"},
-    {'O', "O<cmd>AutolistNewBulletBefore<cr>"},
-    { "X", "<cmd>AutolistToggleCheckbox<cr><CR>"},
-    {mode="i", "<c-l>", "<cmd>AutolistTab<cr>"},
-    {mode="i", "<c-h>", "<cmd>AutolistShiftTab<cr>"},
-    {mode="i", "<c-o>", "<CR><cmd>AutolistNewBullet<cr>"},
-    {mode="i", "<c-O>", "<CR><cmd>AutolistNewBulletBefore<cr>"},
+  keys = {
+    { "o",        "o<cmd>AutolistNewBullet<cr>" },
+    { "O",        "O<cmd>AutolistNewBulletBefore<cr>" },
+    { "X",        "<cmd>AutolistToggleCheckbox<cr><CR>" },
+    { mode = "i", "<c-l>",                              "<cmd>AutolistTab<cr>" },
+    { mode = "i", "<c-h>",                              "<cmd>AutolistShiftTab<cr>" },
+    { mode = "i", "<c-o>",                              "<CR><cmd>AutolistNewBullet<cr>" },
+    { mode = "i", "<c-O>",                              "<CR><cmd>AutolistNewBulletBefore<cr>" },
   },
   config = function()
     require("autolist").setup()
@@ -1010,32 +1003,33 @@ local autolist = {
   end,
 }
 
-local color = {
-  "marko-cerovac/material.nvim",
-  -- event= 'VimEnter',
+local satellite = {
+  "lewis6991/satellite.nvim",
+  cmd = "SatelliteEnable",
   config = function()
-    require("material").setup({
-      contrast = {
-        terminal = false,      -- Enable contrast for the built-in terminal default=false
-        sidebars = true,       -- Enable contrast for sidebar-like windows ( for example Nvim-Tree ) default=false
-        floating_windows = true, -- Enable contrast for floating windows default=false
-        cursor_line = true,    -- Enable darker background for the cursor line default=false
-        non_current_windows = true, -- Enable contrasted background for non-current windows default=false
-      },
-      plugins = {              -- Uncomment the plugins that you use to highlight them
-        -- Available plugins:
-        "gitsigns",
-        "hop",
-        "lspsaga",
-        "nvim-cmp",
-        "nvim-navic",
-        "nvim-web-devicons",
-        "telescope",
-        "which-key",
-        -- "dap",
-        -- "trouble",
+    require("satellite").setup({
+      winblend = 50,
+      zindex = 40,
+      excluded_filetypes = {},
+      width = 2,
+      handlers = {
+        cursor = {
+          enable = true,
+          -- Supports any number of symbols
+          symbols = { "⎺", "⎻", "⎼", "⎽" },
+          -- symbols = { '⎻', '⎼' }
+          -- Highlights:
+          -- - SatelliteCursor (default links to NonText
+        },
+        gitsigns = {
+          enable = true,
+          signs = { -- can only be a single character (multibyte is okay)
+            add = "+",
+            change = "~",
+            delete = "-",
+          },
+        },
       },
     })
-    vim.cmd("colorscheme material")
   end,
 }
