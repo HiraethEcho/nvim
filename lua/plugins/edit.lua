@@ -107,24 +107,35 @@ return {
       },
     },
     cmd = { "TodoLocList", "TodoTelescope", "TodoQuickFix" },
-    config = function()
-      require("todo-comments").setup({
-        signs = true,  -- show icons in the signs column
-        sign_priority = 8, -- sign priority
-        keywords = {
-          FIX = {
-            icon = " ",                        -- icon used for the sign, and in search results
-            color = "error",                      -- can be a hex color, or a named color (see below)
-            alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
-            -- signs = false, -- configure signs for some keywords individually
-          },
-          TODO = { icon = " ", color = "todo" },
-          QUES = { icon = " ", color = "ques" },
-          WARN = { icon = " ", color = "warning", alt = { "XXX" } },
-          NOTE = { icon = " ", color = "note" },
+    opts = {
+      sign_priority = 8, -- sign priority
+      keywords = {
+        FIX = {
+          icon = " ",                              -- icon used for the sign, and in search results
+          color = "error",                            -- can be a hex color, or a named color (see below)
+          alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+          -- signs = false, -- configure signs for some keywords individually
         },
-      })
-    end,
+        TODO = { icon = " ", color = "info" },
+          QUES = { icon = " ", color = "default" },
+        WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+        NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+      },
+      gui_style = {
+        bg = "BOLD",         -- The gui style to use for the bg highlight group.
+      },
+      merge_keywords = true, -- when true, custom keywords will be merged with the defaults
+      -- list of named colors where we try to extract the guifg from the
+      -- list of highlight groups or use the hex color if hl not found as a fallback
+      colors = {
+        error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+        warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
+        info = { "DiagnosticInfo", "#2563EB" },
+        hint = { "DiagnosticHint", "#10B981" },
+        default = { "Identifier", "#7C3AED" },
+        test = { "Identifier", "#FF00FF" }
+      },
+    },
   },
   {
     "ellisonleao/glow.nvim",
@@ -169,8 +180,8 @@ return {
     opts = {
       window = {
         backdrop = 0.90, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-        width = 100, -- width of the Zen window
-        height = 1,  -- height of the Zen window
+        width = 100,     -- width of the Zen window
+        height = 1,      -- height of the Zen window
       },
       plugins = {
         -- disable some global vim options (vim.o...)

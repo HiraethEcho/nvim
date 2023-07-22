@@ -22,6 +22,7 @@ return {
       { "<leader>gs", "<cmd>Telescope git_status<cr>",   desc = "git status" },
       { "<leader>gS", "<cmd>Telescope git_stash<cr>",    desc = "git stash" },
       { "<leader>gf", "<cmd>Telescope git_files<cr>",    desc = "git files" },
+      { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
 
       {
         "<leader>id",

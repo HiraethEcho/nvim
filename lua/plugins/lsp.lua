@@ -98,23 +98,29 @@ return {
           "prettier",
           "markdownlint",
           "stylua",
+          "misspell",
           "latexindent",
+          "vale",
         },
         automatic_installation = true,
         handlers = {},
       })
-      require("null-ls").setup({
+      local null_ls = require("null-ls")
+      null_ls.setup({
         sources = {
-          -- Anything not supported by mason.
+          null_ls.builtins.code_actions.gitsigns,
+          null_ls.builtins.diagnostics.textidote,
+          null_ls.builtins.hover.dictionary,
         },
       })
     end,
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPost", "BufNewFile" }, dependencies = {
-      "jay-babu/mason-null-ls.nvim",   
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "jay-babu/mason-null-ls.nvim",
     },
-    config = true,  
+    config = true,
   },
 }
