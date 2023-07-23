@@ -1,7 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost", "BufNewFile" },
+    -- event = { "BufReadPost", "BufNewFile" },
     -- lazy=false,
     cmd = "LspStart",
     keys = {
@@ -11,11 +11,11 @@ return {
     },
     dependencies = {
       { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+      "jose-elias-alvarez/null-ls.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "SmiteshP/nvim-navbuddy",
-      "jose-elias-alvarez/null-ls.nvim",
     },
     config = function()
       local servers = {
@@ -64,13 +64,12 @@ return {
               onEdit = false,
             },
             bibtexFormatter = "texlab",
-            latexFormatter = "texlab",
+            latexFormatter = "latexindent",
             formatterLineLength = 80,
           },
         },
       }
       require("fidget").setup()
-      -- require("lspsaga").setup()
       require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(servers),
@@ -98,7 +97,6 @@ return {
           "prettier",
           "markdownlint",
           "stylua",
-          "misspell",
           "latexindent",
           "vale",
         },
@@ -108,16 +106,15 @@ return {
       local null_ls = require("null-ls")
       null_ls.setup({
         sources = {
-          null_ls.builtins.code_actions.gitsigns,
-          null_ls.builtins.diagnostics.textidote,
-          null_ls.builtins.hover.dictionary,
+          -- null_ls.builtins.code_actions.gitsigns,
+          -- null_ls.builtins.diagnostics.textidote,
+          -- null_ls.builtins.hover.dictionary,
         },
       })
     end,
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "jay-babu/mason-null-ls.nvim",
     },

@@ -2,7 +2,14 @@ local vim = vim
 return {
   {
     "numToStr/Comment.nvim",
-    event = "BufReadPost",
+    keys = {
+      { "gcc", mode = "n",          desc = "Comment toggle current line" },
+      { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
+      { "gc",  mode = "x",          desc = "Comment toggle linewise (visual)" },
+      { "gbc", mode = "n",          desc = "Comment toggle current block" },
+      { "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+      { "gb",  mode = "x",          desc = "Comment toggle blockwise (visual)" },
+    },
     config = function()
       require("Comment").setup()
     end,
@@ -113,8 +120,8 @@ return {
       sign_priority = 8, -- sign priority
       keywords = {
         FIX = {
-          icon = " ",                         -- icon used for the sign, and in search results
-          color = "error",                       -- can be a hex color, or a named color (see below)
+          icon = " ", -- icon used for the sign, and in search results
+          color = "error", -- can be a hex color, or a named color (see below)
           alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
           -- signs = false, -- configure signs for some keywords individually
         },
