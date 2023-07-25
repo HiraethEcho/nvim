@@ -38,7 +38,23 @@ return {
             },
           },
         },
-        texlab = {
+      }
+      require("fidget").setup()
+      require("mason").setup()
+      require("mason-lspconfig").setup({
+        ensure_installed = vim.tbl_keys(servers),
+        handlers = {
+          function(server_name) -- default handler (optional)
+            require("lspconfig")[server_name].setup({
+              capabilities = require("cmp_nvim_lsp").default_capabilities(),
+              settings = servers[server_name],
+            })
+          end,
+        },
+      })
+      require("lspconfig").texlab.setup({
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        settings = {
           texlab = {
             build = {
               forwardSearchAfter = true,
@@ -68,19 +84,11 @@ return {
             formatterLineLength = 80,
           },
         },
-      }
-      require("fidget").setup()
-      require("mason").setup()
-      require("mason-lspconfig").setup({
-        ensure_installed = vim.tbl_keys(servers),
-        handlers = {
-          function(server_name) -- default handler (optional)
-            require("lspconfig")[server_name].setup({
-              capabilities = require("cmp_nvim_lsp").default_capabilities(),
-              settings = servers[server_name],
-            })
-          end,
-        },
+        on_attach = function(client, bufnr)
+          local bufopts = { noremap = true, silent = true, buffer = bufnr }
+          vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>", bufopts)
+          vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>", bufopts)
+        end,
       })
     end,
   },
@@ -95,17 +103,19 @@ return {
         ensure_installed = {
           -- Opt to list sources here, when available in mason.
           "prettier",
-          "stylua",
+          -- "stylua",
           "latexindent",
         },
         automatic_installation = true,
-        handlers = {},
+        -- handlers = {},
       })
       local null_ls = require("null-ls")
       null_ls.setup({
         sources = {
+          null_ls.builtins.formatting.stylua.with({ extra_args = { "--indent_type", "Spaces", "indent_width", "2" },
+          }),
           -- null_ls.builtins.code_actions.gitsigns,
-          -- null_ls.builtins.diagnostics.textidote,
+      -- null_ls.builtins.diagnostics.textidote,
           -- null_ls.builtins.hover.dictionary,
         },
       })

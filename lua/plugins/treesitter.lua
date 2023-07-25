@@ -42,7 +42,7 @@ return {
       },
     },
     opts = {
-      highlight = { enable = true },
+      highlight = { enable = false },
       indent = { enable = true },
       ensure_installed = {
         "c",

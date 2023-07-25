@@ -18,7 +18,7 @@ return {
         background = "soft",
         transparent_background_level = 0,
         italics = true,
-        dim_inactive_windows = true,
+        dim_inactive_windows = false,
         diagnostic_virtual_text = "grey",
         ---Some plugins support highlighting error/warning/info/hint lines, but this
         ---feature is disabled by default in this colour scheme.

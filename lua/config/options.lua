@@ -5,15 +5,15 @@ vim.g.maplocalleader = "\\"
 
 local opt = vim.opt
 
-opt.autowrite = true           -- Enable auto write
-opt.clipboard = "unnamedplus"  -- Sync with system clipboard
+opt.autowrite = true          -- Enable auto write
+opt.clipboard = "unnamedplus" -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"
-opt.conceallevel = 3           -- Hide * markup for bold and italic
-opt.confirm = true             -- Confirm to save changes before exiting modified buffer
-opt.cursorline = true          -- Enable highlighting of the current line
-opt.cursorcolumn = true        -- Enable highlighting of the current line
-opt.expandtab = true           -- Use spaces instead of tabs
-opt.formatoptions = "jcroqlnt" -- tcqj
+opt.conceallevel = 3          -- Hide * markup for bold and italic
+opt.confirm = true            -- Confirm to save changes before exiting modified buffer
+opt.cursorline = true         -- Enable highlighting of the current line
+opt.cursorcolumn = true       -- Enable highlighting of the current line
+opt.expandtab = true          -- Use spaces instead of tabs
+opt.formatoptions = "jcqlnt"  -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true      -- Ignore case
@@ -44,7 +44,7 @@ opt.tabstop = 2          -- Number of spaces tabs count for
 opt.expandtab = true     -- convert tabs to spaces
 opt.termguicolors = true -- True color support
 opt.timeoutlen = 300
-opt.undofile = true
+opt.undofile = false
 opt.undolevels = 10000
 opt.updatetime = 200               -- Save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
@@ -71,4 +71,3 @@ opt.swapfile = false
 opt.foldmethod = "expr"
 opt.foldlevel = 99
 opt.foldexpr = "nvim_treesitter#foldexpr()"
-
