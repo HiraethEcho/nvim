@@ -95,10 +95,8 @@ return {
         ensure_installed = {
           -- Opt to list sources here, when available in mason.
           "prettier",
-          "markdownlint",
           "stylua",
           "latexindent",
-          "vale",
         },
         automatic_installation = true,
         handlers = {},
