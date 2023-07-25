@@ -201,11 +201,12 @@ return {
   },
   {
     "jiaoshijie/undotree",
+    -- enabled = false,
     keys = {
       { "<leader>U", ":lua require('undotree').open() <cr>", desc = "open undotree" }
     },
-    opts ={
-      float_diff=false,
+    opts = {
+      float_diff = false,
     }
   },
   {
@@ -221,6 +222,3 @@ return {
     end,
   },
 }
--- test
--- test 2
--- test 2
