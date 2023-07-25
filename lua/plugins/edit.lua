@@ -131,7 +131,7 @@ return {
         NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
       },
       gui_style = {
-        bg = "BOLD",      -- The gui style to use for the bg highlight group.
+        bg = "BOLD",         -- The gui style to use for the bg highlight group.
       },
       merge_keywords = true, -- when true, custom keywords will be merged with the defaults
       -- list of named colors where we try to extract the guifg from the
@@ -189,8 +189,8 @@ return {
     opts = {
       window = {
         backdrop = 0.90, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-        width = 100, -- width of the Zen window
-        height = 1,  -- height of the Zen window
+        width = 100,     -- width of the Zen window
+        height = 1,      -- height of the Zen window
       },
       plugins = {
         -- disable some global vim options (vim.o...)
@@ -198,6 +198,15 @@ return {
         twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
       },
     },
+  },
+  {
+    "jiaoshijie/undotree",
+    keys = {
+      { "<leader>U", ":lua require('undotree').open() <cr>", desc = "open undotree" }
+    },
+    opts ={
+      float_diff=false,
+    }
   },
   {
     "voldikss/vim-translator",
@@ -212,3 +221,6 @@ return {
     end,
   },
 }
+-- test
+-- test 2
+-- test 2
