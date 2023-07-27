@@ -33,6 +33,7 @@ return {
   },
   {
     "godlygeek/tabular",
+    enabled = false,
     keys = {
       { "<leader>t", ":Tabularize /", mode = "v", desc = "tabularize" },
     },
@@ -120,8 +121,8 @@ return {
       sign_priority = 8, -- sign priority
       keywords = {
         FIX = {
-          icon = " ", -- icon used for the sign, and in search results
-          color = "error", -- can be a hex color, or a named color (see below)
+          icon = " ",                              -- icon used for the sign, and in search results
+          color = "error",                            -- can be a hex color, or a named color (see below)
           alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
           -- signs = false, -- configure signs for some keywords individually
         },
@@ -147,32 +148,11 @@ return {
     },
   },
   {
-    "ellisonleao/glow.nvim",
-    config = true,
-    cmd = "Glow",
-    keys = {
-      { "<leader>mp", "<cmd>Glow<cr>", desc = "markdown Glow Preview" },
-    },
-  },
-  {
-    "antonk52/markdowny.nvim",
-    ft = { "md", "markdown" },
-    config = function()
-      require("markdowny").setup()
-      vim.keymap.set("v", "<C-b>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })
-      vim.keymap.set("v", "<C-i>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
-      vim.keymap.set("v", "<C-k>", ":lua require('markdowny').link()<cr>", { buffer = 0 })
-      vim.keymap.set("v", "<C-e>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
-    end,
-  },
-  {
     "RRethy/vim-illuminate",
     keys = {
       { "<leader>ui", "<cmd>IlluminateToggle<cr>", desc = "toggle illuminate" },
     },
     opts = {
-      delay = 200,
-      large_file_cutoff = 2000,
       large_file_overrides = {
         providers = { "lsp" },
       },
@@ -200,14 +180,14 @@ return {
     },
   },
   {
-    "jiaoshijie/undotree",
-    -- enabled = false,
+    'mbbill/undotree',
     keys = {
-      { "<leader>U", ":lua require('undotree').open() <cr>", desc = "open undotree" }
+      { "U", "<cmd>UndotreeToggle<cr>", desc = "open undotree" }
     },
-    opts = {
-      float_diff = false,
-    }
+    config = function ()
+      vim.g.undotree_WindowLayout = 2
+
+    end
   },
   {
     "voldikss/vim-translator",

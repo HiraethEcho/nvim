@@ -175,6 +175,25 @@ return {
     end,
   },
   {
+    "ellisonleao/glow.nvim",
+    config = true,
+    cmd = "Glow",
+    keys = {
+      { "<leader>mp", "<cmd>Glow<cr>", desc = "markdown Glow Preview" },
+    },
+  },
+  {
+    "antonk52/markdowny.nvim",
+    ft = { "md", "markdown" },
+    config = function()
+      require("markdowny").setup()
+      vim.keymap.set("v", "<C-b>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })
+      vim.keymap.set("v", "<C-i>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
+      vim.keymap.set("v", "<C-k>", ":lua require('markdowny').link()<cr>", { buffer = 0 })
+      vim.keymap.set("v", "<C-e>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
+    end,
+  },
+  {
     "epwalsh/obsidian.nvim",
     -- lazy=false,
     enabled = false,

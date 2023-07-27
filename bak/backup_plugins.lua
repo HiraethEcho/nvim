@@ -1,3 +1,13 @@
+  local undo={
+    "jiaoshijie/undotree",
+    -- enabled = false,
+    keys = {
+      { "<leader>U", ":lua require('undotree').open() <cr>", desc = "open undotree" }
+    },
+    opts = {
+      float_diff = false,
+    }
+  }
 local minimap = {
   "echasnovski/mini.map",
   version = false,
