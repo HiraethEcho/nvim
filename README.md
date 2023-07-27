@@ -1,4 +1,5 @@
 # NVIM
+This brunch using coc, not lsp or cmp
 
 This is my nvim.
 

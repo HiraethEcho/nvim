@@ -1,13 +1,3 @@
-  local undo={
-    "jiaoshijie/undotree",
-    -- enabled = false,
-    keys = {
-      { "<leader>U", ":lua require('undotree').open() <cr>", desc = "open undotree" }
-    },
-    opts = {
-      float_diff = false,
-    }
-  }
 local minimap = {
   "echasnovski/mini.map",
   version = false,
@@ -744,10 +734,10 @@ local coc = {
       -- "coc-texlab",
     }
     -- vim.g.coc_node_path = "D:/Downloads/apps/nodejs/current/node.exe"
-    function _G.check_back_space()
-      local col = vim.fn.col(".") - 1
-      return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
-    end
+    -- function _G.check_back_space()
+    --   local col = vim.fn.col(".") - 1
+    --   return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
+    -- end
 
     vim.keymap.set(
       "i",

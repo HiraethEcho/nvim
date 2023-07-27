@@ -2,6 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     -- event = { "BufReadPost", "BufNewFile" },
+    enabled =false,
     -- lazy=false,
     cmd = "LspStart",
     keys = {
@@ -13,8 +14,7 @@ return {
       { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "nvimdev/guard.nvim",
-      "hrsh7th/cmp-nvim-lsp",
+      -- "hrsh7th/cmp-nvim-lsp",
       "SmiteshP/nvim-navbuddy",
     },
     config = function()
@@ -42,14 +42,14 @@ return {
         handlers = {
           function(server_name) -- default handler (optional)
             require("lspconfig")[server_name].setup({
-              capabilities = require("cmp_nvim_lsp").default_capabilities(),
+              -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
               settings = servers[server_name],
             })
           end,
         },
       })
       require("lspconfig").texlab.setup({
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
         settings = {
           texlab = {
             build = {

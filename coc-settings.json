@@ -1,0 +1,131 @@
+{
+  "texlab.forwardSearch.executable": "sioyek",
+  "texlab.forwardSearch.args": [
+    "--reuse-window",
+    "--execute-command",
+    "toggle_synctex",
+    "--forward-search-file",
+    "%f",
+    "--forward-search-line",
+    "%l",
+    "%p",
+  ],
+  "pairs.enableCharacters": [
+    "(",
+    "[",
+    "{",
+    "'",
+    "\"",
+    "`"
+  ],
+  "coc.preferences.extensionUpdateCheck": "weekly",
+  "snippets.shortcut": "Snip",
+  "snippets.ultisnips.directories": [
+    "CocSnips",
+  ],
+  "suggest.noselect": true,
+  "suggest.enablePreselect": false,
+  "explorer.quitOnOpen":false,
+  "explorer.sources": [
+    {
+      "name": "buffer",
+      "expand":true
+    },
+    {
+      "name": "file",
+      "expand": true
+    }
+  ],
+  "explorer.file.column.indent.indentLine": true,
+  "explorer.file.showHiddenFiles": true,
+  "explorer.file.hiddenRules": {
+    "extensions": ["o", "a","xdv", "obj", "pyc","aux","fls","toc","gz","log","fdb_latexmk","gz","out","toc"],
+    "filenames": [".git","*.pdf","*.dvi"],
+    "patternMatches": ["^\\."]
+  },
+  "explorer.git.icon.status.added": "A",
+  "explorer.git.icon.status.modified": "M",
+  "explorer.git.icon.status.renamed": "R",
+  "explorer.git.icon.status.mixed": "*",
+  "explorer.git.icon.status.deleted": "D",
+  "explorer.git.icon.status.untracked": "?",
+  "explorer.git.icon.status.unmerged": "U",
+  "explorer.git.icon.status.copied": "C",
+  "explorer.git.icon.status.ignored": "!",
+  "explorer.git.enable": true,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.keyMappingMode": "none",
+  "explorer.buffer.showHiddenBuffers": true,
+  "explorer.keyMappings.global": {
+    "i": false,
+
+    "*": "toggleSelection",
+    "<tab>": "actionMenu",
+
+    "gk": ["wait", "expandablePrev"],
+    "gj": ["wait", "expandableNext"],
+    "h": ["wait", "collapse"],
+    "l": ["wait", "expandable?", "expand", "open"],
+    "<C-j>": ["wait", "toggleSelection", "normal:j"],
+    "<C-k>": ["wait", "toggleSelection", "normal:k"],
+    "gl": ["wait", "expand:recursive"],
+    "gh": ["wait", "collapse:recursive"],
+    "<2-LeftMouse>": ["expandable?", ["expanded?", "collapse", "expand"], "open"],
+    "o": ["wait", "expanded?", "collapse", "expand"],
+    "<cr>": ["wait", "expandable?", "cd", "open"],
+    "e": "open",
+    "s": "open:split",
+    "v": "open:vsplit",
+    "t": "open:tab",
+    "<bs>": ["wait", "gotoParent"],
+    "gs": ["wait", "reveal:select"],
+    "il": "preview:labeling",
+    "ic": "preview:content",
+    "Il": "previewOnHover:toggle:labeling",
+    "Ic": "previewOnHover:toggle:content",
+    "II": "previewOnHover:disable",
+
+    "yp": "copyFilepath",
+    "yn": "copyFilename",
+    "yy": "copyFile",
+    "dd": "cutFile",
+    "p": "pasteFile",
+    "df": "delete",
+    "dF": "deleteForever",
+
+    "a": "addFile",
+    "A": "addDirectory",
+    "r": "rename",
+
+    "zh": "toggleHidden",
+    "R": "refresh",
+
+    "?": "help",
+    "q": "quit",
+    "<esc>": "quit",
+    "x": "systemExecute",
+    "gd": "listDrive",
+
+    "f": "search",
+    "F": "searchRecursive",
+
+    "gf": "gotoSource:file",
+    "gb": "gotoSource:buffer",
+
+    "[[": ["wait", "sourcePrev"],
+    "]]": ["wait", "sourceNext"],
+    "[i": ["wait", "indentPrev"],
+    "]i": ["wait", "indentNext"],
+    "[m": ["wait", "markPrev:modified"],
+    "]m": ["wait", "markNext:modified"],
+    "[d": ["wait", "markPrev:diagnosticError:diagnosticWarning"],
+    "]d": ["wait", "markNext:diagnosticError:diagnosticWarning"],
+    "[D": ["wait", "markPrev:diagnosticError"],
+    "]D": ["wait", "markNext:diagnosticError"],
+    "[c": ["wait", "markPrev:git"],
+    "]c": ["wait", "markNext:git"],
+    "<<": "gitStage",
+    ">>": "gitUnstage"
+  },
+  "snippets.ultisnips.pythonPrompt": false
+}
