@@ -7,7 +7,7 @@ return {
       { "<leader>ff", "<cmd>Telescope find_files<cr>",   desc = "files" },
       { "<leader>fF", "<cmd>Telescope file_browser<cr>", desc = "files" },
       { "<leader>fo", "<cmd>Telescope oldfiles<cr>",     desc = "old files" },
-      { "<leader>fs", "<cmd>Telescope live_grep<cr>",    desc = "live grep" },
+      -- { "<leader>fs", "<cmd>Telescope live_grep<cr>",    desc = "live grep" },
       { "<leader>?",  "<cmd>Telescope live_grep<cr>",    desc = "live grep" },
       { "<leader>fg", "<cmd>Telescope grep_string<cr>",  desc = "grep string" },
       { "<leader>b",  "<cmd>Telescope buffers<cr>",      desc = "buffers" },

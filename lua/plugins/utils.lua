@@ -128,4 +128,41 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
+  {
+    'rmagatti/auto-session',
+    enabled = false,
+    config = function()
+      require("auto-session").setup {
+        log_level = "error",
+        auto_session_suppress_dirs = { "~/", "~/github", "~/documents" },
+        auto_session_root_dir = vim.fn.stdpath('data') .. "/autosessions/",
+        auto_session_enabled = true,
+      }
+      vim.keymap.set("n", "<leader>fs", require("auto-session.session-lens").search_session, { noremap = true, })
+    end
+  },
+  {
+    'Shatur/neovim-session-manager',
+    dependencies={
+
+    'stevearc/dressing.nvim',
+    },
+    config = function()
+      local config = require('session_manager.config')
+      require('session_manager').setup({
+        sessions_dir = vim.fn.stdpath('data') .. '/autosessions/', -- The directory where the session files will be saved.
+        autosave_last_session = true,                              -- Automatically save last session on exit and on session switch.
+        autosave_ignore_dirs = {},                                 -- A list of directories where the session will not be autosaved.
+        autosave_ignore_filetypes = {                              -- All buffers of these file types will be closed before the session is saved.
+          'gitcommit',
+          'gitrebase',
+          'undotree',
+          'neo-tree',
+          "sagaoutline",
+        },
+        autosave_only_in_session = false,             -- Always autosaves session. If true, only autosaves after a session is active.
+        autoload_mode = config.AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
+      })
+    end,
+  },
 }

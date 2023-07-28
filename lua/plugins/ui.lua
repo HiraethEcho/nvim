@@ -1,5 +1,10 @@
 return {
   {
+    'stevearc/dressing.nvim',
+    event = "BufReadPost",
+    opts = {},
+  },
+  {
     "xiyaowong/nvim-transparent",
     cmd = "TransparentEnable",
     -- lazy=false,
@@ -176,15 +181,11 @@ return {
     "goolord/alpha-nvim",
     dependencies = {
       "jedrzejboczar/possession.nvim",
+      'Shatur/neovim-session-manager',
     },
     event = "VimEnter",
     opts = function()
       local dashboard = require("alpha.themes.dashboard")
-      -- TODO: start logo <28-05-23, >
-
-      --local logo = [[
-      --]]
-      -- dashboard.section.header.val = vim.split(logo, "\n")
       dashboard.section.buttons.val = {
         (function()
           local group = { type = "group", opts = { spacing = 0 } }
@@ -213,12 +214,9 @@ return {
           end
           return group
         end)(),
-        -- dashboard.button("f", " " .. " Find Files",
-        -- [[<cmd>lua Util.telescope("find_files", { prompt_title = "Find Files (cwd)", })() <CR>]]),
         dashboard.button("e", " " .. " New Files", ":enew<CR>"),
-        -- dashboard.button("o", " " .. " Recent Files", ":Telescope frecency <CR>"),
-        -- dashboard.button("g", " " .. " Find Text", ":Telescope live_grep <CR>"),
         dashboard.button("t", "󰃨 " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
+        dashboard.button("s", " " .. " Sessions", ":SessionManager load_session<CR>"),
         dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
         dashboard.button("b", "󰖟 " .. " blog", [[<cmd>PLoad blog<CR>]]),
         dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
@@ -235,28 +233,42 @@ return {
       return dashboard
     end,
     config = function(_, dashboard)
-      -- close Lazy and re-open when the dashboard is ready
-      if vim.o.filetype == "lazy" then
-        vim.cmd.close()
-        vim.api.nvim_create_autocmd("User", {
-          pattern = "AlphaReady",
-          callback = function()
-            require("lazy").show()
-          end,
-        })
-      end
-
       require("alpha").setup(dashboard.opts)
+      -- config = function()
+      local alpha = require 'alpha'
+      local startify = require 'alpha.themes.startify'
 
+      startify.section.header.val = {
+        [[                                   __                ]],
+        [[      ___     ___    ___   __  __ /\_\    ___ ___    ]],
+        [[     / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
+        [[    /\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+        [[    \ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+        [[     \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+      }
+      startify.section.top_buttons.val = {
+        startify.button("e", " " .. " New Files", ":enew<CR>"),
+        -- startify.button("s", "  Sessions", ":SessionManager load_session  <CR>"),
+        -- startify.button("c", " " .. " Nvim Config", ":<cmd>e $MYVIMRC<CR>"),
+        -- startify.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
+      }
+      startify.section.mru.val = { { type = "padding", val = 3 } }
+      startify.section.mru_cwd.val = { { type = "padding", val = 3 } }
+      startify.section.bottom_buttons.val = {
+        startify.button("q", "󰅚  Quit NVIM", ":qa<CR>"),
+      }
       vim.api.nvim_create_autocmd("User", {
         pattern = "LazyVimStarted",
         callback = function()
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+          -- startify.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
           pcall(vim.cmd.AlphaRedraw)
         end,
       })
+
+      -- alpha.setup(startify.config)
     end,
   },
   {
