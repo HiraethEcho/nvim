@@ -17,7 +17,7 @@ return {
         background = "soft",
         transparent_background_level = 0,
         italics = true,
-        dim_inactive_windows = false,
+        dim_inactive_windows = true,
         diagnostic_virtual_text = "grey",
         ---Some plugins support highlighting error/warning/info/hint lines, but this
         ---feature is disabled by default in this colour scheme.
@@ -40,6 +40,7 @@ return {
       "meuter/lualine-so-fancy.nvim",
     },
     event = "BufRead",
+    -- event = "VeryLazy",
     config = function()
       local function session_name()
         return require("possession.session").session_name or ""

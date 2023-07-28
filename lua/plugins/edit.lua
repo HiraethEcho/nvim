@@ -28,7 +28,7 @@ return {
   {
     "echasnovski/mini.surround",
     version = false,
-    event = "VeryLazy",
+    event = "BufReadPost",
     config = true,
   },
   {

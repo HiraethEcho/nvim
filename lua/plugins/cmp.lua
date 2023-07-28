@@ -4,13 +4,13 @@ return {
   event = "InsertEnter",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
-    "f3fora/cmp-spell",
-    "octaltree/cmp-look",
+    -- "f3fora/cmp-spell",
+    -- "octaltree/cmp-look",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lua",
     "hrsh7th/cmp-path",
-    "hrsh7th/cmp-omni",
-    "nvim-treesitter/nvim-treesitter",
+    -- "hrsh7th/cmp-omni",
+    -- "nvim-treesitter/nvim-treesitter",
     {
       "SirVer/ultisnips",
       dependencies = {
@@ -75,15 +75,6 @@ return {
         },
         { name = "path" },
         { name = "nvim_lua" },
-        {
-          name = "look",
-          keyword_length = 2,
-          option = {
-            convert_case = true,
-            loud = true,
-            --dict = '/usr/share/dict/words'
-          },
-        },
       }),
       experimental = {
         ghost_text = {

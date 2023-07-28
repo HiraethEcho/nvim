@@ -74,6 +74,7 @@ return {
     keys ={
       {"<leader>DD","<cmd>DiffviewOpen<cr>",desc="Diff View"},
       {"<leader>DH","<cmd>DiffviewFileHistory<cr>",desc="Diff View"},
+      {"<leader>DC","<cmd>DiffviewClose<cr>",desc="Diff close"},
     },
     cmd = {"DiffviewOpen","DiffviewFileHistory"},
     config = function()

@@ -555,7 +555,7 @@ local minipair = {
   end,
 }
 
-local undo = {
+local undo_bak = {
   "jiaoshijie/undotree",
   event = "BufReadPost",
   dependencies = {
@@ -867,7 +867,7 @@ local color = {
       })
       vim.cmd("colorscheme material")
     end,
-  }
+  },
   {
     "shaunsingh/nord.nvim",
     -- enabled=false,

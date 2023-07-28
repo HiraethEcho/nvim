@@ -11,7 +11,6 @@ return {
     },
     dependencies = {
       { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
-      "jose-elias-alvarez/null-ls.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
@@ -40,7 +39,7 @@ return {
         },
       }
       require("fidget").setup()
-      require("mason").setup()
+      -- require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(servers),
         handlers = {
@@ -90,12 +89,27 @@ return {
           vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>", bufopts)
         end,
       })
+      require("lspconfig").grammarly.setup({
+        filetypes = { 'markdown', 'tex', 'plaintex' },
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        settings = {
+          grammarly = {
+          },
+        },
+        on_attach = on_attach
+      })
     end,
   },
   {
     "williamboman/mason.nvim",
+    dependencies = {
+      { "jose-elias-alvarez/null-ls.nvim", config = true },
+      "jay-babu/mason-null-ls.nvim",
+    },
     cmd = "Mason",
-    keys = { { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" } },
+    keys = {
+      { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" }
+    },
     build = ":MasonUpdate",
     config = function()
       require("mason").setup()
@@ -103,7 +117,7 @@ return {
         ensure_installed = {
           -- Opt to list sources here, when available in mason.
           "prettier",
-          -- "stylua",
+          "stylua",
           "latexindent",
         },
         automatic_installation = true,
@@ -115,18 +129,11 @@ return {
           null_ls.builtins.formatting.stylua.with({ extra_args = { "--indent_type", "Spaces", "indent_width", "2" },
           }),
           -- null_ls.builtins.code_actions.gitsigns,
-      -- null_ls.builtins.diagnostics.textidote,
+          -- null_ls.builtins.diagnostics.textidote,
           -- null_ls.builtins.hover.dictionary,
         },
       })
     end,
-  },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    dependencies = {
-      "jay-babu/mason-null-ls.nvim",
-    },
-    config = true,
   },
   {
     "glepnir/lspsaga.nvim",
@@ -152,21 +159,11 @@ return {
     },
     config = function()
       require("lspsaga").setup({
-        preview = {
-          lines_above = 0,
-          lines_below = 10,
-        },
         scroll_preview = {
           scroll_down = "<C-u>",
           scroll_up = "<C-d>",
         },
-        request_timeout = 2000,
-
-        -- For default options for each command, see below
         finder = {
-          max_height = 0.5,
-          min_width = 30,
-          force_max_height = false,
           keys = {
             jump_to = "p",
             expand_or_jump = "<cr>",
@@ -199,19 +196,6 @@ return {
           open_browser = "!msedge",
         },
         diagnostic = {
-          on_insert = false,
-          on_insert_follow = false,
-          insert_winblend = 40,
-          show_code_action = true,
-          show_source = true,
-          jump_num_shortcut = true,
-          max_width = 0.7,
-          max_height = 0.6,
-          max_show_width = 0.9,
-          max_show_height = 0.6,
-          text_hl_follow = true,
-          border_follow = true,
-          extend_relatedInformation = false,
           keys = {
             exec_action = "o",
             quit = "q",
@@ -223,7 +207,6 @@ return {
           winblend = 30,
         },
       })
-
       local sign = function(opts)
         vim.fn.sign_define(opts.name, {
           texthl = opts.name,
