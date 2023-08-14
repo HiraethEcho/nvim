@@ -59,7 +59,7 @@ return {
               forwardSearchAfter = true,
             },
             forwardSearch = {
-              executable = "Sioyek",
+              executable = "sioyek",
               args = {
                 "--reuse-window",
                 "--execute-command",
