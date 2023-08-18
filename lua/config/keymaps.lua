@@ -117,7 +117,11 @@ map("n", "<leader>qq", "<cmd>wa<cr><cmd>qa<cr>", { desc = "Quit all" })
 
 -- floating terminal
 local lazyterm = function()
+      if vim.g.is_linux then
+	Util.float_term("zsh", { esc_esc = true, ctrl_hjkl = false })
+      else
 	Util.float_term("powershell", { esc_esc = true, ctrl_hjkl = false })
+      end
 end
 map("n", "<leader>t", lazyterm, { desc = "Float Terminal" })
 
