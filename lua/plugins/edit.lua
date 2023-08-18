@@ -41,6 +41,13 @@ return {
   {
     "Neur1n/neuims",
     cmd = "IMSToggle",
+    enabled = function()
+      if vim.g.is_linux then
+        return false
+      else
+        return true
+      end
+    end,
   },
   {
     "windwp/nvim-autopairs",
