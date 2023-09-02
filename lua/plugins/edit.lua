@@ -33,7 +33,7 @@ return {
   },
   {
     "godlygeek/tabular",
-    enabled = false,
+    enabled = true,
     keys = {
       { "<leader>t", ":Tabularize /", mode = "v", desc = "tabularize" },
     },
