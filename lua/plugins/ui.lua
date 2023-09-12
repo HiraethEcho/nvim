@@ -216,7 +216,7 @@ return {
         end)(),
         dashboard.button("e", " " .. " New Files", ":enew<CR>"),
         dashboard.button("t", "󰃨 " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
-        dashboard.button("s", " " .. " Sessions", ":SessionManager load_session<CR>"),
+        -- dashboard.button("s", " " .. " Sessions", ":SessionManager load_session<CR>"),
         dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
         dashboard.button("b", "󰖟 " .. " blog", [[<cmd>PLoad blog<CR>]]),
         dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),

@@ -143,8 +143,8 @@ return {
   },
   {
     'Shatur/neovim-session-manager',
+    enabled =false,
     dependencies={
-
     'stevearc/dressing.nvim',
     },
     config = function()

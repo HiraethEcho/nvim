@@ -28,6 +28,9 @@ return {
           checkThirdParty = false,
         },
         marksman = {},
+          beautysh={},
+          shellcheck={},
+        bashls = {},
         html = {},
         clangd = {},
         grammarly = {
@@ -119,6 +122,8 @@ return {
           "prettier",
           "stylua",
           "latexindent",
+          "beautysh",
+          "shellcheck",
         },
         automatic_installation = true,
         -- handlers = {},

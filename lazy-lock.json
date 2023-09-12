@@ -10,6 +10,7 @@
   "diffview.nvim": { "branch": "main", "commit": "db97e667e03294bfa9f15e544e78f3082247bf79" },
   "dressing.nvim": { "branch": "master", "commit": "6bde51adabba06f7fd4a469885a85f36d78a5f52" },
   "everforest-nvim": { "branch": "main", "commit": "e0a2251ec840793afa2db05ed0b8b83291ed74ed" },
+  "fcitx.nvim": { "branch": "main", "commit": "fbfd1025aa2d314850f3114d6d2f27f5849ea1de" },
   "fidget.nvim": { "branch": "main", "commit": "0ba1e16d07627532b6cae915cc992ecac249fb97" },
   "git-conflict.nvim": { "branch": "main", "commit": "8d962d83cae924a314965f738ed1e05a4000d682" },
   "gitsigns.nvim": { "branch": "main", "commit": "5a2b1205841bc06ffb15719b14d54987e17b22ae" },

@@ -50,6 +50,15 @@ return {
     end,
   },
   {
+    "smartding/fcitx.nvim",
+    -- lazy = false,
+    cmd = "Fcitx",
+    config = function()
+    vim.api.nvim_create_user_command("Fcitx", require("fcitx").setup, {})
+      -- require("fcitx").setup()
+    end,
+  },
+  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = true,
@@ -128,8 +137,8 @@ return {
       sign_priority = 8, -- sign priority
       keywords = {
         FIX = {
-          icon = " ",                              -- icon used for the sign, and in search results
-          color = "error",                            -- can be a hex color, or a named color (see below)
+          icon = " ", -- icon used for the sign, and in search results
+          color = "error", -- can be a hex color, or a named color (see below)
           alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
           -- signs = false, -- configure signs for some keywords individually
         },
@@ -191,9 +200,8 @@ return {
     keys = {
       { "U", "<cmd>UndotreeToggle<cr>", desc = "open undotree" }
     },
-    config = function ()
+    config = function()
       vim.g.undotree_WindowLayout = 2
-
     end
   },
   {
