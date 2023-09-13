@@ -24,6 +24,7 @@ return {
   },
   config = function()
     local cmp = require("cmp")
+    local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
     cmp.setup({
       completion = {
         completeopt = "menu,menuone,noinsert,noselect",
@@ -33,6 +34,21 @@ return {
           vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
         end,
       },
+
+      -- mapping = {
+      --   ["<Tab>"] = cmp.mapping(
+      --     function(fallback)
+      --       cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+      --     end,
+      --     { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+      --   ),
+      --   ["<S-Tab>"] = cmp.mapping(
+      --     function(fallback)
+      --       cmp_ultisnips_mappings.jump_backwards(fallback)
+      --     end,
+      --     { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+      --   ),
+      -- },
       mapping = cmp.mapping.preset.insert({
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
@@ -84,7 +100,7 @@ return {
       formatting = {
         format = require("lspkind").cmp_format({
           with_text = true, -- do not show text alongside icons
-          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          maxwidth = 50,    -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
           before = function(entry, vim_item)
             -- Source 显示提示来源
             vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
