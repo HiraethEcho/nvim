@@ -53,7 +53,7 @@ map("i", "jk", "<ESC>")
 -- taken from runtime/lua/_editor.lua
 map(
 	"n",
-	"<leader>ur",
+	"<leader>R",
 	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
 	{ desc = "Redraw / clear hlsearch / diff update" }
 )
@@ -94,9 +94,11 @@ map("n", "<leader>us", function()
 end, { desc = "Toggle Spelling" })
 map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 map("n", "<leader>ul", function()
-	Util.toggle("relativenumber", true)
 	Util.toggle("number")
 end, { desc = "Toggle Line Numbers" })
+map("n", "<leader>ur", function()
+	Util.toggle("relativenumber")
+end, { desc = "Toggle Line Relative Numbers" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 map("n", "<leader>uc", function()
 	Util.toggle("conceallevel", false, { 0, conceallevel })
