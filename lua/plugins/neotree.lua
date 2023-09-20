@@ -182,7 +182,7 @@ return {
     },
     window = {
       mappings = {
-        o = "system_open",
+        x = "system_open",
         Y = "copy_selector",
         ["l"] = {
           "toggle_node",
@@ -211,8 +211,8 @@ return {
         ["D"] = "delete",
         ["r"] = "rename",
         ["y"] = "copy_to_clipboard",
-        ["d"] = "cut_to_clipboard",
-        ["x"] = "cut_to_clipboard",
+        ["dd"] = "cut_to_clipboard",
+        -- ["x"] = "cut_to_clipboard",
         ["p"] = "paste_from_clipboard",
         -- ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
         -- ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
@@ -222,6 +222,8 @@ return {
         ["?"] = "show_help",
         ["<"] = "prev_source",
         [">"] = "next_source",
+        ["[b"] = "prev_source",
+        ["]b"] = "next_source",
         ["<bs>"] = "navigate_up",
         ["."] = "set_root",
         -- ["H"] = "toggle_hidden",
@@ -234,8 +236,6 @@ return {
         ["<c-x>"] = "clear_filter",
         ["[g"] = "prev_git_modified",
         ["]g"] = "next_git_modified",
-        ["[b"] = "prev_source",
-        ["]b"] = "next_source",
       },
     },
     default_component_configs = {
