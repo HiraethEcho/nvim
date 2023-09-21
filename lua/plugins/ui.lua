@@ -1,6 +1,6 @@
 return {
   {
-    'stevearc/dressing.nvim',
+    "stevearc/dressing.nvim",
     event = "BufReadPost",
     opts = {},
   },
@@ -69,9 +69,10 @@ return {
           lualine_b = {
             {
               "filename",
-              file_status = true,    -- Displays file status (readonly status, modified status)
+              file_status = true, -- Displays file status (readonly status, modified status)
               newfile_status = true, -- Display new file status (new file means no write after created)
-              path = 1,              -- 0: Just the filename
+              path = 1,       
+              -- 0: Just the filename
               -- 1: Relative path
               -- 2: Absolute path
               -- 3: Absolute path, with tilde as the home directory
@@ -102,9 +103,9 @@ return {
           lualine_b = {
             {
               "filename",
-              file_status = true,    -- Displays file status (readonly status, modified status)
+              file_status = true, -- Displays file status (readonly status, modified status)
               newfile_status = true, -- Display new file status (new file means no write after created)
-              path = 1,              -- 0: Just the filename
+              path = 1,       -- 0: Just the filename
               -- 1: Relative path
               -- 2: Absolute path
               -- 3: Absolute path, with tilde as the home directory
@@ -139,17 +140,17 @@ return {
           lualine_b = {
             {
               "buffers",
-              show_filename_only = true,   -- Shows shortened relative path when set to false.
+              show_filename_only = true, -- Shows shortened relative path when set to false.
               show_modified_status = true, -- Shows indicator when the buffer is modified.
-              mode = 0,                    -- 0: Shows buffer name
+              mode = 0,             -- 0: Shows buffer name
               -- 1: Shows buffer index
               -- 2: Shows buffer name + buffer index
               -- 3: Shows buffer number
               -- 4: Shows buffer name + buffer number
               symbols = {
-                modified = "",    -- Text to show when the buffer is modified
+                modified = "", -- Text to show when the buffer is modified
                 alternate_file = "", -- Text to show to identify the alternate file
-                directory = "",   -- Text to show when the buffer is a directory
+                directory = "", -- Text to show when the buffer is a directory
               },
             },
           },
@@ -166,7 +167,7 @@ return {
               -- Note:
               -- It can also be a function that returns
               -- the value of `max_length` dynamically.
-              mode = 2, -- 0: Shows tab_nr
+              mode = 0, -- 0: Shows tab_nr
               -- 1: Shows tab_name
               -- 2: Shows tab_nr + tab_name
             },
@@ -181,7 +182,7 @@ return {
     "goolord/alpha-nvim",
     dependencies = {
       "jedrzejboczar/possession.nvim",
-      'Shatur/neovim-session-manager',
+      "Shatur/neovim-session-manager",
     },
     event = "VimEnter",
     opts = function()
@@ -235,8 +236,8 @@ return {
     config = function(_, dashboard)
       require("alpha").setup(dashboard.opts)
       -- config = function()
-      local alpha = require 'alpha'
-      local startify = require 'alpha.themes.startify'
+      local alpha = require("alpha")
+      local startify = require("alpha.themes.startify")
 
       startify.section.header.val = {
         [[                                   __                ]],
@@ -274,6 +275,10 @@ return {
   {
     "shellRaining/hlchunk.nvim",
     -- event = "BufRead",
+    dependencies ={
+    "rcarriga/nvim-notify",
+    "petertriho/nvim-scrollbar",
+    },
     keys = {
       { "<leader>uh", "<cmd>EnableHL<cr>", desc = "Enable hlchunk" },
     },
@@ -336,6 +341,13 @@ return {
   },
   {
     "gorbit99/codewindow.nvim",
+    enabled = function()
+      if vim.g.is_linux then
+        return false
+      else
+        return true
+      end
+    end,
     keys = {
       {
         "<leader>um",
@@ -356,14 +368,14 @@ return {
       local codewindow = require("codewindow")
       codewindow.setup({
         exclude_filetypes = { "help" }, -- Choose certain filetypes to not show minimap on
-        minimap_width = 5,              -- The width of the text part of the minimap
-        use_lsp = true,                 -- Use the builtin LSP to show errors and warnings
-        use_treesitter = true,          -- Use nvim-treesitter to highlight the code
-        use_git = true,                 -- Show small dots to indicate git additions and deletions
-        width_multiplier = 8,           -- How many characters one dot represents
-        z_index = 1,                    -- The z-index the floating window will be on
-        show_cursor = true,             -- Show the cursor position in the minimap
-        window_border = "single",       -- The border style of the floating window (accepts all usual options)
+        minimap_width = 5,          -- The width of the text part of the minimap
+        use_lsp = true,             -- Use the builtin LSP to show errors and warnings
+        use_treesitter = true,      -- Use nvim-treesitter to highlight the code
+        use_git = true,             -- Show small dots to indicate git additions and deletions
+        width_multiplier = 8,       -- How many characters one dot represents
+        z_index = 1,                -- The z-index the floating window will be on
+        show_cursor = true,         -- Show the cursor position in the minimap
+        window_border = "single",   -- The border style of the floating window (accepts all usual options)
       })
     end,
   },

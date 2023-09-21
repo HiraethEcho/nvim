@@ -13,6 +13,7 @@ return {
       { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "nvimdev/guard.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "SmiteshP/nvim-navbuddy",
     },
@@ -28,18 +29,10 @@ return {
           checkThirdParty = false,
         },
         marksman = {},
-        -- beautysh = {},
-        -- shellcheck={},
         bashls = {},
+        latexindent = {},
         html = {},
         clangd = {},
-        grammarly = {
-          grammarly = {
-            config = {
-              documentDomain = "academic",
-            },
-          },
-        },
       }
       require("fidget").setup()
       -- require("mason").setup()
@@ -93,29 +86,29 @@ return {
         end,
       })
       require("lspconfig").grammarly.setup({
-        filetypes = { 'markdown', 'tex', 'plaintex' },
+        filetypes = { "markdown", "tex", "plaintex" },
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
         settings = {
-          grammarly = {
-          },
+          grammarly = {},
         },
-        on_attach = on_attach
+        on_attach = on_attach,
       })
     end,
   },
   {
     "williamboman/mason.nvim",
-    dependencies = {
-      { "jose-elias-alvarez/null-ls.nvim", config = true },
-      "jay-babu/mason-null-ls.nvim",
-    },
+    -- dependencies = {
+    --   { "jose-elias-alvarez/null-ls.nvim", config = true },
+    --   "jay-babu/mason-null-ls.nvim",
+    -- },
     cmd = "Mason",
     keys = {
-      { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" }
+      { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" },
     },
     build = ":MasonUpdate",
     config = function()
       require("mason").setup()
+      --[[
       require("mason-null-ls").setup({
         ensure_installed = {
           -- Opt to list sources here, when available in mason.
@@ -133,11 +126,9 @@ return {
         sources = {
           null_ls.builtins.formatting.stylua.with({ extra_args = { "--indent_type", "Spaces", "indent_width", "2" },
           }),
-          -- null_ls.builtins.code_actions.gitsigns,
-          -- null_ls.builtins.diagnostics.textidote,
-          -- null_ls.builtins.hover.dictionary,
         },
       })
+]]
     end,
   },
   {

@@ -1,5 +1,5 @@
 local function augroup(name)
-  return vim.api.nvim_create_augroup( name, { clear = true })
+  return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -36,14 +36,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = true
   end,
 })
-
+--[[
 vim.api.nvim_create_autocmd("BufWritePost", {
   callback = function()
     vim.lsp.buf.format()
   end,
-
 })
-
+]]
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   group = augroup("resize_splits"),
   callback = function()
