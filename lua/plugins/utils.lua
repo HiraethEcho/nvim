@@ -94,6 +94,9 @@ return {
         i = {
           name = "list",
         },
+        D = {
+          name = "Diff",
+        },
         e = {
           name = "explorer",
         },

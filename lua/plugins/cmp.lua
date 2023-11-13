@@ -4,12 +4,9 @@ return {
   event = "InsertEnter",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
-    -- "f3fora/cmp-spell",
-    -- "octaltree/cmp-look",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lua",
     "hrsh7th/cmp-path",
-    -- "hrsh7th/cmp-omni",
     -- "nvim-treesitter/nvim-treesitter",
     {
       "SirVer/ultisnips",
@@ -35,20 +32,6 @@ return {
         end,
       },
 
-      -- mapping = {
-      --   ["<Tab>"] = cmp.mapping(
-      --     function(fallback)
-      --       cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-      --     end,
-      --     { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-      --   ),
-      --   ["<S-Tab>"] = cmp.mapping(
-      --     function(fallback)
-      --       cmp_ultisnips_mappings.jump_backwards(fallback)
-      --     end,
-      --     { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-      --   ),
-      -- },
       mapping = cmp.mapping.preset.insert({
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
@@ -69,6 +52,7 @@ return {
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       }),
+
       sources = cmp.config.sources({
         { name = "ultisnips" }, -- For ultisnips users.
         { name = "nvim_lsp" },
@@ -80,17 +64,7 @@ return {
             end,
           },
         },
-        {
-          name = "spell",
-          option = {
-            keep_all_entries = false,
-            enable_in_context = function()
-              return true
-            end,
-          },
-        },
         { name = "path" },
-        { name = "nvim_lua" },
       }),
       experimental = {
         ghost_text = {

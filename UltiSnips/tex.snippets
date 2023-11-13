@@ -116,7 +116,7 @@ snippet ol "Enumerate" b
 \end{enumerate}
 endsnippet
 
-snippet ul "Itemize" bA
+snippet ul "Itemize" b
 \begin{itemize}
 	\item $0
 \end{itemize}
@@ -163,6 +163,7 @@ snippet rmk "Remark" bi
 	${0:${VISUAL}}
 \end{rmk}
 endsnippet
+
 snippet ques "Question" bi
 \begin{ques}
 	${0:${VISUAL}}
@@ -189,51 +190,29 @@ else:
 `$1 
 endsnippet
 
-snippet "([^\s]*)Ss" "single letter in math" irA
-$`!p snip.rv = match.group(1)`$1$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
-	snip.rv = ' '
-else:
-	snip.rv = ''
-`$2 
-endsnippet
-
-snippet mk "Math" wA
-$${1}$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
-	snip.rv = ' '
-else:
-	snip.rv = ''
-`$2
-endsnippet
-
 # environment in math environment {{{ #
-context "math()"
-snippet xym "xymatrix" wA
+snippet xym "xymatrix" w
 \xymatrix{
-  $1& & \\\\
-  & &
+$1& & \\\\
+& &
 }
 endsnippet
 
-context "math()"
-snippet flip "flip" wA
+snippet flip "flip" w
 \xymatrix{
-  X\ar[rd] \ar[rr]$1 & & Y\ar[ld]$2 \\\\
-  & S &
+X\ar[rd] \ar[rr]$1 & & Y\ar[ld]$2 \\\\
+& S &
 }
 endsnippet
 
-context "math()"
-snippet rof "commonresolution" wA
+snippet roof "commonre solution" w
 \xymatrix{
-  & W$1 \ar[ld]\ar[rd] &\\\\
-  X\ar[rr]$2 & &Y$3 
+& W$1 \ar[ld]\ar[rd] &\\\\
+X\ar[rr]$2 & &Y$3 
 }
 endsnippet
 
-context "math()"
-snippet tt "text" wA
+snippet tt "text" w
 \text{$1}$0
 endsnippet
 
@@ -249,8 +228,7 @@ endsnippet
 # \frac{$1}{$2}$0
 # endsnippet
 
-context "math()"
-snippet // "Fraction" wA
+snippet // "Fraction" w
 \\frac{$1}{$2}$0
 endsnippet
 
@@ -275,8 +253,7 @@ endsnippet
 # `{$1}$0
 # endsnippet
 
-context "math()"
-snippet case "cases" wA
+snippet case "cases" w
 \begin{cases}
 	$1 \\\\
 	$2 \\\\
@@ -284,40 +261,29 @@ snippet case "cases" wA
 $0
 endsnippet
 
-context "math()"
-snippet ali "Align" bA
+snippet ali "Align" b
 \begin{align*}
 	${1:${VISUAL}}
 .\end{align*}
 endsnippet
 
-context "math()"
-snippet ceil "Ceil" wA
+snippet ceil "Ceil" w
 \left\lceil $1 \right\rceil $0
 endsnippet
 
-context "math()"
-snippet flor "Floor" wA
+snippet floor "Floor" w
 \left\lfloor $1 \right\rfloor$0
 endsnippet
 
-# context "math()"
-# snippet sum "sum" w
-# \sum_{n=${1:1}}^{${2:\infty}} ${3:a_n z^n}
-# endsnippet
-
-context "math()"
-snippet pmat "pmat" iA
+snippet pmat "pmat" i
 \begin{pmatrix} $1 \end{pmatrix} $0
 endsnippet
 
-context "math()"
-snippet bmat "bmat" iA
+snippet bmat "bmat" i
 \begin{bmatrix} $1 \end{bmatrix} $0
 endsnippet
 
-context "math()"
-snippet set "set" wA
+snippet set "set" w
 \\{$1\\} $0
 endsnippet
 # }}} environment in math environment #
@@ -325,83 +291,43 @@ endsnippet
 # }}} environment #
 
 # single letter{{{ #
-snippet FF "FF" wA
-$\mathbb{F}_{${1:n}}$0$
-endsnippet
 
-snippet RR "Real number" wA
-$\mathbb{R}$
-endsnippet
-
-snippet NN "Natural number" wA
-$\mathbb{N}$
-endsnippet
-
-snippet ZZ "integers" wA
-$\mathbb{Z}$
-endsnippet
-
-snippet Aa "Affine space" wA
-$\mathbb{A}^{${1:n}}$
-endsnippet
-
-snippet PP "Projectiv space" wA
-$\mathbb{P}^{${1:n}}$
-endsnippet
-
-snippet QQ "Rational number" wA
-$\mathbb{Q}$
-endsnippet
-
-snippet CC "Complex number" wA
-$\mathbb{C}$
-endsnippet
-
-context "math()"
 snippet Aa "Affine space" wA
 \mathbb{A}^{${1:n}}
 endsnippet
 
-context "math()"
 snippet RR "Real number" wA
 \mathbb{R}
 endsnippet
 
-context "math()"
 snippet FF "FF" wA
 \mathbb{F}_{${1:n}}$0
 endsnippet
 
-context "math()"
 snippet NN "Natural number" wA
 \mathbb{N}
 endsnippet
 
-context "math()"
 snippet ZZ "integers" wA
 \mathbb{Z}
 endsnippet
 
-context "math()"
 snippet QQ "Rational number" wA
 \mathbb{Q}
 endsnippet
 
 
-context "math()"
 snippet PP "Projectiv space" wA
 \mathbb{P}^{${1:n}}
 endsnippet
 
-context "math()"
 snippet CC "Complex number" wA
 \mathbb{C}
 endsnippet
 # }}} single letter #
 
 # sup and sub {{{ #
-context "math()"
-snippet __ "subscript" iA
+snippet __ "subscript" i
 _{$1}$0
 endsnippet
 
@@ -431,13 +357,11 @@ endsnippet
 # `!p snip.rv = match.group(1)`_{k}
 # endsnippet
 
-context "math()"
-snippet ^^ "super script" iA
+snippet ^^ "super script ^{}" i
 ^{$1}$0
 endsnippet
 
-context "math()"
-snippet inv "inverse" iA
+snippet inv "inverse ^{-1}" i
 ^{-1$1}$0
 endsnippet
 
@@ -474,28 +398,23 @@ endsnippet
 # }}} sup and sub #
 
 # Auto Symbol {{{ #
-context "math()"
-snippet \\\ "setminus" iA
+snippet \\\ "setminus" i
 \setminus
 endsnippet
 
-context "math()"
-snippet >> ">>" iA
+snippet >> ">>" i
 \gg
 endsnippet
 
-context "math()"
-snippet ++ "direct sum" iA
+snippet ++ "direct sum" i
 \oplus
 endsnippet
 
-context "math()"
-snippet << "<<" iA
+snippet << "<<" i
 \ll
 endsnippet
 
-context "math()"
-snippet ~~ "~" wA
+snippet ~~ "~" w
 \sim 
 endsnippet
 
@@ -504,54 +423,40 @@ endsnippet
 # ^{\mathrm{T}}
 # endsnippet
 
-context "math()"
-snippet oo "\infty" wA
+snippet oo "\infty" w
 \infty
 endsnippet
 
-context "math()"
-snippet => "implies" iA
+snippet => "implies" i
 \implies
 endsnippet
 
-context "math()"
-snippet ... "ldots" iA
+snippet ... "ldots" i
 \ldots 
 endsnippet
 
 
-context "math()"
-snippet *** "cdots" iA
+snippet *** "cdots" i
 \cdots
 endsnippet
 
-context "math()"
-snippet xx "cross" wA
+snippet xx "cross" w
 \times 
 endsnippet
 
-context "math()"
-snippet >= "greater equal" iA
+snippet >= "greater equal" i
 \geqslant 
 endsnippet
 
-context "math()"
-snippet "(\bin)" "\in" wrA
-\in
-endsnippet
-
-context "math()"
-snippet -< "dashleftarrow" iA
+snippet -< "dashleftarrow" i
 \dashlefrarrow 
 endsnippet
 
-context "math()"
-snippet -> "dashrightarrow" iA
+snippet -> "dashrightarrow" i
 \dashrightarrow 
 endsnippet
 
-context "math()"
-snippet Ee "geq" wA
+snippet Ee "\exists" w
 \exists 
 endsnippet
 
@@ -560,50 +465,41 @@ endsnippet
 # \forall 
 # endsnippet
 
-context "math()"
-snippet R+ "R+" wA
+snippet R+ "R+" w
 \mathbb{R}_{\geqslant 0}
 endsnippet
 
-context "math()"
-snippet cc "subset" wA
+snippet cc "subset" w
 \subset
 endsnippet
-context "math()"
-snippet nn "cap" wA
+snippet nn "cap" w
 \cap 
 endsnippet
 
-context "math()"
-snippet uu "cup" wA
+snippet uu "cup" w
 \cup 
 endsnippet
 
-context "math()"
-snippet Uu "bigcup" wA
+snippet Uu "bigcup" w
 \bigcup_{${1:i \in  I} }} $0
 endsnippet
 
-context "math()"
-snippet Nn "bigcap" wA
+snippet Nn "bigcap" w
 \bigcap_{${1:i \in ${2: I}} } $0
 endsnippet
 
-context "math()"
-snippet vv "Vee" iA
+snippet vv "Vee" i
 \vee
 endsnippet
 
-context "math()"
-snippet xr "xrightarrow" wA
+snippet xr "xrightarrow" w
 \xrightarrow{$1}$0
 endsnippet
 # }}} Auto Symbol #
 
 # Fonts {{{ #
 # math font {{{ #
-context "math()"
-snippet op "operatorname" wA
+snippet op "operatorname" w
 \operatorname{${1: ${VISUAL} }}$0
 endsnippet
 
@@ -650,8 +546,10 @@ endsnippet
 # }}} Fonts #
 
 # abbre {{{ #
-snippet iff "if and only if"
+snippet iff "if and only if" w
 	if and only if
+endsnippet
+
 snippet st "such that " w 
 such that $0
 endsnippet
@@ -671,7 +569,7 @@ snippet wma "we may assume" w
 we may assume
 endsnippet
 
-snippet tm "\item" bA
+snippet tm "\item" b
 \item 
 endsnippet
 # }}} abbre #
@@ -709,7 +607,6 @@ endsnippet
 snippet Qdiv "Q-divisor" wA
 $\mathbb{Q}$-divisor
 endsnippet
-
 
 snippet lcd "log canonical divisor" w
 $(K_{X$1}+B)$$0

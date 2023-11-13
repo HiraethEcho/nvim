@@ -29,8 +29,9 @@ return {
           checkThirdParty = false,
         },
         marksman = {},
+        prosemd_lsp={},
         bashls = {},
-        latexindent = {},
+        -- latexindent = {},
         html = {},
         clangd = {},
       }
@@ -97,10 +98,6 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    -- dependencies = {
-    --   { "jose-elias-alvarez/null-ls.nvim", config = true },
-    --   "jay-babu/mason-null-ls.nvim",
-    -- },
     cmd = "Mason",
     keys = {
       { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" },
@@ -108,27 +105,6 @@ return {
     build = ":MasonUpdate",
     config = function()
       require("mason").setup()
-      --[[
-      require("mason-null-ls").setup({
-        ensure_installed = {
-          -- Opt to list sources here, when available in mason.
-          "prettier",
-          "stylua",
-          "latexindent",
-          -- "beautysh",
-          -- "shellcheck",
-        },
-        automatic_installation = true,
-        -- handlers = {},
-      })
-      local null_ls = require("null-ls")
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.stylua.with({ extra_args = { "--indent_type", "Spaces", "indent_width", "2" },
-          }),
-        },
-      })
-]]
     end,
   },
   {
@@ -178,7 +154,7 @@ return {
           },
         },
         lightbulb = {
-          enable = true,
+          enable = false,
         },
         symbol_in_winbar = {
           enable = true,
