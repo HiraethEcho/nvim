@@ -150,6 +150,7 @@ return {
           MkdnNewListItemBelowInsert = { "n", "o" },
           MkdnNewListItemAboveInsert = { "n", "O" },
           MkdnUpdateNumbering = { "n", "<leader>mn" },
+          MkdnTableFormat = { "n", "<leader>mt" },
           MkdnTableNextRow = { "i", "<c-j>" },
           MkdnTablePrevRow = { "i", "<c-k>" },
           MkdnTableNewRowBelow = { "n", "<leader>mJ" },
@@ -199,10 +200,10 @@ return {
     enabled = false,
     event = { "BufRead " .. vim.fn.expand("~") .. "/obsidian/**.md" },
     keys = {
-      { "<leader>oo", "<cmd>ObsidianOpen<cr>", desc = "Open Obsidian" },
-      { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Search in Obsidian" },
-      { "<leader>ot", "<cmd>ObsidianTemplate<cr>", desc = "Templates in Obsidian" },
-      { "<leader>ob", "<cmd>ObsidianBacklink<cr>", desc = "Backlink" },
+      { "<leader>oo", "<cmd>ObsidianOpen<cr>",       desc = "Open Obsidian" },
+      { "<leader>os", "<cmd>ObsidianSearch<cr>",     desc = "Search in Obsidian" },
+      { "<leader>ot", "<cmd>ObsidianTemplate<cr>",   desc = "Templates in Obsidian" },
+      { "<leader>ob", "<cmd>ObsidianBacklink<cr>",   desc = "Backlink" },
       { "<leader>ol", "<cmd>ObsidianFollowLink<cr>", desc = "Follow link" },
     },
     cmd = {
