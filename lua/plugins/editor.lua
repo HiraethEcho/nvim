@@ -27,7 +27,7 @@ return {
       }
       vim.g.vimtex_toc_config = {
         name = "TOC",
-        layers = { "label", "todo", "include" },
+        layers = { "label", "todo", "include","content" },
         split_width = 30,
         todo_sorted = 1,
         show_help = 1,

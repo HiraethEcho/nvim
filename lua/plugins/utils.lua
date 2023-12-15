@@ -146,9 +146,9 @@ return {
   },
   {
     'Shatur/neovim-session-manager',
-    enabled =false,
-    dependencies={
-    'stevearc/dressing.nvim',
+    enabled = false,
+    dependencies = {
+      'stevearc/dressing.nvim',
     },
     config = function()
       local config = require('session_manager.config')
@@ -168,4 +168,9 @@ return {
       })
     end,
   },
+  {
+    'ActivityWatch/aw-watcher-vim',
+    -- lazy = false,
+    cmd = "AWStart",
+  }
 }
