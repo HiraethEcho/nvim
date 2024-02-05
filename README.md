@@ -1,45 +1,43 @@
 # NVIM
 
-## usage
+This is my nvim.
 
-```zsh
-nvim
-```
+## Usage
 
-- a
--
-- MkdnUnfoldSection
-- j
+I'm using nvim as a code editor, mainly for latex and markdown.
 
-|     |     | test |     |     |     |     |     |     |     |     |
-| --- | --- | ---- | --- | --- | --- | --- | --- | --- | --- | --- |
-|     |     |      |     |     |     |     |     |     |     |     |
-|     |     |      |     |     |     |     |     |     |     |     |
-|     |     |      |     |     |     |     |     |     |     |     |
-|     |     |      |     |     |     |     |     |     |     |     |
-|     |     |      |     |     |     |     |     |     |     |     |
-|     |     |      |     |     |     |     |     |     |     |     |
+### general
 
-## todo
+### latex
+
+### markdown
+
+## How to Configure
+
+Other than some general setting, there are two sets of configurations: using original lsp, and using coc.
+
+### general
+
+### lsp
+
+#### original
+
+#### coc
 
 ### plugins
 
-- [x] comment.nvim
-- [-] session-manager
-  - [x] another test
+#### lazy.nvim
 
-1. test
-2. sdkfj
-3. lksdjafkl
-   - another
-   - hell
-4. ok
+I am using lazy.nvim as my plugins manager.
 
-### ulti
+#### notes on certain plugins
 
-- [x] for neo-tree, using cmd, explorer file.name
+### windows and linux
+There are different settings under windows and linux.
 
-#### some icons
+## misc
+
+### some icons
 
 ActiveLSP = "",
 ActiveTS = "",
