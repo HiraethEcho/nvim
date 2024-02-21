@@ -286,14 +286,14 @@ return {
       require("hlchunk").setup({
         chunk = {
           enable = true,
-          use_treesitter = true,
+          use_treesitter = false,
           style = {
             { fg = "#806d9c" },
           },
         },
         indent = {
           enable = false,
-          use_treesitter = true,
+          use_treesitter = false,
         },
         blank = {
           enable = true,
@@ -370,7 +370,7 @@ return {
         exclude_filetypes = { "help" }, -- Choose certain filetypes to not show minimap on
         minimap_width = 5,          -- The width of the text part of the minimap
         use_lsp = true,             -- Use the builtin LSP to show errors and warnings
-        use_treesitter = true,      -- Use nvim-treesitter to highlight the code
+        use_treesitter = false,      -- Use nvim-treesitter to highlight the code
         use_git = true,             -- Show small dots to indicate git additions and deletions
         width_multiplier = 8,       -- How many characters one dot represents
         z_index = 1,                -- The z-index the floating window will be on
