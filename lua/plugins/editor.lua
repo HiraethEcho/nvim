@@ -4,7 +4,7 @@ return {
     "lervag/vimtex",
     ft = { "bib", "tex" },
     config = function()
-      vim.g.vimtex_view_method = "okular"
+      vim.g.vimtex_view_method = "sioyek"
       vim.g.vimtex_view_general_options = ""
       vim.g.tex_comment_nospell = 1
       vim.g.vimtex_fold_enabled = 1

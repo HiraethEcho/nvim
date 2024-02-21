@@ -1,0 +1,217 @@
+#b - Beginning of line.
+#i - In-word expansion.
+#w - Word boundary.
+#r - Regular expression
+#A - Snippet will be triggered automatically, when condition matches.
+
+global !p
+import re
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+endglobal
+
+# document section
+snippet template(basic) "Basic template" b
+%!TeX program = xelatex
+\documentclass{article}
+
+\usepackage{amsfonts}
+\usepackage[all]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage[hidelinks]{hyperref}
+\usepackage{ulem}
+\usepackage{tikz}  
+\usetikzlibrary{arrows.meta}%画箭头用的包
+
+\usepackage{geometry}
+\geometry{a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm}
+
+\newtheorem{defn}{Definition}[section]
+\newtheorem{prop}[defn]{Proposition}
+\newtheorem{lem}[defn]{Lemma}
+\newtheorem{thm}[defn]{Theorem}
+\newtheorem{cor}[defn]{Corollary}
+\newtheorem{rmk}[defn]{Remark}
+\newtheorem{fact}[defn]{Fact}
+\newtheorem{problem}{Problem}
+\newtheorem*{ques}{Question}
+
+\setcounter{section}{0}
+
+\title{$1}
+\author{wyz}
+\date{\today}
+
+\begin{document}
+
+  \maketitle
+  %\tableofcontents
+  %\newpage
+\end{document}
+endsnippet
+
+snippet sec "section" b
+\section{$1}
+$0
+endsnippet
+
+snippet ssec "subsection" b
+\subsection{$1}
+$0
+endsnippet
+
+snippet sssec "subsubsection" b
+\subsubsection{$1}
+$0
+endsnippet
+
+snippet beg "begin{}  end{}" bi
+\begin{$1}
+	${0:${VISUAL}}
+\end{$1}
+endsnippet
+
+# small environment
+snippet cnt "Center" bi
+\begin{center}
+	${0:${VISUAL}}
+\end{center}
+endsnippet
+
+snippet ol "Enumerate" b
+\begin{enumerate}
+	\item $0
+\end{enumerate}
+endsnippet
+
+snippet ul "Itemize" b
+\begin{itemize}
+	\item $0
+\end{itemize}
+endsnippet
+
+snippet lem "Lemma" bi
+\begin{lem}
+	${0:${VISUAL}}
+\end{lem}
+endsnippet
+
+snippet prop "Proposition" bi
+\begin{prop}[$1]
+	${0:${VISUAL}}
+\end{prop}
+endsnippet
+
+snippet thm "Theorem" bi
+\begin{thm}[$1]
+	${0:${VISUAL}}
+\end{thm}
+endsnippet
+
+snippet cor "Corollary" bi
+\begin{cor}
+	${0:${VISUAL}}
+\end{cor}
+endsnippet
+
+snippet pf "proof" bi
+\begin{proof}
+	${0:${VISUAL}}
+\end{proof}
+endsnippet
+
+snippet def "Definition" bi
+\begin{defn}
+	${0:${VISUAL}}
+\end{defn}
+endsnippet
+
+snippet rmk "Remark" bi
+\begin{rmk}
+	${0:${VISUAL}}
+\end{rmk}
+endsnippet
+
+snippet ques "Question" bi
+\begin{ques}
+	${0:${VISUAL}}
+\end{ques}
+endsnippet
+
+snippet dm "Math" bA
+\[
+	${1:${VISUAL}}
+\]
+$0
+endsnippet
+
+# snippet $ "double dollar" wA
+# \$${1:${VISUAL}}\$$0
+# endsnippet
+
+# environment in math environment 
+
+snippet Fun "Big function" i
+\begin{align*}
+	$1: $2 &\longrightarrow $3 \\\\
+	$4 &\longmapsto $1($4) = $0
+.\end{align*}
+endsnippet
+
+snippet case "cases" w
+\begin{cases}
+	$1 \\\\
+	$2 \\\\
+\end{cases}
+$0
+endsnippet
+
+snippet ali "Align" b
+\begin{align*}
+	${1:${VISUAL}}
+.\end{align*}
+endsnippet
+
+
+context "math()"
+snippet ceil "Ceil" wA
+\left\lceil $1 \right\rceil $0
+endsnippet
+
+context "math()"
+snippet flor "Floor" wA
+\left\lfloor $1 \right\rfloor$0
+endsnippet
+
+snippet pmat "pmat" i
+\begin{pmatrix} $1 \end{pmatrix} $0
+endsnippet
+
+snippet bmat "bmat" i
+\begin{bmatrix} $1 \end{bmatrix} $0
+endsnippet
+
+snippet xym "xymatrix" w
+\xymatrix{
+$1& & \\\\
+& &
+}
+endsnippet
+
+snippet flip "flip" w
+\xymatrix{
+X\ar[rd] \ar[rr]$1 & & Y\ar[ld]$2 \\\\
+& S &
+}
+endsnippet
+
+snippet rof "commonre solution" w
+\xymatrix{
+& W$1 \ar[ld]\ar[rd] &\\\\
+X\ar[rr]$2 & &Y$3 
+}
+endsnippet
