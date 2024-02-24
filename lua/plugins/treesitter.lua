@@ -1,5 +1,3 @@
-if true then return {} end
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -11,6 +9,7 @@ return {
       "kevinhwang91/nvim-ufo",
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        enabled =false,
         config = function()
           require("nvim-treesitter.configs").setup({
             textobjects = {
@@ -29,7 +28,7 @@ return {
                 -- You can choose the select mode (default is charwise 'v')
                 selection_modes = {
                   ["@parameter.outer"] = "v", -- charwise
-                  ["@function.outer"] = "V", -- linewise
+                  ["@function.outer"] = "V",  -- linewise
                   ["@class.outer"] = "<c-v>", -- blockwise
                 },
               },
@@ -45,7 +44,7 @@ return {
         "c",
         "html",
         "lua",
-        "latex",
+        -- "latex",
         "markdown",
         "markdown_inline",
       },
@@ -100,6 +99,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
+    enabled = false,
     cmd = "TSContextEnable",
     keys = {
       { "<leader>ut", "<cmd>TSContextEnable<cr>", desc = "toggle treesitter context" },

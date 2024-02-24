@@ -70,4 +70,4 @@ opt.swapfile = false
 
 opt.foldmethod = "expr"
 opt.foldlevel = 99
--- opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
