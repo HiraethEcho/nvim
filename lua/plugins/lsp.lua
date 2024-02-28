@@ -29,7 +29,7 @@ return {
           checkThirdParty = false,
         },
         marksman = {},
-        prosemd_lsp={},
+        prosemd_lsp = {},
         bashls = {},
         -- latexindent = {},
         html = {},
@@ -151,6 +151,7 @@ return {
           keys = {
             expand_or_jump = "<cr>",
             quit = "q",
+            jump = "<space>"
           },
         },
         lightbulb = {

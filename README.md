@@ -97,3 +97,7 @@ TabClose = "󰅙",
 Terminal = "",
 Window = "",
 WordFile = "󰈭",
+
+## test
+
+
