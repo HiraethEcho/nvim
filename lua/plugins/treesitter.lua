@@ -7,9 +7,10 @@ return {
     -- event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "kevinhwang91/nvim-ufo",
+      "hiphish/rainbow-delimiters.nvim",
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        enabled =false,
+        enabled = false,
         config = function()
           require("nvim-treesitter.configs").setup({
             textobjects = {
@@ -42,9 +43,9 @@ return {
       indent = { enable = true },
       ensure_installed = {
         "c",
-        "html",
+        -- "html",
         "lua",
-        -- "latex",
+        -- "latex", conflict with UltiSnips and math environment detected by vimtex
         "markdown",
         "markdown_inline",
       },
@@ -70,6 +71,18 @@ return {
         end, opts.ensure_installed)
       end
       require("nvim-treesitter.configs").setup(opts)
+
+      local rainbow_delimiters = require 'rainbow-delimiters'
+      require('rainbow-delimiters.setup').setup {
+        strategy = {
+          [''] = rainbow_delimiters.strategy['global'],
+        },
+        query = {
+          [''] = 'rainbow-delimiters',
+          latex = 'rainbow-blocks',
+          lua = 'rainbow-blocks',
+        },
+      }
     end,
   },
   {

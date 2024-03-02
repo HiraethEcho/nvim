@@ -76,7 +76,7 @@ return {
               onEdit = false,
             },
             bibtexFormatter = "texlab",
-            latexFormatter = "latexindent",
+            latexFormatter = "texlab",
             formatterLineLength = 80,
           },
         },
