@@ -27,7 +27,7 @@ return {
       }
       vim.g.vimtex_toc_config = {
         name = "TOC",
-        layers = { "label", "todo", "include","content" },
+        layers = { "label", "todo", "include", "content" },
         split_width = 30,
         todo_sorted = 1,
         show_help = 1,
@@ -49,7 +49,8 @@ return {
   {
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
-    ft = { "markdown" },
+    enabled = false,
+    -- ft = { "markdown" },
     keys = {
       { "<leader>mP", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
     },
@@ -64,6 +65,14 @@ return {
       vim.g.mkdp_page_title = "${name}"
       vim.g.mkdp_filetypes = { "markdown", "md" }
     end,
+  },
+  {
+    "rhysd/nyaovim-markdown-preview",
+    enabled = false,
+    keys = {
+      { "<leader>mP", "<cmd>StartMarkdownPreview<cr>", desc = "markdown Html Preview" },
+    },
+    ft = { "markdown" },
   },
   {
     "jakewvincent/mkdnflow.nvim",

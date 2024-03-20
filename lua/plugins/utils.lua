@@ -3,6 +3,14 @@ local vim = vim
 return {
   { "folke/lazy.nvim", version = "*" },
   {
+    "rhysd/nyaovim-mini-browser",
+    enabled = false,
+    event = "CmdlineEnter",
+    -- keys = {
+    --   { "<leader>B", "<cmd>StartMarkdownPreview<cr>", desc = "markdown Html Preview" },
+    -- },
+  },
+  {
     "gelguy/wilder.nvim",
     event = "CmdlineEnter",
     config = function()

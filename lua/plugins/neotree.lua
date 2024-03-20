@@ -4,11 +4,12 @@ return {
     if vim.g.is_linux then
       return {
         {
-          "<leader>ee",
+          "<leader>e",
           "<cmd>Neotree position=left toggle=true<cr>",
           desc = "File tree",
         },
-        {
+
+        --[[ {
           "<leader>ef",
           "<cmd>Neotree float toggle=true<cr>",
           desc = "File tree float",
@@ -37,7 +38,7 @@ return {
           "<leader>eb",
           "<cmd>Neotree toggle=true float dir=~/blogs <cr>",
           desc = "blogs file float",
-        },
+        }, ]]
         {
           "<leader>gs",
           "<cmd>Neotree source=git_status <cr>",

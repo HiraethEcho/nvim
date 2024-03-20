@@ -59,8 +59,7 @@ return {
               executable = "sioyek",
               args = {
                 "--reuse-window",
-                "--execute-command",
-                "toggle_synctex", -- Open Sioyek in synctex mode.
+                "--execute-command", "toggle_synctex", -- Open Sioyek in synctex mode.
                 "--inverse-search",
                 [[nvim --server ]] .. vim.v.servername .. [[ --remote-send ":e %%%1<cr>:%%%2<cr>"]],
                 -- [[nvim --server ]] .. vim.v.servername .. [[ --remote-send ":%%%2<cr>"]],
@@ -76,7 +75,10 @@ return {
               onEdit = false,
             },
             bibtexFormatter = "texlab",
-            latexFormatter = "texlab",
+            latexFormatter = "latexindent",
+            latexindent = {
+              indent = 2,
+            },
             formatterLineLength = 80,
           },
         },

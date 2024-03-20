@@ -19,3 +19,30 @@ snippet bilibili "insert bilibili" b
 <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"><iframe src="$1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"> </iframe></div>
 $0
 endsnippet
+
+snippet notel "big note in redefine theme" b
+{% notel ${1:color green red blue yellow} ${2: title} %}
+$3
+{% endnotel %}
+$0
+endsnippet
+
+
+snippet note "note in redefine theme" b
+{% note ${1: default info danger primary warning success red } ${2: fa-bolt} %}
+$3
+{% endnotel %}
+$0
+endsnippet
+
+snippet tabh "tab for hexo redefine" b
+{% tabs ${1: name} %}
+<!-- tab ${2: tab name }-->
+${3: This is Tab 1 }
+<!-- endtab -->
+
+<!-- tab ${4: tab name}-->
+${5: This is Tab 2}
+<!-- endtab -->
+{% endtabs %}
+endsnippet
