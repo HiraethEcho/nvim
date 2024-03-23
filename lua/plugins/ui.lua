@@ -14,6 +14,7 @@ return {
   },
   {
     "neanias/everforest-nvim",
+    enabled = false,
     version = false,
     event = "VimEnter",
     config = function()
@@ -32,6 +33,55 @@ return {
     end,
   },
   {
+    'AlexvZyl/nordic.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      local palette = require 'nordic.colors'
+      require 'nordic'.setup {
+        -- This callback can be used to override the colors used in the palette.
+        on_palette = function(palette) return palette end,
+        -- Enable bold keywords.
+        bold_keywords = true,
+        -- Enable italic comments.
+        bright_border = true,
+        -- Reduce the overall amount of blue in the theme (diverges from base Nord).
+        reduced_blue = false,
+        -- Override the styling of any highlight group.
+        override = {
+          TelescopePromptTitle = {
+            fg = palette.red.bright,
+            bg = palette.green.base,
+            italic = true,
+            underline = true,
+            sp = palette.yellow.dim,
+            undercurl = false
+          }
+        },
+        -- Cursorline options.  Also includes visual/selection.
+        cursorline = {
+          -- Bold font in cursorline.
+          bold = true,
+          -- Bold cursorline number.
+          bold_number = true,
+          -- Available styles: 'dark', 'light'.
+          theme = 'dark',
+          -- Blending the cursorline bg with the buffer bg.
+          blend = 0.85,
+        },
+        noice = {
+          -- Available styles: `classic`, `flat`.
+          style = 'fat',
+        },
+        telescope = {
+          -- Available styles: `classic`, `flat`.
+          style = 'classic',
+        },
+      }
+      vim.cmd.colorscheme 'nordic'
+    end
+  },
+  {
     "norcalli/nvim-colorizer.lua",
     cmd = "ColorizerToggle",
     config = function()
@@ -44,7 +94,7 @@ return {
       "nvim-tree/nvim-web-devicons",
       "meuter/lualine-so-fancy.nvim",
     },
-    event = "BufRead",
+    event = "BufEnter",
     -- event = "VeryLazy",
     config = function()
       local function session_name()
@@ -53,7 +103,7 @@ return {
       require("lualine").setup({
         options = {
           icons_enabled = true,
-          theme = "everforest",
+          theme = "nordic",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
@@ -69,9 +119,9 @@ return {
           lualine_b = {
             {
               "filename",
-              file_status = true, -- Displays file status (readonly status, modified status)
+              file_status = true,    -- Displays file status (readonly status, modified status)
               newfile_status = true, -- Display new file status (new file means no write after created)
-              path = 1,       
+              path = 1,
               -- 0: Just the filename
               -- 1: Relative path
               -- 2: Absolute path
@@ -103,9 +153,9 @@ return {
           lualine_b = {
             {
               "filename",
-              file_status = true, -- Displays file status (readonly status, modified status)
+              file_status = true,    -- Displays file status (readonly status, modified status)
               newfile_status = true, -- Display new file status (new file means no write after created)
-              path = 1,       -- 0: Just the filename
+              path = 1,              -- 0: Just the filename
               -- 1: Relative path
               -- 2: Absolute path
               -- 3: Absolute path, with tilde as the home directory
@@ -140,9 +190,9 @@ return {
           lualine_b = {
             {
               "buffers",
-              show_filename_only = true, -- Shows shortened relative path when set to false.
+              show_filename_only = true,   -- Shows shortened relative path when set to false.
               show_modified_status = true, -- Shows indicator when the buffer is modified.
-              mode = 0,             -- 0: Shows buffer name
+              mode = 0,                    -- 0: Shows buffer name
               -- 1: Shows buffer index
               -- 2: Shows buffer name + buffer index
               -- 3: Shows buffer number
@@ -275,9 +325,9 @@ return {
   {
     "shellRaining/hlchunk.nvim",
     -- event = "BufRead",
-    dependencies ={
-    "rcarriga/nvim-notify",
-    "petertriho/nvim-scrollbar",
+    dependencies = {
+      "rcarriga/nvim-notify",
+      "petertriho/nvim-scrollbar",
     },
     keys = {
       { "<leader>uh", "<cmd>EnableHL<cr>", desc = "Enable hlchunk" },
@@ -368,14 +418,14 @@ return {
       local codewindow = require("codewindow")
       codewindow.setup({
         exclude_filetypes = { "help" }, -- Choose certain filetypes to not show minimap on
-        minimap_width = 5,          -- The width of the text part of the minimap
-        use_lsp = true,             -- Use the builtin LSP to show errors and warnings
-        use_treesitter = false,      -- Use nvim-treesitter to highlight the code
-        use_git = true,             -- Show small dots to indicate git additions and deletions
-        width_multiplier = 8,       -- How many characters one dot represents
-        z_index = 1,                -- The z-index the floating window will be on
-        show_cursor = true,         -- Show the cursor position in the minimap
-        window_border = "single",   -- The border style of the floating window (accepts all usual options)
+        minimap_width = 5,              -- The width of the text part of the minimap
+        use_lsp = true,                 -- Use the builtin LSP to show errors and warnings
+        use_treesitter = false,         -- Use nvim-treesitter to highlight the code
+        use_git = true,                 -- Show small dots to indicate git additions and deletions
+        width_multiplier = 8,           -- How many characters one dot represents
+        z_index = 1,                    -- The z-index the floating window will be on
+        show_cursor = true,             -- Show the cursor position in the minimap
+        window_border = "single",       -- The border style of the floating window (accepts all usual options)
       })
     end,
   },
