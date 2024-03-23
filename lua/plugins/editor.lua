@@ -49,16 +49,16 @@ return {
   {
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
-    enabled = false,
-    -- ft = { "markdown" },
+    -- enabled = false,
+    ft = { "markdown" },
     keys = {
       { "<leader>mP", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
     },
     config = function()
       if vim.g.is_linux then
-        vim.g.mkdp_browser = "surf"
+        vim.g.mkdp_browser = "qutebroswer"
       end
-      vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
+      -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
       vim.g.mkdp_theme = "light"
       vim.g.mkdp_auto_start = 1
       vim.g.mkdp_auto_close = 0

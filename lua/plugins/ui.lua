@@ -1,11 +1,13 @@
 return {
   {
+    enabled = false,
     "stevearc/dressing.nvim",
     event = "BufReadPost",
     opts = {},
   },
   {
     "xiyaowong/nvim-transparent",
+    enabled = false,
     cmd = "TransparentEnable",
     -- lazy=false,
     config = function()
@@ -16,26 +18,106 @@ return {
     "neanias/everforest-nvim",
     enabled = false,
     version = false,
-    event = "VimEnter",
+    -- event = "VimEnter",
     config = function()
       require("everforest").setup({
         ---Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
         background = "soft",
-        transparent_background_level = 0,
         italics = true,
+        ---By default, the colour of the sign column background is the same as the as normal text
+        ---background, but you can use a grey background by setting this to `"grey"`.
+        sign_column_background = "grey",
+        ---The contrast of line numbers, indent lines, etc. Options are `"high"` or
+        ---`"low"` (default).
+        ui_contrast = "high",
         dim_inactive_windows = true,
-        diagnostic_virtual_text = "grey",
-        ---Some plugins support highlighting error/warning/info/hint lines, but this
-        ---feature is disabled by default in this colour scheme.
+        diagnostic_text_highlight = true,
+        ---Which colour the diagnostic text should be. Options are `"grey"` or `"coloured"` (default)
+        diagnostic_virtual_text = "coloured",
         diagnostic_line_highlight = true,
+        float_style = "bright",
       })
-      vim.cmd("colorscheme everforest")
+      require("everforest").load()
+    end,
+  },
+  {
+    "rose-pine/neovim",
+    enabled = false,
+    name = "rose-pine",
+    config = function()
+      require("rose-pine").setup({
+        variant = "dawn",      -- auto, main, moon, or dawn
+        dark_variant = "main", -- main, moon, or dawn
+        dim_inactive_windows = true,
+        extend_background_behind_borders = true,
+        enable = {
+          terminal = false,
+          legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
+          migrations = true,        -- Handle deprecated options automatically
+        },
+        styles = {
+          bold = true,
+          italic = true,
+        },
+      })
+      vim.cmd("colorscheme rose-pine")
+      -- vim.cmd("colorscheme rose-pine-main")
+      -- vim.cmd("colorscheme rose-pine-moon")
+      -- vim.cmd("colorscheme rose-pine-dawn")
+    end,
+  },
+  {
+    "EdenEast/nightfox.nvim",
+    event = "VimEnter",
+    config = function()
+      require('nightfox').setup({
+        options = {
+          dim_inactive = true,     -- Non focused panes set to alternative background
+          module_default = true,   -- Default enable value for modules
+          colorblind = {
+            enable = true,         -- Enable colorblind support
+            simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
+          },
+          styles = {               -- Style to be applied to different syntax groups
+            -- bold
+            -- underline
+            -- undercurl  curly underline
+            -- underdouble  double underline
+            -- underdotted  dotted underline
+            -- underdashed  dashed underline
+            -- strikethrough
+            -- reverse
+            -- inverse    same as reverse
+            -- italic
+            -- standout
+            -- altfont 
+            -- nocombine  override attributes instead of combining them
+            -- NONE   no attributes used (used to reset it)
+            comments = "italic", -- Value is any valid attr-list value `:help attr-list`
+            conditionals = "italic",
+            constants = "bold",
+            functions = "bold,italic",
+            keywords = "italic",
+            numbers = "italic",
+            operators = "NONE",
+            strings = "underdotted",
+            types = "NONE",
+            variables = "NONE",
+          },
+          inverse = { -- Inverse highlight for different types
+            match_paren = false,
+            visual = false,
+            search = false,
+          },
+        },
+      })
+      -- setup must be called before loading
+      vim.cmd("colorscheme nordfox")
     end,
   },
   {
     'AlexvZyl/nordic.nvim',
-    lazy = false,
-    priority = 1000,
+    -- event = "VimEnter",
     config = function()
       local palette = require 'nordic.colors'
       require 'nordic'.setup {
@@ -94,7 +176,7 @@ return {
       "nvim-tree/nvim-web-devicons",
       "meuter/lualine-so-fancy.nvim",
     },
-    event = "BufEnter",
+    event = "BufRead",
     -- event = "VeryLazy",
     config = function()
       local function session_name()
@@ -103,7 +185,7 @@ return {
       require("lualine").setup({
         options = {
           icons_enabled = true,
-          theme = "nordic",
+          theme = "auto",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
