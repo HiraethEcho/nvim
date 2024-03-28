@@ -77,7 +77,7 @@ return {
             bibtexFormatter = "texlab",
             latexFormatter = "latexindent",
             latexindent = {
-              indent = 2,
+              defaultIndent = "  ",
             },
             formatterLineLength = 80,
           },
@@ -168,7 +168,7 @@ return {
         hover = {
           max_width = 0.6,
           open_link = "gw",
-          open_browser = "!msedge",
+          open_browser = "!qutebrowser",
         },
         diagnostic = {
           keys = {

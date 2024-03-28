@@ -56,7 +56,7 @@ return {
     },
     config = function()
       if vim.g.is_linux then
-        vim.g.mkdp_browser = "qutebroswer"
+        vim.g.mkdp_browser = "qutebrowser"
       end
       -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
       vim.g.mkdp_theme = "light"
