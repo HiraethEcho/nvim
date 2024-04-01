@@ -1,5 +1,3 @@
-local vim = vim
-
 return {
   { "folke/lazy.nvim", version = "*" },
   {
@@ -105,9 +103,9 @@ return {
         D = {
           name = "Diff",
         },
-        e = {
-          name = "explorer",
-        },
+        -- e = {
+        --   name = "explorer",
+        -- },
         u = {
           name = "ui", -- optional group name
         },
@@ -179,6 +177,7 @@ return {
   {
     'ActivityWatch/aw-watcher-vim',
     -- lazy = false,
+    enabled = false,
     cmd = "AWStart",
   }
 }

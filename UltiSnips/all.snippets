@@ -100,19 +100,3 @@ endsnippet
 snippet uuid "Random UUID" w
 `!p if not snip.c: import uuid; snip.rv = str(uuid.uuid4())`
 endsnippet
-
-
-snippet r "return" "re.match('^\s+if err ', snip.buffer[snip.line-1])" be
-return err
-endsnippet
-
-snippet "([^\s]*)SS" "short inline math" ir
-$`!p snip.rv = match.group(1)`$`!p
-if t[1] and t[1][0] not in [',', '.', '?', '-', ' ']:
-	snip.rv = ' '
-else:
-	snip.rv = ''
-`$1 
-endsnippet
-
-

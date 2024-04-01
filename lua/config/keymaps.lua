@@ -13,7 +13,7 @@ end
 map({ "n", "v" }, ";", ":")
 map({ "v", "n" }, "x", '"_x')
 map("n", "<Space>", "<Nop>", { noremap = true, silent = true })
-map("n", "cd", ":cd %/..<cr>")
+map("n", "<leader>H", ":cd %:h<cr>", { desc = "set cwd to parent of current file" })
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -116,7 +116,7 @@ map("n", "<leader>gg", function()
 end, { desc = "Lazygit " })
 
 -- quit
-map("n", "<leader>qq", "<cmd>wa<cr><cmd>qa<cr>", { desc = "Quit all" })
+map("n", "<leader>q", "<cmd>wqa<cr>", { desc = "Quit all" })
 
 -- floating terminal
 local lazyterm = function()
