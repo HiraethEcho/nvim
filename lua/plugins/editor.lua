@@ -4,13 +4,13 @@ return {
     "lervag/vimtex",
     ft = { "bib", "tex" },
     config = function()
-      vim.g.vimtex_view_method = "sioyek"
+      -- vim.g.vimtex_view_method = "sioyek"
 
-      -- vim.g.vimtex_view_method = 'zathura'
+      --vim.g.vimtex_view_method = 'zathura'
 
       -- this works
-      -- vim.g.vimtex_view_general_viewer = "okular"
-      -- vim.g.vimtex_view_general_options = [[ --unique file:@pdf\#src:@line@tex]]
+       vim.g.vimtex_view_general_viewer = "okular"
+       vim.g.vimtex_view_general_options = [[ --unique file:@pdf\#src:@line@tex]]
       -- in okular, set 'nvr --remote-silent +%l %f' in settings - configure - editor
 
       vim.g.vimtex_syntax_enabled = 0
