@@ -4,13 +4,14 @@ return {
     "lervag/vimtex",
     ft = { "bib", "tex" },
     config = function()
-      vim.g.vimtex_view_method = "sioyek"
+      -- vim.g.vimtex_view_method = "sioyek"
+       vim.g.vimtex_view_general_viewer = "sumatrapdf"
 
-      -- vim.g.vimtex_view_method = 'zathura'
+      --vim.g.vimtex_view_method = 'zathura'
 
       -- this works
-      -- vim.g.vimtex_view_general_viewer = "okular"
-      -- vim.g.vimtex_view_general_options = [[ --unique file:@pdf\#src:@line@tex]]
+       -- vim.g.vimtex_view_general_viewer = "okular"
+       -- vim.g.vimtex_view_general_options = [[ --unique file:@pdf\#src:@line@tex]]
       -- in okular, set 'nvr --remote-silent +%l %f' in settings - configure - editor
 
       vim.g.vimtex_syntax_enabled = 0
@@ -49,9 +50,6 @@ return {
       { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
     },
     config = function()
-      if vim.g.is_linux then
-        vim.g.mkdp_browser = "qutebrowser"
-      end
       -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
       vim.g.mkdp_theme = "light"
       vim.g.mkdp_auto_start = 1
@@ -62,6 +60,7 @@ return {
   },
   {
     "OXY2DEV/markview.nvim",
+    enabled = false,
     ft = "markdown",
     cmd = {"Markview"},
     keys={

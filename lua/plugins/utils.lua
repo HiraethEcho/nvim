@@ -14,7 +14,7 @@ return {
   },
   {
     "gelguy/wilder.nvim",
-    -- enabled = false,
+    enabled = false,
     event = "VeryLazy",
     -- event = "CmdlineEnter",
     config = function()
