@@ -5,26 +5,13 @@ return {
     ft = { "bib", "tex" },
     config = function()
       vim.g.vimtex_view_method = "sioyek"
+      vim.g.vimtex_callback_progpath = "nvim"
       vim.g.vimtex_view_general_options = ""
-      vim.g.tex_comment_nospell = 1
       vim.g.vimtex_fold_enabled = 1
       vim.g.vimtex_quickfix_enabled = 0
 
-      vim.g.vimtex_syntax_conceal = {
-        accents = 1,
-        ligatures = 1,
-        cites = 1,
-        fancy = 0,
-        spacing = 0,
-        greek = 0,
-        math_bounds = 1,
-        math_delimiters = 1,
-        math_fracs = 0,
-        math_super_sub = 0,
-        math_symbols = 0,
-        sections = 1,
-        styles = 1,
-      }
+      vim.g.vimtex_syntax_enabled = 0
+      vim.g.vimtex_syntax_conceal_disable = 1
       vim.g.vimtex_toc_config = {
         name = "TOC",
         layers = { "label", "todo", "include", "content" },
@@ -33,6 +20,7 @@ return {
         show_help = 1,
         show_numbers = 2,
       }
+
       vim.g.vimtex_quickfix_ignore_filters = {
         "Underfull \\\\hbox",
         "Overfull \\\\hbox",
@@ -56,7 +44,7 @@ return {
     },
     config = function()
       if vim.g.is_linux then
-        vim.g.mkdp_browser = "qutebrowser"
+        vim.g.mkdp_browser = "microsoft-edge-stable"
       end
       -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
       vim.g.mkdp_theme = "light"
@@ -207,7 +195,7 @@ return {
     "epwalsh/obsidian.nvim",
     -- lazy=false,
     enabled = false,
-    event = { "BufRead " .. vim.fn.expand("~") .. "/obsidian/**.md" },
+    event = { "BufRead " .. vim.fn.expand("~") .. "/Documents/obsidian/**.md" },
     keys = {
       { "<leader>oo", "<cmd>ObsidianOpen<cr>",       desc = "Open Obsidian" },
       { "<leader>os", "<cmd>ObsidianSearch<cr>",     desc = "Search in Obsidian" },

@@ -6,6 +6,7 @@ return {
     cmd = "LspStart",
     keys = {
       { "<leader>ll", "<cmd>LspStart<cr>",   desc = "Start lsp" },
+      { "<leader>ls", "<cmd>LspStop<cr>",   desc = "stop lsp" },
       { "<leader>li", "<cmd>LspInfo<cr>",    desc = "lsp info" },
       { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
@@ -28,7 +29,7 @@ return {
           },
           checkThirdParty = false,
         },
-        prosemd_lsp = {},
+        -- prosemd_lsp = {},
         bashls = {},
         -- latexindent = {},
         html = {},
@@ -90,6 +91,7 @@ return {
           vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>", bufopts)
         end,
       })
+--[[
       require("lspconfig").grammarly.setup({
         filetypes = { "markdown", "tex", "plaintex" },
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
@@ -98,6 +100,7 @@ return {
         },
         on_attach = on_attach,
       })
+]]
       require("lspconfig").marksman.setup({
         filetypes = { "markdown" },
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
