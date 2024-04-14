@@ -28,7 +28,6 @@ return {
           },
           checkThirdParty = false,
         },
-        marksman = {},
         prosemd_lsp = {},
         bashls = {},
         -- latexindent = {},
@@ -53,7 +52,9 @@ return {
         settings = {
           texlab = {
             build = {
-              forwardSearchAfter = true,
+              executable = 'xelatex',
+              onSave = true,
+              forwardSearchAfter = false,
             },
             forwardSearch = {
               executable = "sioyek",
@@ -77,7 +78,8 @@ return {
             bibtexFormatter = "texlab",
             latexFormatter = "latexindent",
             latexindent = {
-              defaultIndent = "  ",
+              ['local'] = nil, -- local is a reserved keyword
+              modifyLineBreaks = true,
             },
             formatterLineLength = 80,
           },
@@ -95,6 +97,17 @@ return {
           grammarly = {},
         },
         on_attach = on_attach,
+      })
+      require("lspconfig").marksman.setup({
+        filetypes = { "markdown" },
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        settings = {
+          grammarly = {},
+        },
+        on_attach = function(client, bufnr)
+          local bufopts = { noremap = true, silent = true, buffer = bufnr }
+          vim.keymap.set("n", "<cr><cr>", "<cmd>MarkdownPreview<cr>", bufopts)
+        end,
       })
     end,
   },

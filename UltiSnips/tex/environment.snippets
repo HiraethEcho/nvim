@@ -30,13 +30,15 @@ snippet template(basic) "Basic template" b
 \usepackage{geometry}
 \geometry{a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm}
 
-\newtheorem{defn}{Definition}[section]
-\newtheorem{prop}[defn]{Proposition}
-\newtheorem{lem}[defn]{Lemma}
-\newtheorem{thm}[defn]{Theorem}
-\newtheorem{cor}[defn]{Corollary}
-\newtheorem{rmk}[defn]{Remark}
-\newtheorem{fact}[defn]{Fact}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{fact}[definition]{Fact}
+\newtheorem{assertion}[definition]{Assertion}
+\newtheorem{example}[definition]{Example}
 \newtheorem{problem}{Problem}
 \newtheorem*{ques}{Question}
 
@@ -95,27 +97,27 @@ snippet ul "Itemize" b
 endsnippet
 
 snippet lem "Lemma" bi
-\begin{lem}
+\begin{lemma}
 	${0:${VISUAL}}
-\end{lem}
+\end{lemma}
 endsnippet
 
 snippet prop "Proposition" bi
-\begin{prop}[$1]
+\begin{proposition}[$1]
 	${0:${VISUAL}}
-\end{prop}
+\end{proposition}
 endsnippet
 
 snippet thm "Theorem" bi
-\begin{thm}[$1]
+\begin{theorem}[$1]
 	${0:${VISUAL}}
-\end{thm}
+\end{theorem}
 endsnippet
 
 snippet cor "Corollary" bi
-\begin{cor}
+\begin{corollary}
 	${0:${VISUAL}}
-\end{cor}
+\end{corollary}
 endsnippet
 
 snippet pf "proof" bi
@@ -125,15 +127,15 @@ snippet pf "proof" bi
 endsnippet
 
 snippet def "Definition" bi
-\begin{defn}
+\begin{definition}
 	${0:${VISUAL}}
-\end{defn}
+\end{definition}
 endsnippet
 
 snippet rmk "Remark" bi
-\begin{rmk}
+\begin{remark}
 	${0:${VISUAL}}
-\end{rmk}
+\end{remark}
 endsnippet
 
 snippet ques "Question" bi

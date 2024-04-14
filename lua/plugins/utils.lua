@@ -63,7 +63,7 @@ return {
   {
     "folke/which-key.nvim",
     cmd = "WhichKey",
-    event = "BufRead",
+    event = "VeryLazy",
     config = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
@@ -97,38 +97,28 @@ return {
       })
       local wk = require("which-key")
       wk.register({
-        i = {
-          name = "list",
-        },
-        D = {
-          name = "Diff",
-        },
-        -- e = {
-        --   name = "explorer",
-        -- },
-        u = {
-          name = "ui", -- optional group name
-        },
-        f = {
-          name = "find", -- optional group name
-        },
-        o = {
-          name = "obsidian",
-        },
-        g = {
-          name = "git",
-        },
-        l = {
-          name = "lsp",
-        },
-        m = {
-          name = "markdown",
-        },
-        h = {
-          name = "hunk",
-        },
-      }, { prefix = "<leader>" })
+        i = { name = "list", },
+        D = { name = "Diff", },
+        -- e = { name = "explorer", },
+        u = { name = "ui", },
+        f = { name = "find", },
+        o = { name = "obsidian", },
+        g = { name = "git", },
+        l = { name = "lsp", },
+        m = { name = "markdown", },
+        h = { name = "hunk", },
+      })
     end,
+  },
+  {
+    "nvim-pack/nvim-spectre",
+    build = false,
+    cmd = "Spectre",
+    opts = { open_cmd = "noswapfile vnew" },
+    -- stylua: ignore
+    keys = {
+      { "<leader>r", function() require("spectre").open() end, desc = "Replace in Files (Spectre)" },
+    },
   },
   {
     "dstein64/vim-startuptime",

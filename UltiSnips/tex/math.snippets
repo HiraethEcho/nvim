@@ -205,7 +205,7 @@ endsnippet
 
 context "math()"
 snippet '([A-Za-z])([\d])' "auto subscript" wrA
-`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
 endsnippet
 
 
@@ -213,8 +213,3 @@ context "math()"
 snippet "([A-Za-z\]}'])([A-Za-z])\2{1}" "auto subscript" irA
 `!p snip.rv = match.group(1)+'_{'+match.group(2)+'}'`
 endsnippet
-
-# context "math()"
-# snippet "([A-Za-z])(ii)" "auto subscript" irA
-# `!p snip.rv = match.group(1)`_{i}
-# endsnippet

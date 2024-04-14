@@ -9,6 +9,11 @@ return {
           desc = "File tree",
         },
 
+        {
+          "<leader>B",
+          "<cmd>Neotree source=buffers position=left toggle=true<cr>",
+          desc = "buffers",
+        },
         --[[ {
           "<leader>ef",
           "<cmd>Neotree float toggle=true<cr>",
