@@ -84,9 +84,7 @@ return {
   },
   {
     "xiyaowong/nvim-transparent",
-    enabled = false,
     cmd = "TransparentEnable",
-    -- lazy=false,
     config = function()
       require("transparent").setup({})
     end,

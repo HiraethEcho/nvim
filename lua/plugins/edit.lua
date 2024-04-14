@@ -145,6 +145,7 @@ return {
   },
   {
     'mvllow/modes.nvim',
+    enabled = false,
     tag = 'v0.2.0',
     enabled = false,
     event = "InsertEnter",
@@ -170,7 +171,12 @@ return {
     },
   },
   {
+    "Neur1n/neuims",
+    cmd = "IMSToggle",
+  },
+  {
     "smartding/fcitx.nvim",
+    enabled = false,
     -- lazy = false,
     ft = "markdown,md",
     cmd = "Fcitx",
