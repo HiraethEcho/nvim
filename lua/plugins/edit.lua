@@ -1,5 +1,6 @@
 local vim = vim
 return {
+  --[[
   {
     "numToStr/Comment.nvim",
     keys = {
@@ -14,6 +15,7 @@ return {
       require("Comment").setup()
     end,
   },
+  --]]
   {
     "lambdalisue/suda.vim",
     cmd = { "SudaRead", "SudaWrite" },
