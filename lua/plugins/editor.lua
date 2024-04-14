@@ -4,14 +4,19 @@ return {
     "lervag/vimtex",
     ft = { "bib", "tex" },
     config = function()
-      vim.g.vimtex_view_method = "sioyek"
-      vim.g.vimtex_callback_progpath = "nvim"
-      vim.g.vimtex_view_general_options = ""
-      vim.g.vimtex_fold_enabled = 1
-      vim.g.vimtex_quickfix_enabled = 0
+      -- vim.g.vimtex_view_method = "sioyek"
+
+      --vim.g.vimtex_view_method = 'zathura'
+
+      -- this works
+       vim.g.vimtex_view_general_viewer = "okular"
+       vim.g.vimtex_view_general_options = [[ --unique file:@pdf\#src:@line@tex]]
+      -- in okular, set 'nvr --remote-silent +%l %f' in settings - configure - editor
 
       vim.g.vimtex_syntax_enabled = 0
       vim.g.vimtex_syntax_conceal_disable = 1
+      vim.g.vimtex_fold_enabled = 1
+
       vim.g.vimtex_toc_config = {
         name = "TOC",
         layers = { "label", "todo", "include", "content" },
@@ -21,6 +26,7 @@ return {
         show_numbers = 2,
       }
 
+      vim.g.vimtex_quickfix_enabled = 0
       vim.g.vimtex_quickfix_ignore_filters = {
         "Underfull \\\\hbox",
         "Overfull \\\\hbox",

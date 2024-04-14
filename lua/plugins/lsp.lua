@@ -61,10 +61,10 @@ return {
               executable = "sioyek",
               args = {
                 "--reuse-window",
-                "--execute-command", "toggle_synctex", -- Open Sioyek in synctex mode.
+                -- "--execute-command", "toggle_synctex", -- Open Sioyek in synctex mode.
                 "--inverse-search",
                 [[nvim --server ]] .. vim.v.servername .. [[ --remote-send ":e %%%1<cr>:%%%2<cr>"]],
-                -- [[nvim --server ]] .. vim.v.servername .. [[ --remote-send ":%%%2<cr>"]],
+                -- [[nvr --server ]] .. vim.v.servername .. [[ --remote-silent %%%1 -c vs]],
                 "--forward-search-file",
                 "%f",
                 "--forward-search-line",
