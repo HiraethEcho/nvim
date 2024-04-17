@@ -107,7 +107,7 @@ return {
         l = { name = "lsp", },
         m = { name = "markdown", },
         h = { name = "hunk", },
-      })
+      }, { prefix = "<leader>" })
     end,
   },
   {
@@ -117,7 +117,8 @@ return {
     opts = { open_cmd = "noswapfile vnew" },
     -- stylua: ignore
     keys = {
-      { "<leader>r", function() require("spectre").open() end, desc = "Replace in Files (Spectre)" },
+      { "<C-f>", function() require("spectre").open() end, desc = "toggle spectre" },
+      { "<leader>s", function() require("spectre").open_file_search({select_word=true}) end, desc = "search word on current file" },
     },
   },
   {
