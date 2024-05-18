@@ -48,7 +48,7 @@ map("n", "<leader>d", ":bd<CR>", { desc = "buffer delete" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
-map("i", "jk", "<ESC>")
+-- map("i", "jk", "<ESC>")
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua

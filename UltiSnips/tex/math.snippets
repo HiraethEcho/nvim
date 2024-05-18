@@ -199,12 +199,13 @@ context "math()"
 snippet "([\w]*)hat" "hat" riA
 \hat{`!p snip.rv=match.group(1)`${VISUAL}}$0
 endsnippet
+
 snippet __ "subscript" i
 _{$1}$0
 endsnippet
 
 context "math()"
-snippet '([A-Za-z])([\d])' "auto subscript" wrA
+snippet '([A-Za-z\]}'])([\d])' "auto subscript" wrA
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
 endsnippet
 

@@ -90,7 +90,7 @@ return {
             -- inverse    same as reverse
             -- italic
             -- standout
-            -- altfont 
+            -- altfont
             -- nocombine  override attributes instead of combining them
             -- NONE   no attributes used (used to reset it)
             comments = "italic", -- Value is any valid attr-list value `:help attr-list`
@@ -112,7 +112,7 @@ return {
         },
       })
       -- setup must be called before loading
-      vim.cmd("colorscheme nordfox")
+      vim.cmd("colorscheme dayfox")
     end,
   },
   {
@@ -179,9 +179,9 @@ return {
     event = "BufRead",
     -- event = "VeryLazy",
     config = function()
-      local function session_name()
+      --[[ local function session_name()
         return require("possession.session").session_name or ""
-      end
+      end ]]
       require("lualine").setup({
         options = {
           icons_enabled = true,
@@ -303,7 +303,7 @@ return {
               -- 1: Shows tab_name
               -- 2: Shows tab_nr + tab_name
             },
-            session_name,
+            -- session_name,
           },
         },
         extensions = { "neo-tree", "lazy" },

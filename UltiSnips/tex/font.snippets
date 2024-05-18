@@ -56,7 +56,7 @@ $\mathbb{C}$
 endsnippet
 
 # math environment letters
-snippet "([^\s]*)SS" "short inline math" irA
+snippet "([a-zA-Z])SS" "short inline math" irA
 $`!p snip.rv = match.group(1)`$`!p
 if t[1] and t[1][0] not in [',', '.', '?', '-', ' ']:
 	snip.rv = ' '
