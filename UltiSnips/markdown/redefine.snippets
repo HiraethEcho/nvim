@@ -1,0 +1,31 @@
+snippet notel "big note in redefine theme" b
+{% notel ${1:color green red blue yellow} ${2: title} %}
+$3
+{% endnotel %}
+$0
+endsnippet
+
+
+snippet note "note in redefine theme" b
+{% note ${1: default info danger primary warning success red } ${2: fa-bolt} %}
+$3
+{% endnotel %}
+$0
+endsnippet
+
+snippet tabh "tab for hexo redefine" b
+{% tabs ${1: name} %}
+<!-- tab ${2: tab name }-->
+${3: This is Tab 1 }
+<!-- endtab -->
+
+<!-- tab ${4: tab name}-->
+${5: This is Tab 2}
+<!-- endtab -->
+{% endtabs %}
+endsnippet
+snippet foldh "fold note for hexo redefine" b
+{% folding blue::${1:title} %}
+ 
+{% endfolding %}
+endsnippet
