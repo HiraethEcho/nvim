@@ -180,7 +180,12 @@ return {
   },
   {
     "ellisonleao/glow.nvim",
-    config = true,
+    config = function()
+      require("glow").setup({
+        glow_path = "glow",          -- will be filled automatically with your glow bin in $PATH, if any
+        style = "dark",    -- filled automatically with your current editor background, you can override using glow json style
+      })
+    end,
     cmd = "Glow",
     keys = {
       { "<leader>mp", "<cmd>Glow<cr>", desc = "markdown Glow Preview" },
