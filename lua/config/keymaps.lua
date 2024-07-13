@@ -14,6 +14,11 @@ map({ "n", "v" }, ";", ":")
 map({ "v", "n" }, "x", '"_x')
 map("n", "<Space>", "<Nop>", { noremap = true, silent = true })
 map("n", "<leader>H", ":cd %:h<cr>", { desc = "set cwd to parent of current file" })
+-- move cursor in insert mode
+map("i", "<C-h>","<Left>")
+map("i", "<C-l>","<Right>")
+map("i", "<C-k>","<Up>")
+map("i", "<C-j>","<Down>")
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -47,7 +52,7 @@ map("n", "<leader>d", ":bd<CR>", { desc = "buffer delete" })
 -- map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
 -- Clear search with <esc>
-map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+map( "n" , "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 -- map("i", "jk", "<ESC>")
 
 -- Clear search, diff update and redraw

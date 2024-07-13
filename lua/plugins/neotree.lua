@@ -3,115 +3,25 @@ return {
   keys = function()
     if vim.g.is_linux then
       return {
-        {
-          "<leader>e",
-          "<cmd>Neotree position=left toggle=true<cr>",
-          desc = "File tree",
-        },
-
-        {
-          "<leader>B",
-          "<cmd>Neotree source=buffers position=left toggle=true<cr>",
-          desc = "buffers",
-        },
-        --[[ {
-          "<leader>ef",
-          "<cmd>Neotree float toggle=true<cr>",
-          desc = "File tree float",
-        },
-        {
-          "<leader>en",
-          "<cmd>Neotree toggle=true float dir=" .. vim.fn.stdpath("config") .. " <cr>",
-          desc = "nvim file float",
-        },
-        {
-          "<leader>ep",
-          "<cmd>Neotree toggle=true float dir=~/projects <cr>",
-          desc = "Projects file float",
-        },
-        {
-          "<leader>eh",
-          "<cmd>Neotree toggle=true float dir=~<cr>",
-          desc = "home file float",
-        },
-        {
-          "<leader>et",
-          "<cmd>Neotree toggle=true float dir=~/tmp <cr>",
-          desc = "tmp file float",
-        },
-        {
-          "<leader>eb",
-          "<cmd>Neotree toggle=true float dir=~/blogs <cr>",
-          desc = "blogs file float",
-        }, ]]
-        {
-          "<leader>gs",
-          "<cmd>Neotree source=git_status <cr>",
-          desc = "git_status",
-        },
+        { "<leader>e", "<cmd>Neotree position=left toggle=true<cr>", desc = "File tree", },
+        { "<leader>B", "<cmd>Neotree source=buffers position=left toggle=true<cr>", desc = "Neotree buffers", },
+        {"<leader>gs", "<cmd>Neotree source=git_status <cr>", desc = "git_status",},
+        --[[ { "<leader>ef", "<cmd>Neotree float toggle=true<cr>", desc = "File tree float", }, { "<leader>en", "<cmd>Neotree toggle=true float dir=" .. vim.fn.stdpath("config") .. " <cr>", desc = "nvim file float", }, { "<leader>ep", "<cmd>Neotree toggle=true float dir=~/projects <cr>", desc = "Projects file float", }, { "<leader>eh", "<cmd>Neotree toggle=true float dir=~<cr>", desc = "home file float", }, { "<leader>et", "<cmd>Neotree toggle=true float dir=~/tmp <cr>", desc = "tmp file float", }, { "<leader>eb", "<cmd>Neotree toggle=true float dir=~/blogs <cr>", desc = "blogs file float", }, ]] 
       }
     else
       return {
-        {
-          "<leader>ee",
-          "<cmd>Neotree position=left toggle=true<cr>",
-          desc = "File tree",
-        },
-        {
-          "<leader>ef",
-          "<cmd>Neotree float toggle=true<cr>",
-          desc = "File tree float",
-        },
-        {
-          "<leader>eb",
-          "<cmd>Neotree toggle=true float source=buffers<cr>",
-          desc = "buffers float",
-        },
-        {
-          "<leader>en",
-          "<cmd>Neotree toggle=true float dir=" .. vim.fn.stdpath("config") .. " <cr>",
-          desc = "nvim file float",
-        },
-        {
-          "<leader>eg",
-          "<cmd>Neotree toggle=true float dir=~/github<cr>",
-          desc = "win github file float",
-        },
-        {
-          "<leader>eG",
-          "<cmd>Neotree toggle=true float dir=~/Github_arch<cr>",
-          desc = "arch Github file float",
-        },
-        {
-          "<leader>ep",
-          "<cmd>Neotree toggle=true float dir=~/documents/Projects <cr>",
-          desc = "Projects file float",
-        },
-        {
-          "<leader>ed",
-          "<cmd>Neotree toggle=true float dir=~/documents<cr>",
-          desc = "documents file float",
-        },
-        {
-          "<leader>eo",
-          "<cmd>Neotree toggle=true float dir=~/obsidian<cr>",
-          desc = "obsidian file float",
-        },
-        {
-          "<leader>es",
-          "<cmd>Neotree toggle=true float dir=~/site<cr>",
-          desc = "site file float",
-        },
-        {
-          "<leader>eh",
-          "<cmd>Neotree toggle=true float dir=~<cr>",
-          desc = "home file float",
-        },
-        {
-          "<leader>gs",
-          "<cmd>Neotree source=git_status <cr>",
-          desc = "git_status",
-        },
+        { "<leader>ee", "<cmd>Neotree position=left toggle=true<cr>", desc = "File tree", },
+        { "<leader>ef", "<cmd>Neotree float toggle=true<cr>", desc = "File tree float", },
+        { "<leader>eb", "<cmd>Neotree toggle=true float source=buffers<cr>", desc = "buffers float", },
+        { "<leader>en", "<cmd>Neotree toggle=true float dir=" .. vim.fn.stdpath("config") .. " <cr>", desc = "nvim file float", },
+        { "<leader>eg", "<cmd>Neotree toggle=true float dir=~/github<cr>", desc = "win github file float", },
+        { "<leader>eG", "<cmd>Neotree toggle=true float dir=~/Github_arch<cr>", desc = "arch Github file float", },
+        { "<leader>ep", "<cmd>Neotree toggle=true float dir=~/documents/Projects <cr>", desc = "Projects file float", },
+        { "<leader>ed", "<cmd>Neotree toggle=true float dir=~/documents<cr>", desc = "documents file float", },
+        { "<leader>eo", "<cmd>Neotree toggle=true float dir=~/obsidian<cr>", desc = "obsidian file float", },
+        { "<leader>es", "<cmd>Neotree toggle=true float dir=~/site<cr>", desc = "site file float", },
+        { "<leader>eh", "<cmd>Neotree toggle=true float dir=~<cr>", desc = "home file float", },
+        { "<leader>gs", "<cmd>Neotree source=git_status <cr>", desc = "git_status", },
       }
     end
   end,
@@ -157,11 +67,9 @@ return {
         local modify = vim.fn.fnamemodify
 
         local results = {
-          e = { val = modify(filename, ":e"), msg = "Extension only" },
           f = { val = filename, msg = "Filename" },
           F = { val = modify(filename, ":r"), msg = "Filename w/o extension" },
           h = { val = modify(filepath, ":~"), msg = "Path relative to Home" },
-          p = { val = modify(filepath, ":."), msg = "Path relative to CWD" },
           P = { val = filepath, msg = "Absolute path" },
         }
 
@@ -188,12 +96,9 @@ return {
     },
     window = {
       mappings = {
-        x = "system_open",
+        o = "system_open",
         Y = "copy_selector",
-        ["l"] = {
-          "toggle_node",
-          nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
-        },
+        ["l"] =  "toggle_node",
         ["<2-LeftMouse>"] = "open",
         ["<cr>"] = "open",
         -- ["<esc>"] = "revert_preview",
@@ -213,11 +118,11 @@ return {
             show_path = "none", -- "none", "relative", "absolute"
           },
         },
-        ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+        -- ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
         ["D"] = "delete",
         ["r"] = "rename",
-        ["y"] = "copy_to_clipboard",
-        ["dd"] = "cut_to_clipboard",
+        ["yy"] = "copy_to_clipboard",
+        ["x"] = "cut_to_clipboard",
         ["d"] = "",
         ["z"] = "",
         -- ["x"] = "cut_to_clipboard",

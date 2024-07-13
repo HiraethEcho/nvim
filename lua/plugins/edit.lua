@@ -32,6 +32,12 @@ return {
     config = true,
   },
   {
+    event = "InsertEnter",
+    "echasnovski/mini.splitjoin",
+    version = false,
+    config=function() require('mini.splitjoin').setup() end,
+  },
+  {
     "godlygeek/tabular",
     enabled = true,
     keys = {
@@ -54,7 +60,7 @@ return {
     -- lazy = false,
     cmd = "Fcitx",
     config = function()
-    vim.api.nvim_create_user_command("Fcitx", require("fcitx").setup, {})
+      vim.api.nvim_create_user_command("Fcitx", require("fcitx").setup, {})
       -- require("fcitx").setup()
     end,
   },

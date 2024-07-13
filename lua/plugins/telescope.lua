@@ -4,52 +4,43 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<cr>",   desc = "files" },
-      { "<leader>fF", "<cmd>Telescope file_browser<cr>", desc = "files" },
-      { "<leader>fo", "<cmd>Telescope oldfiles<cr>",     desc = "old files" },
+      { "<leader>ff", "<cmd>Telescope find_files<cr>",                            desc = "files" },
+      -- { "<leader>fF", "<cmd>Telescope file_browser<cr>",                          desc = "files" },
+      { "<leader>fo", "<cmd>Telescope oldfiles<cr>",                              desc = "old files" },
       -- { "<leader>fs", "<cmd>Telescope live_grep<cr>",    desc = "live grep" },
-      { "<leader>?",  "<cmd>Telescope live_grep<cr>",    desc = "live grep" },
-      { "<leader>fg", "<cmd>Telescope grep_string<cr>",  desc = "grep string" },
-      { "<leader>b",  "<cmd>Telescope buffers<cr>",      desc = "buffers" },
-      {
-        "<leader>/",
-        "<cmd>Telescope current_buffer_fuzzy_find<cr>",
-        desc = "current buffer fuzzy find",
-      },
-      { "<leader>`",  "<cmd>Telescope marks<cr>",          desc = "marks" },
-      { '<leader>"',  "<cmd>Telescope registers<cr>",      desc = "marks" },
-      { "<leader>gb", "<cmd>Telescope git_branches<cr>",   desc = "git branch" },
-      { "<leader>gc", "<cmd>Telescope git_commits<cr>",    desc = "git commits" },
-      { "<leader>gs", "<cmd>Telescope git_status<cr>",     desc = "git status" },
-      { "<leader>gS", "<cmd>Telescope git_stash<cr>",      desc = "git stash" },
-      { "<leader>gf", "<cmd>Telescope git_files<cr>",      desc = "git files" },
-      { "gr",         "<cmd>Telescope lsp_references<cr>", desc = "References" },
+      { "<leader>?",  "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
+      { "<leader>fg", "<cmd>Telescope grep_string<cr>",                           desc = "grep string" },
+      { "<leader>b",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
+      { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<cr>",             desc = "current buffer fuzzy find", },
+      { "<leader>`",  "<cmd>Telescope marks<cr>",                                 desc = "marks" },
+      { '<leader>"',  "<cmd>Telescope registers<cr>",                             desc = "marks" },
+      { "<leader>gb", "<cmd>Telescope git_branches<cr>",                          desc = "git branch" },
+      { "<leader>gc", "<cmd>Telescope git_commits<cr>",                           desc = "git commits" },
+      { "<leader>gs", "<cmd>Telescope git_status<cr>",                            desc = "git status" },
+      { "<leader>gS", "<cmd>Telescope git_stash<cr>",                             desc = "git stash" },
+      { "<leader>gf", "<cmd>Telescope git_files<cr>",                             desc = "git files" },
+      { "gr",         "<cmd>Telescope lsp_references<cr>",                        desc = "References" },
 
-      {
-        "<leader>id",
-        ":lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>",
-        desc = "current buffer diagnostics",
-      },
-      { "<leader>iD", ":lua require'telescope.builtin'.diagnostics{}<cr>", desc = "workspace diagnostics" },
-      { "<leader>ib", ":lua require'telescope.builtin'.builtin<cr>",       desc = "telescope builtin" },
-
-      { "<leader>ir", "<cmd>Telescope registers<cr>",       desc = "registers" },
-      { "<leader>it", "<cmd>TodoTelescope<cr>",             desc = "Todo" },
-      { "<leader>ic", "<cmd>Telescope commands<cr>",        desc = "commands" },
-      { "<leader>;",  "<cmd>Telescope command_history<cr>", desc = "commands history" },
-      { "<leader>i/", "<cmd>Telescope search_history<cr>",  desc = "search history" },
-      { "<leader>is", "<cmd>Telescope possession list<cr>", desc = "sessions" },
-      { "<leader>im", "<cmd>Telescope marks<cr>",           desc = "marks" },
-      { "<leader>ij", "<cmd>Telescope jumplist<cr>",        desc = "jump list" },
-      { "<leader>ih", "<cmd>Telescope help_tags<cr>",       desc = "help tags" },
-      { "<leader>w",  "<cmd>Telescope spell_suggest<cr>",   desc = "spell suggest" },
+      { "<leader>id", ":lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>", desc = "current buffer diagnostics", },
+      { "<leader>iD", ":lua require'telescope.builtin'.diagnostics{}<cr>",        desc = "workspace diagnostics" },
+      { "<leader>ib", ":lua require'telescope.builtin'.builtin<cr>",              desc = "telescope builtin" },
+      { "<leader>ir", "<cmd>Telescope registers<cr>",                             desc = "registers" },
+      { "<leader>it", "<cmd>TodoTelescope<cr>",                                   desc = "Todo" },
+      { "<leader>ic", "<cmd>Telescope commands<cr>",                              desc = "commands" },
+      { "<leader>;",  "<cmd>Telescope command_history<cr>",                       desc = "commands history" },
+      { "<leader>i/", "<cmd>Telescope search_history<cr>",                        desc = "search history" },
+      { "<leader>is", "<cmd>Telescope possession list<cr>",                       desc = "sessions" },
+      { "<leader>im", "<cmd>Telescope marks<cr>",                                 desc = "marks" },
+      { "<leader>ij", "<cmd>Telescope jumplist<cr>",                              desc = "jump list" },
+      { "<leader>ih", "<cmd>Telescope help_tags<cr>",                             desc = "help tags" },
+      { "<leader>w",  "<cmd>Telescope spell_suggest<cr>",                         desc = "spell suggest" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-file-browser.nvim",
+      -- "nvim-telescope/telescope-file-browser.nvim",
     },
     config = function()
-      local fb_actions = require("telescope._extensions.file_browser.actions")
+      -- local fb_actions = require("telescope._extensions.file_browser.actions")
       require("telescope").setup({
         defaults = {
           winblend = 10,
@@ -147,6 +138,7 @@ return {
           },
         },
         extensions = {
+          --[[
           file_browser = {
             grouped = true,
             auto_depth = true,
@@ -191,10 +183,11 @@ return {
               },
             },
           },
+]]
         },
       })
       require("telescope").load_extension("possession")
-      require("telescope").load_extension("file_browser")
+      -- require("telescope").load_extension("file_browser")
     end,
   },
   {
@@ -202,7 +195,6 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("possession").setup({
-        -- session_dir = (Path:new(vim.fn.stdpath('data')) / 'possession'):absolute(),
         session_dir = vim.fn.stdpath("data") .. "/sessions",
         silent = false,
         load_silent = true,

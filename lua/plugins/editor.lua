@@ -4,9 +4,9 @@ return {
     "lervag/vimtex",
     ft = { "bib", "tex" },
     config = function()
-      -- vim.g.vimtex_view_method = "sioyek"
+      vim.g.vimtex_view_method = "sioyek"
 
-      vim.g.vimtex_view_method = 'zathura'
+      -- vim.g.vimtex_view_method = 'zathura'
 
       -- this works
       -- vim.g.vimtex_view_general_viewer = "okular"
@@ -71,9 +71,7 @@ return {
   {
     "jakewvincent/mkdnflow.nvim",
     ft = "markdown",
-    cmd = {
-      "Mkdnflow",
-    },
+    cmd = { "Mkdnflow", },
     -- lazy=false,
     config = function()
       require("mkdnflow").setup({
@@ -82,7 +80,7 @@ return {
           buffers = true,
           conceal = true,
           cursor = true,
-          folds = false,
+          folds = true,
           links = true,
           lists = true,
           maps = true,
@@ -182,8 +180,8 @@ return {
     "ellisonleao/glow.nvim",
     config = function()
       require("glow").setup({
-        glow_path = "glow",          -- will be filled automatically with your glow bin in $PATH, if any
-        style = "dark",    -- filled automatically with your current editor background, you can override using glow json style
+        glow_path = "glow", -- will be filled automatically with your glow bin in $PATH, if any
+        style = "dark",     -- filled automatically with your current editor background, you can override using glow json style
       })
     end,
     cmd = "Glow",

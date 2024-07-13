@@ -6,7 +6,7 @@ return {
     cmd = "LspStart",
     keys = {
       { "<leader>ll", "<cmd>LspStart<cr>",   desc = "Start lsp" },
-      { "<leader>ls", "<cmd>LspStop<cr>",   desc = "stop lsp" },
+      { "<leader>ls", "<cmd>LspStop<cr>",    desc = "stop lsp" },
       { "<leader>li", "<cmd>LspInfo<cr>",    desc = "lsp info" },
       { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
@@ -91,7 +91,7 @@ return {
           vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>", bufopts)
         end,
       })
---[[
+      --[[
       require("lspconfig").grammarly.setup({
         filetypes = { "markdown", "tex", "plaintex" },
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
@@ -141,7 +141,7 @@ return {
       { "<leader>ld", "<cmd>Lspsaga show_buf_diagnostics<cr>",       desc = "lsp buff diagnostic" },
       { "<leader>lD", "<cmd>Lspsaga show_workspace_diagnostics<cr>", desc = "lsp workspace diagnostic" },
       { "<leader>lf", "<cmd>Lspsaga finder<cr>",                     desc = "lsp finder" },
-      { "<leader>lF", ":lua vim.lsp.buf.format()<cr>",               desc = "lsp formart" },
+      -- { "<leader>lF", ":lua vim.lsp.buf.format()<cr>",               desc = "lsp formart" },
       { "gp",         "<cmd>Lspsaga peek_definition<cr>",            desc = "lsp peek definition" },
       { "gd",         "<cmd>Lspsaga goto_definition<cr>",            desc = "go to definition" },
       { "[d",         "<cmd>Lspsaga diagnostic_jump_prev<cr>",       desc = "previous diagnostic" },
@@ -184,7 +184,7 @@ return {
         hover = {
           max_width = 0.6,
           open_link = "gw",
-          open_browser = "!qutebrowser",
+          open_browser = "qutebrowser",
         },
         diagnostic = {
           keys = {

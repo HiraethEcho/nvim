@@ -10,6 +10,7 @@ return {
   },
   {
     "gelguy/wilder.nvim",
+    -- enabled = false,
     event = "CmdlineEnter",
     config = function()
       local wilder = require("wilder")
