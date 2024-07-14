@@ -192,6 +192,7 @@ return {
             statusline = {
               "neo-tree",
               "sagaoutline",
+              "Outline",
               "undotree",
             },
           },

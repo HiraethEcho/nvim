@@ -99,5 +99,27 @@ Window = "",
 WordFile = "󰈭",
 
 ## test
+what is the best way to write 
 
+a code block in md
+a list
+
+with a code block in it
+```python
+def foo():
+    pass
+```
+
+* foo
+* bar
+
+## License
+
+MIT
+
+
+latex code block in md
+```latex
+ok
+```
 

@@ -64,11 +64,31 @@ return {
   {
     "folke/which-key.nvim",
     cmd = "WhichKey",
+    keys = {
+      { "?", function() require("which-key").show({ loop=true , key="<leader>" }) end, desc = "Buffer Local Keymaps (which-key)" },
+    },
     event = "VeryLazy",
+    opt={
+        presets = {
+          operators = false, -- adds help for operators like d, y, ...
+          motions = false, -- adds help for motions
+          text_objects = true, -- help for text objects triggered after entering an operator
+          windows = true, -- default bindings on <c-w>
+          nav = true, -- misc bindings to work with windows
+          z = true, -- bindings for folds, spelling and others prefixed with z
+          g = true, -- bindings for prefixed with g
+        },
+      preset = "modern",
+      layout = {
+        align = "center", -- align columns left, center or right
+      },
+    },
     config = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
-      require("which-key").setup({
+      local wk = require("which-key")
+      --[[ 
+      wk.setup({
         key_labels = {
           ["<space>"] = "SPC",
           ["<cr>"] = "RET",
@@ -96,19 +116,19 @@ return {
           },
         },
       })
-      local wk = require("which-key")
-      wk.register({
-        i = { name = "list", },
-        D = { name = "Diff", },
-        -- e = { name = "explorer", },
-        u = { name = "ui", },
-        f = { name = "find", },
-        o = { name = "obsidian", },
-        g = { name = "git", },
-        l = { name = "lsp", },
-        m = { name = "markdown", },
-        h = { name = "hunk", },
-      }, { prefix = "<leader>" })
+]]
+      wk.add({
+        { "<leader>i", group = "list", },
+        { "<leader>D", group = "Diff", },
+        { "<leader>u", group = "ui", },
+        { "<leader>f", group = "find", },
+        -- { "<leader>o", group = "obsidian", },
+        { "<leader>g", group = "git", },
+        { "<leader>l", group = "lsp", },
+        { "<leader>m", group = "markdown", },
+        { "<leader>h", group = "hunk", },
+        { "<leader>c", group = "Copilot", },
+      })
     end,
   },
   {
@@ -118,8 +138,8 @@ return {
     opts = { open_cmd = "noswapfile vnew" },
     -- stylua: ignore
     keys = {
-      { "<C-f>", function() require("spectre").open() end, desc = "toggle spectre" },
-      { "<leader>s", function() require("spectre").open_file_search({select_word=true}) end, desc = "search word on current file" },
+      { "<C-f>",     function() require("spectre").open() end,                                   desc = "toggle spectre" },
+      { "<leader>s", function() require("spectre").open_file_search({ select_word = true }) end, desc = "search word on current file" },
     },
   },
   {
@@ -160,6 +180,7 @@ return {
           'undotree',
           'neo-tree',
           "sagaoutline",
+          "Outline",
         },
         autosave_only_in_session = false,             -- Always autosaves session. If true, only autosaves after a session is active.
         autoload_mode = config.AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession

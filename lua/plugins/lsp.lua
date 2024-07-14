@@ -11,7 +11,7 @@ return {
       { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
     dependencies = {
-      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+      -- { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "nvimdev/guard.nvim",
@@ -35,7 +35,7 @@ return {
         html = {},
         clangd = {},
       }
-      require("fidget").setup()
+      -- require("fidget").setup()
       -- require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(servers),
@@ -127,6 +127,7 @@ return {
   },
   {
     "glepnir/lspsaga.nvim",
+    enabled= false,
     event = "LspAttach",
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
@@ -176,7 +177,7 @@ return {
           enable = false,
         },
         symbol_in_winbar = {
-          enable = true,
+          enable = false,
           show_file = false,
           folder_level = 5,
           color_mode = true,
