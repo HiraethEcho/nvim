@@ -138,5 +138,13 @@ map("t", "<esc><esc>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 -- tabs
 map("n", "<c-t>", "<cmd>tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader><tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+-- map("n", "<leader><tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "t", "<cmd>tabNext<cr>", { desc = "Next Tab" })
+map("n", "T", "<cmd>tabprevious<cr>", { desc = "previous Tab" })
+-- map("n", "<C-Tab>", "<cmd>tabNext<cr>", { desc = "Next Tab" })
+-- map("n", "<C-S-Tab>", "<cmd>tabprevious<cr>", { desc = "previous Tab" })
+
+-- vim.keymap.set('n', '<C-Tab>', ':tabNext<CR>', { noremap = true, silent = true }) 
+-- vim.keymap.set('n', '<C-S-Tab>', ':tabprevious<CR>', { noremap = true, silent = true }) 
+
 map("n", "<C-n>", "<C-W>T", { desc = "Window to new tab" })

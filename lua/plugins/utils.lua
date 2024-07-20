@@ -189,8 +189,8 @@ return {
   },
   {
     'ActivityWatch/aw-watcher-vim',
-    -- lazy = false,
-    enabled = false,
+    lazy = false,
+    -- enabled = false,
     cmd = "AWStart",
   }
 }
