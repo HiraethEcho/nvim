@@ -16,7 +16,9 @@ return {
   },
   {
     "neanias/everforest-nvim",
-    enabled = false,
+    -- enabled = false,
+    -- lazy = false,
+    -- cmd = "colorscheme",
     version = false,
     -- event = "VimEnter",
     config = function()
@@ -37,13 +39,14 @@ return {
         diagnostic_line_highlight = true,
         float_style = "bright",
       })
-      require("everforest").load()
+      -- require("everforest").load()
     end,
   },
   {
     "rose-pine/neovim",
-    enabled = false,
-    name = "rose-pine",
+    -- cmd = "colorscheme",
+    -- enabled = false,
+    -- name = "rose-pine",
     config = function()
       require("rose-pine").setup({
         variant = "dawn",      -- auto, main, moon, or dawn
@@ -60,7 +63,7 @@ return {
           italic = true,
         },
       })
-      vim.cmd("colorscheme rose-pine")
+      -- vim.cmd("colorscheme rose-pine")
       -- vim.cmd("colorscheme rose-pine-main")
       -- vim.cmd("colorscheme rose-pine-moon")
       -- vim.cmd("colorscheme rose-pine-dawn")
@@ -117,7 +120,9 @@ return {
   },
   {
     'AlexvZyl/nordic.nvim',
+    enabled =false,
     -- event = "VimEnter",
+    -- cmd = "colorscheme",
     config = function()
       local palette = require 'nordic.colors'
       require 'nordic'.setup {
@@ -172,16 +177,20 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
+    event = "VimEnter",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "meuter/lualine-so-fancy.nvim",
     },
-    event = "BufRead",
+    -- event = "BufRead",
     -- event = "VeryLazy",
     config = function()
       --[[ local function session_name()
         return require("possession.session").session_name or ""
       end ]]
+      local function session_name()
+          return require('possession.session').get_session_name() or ''
+      end
       require("lualine").setup({
         options = {
           icons_enabled = true,
@@ -219,16 +228,17 @@ return {
               },
             },
           },
-          lualine_c = {
-            "branch",
+          lualine_c = { "fancy_diagnostics", "fancy_lsp_servers"  },
+          lualine_x = {
             "fancy_diff",
           },
-          lualine_x = { "fancy_diagnostics", "fancy_lsp_servers", "filetype" },
-          lualine_y = { "progress", "location" },
+          lualine_y = { "filetype" },
           lualine_z = {
-            function()
+            "progress",
+            "location",
+            --[[ function()
               return " " .. os.date("%R")
-            end,
+            end, ]]
           },
         },
         inactive_sections = {
@@ -251,26 +261,42 @@ return {
                 newfile = "", -- Text to show for newly created file before first write
               },
             },
-            "branch",
           },
-          lualine_c = {},
-          lualine_x = { "progress" },
-          lualine_y = { "Location" },
+          lualine_c = {
+            "diff",
+          },
+          lualine_x = { "fancy_diagnostics", "fancy_lsp_servers", "filetype" },
+          lualine_y = { "progress" },
           lualine_z = {},
         },
         tabline = {
           lualine_a = {
             {
-              "filename",
-              symbols = {
-                modified = "", -- Text to show when the file is modified.
-                readonly = "", -- Text to show when the file is non-modifiable or readonly.
-                unnamed = "", -- Text to show for unnamed buffers.
-                newfile = "", -- Text to show for newly created file before first write
-              },
+              "tabs",
+              max_length = vim.o.columns / 3, -- Maximum width of tabs component.
+              -- Note:
+              -- It can also be a function that returns
+              -- the value of `max_length` dynamically.
+              mode = 1, -- 0: Shows tab_nr
+              -- 1: Shows tab_name
+              -- 2: Shows tab_nr + tab_name
             },
           },
           lualine_b = {
+            "windows",
+            -- {
+            --   "filename",
+            --   symbols = {
+            --     modified = "", -- Text to show when the file is modified.
+            --     readonly = "", -- Text to show when the file is non-modifiable or readonly.
+            --     unnamed = "", -- Text to show for unnamed buffers.
+            --     newfile = "", -- Text to show for newly created file before first write
+            --   },
+            -- },
+          },
+          lualine_c = {
+          },
+          lualine_x = {
             {
               "buffers",
               show_filename_only = true,   -- Shows shortened relative path when set to false.
@@ -287,24 +313,22 @@ return {
               },
             },
           },
-          lualine_c = {},
-
-          lualine_x = {},
           lualine_y = {
-            "windows",
+            "branch",
           },
           lualine_z = {
-            {
+            session_name,
+            -- "branch",
+            --[[ {
               "tabs",
               max_length = vim.o.columns / 3, -- Maximum width of tabs component.
               -- Note:
               -- It can also be a function that returns
               -- the value of `max_length` dynamically.
-              mode = 0, -- 0: Shows tab_nr
+              mode = 1, -- 0: Shows tab_nr
               -- 1: Shows tab_name
               -- 2: Shows tab_nr + tab_name
-            },
-            -- session_name,
+            }, ]]
           },
         },
         extensions = { "neo-tree", "lazy" },
