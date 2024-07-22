@@ -18,10 +18,18 @@ return {
     "echasnovski/mini.splitjoin",
     event = "InsertEnter",
     version = false,
-    config = function() require('mini.splitjoin').setup() end,
+    opts = {
+    mappings = {
+      toggle = '',
+      split = 'gK',
+      join = 'gJ',
+    },
+    }
+    -- config = function() require('mini.splitjoin').setup() end,
   },
   {
     "echasnovski/mini.cursorword",
+    enabled =false,
     version = false,
     event = "InsertEnter",
     config = true,

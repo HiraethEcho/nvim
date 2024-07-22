@@ -1,10 +1,10 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false, -- last release is way too old and doesn't work on Windows
+    -- version = false, -- last release is way too old and doesn't work on Windows
     -- lazy = false,
     build = ":TSUpdate",
-    -- event = { "BufReadPost", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "kevinhwang91/nvim-ufo",
       "hiphish/rainbow-delimiters.nvim",
@@ -39,13 +39,17 @@ return {
       },
     },
     opts = {
-      highlight = { enable = true },
+      highlight = {
+          enable = true,
+          -- disable = { "latex" },
+          -- additional_vim_regex_highlighting = { "latex", "markdown" },
+        },
       indent = { enable = true },
       ensure_installed = {
         "c",
-        -- "html",
+        "html",
         "lua",
-        -- "latex", conflict with UltiSnips and math environment detected by vimtex
+        -- "latex",  -- conflict with UltiSnips and math environment detected by vimtex
         "markdown",
         "markdown_inline",
       },
@@ -74,6 +78,15 @@ return {
 
       local rainbow_delimiters = require 'rainbow-delimiters'
       require('rainbow-delimiters.setup').setup {
+        highlight = {
+            'RainbowDelimiterRed',
+            'RainbowDelimiterYellow',
+            'RainbowDelimiterBlue',
+            'RainbowDelimiterOrange',
+            'RainbowDelimiterGreen',
+            'RainbowDelimiterViolet',
+            'RainbowDelimiterCyan',
+        },
         strategy = {
           [''] = rainbow_delimiters.strategy['global'],
         },

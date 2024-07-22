@@ -77,8 +77,8 @@ return {
     end
   },
   {
-    enabled = false,
     "stevearc/dressing.nvim",
+    enabled = false,
     event = "BufReadPost",
     opts = {},
   },
@@ -93,7 +93,7 @@ return {
   },
   {
     "neanias/everforest-nvim",
-    -- enabled = false,
+    enabled = false,
     -- lazy = false,
     -- cmd = "colorscheme",
     version = false,
@@ -122,7 +122,7 @@ return {
   {
     "rose-pine/neovim",
     -- cmd = "colorscheme",
-    -- enabled = false,
+    enabled = false,
     -- name = "rose-pine",
     config = function()
       require("rose-pine").setup({
@@ -262,16 +262,13 @@ return {
     -- event = "BufRead",
     -- event = "VeryLazy",
     config = function()
-      --[[ local function session_name()
-        return require("possession.session").session_name or ""
-      end ]]
       local function session_name()
         return require('possession.session').get_session_name() or ''
       end
       require("lualine").setup({
         options = {
           icons_enabled = true,
-          theme = "auto",
+          theme = "onedark",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
@@ -284,8 +281,8 @@ return {
           },
         },
         sections = {
-          lualine_a = { "mode" },
-          lualine_b = {
+          lualine_a = {
+            -- "mode",
             {
               "filename",
               file_status = true,    -- Displays file status (readonly status, modified status)
@@ -305,9 +302,17 @@ return {
               },
             },
           },
-          lualine_c = { "fancy_diagnostics", "fancy_lsp_servers" },
-          lualine_x = {
+          lualine_b = {
+            -- "diff",
+            "branch",
             "fancy_diff",
+          },
+          lualine_c = {
+            "fancy_lsp_servers",
+            "fancy_diagnostics",
+          },
+          lualine_x = {
+            "searchcount",
           },
           lualine_y = { "filetype" },
           lualine_z = {
@@ -342,7 +347,11 @@ return {
           lualine_c = {
             -- "diff",
           },
-          lualine_x = { "fancy_diagnostics", "fancy_lsp_servers", "filetype" },
+          lualine_x = {
+            -- "hfancy_diagnostics",
+            -- "fancy_lsp_servers",
+            "filetype"
+          },
           lualine_y = { "progress" },
           lualine_z = {},
         },
@@ -393,8 +402,7 @@ return {
           lualine_y = {
           },
           lualine_z = {
-            "branch",
-            -- session_name,
+            session_name,
             -- "branch",
             --[[ {
               "tabs",
@@ -414,7 +422,7 @@ return {
   },
   {
     "luukvbaal/statuscol.nvim",
-    lazy = false,
+    -- lazy = false,
     enabled = false,
     config = function()
       local builtin = require("statuscol.builtin")
@@ -424,11 +432,11 @@ return {
         -- Although I recommend just using the segments field below to build your
         -- statuscolumn to benefit from the performance optimizations in this plugin.
         -- builtin.lnumfunc number string options
-        thousands = false, -- or line number thousands separator string ("." / ",")
+        thousands = false,   -- or line number thousands separator string ("." / ",")
         relculright = false, -- whether to right-align the cursor line number with 'relativenumber' set
         -- Builtin 'statuscolumn' options
-        ft_ignore = nil, -- lua table with 'filetype' values for which 'statuscolumn' will be unset
-        bt_ignore = nil, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
+        ft_ignore = nil,     -- lua table with 'filetype' values for which 'statuscolumn' will be unset
+        bt_ignore = nil,     -- lua table with 'buftype' values for which 'statuscolumn' will be unset
         -- Default segments (fold -> sign -> line number + separator), explained below
         segments = {
           { text = { "%C" }, click = "v:lua.ScFa" },
@@ -439,7 +447,7 @@ return {
             click = "v:lua.ScLa",
           }
         },
-        clickmod = "c", -- modifier used for certain actions in the builtin clickhandlers:
+        clickmod = "c",   -- modifier used for certain actions in the builtin clickhandlers:
         -- "a" for Alt, "c" for Ctrl and "m" for Meta.
         clickhandlers = { -- builtin click handlers
           Lnum                   = builtin.lnum_click,
@@ -458,9 +466,10 @@ return {
   {
     "shellRaining/hlchunk.nvim",
     -- event = "BufRead",
+    -- enabled = false,
     dependencies = {
-      "rcarriga/nvim-notify",
-      "petertriho/nvim-scrollbar",
+      -- "rcarriga/nvim-notify",
+      -- "petertriho/nvim-scrollbar",
     },
     keys = {
       { "<leader>uh", "<cmd>EnableHL<cr>", desc = "Enable hlchunk" },
@@ -475,8 +484,8 @@ return {
           },
         },
         indent = {
-          enable = false,
-          use_treesitter = false,
+          enable = true,
+          use_treesitter = true,
         },
         blank = {
           enable = true,
@@ -489,6 +498,57 @@ return {
           },
         },
       })
+    end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    enabled = false,
+    dependencies = {
+      "hiphish/rainbow-delimiters.nvim",
+    },
+    keys = {
+      { "<leader>ui", "<cmd>IBLToggle<cr>", desc = "toggle indent" },
+      { "<leader>uf", "<cmd>IBLToggleScope<cr>", desc = "toggle scope" },
+    },
+    main = "ibl",
+    -- opts = { },
+    config = function()
+      local highlight = {
+          "RainbowRed",
+          "RainbowYellow",
+          "RainbowBlue",
+          "RainbowOrange",
+          "RainbowGreen",
+          "RainbowViolet",
+          "RainbowCyan",
+      }
+      local hooks = require "ibl.hooks"
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+          vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+          vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+          vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+          vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+          vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+          vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+          vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+      end)
+      vim.g.rainbow_delimiters = { highlight = highlight }
+
+      require "ibl".setup({
+        scope = {
+          enabled = true,
+          highlight = highlight,
+        },
+        indent = {
+          highlight = highlight,
+          char = ""
+        },
+        whitespace = {
+            highlight = highlight,
+            remove_blankline_trail = false,
+        },
+      })
+      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
     end,
   },
   {

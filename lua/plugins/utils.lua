@@ -76,7 +76,7 @@ return {
     "folke/which-key.nvim",
     cmd = "WhichKey",
     keys = {
-      -- { "?", function() require("which-key").show({ loop = true, key = "<leader>" }) end, desc = "Buffer Local Keymaps (which-key)" },
+      { "?", function() require("which-key").show({ loop = true }) end, desc = "Buffer Local Keymaps (which-key)" },
     },
     event = "VeryLazy",
     opt = {
@@ -339,10 +339,12 @@ return {
           "qf",
         },
       })
-      vim.keymap.set("n", "[b", "<Plug>(CybuPrev)")
-      vim.keymap.set("n", "]b", "<Plug>(CybuNext)")
-      vim.keymap.set("n", "<s-tab>", "<plug>(CybuLastusedPrev)")
-      vim.keymap.set("n", "<tab>", "<plug>(CybuLastusedNext)")
+      -- vim.keymap.set("n", "[b", "<Plug>(CybuPrev)")
+      -- vim.keymap.set("n", "]b", "<Plug>(CybuNext)")
+      -- vim.keymap.set("n", "<s-tab>", "<plug>(CybuLastusedPrev)")
+      -- vim.keymap.set("n", "<tab>", "<plug>(CybuLastusedNext)")
+      vim.keymap.set("n", "<s-tab>", "<plug>(CybuPrev)")
+      vim.keymap.set("n", "<tab>", "<plug>(CybuNext)")
     end,
   },
 }
