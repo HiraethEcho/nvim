@@ -262,16 +262,13 @@ return {
     -- event = "BufRead",
     -- event = "VeryLazy",
     config = function()
-      --[[ local function session_name()
-        return require("possession.session").session_name or ""
-      end ]]
       local function session_name()
         return require('possession.session').get_session_name() or ''
       end
       require("lualine").setup({
         options = {
           icons_enabled = true,
-          theme = "auto",
+          theme = "onedark",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
@@ -394,7 +391,7 @@ return {
           },
           lualine_z = {
             "branch",
-            -- session_name,
+            session_name,
             -- "branch",
             --[[ {
               "tabs",
