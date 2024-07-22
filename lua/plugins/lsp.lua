@@ -36,7 +36,6 @@ return {
         clangd = {},
       }
       -- require("fidget").setup()
-      -- require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(servers),
         handlers = {
@@ -44,6 +43,13 @@ return {
             require("lspconfig")[server_name].setup({
               capabilities = require("cmp_nvim_lsp").default_capabilities(),
               settings = servers[server_name],
+
+              on_attach = function(client, bufnr)
+                local bufopts = { noremap = true, silent = true, buffer = bufnr }
+                vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, bufopts)
+                vim.keymap.set("n", "gF", function() vim.lsp.buf.format() end, bufopts)
+                vim.keymap.set("n", "gA", function() vim.lsp.buf.code_action() end, bufopts)
+              end,
             })
           end,
         },
@@ -127,7 +133,7 @@ return {
   },
   {
     "glepnir/lspsaga.nvim",
-    enabled= false,
+    enabled = false,
     event = "LspAttach",
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
@@ -217,5 +223,106 @@ return {
         underline = false,
       })
     end,
+  },
+  {
+    "dnlhc/glance.nvim",
+    -- lazy = false,
+    event = "LspAttach",
+    keys = {
+      { "gd", "<cmd>Glance definitions<cr>",      desc = "Glance definitions" },
+      { "gr", "<cmd>Glance references<cr>",       desc = "Glance references" },
+      { "gy", "<cmd>Glance type_definitions<cr>", desc = "Glance type_definitions" },
+      { "gm", "<cmd>Glance implementations<cr>",  desc = "Glance implementations" },
+    },
+    config = function()
+      local actions = require('glance').actions
+      require('glance').setup({
+        height = 18, -- Height of the window
+        zindex = 45,
+
+        -- By default glance will open preview "embedded" within your active window
+        -- when `detached` is enabled, glance will render above all existing windows
+        -- and won't be restiricted by the width of your active window
+        detached = true,
+
+        -- Or use a function to enable `detached` only when the active window is too small
+        -- (default behavior)
+        -- detached = function(winid)
+        --   return vim.api.nvim_win_get_width(winid) < 100
+        -- end,
+
+        border = {
+          enable = true, -- Show window borders. Only horizontal borders allowed
+          top_char = '―',
+          bottom_char = '―',
+        },
+        list = {
+          position = 'left', -- Position of the list window 'left'|'right'
+          width = 0.25,      -- 33% width relative to the active window, min 0.1, max 0.5
+        },
+        mappings = {
+          list = {
+            ['j'] = actions.next,     -- Bring the cursor to the next item in the list
+            ['k'] = actions.previous, -- Bring the cursor to the previous item in the list
+            ['<Down>'] = actions.next,
+            ['<Up>'] = actions.previous,
+            ['<Tab>'] = actions.next_location,       -- Bring the cursor to the next location skipping groups in the list
+            ['<S-Tab>'] = actions.previous_location, -- Bring the cursor to the previous location skipping groups in the list
+            ['<C-u>'] = actions.preview_scroll_win(5),
+            ['<C-d>'] = actions.preview_scroll_win(-5),
+            ['v'] = actions.jump_vsplit,
+            ['s'] = actions.jump_split,
+            ['t'] = actions.jump_tab,
+            ['<CR>'] = actions.jump,
+            ['l'] = actions.open_fold,
+            ['h'] = actions.close_fold,
+            ['o'] = actions.enter_win('preview'), -- Focus preview window
+            ['q'] = actions.close,
+            ['Q'] = false,
+            ['<Esc>'] = actions.close,
+            ['<C-q>'] = actions.quickfix,
+          },
+          preview = {
+            ['q'] = actions.close,
+            ['<Tab>'] = actions.next_location,
+            ['<S-Tab>'] = actions.previous_location,
+            ['<leader>l'] = actions.enter_win('list'), -- Focus list window
+          },
+        },
+        hooks = {},
+      })
+    end,
+  },
+  {
+    "rmagatti/goto-preview",
+    enabled = false,
+    -- event = "BufEnter",
+    event = "LspAttach",
+    -- config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
+    config = function()
+      require('goto-preview').setup {
+        width = 120, -- Width of the floating window
+        height = 15, -- Height of the floating window
+        border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" }, -- Border characters of the floating window
+        default_mappings = true, -- Bind default mappings
+        debug = false, -- Print debug information
+        opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        resizing_mappings = true, -- Binds arrow keys to resizing the floating window.
+        post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
+        post_close_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
+        -- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
+        dismiss_on_move = false, -- Dismiss the floating window when moving the cursor.
+        force_close = true, -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
+        bufhidden = "wipe", -- the bufhidden option to set on the floating window. See :h bufhidden
+      }
+    end,
+    --[[
+nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
+nnoremap gpt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
+nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
+nnoremap gpD <cmd>lua require('goto-preview').goto_preview_declaration()<CR>
+nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
+nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
+]]
   },
 }

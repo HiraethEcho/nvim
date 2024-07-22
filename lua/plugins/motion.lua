@@ -1,7 +1,8 @@
 return {
   {
     'Bekaboo/dropbar.nvim',
-    lazy = false,
+    -- lazy = false,
+    event = "LspAttach",
     -- optional, but required for fuzzy finder support
     dependencies = {
       -- 'nvim-telescope/telescope-fzf-native.nvim'
@@ -231,7 +232,8 @@ return {
     "SmiteshP/nvim-navbuddy",
     -- enabled = false,
     keys = {
-      { "<leader>ln", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
+      { "<leader>O", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
+      -- TODO: reset keymap
     },
     cmd = "Navbuddy",
     dependencies = {
@@ -250,6 +252,7 @@ return {
       -- {'f', ":HopChar1CurrentLine<cr>", {noremap= true,silent=true}},
       { "<leader><leader>", ":HopWord<cr>", desc = "Hop Word", { noremap = true, silent = true } },
     },
+    -- TODO: more keys
     config = function()
       require("hop").setup()
     end,
@@ -286,5 +289,32 @@ return {
         width_preview = 45,
       },
     },
+  },
+  {
+    'tomasky/bookmarks.nvim',
+    -- tag = 'release' -- To use the latest release
+    -- lazy = false,
+    keys = {
+      {"mm", function() require('bookmarks').bookmark_toggle() end,    desc="add or remove bookmark at current line", mode = {"n"}},
+      {"mi", function() require('bookmarks').bookmark_ann() end,       desc="edit mark annotation at current line"},
+      {"md", function() require('bookmarks').bookmark_clean() end,     desc="clean all marks in local buffer"},
+      {"mj", function() require('bookmarks').bookmark_next() end,      desc="jump to next bookmark"},
+      {"mk", function() require('bookmarks').bookmark_prev() end,      desc="jump to previous bookmark"},
+      {"ml", function() require('bookmarks').bookmark_list() end,      desc="show marked file in quickfix"},
+      {"mc", function() require('bookmarks').bookmark_clear_all() end, desc="removes all bookmarks"},
+    },
+    -- event = "VimEnter",
+    config = function()
+      require('bookmarks').setup {
+        -- sign_priority = 8,  --set bookmark sign priority to cover other sign
+        save_file = vim.fn.stdpath("data") .. "/.bookmarks",
+        keywords = {
+          ["@t"] = " ", -- mark annotation startswith @t ,signs this icon as `Todo`
+          ["@w"] = " ", -- mark annotation startswith @w ,signs this icon as `Warn`
+          ["@f"] = " ", -- mark annotation startswith @f ,signs this icon as `Fix`
+          ["@n"] = " ", -- mark annotation startswith @n ,signs this icon as `Note`
+        },
+      }
+    end,
   },
 }

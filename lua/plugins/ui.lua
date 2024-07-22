@@ -1,5 +1,82 @@
 return {
   {
+    'gen740/SmoothCursor.nvim',
+    lazy = false,
+    enabled = false,
+    config = function()
+      require('smoothcursor').setup({
+        type = "default", -- Cursor movement calculation method, choose "default", "exp" (exponential) or "matrix".
+
+        cursor = "", -- Cursor shape (requires Nerd Font). Disabled in fancy mode.
+        texthl = "SmoothCursor", -- Highlight group. Default is { bg = nil, fg = "#FFD400" }. Disabled in fancy mode.
+        linehl = nil, -- Highlights the line under the cursor, similar to 'cursorline'. "CursorLine" is recommended. Disabled in fancy mode.
+
+        fancy = {
+          enable = true, -- enable fancy mode
+          head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil }, -- false to disable fancy head
+          body = {
+            { cursor = "󰝥", texthl = "SmoothCursorRed" },
+            { cursor = "󰝥", texthl = "SmoothCursorOrange" },
+            { cursor = "●", texthl = "SmoothCursorYellow" },
+            { cursor = "●", texthl = "SmoothCursorGreen" },
+            { cursor = "•", texthl = "SmoothCursorAqua" },
+            { cursor = ".", texthl = "SmoothCursorBlue" },
+            { cursor = ".", texthl = "SmoothCursorPurple" },
+          },
+          tail = { cursor = nil, texthl = "SmoothCursor" } -- false to disable fancy tail
+        },
+
+        matrix = { -- Loaded when 'type' is set to "matrix"
+          head = {
+            -- Picks a random character from this list for the cursor text
+            cursor = require('smoothcursor.matrix_chars'),
+            -- Picks a random highlight from this list for the cursor text
+            texthl = {
+              'SmoothCursor',
+            },
+            linehl = nil, -- No line highlight for the head
+          },
+          body = {
+            length = 6, -- Specifies the length of the cursor body
+            -- Picks a random character from this list for the cursor body text
+            cursor = require('smoothcursor.matrix_chars'),
+            -- Picks a random highlight from this list for each segment of the cursor body
+            texthl = {
+              'SmoothCursorGreen',
+            },
+          },
+          tail = {
+            -- Picks a random character from this list for the cursor tail (if any)
+            cursor = nil,
+            -- Picks a random highlight from this list for the cursor tail
+            texthl = {
+              'SmoothCursor',
+            },
+          },
+          unstop = false, -- Determines if the cursor should stop or not (false means it will stop)
+        },
+
+        autostart = true,          -- Automatically start SmoothCursor
+        always_redraw = true,      -- Redraw the screen on each update
+        flyin_effect = nil,        -- Choose "bottom" or "top" for flying effect
+        speed = 25,                -- Max speed is 100 to stick with your current position
+        intervals = 35,            -- Update intervals in milliseconds
+        priority = 10,             -- Set marker priority
+        timeout = 3000,            -- Timeout for animations in milliseconds
+        threshold = 3,             -- Animate only if cursor moves more than this many lines
+        max_threshold = nil,       -- If you move more than this many lines, don't animate (if `nil`, deactivate check)
+        disable_float_win = false, -- Disable in floating windows
+        enabled_filetypes = nil,   -- Enable only for specific file types, e.g., { "lua", "vim" }
+        disabled_filetypes = nil,  -- Disable for these file types, ignored if enabled_filetypes is set. e.g., { "TelescopePrompt", "NvimTree" }
+        -- Show the position of the latest input mode positions.
+        -- A value of "enter" means the position will be updated when entering the mode.
+        -- A value of "leave" means the position will be updated when leaving the mode.
+        -- `nil` = disabled
+        show_last_positions = nil,
+      })
+    end
+  },
+  {
     enabled = false,
     "stevearc/dressing.nvim",
     event = "BufReadPost",
@@ -120,7 +197,7 @@ return {
   },
   {
     'AlexvZyl/nordic.nvim',
-    enabled =false,
+    enabled = false,
     -- event = "VimEnter",
     -- cmd = "colorscheme",
     config = function()
@@ -189,7 +266,7 @@ return {
         return require("possession.session").session_name or ""
       end ]]
       local function session_name()
-          return require('possession.session').get_session_name() or ''
+        return require('possession.session').get_session_name() or ''
       end
       require("lualine").setup({
         options = {
@@ -228,7 +305,7 @@ return {
               },
             },
           },
-          lualine_c = { "fancy_diagnostics", "fancy_lsp_servers"  },
+          lualine_c = { "fancy_diagnostics", "fancy_lsp_servers" },
           lualine_x = {
             "fancy_diff",
           },
@@ -263,7 +340,7 @@ return {
             },
           },
           lualine_c = {
-            "diff",
+            -- "diff",
           },
           lualine_x = { "fancy_diagnostics", "fancy_lsp_servers", "filetype" },
           lualine_y = { "progress" },
@@ -314,10 +391,10 @@ return {
             },
           },
           lualine_y = {
-            "branch",
           },
           lualine_z = {
-            session_name,
+            "branch",
+            -- session_name,
             -- "branch",
             --[[ {
               "tabs",
@@ -335,98 +412,47 @@ return {
       })
     end,
   },
-  { -- lazy.nvim
-    "goolord/alpha-nvim",
-    dependencies = {
-      "jedrzejboczar/possession.nvim",
-      "Shatur/neovim-session-manager",
-    },
-    event = "VimEnter",
-    opts = function()
-      local dashboard = require("alpha.themes.dashboard")
-      dashboard.section.buttons.val = {
-        (function()
-          local group = { type = "group", opts = { spacing = 0 } }
-          group.val = {
-            {
-              type = "text",
-              val = "Sessions",
-              opts = {
-                position = "center",
-              },
-            },
+  {
+    "luukvbaal/statuscol.nvim",
+    lazy = false,
+    enabled = false,
+    config = function()
+      local builtin = require("statuscol.builtin")
+      require("statuscol").setup({
+        setopt = true, -- Whether to set the 'statuscolumn' option, may be set to false for those who
+        -- want to use the click handlers in their own 'statuscolumn': _G.Sc[SFL]a().
+        -- Although I recommend just using the segments field below to build your
+        -- statuscolumn to benefit from the performance optimizations in this plugin.
+        -- builtin.lnumfunc number string options
+        thousands = false, -- or line number thousands separator string ("." / ",")
+        relculright = false, -- whether to right-align the cursor line number with 'relativenumber' set
+        -- Builtin 'statuscolumn' options
+        ft_ignore = nil, -- lua table with 'filetype' values for which 'statuscolumn' will be unset
+        bt_ignore = nil, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
+        -- Default segments (fold -> sign -> line number + separator), explained below
+        segments = {
+          { text = { "%C" }, click = "v:lua.ScFa" },
+          { text = { "%s" }, click = "v:lua.ScSa" },
+          {
+            text = { builtin.lnumfunc, " " },
+            condition = { true, builtin.not_empty },
+            click = "v:lua.ScLa",
           }
-          local path = vim.fn.stdpath("data") .. "/sessions"
-          local files = vim.split(vim.fn.glob(path .. "/*.json"), "\n")
-          local i = 1
-          for _, file in pairs(files) do
-            local basename = vim.fs.basename(file):gsub("%.json", "")
-            if basename ~= "config" and basename ~= "tmp" and basename ~= "blog" then
-              -- if basename ~= "tmp" then
-              local button =
-                  dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
-              table.insert(group.val, button)
-              i = i + 1
-              -- end
-            end
-          end
-          return group
-        end)(),
-        dashboard.button("e", " " .. " New Files", ":enew<CR>"),
-        dashboard.button("t", "󰃨 " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
-        -- dashboard.button("s", " " .. " Sessions", ":SessionManager load_session<CR>"),
-        dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
-        dashboard.button("b", "󰖟 " .. " blog", [[<cmd>PLoad blog<CR>]]),
-        dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
-        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
-      }
-      for _, button in ipairs(dashboard.section.buttons.val) do
-        button.opts.hl = "AlphaButtons"
-        button.opts.hl_shortcut = "AlphaShortcut"
-      end
-      dashboard.section.footer.opts.hl = "Type"
-      dashboard.section.header.opts.hl = "AlphaHeader"
-      dashboard.section.buttons.opts.hl = "AlphaButtons"
-      dashboard.opts.layout[1].val = 8
-      return dashboard
-    end,
-    config = function(_, dashboard)
-      require("alpha").setup(dashboard.opts)
-      -- config = function()
-      local alpha = require("alpha")
-      local startify = require("alpha.themes.startify")
-
-      startify.section.header.val = {
-        [[                                   __                ]],
-        [[      ___     ___    ___   __  __ /\_\    ___ ___    ]],
-        [[     / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-        [[    /\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-        [[    \ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-        [[     \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
-      }
-      startify.section.top_buttons.val = {
-        startify.button("e", " " .. " New Files", ":enew<CR>"),
-        -- startify.button("s", "  Sessions", ":SessionManager load_session  <CR>"),
-        -- startify.button("c", " " .. " Nvim Config", ":<cmd>e $MYVIMRC<CR>"),
-        -- startify.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
-      }
-      startify.section.mru.val = { { type = "padding", val = 3 } }
-      startify.section.mru_cwd.val = { { type = "padding", val = 3 } }
-      startify.section.bottom_buttons.val = {
-        startify.button("q", "󰅚  Quit NVIM", ":qa<CR>"),
-      }
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "LazyVimStarted",
-        callback = function()
-          local stats = require("lazy").stats()
-          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-          dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-          -- startify.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-          pcall(vim.cmd.AlphaRedraw)
-        end,
+        },
+        clickmod = "c", -- modifier used for certain actions in the builtin clickhandlers:
+        -- "a" for Alt, "c" for Ctrl and "m" for Meta.
+        clickhandlers = { -- builtin click handlers
+          Lnum                   = builtin.lnum_click,
+          FoldClose              = builtin.foldclose_click,
+          FoldOpen               = builtin.foldopen_click,
+          FoldOther              = builtin.foldother_click,
+          DapBreakpointRejected  = builtin.toggle_breakpoint,
+          DapBreakpoint          = builtin.toggle_breakpoint,
+          DapBreakpointCondition = builtin.toggle_breakpoint,
+          ["diagnostic/signs"]   = builtin.diagnostic_click,
+          gitsigns               = builtin.gitsigns_click,
+        },
       })
-
-      -- alpha.setup(startify.config)
     end,
   },
   {
@@ -463,6 +489,18 @@ return {
           },
         },
       })
+    end,
+  },
+  {
+    "utilyre/sentiment.nvim",
+    version = "*",
+    event = "VeryLazy", -- keep for lazy loading
+    opts = {
+      -- config
+    },
+    init = function()
+      -- `matchparen.vim` needs to be disabled manually in case of lazy loading
+      vim.g.loaded_matchparen = 1
     end,
   },
   {

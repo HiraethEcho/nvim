@@ -9,6 +9,17 @@ return {
     -- },
   },
   {
+    "lambdalisue/suda.vim",
+    cmd = { "SudaRead", "SudaWrite" },
+    enabled = function()
+      if vim.g.is_linux then
+        return true
+      else
+        return false
+      end
+    end,
+  },
+  {
     "gelguy/wilder.nvim",
     -- enabled = false,
     event = "CmdlineEnter",
@@ -65,19 +76,19 @@ return {
     "folke/which-key.nvim",
     cmd = "WhichKey",
     keys = {
-      { "?", function() require("which-key").show({ loop=true , key="<leader>" }) end, desc = "Buffer Local Keymaps (which-key)" },
+      -- { "?", function() require("which-key").show({ loop = true, key = "<leader>" }) end, desc = "Buffer Local Keymaps (which-key)" },
     },
     event = "VeryLazy",
-    opt={
-        presets = {
-          operators = false, -- adds help for operators like d, y, ...
-          motions = false, -- adds help for motions
-          text_objects = true, -- help for text objects triggered after entering an operator
-          windows = true, -- default bindings on <c-w>
-          nav = true, -- misc bindings to work with windows
-          z = true, -- bindings for folds, spelling and others prefixed with z
-          g = true, -- bindings for prefixed with g
-        },
+    opt = {
+      presets = {
+        operators = false,   -- adds help for operators like d, y, ...
+        motions = false,     -- adds help for motions
+        text_objects = true, -- help for text objects triggered after entering an operator
+        windows = true,      -- default bindings on <c-w>
+        nav = true,          -- misc bindings to work with windows
+        z = true,            -- bindings for folds, spelling and others prefixed with z
+        g = true,            -- bindings for prefixed with g
+      },
       preset = "modern",
       layout = {
         align = "center", -- align columns left, center or right
@@ -87,7 +98,7 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
       local wk = require("which-key")
-      --[[ 
+      --[[
       wk.setup({
         key_labels = {
           ["<space>"] = "SPC",
@@ -128,6 +139,7 @@ return {
         { "<leader>m", group = "markdown", },
         { "<leader>h", group = "hunk", },
         { "<leader>c", group = "Copilot", },
+        { "m", group = "bookmark", },
       })
     end,
   },
@@ -192,5 +204,145 @@ return {
     lazy = false,
     -- enabled = false,
     cmd = "AWStart",
-  }
+  },
+  { -- lazy.nvim
+    "goolord/alpha-nvim",
+    dependencies = {
+      "jedrzejboczar/possession.nvim",
+      "Shatur/neovim-session-manager",
+    },
+    event = "VimEnter",
+    opts = function()
+      local dashboard = require("alpha.themes.dashboard")
+      dashboard.section.buttons.val = {
+        (function()
+          local group = { type = "group", opts = { spacing = 0 } }
+          group.val = {
+            {
+              type = "text",
+              val = "Sessions",
+              opts = {
+                position = "center",
+              },
+            },
+          }
+          local path = vim.fn.stdpath("data") .. "/sessions"
+          local files = vim.split(vim.fn.glob(path .. "/*.json"), "\n")
+          local i = 1
+          for _, file in pairs(files) do
+            local basename = vim.fs.basename(file):gsub("%.json", "")
+            if basename ~= "config" and basename ~= "tmp" and basename ~= "blog" then
+              -- if basename ~= "tmp" then
+              local button =
+                  dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
+              table.insert(group.val, button)
+              i = i + 1
+              -- end
+            end
+          end
+          return group
+        end)(),
+        dashboard.button("e", " " .. " New Files", ":enew<CR>"),
+        dashboard.button("t", "󰃨 " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
+        -- dashboard.button("s", " " .. " Sessions", ":SessionManager load_session<CR>"),
+        dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
+        dashboard.button("b", "󰖟 " .. " blog", [[<cmd>PLoad blog<CR>]]),
+        dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
+        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+      }
+      for _, button in ipairs(dashboard.section.buttons.val) do
+        button.opts.hl = "AlphaButtons"
+        button.opts.hl_shortcut = "AlphaShortcut"
+      end
+      dashboard.section.footer.opts.hl = "Type"
+      dashboard.section.header.opts.hl = "AlphaHeader"
+      dashboard.section.buttons.opts.hl = "AlphaButtons"
+      dashboard.opts.layout[1].val = 8
+      return dashboard
+    end,
+    config = function(_, dashboard)
+      require("alpha").setup(dashboard.opts)
+      -- config = function()
+      local alpha = require("alpha")
+      local startify = require("alpha.themes.startify")
+
+      startify.section.header.val = {
+        [[                                   __                ]],
+        [[      ___     ___    ___   __  __ /\_\    ___ ___    ]],
+        [[     / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
+        [[    /\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+        [[    \ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+        [[     \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+      }
+      startify.section.top_buttons.val = {
+        startify.button("e", " " .. " New Files", ":enew<CR>"),
+        -- startify.button("s", "  Sessions", ":SessionManager load_session  <CR>"),
+        -- startify.button("c", " " .. " Nvim Config", ":<cmd>e $MYVIMRC<CR>"),
+        -- startify.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
+      }
+      startify.section.mru.val = { { type = "padding", val = 3 } }
+      startify.section.mru_cwd.val = { { type = "padding", val = 3 } }
+      startify.section.bottom_buttons.val = {
+        startify.button("q", "󰅚  Quit NVIM", ":qa<CR>"),
+      }
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "LazyVimStarted",
+        callback = function()
+          local stats = require("lazy").stats()
+          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+          dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+          -- startify.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+          pcall(vim.cmd.AlphaRedraw)
+        end,
+      })
+
+      -- alpha.setup(startify.config)
+    end,
+  },
+  {
+    "ghillb/cybu.nvim",
+    branch = "main",                                                           -- timely updates
+    -- branch = "v1.x", -- won't receive breaking changes
+    -- dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" }, -- optional for icon support
+    lazy = false,
+    config = function()
+      require("cybu").setup({
+        position = {
+          relative_to = "win", -- win, editor, cursor
+          anchor = "topcenter", -- topleft, topcenter, topright,
+          -- centerleft, center, centerright,
+          -- bottomleft, bottomcenter, bottomright
+          vertical_offset = 10, -- vertical offset from anchor in lines
+          horizontal_offset = 0, -- vertical offset from anchor in columns
+          -- float for relative to win/editor width
+        },
+        behavior = { -- set behavior for different modes
+          mode = {
+            default = {
+              switch = "immediate", -- immediate, on_close
+              view = "rolling", -- paging, rolling
+            },
+            last_used = {
+              switch = "immediate", -- immediate, on_close
+              view = "paging", -- paging, rolling
+            },
+            auto = {
+              view = "rolling", -- paging, rolling
+            },
+          },
+          show_on_autocmd = false, -- event to trigger cybu (eg. "BufEnter")
+        },
+        display_time = 750,  -- time the cybu window is displayed
+        exclude = {          -- filetypes, cybu will not be active
+          "neo-tree",
+          "fugitive",
+          "qf",
+        },
+      })
+      vim.keymap.set("n", "[b", "<Plug>(CybuPrev)")
+      vim.keymap.set("n", "]b", "<Plug>(CybuNext)")
+      vim.keymap.set("n", "<s-tab>", "<plug>(CybuLastusedPrev)")
+      vim.keymap.set("n", "<tab>", "<plug>(CybuLastusedNext)")
+    end,
+  },
 }

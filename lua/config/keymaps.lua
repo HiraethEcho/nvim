@@ -45,9 +45,9 @@ map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- buffers
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
-map("n", "<leader>d", ":bd<CR>", { desc = "buffer delete" })
+-- map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+-- map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
+-- map("n", "<leader>d", ":bd<CR>", { desc = "buffer delete" })
 -- map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 -- map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 

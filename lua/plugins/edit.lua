@@ -15,15 +15,16 @@ return {
     end,
   },
   {
-    "lambdalisue/suda.vim",
-    cmd = { "SudaRead", "SudaWrite" },
-    enabled = function()
-      if vim.g.is_linux then
-        return true
-      else
-        return false
-      end
-    end,
+    "echasnovski/mini.splitjoin",
+    event = "InsertEnter",
+    version = false,
+    config = function() require('mini.splitjoin').setup() end,
+  },
+  {
+    "echasnovski/mini.cursorword",
+    version = false,
+    event = "InsertEnter",
+    config = true,
   },
   {
     "echasnovski/mini.surround",
@@ -32,14 +33,128 @@ return {
     config = true,
   },
   {
+    'echasnovski/mini.align',
     event = "InsertEnter",
-    "echasnovski/mini.splitjoin",
     version = false,
-    config=function() require('mini.splitjoin').setup() end,
+    -- lazy = false,
+    opts = {
+      mappings = {
+        -- start = '<leader>a',
+        start = '',
+        start_with_preview = '<leader>a',
+      },
+    },
+  },
+  {
+    'Vonr/align.nvim',
+    branch = "v2",
+    lazy = true,
+    enabled = false,
+    init = function()
+      -- Create your mappings here
+      local NS = { noremap = true, silent = true }
+
+      -- Aligns to 1 character
+      vim.keymap.set(
+        'x',
+        'aa',
+        function()
+          require 'align'.align_to_char({
+            length = 1,
+          })
+        end,
+        NS
+      )
+
+      -- Aligns to 2 characters with previews
+      vim.keymap.set(
+        'x',
+        'ad',
+        function()
+          require 'align'.align_to_char({
+            preview = true,
+            length = 2,
+          })
+        end,
+        NS
+      )
+
+      -- Aligns to a string with previews
+      vim.keymap.set(
+        'x',
+        'aw',
+        function()
+          require 'align'.align_to_string({
+            preview = true,
+            regex = false,
+          })
+        end,
+        NS
+      )
+
+      -- Aligns to a Vim regex with previews
+      vim.keymap.set(
+        'x',
+        'ar',
+        function()
+          require 'align'.align_to_string({
+            preview = true,
+            regex = true,
+          })
+        end,
+        NS
+      )
+
+      -- Example gawip to align a paragraph to a string with previews
+      vim.keymap.set(
+        'n',
+        'gaw',
+        function()
+          local a = require 'align'
+          a.operator(
+            a.align_to_string,
+            {
+              regex = false,
+              preview = true,
+            }
+          )
+        end,
+        NS
+      )
+
+      -- Example gaaip to align a paragraph to 1 character
+      vim.keymap.set(
+        'n',
+        'gaa',
+        function()
+          local a = require 'align'
+          a.operator(a.align_to_char)
+        end,
+        NS
+      )
+    end
+  },
+  {
+    'mvllow/modes.nvim',
+    tag = 'v0.2.0',
+    event = "InsertEnter",
+    config = function()
+      require('modes').setup({
+        colors = {
+          bg = "", -- Optional bg param, defaults to Normal hl group
+          copy = "#f5c359",
+          delete = "#c75c6a",
+          insert = "#78ccc5",
+          visual = "#9745be",
+        },
+        -- Set opacity for cursorline and number background
+        line_opacity = 0.2,
+      })
+    end
   },
   {
     "godlygeek/tabular",
-    enabled = true,
+    enabled = false,
     keys = {
       { "<leader>t", ":Tabularize /", mode = "v", desc = "tabularize" },
     },
@@ -148,7 +263,7 @@ return {
           alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
           -- signs = false, -- configure signs for some keywords individually
         },
-        TODO = { icon = " ", color = "info" },
+        TODO = { icon = " ", color = "info" },
         QUES = { icon = " ", color = "default" },
         WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
         NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
@@ -171,6 +286,7 @@ return {
   },
   {
     "RRethy/vim-illuminate",
+    enabled = false,
     keys = {
       { "<leader>ui", "<cmd>IlluminateToggle<cr>", desc = "toggle illuminate" },
     },

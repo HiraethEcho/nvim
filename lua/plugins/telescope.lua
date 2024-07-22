@@ -4,36 +4,42 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<cr>",                            desc = "files" },
       -- { "<leader>fF", "<cmd>Telescope file_browser<cr>",                          desc = "files" },
-      { "<leader>fo", "<cmd>Telescope oldfiles<cr>",                              desc = "old files" },
-      -- { "<leader>fs", "<cmd>Telescope live_grep<cr>",    desc = "live grep" },
-      { "<leader>?",  "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
+      -- { "<leader>fs", "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
+      { "<leader>ff", "<cmd>Telescope find_files<cr>",                            desc = "files" },
+      { "<leader>fh", "<cmd>Telescope oldfiles<cr>",                              desc = "history files" },
       { "<leader>fg", "<cmd>Telescope grep_string<cr>",                           desc = "grep string" },
       { "<leader>b",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
+
       { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<cr>",             desc = "current buffer fuzzy find", },
+      { "<leader>?",  "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
       { "<leader>`",  "<cmd>Telescope marks<cr>",                                 desc = "marks" },
       { '<leader>"',  "<cmd>Telescope registers<cr>",                             desc = "marks" },
+      { "<leader>;",  "<cmd>Telescope commands<cr>",                              desc = "commands" },
+      { "<leader>w",  "<cmd>Telescope spell_suggest<cr>",                         desc = "spell suggest" },
+      { "<leader>j",  "<cmd>Telescope jumplist<cr>",                              desc = "jump list" },
+      { "M",  "<cmd>Telescope bookmarks list<cr>",                                 desc = "bookmarks" },
+      -- { "M",  "<cmd>Telescope marks list<cr>",                                 desc = "bookmarks" },
+
+
       { "<leader>gb", "<cmd>Telescope git_branches<cr>",                          desc = "git branch" },
       { "<leader>gc", "<cmd>Telescope git_commits<cr>",                           desc = "git commits" },
       { "<leader>gs", "<cmd>Telescope git_status<cr>",                            desc = "git status" },
       { "<leader>gS", "<cmd>Telescope git_stash<cr>",                             desc = "git stash" },
       { "<leader>gf", "<cmd>Telescope git_files<cr>",                             desc = "git files" },
-      { "gr",         "<cmd>Telescope lsp_references<cr>",                        desc = "References" },
 
-      { "<leader>id", ":lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>", desc = "current buffer diagnostics", },
-      { "<leader>iD", ":lua require'telescope.builtin'.diagnostics{}<cr>",        desc = "workspace diagnostics" },
-      { "<leader>ib", ":lua require'telescope.builtin'.builtin<cr>",              desc = "telescope builtin" },
-      { "<leader>ir", "<cmd>Telescope registers<cr>",                             desc = "registers" },
-      { "<leader>it", "<cmd>TodoTelescope<cr>",                                   desc = "Todo" },
-      { "<leader>ic", "<cmd>Telescope commands<cr>",                              desc = "commands" },
       { "<leader>i/", "<cmd>Telescope search_history<cr>",                        desc = "search history" },
+      { "<leader>i;", "<cmd>Telescope command_history<cr>",                       desc = "commands history" },
+
+
+      { "<leader>it", "<cmd>TodoTelescope<cr>",                                   desc = "Todo" },
       { "<leader>is", "<cmd>Telescope possession list<cr>",                       desc = "sessions" },
       { "<leader>ih", "<cmd>Telescope help_tags<cr>",                             desc = "help tags" },
-      { "<leader>;",  "<cmd>Telescope command_history<cr>",                       desc = "commands history" },
-      { "<leader>w",  "<cmd>Telescope spell_suggest<cr>",                         desc = "spell suggest" },
-      { "<leader>j", "<cmd>Telescope jumplist<cr>",                              desc = "jump list" },
-      { "<leader>m", "<cmd>Telescope marks<cr>",                                 desc = "marks" },
+
+      { "<leader>ii", ":lua require'telescope.builtin'.builtin{}<cr>",            desc = "telescope builtin" },
+      { "<leader>ir", "<cmd>Telescope lsp_references<cr>",                        desc = "References" },
+      { "<leader>id", ":lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>", desc = "current buffer diagnostics", },
+      { "<leader>iD", ":lua require'telescope.builtin'.diagnostics{}<cr>",        desc = "workspace diagnostics" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -52,10 +58,10 @@ return {
               ["<C-s>"] = "select_horizontal",
               ["<C-v>"] = "select_vertical",
               ["<C-t>"] = "select_tab",
-              ["<C-j>"] ="move_selection_next",
-              ["<C-k>"] ="move_selection_previous",
-              ["up"]= "cycle_history_prev",
-              ["down"]= "cycle_history_next",
+              ["<C-j>"] = "move_selection_next",
+              ["<C-k>"] = "move_selection_previous",
+              ["up"] = "cycle_history_prev",
+              ["down"] = "cycle_history_next",
               -- ["<C-k>"] = "move_previous",
             },
             n = {
@@ -63,7 +69,7 @@ return {
               ["q"] = "close",
               ["v"] = "select_vertical",
               ["t"] = "select_tab",
-              ["<space>"]="toggle_selection",
+              ["<space>"] = "toggle_selection",
             },
           },
           prompt_prefix = " ",
@@ -193,6 +199,7 @@ return {
         },
       })
       require("telescope").load_extension("possession")
+      require('telescope').load_extension("bookmarks")
       -- require("telescope").load_extension("file_browser")
     end,
   },
