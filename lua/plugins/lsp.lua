@@ -32,6 +32,7 @@ return {
         bashls = {},
         html = {},
         clangd = {},
+        -- digestif = {},
       }
       -- require("fidget").setup()
       require("mason-lspconfig").setup({
@@ -81,11 +82,11 @@ return {
               onEdit = false,
             },
             bibtexFormatter = "texlab",
-            latexFormatter = "latexindent",
-            latexindent = {
-              ['local'] = nil, -- local is a reserved keyword
-              modifyLineBreaks = true,
-            },
+            -- latexFormatter = "latexindent",
+            -- latexindent = {
+            --   ['local'] = nil, -- local is a reserved keyword
+            --   modifyLineBreaks = true,
+            -- },
             formatterLineLength = 80,
           },
         },

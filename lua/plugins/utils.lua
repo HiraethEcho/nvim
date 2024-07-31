@@ -25,7 +25,7 @@ return {
     event = "CmdlineEnter",
     config = function()
       local wilder = require("wilder")
-      wilder.setup({ modes = { ":", "/", "?" } })
+      wilder.setup({ modes = { ":", "/" } })
       wilder.set_option("pipeline", {
         wilder.branch(
           wilder.cmdline_pipeline({
@@ -76,20 +76,11 @@ return {
     "folke/which-key.nvim",
     cmd = "WhichKey",
     keys = {
-      { "?", function() require("which-key").show({ loop = true }) end, desc = "Buffer Local Keymaps (which-key)" },
+      { "?", function() require("which-key").show() end, desc = "Buffer Local Keymaps (which-key)" },
     },
     event = "VeryLazy",
-    opt = {
-      presets = {
-        operators = false,   -- adds help for operators like d, y, ...
-        motions = false,     -- adds help for motions
-        text_objects = true, -- help for text objects triggered after entering an operator
-        windows = true,      -- default bindings on <c-w>
-        nav = true,          -- misc bindings to work with windows
-        z = true,            -- bindings for folds, spelling and others prefixed with z
-        g = true,            -- bindings for prefixed with g
-      },
-      preset = "modern",
+    opts = {
+      preset = "classic",
       layout = {
         align = "center", -- align columns left, center or right
       },
@@ -151,7 +142,7 @@ return {
     -- stylua: ignore
     keys = {
       { "<C-f>",     function() require("spectre").open() end,                                   desc = "toggle spectre" },
-      { "<leader>s", function() require("spectre").open_file_search({ select_word = true }) end, desc = "search word on current file" },
+      { "<leader>s", function() require("spectre").open_file_search({ select_word = true }) end, mode = {"x","v"} ,desc = "search word on current file" },
     },
   },
   {
