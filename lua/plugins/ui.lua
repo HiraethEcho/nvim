@@ -5,7 +5,7 @@ return {
     enabled = false,
     config = function()
       require('smoothcursor').setup({
-        type = "default", -- Cursor movement calculation method, choose "default", "exp" (exponential) or "matrix".
+        type = "matrix", -- Cursor movement calculation method, choose "default", "exp" (exponential) or "matrix".
 
         cursor = "", -- Cursor shape (requires Nerd Font). Disabled in fancy mode.
         texthl = "SmoothCursor", -- Highlight group. Default is { bg = nil, fg = "#FFD400" }. Disabled in fancy mode.
@@ -590,6 +590,7 @@ return {
   },
   {
     "petertriho/nvim-scrollbar",
+    enabled = false,
     cmd = "ScrollbarToggle",
     config = function()
       require("scrollbar").setup()

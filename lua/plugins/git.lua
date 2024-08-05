@@ -48,7 +48,7 @@ return {
         },
         current_line_blame_formatter = "<author>, <author_time:%y-%m-%d> - <summary>",
       })
-      require("scrollbar.handlers.gitsigns").setup()
+      -- require("scrollbar.handlers.gitsigns").setup()
     end,
   },
   {
