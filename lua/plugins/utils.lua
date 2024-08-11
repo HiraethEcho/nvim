@@ -200,7 +200,8 @@ return {
     "goolord/alpha-nvim",
     dependencies = {
       "jedrzejboczar/possession.nvim",
-      "Shatur/neovim-session-manager",
+      "nvim-telescope/telescope.nvim",
+      -- "Shatur/neovim-session-manager",
     },
     event = "VimEnter",
     opts = function()
@@ -235,6 +236,7 @@ return {
         end)(),
         dashboard.button("e", " " .. " New Files", ":enew<CR>"),
         dashboard.button("t", "󰃨 " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
+        dashboard.button("h", " " .. " history files", [[<cmd>Telescope oldfiles<CR>]]),
         -- dashboard.button("s", " " .. " Sessions", ":SessionManager load_session<CR>"),
         dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
         dashboard.button("b", "󰖟 " .. " blog", [[<cmd>PLoad blog<CR>]]),
