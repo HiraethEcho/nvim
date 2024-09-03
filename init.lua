@@ -1,6 +1,6 @@
 require("config.options")
 require("config.lazynvim")
 require("config.keymaps")
-require("config.autocmds")
-require("config.util")
+-- require("config.autocmds")
+-- require("config.util")
 require("config.gui")
