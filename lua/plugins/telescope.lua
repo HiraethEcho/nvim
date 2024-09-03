@@ -3,6 +3,7 @@ local Util = require("config.util")
 return {
   {
     "nvim-telescope/telescope.nvim",
+    -- cmd = { "Telescope oldfiles", },
     keys = {
       -- { "<leader>fF", "<cmd>Telescope file_browser<cr>",                          desc = "files" },
       -- { "<leader>fs", "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
@@ -18,7 +19,7 @@ return {
       { "<leader>;",  "<cmd>Telescope commands<cr>",                              desc = "commands" },
       { "<leader>w",  "<cmd>Telescope spell_suggest<cr>",                         desc = "spell suggest" },
       { "<leader>j",  "<cmd>Telescope jumplist<cr>",                              desc = "jump list" },
-      { "M",  "<cmd>Telescope bookmarks list<cr>",                                 desc = "bookmarks" },
+      -- { "M",  "<cmd>Telescope bookmarks list<cr>",                                 desc = "bookmarks" },
       -- { "M",  "<cmd>Telescope marks list<cr>",                                 desc = "bookmarks" },
 
 
@@ -37,6 +38,7 @@ return {
       { "<leader>ih", "<cmd>Telescope help_tags<cr>",                             desc = "help tags" },
 
       { "<leader>ii", ":lua require'telescope.builtin'.builtin{}<cr>",            desc = "telescope builtin" },
+      { "<leader>ft", "<cmd>Telescope builtin<cr>",            desc = "telescope builtin" },
       { "<leader>ir", "<cmd>Telescope lsp_references<cr>",                        desc = "References" },
       { "<leader>id", ":lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>", desc = "current buffer diagnostics", },
       { "<leader>iD", ":lua require'telescope.builtin'.diagnostics{}<cr>",        desc = "workspace diagnostics" },
@@ -199,7 +201,7 @@ return {
         },
       })
       require("telescope").load_extension("possession")
-      require('telescope').load_extension("bookmarks")
+      -- require('telescope').load_extension("bookmarks")
       -- require("telescope").load_extension("file_browser")
     end,
   },

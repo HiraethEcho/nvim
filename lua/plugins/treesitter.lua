@@ -1,13 +1,15 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false, -- last release is way too old and doesn't work on Windows
+    -- version = false, -- last release is way too old and doesn't work on Windows
     -- lazy = false,
+    cmd = "TSEnable",
     build = ":TSUpdate",
+    -- event = "VeryLazy",
     -- event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "kevinhwang91/nvim-ufo",
-      "hiphish/rainbow-delimiters.nvim",
+      -- "hiphish/rainbow-delimiters.nvim",
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
         enabled = false,
@@ -39,13 +41,17 @@ return {
       },
     },
     opts = {
-      highlight = { enable = true },
+      highlight = {
+          enable = true,
+          -- disable = { "latex" },
+          -- additional_vim_regex_highlighting = { "latex", "markdown" },
+        },
       indent = { enable = true },
       ensure_installed = {
         "c",
-        -- "html",
+        "html",
         "lua",
-        -- "latex", conflict with UltiSnips and math environment detected by vimtex
+        -- "latex",  -- conflict with UltiSnips and math environment detected by vimtex
         "markdown",
         "markdown_inline",
       },
@@ -71,9 +77,18 @@ return {
         end, opts.ensure_installed)
       end
       require("nvim-treesitter.configs").setup(opts)
-
+--[[
       local rainbow_delimiters = require 'rainbow-delimiters'
       require('rainbow-delimiters.setup').setup {
+        highlight = {
+            'RainbowDelimiterRed',
+            'RainbowDelimiterYellow',
+            'RainbowDelimiterBlue',
+            'RainbowDelimiterOrange',
+            'RainbowDelimiterGreen',
+            'RainbowDelimiterViolet',
+            'RainbowDelimiterCyan',
+        },
         strategy = {
           [''] = rainbow_delimiters.strategy['global'],
         },
@@ -83,6 +98,7 @@ return {
           lua = 'rainbow-blocks',
         },
       }
+]]
     end,
   },
   {

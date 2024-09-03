@@ -23,9 +23,9 @@ M.has = function(feat)
     return false
 end
 
-vim.g.is_win = (M.has("win32") or M.has("win64")) and true or false
+-- vim.g.is_win = (M.has("win32") or M.has("win64")) and true or false
 vim.g.is_linux = (M.has("unix") and (not M.has("macunix"))) and true or false
-vim.g.is_mac = M.has("macunix") and true or false
+-- vim.g.is_mac = M.has("macunix") and true or false
 
 -- local icons = require("config").icons.diagnostics
 --
@@ -153,7 +153,7 @@ function M.float_term(cmd, opts)
 
   return terminals[termkey]
 end
-
+--[[
 function M.telescope(builtin, opts)
   local params = { builtin = builtin, opts = opts }
   return function()
@@ -185,5 +185,5 @@ function M.telescope(builtin, opts)
     require("telescope.builtin")[builtin](opts)
   end
 end
-
+]]
 return M

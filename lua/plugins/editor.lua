@@ -61,6 +61,32 @@ return {
     end,
   },
   {
+    "OXY2DEV/markview.nvim",
+    ft = "markdown",
+    cmd = {"Markview"},
+    keys={
+      { "<C-e>", "<cmd>Markview toggle<cr>", desc = "Markiview toggle" },
+    },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+    config = true,
+  },
+  {
+    "ellisonleao/glow.nvim",
+    config = function()
+      require("glow").setup({
+        glow_path = "glow", -- will be filled automatically with your glow bin in $PATH, if any
+        style = "dark",     -- filled automatically with your current editor background, you can override using glow json style
+      })
+    end,
+    cmd = "Glow",
+    keys = {
+      { "<leader>mp", "<cmd>Glow<cr>", desc = "markdown Glow Preview" },
+    },
+  },
+  {
     "rhysd/nyaovim-markdown-preview",
     enabled = false,
     keys = {
@@ -177,27 +203,14 @@ return {
     end,
   },
   {
-    "ellisonleao/glow.nvim",
-    config = function()
-      require("glow").setup({
-        glow_path = "glow", -- will be filled automatically with your glow bin in $PATH, if any
-        style = "dark",     -- filled automatically with your current editor background, you can override using glow json style
-      })
-    end,
-    cmd = "Glow",
-    keys = {
-      { "<leader>mp", "<cmd>Glow<cr>", desc = "markdown Glow Preview" },
-    },
-  },
-  {
     "antonk52/markdowny.nvim",
     ft = { "md", "markdown" },
     config = function()
       require("markdowny").setup()
-      vim.keymap.set("v", "<C-b>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })
+      vim.keymap.set("v", "<C-e>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })
       vim.keymap.set("v", "<C-i>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
-      vim.keymap.set("v", "<C-k>", ":lua require('markdowny').link()<cr>", { buffer = 0 })
-      vim.keymap.set("v", "<C-e>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
+      -- vim.keymap.set("v", "<C-l>", ":lua require('markdowny').link()<cr>", { buffer = 0 })
+      -- vim.keymap.set("v", "<C-k>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
     end,
   },
   {

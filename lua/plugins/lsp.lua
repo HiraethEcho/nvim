@@ -29,11 +29,10 @@ return {
           },
           checkThirdParty = false,
         },
-        -- prosemd_lsp = {},
         bashls = {},
-        -- latexindent = {},
         html = {},
         clangd = {},
+        -- digestif = {},
       }
       -- require("fidget").setup()
       require("mason-lspconfig").setup({
@@ -46,9 +45,9 @@ return {
 
               on_attach = function(client, bufnr)
                 local bufopts = { noremap = true, silent = true, buffer = bufnr }
-                vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, bufopts)
-                vim.keymap.set("n", "gF", function() vim.lsp.buf.format() end, bufopts)
-                vim.keymap.set("n", "gA", function() vim.lsp.buf.code_action() end, bufopts)
+                vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, bufopts, { desc = "lsp rename" })
+                vim.keymap.set("n", "gF", function() vim.lsp.buf.format() end, bufopts, { desc = "lsp format" })
+                vim.keymap.set("n", "gA", function() vim.lsp.buf.code_action() end, bufopts, { desc = "lsp action" })
               end,
             })
           end,
@@ -83,11 +82,11 @@ return {
               onEdit = false,
             },
             bibtexFormatter = "texlab",
-            latexFormatter = "latexindent",
-            latexindent = {
-              ['local'] = nil, -- local is a reserved keyword
-              modifyLineBreaks = true,
-            },
+            -- latexFormatter = "latexindent",
+            -- latexindent = {
+            --   ['local'] = nil, -- local is a reserved keyword
+            --   modifyLineBreaks = true,
+            -- },
             formatterLineLength = 80,
           },
         },
@@ -276,17 +275,17 @@ return {
             ['<CR>'] = actions.jump,
             ['l'] = actions.open_fold,
             ['h'] = actions.close_fold,
-            ['o'] = actions.enter_win('preview'), -- Focus preview window
+            ['<space>'] = actions.enter_win('preview'), -- Focus preview window
             ['q'] = actions.close,
             ['Q'] = false,
             ['<Esc>'] = actions.close,
             ['<C-q>'] = actions.quickfix,
           },
           preview = {
-            ['q'] = actions.close,
+            -- ['q'] = actions.close,
             ['<Tab>'] = actions.next_location,
             ['<S-Tab>'] = actions.previous_location,
-            ['<leader>l'] = actions.enter_win('list'), -- Focus list window
+            ['q'] = actions.enter_win('list'), -- Focus list window
           },
         },
         hooks = {},

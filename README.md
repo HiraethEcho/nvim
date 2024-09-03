@@ -140,10 +140,38 @@ WordFile = "󰈭",
 ```
 ## test
 
+>[!note]
+> `test`
+
+> [!QUESTION] Consider this…
+> How do we `invalidate` the cache?
+
+```html
+<p>
+what a <a>hell</a>
+</p>
+```
+
+
 what is the best way to write
 
 a code block in md
 a list
+<slash>asdf</slash>
+
+<del> del tag</del>
+
+<s> s tag </s>
+
+<underline>underline tag</underline>
+
+<overline>underline tag</overline>
+
+__asdf__  _italic_ *italic* **what?**  ~~slash~~
+
+~~what~~
+
+<a href="https://bing.com">a tag </a>
 
 with a code block in it
 
@@ -164,3 +192,5 @@ latex code block in md
 ```latex
 ok
 ```
+
+$apo$
