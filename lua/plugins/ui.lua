@@ -254,7 +254,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    -- enabled = false,
+    enabled = false,
     event = "VimEnter",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -263,9 +263,9 @@ return {
     -- event = "BufRead",
     -- event = "VeryLazy",
     config = function()
-      local function session_name()
+      --[[ local function session_name()
         return require('possession.session').get_session_name() or ''
-      end
+      end ]]
       require("lualine").setup({
         options = {
           icons_enabled = true,
@@ -403,7 +403,7 @@ return {
           lualine_y = {
           },
           lualine_z = {
-            session_name,
+            -- session_name,
             -- "branch",
             --[[ {
               "tabs",
@@ -467,7 +467,7 @@ return {
   {
     "shellRaining/hlchunk.nvim",
     -- event = "BufRead",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       -- "rcarriga/nvim-notify",
       -- "petertriho/nvim-scrollbar",
@@ -554,6 +554,7 @@ return {
   },
   {
     "utilyre/sentiment.nvim",
+    enabled = false,
     version = "*",
     event = "VeryLazy", -- keep for lazy loading
     opts = {
@@ -570,6 +571,7 @@ return {
   },
   {
     "rcarriga/nvim-notify",
+    enabled = false,
     config = function()
       require("notify").setup({
         background_colour = "NotifyBackground",
@@ -602,13 +604,7 @@ return {
   },
   {
     "gorbit99/codewindow.nvim",
-    enabled = function()
-      if vim.g.is_linux then
-        return false
-      else
-        return true
-      end
-    end,
+    enabled = false,
     keys = {
       {
         "<leader>um",
@@ -641,8 +637,9 @@ return {
     end,
   },
   {
-  "nvim-zh/colorful-winsep.nvim",
-  config = true,
-  event = { "WinLeave" },
-}
+    "nvim-zh/colorful-winsep.nvim",
+    config = true,
+    enabled = false,
+    event = { "WinLeave" },
+  },
 }

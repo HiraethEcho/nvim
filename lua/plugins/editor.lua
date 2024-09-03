@@ -43,7 +43,7 @@ return {
   {
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
-    -- enabled = false,
+    enabled = false,
     ft = { "markdown" },
     keys = {
       { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
@@ -62,6 +62,7 @@ return {
   },
   {
     "OXY2DEV/markview.nvim",
+    enabled = false,
     ft = "markdown",
     cmd = { "Markview" },
     keys = {
@@ -100,6 +101,7 @@ return {
   {
     "jakewvincent/mkdnflow.nvim",
     ft = "markdown",
+    enabled = false,
     -- cmd = { "Mkdnflow", },
     -- lazy=false,
     config = function()
@@ -208,6 +210,7 @@ return {
   {
     "antonk52/markdowny.nvim",
     ft = { "md", "markdown" },
+    enabled = false,
     config = function()
       require("markdowny").setup()
       vim.keymap.set("v", "<C-e>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })

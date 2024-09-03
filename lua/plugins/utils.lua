@@ -14,7 +14,7 @@ return {
   },
   {
     "gelguy/wilder.nvim",
-    -- enabled = false,
+    enabled = false,
     event = "VeryLazy",
     -- event = "CmdlineEnter",
     config = function()
@@ -155,14 +155,14 @@ return {
   },
   {
     'ActivityWatch/aw-watcher-vim',
+    enabled = false,
     -- lazy = false,
     event = "VimEnter",
-    -- enabled = false,
     cmd = "AWStart",
   },
   { -- lazy.nvim
     "goolord/alpha-nvim",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       "jedrzejboczar/possession.nvim",
       -- "nvim-telescope/telescope.nvim",
@@ -306,4 +306,5 @@ return {
       vim.keymap.set("n", "<tab>", "<plug>(CybuNext)")
     end,
   },
+    -- enabled = false,
 }
