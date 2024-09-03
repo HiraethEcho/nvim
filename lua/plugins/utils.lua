@@ -22,7 +22,8 @@ return {
   {
     "gelguy/wilder.nvim",
     -- enabled = false,
-    event = "CmdlineEnter",
+    event = "VeryLazy",
+    -- event = "CmdlineEnter",
     config = function()
       local wilder = require("wilder")
       wilder.setup({ modes = { ":", "/" } })
@@ -130,7 +131,7 @@ return {
         { "<leader>m", group = "markdown", },
         { "<leader>h", group = "hunk", },
         { "<leader>c", group = "Copilot", },
-        { "m", group = "bookmark", },
+        -- { "m", group = "bookmark", },
       })
     end,
   },
@@ -192,15 +193,17 @@ return {
   },
   {
     'ActivityWatch/aw-watcher-vim',
-    lazy = false,
+    -- lazy = false,
+    event = "VimEnter",
     -- enabled = false,
     cmd = "AWStart",
   },
   { -- lazy.nvim
     "goolord/alpha-nvim",
+    -- enabled = false,
     dependencies = {
       "jedrzejboczar/possession.nvim",
-      "nvim-telescope/telescope.nvim",
+      -- "nvim-telescope/telescope.nvim",
       -- "Shatur/neovim-session-manager",
     },
     event = "VimEnter",
@@ -236,7 +239,7 @@ return {
         end)(),
         dashboard.button("e", " " .. " New Files", ":enew<CR>"),
         dashboard.button("t", "󰃨 " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
-        dashboard.button("h", " " .. " history files", [[<cmd>Telescope oldfiles<CR>]]),
+        -- dashboard.button("h", " " .. " history files", [[<cmd>Telescope oldfiles<CR>]]),
         -- dashboard.button("s", " " .. " Sessions", ":SessionManager load_session<CR>"),
         dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
         dashboard.button("b", "󰖟 " .. " blog", [[<cmd>PLoad blog<CR>]]),
@@ -295,9 +298,10 @@ return {
   {
     "ghillb/cybu.nvim",
     branch = "main",                                                           -- timely updates
+    enabled = false,
     -- branch = "v1.x", -- won't receive breaking changes
     -- dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" }, -- optional for icon support
-    lazy = false,
+    -- lazy = false,
     config = function()
       require("cybu").setup({
         position = {

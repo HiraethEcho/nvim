@@ -130,6 +130,7 @@ return {
   },
   {
     'tomasky/bookmarks.nvim',
+    enabled = false,
     -- tag = 'release' -- To use the latest release
     -- lazy = false,
     keys = {

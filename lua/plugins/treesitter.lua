@@ -3,11 +3,13 @@ return {
     "nvim-treesitter/nvim-treesitter",
     -- version = false, -- last release is way too old and doesn't work on Windows
     -- lazy = false,
+    cmd = "TSEnable",
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
+    -- event = "VeryLazy",
+    -- event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "kevinhwang91/nvim-ufo",
-      "hiphish/rainbow-delimiters.nvim",
+      -- "hiphish/rainbow-delimiters.nvim",
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
         enabled = false,
@@ -75,7 +77,7 @@ return {
         end, opts.ensure_installed)
       end
       require("nvim-treesitter.configs").setup(opts)
-
+--[[
       local rainbow_delimiters = require 'rainbow-delimiters'
       require('rainbow-delimiters.setup').setup {
         highlight = {
@@ -96,6 +98,7 @@ return {
           lua = 'rainbow-blocks',
         },
       }
+]]
     end,
   },
   {

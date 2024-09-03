@@ -19,7 +19,7 @@ return {
       { "<leader>;",  "<cmd>Telescope commands<cr>",                              desc = "commands" },
       { "<leader>w",  "<cmd>Telescope spell_suggest<cr>",                         desc = "spell suggest" },
       { "<leader>j",  "<cmd>Telescope jumplist<cr>",                              desc = "jump list" },
-      { "M",  "<cmd>Telescope bookmarks list<cr>",                                 desc = "bookmarks" },
+      -- { "M",  "<cmd>Telescope bookmarks list<cr>",                                 desc = "bookmarks" },
       -- { "M",  "<cmd>Telescope marks list<cr>",                                 desc = "bookmarks" },
 
 
@@ -201,7 +201,7 @@ return {
         },
       })
       require("telescope").load_extension("possession")
-      require('telescope').load_extension("bookmarks")
+      -- require('telescope').load_extension("bookmarks")
       -- require("telescope").load_extension("file_browser")
     end,
   },

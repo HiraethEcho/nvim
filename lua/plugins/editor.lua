@@ -62,7 +62,7 @@ return {
   },
   {
     "OXY2DEV/markview.nvim",
-    -- ft = "markdown",
+    ft = "markdown",
     cmd = {"Markview"},
     keys={
       { "<C-e>", "<cmd>Markview toggle<cr>", desc = "Markiview toggle" },
@@ -71,6 +71,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons"
     },
+    config = true,
   },
   {
     "ellisonleao/glow.nvim",
