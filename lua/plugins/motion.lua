@@ -1,8 +1,8 @@
 return {
   {
     'Bekaboo/dropbar.nvim',
-    enabled = false,
     -- lazy = false,
+    enabled = false,
     event = "LspAttach",
     -- optional, but required for fuzzy finder support
     dependencies = {
@@ -84,6 +84,7 @@ return {
   },
   {
     "phaazon/hop.nvim",
+    enabled = false,
     -- event = "BufRead",
     keys = {
       -- {'<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>",  mode={"n","v"}},
