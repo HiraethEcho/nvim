@@ -1,6 +1,7 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    enabled = false,
     keys = {
       -- { "<leader>e", "<cmd>Neotree float<cr>",                desc = "File tree float", },
       { "<leader>e", "<cmd>Neotree position=left toggle<cr>", desc = "File tree", },

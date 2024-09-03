@@ -643,11 +643,6 @@ return {
           },
           lualine_z = {
             -- session_name,
-            {
-              function()
-                return require('auto-session.lib').current_session_name(true)
-              end
-            },
             -- "branch",
             --[[ {
               "tabs",
@@ -678,7 +673,7 @@ return {
   {
     "shellRaining/hlchunk.nvim",
     -- event = "BufRead",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       -- "rcarriga/nvim-notify",
       "kevinhwang91/nvim-ufo",
@@ -766,6 +761,7 @@ return {
   },
   {
     "utilyre/sentiment.nvim",
+    enabled = false,
     version = "*",
     event = "InsertEnter", -- keep for lazy loading
     opts = {
@@ -907,6 +903,7 @@ return {
     "nvim-zh/colorful-winsep.nvim",
     enabled = false,
     config = true,
-    event = { "BufRead", "BufNewFile" },
+    enabled = false,
+    event = { "WinLeave" },
   },
 }

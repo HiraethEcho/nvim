@@ -123,8 +123,8 @@ return {
   },
   {
     "gelguy/wilder.nvim",
-    -- enabled = false,
-    event = "CmdlineEnter",
+    enabled = false,
+    event = "VeryLazy",
     -- event = "CmdlineEnter",
     config = function()
       local wilder = require("wilder")
@@ -382,6 +382,7 @@ return {
   },
   {
     'ActivityWatch/aw-watcher-vim',
+    enabled = false,
     -- lazy = false,
     event = "BufRead",
     enabled = false,
