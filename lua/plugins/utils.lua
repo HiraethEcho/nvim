@@ -11,13 +11,6 @@ return {
   {
     "lambdalisue/suda.vim",
     cmd = { "SudaRead", "SudaWrite" },
-    enabled = function()
-      if vim.g.is_linux then
-        return true
-      else
-        return false
-      end
-    end,
   },
   {
     "gelguy/wilder.nvim",
@@ -90,42 +83,11 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
       local wk = require("which-key")
-      --[[
-      wk.setup({
-        key_labels = {
-          ["<space>"] = "SPC",
-          ["<cr>"] = "RET",
-          ["<tab>"] = "TAB",
-        },
-        popup_mappings = {
-          scroll_down = "<c-d>", -- binding to scroll down inside the popup
-          scroll_up = "<c-u>",   -- binding to scroll up inside the popup
-        },
-        layout = {
-          align = "center", -- align columns left, center or right
-        },
-        triggers_blacklist = {
-          i = { "j", "k" },
-          v = { "j", "k" },
-        },
-        -- disable the WhichKey popup for certain buf types and file types.
-        -- Disabled by deafult for Telescope
-        disable = {
-          buftypes = {},
-          filetypes = {
-            "TelescopePrompt",
-            'neo-tree',
-            'undotree',
-          },
-        },
-      })
-]]
       wk.add({
         { "<leader>i", group = "list", },
         { "<leader>D", group = "Diff", },
         { "<leader>u", group = "ui", },
         { "<leader>f", group = "find", },
-        -- { "<leader>o", group = "obsidian", },
         { "<leader>g", group = "git", },
         { "<leader>l", group = "lsp", },
         { "<leader>m", group = "markdown", },

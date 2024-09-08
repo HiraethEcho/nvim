@@ -1,5 +1,3 @@
-local Util = require("config.util")
-
 return {
   {
     "nvim-telescope/telescope.nvim",

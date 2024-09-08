@@ -28,7 +28,7 @@ return {
   },
   {
     "nvimdev/guard.nvim",
-    -- enabled = false,
+    enabled = false,
     -- Builtin configuration, optional
     dependencies = {
       "nvimdev/guard-collection",

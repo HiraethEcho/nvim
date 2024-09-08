@@ -57,7 +57,7 @@ map( "n" , "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
-map( "n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / clear hlsearch / diff update" })
+-- map( "n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / clear hlsearch / diff update" })
 
 -- map({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor" })
 
@@ -121,11 +121,7 @@ map("n", "<leader>q", "<cmd>wqa<cr>", { desc = "Quit all" })
 
 -- floating terminal
 local lazyterm = function()
-  if vim.g.is_linux then
     Util.float_term("zsh", { esc_esc = true, ctrl_hjkl = false })
-  else
-    Util.float_term("powershell", { esc_esc = true, ctrl_hjkl = false })
-  end
 end
 map("n", "<leader>t", lazyterm, { desc = "Float Terminal" })
 

@@ -46,7 +46,7 @@ return {
     -- enabled = false,
     ft = { "markdown" },
     keys = {
-      { "<leader>mP", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
+      { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
     },
     config = function()
       if vim.g.is_linux then
@@ -75,6 +75,7 @@ return {
   },
   {
     "ellisonleao/glow.nvim",
+    enabled = false,
     config = function()
       require("glow").setup({
         glow_path = "glow", -- will be filled automatically with your glow bin in $PATH, if any
@@ -97,7 +98,7 @@ return {
   {
     "jakewvincent/mkdnflow.nvim",
     ft = "markdown",
-    cmd = { "Mkdnflow", },
+    -- cmd = { "Mkdnflow", },
     -- lazy=false,
     config = function()
       require("mkdnflow").setup({
