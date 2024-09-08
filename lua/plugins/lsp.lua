@@ -96,16 +96,6 @@ return {
           vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>", bufopts)
         end,
       })
-      --[[
-      require("lspconfig").grammarly.setup({
-        filetypes = { "markdown", "tex", "plaintex" },
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        settings = {
-          grammarly = {},
-        },
-        on_attach = on_attach,
-      })
-]]
       require("lspconfig").marksman.setup({
         filetypes = { "markdown" },
         capabilities = require("cmp_nvim_lsp").default_capabilities(),

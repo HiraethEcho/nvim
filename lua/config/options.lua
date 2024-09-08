@@ -16,13 +16,12 @@ opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true      -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
-opt.laststatus = 0
+opt.laststatus = 3
 --[[
   'laststatus' = 0  never a status line
   'laststatus' = 1  status line if there is more than one window
   'laststatus' = 2  always a status line
-  'laststatus' = 3  have a global statusline at the bottom instead
-        of one for each window
+  'laststatus' = 3  have a global statusline at the bottom instead of one for each window
 ]]
 opt.list = true            -- Show some invisible characters (tabs...
 opt.mouse = "a"            -- Enable mouse mode
@@ -58,7 +57,7 @@ opt.wrap = false                   -- Disable line wrap
 opt.linebreak = true               -- companion to wrap, don't split words
 -- opt.whichwrap = "bs<>[]"     -- which "horizontal" keys are allowed to travel to prev/next line
 
--- opt.listchars:append("eol:↴")
+opt.listchars:append("eol:↴")
 opt.listchars:append "space:⋅"
 
 opt.hidden = true -- 允许隐藏被修改过的buffer
@@ -70,8 +69,6 @@ opt.autoread = true -- 当文件被外部程序修改时，自动加载
 opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
-
--- vim.o.shell = 'powershell'
 
 opt.foldmethod = "expr"
 opt.foldlevel = 99

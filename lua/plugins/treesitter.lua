@@ -77,28 +77,6 @@ return {
         end, opts.ensure_installed)
       end
       require("nvim-treesitter.configs").setup(opts)
---[[
-      local rainbow_delimiters = require 'rainbow-delimiters'
-      require('rainbow-delimiters.setup').setup {
-        highlight = {
-            'RainbowDelimiterRed',
-            'RainbowDelimiterYellow',
-            'RainbowDelimiterBlue',
-            'RainbowDelimiterOrange',
-            'RainbowDelimiterGreen',
-            'RainbowDelimiterViolet',
-            'RainbowDelimiterCyan',
-        },
-        strategy = {
-          [''] = rainbow_delimiters.strategy['global'],
-        },
-        query = {
-          [''] = 'rainbow-delimiters',
-          latex = 'rainbow-blocks',
-          lua = 'rainbow-blocks',
-        },
-      }
-]]
     end,
   },
   {
@@ -128,7 +106,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    enabled = false,
+    -- enabled = false,
     cmd = "TSContextEnable",
     keys = {
       { "<leader>ut", "<cmd>TSContextEnable<cr>", desc = "toggle treesitter context" },

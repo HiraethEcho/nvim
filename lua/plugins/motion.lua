@@ -87,8 +87,9 @@ return {
     keys = {
       -- {'<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>",  mode={"n","v"}},
       -- {'F', "<cmd>lua require'hop'.hint_char1()<cr>", mode={"n","v"}},
-      -- {'f', ":HopChar1CurrentLine<cr>", {noremap= true,silent=true}},
-      { "<leader><leader>", ":HopWord<cr>", desc = "Hop Word", { noremap = true, silent = true } },
+      { 'f',                ":HopChar1<cr>",    desc = "Hop Char",    { noremap = true, silent = true } },
+      { 'F',                ":HopWord<cr>",     desc = "Hop Word",    { noremap = true, silent = true } },
+      { "<leader><leader>", ":HopAnywhere<cr>", desc = "HopAnywhere", { noremap = true, silent = true } },
     },
     -- TODO: more keys
     config = function()
@@ -134,13 +135,13 @@ return {
     -- tag = 'release' -- To use the latest release
     -- lazy = false,
     keys = {
-      {"mm", function() require('bookmarks').bookmark_toggle() end,    desc="add or remove bookmark at current line", mode = {"n"}},
-      {"mi", function() require('bookmarks').bookmark_ann() end,       desc="edit mark annotation at current line"},
-      {"md", function() require('bookmarks').bookmark_clean() end,     desc="clean all marks in local buffer"},
-      {"mj", function() require('bookmarks').bookmark_next() end,      desc="jump to next bookmark"},
-      {"mk", function() require('bookmarks').bookmark_prev() end,      desc="jump to previous bookmark"},
-      {"ml", function() require('bookmarks').bookmark_list() end,      desc="show marked file in quickfix"},
-      {"mc", function() require('bookmarks').bookmark_clear_all() end, desc="removes all bookmarks"},
+      { "mm", function() require('bookmarks').bookmark_toggle() end,    desc = "add or remove bookmark at current line", mode = { "n" } },
+      { "mi", function() require('bookmarks').bookmark_ann() end,       desc = "edit mark annotation at current line" },
+      { "md", function() require('bookmarks').bookmark_clean() end,     desc = "clean all marks in local buffer" },
+      { "mj", function() require('bookmarks').bookmark_next() end,      desc = "jump to next bookmark" },
+      { "mk", function() require('bookmarks').bookmark_prev() end,      desc = "jump to previous bookmark" },
+      { "ml", function() require('bookmarks').bookmark_list() end,      desc = "show marked file in quickfix" },
+      { "mc", function() require('bookmarks').bookmark_clear_all() end, desc = "removes all bookmarks" },
     },
     -- event = "VimEnter",
     config = function()

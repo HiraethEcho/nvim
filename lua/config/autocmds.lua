@@ -2,7 +2,7 @@ local function augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
---[[
+
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
@@ -20,7 +20,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
-]]
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
@@ -28,31 +27,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
---[[
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("wrap"),
-  pattern = { "gitcommit", "markdown", "latex" },
-  callback = function()
-    vim.opt_local.wrap = true
-  end,
-})
 
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("spell"),
-  pattern = { "gitcommit", "latex" },
-  callback = function()
-    vim.opt_local.spell = true
-  end,
-})
-]]
-
---[[
-vim.api.nvim_create_autocmd("BufWritePost", {
-  callback = function()
-    vim.lsp.buf.format()
-  end,
-})
-]]
 --[[
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   group = augroup("resize_splits"),

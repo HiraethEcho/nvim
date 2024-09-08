@@ -23,13 +23,6 @@ return {
     dependencies = { "akinsho/git-conflict.nvim" },
     config = function()
       require("gitsigns").setup({
-        signs = {
-          add = { text = "+" },
-          change = { text = "~" },
-          delete = { text = "_" },
-          topdelete = { text = "‾" },
-          changedelete = { text = "~" },
-        },
         signcolumn = false, -- toggle with `:gitsigns toggle_signs`
         numhl = false,      -- toggle with `:gitsigns toggle_numhl`
         linehl = false,     -- toggle with `:gitsigns toggle_linehl`
@@ -42,11 +35,11 @@ return {
         current_line_blame = false, -- toggle with `:gitsigns toggle_current_line_blame`
         current_line_blame_opts = {
           virt_text = true,
-          virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-          delay = 500,
+          virt_text_pos = "overlay", -- 'eol' | 'overlay' | 'right_align'
+          delay = 200,
           ignore_whitespace = true,
         },
-        current_line_blame_formatter = "<author>, <author_time:%y-%m-%d> - <summary>",
+        current_line_blame_formatter = "<summary> - <author>, <author_time:%y-%m-%d>",
       })
       -- require("scrollbar.handlers.gitsigns").setup()
     end,

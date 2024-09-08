@@ -168,20 +168,9 @@ return {
     },
   },
   {
-    "Neur1n/neuims",
-    cmd = "IMSToggle",
-    enabled = function()
-      if vim.g.is_linux then
-        return false
-      else
-        return true
-      end
-    end,
-  },
-  {
     "smartding/fcitx.nvim",
     -- lazy = false,
-    ft = "markdown",
+    ft = "markdown,md",
     cmd = "Fcitx",
     config = function()
       vim.api.nvim_create_user_command("Fcitx", require("fcitx").setup, {})

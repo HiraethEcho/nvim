@@ -1,31 +1,9 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  keys = function()
-    if vim.g.is_linux then
-      return {
-        { "<leader>e", "<cmd>Neotree position=left toggle=true<cr>", desc = "File tree", },
-        { "<leader>B", "<cmd>Neotree source=buffers position=left toggle=true<cr>", desc = "Neotree buffers", },
-        {"<leader>gs", "<cmd>Neotree source=git_status <cr>", desc = "git_status",},
-        --[[ { "<leader>ef", "<cmd>Neotree float toggle=true<cr>", desc = "File tree float", }, { "<leader>en", "<cmd>Neotree toggle=true float dir=" .. vim.fn.stdpath("config") .. " <cr>", desc = "nvim file float", }, { "<leader>ep", "<cmd>Neotree toggle=true float dir=~/projects <cr>", desc = "Projects file float", }, { "<leader>eh", "<cmd>Neotree toggle=true float dir=~<cr>", desc = "home file float", }, { "<leader>et", "<cmd>Neotree toggle=true float dir=~/tmp <cr>", desc = "tmp file float", }, { "<leader>eb", "<cmd>Neotree toggle=true float dir=~/blogs <cr>", desc = "blogs file float", }, ]] 
-      }
-    else
-      return {
-        { "<leader>ee", "<cmd>Neotree position=left toggle=true<cr>", desc = "File tree", },
-        { "<leader>ef", "<cmd>Neotree float toggle=true<cr>", desc = "File tree float", },
-        { "<leader>eb", "<cmd>Neotree toggle=true float source=buffers<cr>", desc = "buffers float", },
-        { "<leader>en", "<cmd>Neotree toggle=true float dir=" .. vim.fn.stdpath("config") .. " <cr>", desc = "nvim file float", },
-        { "<leader>eg", "<cmd>Neotree toggle=true float dir=~/github<cr>", desc = "win github file float", },
-        { "<leader>eG", "<cmd>Neotree toggle=true float dir=~/Github_arch<cr>", desc = "arch Github file float", },
-        { "<leader>ep", "<cmd>Neotree toggle=true float dir=~/documents/Projects <cr>", desc = "Projects file float", },
-        { "<leader>ed", "<cmd>Neotree toggle=true float dir=~/documents<cr>", desc = "documents file float", },
-        { "<leader>eo", "<cmd>Neotree toggle=true float dir=~/obsidian<cr>", desc = "obsidian file float", },
-        { "<leader>es", "<cmd>Neotree toggle=true float dir=~/site<cr>", desc = "site file float", },
-        { "<leader>eh", "<cmd>Neotree toggle=true float dir=~<cr>", desc = "home file float", },
-        { "<leader>gs", "<cmd>Neotree source=git_status <cr>", desc = "git_status", },
-      }
-    end
-  end,
-
+  keys = {
+    { "<leader>e", "<cmd>Neotree float<cr>",         desc = "File tree float", },
+    { "<leader>E", "<cmd>Neotree position=left toggle<cr>", desc = "File tree", },
+  },
   dependencies = {
     { "nvim-lua/plenary.nvim" },
     { "MunifTanjim/nui.nvim" },
@@ -98,12 +76,12 @@ return {
       mappings = {
         o = "system_open",
         Y = "copy_selector",
-        ["l"] =  "toggle_node",
+        ["l"] = "toggle_node",
         ["<2-LeftMouse>"] = "open",
         ["<cr>"] = "open",
         -- ["<esc>"] = "revert_preview",
         ["P"] = { "toggle_preview", config = { use_float = true } },
-        ["L"] = "focus_preview",
+        ["<space>"] = "focus_preview",
         ["s"] = "open_split",
         ["v"] = "open_vsplit",
         ["S"] = "split_with_window_picker",
@@ -125,7 +103,6 @@ return {
         ["x"] = "cut_to_clipboard",
         ["d"] = "",
         ["z"] = "",
-        -- ["x"] = "cut_to_clipboard",
         ["p"] = "paste_from_clipboard",
         -- ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
         -- ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
@@ -133,10 +110,6 @@ return {
         ["<esc>"] = "close_window",
         ["R"] = "refresh",
         ["?"] = "show_help",
-        ["<"] = "prev_source",
-        [">"] = "next_source",
-        ["[b"] = "prev_source",
-        ["]b"] = "next_source",
         ["<bs>"] = "navigate_up",
         ["."] = "set_root",
         -- ["H"] = "toggle_hidden",
@@ -156,20 +129,6 @@ return {
         folder_closed = "",
         folder_open = "",
         folder_empty = "󰉖",
-      },
-      git_status = {
-        symbols = {
-          added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-          modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
-          deleted = "", -- this can only be used in the git_status source
-          renamed = "󰁕",
-          -- Status type
-          untracked = "",
-          ignored = "◌",
-          unstaged = "✗",
-          staged = "✓",
-          conflict = "",
-        },
       },
     },
   },
