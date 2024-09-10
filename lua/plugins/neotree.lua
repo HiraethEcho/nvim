@@ -2,8 +2,8 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     keys = {
-      { "<leader>e", "<cmd>Neotree float<cr>",                desc = "File tree float", },
-      { "<leader>E", "<cmd>Neotree position=left toggle<cr>", desc = "File tree", },
+      -- { "<leader>e", "<cmd>Neotree float<cr>",                desc = "File tree float", },
+      { "<leader>e", "<cmd>Neotree position=left toggle<cr>", desc = "File tree", },
     },
     dependencies = {
       { "nvim-lua/plenary.nvim" },
@@ -137,9 +137,9 @@ return {
   {
     "mikavilpas/yazi.nvim",
     keys = {
-      { "Y", "<cmd>Yazi<cr>",     desc = "Open yazi at the current file", },
-      { "R", "<cmd>Yazi cwd<cr>", desc = "Open the file manager in nvim's working directory", },
-      { '<c-up>', "<cmd>Yazi toggle<cr>", desc = "Resume the last yazi session",
+      { "<leader>R", "<cmd>Yazi<cr>",     desc = "Open yazi at the current file", },
+      -- { "<leader>r", "<cmd>Yazi cwd<cr>", desc = "Open the file manager in nvim's working directory", },
+      { '<leader>r', "<cmd>Yazi toggle<cr>", desc = "Resume the last yazi session",
       },
     },
     opts = {
