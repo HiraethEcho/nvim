@@ -59,7 +59,6 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "ultisnips" }, -- For ultisnips users.
-          { name = "nvim_lsp" }, -- For ultisnips users.
           -- { name = "vimtex" },
           { name = "copilot" },
           { name = "buffer",   option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end, }, },
