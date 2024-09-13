@@ -14,15 +14,9 @@ I'm using nvim as a code editor, mainly for latex and markdown.
 
 ## How to Configure
 
-Other than some general setting, there are two sets of configurations: using original lsp, and using coc.
-
 ### general
 
 ### lsp
-
-#### original
-
-#### coc
 
 ### plugins
 
@@ -138,59 +132,54 @@ WordFile = "󰈭",
     Variable = " ",
   }
 ```
-## test
 
->[!note]
-> `test`
+## callouts
 
-> [!QUESTION] Consider this…
-> How do we `invalidate` the cache?
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
 
-```html
-<p>
-what a <a>hell</a>
-</p>
-```
+> [!TIP]
+> Helpful advice for doing things better or more easily.
 
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
 
-what is the best way to write
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
 
-a code block in md
-a list
-<slash>asdf</slash>
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
 
-<del> del tag</del>
+> [!TODO]
+> test for callouts
 
-<s> s tag </s>
+> [!bug]
+> bug
 
-<underline>underline tag</underline>
+> [!example]
+> example
 
-<overline>underline tag</overline>
+> [!quote]
+> waht
 
-__asdf__  _italic_ *italic* **what?**  ~~slash~~
+> [!cite]
+> waht
 
-~~what~~
+> [!success]
+> success
 
-<a href="https://bing.com">a tag </a>
+> [!failure]
+> failure
 
-with a code block in it
+> [!question]
+> question
 
-```python
-def foo():
-    pass
-```
+> [!help]
 
-- foo
-- bar
+> [!attention]
 
-## License
+> [!abstract]
 
-MIT
-
-latex code block in md
-
-```latex
-ok
-```
-
-$apo$
+- [ ] checkbox empty
+- [-] checkbox on going
+- [x] checkbox done
