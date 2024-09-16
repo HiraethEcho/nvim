@@ -1,6 +1,6 @@
 return {
   {
-    enabled=false,
+    enabled = false,
     lazy = false,
     "stevearc/conform.nvim",
     keys = {

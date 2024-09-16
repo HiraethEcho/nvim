@@ -20,7 +20,7 @@ return {
     },
     config = function()
       local servers = {
-        lua_ls = {
+        lua_ls    = {
           lua = {
             diagnostics = {
               -- Get the language server to recognize the `vim` global
@@ -29,9 +29,9 @@ return {
           },
           checkThirdParty = false,
         },
-        bashls = {},
-        html = {},
-        clangd = {},
+        bashls    = {},
+        html      = {},
+        clangd    = {},
         -- digestif = {},
       }
       -- require("fidget").setup()

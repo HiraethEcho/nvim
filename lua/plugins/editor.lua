@@ -63,8 +63,8 @@ return {
   {
     "OXY2DEV/markview.nvim",
     ft = "markdown",
-    cmd = {"Markview"},
-    keys={
+    cmd = { "Markview" },
+    keys = {
       { "<C-e>", "<cmd>Markview toggle<cr>", desc = "Markiview toggle" },
     },
     dependencies = {

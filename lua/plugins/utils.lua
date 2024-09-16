@@ -105,7 +105,7 @@ return {
     -- stylua: ignore
     keys = {
       { "<C-f>",     function() require("spectre").open() end,                                   desc = "toggle spectre" },
-      { "<leader>s", function() require("spectre").open_file_search({ select_word = true }) end, mode = {"x","v"} ,desc = "search word on current file" },
+      { "<leader>s", function() require("spectre").open_file_search({ select_word = true }) end, mode = { "x", "v" },    desc = "search word on current file" },
     },
   },
   {
@@ -259,7 +259,7 @@ return {
   },
   {
     "ghillb/cybu.nvim",
-    branch = "main",                                                           -- timely updates
+    branch = "main", -- timely updates
     enabled = false,
     -- branch = "v1.x", -- won't receive breaking changes
     -- dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" }, -- optional for icon support
@@ -267,11 +267,11 @@ return {
     config = function()
       require("cybu").setup({
         position = {
-          relative_to = "win", -- win, editor, cursor
+          relative_to = "win",  -- win, editor, cursor
           anchor = "topcenter", -- topleft, topcenter, topright,
           -- centerleft, center, centerright,
           -- bottomleft, bottomcenter, bottomright
-          vertical_offset = 10, -- vertical offset from anchor in lines
+          vertical_offset = 10,  -- vertical offset from anchor in lines
           horizontal_offset = 0, -- vertical offset from anchor in columns
           -- float for relative to win/editor width
         },
@@ -279,11 +279,11 @@ return {
           mode = {
             default = {
               switch = "immediate", -- immediate, on_close
-              view = "rolling", -- paging, rolling
+              view = "rolling",     -- paging, rolling
             },
             last_used = {
               switch = "immediate", -- immediate, on_close
-              view = "paging", -- paging, rolling
+              view = "paging",      -- paging, rolling
             },
             auto = {
               view = "rolling", -- paging, rolling
@@ -291,8 +291,8 @@ return {
           },
           show_on_autocmd = false, -- event to trigger cybu (eg. "BufEnter")
         },
-        display_time = 750,  -- time the cybu window is displayed
-        exclude = {          -- filetypes, cybu will not be active
+        display_time = 750,        -- time the cybu window is displayed
+        exclude = {                -- filetypes, cybu will not be active
           "neo-tree",
           "fugitive",
           "qf",

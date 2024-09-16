@@ -42,10 +42,10 @@ return {
     },
     opts = {
       highlight = {
-          enable = true,
-          -- disable = { "latex" },
-          -- additional_vim_regex_highlighting = { "latex", "markdown" },
-        },
+        enable = true,
+        -- disable = { "latex" },
+        -- additional_vim_regex_highlighting = { "latex", "markdown" },
+      },
       indent = { enable = true },
       ensure_installed = {
         "c",

@@ -15,10 +15,10 @@ map({ "v", "n" }, "x", '"_x')
 map("n", "<Space>", "<Nop>", { noremap = true, silent = true })
 map("n", "<leader>H", ":cd %:h<cr>", { desc = "set cwd to parent of current file" })
 -- move cursor in insert mode
-map("i", "<C-h>","<Left>")
-map("i", "<C-l>","<Right>")
-map("i", "<C-k>","<Up>")
-map("i", "<C-j>","<Down>")
+map("i", "<C-h>", "<Left>")
+map("i", "<C-l>", "<Right>")
+map("i", "<C-k>", "<Up>")
+map("i", "<C-j>", "<Down>")
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -52,7 +52,7 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 -- map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
 -- Clear search with <esc>
-map( "n" , "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 -- map("i", "jk", "<ESC>")
 
 -- Clear search, diff update and redraw
@@ -121,7 +121,7 @@ map("n", "<leader>q", "<cmd>wqa<cr>", { desc = "Quit all" })
 
 -- floating terminal
 local lazyterm = function()
-    Util.float_term("zsh", { esc_esc = true, ctrl_hjkl = false })
+  Util.float_term("zsh", { esc_esc = true, ctrl_hjkl = false })
 end
 map("n", "<leader>t", lazyterm, { desc = "Float Terminal" })
 
@@ -140,7 +140,7 @@ map("n", "T", "<cmd>tabprevious<cr>", { desc = "previous Tab" })
 -- map("n", "<C-Tab>", "<cmd>tabNext<cr>", { desc = "Next Tab" })
 -- map("n", "<C-S-Tab>", "<cmd>tabprevious<cr>", { desc = "previous Tab" })
 
--- vim.keymap.set('n', '<C-Tab>', ':tabNext<CR>', { noremap = true, silent = true }) 
--- vim.keymap.set('n', '<C-S-Tab>', ':tabprevious<CR>', { noremap = true, silent = true }) 
+-- vim.keymap.set('n', '<C-Tab>', ':tabNext<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-S-Tab>', ':tabprevious<CR>', { noremap = true, silent = true })
 
 map("n", "<C-n>", "<C-W>T", { desc = "Window to new tab" })

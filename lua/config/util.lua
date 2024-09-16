@@ -19,7 +19,7 @@ M.has = function(feat)
   if vim.fn.has(feat) == 1 then
     return true
   end
-    return false
+  return false
 end
 
 -- vim.g.is_win = (M.has("win32") or M.has("win64")) and true or false

@@ -34,6 +34,9 @@ There are different settings under windows and linux.
 
 ### some icons
 
+
+```lua
+{
 ActiveLSP = "",
 ActiveTS = "",
 ArrowLeft = "",
@@ -92,9 +95,6 @@ TabClose = "󰅙",
 Terminal = "",
 Window = "",
 WordFile = "󰈭",
-
-```lua
-{
     Array = " ",
     Boolean = " ",
     Class = " ",
@@ -150,29 +150,23 @@ WordFile = "󰈭",
 > [!CAUTION]
 > Advises about risks or negative outcomes of certain actions.
 
+more
+
 > [!TODO]
-> test for callouts
 
 > [!bug]
-> bug
 
 > [!example]
-> example
 
 > [!quote]
-> waht
 
 > [!cite]
-> waht
 
 > [!success]
-> success
 
 > [!failure]
-> failure
 
 > [!question]
-> question
 
 > [!help]
 
