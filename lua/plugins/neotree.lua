@@ -150,6 +150,7 @@ return {
         open_file_in_vertical_split = '<c-v>',
         open_file_in_horizontal_split = '<c-s>',
         open_file_in_tab = '<c-t>',
+        change_working_directory = '.',
         -- grep_in_directory = '<c-s>',
         -- replace_in_directory = '<c-g>',
         cycle_open_buffers = '<tab>',

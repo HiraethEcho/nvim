@@ -314,10 +314,20 @@ nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
 nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
 ]]
   },
+{
+  "jinzhongjia/LspUI.nvim",
+  branch = "main",
+  enabled = false,
+  config = function()
+    require("LspUI").setup({
+	  -- config options go here
+	  })
+  end
+},
   {
     "folke/trouble.nvim",
+    enabled = false,
     opts = {
-
     }, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
     keys = {

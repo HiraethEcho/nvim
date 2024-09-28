@@ -105,11 +105,9 @@ map("n", "<leader>uc", function()
   Util.toggle("conceallevel", false, { 0, conceallevel })
 end, { desc = "Toggle Conceal" })
 
-if vim.lsp.inlay_hint then
-  map("n", "<leader>uI", function()
-    vim.lsp.inlay_hint(0, nil)
-  end, { desc = "Toggle Inlay Hints" })
-end
+map("n", "<leader>uI", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle Inlay Hints" })
 
 -- lazygit
 map("n", "<leader>gg", function()
