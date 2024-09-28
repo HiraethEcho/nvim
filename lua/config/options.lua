@@ -16,7 +16,7 @@ opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true      -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
-opt.laststatus = 3
+opt.laststatus = 0
 --[[
   'laststatus' = 0  never a status line
   'laststatus' = 1  status line if there is more than one window
