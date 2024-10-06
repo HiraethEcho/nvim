@@ -555,7 +555,7 @@ return {
   {
     "utilyre/sentiment.nvim",
     version = "*",
-    event = "VeryLazy", -- keep for lazy loading
+    event = "InsertEnter", -- keep for lazy loading
     opts = {
       pairs = {
         { "(", ")" },
@@ -641,8 +641,8 @@ return {
     end,
   },
   {
-  "nvim-zh/colorful-winsep.nvim",
-  config = true,
-  event = { "WinLeave" },
-}
+    "nvim-zh/colorful-winsep.nvim",
+    config = true,
+    event = { "BufRead", "BufReadPost" },
+  }
 }

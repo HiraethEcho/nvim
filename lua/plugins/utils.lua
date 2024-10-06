@@ -15,7 +15,7 @@ return {
   {
     "gelguy/wilder.nvim",
     -- enabled = false,
-    event = "VeryLazy",
+    event = "CmdlineEnter",
     -- event = "CmdlineEnter",
     config = function()
       local wilder = require("wilder")
@@ -199,14 +199,14 @@ return {
           end
           return group
         end)(),
-        dashboard.button("e", " " .. " New Files", ":enew<CR>"),
+        dashboard.button("e", " " .. " New Files", "<cmd>enew<CR>"),
         dashboard.button("t", "󰃨 " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
         -- dashboard.button("h", " " .. " history files", [[<cmd>Telescope oldfiles<CR>]]),
         -- dashboard.button("s", " " .. " Sessions", ":SessionManager load_session<CR>"),
         dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
         dashboard.button("b", "󰖟 " .. " blog", [[<cmd>PLoad blog<CR>]]),
-        dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
-        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+        dashboard.button("l", "󰒲 " .. " Lazy", "<cmd>Lazy<CR>"),
+        dashboard.button("q", " " .. " Quit", "<cmd>qa<CR>"),
       }
       for _, button in ipairs(dashboard.section.buttons.val) do
         button.opts.hl = "AlphaButtons"
