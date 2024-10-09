@@ -35,7 +35,6 @@ return {
             vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
           end,
         },
-
         mapping = cmp.mapping.preset.insert({
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
@@ -65,6 +64,9 @@ return {
           { name = "path" },
           -- { name = 'nvim_lua' },
         }),
+        experimental = {
+          ghost_text = true, -- this feature conflict with copilot.vim's preview.
+        },
       })
     end,
   },
@@ -105,14 +107,11 @@ return {
           debounce = 75,
         },
         filetypes = {
-          yaml = true,
           lua = true,
           markdown = true,
           latex = true,
           -- ["."] = false,
         },
-        copilot_node_command = 'node', -- Node.js version must be > 18.x
-        server_opts_overrides = {},
       })
     end,
   },
