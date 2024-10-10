@@ -643,6 +643,6 @@ return {
   {
     "nvim-zh/colorful-winsep.nvim",
     config = true,
-    event = { "BufRead", "BufReadPost" },
-  }
+    event = { "BufRead", "BufNewFile" },
+  },
 }
