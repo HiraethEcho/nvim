@@ -192,7 +192,7 @@ return {
         },
       })
       -- setup must be called before loading
-      vim.cmd("colorscheme nordfox")
+      vim.cmd("colorscheme dawnfox")
     end,
   },
   {
@@ -370,7 +370,7 @@ return {
             },
           },
           lualine_b = {
-            "windows",
+            -- "windows",
             -- {
             --   "filename",
             --   symbols = {
@@ -602,13 +602,7 @@ return {
   },
   {
     "gorbit99/codewindow.nvim",
-    enabled = function()
-      if vim.g.is_linux then
-        return false
-      else
-        return true
-      end
-    end,
+    enabled = false,
     keys = {
       {
         "<leader>um",

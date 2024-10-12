@@ -157,7 +157,7 @@ return {
     'ActivityWatch/aw-watcher-vim',
     -- lazy = false,
     event = "VimEnter",
-    enabled = false,
+    -- enabled = false,
     cmd = "AWStart",
   },
   { -- lazy.nvim
