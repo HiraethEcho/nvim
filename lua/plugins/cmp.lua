@@ -2,6 +2,7 @@ local vim = vim
 return {
   {
     "hrsh7th/nvim-cmp",
+    enabled = false,
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -74,6 +75,7 @@ return {
     "zbirenbaum/copilot.lua",
     enabled = false,
     cmd = "Copilot",
+    enabled = false,
     keys = { -- Example mapping to toggle outline
       { "<leader>cc", "<cmd>Copilot<CR>",        desc = "Copilot" },
       { "<leader>ct", "<cmd>Copilot toggle<CR>", desc = "Copilot toggle" },

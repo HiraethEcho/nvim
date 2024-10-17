@@ -10,6 +10,7 @@ return {
   },
   {
     "lambdalisue/suda.vim",
+    enabled = false,
     cmd = { "SudaRead", "SudaWrite" },
   },
   {

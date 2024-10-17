@@ -71,11 +71,8 @@ opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
 
-<<<<<<< HEAD
-=======
 vim.o.shell = 'powershell'
 
->>>>>>> 207d649 (okular for vimtex)
 opt.foldmethod = "expr"
 opt.foldlevel = 99
 opt.foldexpr = "nvim_treesitter#foldexpr()"
