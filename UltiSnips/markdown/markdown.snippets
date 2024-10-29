@@ -1,24 +1,37 @@
-snippet note "callout note" b
-> [!NOTE]
->
+#b - Beginning of line.
+#i - In-word expansion.
+#w - Word boundary.
+#r - Regular expression
+#A - Snippet will be triggered automatically, when condition matches.
+#
+snippet note "callout note" bw
+> [!note]
+> 
 endsnippet
 
-snippet tip "callout tip" b
+snippet tip "callout tip" bw
 > [!tip]
->
+> 
 endsnippet
 
-snippet important "callout important" b
+snippet important "callout important" bw
 > [!important]
->
+> 
 endsnippet
 
-snippet warning "callout warning" b
+snippet warning "callout warning" bw
 > [!warning]
->
+> 
 endsnippet
 
-snippet caution "callout caution" b
+snippet caution "callout caution" bw
 > [!caution]
->
+> 
+endsnippet
+
+snippet details "details tag in html" bw
+<details><summary>$1</summary>
+$2
+</details>
+$0
 endsnippet
