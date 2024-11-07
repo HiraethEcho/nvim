@@ -28,9 +28,49 @@ I am using lazy.nvim as my plugins manager.
 
 ### windows and linux
 
-There are different settings under windows and linux.
+## callouts
 
-## misc
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
+
+more
+
+> [!TODO]
+
+> [!bug]
+
+> [!example]
+
+> [!quote]
+
+> [!cite]
+
+> [!success]
+
+> [!failure]
+
+> [!question]
+
+> [!help]
+
+> [!attention]
+
+> [!abstract]
+
+- [ ] checkbox
+- [x] checkbox done
 
 ### some icons
 
@@ -132,48 +172,3 @@ WordFile = "󰈭",
     Variable = " ",
   }
 ```
-
-## callouts
-
-> [!NOTE]
-> Useful information that users should know, even when skimming content.
-
-> [!TIP]
-> Helpful advice for doing things better or more easily.
-
-> [!IMPORTANT]
-> Key information users need to know to achieve their goal.
-
-> [!WARNING]
-> Urgent info that needs immediate user attention to avoid problems.
-
-> [!CAUTION]
-> Advises about risks or negative outcomes of certain actions.
-
-more
-
-> [!TODO]
-
-> [!bug]
-
-> [!example]
-
-> [!quote]
-
-> [!cite]
-
-> [!success]
-
-> [!failure]
-
-> [!question]
-
-> [!help]
-
-> [!attention]
-
-> [!abstract]
-
-- [ ] checkbox empty
-- [-] checkbox on going
-- [x] checkbox done

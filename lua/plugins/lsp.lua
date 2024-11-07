@@ -44,10 +44,12 @@ return {
               settings = servers[server_name],
 
               on_attach = function(client, bufnr)
-                local bufopts = { noremap = true, silent = true, buffer = bufnr }
-                vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, bufopts, { desc = "lsp rename" })
-                vim.keymap.set("n", "gF", function() vim.lsp.buf.format() end, bufopts, { desc = "lsp format" })
-                vim.keymap.set("n", "gA", function() vim.lsp.buf.code_action() end, bufopts, { desc = "lsp action" })
+                vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end,
+                  { noremap = true, silent = true, buffer = bufnr, desc = "lsp rename" })
+                vim.keymap.set("n", "gF", function() vim.lsp.buf.format() end,
+                  { noremap = true, silent = true, buffer = bufnr, desc = "lsp format" })
+                vim.keymap.set("n", "gA", function() vim.lsp.buf.code_action() end,
+                  { noremap = true, silent = true, buffer = bufnr, desc = "lsp action" })
               end,
             })
           end,
@@ -247,7 +249,7 @@ return {
         },
         list = {
           position = 'left', -- Position of the list window 'left'|'right'
-          width = 0.25,      -- 33% width relative to the active window, min 0.1, max 0.5
+          width = 0.2,      -- 33% width relative to the active window, min 0.1, max 0.5
         },
         mappings = {
           list = {
@@ -314,16 +316,16 @@ nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
 nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
 ]]
   },
-{
-  "jinzhongjia/LspUI.nvim",
-  branch = "main",
-  enabled = false,
-  config = function()
-    require("LspUI").setup({
-	  -- config options go here
-	  })
-  end
-},
+  {
+    "jinzhongjia/LspUI.nvim",
+    branch = "main",
+    enabled = false,
+    config = function()
+      require("LspUI").setup({
+        -- config options go here
+      })
+    end
+  },
   {
     "folke/trouble.nvim",
     enabled = false,
