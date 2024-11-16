@@ -325,6 +325,21 @@ return {
     end
   },
   {
+    "phaazon/hop.nvim",
+    -- event = "BufRead",
+    keys = {
+      -- {'<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>",  mode={"n","v"}},
+      -- {'F', "<cmd>lua require'hop'.hint_char1()<cr>", mode={"n","v"}},
+      { 'f',                ":HopChar1<cr>",    desc = "Hop Char",    { noremap = true, silent = true } },
+      { 'F',                ":HopWord<cr>",     desc = "Hop Word",    { noremap = true, silent = true } },
+      { "<leader><leader>", ":HopAnywhere<cr>", desc = "HopAnywhere", { noremap = true, silent = true } },
+    },
+    -- TODO: more keys
+    config = function()
+      require("hop").setup()
+    end,
+  },
+  {
     "voldikss/vim-translator",
     cmd = "TranslateW",
     keys = {

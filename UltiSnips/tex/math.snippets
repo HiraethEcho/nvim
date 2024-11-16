@@ -4,14 +4,6 @@ def math():
 	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 endglobal
 
-
-
-
-context "math()"
-snippet // "Fraction" wA
-\\frac{$1}{$2}$0
-endsnippet
-
 context "math()"
 snippet frac "Fraction" wA
 \frac{$1}{$2}$0
@@ -147,6 +139,11 @@ endsnippet
 context "math()"
 snippet -> "dashrightarrow" iA
 \dashrightarrow 
+endsnippet
+
+context "math()"
+snippet Vv "\forall" wA
+\forall 
 endsnippet
 
 context "math()"

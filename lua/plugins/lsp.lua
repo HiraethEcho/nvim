@@ -123,6 +123,33 @@ return {
     end,
   },
   {
+    "hedyhli/outline.nvim",
+    cmd = { "Outline", "OutlineOpen" },
+    keys = { -- Example mapping to toggle outline
+      { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+    },
+    opts = {
+      -- Your setup opts here
+      outline_window = {
+        position = 'left',
+      },
+      preview_window = {
+        open_hover_on_preview = true,
+        live = true,
+      },
+      keymaps = {
+        goto_location = '<space>',
+        peek_location = 'o',
+        goto_and_close = '<Cr>',
+        restore_location = '<C-g>',
+        hover_symbol = 'K',
+        toggle_preview = 'p',
+        fold_all = 'zM',
+        unfold_all = 'zR',
+      },
+    },
+  },
+  {
     "glepnir/lspsaga.nvim",
     enabled = false,
     event = "LspAttach",
@@ -364,5 +391,20 @@ nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
         desc = "Quickfix List (Trouble)",
       },
     },
-  }
+  },
+  {
+    "SmiteshP/nvim-navbuddy",
+    enabled = false,
+    keys = {
+      { "<leader>O", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
+      -- TODO: reset keymap
+    },
+    cmd = "Navbuddy",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    opts = { lsp = { auto_attach = true } },
+  },
 }
