@@ -65,6 +65,7 @@ I am using lazy.nvim as my plugins manager. Plugins are divided in serval classe
     - [which-key.nvim](https://github.com/folke/which-key.nvim), show leader key sequence
     - [nvim-spectre](https://github.com/nvim-pack/nvim-spectre), search and replace
     - [vim-startuptime](https://github.com/dstein64/vim-startuptime), show start up time
+    - [suda.vim](https://github.com/lambdalisue/suda.vim), sudo write files
 
 ## miscellanea
 
