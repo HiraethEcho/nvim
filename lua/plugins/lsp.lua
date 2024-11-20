@@ -20,6 +20,8 @@ return {
     },
     config = function()
       local servers = {
+        textlsp = {},
+        grammarly = {},
         lua_ls = {
           lua = {
             diagnostics = {
