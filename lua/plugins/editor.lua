@@ -60,7 +60,28 @@ return {
     end,
   },
   {
+    'MeanderingProgrammer/render-markdown.nvim',
+    ft = { "markdown", "md" },
+    keys = {
+      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle" },
+    },
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons'
+    }, -- if you prefer nvim-web-devicons
+    opts = {
+      latex = {
+        enabled = true,
+        converter = 'latex2text',
+        highlight = 'RenderMarkdownMath',
+        top_pad = 1,
+        bottom_pad = 0,
+      },
+    },
+  },
+  {
     "OXY2DEV/markview.nvim",
+    enabled = false,
     ft = "markdown",
     cmd = { "Markview" },
     keys = {
@@ -145,7 +166,7 @@ return {
           end,
         },
         to_do = {
-          symbols = { " ",  "x" },
+          symbols = { " ", "x" },
           update_parents = true,
           not_started = " ",
           -- in_progress = "-",
@@ -337,8 +358,8 @@ return {
       -- Optional, configure additional syntax highlighting / extmarks.
       -- This requires you have `conceallevel` set to 1 or 2. See `:help conceallevel` for more details.
       ui = {
-        enable = true,      -- set to false to disable all additional syntax features
-        update_debounce = 200, -- update delay after a text change (in milliseconds)
+        enable = true,          -- set to false to disable all additional syntax features
+        update_debounce = 200,  -- update delay after a text change (in milliseconds)
         max_file_length = 5000, -- disable UI features for files with more than this many lines
         -- Define how various check-boxes are displayed
         checkboxes = {

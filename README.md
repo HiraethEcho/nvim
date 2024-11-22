@@ -40,7 +40,7 @@ I am using lazy.nvim as my plugins manager. Plugins are divided in serval classe
 - editor: enhance for latex and markdown
     - [vimtex](https://github.com/lervag/vimtex), for latex
     - [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim), preview md in browser
-    - [markview.nvim](https://github.com/OXY2DEV/markview.nvim), view md in nvim
+    - ~~[markview.nvim](https://github.com/OXY2DEV/markview.nvim)~~  [render-markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim), view md in nvim
     - [mkdnflow.nvim](https://github.com/jakewvincent/mkdnflow.nvim), help edit list, table etc in nvim
 - git: using git in nvim
     - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), show git status at left, jump by hunks
