@@ -14,15 +14,22 @@ return {
       -- { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "nvimdev/guard.nvim",
+      -- "nvimdev/guard.nvim",
       "hrsh7th/cmp-nvim-lsp",
-      "SmiteshP/nvim-navbuddy",
+      -- "SmiteshP/nvim-navbuddy",
     },
     config = function()
+      -- An example nvim-lspconfig capabilities setting
+      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
       local servers = {
-        textlsp = {},
-        grammarly = {},
-        lua_ls = {
+        -- textlsp = {},
+        -- grammarly = {},
+        -- mdformat = {},
+        -- alex = {},
+        -- markdown-oxide = {},
+        marksman = {},
+        lua_ls   = {
           lua = {
             diagnostics = {
               -- Get the language server to recognize the `vim` global
@@ -31,25 +38,23 @@ return {
           },
           checkThirdParty = false,
         },
-        bashls = {},
-        html   = {},
-        clangd = {},
-        -- digestif = {},
+        bashls   = {},
+        html     = {},
+        clangd   = {},
       }
-      -- require("fidget").setup()
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(servers),
         handlers = {
           function(server_name) -- default handler (optional)
             require("lspconfig")[server_name].setup({
-              capabilities = require("cmp_nvim_lsp").default_capabilities(),
+              -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
               settings = servers[server_name],
 
               on_attach = function(client, bufnr)
                 vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end,
                   { noremap = true, silent = true, buffer = bufnr, desc = "lsp rename" })
-                vim.keymap.set("n", "gF", function() vim.lsp.buf.format() end,
-                  { noremap = true, silent = true, buffer = bufnr, desc = "lsp format" })
+                -- vim.keymap.set("n", "gF", function() vim.lsp.buf.format() end,
+                --   { noremap = true, silent = true, buffer = bufnr, desc = "lsp format" })
                 vim.keymap.set("n", "gA", function() vim.lsp.buf.code_action() end,
                   { noremap = true, silent = true, buffer = bufnr, desc = "lsp action" })
               end,
@@ -58,7 +63,7 @@ return {
         },
       })
       require("lspconfig").texlab.setup({
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
         settings = {
           texlab = {
             build = {
@@ -86,7 +91,7 @@ return {
               onEdit = false,
             },
             bibtexFormatter = "texlab",
-            -- latexFormatter = "latexindent",
+            latexFormatter = "latexindent",
             -- latexindent = {
             --   ['local'] = nil, -- local is a reserved keyword
             --   modifyLineBreaks = true,
@@ -98,17 +103,6 @@ return {
           local bufopts = { noremap = true, silent = true, buffer = bufnr }
           vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>", bufopts)
           vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>", bufopts)
-        end,
-      })
-      require("lspconfig").marksman.setup({
-        filetypes = { "markdown" },
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        settings = {
-          grammarly = {},
-        },
-        on_attach = function(client, bufnr)
-          local bufopts = { noremap = true, silent = true, buffer = bufnr }
-          vim.keymap.set("n", "<cr><cr>", "<cmd>MarkdownPreview<cr>", bufopts)
         end,
       })
     end,
@@ -278,7 +272,7 @@ return {
         },
         list = {
           position = 'left', -- Position of the list window 'left'|'right'
-          width = 0.2,      -- 33% width relative to the active window, min 0.1, max 0.5
+          width = 0.2,       -- 33% width relative to the active window, min 0.1, max 0.5
         },
         mappings = {
           list = {

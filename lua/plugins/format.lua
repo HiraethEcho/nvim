@@ -1,18 +1,11 @@
 return {
   {
-    enabled = false,
-    lazy = false,
     "stevearc/conform.nvim",
+    -- enabled = false,
+    event = { "BufWritePre" },
+    -- lazy = false,
     keys = {
-      {
-        -- Customize or remove this keymap to your liking
-        "<leader>F",
-        function()
-          require("conform").format({ async = true, lsp_format = "fallback" })
-        end,
-        mode = "",
-        desc = "Format buffer",
-      },
+      { "<leader>F", function() require("conform").format({ async = true, lsp_format = "fallback" }) end, mode = "", desc = "Format buffer", },
     },
     opts = {},
     config = function()
@@ -20,7 +13,7 @@ return {
         formatters_by_ft = {
           lua = { "stylua" },
           markdown = { "prettier" },
-          latex = { "llf" },
+          latex = { "latexindent" },
           -- Conform will run multiple formatters sequentially
         },
       })

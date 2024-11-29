@@ -59,6 +59,14 @@ return {
         sources = cmp.config.sources({
           { name = "ultisnips" }, -- For ultisnips users.
           -- { name = "vimtex" },
+          {
+            name = 'nvim_lsp',
+            option = {
+              markdown_oxide = {
+                keyword_pattern = [[\(\k\| \|\/\|#\)\+]]
+              }
+            }
+          },
           { name = "copilot" },
           { name = "buffer",   option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end, }, },
           { name = "path" },
