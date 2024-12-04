@@ -10,8 +10,8 @@ return {
       { "<leader>fg", "<cmd>Telescope grep_string<cr>",                           desc = "grep string" },
       { "<leader>b",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
 
-      { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<cr>",             desc = "current buffer fuzzy find", },
-      { "<leader>?",  "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
+      -- { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<cr>",             desc = "current buffer fuzzy find", },
+      { "<leader>/",  "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
       { "<leader>`",  "<cmd>Telescope marks<cr>",                                 desc = "marks" },
       { '<leader>"',  "<cmd>Telescope registers<cr>",                             desc = "marks" },
       { '<leader>y',  "<cmd>Telescope neoclip<cr>",                               desc = "yank history" },

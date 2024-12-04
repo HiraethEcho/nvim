@@ -127,7 +127,8 @@ return {
     opts = {
       -- Your setup opts here
       outline_window = {
-        position = 'left',
+        position = 'right',
+        width = 15,
       },
       preview_window = {
         open_hover_on_preview = true,
