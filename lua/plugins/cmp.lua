@@ -7,7 +7,6 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "zbirenbaum/copilot.lua",
-      -- "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-path",
       -- "nvim-treesitter/nvim-treesitter",
       -- "micangl/cmp-vimtex",
@@ -17,6 +16,7 @@ return {
     config = function()
       local cmp = require("cmp")
       local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
+      vim.g.UltiSnipsExpandTrigger = "<cr>"
       cmp.setup({
         completion = {
           completeopt = "menu,noselect,noinsert,menuone,popup",
@@ -35,27 +35,24 @@ return {
             vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
           end,
         },
-        mapping = cmp.mapping.preset.insert({
+        mapping = {
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
-          ["<Tab>"] = function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
-            end
-          end,
-
-          ["<S-Tab>"] = function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end,
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        }),
+          ["<Tab>"] = cmp.mapping(
+            function(fallback)
+              -- cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+              cmp_ultisnips_mappings.jump_forwards(fallback)
+            end,
+            { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+          ),
+          ["<S-Tab>"] = cmp.mapping(
+            function(fallback)
+              cmp_ultisnips_mappings.jump_backwards(fallback)
+            end,
+            { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+          ),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        },
         sources = cmp.config.sources({
           { name = "ultisnips" }, -- For ultisnips users.
           -- { name = "vimtex" },
