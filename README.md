@@ -52,7 +52,7 @@ I am using lazy.nvim as my plugins manager. Plugins are divided in serval classe
   - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig), Configure lsp
   - [mason.nvim](https://github.com/williamboman/mason.nvim), install lsp
   - [glance.nvim](https://github.com/dnlhc/glance.nvim), jump by definitions, references etc
-  - [outline.nvim](https://github.com/hedyhli/outline.nvim), jump by symbols etc
+  - [outline.nvim](https://github.com/hedyhli/outline.nvim) and [navbuddy](https://github.com/SmiteshP/nvim-navbuddy), jump by symbols etc
 - file explorer:
   - [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim), file tree
   - [yazi.nvim](https://github.com/mikavilpas/yazi.nvim), yazi (tui file manager) in float terminal
