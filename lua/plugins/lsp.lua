@@ -14,52 +14,22 @@ return {
       -- { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "nvimdev/guard.nvim",
+      -- "nvimdev/guard.nvim",
       "hrsh7th/cmp-nvim-lsp",
-      "SmiteshP/nvim-navbuddy",
+      -- "SmiteshP/nvim-navbuddy",
     },
     config = function()
-      local servers = {
-        textlsp = {},
-        grammarly = {},
-        lua_ls = {
-          lua = {
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = { "vim" },
-            },
-          },
-          checkThirdParty = false,
-        },
-        bashls = {},
-        html   = {},
-        clangd = {},
-        -- digestif = {},
-      }
-      -- require("fidget").setup()
-      require("mason-lspconfig").setup({
-        ensure_installed = vim.tbl_keys(servers),
-        handlers = {
-          function(server_name) -- default handler (optional)
-            require("lspconfig")[server_name].setup({
-              capabilities = require("cmp_nvim_lsp").default_capabilities(),
-              settings = servers[server_name],
+      -- An example nvim-lspconfig capabilities setting
+      -- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-              on_attach = function(client, bufnr)
-                vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end,
-                  { noremap = true, silent = true, buffer = bufnr, desc = "lsp rename" })
-                vim.keymap.set("n", "gF", function() vim.lsp.buf.format() end,
-                  { noremap = true, silent = true, buffer = bufnr, desc = "lsp format" })
-                vim.keymap.set("n", "gA", function() vim.lsp.buf.code_action() end,
-                  { noremap = true, silent = true, buffer = bufnr, desc = "lsp action" })
-              end,
-            })
-          end,
-        },
-      })
-      require("lspconfig").texlab.setup({
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        settings = {
+      local servers = {
+        -- textlsp = {},
+        -- grammarly = {},
+        -- mdformat = {},
+        -- alex = {},
+        -- markdown-oxide = {},
+        -- ltex     = {},
+        texlab   = {
           texlab = {
             build = {
               executable = 'xelatex',
@@ -86,30 +56,49 @@ return {
               onEdit = false,
             },
             bibtexFormatter = "texlab",
-            -- latexFormatter = "latexindent",
-            -- latexindent = {
-            --   ['local'] = nil, -- local is a reserved keyword
-            --   modifyLineBreaks = true,
-            -- },
+            latexFormatter = "latexindent",
             formatterLineLength = 80,
           },
         },
-        on_attach = function(client, bufnr)
-          local bufopts = { noremap = true, silent = true, buffer = bufnr }
-          vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>", bufopts)
-          vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>", bufopts)
-        end,
-      })
-      require("lspconfig").marksman.setup({
-        filetypes = { "markdown" },
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        settings = {
-          grammarly = {},
+        marksman = {},
+        lua_ls   = {
+          lua = {
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = { "vim" },
+            },
+          },
+          checkThirdParty = false,
         },
-        on_attach = function(client, bufnr)
-          local bufopts = { noremap = true, silent = true, buffer = bufnr }
-          vim.keymap.set("n", "<cr><cr>", "<cmd>MarkdownPreview<cr>", bufopts)
-        end,
+        bashls   = {},
+        -- html     = {},
+        clangd   = {},
+      }
+      -- require("lspconfig").html.setup({
+      --   filetypes = { "md","markdown", "html" },
+      -- })
+      require("mason-lspconfig").setup({
+        ensure_installed = vim.tbl_keys(servers),
+        handlers = {
+          function(server_name)
+            require("lspconfig")[server_name].setup({
+              capabilities = require("cmp_nvim_lsp").default_capabilities(),
+              settings = servers[server_name],
+              on_attach = function(client, bufnr)
+                require("nvim-navic").attach(client, bufnr)
+                vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end,
+                  { noremap = true, silent = true, buffer = bufnr, desc = "lsp rename" })
+                vim.keymap.set("n", "gA", function() vim.lsp.buf.code_action() end,
+                  { noremap = true, silent = true, buffer = bufnr, desc = "lsp action" })
+                if server_name == "texlab" then
+                  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+                  vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>", bufopts)
+                  vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>", bufopts)
+                end
+              end,
+            })
+          end,
+        },
       })
     end,
   },
@@ -125,6 +114,104 @@ return {
     end,
   },
   {
+    "SmiteshP/nvim-navbuddy",
+    -- enabled = false,
+    keys = {
+      { "<leader>O", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
+    },
+    cmd = "Navbuddy",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    -- opts = { lsp = { auto_attach = true } },
+    config = function()
+      local navbuddy = require("nvim-navbuddy")
+      local actions = require("nvim-navbuddy.actions")
+      navbuddy.setup({
+        window = {
+          size = "80%",     -- Or table format example: { height = "40%", width = "100%"}
+          position = "50%", -- Or table format example: { row = "100%", col = "0%"}
+          scrolloff = nil,  -- scrolloff value within navbuddy window
+          sections = {
+            left = {
+              size = "20%",
+              border = nil, -- You can set border style for each section individually as well.
+            },
+            mid = {
+              size = "40%",
+              border = nil,
+            },
+            right = {
+              -- No size option for right most section. It fills to
+              -- remaining area.
+              border = nil,
+              preview = "leaf", -- Right section can show previews too.
+              -- Options: "leaf", "always" or "never"
+            }
+          },
+        },
+        use_default_mappings = false,  -- If set to false, only mappings set by user are set. Else default mappings are used for keys that are not set by user
+        mappings = {
+          ["<esc>"] = actions.close(), -- Close and cursor to original location
+          ["q"] = actions.close(),
+
+          ["j"] = actions.next_sibling(),     -- down
+          ["k"] = actions.previous_sibling(), -- up
+
+          ["h"] = actions.parent(),           -- Move to left panel
+          ["l"] = actions.children(),         -- Move to right panel
+          -- ["0"] = actions.root(),           -- Move to first panel
+
+          ["v"] = actions.visual_name(),  -- Visual selection of name
+          ["V"] = actions.visual_scope(), -- Visual selection of scope
+
+          ["y"] = actions.yank_name(),    -- Yank the name to system clipboard "+
+          ["Y"] = actions.yank_scope(),   -- Yank the scope to system clipboard "+
+
+          ["i"] = actions.insert_name(),  -- Insert at start of name
+          ["I"] = actions.insert_scope(), -- Insert at start of scope
+
+          ["a"] = actions.append_name(),  -- Insert at end of name
+          ["A"] = actions.append_scope(), -- Insert at end of scope
+
+          ["r"] = actions.rename(),       -- Rename currently focused symbol
+
+          ["x"] = actions.delete(),       -- Delete scope
+
+          ["f"] = actions.fold_create(),  -- Create fold of current scope
+          ["F"] = actions.fold_delete(),  -- Delete fold of current scope
+
+          ["c"] = actions.comment(),      -- Comment out current scope
+
+          ["<enter>"] = actions.select(), -- Goto selected symbol
+          ["o"] = actions.select(),
+
+          ["J"] = actions.move_down(),      -- Move focused node down
+          ["K"] = actions.move_up(),        -- Move focused node up
+
+          ["p"] = actions.toggle_preview(), -- Show preview of current node
+
+          ["<C-v>"] = actions.vsplit(),     -- Open selected node in a vertical split
+          ["<C-s>"] = actions.hsplit(),     -- Open selected node in a horizontal split
+
+          ["t"] = actions.telescope({       -- Fuzzy finder at current level.
+            layout_config = {               -- All options that can be
+              height = 0.60,                -- passed to telescope.nvim's
+              width = 0.60,                 -- default can be passed here.
+              prompt_position = "top",
+              preview_width = 0.50
+            },
+            layout_strategy = "horizontal"
+          }),
+          ["g?"] = actions.help(),    -- Open mappings help window
+        },
+        lsp = { auto_attach = true }, -- If set to true, you don't need to manually use attach function },
+      })
+    end,
+  },
+  {
     "hedyhli/outline.nvim",
     cmd = { "Outline", "OutlineOpen" },
     keys = { -- Example mapping to toggle outline
@@ -133,7 +220,8 @@ return {
     opts = {
       -- Your setup opts here
       outline_window = {
-        position = 'left',
+        position = 'right',
+        width = 15,
       },
       preview_window = {
         open_hover_on_preview = true,
@@ -150,6 +238,126 @@ return {
         unfold_all = 'zR',
       },
     },
+  },
+  {
+    "dnlhc/glance.nvim",
+    -- lazy = false,
+    event = "LspAttach",
+    keys = {
+      { "gd", "<cmd>Glance definitions<cr>",      desc = "Glance definitions" },
+      { "gr", "<cmd>Glance references<cr>",       desc = "Glance references" },
+      { "gy", "<cmd>Glance type_definitions<cr>", desc = "Glance type_definitions" },
+      { "gm", "<cmd>Glance implementations<cr>",  desc = "Glance implementations" },
+    },
+    config = function()
+      local actions = require('glance').actions
+      require('glance').setup({
+        height = 18, -- Height of the window
+        zindex = 45,
+
+        -- By default glance will open preview "embedded" within your active window
+        -- when `detached` is enabled, glance will render above all existing windows
+        -- and won't be restiricted by the width of your active window
+        detached = true,
+
+        -- Or use a function to enable `detached` only when the active window is too small
+        -- (default behavior)
+        -- detached = function(winid)
+        --   return vim.api.nvim_win_get_width(winid) < 100
+        -- end,
+
+        border = {
+          enable = true, -- Show window borders. Only horizontal borders allowed
+          top_char = '―',
+          bottom_char = '―',
+        },
+        list = {
+          position = 'left', -- Position of the list window 'left'|'right'
+          width = 0.2,       -- 33% width relative to the active window, min 0.1, max 0.5
+        },
+        mappings = {
+          list = {
+            ['j'] = actions.next,     -- Bring the cursor to the next item in the list
+            ['k'] = actions.previous, -- Bring the cursor to the previous item in the list
+            ['<Down>'] = actions.next,
+            ['<Up>'] = actions.previous,
+            ['<Tab>'] = actions.next_location,       -- Bring the cursor to the next location skipping groups in the list
+            ['<S-Tab>'] = actions.previous_location, -- Bring the cursor to the previous location skipping groups in the list
+            ['<C-u>'] = actions.preview_scroll_win(5),
+            ['<C-d>'] = actions.preview_scroll_win(-5),
+            ['v'] = actions.jump_vsplit,
+            ['s'] = actions.jump_split,
+            ['t'] = actions.jump_tab,
+            ['<CR>'] = actions.jump,
+            ['l'] = actions.open_fold,
+            ['h'] = actions.close_fold,
+            ['<space>'] = actions.enter_win('preview'), -- Focus preview window
+            ['q'] = actions.close,
+            ['Q'] = false,
+            ['<Esc>'] = actions.close,
+            ['<C-q>'] = actions.quickfix,
+          },
+          preview = {
+            -- ['q'] = actions.close,
+            ['<Tab>'] = actions.next_location,
+            ['<S-Tab>'] = actions.previous_location,
+            ['q'] = actions.enter_win('list'), -- Focus list window
+          },
+        },
+        hooks = {},
+      })
+    end,
+  },
+  {
+    'vigoux/ltex-ls.nvim',
+    lazy = false,
+    enabled = false,
+    dependencies = 'neovim/nvim-lspconfig',
+    config = function()
+      require 'ltex-ls'.setup {
+        -- on_attach = on_attach,
+        -- capabilities = capabilities,
+        use_spellfile = false,
+        filetypes = { "latex", "tex", "bib", "markdown", "gitcommit", "text" },
+        settings = {
+          ltex = {
+            enabled = { "latex", "tex", "bib", "markdown", },
+            language = "auto",
+            diagnosticSeverity = "information",
+            sentenceCacheSize = 2000,
+            additionalRules = {
+              enablePickyRules = true,
+              motherTongue = "en",
+            },
+            disabledRules = {
+            },
+            dictionary = (function()
+              -- For dictionary, search for files in the runtime to have
+              -- and include them as externals the format for them is
+              -- dict/{LANG}.txt
+              --
+              -- Also add dict/default.txt to all of them
+              local files = {}
+              for _, file in ipairs(vim.api.nvim_get_runtime_file("dict/*", true)) do
+                local lang = vim.fn.fnamemodify(file, ":t:r")
+                local fullpath = vim.fs.normalize(file, ":p")
+                files[lang] = { ":" .. fullpath }
+              end
+
+              if files.default then
+                for lang, _ in pairs(files) do
+                  if lang ~= "default" then
+                    vim.list_extend(files[lang], files.default)
+                  end
+                end
+                files.default = nil
+              end
+              return files
+            end)(),
+          },
+        },
+      }
+    end,
   },
   {
     "glepnir/lspsaga.nvim",
@@ -245,75 +453,6 @@ return {
     end,
   },
   {
-    "dnlhc/glance.nvim",
-    -- lazy = false,
-    event = "LspAttach",
-    keys = {
-      { "gd", "<cmd>Glance definitions<cr>",      desc = "Glance definitions" },
-      { "gr", "<cmd>Glance references<cr>",       desc = "Glance references" },
-      { "gy", "<cmd>Glance type_definitions<cr>", desc = "Glance type_definitions" },
-      { "gm", "<cmd>Glance implementations<cr>",  desc = "Glance implementations" },
-    },
-    config = function()
-      local actions = require('glance').actions
-      require('glance').setup({
-        height = 18, -- Height of the window
-        zindex = 45,
-
-        -- By default glance will open preview "embedded" within your active window
-        -- when `detached` is enabled, glance will render above all existing windows
-        -- and won't be restiricted by the width of your active window
-        detached = true,
-
-        -- Or use a function to enable `detached` only when the active window is too small
-        -- (default behavior)
-        -- detached = function(winid)
-        --   return vim.api.nvim_win_get_width(winid) < 100
-        -- end,
-
-        border = {
-          enable = true, -- Show window borders. Only horizontal borders allowed
-          top_char = '―',
-          bottom_char = '―',
-        },
-        list = {
-          position = 'left', -- Position of the list window 'left'|'right'
-          width = 0.2,      -- 33% width relative to the active window, min 0.1, max 0.5
-        },
-        mappings = {
-          list = {
-            ['j'] = actions.next,     -- Bring the cursor to the next item in the list
-            ['k'] = actions.previous, -- Bring the cursor to the previous item in the list
-            ['<Down>'] = actions.next,
-            ['<Up>'] = actions.previous,
-            ['<Tab>'] = actions.next_location,       -- Bring the cursor to the next location skipping groups in the list
-            ['<S-Tab>'] = actions.previous_location, -- Bring the cursor to the previous location skipping groups in the list
-            ['<C-u>'] = actions.preview_scroll_win(5),
-            ['<C-d>'] = actions.preview_scroll_win(-5),
-            ['v'] = actions.jump_vsplit,
-            ['s'] = actions.jump_split,
-            ['t'] = actions.jump_tab,
-            ['<CR>'] = actions.jump,
-            ['l'] = actions.open_fold,
-            ['h'] = actions.close_fold,
-            ['<space>'] = actions.enter_win('preview'), -- Focus preview window
-            ['q'] = actions.close,
-            ['Q'] = false,
-            ['<Esc>'] = actions.close,
-            ['<C-q>'] = actions.quickfix,
-          },
-          preview = {
-            -- ['q'] = actions.close,
-            ['<Tab>'] = actions.next_location,
-            ['<S-Tab>'] = actions.previous_location,
-            ['q'] = actions.enter_win('list'), -- Focus list window
-          },
-        },
-        hooks = {},
-      })
-    end,
-  },
-  {
     "rmagatti/goto-preview",
     enabled = false,
     -- event = "BufEnter",
@@ -393,20 +532,5 @@ nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
         desc = "Quickfix List (Trouble)",
       },
     },
-  },
-  {
-    "SmiteshP/nvim-navbuddy",
-    enabled = false,
-    keys = {
-      { "<leader>O", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
-      -- TODO: reset keymap
-    },
-    cmd = "Navbuddy",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "MunifTanjim/nui.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    opts = { lsp = { auto_attach = true } },
   },
 }
