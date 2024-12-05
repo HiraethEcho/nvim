@@ -3,9 +3,12 @@ return {
     "lervag/vimtex",
     ft = { "bib", "tex" },
     config = function()
-      vim.g.vimtex_view_method = "sioyek"
-
       -- vim.g.vimtex_view_method = 'zathura'
+      vim.g.vimtex_view_method = "sioyek"
+      -- vim.g.vimtex_mappings_enabled = 0
+      --nmap <localleader>ll <Plug>(vimtex-compile)
+      -- vim.g.vimtex_imaps_enabled = 0
+      vim.g.vimtex_imaps_leader = ';'
 
       -- this works
       -- vim.g.vimtex_view_general_viewer = "okular"

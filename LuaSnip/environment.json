@@ -1,0 +1,229 @@
+{
+  "sec": {
+    "prefix": "sec",
+    "description": "section",
+    "body": [
+      "\\section{$1\\}",
+      "$0"
+    ]
+  },
+  "ssec": {
+    "prefix": "ssec",
+    "description": "subsection",
+    "body": [
+      "\\subsection{$1\\}",
+      "$0"
+    ]
+  },
+  "sssec": {
+    "prefix": "sssec",
+    "description": "subsubsection",
+    "body": [
+      "\\subsubsection{$1\\}",
+      "$0"
+    ]
+  },
+  "beg": {
+    "prefix": "beg",
+    "description": "begin{}  end{}",
+    "body": [
+      "\\begin{$1\\}",
+      "\t${0:$TM_SELECTED_TEXT}",
+      "\\end{$1\\}"
+    ]
+  },
+  "cnt": {
+    "prefix": "cnt",
+    "description": "Center",
+    "body": [
+      "\\begin{center\\}",
+      "\t${0:$TM_SELECTED_TEXT}",
+      "\\end{center\\}"
+    ]
+  },
+  "ol": {
+    "prefix": "ol",
+    "description": "Enumerate",
+    "body": [
+      "\\begin{enumerate\\}",
+      "\t\\item $0",
+      "\\end{enumerate\\}"
+    ]
+  },
+  "ul": {
+    "prefix": "ul",
+    "description": "Itemize",
+    "body": [
+      "\\begin{itemize\\}",
+      "\t\\item $0",
+      "\\end{itemize\\}"
+    ]
+  },
+  "lem": {
+    "prefix": "lem",
+    "description": "Lemma",
+    "body": [
+      "\\begin{lemma\\}",
+      "\t${0:$TM_SELECTED_TEXT}",
+      "\\end{lemma\\}"
+    ]
+  },
+  "prop": {
+    "prefix": "prop",
+    "description": "Proposition",
+    "body": [
+      "\\begin{proposition\\}[$1]",
+      "\t${0:$TM_SELECTED_TEXT}",
+      "\\end{proposition\\}"
+    ]
+  },
+  "thm": {
+    "prefix": "thm",
+    "description": "Theorem",
+    "body": [
+      "\\begin{theorem\\}[$1]",
+      "\t${0:$TM_SELECTED_TEXT}",
+      "\\end{theorem\\}"
+    ]
+  },
+  "cor": {
+    "prefix": "cor",
+    "description": "Corollary",
+    "body": [
+      "\\begin{corollary\\}",
+      "\t${0:$TM_SELECTED_TEXT}",
+      "\\end{corollary\\}"
+    ]
+  },
+  "pf": {
+    "prefix": "pf",
+    "description": "proof",
+    "body": [
+      "\\begin{proof\\}",
+      "\t${0:$TM_SELECTED_TEXT}",
+      "\\end{proof\\}"
+    ]
+  },
+  "def": {
+    "prefix": "def",
+    "description": "Definition",
+    "body": [
+      "\\begin{definition\\}",
+      "\t${0:$TM_SELECTED_TEXT}",
+      "\\end{definition\\}"
+    ]
+  },
+  "rmk": {
+    "prefix": "rmk",
+    "description": "Remark",
+    "body": [
+      "\\begin{remark\\}",
+      "\t${0:$TM_SELECTED_TEXT}",
+      "\\end{remark\\}"
+    ]
+  },
+  "ques": {
+    "prefix": "ques",
+    "description": "Question",
+    "body": [
+      "\\begin{ques\\}",
+      "\t${0:$TM_SELECTED_TEXT}",
+      "\\end{ques\\}"
+    ]
+  },
+  "dm": {
+    "prefix": "dm",
+    "description": "display Math",
+    "body": [
+      "\\[",
+      "\t${1:$TM_SELECTED_TEXT} $0",
+      "\\]"
+    ],
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "ii": {
+    "prefix": "ii",
+    "description": "inline math",
+    "body": "${1:$TM_SELECTED_TEXT} ",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "fun": {
+    "prefix": "fun",
+    "description": "Big function",
+    "body": [
+      "\\begin{align*\\}",
+      "\t$1: $2 &\\longrightarrow $3 \\\\",
+      "\t$4 &\\longmapsto $1($4) = $0",
+      ".\\end{align*\\}"
+    ]
+  },
+  "case": {
+    "prefix": "case",
+    "description": "cases",
+    "body": [
+      "\\begin{cases\\}",
+      "\t$1 \\\\",
+      "\t$2 \\\\",
+      "\\end{cases\\}",
+      "$0"
+    ]
+  },
+  "ali": {
+    "prefix": "ali",
+    "description": "Align",
+    "body": [
+      "\\begin{equation\\}",
+      "\\begin{aligned\\}",
+      "\t${1:$TM_SELECTED_TEXT}",
+      ".\\end{aligned\\}",
+      "\\end{equation\\}"
+    ]
+  },
+  "ceil": {
+    "prefix": "ceil",
+    "description": "Ceil",
+    "body": "\\left\\lceil $1 \\right\\rceil $0",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "floor": {
+    "prefix": "floor",
+    "description": "Floor",
+    "body": "\\left\\lfloor $1 \\right\\rfloor$0"
+  },
+  "xym": {
+    "prefix": "xym",
+    "description": "xymatrix",
+    "body": [
+      "\\xymatrix{",
+      "$1& & \\\\",
+      "& &",
+      "\\}"
+    ]
+  },
+  "flip": {
+    "prefix": "flip",
+    "description": "flip",
+    "body": [
+      "\\xymatrix{",
+      "X\\ar[rd] \\ar[rr]$1 & & Y\\ar[ld]$2 \\\\",
+      "& S$3 &",
+      "\\}"
+    ]
+  },
+  "roof": {
+    "prefix": "roof",
+    "description": "commonre solution",
+    "body": [
+      "\\xymatrix{",
+      "& W$1 \\ar[ld]\\ar[rd] &\\\\",
+      "X\\ar[rr]$2 & &Y$3 ",
+      "\\}"
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "note": {
+    "prefix": "note",
+    "description": "callout note",
+    "body": [
+      "> [!note]",
+      "> "
+    ]
+  },
+  "tip": {
+    "prefix": "tip",
+    "description": "callout tip",
+    "body": [
+      "> [!tip]",
+      "> "
+    ]
+  },
+  "important": {
+    "prefix": "important",
+    "description": "callout important",
+    "body": [
+      "> [!important]",
+      "> "
+    ]
+  },
+  "warning": {
+    "prefix": "warning",
+    "description": "callout warning",
+    "body": [
+      "> [!warning]",
+      "> "
+    ]
+  },
+  "caution": {
+    "prefix": "caution",
+    "description": "callout caution",
+    "body": [
+      "> [!caution]",
+      "> "
+    ]
+  },
+  "details": {
+    "prefix": "details",
+    "description": "details tag in html",
+    "body": [
+      "<details><summary>$1</summary>",
+      "$2",
+      "</details>",
+      "$0"
+    ]
+  }
+}

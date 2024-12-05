@@ -1,0 +1,119 @@
+{
+  "iff": {
+    "prefix": "iff",
+    "description": "if and only if",
+    "body": "\tif and only if",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "st": {
+    "prefix": "st",
+    "description": "such that ",
+    "body": "such that $0"
+  },
+  "mfs": {
+    "prefix": "mfs",
+    "description": "Mori Fibre Space",
+    "body": "Mori fibre space$0"
+  },
+  "gt": {
+    "prefix": "gt",
+    "description": "general type",
+    "body": "general type$0"
+  },
+  "wrt": {
+    "prefix": "wrt",
+    "description": "with respect to",
+    "body": "with respect to",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "wma": {
+    "prefix": "wma",
+    "description": "we may assume",
+    "body": "we may assume",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "pair": {
+    "prefix": "pair",
+    "description": "(X,B)",
+    "body": "\\$(X$1,B)\\$$0 "
+  },
+  "gfq": {
+    "prefix": "gfq",
+    "description": "generalized foliated quartupe",
+    "body": "(X$1,\\mathcal{F\\}$2,B$3,\\mathbf{M\\}) $0 ",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "mm": {
+    "prefix": "mm",
+    "description": "minimal model",
+    "body": "minimal model"
+  },
+  "fg": {
+    "prefix": "fg",
+    "description": "finitely generated",
+    "body": "finitely generated"
+  },
+  "wlcm": {
+    "prefix": "wlcm",
+    "description": "weak log canonical model",
+    "body": "weak log canonical model"
+  },
+  "Qfac": {
+    "prefix": "Qfac",
+    "description": "Q-factorial",
+    "body": "\\$\\mathbb{Q\\}\\$-factorial",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "Rdiv": {
+    "prefix": "Rdiv",
+    "description": "R-div",
+    "body": "\\$\\mathbb{R\\}\\$-divisor",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "bdiv": {
+    "prefix": "bdiv",
+    "description": "b-div",
+    "body": "\\$\\bf{b\\}\\$-divisor",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "Rcar": {
+    "prefix": "Rcar",
+    "description": "R-Cartier",
+    "body": "\\$\\mathbb{R\\}\\$-Cartier",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "Qdiv": {
+    "prefix": "Qdiv",
+    "description": "Q-divisor",
+    "body": "\\$\\mathbb{Q\\}\\$-divisor",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "lcd": {
+    "prefix": "lcd",
+    "description": "log canonical divisor",
+    "body": "\\$(K_{X$1\\}+B)\\$$0"
+  },
+  "cite": {
+    "prefix": "cite",
+    "description": "Description",
+    "body": "\\cite[$1]{$2\\}"
+  }
+}

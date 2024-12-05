@@ -1,0 +1,86 @@
+{
+  "bb": {
+    "prefix": "bb",
+    "description": "textbf",
+    "body": "\\textbf{${1:$TM_SELECTED_TEXT }\\}$0"
+  },
+  "ee": {
+    "prefix": "ee",
+    "description": "emph",
+    "body": "\\emph{${1:$TM_SELECTED_TEXT} \\}$0"
+  },
+  "tt": {
+    "prefix": "tt",
+    "description": "text",
+    "body": "\\text{$1\\}$0"
+  },
+  "op": {
+    "prefix": "op",
+    "description": "operatorname",
+    "body": "\\operatorname{${1:$TM_SELECTED_TEXT}\\}$0"
+  },
+  "Aa": {
+    "prefix": "Aa",
+    "description": "Affine space",
+    "body": "\\mathbb{A\\}^{${1:n}\\}",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "RR": {
+    "prefix": "RR",
+    "description": "Real number",
+    "body": "\\mathbb{R\\}",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "FF": {
+    "prefix": "FF",
+    "description": "FF",
+    "body": "\\mathbb{F\\}_{${1:n}\\}$0",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "NN": {
+    "prefix": "NN",
+    "description": "Natural number",
+    "body": "\\mathbb{N\\}",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "ZZ": {
+    "prefix": "ZZ",
+    "description": "integers",
+    "body": "\\mathbb{Z\\}",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "QQ": {
+    "prefix": "QQ",
+    "description": "Rational number",
+    "body": "\\mathbb{Q\\}",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "PP": {
+    "prefix": "PP",
+    "description": "Projectiv space",
+    "body": "\\mathbb{P\\}^{${1:n}\\}",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "CC": {
+    "prefix": "CC",
+    "description": "Complex number",
+    "body": "\\mathbb{C\\}",
+    "luasnip": {
+      "autotrigger": true
+    }
+  }
+}

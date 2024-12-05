@@ -4,12 +4,6 @@
 #r - Regular expression
 #A - Snippet will be triggered automatically, when condition matches.
 
-global !p
-import re
-def math():
-	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
-endglobal
-
 snippet sec "section" b
 \section{$1}
 $0
