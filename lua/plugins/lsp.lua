@@ -38,11 +38,22 @@ return {
             },
             forwardSearch = {
               executable = "sioyek",
+-- args = {
+--                 "--reuse-window",
+--                 "--inverse-search",
+--                 vim.fn.stdpath("data") .. "/mason/bin/texlab inverse-search -i %%1 -l %%2",
+--                 "--forward-search-file",
+--                 "%f",
+--                 "--forward-search-line",
+--                 "%l",
+--                 "%p",
+--               },
               args = {
                 "--reuse-window",
                 -- "--execute-command", "toggle_synctex", -- Open Sioyek in synctex mode.
                 "--inverse-search",
-                [[nvim --server ]] .. vim.v.servername .. [[ --remote-send ":e %%%1<cr>:%%%2<cr>"]],
+                vim.fn.stdpath("data") .. "/mason/bin/texlab inverse-search -i %%1 -l %%2",
+                -- [[nvim --server ]] .. vim.v.servername .. [[ --remote-send ":e %%%1<cr>:%%%2<cr>"]],
                 -- [[nvr --server ]] .. vim.v.servername .. [[ --remote-silent %%%1 -c vs]],
                 "--forward-search-file",
                 "%f",
