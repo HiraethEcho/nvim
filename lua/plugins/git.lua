@@ -20,7 +20,7 @@ return {
       { "<leader>hw", "<cmd>Gitsigns toggle_word_diff<cr>",                           desc = "toggle word diff" },
       -- { "<leader>hh" , "<cmd>Gitsigns get_hunks<cr>"    , desc = "get hunk list" } ,
     },
-    -- dependencies = { "akinsho/git-conflict.nvim" },
+    dependencies = { "akinsho/git-conflict.nvim" },
     config = function()
       require("gitsigns").setup({
         signcolumn = false, -- toggle with `:gitsigns toggle_signs`
@@ -46,7 +46,6 @@ return {
   },
   {
     "akinsho/git-conflict.nvim",
-    enabled = false,
     version = "*",
     config = function()
       require("git-conflict").setup({

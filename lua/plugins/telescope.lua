@@ -33,7 +33,7 @@ return {
 
 
       { "<leader>it", "<cmd>TodoTelescope<cr>",                                   desc = "Todo" },
-      -- { "<leader>is", "<cmd>Telescope possession list<cr>",                       desc = "sessions" },
+      { "<leader>is", "<cmd>Telescope possession list<cr>",                       desc = "sessions" },
       { "<leader>ih", "<cmd>Telescope help_tags<cr>",                             desc = "help tags" },
 
       { "<leader>ii", ":lua require'telescope.builtin'.builtin{}<cr>",            desc = "telescope builtin" },
@@ -200,14 +200,13 @@ return {
 ]]
         },
       })
-      -- require("telescope").load_extension("possession")
+      require("telescope").load_extension("possession")
       -- require('telescope').load_extension("bookmarks")
       -- require("telescope").load_extension("file_browser")
     end,
   },
   {
     "jedrzejboczar/possession.nvim",
-    enabled = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("possession").setup({

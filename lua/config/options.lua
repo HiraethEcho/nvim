@@ -16,7 +16,7 @@ opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true      -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
-opt.laststatus = 2
+opt.laststatus = 0
 --[[
   'laststatus' = 0  never a status line
   'laststatus' = 1  status line if there is more than one window
@@ -34,8 +34,7 @@ opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true  -- Round indent
 opt.shiftwidth = 2     -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true })
--- opt.showmode = false   -- Dont show mode since we have a statusline
-opt.showmode = true
+opt.showmode = false   -- Dont show mode since we have a statusline
 opt.sidescrolloff = 2  -- Columns of context
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true   -- Don't ignore case with capitals

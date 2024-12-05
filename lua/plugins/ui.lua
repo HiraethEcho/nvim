@@ -1,7 +1,7 @@
 return {
   { -- lazy.nvim
     "goolord/alpha-nvim",
-    enabled = false,
+    -- enabled = false,
     dependencies = {
       "jedrzejboczar/possession.nvim",
       -- "nvim-telescope/telescope.nvim",
@@ -284,7 +284,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    enabled = false,
+    -- enabled = false,
     event = "VimEnter",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -293,9 +293,9 @@ return {
     -- event = "BufRead",
     -- event = "VeryLazy",
     config = function()
-      --[[ local function session_name()
+      local function session_name()
         return require('possession.session').get_session_name() or ''
-      end ]]
+      end
       require("lualine").setup({
         options = {
           icons_enabled = true,
@@ -446,7 +446,7 @@ return {
           lualine_y = {
           },
           lualine_z = {
-            -- session_name,
+            session_name,
             -- "branch",
             --[[ {
               "tabs",
@@ -510,7 +510,7 @@ return {
   {
     "shellRaining/hlchunk.nvim",
     -- event = "BufRead",
-    enabled = false,
+    -- enabled = false,
     dependencies = {
       -- "rcarriga/nvim-notify",
       -- "petertriho/nvim-scrollbar",
@@ -597,7 +597,6 @@ return {
   },
   {
     "utilyre/sentiment.nvim",
-    enabled = false,
     version = "*",
     event = "InsertEnter", -- keep for lazy loading
     opts = {
@@ -614,7 +613,6 @@ return {
   },
   {
     "rcarriga/nvim-notify",
-    enabled = false,
     config = function()
       require("notify").setup({
         background_colour = "NotifyBackground",
@@ -683,7 +681,6 @@ return {
     "nvim-zh/colorful-winsep.nvim",
     enabled = false,
     config = true,
-    enabled = false,
-    event = { "WinLeave" },
+    event = { "BufRead", "BufNewFile" },
   },
 }

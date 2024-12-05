@@ -2,7 +2,6 @@ local vim = vim
 return {
   {
     "numToStr/Comment.nvim",
-    enabled = false,
     keys = {
       { "gcc", mode = "n",          desc = "Comment toggle current line" },
       { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
@@ -146,7 +145,6 @@ return {
   {
     'mvllow/modes.nvim',
     tag = 'v0.2.0',
-    enabled = false,
     event = "InsertEnter",
     config = function()
       require('modes').setup({
@@ -186,7 +184,6 @@ return {
   },
   {
     "folke/todo-comments.nvim",
-    enabled = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
       {
@@ -302,7 +299,6 @@ return {
   },
   {
     "folke/zen-mode.nvim",
-    enabled = false,
     keys = {
       { "<leader>z", "<cmd>ZenMode<cr>", desc = "toggle zen mode" },
     },
@@ -321,7 +317,6 @@ return {
   },
   {
     'mbbill/undotree',
-    enabled = false,
     keys = {
       { "U", "<cmd>UndotreeToggle<cr>", desc = "open undotree" }
     },
@@ -346,7 +341,6 @@ return {
   },
   {
     "voldikss/vim-translator",
-    enabled = false,
     cmd = "TranslateW",
     keys = {
       { "<leader>W", "<cmd>TranslateW<cr>", mode = { "n", "v" }, desc = "translate" },

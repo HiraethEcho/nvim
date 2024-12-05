@@ -7,6 +7,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "zbirenbaum/copilot.lua",
+      -- "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-path",
       -- "nvim-treesitter/nvim-treesitter",
       -- "micangl/cmp-vimtex",
@@ -69,7 +70,6 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    enabled = false,
     cmd = "Copilot",
     keys = { -- Example mapping to toggle outline
       { "<leader>cc", "<cmd>Copilot<CR>",        desc = "Copilot" },

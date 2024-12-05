@@ -3,13 +3,12 @@ return {
     "nvim-treesitter/nvim-treesitter",
     -- version = false, -- last release is way too old and doesn't work on Windows
     -- lazy = false,
-    enabled = false,
     cmd = "TSEnable",
     build = ":TSUpdate",
     -- event = "VeryLazy",
     -- event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      -- "kevinhwang91/nvim-ufo",
+      "kevinhwang91/nvim-ufo",
       -- "hiphish/rainbow-delimiters.nvim",
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
@@ -82,7 +81,6 @@ return {
   },
   {
     "kevinhwang91/nvim-ufo",
-    enabled = false,
     dependencies = "kevinhwang91/promise-async",
     config = function()
       require("ufo").setup({
@@ -108,7 +106,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    enabled = false,
+    -- enabled = false,
     cmd = "TSContextEnable",
     keys = {
       { "<leader>ut", "<cmd>TSContextEnable<cr>", desc = "toggle treesitter context" },
