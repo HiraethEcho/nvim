@@ -51,7 +51,7 @@ return {
         "c",
         "html",
         "lua",
-        -- "latex",  -- conflict with UltiSnips and math environment detected by vimtex
+        "latex",  -- conflict with UltiSnips and math environment detected by vimtex
         "markdown",
         "markdown_inline",
       },
@@ -109,7 +109,7 @@ return {
     -- enabled = false,
     cmd = "TSContextEnable",
     keys = {
-      { "<leader>ut", "<cmd>TSContextEnable<cr>", desc = "toggle treesitter context" },
+      { "<leader>ut", "<cmd>TSContextToggle<cr>", desc = "toggle treesitter context" },
     },
     opts = {
       max_lines = 3,
