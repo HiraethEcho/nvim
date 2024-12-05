@@ -1,5 +1,12 @@
 return {
   {
+ 'jbyuki/nabla.nvim',
+    lazy = false,
+    keys = {
+      { "<leader>p", "<cmd>lua require('nabla').popup()<cr>", desc = "Nabla popup" },
+    },
+  },
+  {
     "lervag/vimtex",
     ft = { "bib", "tex" },
     config = function()

@@ -1,4 +1,5 @@
 return {
+  {'edluffy/hologram.nvim'},
   { -- lazy.nvim
     "goolord/alpha-nvim",
     -- enabled = false,
