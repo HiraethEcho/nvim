@@ -59,18 +59,10 @@ return {
         sources = cmp.config.sources({
           { name = "ultisnips" }, -- For ultisnips users.
           -- { name = "vimtex" },
-          {
-            name = 'nvim_lsp',
-            option = {
-              markdown_oxide = {
-                keyword_pattern = [[\(\k\| \|\/\|#\)\+]]
-              }
-            }
-          },
+          { name = 'nvim_lsp' },
           { name = "copilot" },
           { name = "buffer",   option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end, }, },
           { name = "path" },
-          -- { name = 'nvim_lua' },
         }),
         experimental = {
           ghost_text = false, -- this feature conflict with copilot.vim's preview.
