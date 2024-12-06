@@ -51,7 +51,7 @@ return {
         "c",
         "html",
         "lua",
-        "latex",  -- conflict with UltiSnips and math environment detected by vimtex
+        -- "latex",  -- conflict with UltiSnips and math environment detected by vimtex
         "markdown",
         "markdown_inline",
       },
