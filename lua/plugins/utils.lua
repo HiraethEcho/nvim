@@ -1,6 +1,16 @@
 return {
   { "folke/lazy.nvim", version = "*" },
   {
+    'stevearc/quicker.nvim',
+    enabled = false,
+    lazy = false,
+    event = "FileType qf",
+    keys = {
+      { "<leader>x", function() require("quicker").toggle() end, desc = "toggle quicker" },
+    },
+    opts = {},
+  },
+  {
     "rhysd/nyaovim-mini-browser",
     enabled = false,
     event = "CmdlineEnter",
@@ -105,14 +115,14 @@ return {
     opts = { open_cmd = "noswapfile vnew" },
     -- stylua: ignore
     keys = {
-      { "<C-f>",     function() require("spectre").open_file_search() end,                                   desc = "toggle spectre" },
+      { "<C-f>",     function() require("spectre").open_file_search() end,                       desc = "toggle spectre" },
       { "<leader>s", function() require("spectre").open_file_search({ select_word = true }) end, mode = { "x", "v" },    desc = "search word on current file" },
     },
   },
   {
     'MagicDuck/grug-far.nvim',
     keys = {
-      { "<C-f>", "<cmd>GrugFar<cr>", desc = "Find and Replace" },
+      { "<C-f>",  function() require('grug-far').open({ prefills = { paths = vim.fn.expand("%") } }) end, desc = "search and replace" },
     },
     config = function()
       require('grug-far').setup({

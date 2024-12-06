@@ -1,5 +1,26 @@
 return {
-  {'edluffy/hologram.nvim'},
+  {
+    'mvllow/modes.nvim',
+    tag = 'v0.2.0',
+    event = "InsertEnter",
+    config = function()
+      require('modes').setup({
+        colors = {
+          bg = "", -- Optional bg param, defaults to Normal hl group
+          copy = "#f5c359",
+          delete = "#c75c6a",
+          insert = "#78ccc5",
+          visual = "#9745be",
+        },
+        -- Set opacity for cursorline and number background
+        line_opacity = 0.2,
+      })
+    end
+  },
+  {
+    'edluffy/hologram.nvim',
+    enabled = false,
+  },
   { -- lazy.nvim
     "goolord/alpha-nvim",
     -- enabled = false,

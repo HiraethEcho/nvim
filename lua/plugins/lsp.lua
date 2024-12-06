@@ -497,38 +497,49 @@ nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
   },
   {
     "folke/trouble.nvim",
-    enabled = false,
+    -- enabled = false,
     opts = {
+      modes = {
+        split = {
+          mode = "diagnostics",
+          preview = {
+            type = "split",
+            relative = "win",
+            position = "right",
+            size = 0.3,
+          },
+        },
+      },
     }, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
     keys = {
       {
-        "<leader>xx",
+        "<leader>XX",
         "<cmd>Trouble diagnostics toggle<cr>",
         desc = "Diagnostics (Trouble)",
       },
       {
-        "<leader>xX",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        "<leader>x",
+        "<cmd>Trouble diagnostics toggle filter.buf=0 focus=false<cr>",
         desc = "Buffer Diagnostics (Trouble)",
       },
       {
-        "<leader>cs",
+        "<leader>Xs",
         "<cmd>Trouble symbols toggle focus=false<cr>",
         desc = "Symbols (Trouble)",
       },
       {
-        "<leader>cl",
+        "<leader>Xl",
         "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
         desc = "LSP Definitions / references / ... (Trouble)",
       },
       {
-        "<leader>xL",
+        "<leader>XL",
         "<cmd>Trouble loclist toggle<cr>",
         desc = "Location List (Trouble)",
       },
       {
-        "<leader>xQ",
+        "<leader>XQ",
         "<cmd>Trouble qflist toggle<cr>",
         desc = "Quickfix List (Trouble)",
       },
