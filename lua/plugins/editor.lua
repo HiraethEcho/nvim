@@ -8,6 +8,7 @@ return {
   },
   {
     "lervag/vimtex",
+    enabled = false,
     ft = { "bib", "tex" },
     config = function()
       -- vim.g.vimtex_view_method = 'zathura'
