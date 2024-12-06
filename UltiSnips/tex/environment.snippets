@@ -134,13 +134,13 @@ endsnippet
 
 
 context "math()"
-snippet ceil "Ceil" wA
-\left\lceil $1 \right\rceil $0
+snippet upround "round up" wA
+\left\lceil ${1:${VISUAL}}  \right\rceil $0
 endsnippet
 
 context "math()"
-snippet floor "Floor" w
-\left\lfloor $1 \right\rfloor$0
+snippet downdown "round down" w
+\left\lfloor ${1:${VISUAL}} \right\rfloor$0
 endsnippet
 
 snippet xym "xymatrix" w
@@ -157,7 +157,7 @@ X\ar[rd] \ar[rr]$1 & & Y\ar[ld]$2 \\\\
 }
 endsnippet
 
-snippet roof "commonre solution" w
+snippet resolvemap "commonre solution" w
 \xymatrix{
 & W$1 \ar[ld]\ar[rd] &\\\\
 X\ar[rr]$2 & &Y$3 
