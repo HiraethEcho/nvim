@@ -1,20 +1,24 @@
 import string, vim, re
-texMathZones = ['texMathZone'+x for x in ['A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z']]
-
-texIgnoreMathZones = ['texMathText']
-
-texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
-texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
-
-ignore = texIgnoreMathZoneIds[0]
+# texMathZones = ['texMathZone'+x for x in ['A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z']]
+#
+# texIgnoreMathZones = ['texMathText']
+#
+# texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+# texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+#
+# ignore = texIgnoreMathZoneIds[0]
+#
+# def math():
+# 	synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+# 	try:
+# 		first = next(i for i in reversed(synstackids) if i in texIgnoreMathZoneIds or i in texMathZoneIds)
+# 		return first != ignore
+# 	except StopIteration:
+# 		return False
+# from https://github.com/CaesarOG/Vim-Latex-Zathura
 
 def math():
-	synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
-	try:
-		first = next(i for i in reversed(synstackids) if i in texIgnoreMathZoneIds or i in texMathZoneIds)
-		return first != ignore
-	except StopIteration:
-		return False
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
 def get_comment_format():
   """ Returns a 4-element tuple (first_line, middle_lines, end_line, indent)
@@ -34,7 +38,6 @@ def get_comment_format():
       return c[1:]
   return comments[0][:]
 
-
 def make_box(twidth, bwidth=None):
   b, m, e, i = (s.strip() for s in get_comment_format())
   m0 = m[0] if m else ''
@@ -49,7 +52,6 @@ def make_box(twidth, bwidth=None):
 def foldmarker():
   "Return a tuple of (open fold marker, close fold marker)"
   return vim.eval("&foldmarker").split(",")
-
 
 def display_width(str):
   """Return the required over-/underline length for str."""

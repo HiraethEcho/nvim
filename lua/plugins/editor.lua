@@ -1,14 +1,15 @@
 return {
   {
- 'jbyuki/nabla.nvim',
-    lazy = false,
+    'jbyuki/nabla.nvim',
+    -- lazy = false,
+    enabled = false,
     keys = {
       { "<leader>p", "<cmd>lua require('nabla').popup()<cr>", desc = "Nabla popup" },
     },
   },
   {
     "lervag/vimtex",
-    enabled = false,
+    -- enabled = false,
     ft = { "bib", "tex" },
     config = function()
       -- vim.g.vimtex_view_method = 'zathura'
