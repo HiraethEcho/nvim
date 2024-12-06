@@ -10,7 +10,17 @@ return {
       -- "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-path",
       -- "nvim-treesitter/nvim-treesitter",
-      "micangl/cmp-vimtex",
+      {
+        "micangl/cmp-vimtex",
+        opt = {
+          additional_information = {
+            info_in_menu = true,
+            info_in_window = true,
+            info_max_length = 20,
+            symbols_in_menu = false,
+          },
+        },
+      },
       { "SirVer/ultisnips", dependencies = { "quangnguyen30192/cmp-nvim-ultisnips", config = true, }, },
       -- "onsails/lspkind-nvim",
     },
