@@ -99,6 +99,7 @@ return {
   },
   {
     "nvim-pack/nvim-spectre",
+    enabled = false,
     build = false,
     cmd = "Spectre",
     opts = { open_cmd = "noswapfile vnew" },
@@ -110,6 +111,9 @@ return {
   },
   {
     'MagicDuck/grug-far.nvim',
+    keys = {
+      { "<C-f>", "<cmd>GrugFar<cr>", desc = "Find and Replace" },
+    },
     config = function()
       require('grug-far').setup({
         -- options, see Configuration section below
