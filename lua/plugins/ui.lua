@@ -362,12 +362,11 @@ return {
           },
           lualine_c = {
             -- "fancy_lsp_servers",
-            "fancy_diagnostics",
           },
           lualine_x = {
             "searchcount",
           },
-          -- lualine_y = { "filetype" },
+          lualine_y = { "filetype" },
           lualine_z = {
             "progress",
             "location",
@@ -418,8 +417,9 @@ return {
           },
           lualine_b = {
             "fancy_lsp_servers",
+            "fancy_diagnostics",
           },
-          lualine_x = { "filetype" },
+          -- lualine_x = { "filetype" },
         },
         tabline = {
           lualine_a = {
