@@ -73,5 +73,5 @@ opt.swapfile = false
 opt.foldmethod = "expr"
 vim.o.foldexpr = "vimtex#fold#level(v:lnum)"
 vim.o.foldtext = "vimtex#fold#text()"
--- opt.foldlevel = 99
+opt.foldlevel = 5
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
