@@ -6,9 +6,7 @@ return {
     config = function()
       -- vim.g.vimtex_view_method = 'zathura'
       vim.g.vimtex_view_method = "sioyek"
-      -- vim.g.vimtex_mappings_enabled = 0
       --nmap <localleader>ll <Plug>(vimtex-compile)
-      -- vim.g.vimtex_imaps_enabled = 0
       vim.g.vimtex_imaps_leader = ';'
 
       -- this works
@@ -19,6 +17,19 @@ return {
       vim.g.vimtex_syntax_enabled = 0
       vim.g.vimtex_syntax_conceal_disable = 1
       vim.g.vimtex_fold_enabled = 1
+
+-- vim.g.vimtex_indent_enabled = 0           -- turn off vimtex indentation
+-- vim.g.vimtex_mappings_enabled = 0         -- disable default mappings
+-- vim.g.vimtex_imaps_enabled = 0            -- disable insert mode mappings (I use UltiSnips)
+-- vim.g.vimtex_complete_enabled = 0         -- turn off completion (not currently used so more efficient to turn off)
+-- vim.g.vimtex_syntax_conceal_disable = 1   -- disable syntax conceal
+-- vim.g.vimtex_fold_enabled= 1
+-- vim.g.vimtex_fold_manual=0
+-- vim.g.vimtex_fold_levelmarker      =1
+-- vim.g.vimtex_fold_types            =1
+-- vim.g.vimtex_fold_types_defaults   =1
+-- vim.g.vimtex_fold_bib_enabled      =1
+-- vim.g.vimtex_fold_bib_max_key_width=1
 
       vim.g.vimtex_toc_config = {
         name = "TOC",
@@ -47,7 +58,7 @@ return {
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
     -- enabled = false,
-    ft = { "markdown" },
+    -- ft = { "markdown" },
     keys = {
       { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
     },
@@ -65,7 +76,7 @@ return {
   },
   {
     'MeanderingProgrammer/render-markdown.nvim',
-    ft = { "markdown", "md" },
+    -- ft = { "markdown", "md" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle" },
     },

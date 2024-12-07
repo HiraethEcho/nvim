@@ -91,10 +91,15 @@ return {
                   { noremap = true, silent = true, buffer = bufnr, desc = "lsp rename" })
                 vim.keymap.set("n", "gA", function() vim.lsp.buf.code_action() end,
                   { noremap = true, silent = true, buffer = bufnr, desc = "lsp action" })
+                -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true, buffer = bufnr, desc = "lsp goto definition" })
+                vim.keymap.set("n", "K", vim.lsp.buf.hover,
+                  { noremap = true, silent = true, buffer = bufnr, desc = "lsp hover" })
+                -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true, buffer = bufnr, desc = "lsp references" })
                 if server_name == "texlab" then
-                  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-                  vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>", bufopts)
-                  vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>", bufopts)
+                  vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>",
+                    { noremap = true, silent = true, buffer = bufnr, desc = "texlab build" })
+                  vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>",
+                    { noremap = true, silent = true, buffer = bufnr, desc = "texlab forward" })
                 end
               end,
             })
