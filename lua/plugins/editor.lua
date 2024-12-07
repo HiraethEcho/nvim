@@ -1,13 +1,5 @@
 return {
   {
-    'jbyuki/nabla.nvim',
-    -- lazy = false,
-    enabled = false,
-    keys = {
-      { "<leader>p", "<cmd>lua require('nabla').popup()<cr>", desc = "Nabla popup" },
-    },
-  },
-  {
     "lervag/vimtex",
     -- enabled = false,
     ft = { "bib", "tex" },
@@ -136,62 +128,20 @@ return {
     -- lazy=false,
     config = function()
       require("mkdnflow").setup({
-        modules = {
-          bib = true,
-          buffers = true,
-          conceal = true,
-          cursor = true,
-          folds = true,
-          links = true,
-          lists = true,
-          maps = true,
-          paths = true,
-          tables = true,
-          yaml = true,
-        },
-        filetypes = { md = true, rmd = true, markdown = true },
-        create_dirs = true,
         perspective = {
-          priority = "current",
+          priority = "root",
           fallback = "current",
-          root_tell = false,
-          nvim_wd_heel = true,
+          root_tell = ".obsidian",
+          nvim_wd_heel = false,
           update = true,
         },
-        wrap = false,
-        bib = {
-          default_path = nil,
-          find_in_root = true,
-        },
         silent = false,
-        links = {
-          style = "markdown",
-          conceal = false,
-          context = 0,
-          implicit_extension = nil,
-          transform_implicit = false,
-          transform_explicit = function(text)
-            text = text:gsub(" ", "-")
-            text = text:lower()
-            -- text = text..os.date('_%Y-%m-%d')
-            return text
-          end,
-        },
         to_do = {
           symbols = { " ", "x" },
           update_parents = true,
           not_started = " ",
           -- in_progress = "-",
           complete = "x",
-        },
-        tables = {
-          trim_whitespace = true,
-          format_on_move = true,
-          auto_extend_rows = false,
-          auto_extend_cols = false,
-        },
-        yaml = {
-          bib = { override = false },
         },
         mappings = {
           MkdnTab = { "i", "<c-l>" },
@@ -424,5 +374,13 @@ return {
       require("obsidian").setup(opts)
       -- see also: 'follow_url_func' config option above.
     end,
+  },
+  {
+    'jbyuki/nabla.nvim',
+    -- lazy = false,
+    enabled = false,
+    keys = {
+      { "<leader>p", "<cmd>lua require('nabla').popup()<cr>", desc = "Nabla popup" },
+    },
   },
 }
