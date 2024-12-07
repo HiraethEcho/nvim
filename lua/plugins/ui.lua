@@ -334,8 +334,9 @@ return {
           },
         },
         sections = {
-          lualine_a = {
+          lualine_c = {
             -- "mode",
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
               file_status = true,    -- Displays file status (readonly status, modified status)
@@ -357,16 +358,16 @@ return {
           },
           lualine_b = {
             -- "diff",
-            "branch",
             "fancy_diff",
           },
-          lualine_c = {
+          lualine_a = {
+            "branch",
             -- "fancy_lsp_servers",
           },
           lualine_x = {
             "searchcount",
           },
-          lualine_y = { "filetype" },
+          -- lualine_y = { "filetype" },
           lualine_z = {
             "progress",
             "location",
