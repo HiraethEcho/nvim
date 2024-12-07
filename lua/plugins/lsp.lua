@@ -37,19 +37,23 @@ return {
               forwardSearchAfter = false,
             },
             forwardSearch = {
-              executable = "sioyek",
+              --[[ executable = "sioyek",
               args = {
                 "--reuse-window",
-                -- "--execute-command", "toggle_synctex", -- Open Sioyek in synctex mode.
                 "--inverse-search",
                 vim.fn.stdpath("data") .. "/mason/bin/texlab inverse-search -i %%1 -l %%2",
-                -- [[nvim --server ]] .. vim.v.servername .. [[ --remote-send ":e %%%1<cr>:%%%2<cr>"]],
-                -- [[nvr --server ]] .. vim.v.servername .. [[ --remote-silent %%%1 -c vs]],
                 "--forward-search-file",
                 "%f",
                 "--forward-search-line",
                 "%l",
                 "%p",
+              }, ]]
+              executable = "zathura",
+              args = {
+                "--synctex-forward",
+                "%l:1:%f", "%p",
+                -- "--synctex-editor-command",
+                -- vim.fn.stdpath("data") .. "/mason/bin/texlab inverse-search -i %{input} -l %{line}",
               },
             },
             chktex = {
@@ -75,11 +79,17 @@ return {
         -- html     = {},
         clangd   = {},
       }
-      -- require("lspconfig").html.setup({
-      --   filetypes = { "md","markdown", "html" },
-      -- })
+      require("lspconfig").texlab.setup({
+        settings = servers.texlab,
+        on_attach = function(client, bufnr)
+          vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>",
+            { noremap = true, silent = true, buffer = bufnr, desc = "texlab build" })
+          vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>",
+            { noremap = true, silent = true, buffer = bufnr, desc = "texlab forward" })
+        end,
+      })
       require("mason-lspconfig").setup({
-        ensure_installed = vim.tbl_keys(servers),
+        -- ensure_installed = vim.tbl_keys(servers),
         handlers = {
           function(server_name)
             require("lspconfig")[server_name].setup({
