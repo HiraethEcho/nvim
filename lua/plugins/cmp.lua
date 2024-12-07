@@ -10,18 +10,8 @@ return {
       -- "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-path",
       -- "nvim-treesitter/nvim-treesitter",
-      {
-        "micangl/cmp-vimtex",
-        opt = {
-          additional_information = {
-            info_in_menu = true,
-            info_in_window = true,
-            info_max_length = 20,
-            symbols_in_menu = false,
-          },
-        },
-      },
-      { "SirVer/ultisnips", dependencies = { "quangnguyen30192/cmp-nvim-ultisnips", config = true, }, },
+      { "micangl/cmp-vimtex", },
+      { "SirVer/ultisnips",   dependencies = { "quangnguyen30192/cmp-nvim-ultisnips", config = true, }, },
       -- "onsails/lspkind-nvim",
     },
     config = function()
@@ -39,18 +29,20 @@ return {
         mapping = {
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
-          ["<Tab>"] = cmp.mapping(
+          ["<c-j>"] = cmp.mapping(
             function(fallback)
               cmp_ultisnips_mappings.jump_forwards(fallback)
             end,
             { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
           ),
-          ["<S-Tab>"] = cmp.mapping(
+          ["<c-k>"] = cmp.mapping(
             function(fallback)
               cmp_ultisnips_mappings.jump_backwards(fallback)
             end,
             { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
           ),
+          ["<Tab>"] = cmp.mapping.select_next_item(fallback),
+          ["<S-Tab>"] = cmp.mapping.select_prev_item(fallback),
           ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         },
         sources = cmp.config.sources({
