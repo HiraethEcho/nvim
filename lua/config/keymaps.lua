@@ -85,20 +85,19 @@ map("v", ">", ">gv")
 -- lazy
 -- map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 -- map("n", "<leader>uf", require("lazyvim.plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
--- map("n", "<leader>uw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>uw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
 -- map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
--- map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
--- map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
--- map("n", "<leader>ul", function() Util.toggle("number") end, { desc = "Toggle Line Numbers" })
--- map("n", "<leader>ur", function() Util.toggle("relativenumber") end, { desc = "Toggle Line Relative Numbers" })
+map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
+map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
+map("n", "<leader>ul", function() Util.toggle("number") end, { desc = "Toggle Line Numbers" })
+map("n", "<leader>ur", function() Util.toggle("relativenumber") end, { desc = "Toggle Line Relative Numbers" })
 -- local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
--- map("n", "<leader>uc", function() Util.toggle("conceallevel", false, { 0, conceallevel }) end, { desc = "Toggle Conceal" })
+map("n", "<leader>uc", function() Util.toggle("conceallevel", false, { 0, conceallevel }) end, { desc = "Toggle Conceal" })
 
--- map("n", "<leader>uI", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
+map("n", "<leader>uI", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
 
 -- lazygit
--- map("n", "<leader>gg", function() Util.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit " })
-
+map("n", "<leader>gg", function() Util.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit " })
 -- quit
 map("n", "<leader>q", "<cmd>wqa<cr>", { desc = "Quit all" })
 
@@ -106,7 +105,7 @@ map("n", "<leader>q", "<cmd>wqa<cr>", { desc = "Quit all" })
 local lazyterm = function()
   Util.float_term("zsh", { esc_esc = true, ctrl_hjkl = false })
 end
--- map("n", "<leader>t", lazyterm, { desc = "Float Terminal" })
+map("n", "<leader>t", lazyterm, { desc = "Float Terminal" })
 
 -- Terminal Mappings
 map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
