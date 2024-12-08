@@ -278,17 +278,17 @@ return {
     config = function()
       require('jabs').setup({
         -- options
-        position = 'center',   -- left or right
+        position = 'center',     -- left or right
         symbols = {
-          current = "C",       -- default 
-          split = "S",         -- default 
-          alternate = "A",     -- default 
-          hidden = "H",        -- default ﬘
-          locked = "L",        -- default 
-          ro = "R",            -- default 
-          edited = "E",        -- default 
-          terminal = "T",      -- default 
-          default_file = "D",  -- Filetype icon if not present in nvim-web-devicons. Default 
+          current = "C",         -- default 
+          split = "S",           -- default 
+          alternate = "A",       -- default 
+          hidden = "H",          -- default ﬘
+          locked = "L",          -- default 
+          ro = "R",              -- default 
+          edited = "E",          -- default 
+          terminal = "T",        -- default 
+          default_file = "D",    -- Filetype icon if not present in nvim-web-devicons. Default 
           terminal_symbol = ">_" -- Filetype icon for a terminal split. Default 
         },
         keymap = {
@@ -353,6 +353,17 @@ return {
     dependencies = {
       -- "luukvbaal/statuscol.nvim",
       "kevinhwang91/promise-async",
+      {
+        -- enabled = false,
+        'yaocccc/nvim-foldsign',
+        opts = {
+          foldsigns = {
+            open = '', -- mark the beginning of a fold
+            close = '', -- show a closed fold
+            seps = { '│', '┃' }, -- open fold middle marker
+          }
+        },
+      },
     },
     keys = {
       { "zR", function() require('ufo').openAllFolds() end,               desc = "Open All Folds" },
@@ -362,7 +373,8 @@ return {
       { "PP", function() require('ufo').peekFoldedLinesUnderCursor() end, desc = "Peek Folded Lines Under Cursor" },
     },
     config = function()
-      vim.o.foldcolumn = 'auto:1' -- '0' is not bad
+      -- vim.o.foldcolumn = 'auto:3' -- '0' is not bad
+      vim.o.foldcolumn = '1' -- '0' is not bad
       vim.o.foldenable = true
       vim.o.foldlevel = 99        -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
