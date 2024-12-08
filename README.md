@@ -22,7 +22,7 @@ I am using lazy.nvim as my plugins manager. Plugins are divided in serval classe
 
 - edit: enhance for editing
   - [mini.surround](https://github.com/echasnovski/mini.surround),
-  - [mini.align](https://github.com/eccasnovski/mini.align),
+  - [mini.align](https://github.com/echasnovski/mini.align),
   - [mini.splitjoin](https://github.com/echasnovski/mini.splitjoin),
   - [fcitx.nvim](https://github.com/smartding/fcitx.nvim), 中文输入自动切换
   - [nvim-autopairs](https://github.com/windwp/nvim-autopairs),

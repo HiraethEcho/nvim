@@ -376,7 +376,7 @@ return {
       -- vim.o.foldcolumn = 'auto:3' -- '0' is not bad
       vim.o.foldcolumn = '1' -- '0' is not bad
       vim.o.foldenable = true
-      vim.o.foldlevel = 99        -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       local function customizeSelector(bufnr)
@@ -420,5 +420,29 @@ return {
     config = function()
       require('pretty-fold').setup()
     end
+  },
+  {
+    "axieax/urlview.nvim",
+    -- enabled = false,
+    -- lazy = false,
+    cmd = "UrlView",
+    opts = {
+      default_picker = "telescope",
+    },
+  },
+  {
+    "sontungexpt/url-open",
+    -- enabled = false,
+    branch = "mini",
+    keys = {
+      { "gx", "<esc>:URLOpenUnderCursor<cr>", desc = "Open URL under cursor" },
+    },
+    config = function()
+      local status_ok, url_open = pcall(require, "url-open")
+      if not status_ok then
+        return
+      end
+      url_open.setup({})
+    end,
   },
 }
