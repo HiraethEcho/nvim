@@ -129,6 +129,10 @@ return {
     end
   },
   {
+    'eandrju/cellular-automaton.nvim',
+    cmd = "CellularAutomaton",
+  },
+  {
     "stevearc/dressing.nvim",
     enabled = false,
     event = "BufReadPost",

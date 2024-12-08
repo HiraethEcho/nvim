@@ -82,6 +82,8 @@ return {
           ["<cr>"] = "open",
           -- ["<esc>"] = "revert_preview",
           ["P"] = { "toggle_preview", config = { use_float = true } },
+          ["<C-u>"] = { "scroll_preview", config = {direction = 10} },
+          ["<C-d>"] = { "scroll_preview", config = {direction = -10} },
           ["<space>"] = "focus_preview",
           ["s"] = "open_split",
           ["v"] = "open_vsplit",
@@ -115,11 +117,11 @@ return {
           ["H"] = "set_root",
           -- ["H"] = "toggle_hidden",
           ["zh"] = "toggle_hidden",
-          ["/"] = "fuzzy_finder",
+          -- ["/"] = "fuzzy_finder",
           -- ["D"] = "fuzzy_finder_directory",
-          ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
+          -- ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
           -- ["D"] = "fuzzy_sorter_directory",
-          ["f"] = "filter_on_submit",
+          ["/"] = "filter_on_submit",
           ["<c-x>"] = "clear_filter",
           ["[g"] = "prev_git_modified",
           ["]g"] = "next_git_modified",
