@@ -12,6 +12,7 @@ return {
     },
     dependencies = {
       -- { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+      "rachartier/tiny-inline-diagnostic.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       -- "nvimdev/guard.nvim",
@@ -525,5 +526,22 @@ return {
         desc = "Quickfix List (Trouble)",
       },
     },
+  },
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "LspAttach", -- Or `LspAttach`
+    priority = 1000,     -- needs to be loaded in first
+    config = function()
+      vim.diagnostic.config({ virtual_text = false })
+      require("tiny-inline-diagnostic").setup({
+        preset = "powerline", -- Can be: "modern", "classic", "minimal", "powerline", ghost", "simple", "nonerdfont", "amongus"
+        options = {
+          -- Show the source of the diagnostic.
+          show_source = true,
+          -- If multiple diagnostics are under the cursor, display all of them.
+          multiple_diag_under_cursor = true,
+        },
+      })
+    end
   },
 }
