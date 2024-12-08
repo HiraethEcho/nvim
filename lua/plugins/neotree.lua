@@ -33,6 +33,10 @@ return {
     opts = {
       filesystem = {
         bind_to_cwd = true,
+        follow_current_file = {
+          enabled = true,          -- This will find and focus the file in the active buffer every time the current file is changed while the tree is open.
+          leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+        },
       },
       sources = { "filesystem", "buffers", "git_status", "document_symbols" },
       commands = {
@@ -44,7 +48,6 @@ return {
           local filepath = node:get_id()
           local filename = node.name
           local modify = vim.fn.fnamemodify
-
           local results = {
             f = { val = filename, msg = "Filename" },
             F = { val = modify(filename, ":r"), msg = "Filename w/o extension" },
@@ -82,8 +85,8 @@ return {
           ["<cr>"] = "open",
           -- ["<esc>"] = "revert_preview",
           ["P"] = { "toggle_preview", config = { use_float = true } },
-          ["<C-u>"] = { "scroll_preview", config = {direction = 10} },
-          ["<C-d>"] = { "scroll_preview", config = {direction = -10} },
+          ["<C-u>"] = { "scroll_preview", config = { direction = 10 } },
+          ["<C-d>"] = { "scroll_preview", config = { direction = -10 } },
           ["<space>"] = "focus_preview",
           ["s"] = "open_split",
           ["v"] = "open_vsplit",
@@ -107,24 +110,41 @@ return {
           ["d"] = "",
           ["z"] = "",
           ["p"] = "paste_from_clipboard",
-          -- ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
-          -- ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
           ["q"] = "close_window",
           ["<esc>"] = "close_window",
           ["R"] = "refresh",
           ["?"] = "show_help",
           ["<bs>"] = "navigate_up",
           ["H"] = "set_root",
-          -- ["H"] = "toggle_hidden",
           ["zh"] = "toggle_hidden",
-          -- ["/"] = "fuzzy_finder",
-          -- ["D"] = "fuzzy_finder_directory",
-          -- ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
-          -- ["D"] = "fuzzy_sorter_directory",
-          ["/"] = "filter_on_submit",
+          ["f"] = "filter_on_submit",
           ["<c-x>"] = "clear_filter",
           ["[g"] = "prev_git_modified",
           ["]g"] = "next_git_modified",
+        },
+        fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
+          ["<C-j>"] = "move_cursor_down",
+          ["<C-k>"] = "move_cursor_up",
+          -- ['<key>'] = function(state, scroll_padding) ... end,
+        },
+      },
+      buffers = {
+        follow_current_file = {
+          enabled = true,          -- This will find and focus the file in the active buffer every time
+          leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+        },
+        window = {
+          mappings = {
+            ["d"] = "buffer_delete",
+            ["<bs>"] = "navigate_up",
+            ["z"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+            ["zc"] = { "order_by_created", nowait = false },
+            ["zd"] = { "order_by_diagnostics", nowait = false },
+            ["zm"] = { "order_by_modified", nowait = false },
+            ["zn"] = { "order_by_name", nowait = false },
+            ["zs"] = { "order_by_size", nowait = false },
+            ["zt"] = { "order_by_type", nowait = false },
+          }
         },
       },
       default_component_configs = {
