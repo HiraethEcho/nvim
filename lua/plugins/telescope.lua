@@ -8,7 +8,7 @@ return {
       { "<leader>ff", "<cmd>Telescope find_files<cr>",                            desc = "files" },
       { "<leader>fh", "<cmd>Telescope oldfiles<cr>",                              desc = "history files" },
       { "<leader>fg", "<cmd>Telescope grep_string<cr>",                           desc = "grep string" },
-      { "<leader>b",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
+      -- { "<leader>b",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
 
       -- { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<cr>",             desc = "current buffer fuzzy find", },
       { "<leader>/",  "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },

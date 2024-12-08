@@ -1,7 +1,5 @@
 # NVIM
 
-This is my nvim.
-
 ## Usage
 
 I'm using nvim as a code editor, mainly for latex and markdown.

@@ -270,6 +270,35 @@ return {
     cmd = "AWStart",
   },
   {
+    'matbme/JABS.nvim',
+    -- lazy = false,
+    keys = {
+      { "<leader>b", "<cmd>JABSOpen<cr>", desc = "buffer lists" },
+    },
+    config = function()
+      require('jabs').setup({
+        -- options
+        position = 'center',   -- left or right
+        symbols = {
+          current = "C",       -- default 
+          split = "S",         -- default 
+          alternate = "A",     -- default 
+          hidden = "H",        -- default ﬘
+          locked = "L",        -- default 
+          ro = "R",            -- default 
+          edited = "E",        -- default 
+          terminal = "T",      -- default 
+          default_file = "D",  -- Filetype icon if not present in nvim-web-devicons. Default 
+          terminal_symbol = ">_" -- Filetype icon for a terminal split. Default 
+        },
+        keymap = {
+          close = "d",   -- Close buffer. Default D
+          preview = "p", -- Open buffer preview. Default P
+        },
+      })
+    end,
+  },
+  {
     "ghillb/cybu.nvim",
     branch = "main", -- timely updates
     enabled = false,
@@ -335,7 +364,7 @@ return {
     config = function()
       vim.o.foldcolumn = 'auto:1' -- '0' is not bad
       vim.o.foldenable = true
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevel = 99        -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       local function customizeSelector(bufnr)
