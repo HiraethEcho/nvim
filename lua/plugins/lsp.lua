@@ -21,7 +21,12 @@ return {
     config = function()
       -- An example nvim-lspconfig capabilities setting
       -- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
+      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true
+      }
       local servers = {
         -- textlsp = {},
         -- grammarly = {},
@@ -32,16 +37,16 @@ return {
         texlab   = {
           texlab = {
             build = {
-              executable = 'xelatex',
+              -- executable = 'xelatex',
               onSave = true,
               forwardSearchAfter = false,
             },
             forwardSearch = {
               executable = "sioyek",
+              -- vim.fn.stdpath("data") .. "/mason/bin/texlab inverse-search -i %%1 -l %%2",
               args = {
                 "--reuse-window",
                 "--inverse-search",
-                -- vim.fn.stdpath("data") .. "/mason/bin/texlab inverse-search -i %%1 -l %%2",
                 "texlab inverse-search -i %%1 -l %%2",
                 "--forward-search-file",
                 "%f",
@@ -80,23 +85,13 @@ return {
         -- html     = {},
         clangd   = {},
       }
-      --
-      --[[ require("lspconfig").texlab.setup({
-        settings = servers.texlab,
-        on_attach = function(client, bufnr)
-          vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>",
-            { noremap = true, silent = true, buffer = bufnr, desc = "texlab build" })
-          vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>",
-            { noremap = true, silent = true, buffer = bufnr, desc = "texlab forward" })
-        end,
-      }) ]]
-      --
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(servers),
         handlers = {
           function(server_name)
             require("lspconfig")[server_name].setup({
-              capabilities = require("cmp_nvim_lsp").default_capabilities(),
+              -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
+              capabilities = capabilities,
               settings = servers[server_name],
               on_attach = function(client, bufnr)
                 require("nvim-navic").attach(client, bufnr)
@@ -251,7 +246,7 @@ return {
         peek_location = 'o',
         goto_and_close = '<Cr>',
         restore_location = '<C-g>',
-        hover_symbol = 'K',
+        -- hover_symbol = 'K',
         toggle_preview = 'p',
         fold_all = 'zM',
         unfold_all = 'zR',
@@ -470,38 +465,6 @@ return {
         underline = false,
       })
     end,
-  },
-  {
-    "rmagatti/goto-preview",
-    enabled = false,
-    -- event = "BufEnter",
-    event = "LspAttach",
-    -- config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
-    config = function()
-      require('goto-preview').setup {
-        width = 120, -- Width of the floating window
-        height = 15, -- Height of the floating window
-        border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" }, -- Border characters of the floating window
-        default_mappings = true, -- Bind default mappings
-        debug = false, -- Print debug information
-        opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
-        resizing_mappings = true, -- Binds arrow keys to resizing the floating window.
-        post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
-        post_close_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
-        -- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
-        dismiss_on_move = false, -- Dismiss the floating window when moving the cursor.
-        force_close = true, -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
-        bufhidden = "wipe", -- the bufhidden option to set on the floating window. See :h bufhidden
-      }
-    end,
-    --[[
-nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
-nnoremap gpt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
-nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
-nnoremap gpD <cmd>lua require('goto-preview').goto_preview_declaration()<CR>
-nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
-nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
-]]
   },
   {
     "jinzhongjia/LspUI.nvim",

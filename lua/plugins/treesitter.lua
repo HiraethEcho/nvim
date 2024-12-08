@@ -3,13 +3,14 @@ return {
     "nvim-treesitter/nvim-treesitter",
     -- version = false, -- last release is way too old and doesn't work on Windows
     -- lazy = false,
-    cmd = "TSEnable",
+    -- cmd = "TSEnable",
     build = ":TSUpdate",
     -- event = "VeryLazy",
     -- event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      "kevinhwang91/nvim-ufo",
+      -- "kevinhwang91/nvim-ufo",
       -- "hiphish/rainbow-delimiters.nvim",
+    -- 'anuvyklack/pretty-fold.nvim',
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
         enabled = false,
@@ -77,31 +78,6 @@ return {
         end, opts.ensure_installed)
       end
       require("nvim-treesitter.configs").setup(opts)
-    end,
-  },
-  {
-    "kevinhwang91/nvim-ufo",
-    dependencies = "kevinhwang91/promise-async",
-    config = function()
-      require("ufo").setup({
-        provider_selector = function(bufnr, filetype, buftype)
-          return { "treesitter", "indent" }
-        end,
-        open_fold_hl_timeout = 100,
-        preview = {
-          win_config = {
-            border = { "", "─", "", "", "", "─", "", "" },
-            winhighlight = "Normal:Folded",
-            winblend = 0,
-          },
-          mappings = {
-            scrollU = "<C-u>",
-            scrollD = "<C-d>",
-            jumpTop = "[",
-            jumpBot = "]",
-          },
-        },
-      })
     end,
   },
   {

@@ -70,8 +70,6 @@ opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
 
-opt.foldmethod = "expr"
-vim.o.foldexpr = "vimtex#fold#level(v:lnum)"
-vim.o.foldtext = "vimtex#fold#text()"
-opt.foldlevel = 5
+-- opt.foldmethod = "expr"
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- opt.foldlevel = 99

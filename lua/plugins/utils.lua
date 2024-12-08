@@ -318,4 +318,64 @@ return {
       vim.keymap.set("n", "<tab>", "<plug>(CybuNext)")
     end,
   },
+  {
+    "kevinhwang91/nvim-ufo",
+    -- enabled = false,
+    dependencies = "kevinhwang91/promise-async",
+    keys = {
+      { "zR", function() require('ufo').openAllFolds() end,         desc = "Open All Folds" },
+      { "zM", function() require('ufo').closeAllFolds() end,        desc = "Close All Folds" },
+      { "zr", function() require('ufo').openFoldsExceptKinds() end, desc = "Open Folds Except Kinds" },
+      { "zm", function() require('ufo').closeFoldsWith() end,       desc = "Close Folds With" },
+      -- { "za", "<cmd>UfoEnable<cr>",                                 desc = "Enable UFO" },
+      { "PP", function() require('ufo').peekFoldedLinesUnderCursor() end, desc = "Peek Folded Lines Under Cursor" },
+    },
+    config = function()
+      vim.o.foldcolumn = '1' -- '0' is not bad
+      vim.o.foldenable = true
+      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevelstart = 99
+      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+      local function customizeSelector(bufnr)
+        local function handleFallbackException(err, providerName)
+          if type(err) == 'string' and err:match('UfoFallbackException') then
+            return require('ufo').getFolds(bufnr, providerName)
+          else
+            return require('promise').reject(err)
+          end
+        end
+        return require('ufo').getFolds(bufnr, 'lsp'):catch(function(err)
+          return handleFallbackException(err, 'treesitter')
+        end):catch(function(err)
+          return handleFallbackException(err, 'indent')
+        end)
+      end
+      require("ufo").setup({
+        provider_selector = function(bufnr, filetype, buftype)
+          return customizeSelector
+        end,
+        preview = {
+          mappings = {
+            scrollU = "<C-u>",
+            scrollD = "<C-d>",
+            jumpTop = "[",
+            jumpBot = "]",
+          },
+        },
+      })
+      --[[ vim.keymap.set('n', 'K', function()
+        local winid = require('ufo').peekFoldedLinesUnderCursor()
+        if not winid then
+          vim.lsp.buf.hover()
+        end
+      end) ]]
+    end,
+  },
+  {
+    'anuvyklack/pretty-fold.nvim',
+    -- lazy = false,
+    config = function()
+      require('pretty-fold').setup()
+    end
+  },
 }
