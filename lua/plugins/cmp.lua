@@ -6,12 +6,22 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "zbirenbaum/copilot.lua",
+      -- "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-path",
       -- "nvim-treesitter/nvim-treesitter",
       { "micangl/cmp-vimtex", },
       { "SirVer/ultisnips",   dependencies = { "quangnguyen30192/cmp-nvim-ultisnips", config = true, }, },
       -- "onsails/lspkind-nvim",
+      {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+          library = {
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          },
+        },
+      },
     },
     config = function()
       local cmp = require("cmp")
@@ -52,6 +62,7 @@ return {
           { name = "copilot" },
           { name = "buffer",   option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end, }, },
           { name = "path" },
+          { name = "lazydev",  group_index = 0, },
         }),
         experimental = {
           ghost_text = false, -- this feature conflict with copilot.vim's preview.

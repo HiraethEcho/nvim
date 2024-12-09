@@ -16,7 +16,7 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       -- "nvimdev/guard.nvim",
-      "hrsh7th/cmp-nvim-lsp",
+      -- "hrsh7th/cmp-nvim-lsp",
       "kevinhwang91/nvim-ufo",
       -- "SmiteshP/nvim-navbuddy",
     },
