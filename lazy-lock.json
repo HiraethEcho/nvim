@@ -86,6 +86,7 @@
   "quicker.nvim": { "branch": "master", "commit": "049d66534d3de5920663ee1b8dd0096d70f55a67" },
   "render-markdown.nvim": { "branch": "main", "commit": "3d2dc15542e56671dd14dfbfff63434ec21d8fcd" },
   "sentiment.nvim": { "branch": "main", "commit": "54a6db15b630eccfa98c32a76baf90f21c6f1e40" },
+  "signup.nvim": { "branch": "main", "commit": "2b21a2aa51efbdeb9454a3f5d62659368d87d420" },
   "snacks.nvim": { "branch": "main", "commit": "974bccb126b6b5d7170c519c380207069d23f557" },
   "snippet-converter.nvim": { "branch": "main", "commit": "d7e783618f02541641980ebd823e439bdef64a4f" },
   "statuscol.nvim": { "branch": "main", "commit": "d6f7f5437c5404d958b88bb73e0721b1c0e09223" },

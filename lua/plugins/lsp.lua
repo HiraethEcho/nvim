@@ -18,11 +18,30 @@ return {
       -- "nvimdev/guard.nvim",
       -- "hrsh7th/cmp-nvim-lsp",
       "kevinhwang91/nvim-ufo",
-      -- "SmiteshP/nvim-navbuddy",
+      {
+        "Dan7h3x/signup.nvim",
+        branch = "main",
+        opts = {
+          number = true,
+          winblend = 10,
+          trigger_chars = { "(", "," },
+          max_height = 10,
+          max_width = 40,
+          floating_window_above_cur_line = true,
+          preview_parameters = true,
+          dock_toggle_key = "<Leader>sd",
+          toggle_key = "<C-k>",
+          dock_mode = {
+            enabled = true,
+            position = "bottom",
+            height = 3,
+            padding = 1,
+          },
+        },
+      },
     },
     config = function()
       -- An example nvim-lspconfig capabilities setting
-      -- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
       -- local capabilities = vim.lsp.protocol.make_client_capabilities()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       capabilities.textDocument.foldingRange = {
@@ -69,7 +88,7 @@ return {
               onEdit = false,
             },
             bibtexFormatter = "texlab",
-            latexFormatter = "latexindent",
+            latexFormatter = "texlab",
             formatterLineLength = 80,
           },
         },
@@ -268,8 +287,6 @@ return {
     config = function()
       local actions = require('glance').actions
       require('glance').setup({
-        height = 18, -- Height of the window
-        zindex = 45,
 
         -- By default glance will open preview "embedded" within your active window
         -- when `detached` is enabled, glance will render above all existing windows
@@ -282,11 +299,6 @@ return {
         --   return vim.api.nvim_win_get_width(winid) < 100
         -- end,
 
-        border = {
-          enable = true, -- Show window borders. Only horizontal borders allowed
-          top_char = '―',
-          bottom_char = '―',
-        },
         list = {
           position = 'left', -- Position of the list window 'left'|'right'
           width = 0.2,       -- 33% width relative to the active window, min 0.1, max 0.5
@@ -314,13 +326,11 @@ return {
             ['<C-q>'] = actions.quickfix,
           },
           preview = {
-            -- ['q'] = actions.close,
             ['<Tab>'] = actions.next_location,
             ['<S-Tab>'] = actions.previous_location,
             ['q'] = actions.enter_win('list'), -- Focus list window
           },
         },
-        hooks = {},
       })
     end,
   },
@@ -537,9 +547,7 @@ return {
       require("tiny-inline-diagnostic").setup({
         preset = "powerline", -- Can be: "modern", "classic", "minimal", "powerline", ghost", "simple", "nonerdfont", "amongus"
         options = {
-          -- Show the source of the diagnostic.
           show_source = true,
-          -- If multiple diagnostics are under the cursor, display all of them.
           multiple_diag_under_cursor = true,
         },
       })
