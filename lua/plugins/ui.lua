@@ -507,7 +507,8 @@ return {
     -- enabled = false,
     dependencies = {
       -- "rcarriga/nvim-notify",
-      -- "petertriho/nvim-scrollbar",
+      "kevinhwang91/nvim-ufo",
+      "petertriho/nvim-scrollbar",
     },
     keys = {
       { "<leader>uh", "<cmd>EnableHL<cr>", desc = "Enable hlchunk" },

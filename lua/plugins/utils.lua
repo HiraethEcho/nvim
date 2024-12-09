@@ -366,17 +366,17 @@ return {
       },
     },
     keys = {
-      { "zR", function() require('ufo').openAllFolds() end,               desc = "Open All Folds" },
-      { "zM", function() require('ufo').closeAllFolds() end,              desc = "Close All Folds" },
-      { "zr", function() require('ufo').openFoldsExceptKinds() end,       desc = "Open Folds Except Kinds" },
-      { "zm", function() require('ufo').closeFoldsWith() end,             desc = "Close Folds With" },
-      { "PP", function() require('ufo').peekFoldedLinesUnderCursor() end, desc = "Peek Folded Lines Under Cursor" },
+      -- { "zR", function() require('ufo').openAllFolds() end,               desc = "Open All Folds" },
+      -- { "zM", function() require('ufo').closeAllFolds() end,              desc = "Close All Folds" },
+      -- { "zr", function() require('ufo').openFoldsExceptKinds() end,       desc = "Open Folds Except Kinds" },
+      -- { "zm", function() require('ufo').closeFoldsWith() end,             desc = "Close Folds With" },
+      { "KK", function() require('ufo').peekFoldedLinesUnderCursor() end, desc = "Peek Folded Lines Under Cursor" },
     },
     config = function()
       -- vim.o.foldcolumn = 'auto:3' -- '0' is not bad
       vim.o.foldcolumn = '0' -- '0' is not bad
       vim.o.foldenable = true
-      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+      -- vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       local function customizeSelector(bufnr)
@@ -395,7 +395,9 @@ return {
       end
       require("ufo").setup({
         provider_selector = function(bufnr, filetype, buftype)
-          return customizeSelector
+          -- return customizeSelector
+          return { 'treesitter', 'indent' }
+          -- return ''
         end,
         preview = {
           mappings = {
@@ -417,6 +419,7 @@ return {
   {
     'anuvyklack/pretty-fold.nvim',
     -- lazy = false,
+    enabled = false,
     config = function()
       require('pretty-fold').setup()
     end

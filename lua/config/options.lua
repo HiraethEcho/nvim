@@ -70,6 +70,6 @@ opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
 
--- opt.foldmethod = "expr"
+opt.foldmethod = "indent"
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
--- opt.foldlevel = 99
+opt.foldlevel = 99
