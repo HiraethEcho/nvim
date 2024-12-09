@@ -390,9 +390,14 @@ return {
       require("lualine").setup({
         options = {
           icons_enabled = true,
-          theme = "everforest",
+          theme = "onedark",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
+          -- section_separators = { left = '', right = '' },
+          -- component_separators = '',
+          -- section_separators = '',
+          -- section_separators = { left = '', right = '' },
+          always_show_tabline = false,
           disabled_filetypes = {
             statusline = {
               "neo-tree",
@@ -403,51 +408,48 @@ return {
           },
         },
         sections = {
+          lualine_a = {
+            { "fancy_branch" },
+            -- "branch",
+            -- "fancy_lsp_servers",
+          },
+          lualine_b = {
+            { "fancy_diff" },
+          },
           lualine_c = {
-            -- "mode",
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
               file_status = true,    -- Displays file status (readonly status, modified status)
               newfile_status = true, -- Display new file status (new file means no write after created)
               path = 1,
-              -- 0: Just the filename
-              -- 1: Relative path
-              -- 2: Absolute path
-              -- 3: Absolute path, with tilde as the home directory
-              shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-              -- for other components. (terrible name, any suggestions?)
               symbols = {
-                modified = "", -- Text to show when the file is modified.
+                modified = "", -- Text to show when the file is modified.
                 readonly = "", -- Text to show when the file is non-modifiable or readonly.
                 unnamed = "", -- Text to show for unnamed buffers.
-                newfile = "", -- Text to show for newly created file before first write
+                newfile = "", -- Text to show for newly created file before first write
               },
             },
           },
-          lualine_b = {
-            -- "diff",
-            "fancy_diff",
-          },
-          lualine_a = {
-            "branch",
-            -- "fancy_lsp_servers",
-          },
           lualine_x = {
-            "searchcount",
+            -- "searchcount",
+            { "fancy_searchcount" },
           },
           -- lualine_y = { "filetype" },
           lualine_y = {},
           lualine_z = {
             "progress",
-            "location",
+            -- "location",
+            { "fancy_location" },
             --[[ function()
               return " " .. os.date("%R")
             end, ]]
           },
         },
         inactive_sections = {
-          lualine_a = {},
+          lualine_a = {
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          },
           lualine_b = {
             {
               "filename",
@@ -471,9 +473,8 @@ return {
             -- "diff",
           },
           lualine_x = {
-            -- "hfancy_diagnostics",
+            -- "fancy_diagnostics",
             -- "fancy_lsp_servers",
-            "filetype"
           },
           lualine_y = { "progress" },
           lualine_z = {},
@@ -487,8 +488,6 @@ return {
           lualine_c = {
             {
               "navic",
-              color_correction = nil,
-              navic_opts = nil
             }
           },
           -- lualine_x = { "filetype" },
@@ -508,20 +507,14 @@ return {
             },
           },
           lualine_b = {
-            -- "windows",
-            -- {
-            --   "filename",
-            --   symbols = {
-            --     modified = "", -- Text to show when the file is modified.
-            --     readonly = "", -- Text to show when the file is non-modifiable or readonly.
-            --     unnamed = "", -- Text to show for unnamed buffers.
-            --     newfile = "", -- Text to show for newly created file before first write
-            --   },
-            -- },
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           },
           lualine_c = {
+            "windows",
           },
           lualine_x = {
+          },
+          lualine_y = {
             {
               "buffers",
               show_filename_only = true,   -- Shows shortened relative path when set to false.
@@ -538,10 +531,9 @@ return {
               },
             },
           },
-          lualine_y = {
-          },
           lualine_z = {
             session_name,
+            { "fancy_cwd", substitute_home = true },
             -- "branch",
             --[[ {
               "tabs",
