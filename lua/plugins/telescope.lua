@@ -7,14 +7,14 @@ return {
       -- { "<leader>fs", "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
       { "<leader>ff", "<cmd>Telescope find_files<cr>",                            desc = "files" },
       { "<leader>fh", "<cmd>Telescope oldfiles<cr>",                              desc = "history files" },
-      { "<leader>fg", "<cmd>Telescope grep_string<cr>",                           desc = "grep string" },
-      -- { "<leader>b",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
+      { "<leader>B",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
 
       -- { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<cr>",             desc = "current buffer fuzzy find", },
+      { "<leader>?", "<cmd>Telescope grep_string<cr>",                           desc = "grep string" },
       { "<leader>/",  "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
       { "<leader>`",  "<cmd>Telescope marks<cr>",                                 desc = "marks" },
       { '<leader>"',  "<cmd>Telescope registers<cr>",                             desc = "marks" },
-      { '<leader>y',  "<cmd>Telescope neoclip<cr>",                               desc = "yank history" },
+      -- { '<leader>y',  "<cmd>Telescope neoclip<cr>",                               desc = "yank history" },
       { "<leader>;",  "<cmd>Telescope commands<cr>",                              desc = "commands" },
       { "<leader>w",  "<cmd>Telescope spell_suggest<cr>",                         desc = "spell suggest" },
       { "<leader>j",  "<cmd>Telescope jumplist<cr>",                              desc = "jump list" },
@@ -33,18 +33,18 @@ return {
 
 
       { "<leader>it", "<cmd>TodoTelescope<cr>",                                   desc = "Todo" },
-      -- { "<leader>is", "<cmd>Telescope possession list<cr>",                       desc = "sessions" },
       { "<leader>ih", "<cmd>Telescope help_tags<cr>",                             desc = "help tags" },
 
+      -- { "<leader>is", "<cmd>Telescope possession list<cr>",                       desc = "sessions" },
       { "<leader>ii", ":lua require'telescope.builtin'.builtin{}<cr>",            desc = "telescope builtin" },
-      { "<leader>ft", "<cmd>Telescope builtin<cr>",                               desc = "telescope builtin" },
+      -- { "<leader>ft", "<cmd>Telescope builtin<cr>",                               desc = "telescope builtin" },
       { "<leader>ir", "<cmd>Telescope lsp_references<cr>",                        desc = "References" },
       { "<leader>id", ":lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>", desc = "current buffer diagnostics", },
       { "<leader>iD", ":lua require'telescope.builtin'.diagnostics{}<cr>",        desc = "workspace diagnostics" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
-      { "AckslD/nvim-neoclip.lua", config = true, },
+      -- { "AckslD/nvim-neoclip.lua", config = true, },
       -- "nvim-telescope/telescope-file-browser.nvim",
     },
     config = function()

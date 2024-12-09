@@ -310,10 +310,10 @@ return {
     -- enabled = false,
     config = function()
       require("auto-session").setup {
-        log_level = "error",
-        pre_save_cmds = {
+        -- log_level = "error",
+        --[[ pre_save_cmds = {
           "tabdo Neotree close" -- Close NERDTree before saving session
-        },
+        }, ]]
         post_cwd_changed_cmds = {
           function()
             require("lualine").refresh() -- example refreshing the lualine status line _after_ the cwd changes
