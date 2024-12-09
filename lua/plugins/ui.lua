@@ -394,10 +394,11 @@ return {
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           -- section_separators = { left = '', right = '' },
+          -- component_separators = { left = '', right = '' },
+          -- section_separators = { left = '', right = '' },
           -- component_separators = '',
           -- section_separators = '',
           -- section_separators = { left = '', right = '' },
-          always_show_tabline = false,
           disabled_filetypes = {
             statusline = {
               "neo-tree",
@@ -482,13 +483,13 @@ return {
 
         winbar = {
           lualine_b = {
-            "fancy_lsp_servers",
+            -- "fancy_lsp_servers",
             "fancy_diagnostics",
           },
           lualine_c = {
             {
               "navic",
-            }
+            },
           },
           -- lualine_x = { "filetype" },
         },
@@ -498,19 +499,21 @@ return {
             {
               "tabs",
               max_length = vim.o.columns / 3, -- Maximum width of tabs component.
-              -- Note:
-              -- It can also be a function that returns
-              -- the value of `max_length` dynamically.
               mode = 1, -- 0: Shows tab_nr
               -- 1: Shows tab_name
               -- 2: Shows tab_nr + tab_name
             },
           },
           lualine_b = {
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           },
           lualine_c = {
-            "windows",
+            {
+              "windows",
+              show_filename_only = true,   -- Shows shortened relative path when set to false.
+              show_modified_status = true, -- Shows indicator when the window is modified.
+              mode = 2,
+            },
           },
           lualine_x = {
           },
@@ -527,12 +530,12 @@ return {
               symbols = {
                 modified = "", -- Text to show when the buffer is modified
                 alternate_file = "", -- Text to show to identify the alternate file
-                directory = "", -- Text to show when the buffer is a directory
+                directory = "", -- Text to show when the buffer is a directory
               },
             },
           },
           lualine_z = {
-            session_name,
+            -- session_name,
             { "fancy_cwd", substitute_home = true },
             -- "branch",
             --[[ {
