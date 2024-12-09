@@ -156,7 +156,7 @@ return {
     cmd = "Fcitx",
     config = function()
       vim.api.nvim_create_user_command("Fcitx", require("fcitx").setup, {})
-      -- require("fcitx").setup()
+      require("fcitx").setup()
     end,
   },
   {

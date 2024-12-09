@@ -349,6 +349,7 @@ return {
   },
   {
     "kevinhwang91/nvim-ufo",
+    -- event = "LspAttach",
     -- enabled = false,
     dependencies = {
       -- "luukvbaal/statuscol.nvim",
@@ -395,8 +396,8 @@ return {
       end
       require("ufo").setup({
         provider_selector = function(bufnr, filetype, buftype)
-          -- return customizeSelector
-          return { 'treesitter', 'indent' }
+          return customizeSelector
+          -- return { 'treesitter', 'indent' }
           -- return ''
         end,
         preview = {

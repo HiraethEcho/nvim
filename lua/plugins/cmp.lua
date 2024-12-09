@@ -7,7 +7,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "zbirenbaum/copilot.lua",
-      -- "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-path",
       -- "nvim-treesitter/nvim-treesitter",
       { "micangl/cmp-vimtex", },
@@ -48,6 +48,7 @@ return {
         sources = cmp.config.sources({
           { name = "ultisnips" }, -- For ultisnips users.
           { name = "vimtex" },
+          { name = "nvim_lua" },
           { name = 'nvim_lsp' },
           { name = "copilot" },
           { name = "buffer",   option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end, }, },

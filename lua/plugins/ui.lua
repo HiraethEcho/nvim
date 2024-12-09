@@ -130,7 +130,13 @@ return {
   },
   {
     'eandrju/cellular-automaton.nvim',
-    cmd = "CellularAutomaton",
+    keys = {
+      { "<leader>uR", "<cmd>CellularAutomaton make_it_rain<cr>", desc = "Rain" },
+      { "<leader>uG", "<cmd>CellularAutomaton game_of_life<cr>", desc = "Rain" },
+    },
+    config = function()
+      -- vim.api.nvim_create_user_command("Rain", require("cellular-automaton").start_animation("make_it_rain"), {})
+    end
   },
   {
     "stevearc/dressing.nvim",
@@ -309,6 +315,65 @@ return {
     end,
   },
   {
+    'b0o/incline.nvim',
+    enabled = false,
+    config = function()
+      local helpers = require 'incline.helpers'
+      local navic = require 'nvim-navic'
+      local devicons = require 'nvim-web-devicons'
+      require('incline').setup {
+        window = {
+          padding = 0,
+          margin = { horizontal = 0, vertical = 0 },
+        },
+        render = function(props)
+          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
+          if filename == '' then
+            filename = '[No Name]'
+          end
+          local ft_icon, ft_color = devicons.get_icon_color(filename)
+          local modified = vim.bo[props.buf].modified
+
+          local function get_diagnostic_label()
+            local icons = { error = '', warn = '', info = '', hint = '󰌵' }
+            local label = {}
+
+            for severity, icon in pairs(icons) do
+              local n = #vim.diagnostic.get(props.buf, { severity = vim.diagnostic.severity[string.upper(severity)] })
+              if n > 0 then
+                table.insert(label, { icon .. n .. ' ', group = 'DiagnosticSign' .. severity })
+              end
+            end
+            if #label > 0 then
+              table.insert(label, { '┊ ' })
+            end
+            return label
+          end
+          local res = {
+            ft_icon and { ' ', ft_icon, ' ', guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or '',
+            ' ',
+            { filename,              gui = modified and 'bold,italic' or 'bold' },
+            { get_diagnostic_label() },
+            guibg = '#44406e',
+          }
+          if props.focused then
+            for _, item in ipairs(navic.get_data(props.buf) or {}) do
+              table.insert(res, {
+                { ' > ',     group = 'NavicSeparator' },
+                { item.icon, group = 'NavicIcons' .. item.type },
+                { item.name, group = 'NavicText' },
+              })
+            end
+          end
+          table.insert(res, ' ')
+          return res
+        end,
+      }
+    end,
+    -- Optional: Lazy load Incline
+    event = 'VeryLazy',
+  },
+  {
     "nvim-lualine/lualine.nvim",
     -- enabled = false,
     event = "VimEnter",
@@ -372,6 +437,7 @@ return {
             "searchcount",
           },
           -- lualine_y = { "filetype" },
+          lualine_y = {},
           lualine_z = {
             "progress",
             "location",
@@ -412,7 +478,12 @@ return {
           lualine_y = { "progress" },
           lualine_z = {},
         },
+
         winbar = {
+          lualine_b = {
+            "fancy_lsp_servers",
+            "fancy_diagnostics",
+          },
           lualine_c = {
             {
               "navic",
@@ -420,12 +491,9 @@ return {
               navic_opts = nil
             }
           },
-          lualine_b = {
-            "fancy_lsp_servers",
-            "fancy_diagnostics",
-          },
           -- lualine_x = { "filetype" },
         },
+
         tabline = {
           lualine_a = {
             {
