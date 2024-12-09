@@ -321,8 +321,16 @@ return {
         },
         auto_session_root_dir = vim.fn.stdpath('data') .. "/sessions/",
         auto_create = false,
+        auto_save = true, -- Enables/disables auto saving session on exit
+        previewer = true, -- File preview for session picker
+        mappings = {
+          delete_session = { "n", "d" },
+          alternate_session = { "n", "<CR>" },
+          copy_session = { "n", "Y" },
+        },
       }
       vim.keymap.set("n", "<leader>is", require("auto-session.session-lens").search_session, { noremap = true, })
+      vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
     end
   },
   {

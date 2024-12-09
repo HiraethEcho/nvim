@@ -27,7 +27,6 @@ return {
     version = '*',
     event = "VimEnter",
     dependencies = {
-      -- 'Shatur/neovim-session-manager',
       'rmagatti/auto-session',
       'echasnovski/mini.sessions',
     },
@@ -36,7 +35,7 @@ return {
       starter.setup({
         evaluate_single = true,
         items = {
-          starter.sections.sessions(4, true),
+          starter.sections.sessions(8, true),
           starter.sections.recent_files(5, false),
           -- starter.sections.telescope(),
           -- starter.sections.recent_files(3, true), -- local
