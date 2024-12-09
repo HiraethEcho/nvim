@@ -21,9 +21,41 @@ return {
     'edluffy/hologram.nvim',
     enabled = false,
   },
+  {
+    'echasnovski/mini.starter',
+    -- enabled = false,
+    version = '*',
+    event = "VimEnter",
+    dependencies = {
+      -- 'Shatur/neovim-session-manager',
+      'rmagatti/auto-session',
+      'echasnovski/mini.sessions',
+    },
+    config = function()
+      local starter = require('mini.starter')
+      starter.setup({
+        evaluate_single = true,
+        items = {
+          starter.sections.sessions(4, true),
+          starter.sections.recent_files(3, false),
+          -- starter.sections.telescope(),
+          -- starter.sections.recent_files(3, true), -- local
+          starter.sections.builtin_actions(),
+          { name = 'start up time', action = [[StartupTime]], section = 'Builtin actions' },
+        },
+        header = nil,
+        content_hooks = {
+          -- starter.gen_hook.adding_bullet(),
+          -- starter.gen_hook.indexing('all', { 'Builtin actions' }),
+          starter.gen_hook.padding(3, 2),
+          starter.gen_hook.aligning('center', 'center'),
+        },
+      })
+    end,
+  },
   { -- lazy.nvim
     "goolord/alpha-nvim",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       "jedrzejboczar/possession.nvim",
       -- "nvim-telescope/telescope.nvim",
@@ -384,9 +416,9 @@ return {
     -- event = "BufRead",
     -- event = "VeryLazy",
     config = function()
-      local function session_name()
+      --[[ local function session_name()
         return require('possession.session').get_session_name() or ''
-      end
+      end ]]
       require("lualine").setup({
         options = {
           icons_enabled = true,
@@ -463,10 +495,10 @@ return {
               shorting_target = 40, -- Shortens path to leave 40 spaces in the window
               -- for other components. (terrible name, any suggestions?)
               symbols = {
-                modified = "", -- Text to show when the file is modified.
+                modified = "", -- Text to show when the file is modified.
                 readonly = "", -- Text to show when the file is non-modifiable or readonly.
                 unnamed = "", -- Text to show for unnamed buffers.
-                newfile = "", -- Text to show for newly created file before first write
+                newfile = "", -- Text to show for newly created file before first write
               },
             },
           },
@@ -499,7 +531,7 @@ return {
             {
               "tabs",
               max_length = vim.o.columns / 3, -- Maximum width of tabs component.
-              mode = 1, -- 0: Shows tab_nr
+              mode = 1,                       -- 0: Shows tab_nr
               -- 1: Shows tab_name
               -- 2: Shows tab_nr + tab_name
             },
@@ -510,8 +542,14 @@ return {
           lualine_c = {
             {
               "windows",
-              show_filename_only = true,   -- Shows shortened relative path when set to false.
+              show_filename_only = true, -- Shows shortened relative path when set to false.
               show_modified_status = true, -- Shows indicator when the window is modified.
+              symbols = {
+                modified = "", -- Text to show when the file is modified.
+                readonly = "", -- Text to show when the file is non-modifiable or readonly.
+                unnamed = "", -- Text to show for unnamed buffers.
+                newfile = "", -- Text to show for newly created file before first write
+              },
               mode = 2,
             },
           },
@@ -537,6 +575,11 @@ return {
           lualine_z = {
             -- session_name,
             { "fancy_cwd", substitute_home = true },
+            {
+              function()
+                return require('auto-session.lib').current_session_name(true)
+              end
+            },
             -- "branch",
             --[[ {
               "tabs",

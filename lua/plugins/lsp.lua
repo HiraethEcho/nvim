@@ -20,6 +20,7 @@ return {
       "kevinhwang91/nvim-ufo",
       {
         "Dan7h3x/signup.nvim",
+        enabled = false,
         branch = "main",
         opts = {
           number = true,

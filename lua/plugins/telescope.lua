@@ -33,7 +33,7 @@ return {
 
 
       { "<leader>it", "<cmd>TodoTelescope<cr>",                                   desc = "Todo" },
-      { "<leader>is", "<cmd>Telescope possession list<cr>",                       desc = "sessions" },
+      -- { "<leader>is", "<cmd>Telescope possession list<cr>",                       desc = "sessions" },
       { "<leader>ih", "<cmd>Telescope help_tags<cr>",                             desc = "help tags" },
 
       { "<leader>ii", ":lua require'telescope.builtin'.builtin{}<cr>",            desc = "telescope builtin" },
@@ -200,73 +200,9 @@ return {
 ]]
         },
       })
-      require("telescope").load_extension("possession")
+      -- require("telescope").load_extension("possession")
       -- require('telescope').load_extension("bookmarks")
       -- require("telescope").load_extension("file_browser")
-    end,
-  },
-  {
-    "jedrzejboczar/possession.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("possession").setup({
-        session_dir = vim.fn.stdpath("data") .. "/sessions",
-        silent = false,
-        load_silent = true,
-        debug = false,
-        logfile = false,
-        prompt_no_cr = false,
-        autosave = {
-          current = true, -- or fun(name): boolean
-          tmp = true,     -- or fun(): boolean
-          tmp_name = "tmp",
-          on_load = true,
-          on_quit = true,
-        },
-        commands = {
-          save = "PSave",
-          load = "PLoad",
-          rename = "PRename",
-          close = "PClose",
-          delete = "PDelete",
-          show = "PShow",
-          list = "PList",
-          migrate = "PMigrate",
-        },
-        hooks = {
-          before_save = function(name)
-            return {}
-          end,
-          after_save = function(name, user_data, aborted) end,
-          before_load = function(name, user_data)
-            return user_data
-          end,
-          after_load = function(name, user_data) end,
-        },
-        plugins = {
-          close_windows = {
-            hooks = { "before_save", "before_load" },
-            preserve_layout = true, -- or fun(win): boolean
-            match = {
-              floating = true,
-              buftype = {},
-              filetype = {},
-              custom = false, -- or fun(win): boolean
-            },
-          },
-          delete_hidden_buffers = {
-            hooks = {
-              "before_load",
-              vim.o.sessionoptions:match("buffer") and "before_save",
-            },
-            force = false, -- or fun(buf): boolean
-          },
-          nvim_tree = true,
-          tabby = true,
-          dap = true,
-          delete_buffers = false,
-        },
-      })
     end,
   },
 }

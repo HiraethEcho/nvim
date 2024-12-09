@@ -240,17 +240,97 @@ return {
     end,
   },
   {
-    'rmagatti/auto-session',
+    "jedrzejboczar/possession.nvim",
     enabled = false,
+    -- lazy = false,
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("possession").setup({
+        session_dir = vim.fn.stdpath("data") .. "/sessions",
+        silent = false,
+        load_silent = true,
+        debug = false,
+        logfile = false,
+        prompt_no_cr = false,
+        autosave = {
+          current = true, -- or fun(name): boolean
+          tmp = true,     -- or fun(): boolean
+          tmp_name = "tmp",
+          on_load = true,
+          on_quit = true,
+        },
+        commands = {
+          save = "PSave",
+          load = "PLoad",
+          rename = "PRename",
+          close = "PClose",
+          delete = "PDelete",
+          show = "PShow",
+          list = "PList",
+          migrate = "PMigrate",
+        },
+        hooks = {
+          before_save = function(name)
+            return {}
+          end,
+          after_save = function(name, user_data, aborted) end,
+          before_load = function(name, user_data)
+            return user_data
+          end,
+          after_load = function(name, user_data) end,
+        },
+        plugins = {
+          close_windows = {
+            hooks = { "before_save", "before_load" },
+            preserve_layout = true, -- or fun(win): boolean
+            match = {
+              floating = true,
+              buftype = {},
+              filetype = {},
+              custom = false, -- or fun(win): boolean
+            },
+          },
+          delete_hidden_buffers = {
+            hooks = {
+              "before_load",
+              vim.o.sessionoptions:match("buffer") and "before_save",
+            },
+            force = false, -- or fun(buf): boolean
+          },
+          nvim_tree = true,
+          tabby = true,
+          dap = true,
+          delete_buffers = false,
+        },
+      })
+    end,
+  },
+  {
+    'rmagatti/auto-session',
+    -- enabled = false,
     config = function()
       require("auto-session").setup {
         log_level = "error",
-        auto_session_suppress_dirs = { "~/", "~/github", "~/documents" },
-        auto_session_root_dir = vim.fn.stdpath('data') .. "/autosessions/",
-        auto_session_enabled = true,
+        pre_save_cmds = {
+          "tabdo Neotree close" -- Close NERDTree before saving session
+        },
+        post_cwd_changed_cmds = {
+          function()
+            require("lualine").refresh() -- example refreshing the lualine status line _after_ the cwd changes
+          end
+        },
+        auto_session_root_dir = vim.fn.stdpath('data') .. "/sessions/",
+        auto_create = false,
       }
-      vim.keymap.set("n", "<leader>fs", require("auto-session.session-lens").search_session, { noremap = true, })
+      vim.keymap.set("n", "<leader>is", require("auto-session.session-lens").search_session, { noremap = true, })
     end
+  },
+  {
+    'echasnovski/mini.sessions',
+    version = '*',
+    opts = {
+      directory = vim.fn.stdpath("data") .. "/sessions",
+    },
   },
   {
     'Shatur/neovim-session-manager',
@@ -261,10 +341,9 @@ return {
     config = function()
       local config = require('session_manager.config')
       require('session_manager').setup({
-        sessions_dir = vim.fn.stdpath('data') .. '/autosessions/', -- The directory where the session files will be saved.
-        autosave_last_session = true,                              -- Automatically save last session on exit and on session switch.
-        autosave_ignore_dirs = {},                                 -- A list of directories where the session will not be autosaved.
-        autosave_ignore_filetypes = {                              -- All buffers of these file types will be closed before the session is saved.
+        sessions_dir = vim.fn.stdpath('data') .. '/sessions/',
+        autosave_last_session = true, -- Automatically save last session on exit and on session switch.
+        autosave_ignore_filetypes = { -- All buffers of these file types will be closed before the session is saved.
           'gitcommit',
           'gitrebase',
           'undotree',
@@ -272,7 +351,7 @@ return {
           "sagaoutline",
           "Outline",
         },
-        autosave_only_in_session = false,             -- Always autosaves session. If true, only autosaves after a session is active.
+        autosave_only_in_session = true,              -- Always autosaves session. If true, only autosaves after a session is active.
         autoload_mode = config.AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
       })
     end,
