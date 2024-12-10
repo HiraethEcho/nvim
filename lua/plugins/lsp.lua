@@ -96,6 +96,8 @@ return {
         marksman = {},
         tinymist = {
           single_file_support = true,
+          -- root_dir = require 'lspconfig.util'.root_pattern('.git'),
+          -- root_dir ={},
         },
         lua_ls   = {
           lua = {
