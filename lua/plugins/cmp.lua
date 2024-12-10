@@ -28,7 +28,7 @@ return {
       local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
       cmp.setup({
         completion = {
-          completeopt = "menu,popup,menuone", -- see :help 'completeopt'
+          completeopt = "menu,popup,menuone,noselect", -- see :help 'completeopt'
         },
         snippet = {
           expand = function(args)
@@ -52,7 +52,7 @@ return {
           ),
           ["<Tab>"] = cmp.mapping.select_next_item(fallback),
           ["<S-Tab>"] = cmp.mapping.select_prev_item(fallback),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         },
         sources = cmp.config.sources({
           { name = "ultisnips" }, -- For ultisnips users.
