@@ -570,7 +570,7 @@ return {
               -- 3: Shows buffer number
               -- 4: Shows buffer name + buffer number
               symbols = {
-                modified = "", -- Text to show when the buffer is modified
+                modified = "", -- Text to show when the buffer is modified
                 alternate_file = "", -- Text to show to identify the alternate file
                 directory = "", -- Text to show when the buffer is a directory
               },

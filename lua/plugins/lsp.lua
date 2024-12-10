@@ -94,6 +94,9 @@ return {
           },
         },
         marksman = {},
+        tinymist = {
+          single_file_support = true,
+        },
         lua_ls   = {
           lua = {
             diagnostics = {
@@ -114,6 +117,7 @@ return {
             require("lspconfig")[server_name].setup({
               -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
               capabilities = capabilities,
+              offset_encoding = "utf-8",
               settings = servers[server_name],
               on_attach = function(client, bufnr)
                 require("nvim-navic").attach(client, bufnr)
@@ -125,6 +129,10 @@ return {
                 vim.keymap.set("n", "K", vim.lsp.buf.hover,
                   { noremap = true, silent = true, buffer = bufnr, desc = "lsp hover" })
                 -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true, buffer = bufnr, desc = "lsp references" })
+                if server_name == "tinymist" then
+                  vim.keymap.set("n", "<cr>", "<cmd>TypstPreview<cr>",
+                    { noremap = true, silent = true, buffer = bufnr, desc = "Typst Preview" })
+                end
                 if server_name == "texlab" then
                   vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>",
                     { noremap = true, silent = true, buffer = bufnr, desc = "texlab build" })

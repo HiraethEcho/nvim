@@ -330,7 +330,7 @@ return {
         },
       }
       vim.keymap.set("n", "<leader>is", require("auto-session.session-lens").search_session, { noremap = true, })
-      vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,terminal,localoptions"
+      vim.o.sessionoptions = "blank,buffers,curdir,help,tabpages,terminal,localoptions"
     end
   },
   {
