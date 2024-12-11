@@ -43,7 +43,7 @@ return {
           { name = 'start up time', action = [[StartupTime]], section = 'actions' },
           { name = 'Lazy',          action = [[Lazy]],        section = 'actions' },
           { name = 'quit',          action = [[quit]],        section = 'actions' },
-          -- { name = 'new file', action = [[edit]], section = 'actions' },
+          { name = 'new file', action = 'enew', section = 'actions' },
         },
         header = '',
         footer = '',

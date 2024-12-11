@@ -7,10 +7,10 @@ return {
       -- { "<leader>fs", "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
       { "<leader>ff", "<cmd>Telescope find_files<cr>",                            desc = "files" },
       { "<leader>fh", "<cmd>Telescope oldfiles<cr>",                              desc = "history files" },
-      { "<leader>B",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
+      { "<leader>b",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
 
       -- { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<cr>",             desc = "current buffer fuzzy find", },
-      { "<leader>?", "<cmd>Telescope grep_string<cr>",                           desc = "grep string" },
+      { "<leader>?",  "<cmd>Telescope grep_string<cr>",                           desc = "grep string" },
       { "<leader>/",  "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
       { "<leader>`",  "<cmd>Telescope marks<cr>",                                 desc = "marks" },
       { '<leader>"',  "<cmd>Telescope registers<cr>",                             desc = "marks" },
@@ -204,5 +204,15 @@ return {
       -- require('telescope').load_extension("bookmarks")
       -- require("telescope").load_extension("file_browser")
     end,
+  },
+  {
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    -- lazy = false,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      -- calling `setup` is optional for customization
+      require("fzf-lua").setup({})
+    end
   },
 }

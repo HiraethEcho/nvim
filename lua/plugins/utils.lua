@@ -564,6 +564,10 @@ return {
     -- enabled = false,
     -- lazy = false,
     cmd = "UrlView",
+    keys = {
+      { "<leader>iu", "<cmd>UrlView", desc = "List URL" },
+      { "<leader>iL", "<cmd>UrlView", desc = "List Lazy plugin url" },
+    },
     opts = {
       default_picker = "telescope",
     },
@@ -573,7 +577,7 @@ return {
     -- enabled = false,
     branch = "mini",
     keys = {
-      { "gx", "<esc>:URLOpenUnderCursor<cr>", desc = "Open URL under cursor" },
+      { "gw", "<esc>:URLOpenUnderCursor<cr>", desc = "Open URL under cursor" },
     },
     config = function()
       local status_ok, url_open = pcall(require, "url-open")
