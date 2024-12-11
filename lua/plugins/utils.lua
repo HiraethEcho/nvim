@@ -374,7 +374,7 @@ return {
   {
     'matbme/JABS.nvim',
     -- lazy = false,
-    -- enabled = false,
+    enabled = false,
     keys = {
       { "<leader>b", "<cmd>JABSOpen<cr>", desc = "buffer lists" },
     },

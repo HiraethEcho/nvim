@@ -183,8 +183,8 @@ return {
   },
   {
     "echasnovski/mini.files",
-    version = false,
-    enabled = false,
+    -- version = false,
+    -- enabled = false,
     keys = {
       { "<leader>E", ":lua MiniFiles.open()<cr>", desc = "mini file " },
     },
@@ -202,7 +202,7 @@ return {
         trim_right = ">",
       },
       options = {
-        use_as_default_explorer = true,
+        use_as_default_explorer = false,
       },
       windows = {
         preview = true,
@@ -216,6 +216,7 @@ return {
   },
   {
     'stevearc/oil.nvim',
+    enabled = false,
     cmd = "Oil",
     opts = {},
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
