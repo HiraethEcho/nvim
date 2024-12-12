@@ -1,5 +1,19 @@
 return {
-  { "folke/lazy.nvim", version = "*" },
+  {
+    "folke/lazy.nvim",
+    version = "*",
+    keys = {
+      { "<leader>L", "<cmd>Lazy<cr>", desc = "Lazy" },
+    },
+  },
+  { 'echasnovski/mini.test', version = '*' },
+  {
+    "Zeioth/hot-reload.nvim",
+    enabled = false,
+    dependencies = "nvim-lua/plenary.nvim",
+    event = "BufEnter",
+    opts = {}
+  },
   {
     "folke/snacks.nvim",
     enabled = false,
@@ -586,5 +600,12 @@ return {
       end
       url_open.setup({})
     end,
+  },
+  {
+    "OXY2DEV/helpview.nvim",
+    ft = "help",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter"
+    },
   },
 }

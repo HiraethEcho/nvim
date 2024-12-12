@@ -15,6 +15,12 @@ return {
     end,
   },
   {
+    'tzachar/highlight-undo.nvim',
+    event = "InsertEnter",
+    enabled = false,
+    opts = {},
+  },
+  {
     "echasnovski/mini.splitjoin",
     event = "InsertEnter",
     version = false,
@@ -281,6 +287,7 @@ return {
   },
   {
     "folke/zen-mode.nvim",
+    dependencies = { "folke/twilight.nvim" },
     keys = {
       { "<leader>z", "<cmd>ZenMode<cr>", desc = "toggle zen mode" },
     },
@@ -317,5 +324,40 @@ return {
       vim.g.translator_history_enable = true
       vim.g.translator_default_engines = { "bing", "youdao" }
     end,
+  },
+  {
+    'FluxxField/bionic-reading.nvim',
+    ft = {'help', 'lua' ,'markdown', 'text' },
+    opts = {
+      -- determines if the file types below will be
+      -- automatically highlighted on buffer open
+      auto_highlight = true,
+      -- the file types you want to highlight with
+      -- the node types you would like to target
+      -- using treesitter
+      file_types = {
+        ["text"] = "any", -- highlight any node
+        ["help"] = "any", -- highlight any node
+        ["markdown"] = "any",
+        -- EX: only highlights comments in lua files
+        ["lua"] = {
+          "comment",
+        },
+      },
+      -- the highlighting styles applied as val to nvim_set_hl()
+      -- Please see :help nvim_set_hl() to see vals that can be passed
+      hl_group_value = {
+        bold = true
+      },
+      -- Flag used to control if the user is prompted
+      -- if BRToggle is called on a file type that is not
+      -- explicitly defined above
+      prompt_user = true,
+      -- Enable or disable the use of treesitter
+      treesitter = true,
+      -- Flag used to control if highlighting is applied as
+      -- you type
+      update_in_insert_mode = true,
+    },
   },
 }

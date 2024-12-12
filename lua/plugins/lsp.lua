@@ -15,6 +15,11 @@ return {
       "rachartier/tiny-inline-diagnostic.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      {
+        "smjonas/inc-rename.nvim",
+        enabled = false,
+        opts = {},
+      },
       -- "nvimdev/guard.nvim",
       -- "hrsh7th/cmp-nvim-lsp",
       "kevinhwang91/nvim-ufo",
@@ -124,6 +129,7 @@ return {
               on_attach = function(client, bufnr)
                 require("nvim-navic").attach(client, bufnr)
                 vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end,
+                -- vim.keymap.set("n", "gR", function() return ":IncRename " .. vim.fn.expand("<cword>") end,
                   { noremap = true, silent = true, buffer = bufnr, desc = "lsp rename" })
                 vim.keymap.set("n", "gA", function() vim.lsp.buf.code_action() end,
                   { noremap = true, silent = true, buffer = bufnr, desc = "lsp action" })
@@ -278,7 +284,7 @@ return {
         peek_location = 'o',
         goto_and_close = '<Cr>',
         restore_location = '<C-g>',
-        -- hover_symbol = 'K',
+        hover_symbol = 'K',
         toggle_preview = 'p',
         fold_all = 'zM',
         unfold_all = 'zR',
