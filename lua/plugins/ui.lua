@@ -27,7 +27,7 @@ return {
     version = '*',
     event = "VimEnter",
     dependencies = {
-      'rmagatti/auto-session',
+      -- 'rmagatti/auto-session',
       'echasnovski/mini.sessions',
     },
     config = function()
@@ -412,7 +412,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     -- enabled = false,
-    event = "VimEnter",
+    event = "BufReadPost",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "meuter/lualine-so-fancy.nvim",

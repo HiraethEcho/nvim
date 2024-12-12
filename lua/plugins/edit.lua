@@ -21,25 +21,26 @@ return {
     opts = {},
   },
   {
-    "echasnovski/mini.splitjoin",
+    'Wansmer/treesj',
+    enabled = false,
     event = "InsertEnter",
-    version = false,
-    opts = {
-      mappings = {
-        toggle = '',
-        split = 'gK',
-        join = 'gJ',
-      },
-    }
-    -- config = function() require('mini.splitjoin').setup() end,
+    keys = {
+      { "gJ", "<cmd>TSJJoin<cr>",  desc = "Join" },
+      { "gK", "<cmd>TSJSplit<cr>", desc = "Split" },
+    },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you install parsers with `nvim-treesitter`
+    config = function()
+      require('treesj').setup({})
+    end,
   },
   {
-    "echasnovski/mini.cursorword",
-    enabled = false,
-    version = false,
+    "echasnovski/mini.splitjoin",
+    -- enabled = false,
     event = "InsertEnter",
-    config = true,
+    version = false,
+    opts = { mappings = { toggle = '', split = 'gK', join = 'gJ' } }
   },
+  { "echasnovski/mini.cursorword", enabled = false, version = false, event = "InsertEnter", config = true },
   {
     "echasnovski/mini.surround",
     version = false,
@@ -51,13 +52,7 @@ return {
     event = "InsertEnter",
     version = false,
     -- lazy = false,
-    opts = {
-      mappings = {
-        -- start = '<leader>a',
-        start = '',
-        start_with_preview = '<leader>a',
-      },
-    },
+    opts = { mappings = { start = '', start_with_preview = '<leader>a' } },
   },
   {
     'Vonr/align.nvim',
@@ -327,7 +322,7 @@ return {
   },
   {
     'FluxxField/bionic-reading.nvim',
-    ft = {'help', 'lua' ,'markdown', 'text' },
+    ft = { 'help', 'lua', 'markdown', 'text' },
     opts = {
       -- determines if the file types below will be
       -- automatically highlighted on buffer open

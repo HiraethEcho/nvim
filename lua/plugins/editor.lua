@@ -87,7 +87,7 @@ return {
     'MeanderingProgrammer/render-markdown.nvim',
     -- ft = { "markdown", "md" },
     keys = {
-      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle" },
+      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
     },
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
@@ -405,7 +405,7 @@ return {
   },
   {
     'chomosuke/typst-preview.nvim',
-    -- lazy = false, -- or 
+    -- lazy = false, -- or
     ft = 'typst',
     version = '1.*',
     opts = {

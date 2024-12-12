@@ -196,7 +196,7 @@ return {
     keys = {
       { "?", function() require("which-key").show() end, desc = "Buffer Local Keymaps (which-key)" },
     },
-    event = "VeryLazy",
+    event = "BufRead",
     opts = {
       preset = "classic",
       layout = {
@@ -322,6 +322,7 @@ return {
   {
     'rmagatti/auto-session',
     -- enabled = false,
+    event = "BufRead",
     config = function()
       require("auto-session").setup {
         -- log_level = "error",
@@ -381,7 +382,7 @@ return {
   {
     'ActivityWatch/aw-watcher-vim',
     -- lazy = false,
-    event = "VimEnter",
+    event = "BufRead",
     -- enabled = false,
     cmd = "AWStart",
   },

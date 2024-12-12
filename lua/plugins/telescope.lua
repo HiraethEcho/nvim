@@ -1,46 +1,46 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    -- enabled = false,
     -- cmd = { "Telescope oldfiles", },
     keys = {
-      -- { "<leader>fF", "<cmd>Telescope file_browser<cr>",                          desc = "files" },
-      -- { "<leader>fs", "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
+      -- telescope builtin
+      { "<leader>ii", "<cmd>Telescope builtin<cr>",                               desc = "telescope builtin" },
+      -- files
       { "<leader>ff", "<cmd>Telescope find_files<cr>",                            desc = "files" },
       { "<leader>fh", "<cmd>Telescope oldfiles<cr>",                              desc = "history files" },
       { "<leader>b",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
-
-      -- { "<leader>/",  "<cmd>Telescope current_buffer_fuzzy_find<cr>",             desc = "current buffer fuzzy find", },
-      { "<leader>?",  "<cmd>Telescope grep_string<cr>",                           desc = "grep string" },
+      -- enhance native
+      { "**",         ":lua require'telescope.builtin'.grep_string{bufnr=0}<cr>", desc = "current buffer grep_string", },
       { "<leader>/",  "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
-      { "<leader>`",  "<cmd>Telescope marks<cr>",                                 desc = "marks" },
-      { '<leader>"',  "<cmd>Telescope registers<cr>",                             desc = "marks" },
-      -- { '<leader>y',  "<cmd>Telescope neoclip<cr>",                               desc = "yank history" },
+      { "<leader>//",         "<cmd>Telescope resume<cr>",                                desc = "resume" },
       { "<leader>;",  "<cmd>Telescope commands<cr>",                              desc = "commands" },
       { "<leader>w",  "<cmd>Telescope spell_suggest<cr>",                         desc = "spell suggest" },
       { "<leader>j",  "<cmd>Telescope jumplist<cr>",                              desc = "jump list" },
-      -- { "M",  "<cmd>Telescope bookmarks list<cr>",                                 desc = "bookmarks" },
-      -- { "M",  "<cmd>Telescope marks list<cr>",                                 desc = "bookmarks" },
-
-
-      { "<leader>gb", "<cmd>Telescope git_branches<cr>",                          desc = "git branch" },
+      { "<leader>`",  "<cmd>Telescope marks<cr>",                                 desc = "marks" },
+      { '<leader>"',  "<cmd>Telescope registers<cr>",                             desc = "registers" },
+      { "<leader>ih", "<cmd>Telescope help_tags<cr>",                             desc = "help tags" },
+      { "<leader>ic", "<cmd>Telescope colorschemes<cr>",                          desc = "colorschemes" },
+      -- git
+      { "<leader>gB", "<cmd>Telescope git_branches<cr>",                          desc = "git branch" },
       { "<leader>gc", "<cmd>Telescope git_commits<cr>",                           desc = "git commits" },
       { "<leader>gs", "<cmd>Telescope git_status<cr>",                            desc = "git status" },
       { "<leader>gS", "<cmd>Telescope git_stash<cr>",                             desc = "git stash" },
       { "<leader>gf", "<cmd>Telescope git_files<cr>",                             desc = "git files" },
-
+      -- history
       { "<leader>i/", "<cmd>Telescope search_history<cr>",                        desc = "search history" },
       { "<leader>i;", "<cmd>Telescope command_history<cr>",                       desc = "commands history" },
-
-
-      { "<leader>it", "<cmd>TodoTelescope<cr>",                                   desc = "Todo" },
-      { "<leader>ih", "<cmd>Telescope help_tags<cr>",                             desc = "help tags" },
-
-      -- { "<leader>is", "<cmd>Telescope possession list<cr>",                       desc = "sessions" },
-      { "<leader>ii", ":lua require'telescope.builtin'.builtin{}<cr>",            desc = "telescope builtin" },
-      -- { "<leader>ft", "<cmd>Telescope builtin<cr>",                               desc = "telescope builtin" },
+      -- lsp
       { "<leader>ir", "<cmd>Telescope lsp_references<cr>",                        desc = "References" },
       { "<leader>id", ":lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>", desc = "current buffer diagnostics", },
       { "<leader>iD", ":lua require'telescope.builtin'.diagnostics{}<cr>",        desc = "workspace diagnostics" },
+      -- plugins
+      { "<leader>it", "<cmd>TodoTelescope<cr>",                                   desc = "Todo" },
+      -- { "<leader>is", "<cmd>Telescope possession list<cr>",                       desc = "sessions" },
+      -- { "<leader>fF", "<cmd>Telescope file_browser<cr>",                          desc = "files" },
+      -- { '<leader>y',  "<cmd>Telescope neoclip<cr>",                               desc = "yank history" },
+      -- { "M",  "<cmd>Telescope bookmarks list<cr>",                                 desc = "bookmarks" },
+      -- { "M",  "<cmd>Telescope marks list<cr>",                                 desc = "bookmarks" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -51,12 +51,10 @@ return {
       -- local fb_actions = require("telescope._extensions.file_browser.actions")
       require("telescope").setup({
         defaults = {
-          winblend = 10,
-          initial_mode = "normal",
+          initial_mode = "insert",
           scroll_strategy = "limit",
           mappings = {
             i = {
-              --       ["<c-d>"] = "delete_buffer",
               ["<C-s>"] = "select_horizontal",
               ["<C-v>"] = "select_vertical",
               ["<C-t>"] = "select_tab",
@@ -64,7 +62,6 @@ return {
               ["<C-k>"] = "move_selection_previous",
               ["up"] = "cycle_history_prev",
               ["down"] = "cycle_history_next",
-              -- ["<C-k>"] = "move_previous",
             },
             n = {
               ["s"] = "select_horizontal",
@@ -72,12 +69,11 @@ return {
               ["v"] = "select_vertical",
               ["t"] = "select_tab",
               ["<space>"] = "toggle_selection",
+              ["<C-j>"] = "move_selection_next",
+              ["<C-k>"] = "move_selection_previous",
             },
           },
-          prompt_prefix = " ",
           sorting_strategy = "ascending",
-          selection_caret = " ",
-          entry_prefix = " ",
           layout_config = {
             horizontal = { prompt_position = "top", preview_width = 0.55 },
             bottom_pane = {
@@ -88,36 +84,18 @@ return {
           },
         },
         pickers = {
-          current_buffer_fuzzy_find = {
-            initial_mode = "insert",
-          },
           spell_suggest = {
+            initial_mode = "normal",
             theme = "cursor",
           },
-          help_tags = {
-            initial_mode = "insert",
-          },
-          commands = {
-            initial_mode = "insert",
-          },
-          live_grep = {
-            initial_mode = "insert",
-          },
           grep_string = {
-            initial_mode = "insert",
-          },
-          find_files = {
-            initial_mode = "insert",
+            initial_mode = "normal",
           },
           buffers = {
             initial_mode = "normal",
             mappings = {
-              i = {
-                ["<c-d>"] = "delete_buffer",
-              },
-              n = {
-                ["d"] = "delete_buffer",
-              },
+              i = { ["<c-d>"] = "delete_buffer", },
+              n = { ["d"] = "delete_buffer", },
             },
           },
           git_branches = {
@@ -152,52 +130,6 @@ return {
           },
         },
         extensions = {
-          --[[
-          file_browser = {
-            grouped = true,
-            auto_depth = true,
-            select_buffer = false,
-            hidden = { file_browser = true, folder_browser = true },
-            dir_icon = "",
-            use_fd = true,
-            git_status = true,
-            mappings = {
-              ["i"] = {
-                ["<A-a>"] = fb_actions.create,
-                ["<S-CR>"] = fb_actions.create_from_prompt,
-                ["<A-r>"] = fb_actions.rename,
-                ["<A-m>"] = fb_actions.move,
-                ["<A-y>"] = fb_actions.copy,
-                ["<A-d>"] = fb_actions.remove,
-                ["<C-o>"] = fb_actions.open,
-                ["<C-g>"] = fb_actions.goto_parent_dir,
-                ["<C-e>"] = fb_actions.goto_home_dir,
-                ["<C-w>"] = fb_actions.goto_cwd,
-                ["<C-t>"] = fb_actions.change_cwd,
-                ["<C-f>"] = fb_actions.toggle_browser,
-                ["<C-h>"] = fb_actions.toggle_hidden,
-                ["<C-s>"] = fb_actions.toggle_all,
-                ["<bs>"] = fb_actions.backspace,
-              },
-              ["n"] = {
-                ["a"] = fb_actions.create,
-                ["r"] = fb_actions.rename,
-                ["m"] = fb_actions.move,
-                ["y"] = fb_actions.copy,
-                ["D"] = fb_actions.remove,
-                ["o"] = fb_actions.open,
-                ["h"] = fb_actions.goto_parent_dir,
-                ["e"] = fb_actions.goto_home_dir,
-                ["w"] = fb_actions.goto_cwd,
-                ["."] = fb_actions.change_cwd,
-                ["f"] = fb_actions.toggle_browser,
-                ["zh"] = fb_actions.toggle_hidden,
-                ["H"] = fb_actions.toggle_hidden,
-                ["s"] = fb_actions.toggle_all,
-              },
-            },
-          },
-]]
         },
       })
       -- require("telescope").load_extension("possession")
@@ -207,11 +139,49 @@ return {
   },
   {
     "ibhagwan/fzf-lua",
+    enabled = false,
     -- optional for icon support
     -- lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+      -- search files
+      -- { "<leader>ff", "<cmd>FzfLua files<cr>",                    desc = "files" },
+      -- { "<leader>fh", "<cmd>FzfLua oldfiles<cr>",                 desc = "history files" },
+      -- search string
+      -- { "<leader>?",  "<cmd>FzfLua live_grep_resume<cr>",         desc = "grep string" },
+      -- { "<leader>/",  "<cmd>FzfLua grep<cr>",                     desc = "live grep" },
+      -- { "/",          "<cmd>FzfLua grep_visual<cr>",              desc = "live grep visual select", mode = "v" },
+      -- { "**",         "<cmd>FzfLua grep_cword<cr>", desc = "live grep cursor word" },
+      -- git
+      -- { "<leader>gb", "<cmd>FzfLua git_blame<cr>",  desc = "git blame" },
+      -- { "<leader>gB", "<cmd>FzfLua git_branches<cr>",             desc = "git branch" },
+      -- { "<leader>gc", "<cmd>FzfLua git_commits<cr>",              desc = "git commits" },
+      -- { "<leader>gs", "<cmd>FzfLua git_status<cr>",               desc = "git status" },
+      -- { "<leader>gS", "<cmd>FzfLua git_stash<cr>",                desc = "git stash" },
+      -- { "<leader>gf", "<cmd>FzfLua git_files<cr>",                desc = "git files" },
+      -- list native
+      -- { "<leader>b",  "<cmd>FzfLua buffers<cr>",                  desc = "buffers" },
+      -- { "<leader>i/", "<cmd>FzfLua search_history<cr>",           desc = "search history" },
+      -- { "<leader>i;", "<cmd>FzfLua command_history<cr>",          desc = "commands history" },
+      -- { "<leader>ic", "<cmd>FzfLua colorschemes<cr>",             desc = "colorschemes" },
+      -- { "<leader>ih", "<cmd>FzfLua helptags<cr>",                 desc = "help tags" },
+      -- { "<leader>iq", "<cmd>FzfLua quickfix<cr>",                 desc = "quickfix" },
+      -- { "<leader>im", "<cmd>FzfLua menu<cr>",                     desc = "menu" },
+      -- { "<leader>`",  "<cmd>FzfLua marks<cr>",                    desc = "marks" },
+      -- { '<leader>"',  "<cmd>FzfLua registers<cr>",                desc = "registers" },
+      -- { "<leader>;",  "<cmd>FzfLua commands<cr>",                 desc = "commands" },
+      -- { "<leader>w",  "<cmd>FzfLua spell_suggest<cr>",            desc = "spell suggest" },
+      -- { "<leader>j",  "<cmd>FzfLua jumplist<cr>",                 desc = "jump list" },
+      -- list lsp and treesitter
+      -- { "<leader>ir", "<cmd>FzfLua lsp_references<cr>",           desc = "lsp references" },
+      -- { "<leader>if", "<cmd>FzfLua lsp_finder<cr>", desc = "lsp finder" },
+      -- { "<leader>io", "<cmd>FzfLua lsp_document_symbols<cr>",     desc = "lsp symbols" },
+      -- { "<leader>id", "<cmd>FzfLua lsp_document_diagnostics<cr>", desc = "lsp diagnostics" },
+      -- { "<leader>it", "<cmd>FzfLua treesitter<cr>",               desc = "treesitter" },
+      -- itself
+      -- { "<leader>ii", "<cmd>FzfLua builtin",                      desc = "telescope builtin" },
+    },
     config = function()
-      -- calling `setup` is optional for customization
       require("fzf-lua").setup({})
     end
   },
