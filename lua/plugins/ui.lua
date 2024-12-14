@@ -41,9 +41,9 @@ return {
           -- starter.sections.recent_files(3, true), -- local
           -- starter.sections.builtin_actions(),
           { name = 'start up time', action = [[StartupTime]], section = 'actions' },
-          { name = 'Lazy',          action = [[Lazy]],        section = 'actions' },
+          { name = 'lazy.nvim',     action = [[Lazy]],        section = 'actions' },
           { name = 'quit',          action = [[quit]],        section = 'actions' },
-          { name = 'new file', action = 'enew', section = 'actions' },
+          { name = 'new file',      action = 'enew',          section = 'actions' },
         },
         header = '',
         footer = '',
@@ -446,6 +446,7 @@ return {
         },
         sections = {
           lualine_a = {
+            -- { "fancy_cwd", substitute_home = true },
             { "fancy_branch" },
             -- "branch",
             -- "fancy_lsp_servers",
@@ -485,7 +486,7 @@ return {
         },
         inactive_sections = {
           lualine_a = {
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           },
           lualine_b = {
             {
@@ -497,7 +498,6 @@ return {
               -- 2: Absolute path
               -- 3: Absolute path, with tilde as the home directory
               shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-              -- for other components. (terrible name, any suggestions?)
               symbols = {
                 modified = "", -- Text to show when the file is modified.
                 readonly = "", -- Text to show when the file is non-modifiable or readonly.
@@ -545,6 +545,17 @@ return {
           },
           lualine_c = {
             {
+              "buffers",
+              show_filename_only = true,   -- Shows shortened relative path when set to false.
+              show_modified_status = false, -- Shows indicator when the buffer is modified.
+              mode = 0,                    -- 0: Shows buffer name
+              symbols = {
+                modified = "", -- Text to show when the buffer is modified
+                alternate_file = "", -- Text to show to identify the alternate file
+                directory = "", -- Text to show when the buffer is a directory
+              },
+            },
+            --[[ {
               "windows",
               show_filename_only = true, -- Shows shortened relative path when set to false.
               show_modified_status = true, -- Shows indicator when the window is modified.
@@ -554,27 +565,24 @@ return {
                 unnamed = "", -- Text to show for unnamed buffers.
                 newfile = "", -- Text to show for newly created file before first write
               },
-              mode = 2,
-            },
+              mode = 0,
+            }, ]]
           },
           lualine_x = {
           },
           lualine_y = {
-            {
+            "fancy_lsp_servers",
+            --[[ {
               "buffers",
               show_filename_only = true,   -- Shows shortened relative path when set to false.
               show_modified_status = true, -- Shows indicator when the buffer is modified.
               mode = 0,                    -- 0: Shows buffer name
-              -- 1: Shows buffer index
-              -- 2: Shows buffer name + buffer index
-              -- 3: Shows buffer number
-              -- 4: Shows buffer name + buffer number
               symbols = {
                 modified = "", -- Text to show when the buffer is modified
                 alternate_file = "", -- Text to show to identify the alternate file
                 directory = "", -- Text to show when the buffer is a directory
               },
-            },
+            }, ]]
           },
           lualine_z = {
             -- session_name,
@@ -715,6 +723,24 @@ return {
       -- `matchparen.vim` needs to be disabled manually in case of lazy loading
       vim.g.loaded_matchparen = 1
     end,
+  },
+  -- lazy.nvim
+  {
+    "folke/noice.nvim",
+    enabled = false,
+    event = "BufReadPost",
+    opts = {
+      -- add any options here
+      -- cmdline = {enabled = false,}
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
   },
   {
     "rcarriga/nvim-notify",

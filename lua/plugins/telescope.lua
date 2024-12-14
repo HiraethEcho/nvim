@@ -11,9 +11,9 @@ return {
       { "<leader>fh", "<cmd>Telescope oldfiles<cr>",                              desc = "history files" },
       { "<leader>b",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
       -- enhance native
-      { "<leader>*",         ":lua require'telescope.builtin'.grep_string{bufnr=0}<cr>", desc = "current buffer grep_string", },
+      { "<leader>*",  ":lua require'telescope.builtin'.grep_string{bufnr=0}<cr>", desc = "current buffer grep_string", },
       { "<leader>/",  "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
-      { "<leader>fr",         "<cmd>Telescope resume<cr>",                                desc = "resume" },
+      { "<leader>fr", "<cmd>Telescope resume<cr>",                                desc = "resume" },
       { "<leader>;",  "<cmd>Telescope commands<cr>",                              desc = "commands" },
       { "<leader>w",  "<cmd>Telescope spell_suggest<cr>",                         desc = "spell suggest" },
       { "<leader>j",  "<cmd>Telescope jumplist<cr>",                              desc = "jump list" },
@@ -30,6 +30,7 @@ return {
       -- history
       { "<leader>i/", "<cmd>Telescope search_history<cr>",                        desc = "search history" },
       { "<leader>i;", "<cmd>Telescope command_history<cr>",                       desc = "commands history" },
+      { "<leader>in", "<cmd>Telescope notify<cr>",                                desc = "notify history" },
       -- lsp
       { "<leader>ir", "<cmd>Telescope lsp_references<cr>",                        desc = "References" },
       { "<leader>id", ":lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>", desc = "current buffer diagnostics", },

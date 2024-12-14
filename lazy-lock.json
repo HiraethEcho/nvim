@@ -67,6 +67,7 @@
   "neovim": { "branch": "main", "commit": "375ddbeb60f41c5fd54daec5960a6ae3e8b03ee5" },
   "neovim-session-manager": { "branch": "master", "commit": "35c154a4b904cbe2aa7acce00a8c1c54a8831780" },
   "nightfox.nvim": { "branch": "main", "commit": "7557f26defd093c4e9bc17f28b08403f706f5a44" },
+  "noice.nvim": { "branch": "main", "commit": "eaed6cc9c06aa2013b5255349e4f26a6b17ab70f" },
   "nordic.nvim": { "branch": "main", "commit": "03fcff3c8d68049b8118047784746048b4a08049" },
   "nui.nvim": { "branch": "main", "commit": "53e907ffe5eedebdca1cd503b00aa8692068ca46" },
   "nvim-autopairs": { "branch": "master", "commit": "b464658e9b880f463b9f7e6ccddd93fb0013f559" },

@@ -95,6 +95,7 @@ map("n", "<leader>ur", function() Util.toggle("relativenumber") end, { desc = "T
 map("n", "<leader>uc", function() Util.toggle("conceallevel", false, { 0, conceallevel }) end, { desc = "Toggle Conceal" })
 
 map("n", "<leader>uI", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
+map("n", "<leader>ub", "<cmd>BRToggle", { desc = "Toggle Bionic Read" })
 
 -- lazygit
 map("n", "<leader>gg", function() Util.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit " })
