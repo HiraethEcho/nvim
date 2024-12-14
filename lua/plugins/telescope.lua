@@ -11,9 +11,9 @@ return {
       { "<leader>fh", "<cmd>Telescope oldfiles<cr>",                              desc = "history files" },
       { "<leader>b",  "<cmd>Telescope buffers<cr>",                               desc = "buffers" },
       -- enhance native
-      { "**",         ":lua require'telescope.builtin'.grep_string{bufnr=0}<cr>", desc = "current buffer grep_string", },
+      { "<leader>*",         ":lua require'telescope.builtin'.grep_string{bufnr=0}<cr>", desc = "current buffer grep_string", },
       { "<leader>/",  "<cmd>Telescope live_grep<cr>",                             desc = "live grep" },
-      { "<leader>//",         "<cmd>Telescope resume<cr>",                                desc = "resume" },
+      { "<leader>fr",         "<cmd>Telescope resume<cr>",                                desc = "resume" },
       { "<leader>;",  "<cmd>Telescope commands<cr>",                              desc = "commands" },
       { "<leader>w",  "<cmd>Telescope spell_suggest<cr>",                         desc = "spell suggest" },
       { "<leader>j",  "<cmd>Telescope jumplist<cr>",                              desc = "jump list" },
