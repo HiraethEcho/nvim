@@ -718,24 +718,14 @@ return {
   },
   {
     "rcarriga/nvim-notify",
+    event = "BufRead",
     config = function()
       require("notify").setup({
-        background_colour = "NotifyBackground",
         fps = 60,
-        icons = {
-          -- Nalpha OTE:icons here
-          DEBUG = "",
-          ERROR = "",
-          INFO = "",
-          TRACE = "✎",
-          WARN = "",
-        },
         level = 2,
-        minimum_width = 50,
         render = "default",
         stages = "slide",
-        timeout = 2000,
-        top_down = true,
+        timeout = 1000,
       })
       vim.notify = require("notify")
     end,
