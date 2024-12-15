@@ -85,7 +85,7 @@ return {
   },
   {
     'MeanderingProgrammer/render-markdown.nvim',
-    -- ft = { "markdown", "md" },
+    ft = { "markdown", "md" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
     },

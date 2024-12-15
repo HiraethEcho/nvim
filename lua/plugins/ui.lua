@@ -520,13 +520,19 @@ return {
         winbar = {
           lualine_b = {
             -- "fancy_lsp_servers",
-            "fancy_diagnostics",
+            -- "fancy_diagnostics",
           },
           lualine_c = {
             {
               "navic",
             },
           },
+          lualine_z = {
+            "fancy_lsp_servers",
+          },
+          lualine_y ={
+            "fancy_diagnostics",
+          }
           -- lualine_x = { "filetype" },
         },
 
@@ -544,7 +550,7 @@ return {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           },
           lualine_c = {
-            {
+            --[[ {
               "buffers",
               show_filename_only = true,   -- Shows shortened relative path when set to false.
               show_modified_status = false, -- Shows indicator when the buffer is modified.
@@ -554,8 +560,8 @@ return {
                 alternate_file = "", -- Text to show to identify the alternate file
                 directory = "", -- Text to show when the buffer is a directory
               },
-            },
-            --[[ {
+            }, ]]
+            {
               "windows",
               show_filename_only = true, -- Shows shortened relative path when set to false.
               show_modified_status = true, -- Shows indicator when the window is modified.
@@ -566,12 +572,12 @@ return {
                 newfile = "", -- Text to show for newly created file before first write
               },
               mode = 0,
-            }, ]]
+            },
           },
           lualine_x = {
           },
           lualine_y = {
-            "fancy_lsp_servers",
+            -- "fancy_lsp_servers",
             --[[ {
               "buffers",
               show_filename_only = true,   -- Shows shortened relative path when set to false.
@@ -583,10 +589,10 @@ return {
                 directory = "", -- Text to show when the buffer is a directory
               },
             }, ]]
+            { "fancy_cwd", substitute_home = true },
           },
           lualine_z = {
             -- session_name,
-            { "fancy_cwd", substitute_home = true },
             {
               function()
                 return require('auto-session.lib').current_session_name(true)
