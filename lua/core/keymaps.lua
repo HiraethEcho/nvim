@@ -66,23 +66,20 @@ map("i", ";", ";<c-g>u")
 -- better indenting
 
 -- toggle
-map("n", "<leader>uw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
--- map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
-map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
-map("n", "<leader>ul", function() Util.toggle("number") end, { desc = "Toggle Line Numbers" })
-map("n", "<leader>ur", function() Util.toggle("relativenumber") end, { desc = "Toggle Line Relative Numbers" })
--- local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map("n", "<leader>uc", function() Util.toggle("conceallevel", false, { 0, conceallevel }) end,
-  { desc = "Toggle Conceal" })
+map("n", "<leader>uw", function() Util.toggle_set("wrap") end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>us", function() Util.toggle_set("spell") end, { desc = "Toggle Spelling" })
+map("n", "<leader>ul", function() Util.toggle_set("number") end, { desc = "Toggle Line Numbers" })
+map("n", "<leader>ur", function() Util.toggle_set("relativenumber") end, { desc = "Toggle Line Relative Numbers" })
+map("n", "<leader>uc", function() Util.toggle_set("conceallevel", false, { 0, conceallevel }) end, { desc = "Toggle Conceal" })
+map("n", "<leader>ud", function() Util.toggle_diagnostics() end, { desc = "Toggle Diagnostics" })
 
 map("n", "<leader>uI", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
   { desc = "Toggle Inlay Hints" })
 map("n", "<leader>ub", "<cmd>BRToggle<cr>", { desc = "Toggle Bionic Read" })
 
 -- lazygit
-map("n", "<leader>gg", function() Util.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false }) end,
-  { desc = "Lazygit " })
+map("n", "<leader>gg", function() Util.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit " })
+-- map("n", "<leader>gg", function() Util.lazygit() end, { desc = "Lazygit " })
 -- quit
 map("n", "<leader>q", "<cmd>wqa<cr>", { desc = "Quit all" })
 
