@@ -1,4 +1,5 @@
 vim.o.guifont = "Maple Mono NF:h8"
+vim.opt.termguicolors = true -- True color support
 if vim.g.neovide then
   vim.opt.linespace = -1
   -- Helper function for transparency formatting
