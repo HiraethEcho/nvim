@@ -407,7 +407,7 @@ return {
       }
     end,
     -- Optional: Lazy load Incline
-    event = 'VeryLazy',
+    event = 'BufReadPost',
   },
   {
     "nvim-lualine/lualine.nvim",

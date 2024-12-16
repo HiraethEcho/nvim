@@ -170,6 +170,7 @@ return {
   {
     "SmiteshP/nvim-navbuddy",
     -- enabled = false,
+    event = "LspAttach",
     keys = {
       { "<leader>O", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
     },
