@@ -3,18 +3,22 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
+      { "SirVer/ultisnips",   dependencies = { "quangnguyen30192/cmp-nvim-ultisnips", config = true, }, },
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
-      "zbirenbaum/copilot.lua",
-      -- "neovim/nvim-lspconfig",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-path",
-      -- "nvim-treesitter/nvim-treesitter",
       { "micangl/cmp-vimtex", },
-      { "SirVer/ultisnips",   dependencies = { "quangnguyen30192/cmp-nvim-ultisnips", config = true, }, },
-      -- "onsails/lspkind-nvim",
+      "zbirenbaum/copilot.lua",
+      "hrsh7th/cmp-path",
+      "onsails/lspkind-nvim",
+      -- "neovim/nvim-lspconfig",
+      -- "hrsh7th/cmp-nvim-lua",
+      -- "nvim-treesitter/nvim-treesitter",
+      -- "yehuohan/cmp-im",
+      -- "yehuohan/cmp-im-zh",
+      -- "liubianshi/cmp-lsp-rimels",
       {
         "folke/lazydev.nvim",
+        enabled = false,
         ft = "lua", -- only load on lua files
         opts = {
           library = {
@@ -24,12 +28,11 @@ return {
       },
     },
     config = function()
+      local lspkind = require('lspkind')
       local cmp = require("cmp")
       local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
       cmp.setup({
-        completion = {
-          completeopt = "menu,popup,menuone,noselect", -- see :help 'completeopt'
-        },
+        completion = { completeopt = "menu,popup,menuone,noselect", }, -- see :help 'completeopt'
         snippet = {
           expand = function(args)
             vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
@@ -42,13 +45,13 @@ return {
             function(fallback)
               cmp_ultisnips_mappings.jump_forwards(fallback)
             end,
-            { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+            { "i", "s", }
           ),
           ["<c-k>"] = cmp.mapping(
             function(fallback)
               cmp_ultisnips_mappings.jump_backwards(fallback)
             end,
-            { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+            { "i", "s", }
           ),
           ["<Tab>"] = cmp.mapping.select_next_item(fallback),
           ["<S-Tab>"] = cmp.mapping.select_prev_item(fallback),
@@ -64,8 +67,19 @@ return {
           { name = "path" },
           { name = "lazydev",  group_index = 0, },
         }),
-        experimental = {
-          ghost_text = false, -- this feature conflict with copilot.vim's preview.
+        formatting = {
+          format = lspkind.cmp_format({
+            mode = 'symbol_text',     -- show only symbol annotations
+            maxwidth = {
+              menu = 100,              -- leading text (labelDetails)
+              abbr = 100,              -- actual suggestion item
+            },
+            show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+            before = function(entry, vim_item)
+              vim_item.menu = entry.source.name
+              return vim_item
+            end
+          })
         },
       })
     end,

@@ -74,8 +74,6 @@ return {
         end,
         NS
       )
-
-      -- Aligns to 2 characters with previews
       vim.keymap.set(
         'x',
         'ad',

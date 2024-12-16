@@ -527,13 +527,15 @@ return {
               "navic",
             },
           },
-          lualine_z = {
+          lualine_y ={
             "fancy_lsp_servers",
           },
-          lualine_y ={
+          lualine_x = {
+            -- "filetype",
             "fancy_diagnostics",
-          }
-          -- lualine_x = { "filetype" },
+          },
+          lualine_z = {
+          },
         },
 
         tabline = {

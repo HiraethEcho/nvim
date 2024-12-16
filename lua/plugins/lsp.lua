@@ -61,6 +61,8 @@ return {
         -- alex = {},
         -- markdown-oxide = {},
         -- ltex     = {},
+        -- digestif = {},
+        -- textlsp  = {},
         texlab   = {
           texlab = {
             build = {
@@ -129,7 +131,7 @@ return {
               on_attach = function(client, bufnr)
                 require("nvim-navic").attach(client, bufnr)
                 vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end,
-                -- vim.keymap.set("n", "gR", function() return ":IncRename " .. vim.fn.expand("<cword>") end,
+                  -- vim.keymap.set("n", "gR", function() return ":IncRename " .. vim.fn.expand("<cword>") end,
                   { noremap = true, silent = true, buffer = bufnr, desc = "lsp rename" })
                 vim.keymap.set("n", "gA", function() vim.lsp.buf.code_action() end,
                   { noremap = true, silent = true, buffer = bufnr, desc = "lsp action" })

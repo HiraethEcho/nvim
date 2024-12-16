@@ -20,7 +20,7 @@ return {
       { "<leader>`",  "<cmd>Telescope marks<cr>",                                 desc = "marks" },
       { '<leader>"',  "<cmd>Telescope registers<cr>",                             desc = "registers" },
       { "<leader>ih", "<cmd>Telescope help_tags<cr>",                             desc = "help tags" },
-      { "<leader>ic", "<cmd>Telescope colorschemes<cr>",                          desc = "colorschemes" },
+      { "<leader>ic", "<cmd>Telescope colorscheme<cr>",                          desc = "colorschemes" },
       -- git
       { "<leader>gB", "<cmd>Telescope git_branches<cr>",                          desc = "git branch" },
       { "<leader>gc", "<cmd>Telescope git_commits<cr>",                           desc = "git commits" },
