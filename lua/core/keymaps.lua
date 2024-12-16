@@ -15,28 +15,11 @@ map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
-
--- better up/down
-map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-map({ "n", "v" }, "H", "^")
-map({ "n", "v" }, "L", "g_")
--- Move Lines
-map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
-
 -- tabs
 map("n", "<c-t>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<C-n>", "<C-W>T", { desc = "Window to new tab" })
 map("n", "t", "<cmd>tabNext<cr>", { desc = "Next Tab" })
 map("n", "T", "<cmd>tabprevious<cr>", { desc = "previous Tab" })
--- map("n", "<leader><tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
--- map("n", "<C-Tab>", "<cmd>tabNext<cr>", { desc = "Next Tab" })
--- map("n", "<C-S-Tab>", "<cmd>tabprevious<cr>", { desc = "previous Tab" })
-
--- vim.keymap.set('n', '<C-Tab>', ':tabNext<CR>', { noremap = true, silent = true })
--- vim.keymap.set('n', '<C-S-Tab>', ':tabprevious<CR>', { noremap = true, silent = true })
-
-map("n", "<C-n>", "<C-W>T", { desc = "Window to new tab" })
 
 -- window
 map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
@@ -48,47 +31,47 @@ map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
-map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
-map("n", "Q", "<c-w>q", { desc = "Close window" })
-map("n", "<leader>H", ":cd %:h<cr>", { desc = "set cwd to parent of current file" })
-
 -- edit
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map({ "n", "v" }, "H", "^")
+map({ "n", "v" }, "L", "g_")
+-- map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+-- map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 -- Add undo break-points
 map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
-
 -- move cursor in insert mode
--- map("i", "<C-h>", "<Left>")
--- map("i", "<C-l>", "<Right>")
--- map("i", "<C-k>", "<Up>")
--- map("i", "<C-j>", "<Down>")
--- better indenting
+map("i", "<C-h>", "<Left>")
+map("i", "<C-l>", "<Right>")
+map("i", "<C-k>", "<Up>")
+map("i", "<C-j>", "<Down>")
 
--- toggle
+-- file
+map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
+map("n", "Q", "<c-w>q", { desc = "Close window" })
+map("n", "<leader>H", ":cd %:h<cr>", { desc = "set cwd to parent of current file" })
+
+
+-- toggle set
 map("n", "<leader>uw", function() Util.toggle_set("wrap") end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>us", function() Util.toggle_set("spell") end, { desc = "Toggle Spelling" })
 map("n", "<leader>ul", function() Util.toggle_set("number") end, { desc = "Toggle Line Numbers" })
 map("n", "<leader>ur", function() Util.toggle_set("relativenumber") end, { desc = "Toggle Line Relative Numbers" })
 map("n", "<leader>uc", function() Util.toggle_set("conceallevel", false, { 0, conceallevel }) end, { desc = "Toggle Conceal" })
+-- toggle function
 map("n", "<leader>ud", function() Util.toggle_diagnostics() end, { desc = "Toggle Diagnostics" })
-
-map("n", "<leader>uI", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
-  { desc = "Toggle Inlay Hints" })
+map("n", "<leader>uI", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
 map("n", "<leader>ub", "<cmd>BRToggle<cr>", { desc = "Toggle Bionic Read" })
 
--- lazygit
-map("n", "<leader>gg", function() Util.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit " })
--- map("n", "<leader>gg", function() Util.lazygit() end, { desc = "Lazygit " })
--- quit
+-- terminals
+map("n", "<leader>gg", function() Util.lazygit() end, { desc = "Lazygit " })
 map("n", "<leader>q", "<cmd>wqa<cr>", { desc = "Quit all" })
-
--- floating terminal
 local lazyterm = function()
   Util.float_term("zsh", { esc_esc = true, ctrl_hjkl = false })
 end
 map("n", "<leader>t", lazyterm, { desc = "Float Terminal" })
-
 -- Terminal Mappings
 map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
 map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })

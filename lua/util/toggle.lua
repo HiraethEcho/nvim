@@ -27,7 +27,6 @@ function M.toggle_diagnostics()
     vim.diagnostic.enable()
     Util.info("Enabled diagnostics", { title = "Diagnostics" })
   else
-    -- vim.diagnostic.disable()
     vim.diagnostic.enable(false)
     Util.warn("Disabled diagnostics", { title = "Diagnostics" })
   end
