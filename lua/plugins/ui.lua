@@ -759,7 +759,7 @@ return {
         level = 2,
         render = "default",
         stages = "slide",
-        timeout = 1000,
+        timeout = 2000,
       })
       vim.notify = require("notify")
     end,

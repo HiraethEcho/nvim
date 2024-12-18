@@ -16,12 +16,27 @@ snippet sec "section" b
 $0
 endsnippet
 
+snippet ## "section" b
+\section{$1}
+$0
+endsnippet
+
 snippet ssec "subsection" b
 \subsection{$1}
 $0
 endsnippet
 
+snippet ### "subsection" b
+\subsection{$1}
+$0
+endsnippet
+
 snippet sssec "subsubsection" b
+\subsubsection{$1}
+$0
+endsnippet
+
+snippet #### "subsubsection" b
 \subsubsection{$1}
 $0
 endsnippet
@@ -50,6 +65,11 @@ snippet ul "Itemize" b
 	\item $0
 \end{itemize}
 endsnippet
+
+snippet li "list item" b
+\item $0
+endsnippet
+
 
 snippet lem "Lemma" bi
 \begin{lemma}
@@ -93,6 +113,12 @@ snippet rmk "Remark" bi
 \end{remark}
 endsnippet
 
+snippet example "Example" bi
+\begin{example}
+	${0:${VISUAL}}
+\end{example}
+endsnippet
+
 snippet ques "Question" bi
 \begin{ques}
 	${0:${VISUAL}}
@@ -106,7 +132,7 @@ snippet dm "display Math" bA
 endsnippet
 
 snippet ii "inline math" wA
-${1:${VISUAL}} 
+$ ${1:${VISUAL}} $
 endsnippet
 
 snippet fun "Big function" i

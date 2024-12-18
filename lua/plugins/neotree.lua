@@ -41,7 +41,7 @@ return {
       sources = { "filesystem", "buffers", "git_status", "document_symbols" },
       commands = {
         system_open = function(state)
-          require("config.util").system_open(state.tree:get_node():get_id())
+          require("util").system_open(state.tree:get_node():get_id())
         end,
         copy_selector = function(state)
           local node = state.tree:get_node()

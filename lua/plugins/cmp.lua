@@ -3,10 +3,13 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      { "SirVer/ultisnips",   dependencies = { "quangnguyen30192/cmp-nvim-ultisnips", config = true, }, },
       "hrsh7th/cmp-nvim-lsp",
+      {
+        "SirVer/ultisnips",
+      },
+      { "quangnguyen30192/cmp-nvim-ultisnips", config = true, },
       "hrsh7th/cmp-buffer",
-      { "micangl/cmp-vimtex", },
+      -- { "micangl/cmp-vimtex", },
       "zbirenbaum/copilot.lua",
       "hrsh7th/cmp-path",
       "onsails/lspkind-nvim",
@@ -59,21 +62,17 @@ return {
         },
         sources = cmp.config.sources({
           { name = "ultisnips" }, -- For ultisnips users.
-          { name = "vimtex" },
-          { name = "nvim_lua" },
+          -- { name = "vimtex" },
+          -- { name = "nvim_lua" },
           { name = 'nvim_lsp' },
-          { name = "copilot" },
-          { name = "buffer",   option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end, }, },
+          { name = "copilot",  max_item_count = 3, },
+          { name = "buffer",   option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end, }, max_item_count = 3, },
           { name = "path" },
-          { name = "lazydev",  group_index = 0, },
+          -- { name = "lazydev",  group_index = 0, },
         }),
         formatting = {
           format = lspkind.cmp_format({
             mode = 'symbol_text',     -- show only symbol annotations
-            maxwidth = {
-              menu = 100,              -- leading text (labelDetails)
-              abbr = 100,              -- actual suggestion item
-            },
             show_labelDetails = true, -- show labelDetails in menu. Disabled by default
             before = function(entry, vim_item)
               vim_item.menu = entry.source.name
