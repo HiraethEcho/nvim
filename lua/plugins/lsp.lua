@@ -96,15 +96,17 @@ return {
               onEdit = false,
             },
             bibtexFormatter = "texlab",
-            latexFormatter = "texlab",
+            latexFormatter = "latexindent",
+            latexindent = {
+              ['local'] = nil, -- local is a reserved keyword
+              modifyLineBreaks = false,
+            },
             formatterLineLength = 80,
           },
         },
         marksman = {},
         tinymist = {
           single_file_support = true,
-          -- root_dir = require 'lspconfig.util'.root_pattern('.git'),
-          -- root_dir ={},
         },
         lua_ls   = {
           lua = {
@@ -128,6 +130,9 @@ return {
               capabilities = capabilities,
               offset_encoding = "utf-8",
               settings = servers[server_name],
+              root_dir = function(_, bufnr)
+                return vim.fs.root(bufnr, { ".git" }) or vim.fn.expand("%:p:h")
+              end,
               on_attach = function(client, bufnr)
                 require("nvim-navic").attach(client, bufnr)
                 vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end,
@@ -140,7 +145,7 @@ return {
                   { noremap = true, silent = true, buffer = bufnr, desc = "lsp hover" })
                 -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true, buffer = bufnr, desc = "lsp references" })
                 if server_name == "tinymist" then
-                  vim.keymap.set("n", "<cr>", "<cmd>TypstPreview<cr>",
+                  vim.keymap.set("n", "<cr><cr>", "<cmd>TypstPreviewSyncCursor<cr>",
                     { noremap = true, silent = true, buffer = bufnr, desc = "Typst Preview" })
                 end
                 if server_name == "texlab" then

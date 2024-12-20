@@ -384,7 +384,7 @@ return {
     'ActivityWatch/aw-watcher-vim',
     -- lazy = false,
     event = "BufRead",
-    -- enabled = false,
+    enabled = false,
     cmd = "AWStart",
   },
   {
