@@ -410,6 +410,53 @@ return {
     event = 'BufReadPost',
   },
   {
+    'tamton-aquib/staline.nvim',
+    enabled = false,
+    -- lazy = false,
+    config = function()
+      require('staline').setup {
+        defaults = {
+          left_separator    = "",
+          right_separator   = "",
+          full_path         = false,
+          line_column       = "%l/%L:%c", -- `:h stl` to see all flags.
+          inactive_color    = "#503060",
+          inactive_bgcolor  = "none",
+          true_colors       = true,          -- true lsp colors.
+          font_active       = "bold,italic", -- "bold", "italic", "bold,italic", etc
+          lsp_client_symbol = " ",
+        },
+        mode_colors = {
+          i = "#78ccc5",
+          v = "#9745be",
+          c = "#e27d60",
+        },
+        sections = {
+          left  = { ' ', '-mode', 'left_sep_double', ' ', 'branch', 'lsp_name', 'lsp', 'cwd' },
+          mid   = { 'file_name' },
+          right = { 'right_sep_double', '-line_column' },
+        },
+        inactive_sections = {
+          left  = { 'branch' },
+          mid   = { 'file_name' },
+          right = { 'line_column' }
+        },
+        special_table = {
+          neotree = { 'neo-tree', ' ' },
+        },
+        lsp_symbols = {
+          Error = " ",
+          Info = "󰋼 ",
+          Warn = " ",
+          Hint = "",
+        },
+      }
+      require('stabline').setup()
+      -- vim.opt.laststatus = 2
+      -- vim.opt.showtabline = 2
+    end
+  },
+  {
     "nvim-lualine/lualine.nvim",
     -- enabled = false,
     event = "BufReadPost",
@@ -477,8 +524,9 @@ return {
           lualine_y = {},
           lualine_z = {
             "progress",
-            -- "location",
-            { "fancy_location" },
+            "location",
+            -- "%:L",
+            -- { "fancy_location" },
             --[[ function()
               return " " .. os.date("%R")
             end, ]]
@@ -527,7 +575,7 @@ return {
               "navic",
             },
           },
-          lualine_y ={
+          lualine_y = {
             "fancy_lsp_servers",
           },
           lualine_x = {
@@ -804,6 +852,55 @@ return {
         show_cursor = true,             -- Show the cursor position in the minimap
         window_border = "single",       -- The border style of the floating window (accepts all usual options)
       })
+    end,
+  },
+  {
+    "Isrothy/neominimap.nvim",
+    version = "v3.*.*",
+    enabled = false,
+    -- lazy = false, -- NOTE: NO NEED to Lazy load
+    -- Optional
+    keys = {
+      -- Global Minimap Controls
+      { "<leader>nm",  "<cmd>Neominimap toggle<cr>",      desc = "Toggle global minimap" },
+      { "<leader>no",  "<cmd>Neominimap on<cr>",          desc = "Enable global minimap" },
+      { "<leader>nc",  "<cmd>Neominimap off<cr>",         desc = "Disable global minimap" },
+      { "<leader>nr",  "<cmd>Neominimap refresh<cr>",     desc = "Refresh global minimap" },
+
+      -- Window-Specific Minimap Controls
+      { "<leader>nwt", "<cmd>Neominimap winToggle<cr>",   desc = "Toggle minimap for current window" },
+      { "<leader>nwr", "<cmd>Neominimap winRefresh<cr>",  desc = "Refresh minimap for current window" },
+      { "<leader>nwo", "<cmd>Neominimap winOn<cr>",       desc = "Enable minimap for current window" },
+      { "<leader>nwc", "<cmd>Neominimap winOff<cr>",      desc = "Disable minimap for current window" },
+
+      -- Tab-Specific Minimap Controls
+      { "<leader>ntt", "<cmd>Neominimap tabToggle<cr>",   desc = "Toggle minimap for current tab" },
+      { "<leader>ntr", "<cmd>Neominimap tabRefresh<cr>",  desc = "Refresh minimap for current tab" },
+      { "<leader>nto", "<cmd>Neominimap tabOn<cr>",       desc = "Enable minimap for current tab" },
+      { "<leader>ntc", "<cmd>Neominimap tabOff<cr>",      desc = "Disable minimap for current tab" },
+
+      -- Buffer-Specific Minimap Controls
+      { "<leader>nbt", "<cmd>Neominimap bufToggle<cr>",   desc = "Toggle minimap for current buffer" },
+      { "<leader>nbr", "<cmd>Neominimap bufRefresh<cr>",  desc = "Refresh minimap for current buffer" },
+      { "<leader>nbo", "<cmd>Neominimap bufOn<cr>",       desc = "Enable minimap for current buffer" },
+      { "<leader>nbc", "<cmd>Neominimap bufOff<cr>",      desc = "Disable minimap for current buffer" },
+
+      ---Focus Controls
+      { "<leader>nf",  "<cmd>Neominimap focus<cr>",       desc = "Focus on minimap" },
+      { "<leader>nu",  "<cmd>Neominimap unfocus<cr>",     desc = "Unfocus minimap" },
+      { "<leader>ns",  "<cmd>Neominimap toggleFocus<cr>", desc = "Switch focus on minimap" },
+    },
+    init = function()
+      vim.g.neominimap = {
+        auto_enable = false,
+        layout = "split",
+        split = {
+          minimap_width = 20, ---@type integer
+          fix_width = false, ---@type boolean
+          ---@alias Neominimap.Config.SplitDirection "left" | "right"
+          direction = "right", ---@type Neominimap.Config.SplitDirection
+        },
+      }
     end,
   },
   {

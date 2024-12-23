@@ -497,9 +497,19 @@ return {
       vim.keymap.set("n", "<tab>", "<plug>(CybuNext)")
     end,
   },
+{
+    "gh-liu/fold_line.nvim",
+    event = "BufRead",
+    enabled = false,
+    config = function()
+        -- change the char of the line, see the `Appearance` section
+        vim.g.fold_line_char_open_start = "╭"
+        vim.g.fold_line_char_open_end = "╰"
+    end,
+},
   {
     "kevinhwang91/nvim-ufo",
-    -- event = "LspAttach",
+    event = "LspAttach",
     -- enabled = false,
     dependencies = {
       -- "luukvbaal/statuscol.nvim",
