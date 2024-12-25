@@ -1,7 +1,51 @@
 return {
   {
+    'saghen/blink.cmp',
+    enabled = false,
+    event = "InsertEnter",
+    version= "*",
+    dependencies = {
+      -- 'rafamadriz/friendly-snippets'
+        "SirVer/ultisnips",
+    },
+    opts = {
+      -- 'default' for mappings similar to built-in completion
+      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+      -- See the full "keymap" documentation for information on defining your own keymap.
+      keymap = {
+        preset = 'none',
+        ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+        ['<C-j>'] = { 'snippet_forward', 'fallback' },
+        ['<C-k>'] = { 'snippet_backward', 'fallback' },
+        ['<S-Tab>'] = { 'select_prev', 'fallback' },
+        ['<Tab>'] = { 'select_next', 'fallback' },
+        ['<Up>'] = { 'select_prev', 'fallback' },
+        ['<Down>'] = { 'select_next', 'fallback' },
+        ['<CR>'] = { 'accept', 'fallback' },
+        ['<C-e>'] = { 'hide', 'fallback' },
+        -- show with a list of providers
+        -- ['<C-space>'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end },
+
+        -- control whether the next command will be run when using a function
+        -- optionally, separate cmdline keymaps
+        -- cmdline = {}
+      },
+
+      -- Default list of enabled providers defined so that you can extend it
+      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      sources = {
+        cmdline = {},
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+    },
+    opts_extend = { "sources.default" }
+  },
+  {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
+    -- enabled = false,
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       {

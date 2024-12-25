@@ -15,6 +15,7 @@ return {
       "rachartier/tiny-inline-diagnostic.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "saghen/blink.cmp",
       {
         "smjonas/inc-rename.nvim",
         enabled = false,
@@ -49,6 +50,7 @@ return {
     config = function()
       -- An example nvim-lspconfig capabilities setting
       -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+      -- local capabilities = require('blink.cmp').get_lsp_capabilities()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       capabilities.textDocument.foldingRange = {
         dynamicRegistration = false,
