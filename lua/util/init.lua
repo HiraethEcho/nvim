@@ -28,7 +28,13 @@ vim.g.is_linux = (M.has("unix") and (not M.has("macunix"))) and true or false
 
 M.toggle_set = require("util.toggle").toggle_set
 M.toggle_diagnostics = require("util.toggle").toggle_diagnostics
-M.float_term = require("util.term").float_term
-M.lazygit = require("util.term").lazygit
+-- M.float_term = require("util.term").float_term
+M.float_term = require("util.term")
+-- M.lazygit = require("util.term").lazygit
+
+function M.lazygit()
+  return M.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
+end
+-- M.test = require("util.test")
 
 return M
