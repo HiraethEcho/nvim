@@ -43,15 +43,16 @@ map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 -- move cursor in insert mode
-map("i", "<C-h>", "<Left>")
-map("i", "<C-l>", "<Right>")
-map("i", "<C-k>", "<Up>")
-map("i", "<C-j>", "<Down>")
+-- map("i", "<C-h>", "<Left>")
+-- map("i", "<C-l>", "<Right>")
+-- map("i", "<C-k>", "<Up>")
+-- map("i", "<C-j>", "<Down>")
 
 -- file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 map("n", "Q", "<c-w>q", { desc = "Close window" })
 map("n", "<leader>H", ":cd %:h<cr>", { desc = "set cwd to parent of current file" })
+map("n", "<leader>q", "<cmd>wqa<cr>", { desc = "Quit all" })
 
 
 -- toggle set
@@ -66,15 +67,14 @@ map("n", "<leader>uI", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hi
 map("n", "<leader>ub", "<cmd>BRToggle<cr>", { desc = "Toggle Bionic Read" })
 
 -- terminals
-map("n", "<leader>gg", function() Util.lazygit() end, { desc = "Lazygit " })
-map("n", "<leader>q", "<cmd>wqa<cr>", { desc = "Quit all" })
 local lazyterm = function()
   Util.float_term("zsh", { esc_esc = true, ctrl_hjkl = false })
 end
 map("n", "<leader>t", lazyterm, { desc = "Float Terminal" })
+map("n", "<leader>gg", function() Util.lazygit() end, { desc = "Lazygit " })
 -- Terminal Mappings
-map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
-map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
-map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
-map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
+-- map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
+-- map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
+-- map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
+-- map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
 map("t", "<esc><esc>", "<cmd>close<cr>", { desc = "Hide Terminal" })

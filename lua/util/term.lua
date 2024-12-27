@@ -1,6 +1,6 @@
-local M = {}
+-- local M = {}
 local terminals = {}
-function M.float_term(cmd, opts)
+local function M(cmd, opts)
   opts = vim.tbl_deep_extend("force", {
     ft = "lazyterm",
     size = { width = 0.9, height = 0.9 },
@@ -34,8 +34,8 @@ function M.float_term(cmd, opts)
   return terminals[termkey]
 end
 
-function M.lazygit()
-  return M.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
-end
+-- function M.lazygit()
+--   return M.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
+-- end
 
 return M
