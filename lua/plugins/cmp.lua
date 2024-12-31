@@ -3,10 +3,10 @@ return {
     'saghen/blink.cmp',
     enabled = false,
     event = "InsertEnter",
-    version= "*",
+    version = "*",
     dependencies = {
       -- 'rafamadriz/friendly-snippets'
-        "SirVer/ultisnips",
+      "SirVer/ultisnips",
     },
     opts = {
       -- 'default' for mappings similar to built-in completion
@@ -108,7 +108,15 @@ return {
           { name = "ultisnips" }, -- For ultisnips users.
           -- { name = "vimtex" },
           -- { name = "nvim_lua" },
-          { name = 'nvim_lsp' },
+          {
+            name = 'nvim_lsp',
+            option = {
+              markdown_oxide = {
+                keyword_pattern = [[\(\k\| \|\/\|#\)\+]]
+              }
+            }
+          },
+          -- { name = 'nvim_lsp' },
           { name = "copilot",  max_item_count = 3, },
           { name = "buffer",   option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end, }, max_item_count = 3, },
           { name = "path" },
@@ -116,7 +124,14 @@ return {
         }),
         formatting = {
           format = lspkind.cmp_format({
-            mode = 'symbol_text',     -- show only symbol annotations
+            mode = 'symbol', -- show only symbol annotations
+            maxwidth = {
+              -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+              -- can also be a function to dynamically calculate max width such as
+              -- menu = function() return math.floor(0.45 * vim.o.columns) end,
+              menu = 50,              -- leading text (labelDetails)
+              abbr = 50,              -- actual suggestion item
+            },
             show_labelDetails = true, -- show labelDetails in menu. Disabled by default
             before = function(entry, vim_item)
               vim_item.menu = entry.source.name

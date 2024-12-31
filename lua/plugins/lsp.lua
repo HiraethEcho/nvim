@@ -53,15 +53,26 @@ return {
       -- local capabilities = require('blink.cmp').get_lsp_capabilities()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
+        -- dynamicRegistration = false,
         lineFoldingOnly = true
       }
+      capabilities = vim.tbl_deep_extend(
+        'force',
+        capabilities,
+        {
+          workspace = {
+            didChangeWatchedFiles = {
+              dynamicRegistration = true,
+            },
+          },
+        }
+      )
       local servers = {
         -- textlsp = {},
         -- grammarly = {},
         -- mdformat = {},
         -- alex = {},
-        -- markdown-oxide = {},
+        markdown_oxide = {},
         -- ltex     = {},
         -- digestif = {},
         -- textlsp  = {},
@@ -107,6 +118,7 @@ return {
           },
         },
         marksman = {},
+        -- write-good = {},
         tinymist = {
           single_file_support = true,
         },
@@ -133,7 +145,7 @@ return {
               offset_encoding = "utf-8",
               settings = servers[server_name],
               root_dir = function(_, bufnr)
-                return vim.fs.root(bufnr, { ".git" }) or vim.fn.expand("%:p:h")
+                return vim.fs.root(bufnr, { ".git", ".obsidian" }) or vim.fn.expand("%:p:h")
               end,
               on_attach = function(client, bufnr)
                 require("nvim-navic").attach(client, bufnr)
