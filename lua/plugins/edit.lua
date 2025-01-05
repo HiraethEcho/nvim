@@ -293,7 +293,7 @@ return {
       plugins = {
         -- disable some global vim options (vim.o...)
         -- comment the lines to not apply the options
-        twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+        twilight = { enabled = false }, -- enable to start Twilight when zen mode opens
       },
     },
   },
