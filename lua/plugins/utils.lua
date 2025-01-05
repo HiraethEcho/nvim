@@ -8,6 +8,7 @@ return {
   },
   {
     'MagicDuck/grug-far.nvim',
+    enabled = false,
     keys = {
       { "<C-f>", function() require('grug-far').open({ prefills = { paths = vim.fn.expand("%") } }) end, desc = "search and replace" },
     },
@@ -21,6 +22,7 @@ return {
   },
   {
     "OXY2DEV/helpview.nvim",
+    enabled = false,
     ft = "help",
     dependencies = {
       "nvim-treesitter/nvim-treesitter"
@@ -32,7 +34,7 @@ return {
   },
   {
     "gelguy/wilder.nvim",
-    -- enabled = false,
+    enabled = false,
     event = "CmdlineEnter",
     -- event = "CmdlineEnter",
     config = function()
@@ -140,7 +142,7 @@ return {
   },
   {
     'rmagatti/auto-session',
-    -- enabled = false,
+    enabled = false,
     event = "BufRead",
     config = function()
       require("auto-session").setup {
@@ -169,6 +171,7 @@ return {
   },
   {
     'echasnovski/mini.sessions',
+    enabled = false,
     version = '*',
     opts = {
       directory = vim.fn.stdpath("data") .. "/sessions",
@@ -177,7 +180,7 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     event = "LspAttach",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       -- "luukvbaal/statuscol.nvim",
       "kevinhwang91/promise-async",
@@ -246,7 +249,7 @@ return {
   },
   {
     "axieax/urlview.nvim",
-    -- enabled = false,
+    enabled = false,
     -- lazy = false,
     cmd = "UrlView",
     keys = {
@@ -259,7 +262,7 @@ return {
   },
   {
     "sontungexpt/url-open",
-    -- enabled = false,
+    enabled = false,
     branch = "mini",
     keys = {
       { "gw", "<esc>:URLOpenUnderCursor<cr>", desc = "Open URL under cursor" },

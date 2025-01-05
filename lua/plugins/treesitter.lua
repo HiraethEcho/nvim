@@ -1,6 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    enabled = false,
     -- version = false, -- last release is way too old and doesn't work on Windows
     -- lazy = false,
     -- cmd = "TSEnable",
@@ -82,7 +83,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    -- enabled = false,
+    enabled = false,
     cmd = "TSContextEnable",
     keys = {
       { "<leader>ut", "<cmd>TSContextToggle<cr>", desc = "toggle treesitter context" },

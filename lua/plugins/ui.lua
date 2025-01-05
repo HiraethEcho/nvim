@@ -1,6 +1,7 @@
 return {
   {
     'mvllow/modes.nvim',
+    enabled = false,
     tag = 'v0.2.0',
     event = "InsertEnter",
     config = function()
@@ -19,7 +20,7 @@ return {
   },
   {
     'echasnovski/mini.starter',
-    -- enabled = false,
+    enabled = false,
     version = '*',
     event = "VimEnter",
     dependencies = {
@@ -55,6 +56,7 @@ return {
   },
   {
     'eandrju/cellular-automaton.nvim',
+    enabled = false,
     keys = {
       { "<leader>uR", "<cmd>CellularAutomaton make_it_rain<cr>", desc = "Rain" },
       { "<leader>uG", "<cmd>CellularAutomaton game_of_life<cr>", desc = "Rain" },
@@ -65,6 +67,7 @@ return {
   },
   {
     "EdenEast/nightfox.nvim",
+    enabled = false,
     event = "VimEnter",
     config = function()
       require('nightfox').setup({
@@ -114,6 +117,7 @@ return {
   },
   {
     "norcalli/nvim-colorizer.lua",
+    enabled = false,
     cmd = "ColorizerToggle",
     config = function()
       require("colorizer").setup()
@@ -121,7 +125,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    -- enabled = false,
+    enabled = false,
     event = "BufReadPost",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -331,7 +335,7 @@ return {
   {
     "shellRaining/hlchunk.nvim",
     -- event = "BufRead",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       -- "rcarriga/nvim-notify",
       "kevinhwang91/nvim-ufo",
@@ -384,6 +388,7 @@ return {
   },
   {
     "rcarriga/nvim-notify",
+    enabled = false,
     event = "BufRead",
     config = function()
       require("notify").setup({

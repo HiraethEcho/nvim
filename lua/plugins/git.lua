@@ -46,6 +46,7 @@ return {
   },
   {
     "akinsho/git-conflict.nvim",
+    enabled = false,
     version = "*",
     config = function()
       require("git-conflict").setup({
@@ -61,6 +62,7 @@ return {
   },
   {
     "sindrets/diffview.nvim",
+    enabled = false,
     keys = {
       { "<leader>DD", "<cmd>DiffviewOpen<cr>",        desc = "Diff View" },
       { "<leader>DH", "<cmd>DiffviewFileHistory<cr>", desc = "Diff View File History" },

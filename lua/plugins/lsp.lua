@@ -188,7 +188,7 @@ return {
   },
   {
     "SmiteshP/nvim-navbuddy",
-    -- enabled = false,
+    enabled = false,
     event = "LspAttach",
     keys = {
       { "<leader>O", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
@@ -287,6 +287,7 @@ return {
   },
   {
     "hedyhli/outline.nvim",
+    enabled = false,
     cmd = { "Outline", "OutlineOpen" },
     keys = { -- Example mapping to toggle outline
       { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
@@ -316,6 +317,7 @@ return {
   {
     "dnlhc/glance.nvim",
     -- lazy = false,
+    enabled = false,
     event = "LspAttach",
     keys = {
       { "gd", "<cmd>Glance definitions<cr>",      desc = "Glance definitions" },
@@ -375,7 +377,7 @@ return {
   },
   {
     "folke/trouble.nvim",
-    -- enabled = false,
+    enabled = false,
     opts = {
       modes = {
         split = {
@@ -425,6 +427,7 @@ return {
   },
   {
     "rachartier/tiny-inline-diagnostic.nvim",
+    enabled = false,
     event = "LspAttach", -- Or `LspAttach`
     priority = 1000,     -- needs to be loaded in first
     config = function()

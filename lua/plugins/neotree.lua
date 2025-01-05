@@ -1,6 +1,7 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    enabled = false,
     keys = {
       -- { "<leader>e", "<cmd>Neotree float<cr>",                desc = "File tree float", },
       { "<leader>e", "<cmd>Neotree position=left toggle<cr>", desc = "File tree", },
@@ -184,7 +185,7 @@ return {
   {
     "echasnovski/mini.files",
     -- version = false,
-    -- enabled = false,
+    enabled = false,
     keys = {
       { "<leader>E", ":lua MiniFiles.open()<cr>", desc = "mini file " },
     },

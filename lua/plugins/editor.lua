@@ -1,7 +1,7 @@
 return {
   {
     "lervag/vimtex",
-    -- enabled = false,
+    enabled = false,
     ft = { "bib", "tex" },
     config = function()
       -- vim.g.vimtex_view_method = 'zathura'
@@ -56,6 +56,7 @@ return {
   },
   {
     "iamcco/markdown-preview.nvim",
+    enabled = false,
     build = "cd app && npm install",
     -- build = function() vim.fn["mkdp#util#install"]() end,
     -- enabled = false,
@@ -77,6 +78,7 @@ return {
   },
   {
     'MeanderingProgrammer/render-markdown.nvim',
+    enabled = false,
     ft = { "markdown", "md" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
@@ -163,6 +165,7 @@ return {
   },
   {
     'chomosuke/typst-preview.nvim',
+    enabled = false,
     -- lazy = false, -- or
     ft = 'typst',
     version = '1.*',

@@ -54,9 +54,9 @@ return {
       { "quangnguyen30192/cmp-nvim-ultisnips", config = true, },
       "hrsh7th/cmp-buffer",
       -- { "micangl/cmp-vimtex", },
-      "zbirenbaum/copilot.lua",
+      -- "zbirenbaum/copilot.lua",
       "hrsh7th/cmp-path",
-      "onsails/lspkind-nvim",
+      -- "onsails/lspkind-nvim",
       -- "neovim/nvim-lspconfig",
       -- "hrsh7th/cmp-nvim-lua",
       -- "nvim-treesitter/nvim-treesitter",
@@ -144,6 +144,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
+    enabled = false,
     cmd = "Copilot",
     keys = { -- Example mapping to toggle outline
       { "<leader>cc", "<cmd>Copilot<CR>",        desc = "Copilot" },
