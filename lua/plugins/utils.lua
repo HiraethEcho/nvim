@@ -132,18 +132,6 @@ return {
     end,
   },
   {
-    "nvim-pack/nvim-spectre",
-    enabled = false,
-    build = false,
-    cmd = "Spectre",
-    opts = { open_cmd = "noswapfile vnew" },
-    -- stylua: ignore
-    keys = {
-      { "<C-f>",     function() require("spectre").open_file_search() end,                       desc = "toggle spectre" },
-      { "<leader>s", function() require("spectre").open_file_search({ select_word = true }) end, mode = { "x", "v" },    desc = "search word on current file" },
-    },
-  },
-  {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
     config = function()
@@ -285,6 +273,18 @@ return {
     end,
   },
   -- disable
+  {
+    "nvim-pack/nvim-spectre",
+    enabled = false,
+    build = false,
+    cmd = "Spectre",
+    opts = { open_cmd = "noswapfile vnew" },
+    -- stylua: ignore
+    keys = {
+      { "<C-f>",     function() require("spectre").open_file_search() end,                       desc = "toggle spectre" },
+      { "<leader>s", function() require("spectre").open_file_search({ select_word = true }) end, mode = { "x", "v" },    desc = "search word on current file" },
+    },
+  },
   {
     "jedrzejboczar/possession.nvim",
     enabled = false,
