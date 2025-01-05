@@ -185,7 +185,7 @@ return {
   {
     "echasnovski/mini.files",
     -- version = false,
-    -- enabled = false,
+    enabled = false,
     keys = {
       { "<leader>E", ":lua MiniFiles.open()<cr>", desc = "mini file " },
     },

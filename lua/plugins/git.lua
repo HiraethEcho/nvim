@@ -47,6 +47,7 @@ return {
   },
   {
     "akinsho/git-conflict.nvim",
+    enabled = false,
     version = "*",
     enabled = false,
     config = function()
@@ -63,6 +64,7 @@ return {
   },
   {
     "sindrets/diffview.nvim",
+    enabled = false,
     keys = {
       { "<leader>DD", "<cmd>DiffviewOpen<cr>",        desc = "Diff View" },
       { "<leader>DH", "<cmd>DiffviewFileHistory<cr>", desc = "Diff View File History" },

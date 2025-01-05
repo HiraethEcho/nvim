@@ -1,7 +1,7 @@
 return {
   {
     "lervag/vimtex",
-    -- enabled = false,
+    enabled = false,
     ft = { "bib", "tex" },
     config = function()
       vim.g.vimtex_view_method = 'zathura'
@@ -55,7 +55,30 @@ return {
     end,
   },
   {
+    "iamcco/markdown-preview.nvim",
+    enabled = false,
+    build = "cd app && npm install",
+    -- build = function() vim.fn["mkdp#util#install"]() end,
+    -- enabled = false,
+    -- ft = { "markdown" },
+    keys = {
+      { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
+    },
+    config = function()
+      if vim.g.is_linux then
+        vim.g.mkdp_browser = "qutebrowser"
+      end
+      -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
+      vim.g.mkdp_theme = "light"
+      vim.g.mkdp_auto_start = 1
+      vim.g.mkdp_auto_close = 0
+      vim.g.mkdp_page_title = "${name}"
+      vim.g.mkdp_filetypes = { "markdown", "md" }
+    end,
+  },
+  {
     'MeanderingProgrammer/render-markdown.nvim',
+    enabled = false,
     ft = { "markdown", "md" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
@@ -138,6 +161,7 @@ return {
   },
   {
     'chomosuke/typst-preview.nvim',
+    enabled = false,
     -- lazy = false, -- or
     ft = 'typst',
     version = '1.*',

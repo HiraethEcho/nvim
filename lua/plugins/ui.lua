@@ -1,6 +1,7 @@
 return {
   {
     'mvllow/modes.nvim',
+    enabled = false,
     tag = 'v0.2.0',
     event = "InsertEnter",
     config = function()
@@ -18,7 +19,44 @@ return {
     end
   },
   {
+    'echasnovski/mini.starter',
+    enabled = false,
+    version = '*',
+    event = "VimEnter",
+    dependencies = {
+      -- 'rmagatti/auto-session',
+      'echasnovski/mini.sessions',
+    },
+    config = function()
+      local starter = require('mini.starter')
+      starter.setup({
+        evaluate_single = true,
+        items = {
+          starter.sections.sessions(8, true),
+          starter.sections.recent_files(5, false),
+          -- starter.sections.telescope(),
+          -- starter.sections.recent_files(3, true), -- local
+          -- starter.sections.builtin_actions(),
+          { name = 'start up time', action = [[StartupTime]], section = 'actions' },
+          { name = 'lazy.nvim',     action = [[Lazy]],        section = 'actions' },
+          { name = 'quit',          action = [[quit]],        section = 'actions' },
+          { name = 'new file',      action = 'enew',          section = 'actions' },
+        },
+        header = '',
+        footer = '',
+        content_hooks = {
+          -- starter.gen_hook.adding_bullet(),
+          starter.gen_hook.indexing('all', { 'Sessions', 'actions' }),
+          -- starter.gen_hook.indexing('all', { 'Builtin actions' }),
+          starter.gen_hook.padding(3, 2),
+          starter.gen_hook.aligning('center', 'center'),
+        },
+      })
+    end,
+  },
+  {
     'eandrju/cellular-automaton.nvim',
+    enabled = false,
     keys = {
       { "<leader>uR", "<cmd>CellularAutomaton make_it_rain<cr>", desc = "Rain" },
       { "<leader>uG", "<cmd>CellularAutomaton game_of_life<cr>", desc = "Rain" },
@@ -29,6 +67,7 @@ return {
   },
   {
     "EdenEast/nightfox.nvim",
+    enabled = false,
     event = "VimEnter",
     config = function()
       require('nightfox').setup({
@@ -78,6 +117,7 @@ return {
   },
   {
     "norcalli/nvim-colorizer.lua",
+    enabled = false,
     cmd = "ColorizerToggle",
     config = function()
       require("colorizer").setup()
@@ -85,7 +125,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    -- enabled = false,
+    enabled = false,
     event = "BufReadPost",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -304,7 +344,7 @@ return {
   {
     "shellRaining/hlchunk.nvim",
     -- event = "BufRead",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       -- "rcarriga/nvim-notify",
       "kevinhwang91/nvim-ufo",
@@ -358,6 +398,7 @@ return {
   },
   {
     "rcarriga/nvim-notify",
+    enabled = false,
     event = "BufRead",
     enabled = false,
     config = function()

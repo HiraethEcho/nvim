@@ -18,6 +18,7 @@ return {
   },
   {
     "numToStr/Comment.nvim",
+    enabled = false,
     keys = {
       { "gcc", mode = "n", desc = "Comment toggle current line" },
       { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
@@ -32,7 +33,7 @@ return {
   },
   {
     "echasnovski/mini.splitjoin",
-    -- enabled = false,
+    enabled = false,
     event = "InsertEnter",
     version = false,
     opts = { mappings = { toggle = "", split = "gK", join = "gJ" } },
@@ -61,6 +62,7 @@ return {
   },
   {
     "folke/todo-comments.nvim",
+    enabled = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
       {
@@ -180,7 +182,8 @@ return {
     },
   },
   {
-    "mbbill/undotree",
+    'mbbill/undotree',
+    enabled = false,
     keys = {
       { "U", "<cmd>UndotreeToggle<cr>", desc = "open undotree" },
     },
@@ -190,6 +193,7 @@ return {
   },
   {
     "voldikss/vim-translator",
+    enabled = false,
     cmd = "TranslateW",
     keys = {
       { "<leader>W", "<cmd>TranslateW<cr>", mode = { "n", "v" }, desc = "translate" },

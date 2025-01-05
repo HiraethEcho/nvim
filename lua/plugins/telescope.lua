@@ -36,7 +36,7 @@ return {
       { "<leader>id", ":lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>", desc = "current buffer diagnostics", },
       { "<leader>iD", ":lua require'telescope.builtin'.diagnostics{}<cr>",        desc = "workspace diagnostics" },
       -- plugins
-      { "<leader>it", "<cmd>TodoTelescope<cr>",                                   desc = "Todo" },
+      -- { "<leader>it", "<cmd>TodoTelescope<cr>",                                   desc = "Todo" },
       -- { "<leader>is", "<cmd>Telescope possession list<cr>",                       desc = "sessions" },
       -- { "<leader>fF", "<cmd>Telescope file_browser<cr>",                          desc = "files" },
       -- { '<leader>y',  "<cmd>Telescope neoclip<cr>",                               desc = "yank history" },

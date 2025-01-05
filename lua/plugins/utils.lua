@@ -4,81 +4,8 @@ return {
     version = "*",
   },
   {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    dependencies = {
-      -- "Shatur/neovim-session-manager",
-    },
-    opts = {
-      bigfile = { enabled = true },
-      dashboard = {
-        enabled = false,
-        sections = {
-          { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-          { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-          { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-          { section = "startup" },
-        },
-      },
-      explorer = { enabled = true },
-      indent = { enabled = false },
-      input = { enabled = true },
-      notifier = { enabled = true },
-      picker = {
-        sources = {
-          explorer = {
-            -- layout = { layout = { position = "right" } },
-            win = {
-              list = {
-                keys = {
-                  ["."] = "tcd",
-                  ["zh"] = "toggle_hidden",
-                  ["s"] = "edit_split",
-                  ["v"] = "edit_vsplit",
-                  ["<c-u>"] = { "preview_scroll_up" },
-                  ["<c-d>"] = { "preview_scroll_down" },
-                  ["w"] = { { "pick_win", "jump" }, mode = { "n", "i" } },
-                },
-              },
-            },
-          },
-        },
-        layout = {
-          cycle = false,
-        },
-        matcher = {
-          frecency = true,
-          history_bonus = true,
-        },
-        win = {
-          input = {
-            keys = {
-              ["<Esc>"] = { "close", mode = { "n" } },
-              ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-              ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-              ["<c-b>"] = { "list_scroll_up", mode = { "i", "n" } },
-              ["<c-f>"] = { "list_scroll_down", mode = { "i", "n" } },
-            },
-          },
-        },
-      },
-      quickfile = { enabled = true },
-      scope = { enabled = true },
-      debug = { enabled = false },
-      scroll = { enabled = false },
-      lazygit = { enabled = true },
-      statuscolumn = {
-        enabled = true,
-        left = {}, -- priority of signs on the left (high to low)
-      },
-      words = { enabled = true },
-      styles = {
-        notification = {
-          wo = { wrap = true }, -- Wrap notifications
-        },
-      },
-    },
+    'MagicDuck/grug-far.nvim',
+    enabled = false,
     keys = {
       -- Top Pickers & Explorer
       {"<leader>ff", function() Snacks.picker.smart() end, desc = "Smart Find Files",},
@@ -195,6 +122,7 @@ return {
   },
   {
     "OXY2DEV/helpview.nvim",
+    enabled = false,
     ft = "help",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
@@ -206,7 +134,7 @@ return {
   },
   {
     "gelguy/wilder.nvim",
-    -- enabled = false,
+    enabled = false,
     event = "CmdlineEnter",
     -- event = "CmdlineEnter",
     config = function()
@@ -397,7 +325,7 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     event = "LspAttach",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       -- "luukvbaal/statuscol.nvim",
       "kevinhwang91/promise-async",
@@ -462,7 +390,7 @@ return {
   },
   {
     "axieax/urlview.nvim",
-    -- enabled = false,
+    enabled = false,
     -- lazy = false,
     cmd = "UrlView",
     keys = {
@@ -475,7 +403,7 @@ return {
   },
   {
     "sontungexpt/url-open",
-    -- enabled = false,
+    enabled = false,
     branch = "mini",
     keys = {
       { "gw", "<esc>:URLOpenUnderCursor<cr>", desc = "Open URL under cursor" },
