@@ -295,7 +295,7 @@ return {
       -- Your setup opts here
       outline_window = {
         position = 'right',
-        width = 15,
+        width = 20,
       },
       preview_window = {
         open_hover_on_preview = true,
