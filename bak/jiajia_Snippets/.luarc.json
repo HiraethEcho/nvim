@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "diagnostics.globals": [
+    "c",
+    "d",
+    "dl",
+    "events",
+    "f",
+    "fmt",
+    "fmta",
+    "i",
+    "l",
+    "p",
+    "postfix",
+    "r",
+    "rep",
+    "s",
+    "sn",
+    "t",
+    "vim"
+  ],
+  "runtime.version": "LuaJIT",
+  "workspace.checkThirdParty": false,
+  "telemetry.enable": false
+}

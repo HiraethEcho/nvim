@@ -1,0 +1,5 @@
+require("core.options")
+require("core.lazy-bootstrap")
+require("core.keymaps")
+require("core.autocmds")
+require("core.gui")
