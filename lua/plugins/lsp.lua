@@ -131,7 +131,7 @@ return {
           },
           checkThirdParty = false,
         },
-        bashls   = {},
+        -- bashls   = {},
         -- html     = {},
         clangd   = {},
       }
