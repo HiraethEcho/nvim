@@ -84,8 +84,8 @@ return {
               forwardSearchAfter = false,
             },
             forwardSearch = {
-              executable = "sioyek",
               -- vim.fn.stdpath("data") .. "/mason/bin/texlab inverse-search -i %%1 -l %%2",
+              --[[ executable = "sioyek",
               args = {
                 "--reuse-window",
                 "--inverse-search",
@@ -95,14 +95,14 @@ return {
                 "--forward-search-line",
                 "%l",
                 "%p",
-              },
-              --[[ executable = "zathura",
+              }, ]]
+              executable = "zathura",
               args = {
                 "--synctex-forward",
                 "%l:1:%f", "%p",
                 "--synctex-editor-command",
                 "texlab inverse-search -i %{input} -l %{line}",
-              }, ]]
+              },
             },
             chktex = {
               onOpenAndSave = true,
