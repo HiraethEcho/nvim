@@ -578,7 +578,8 @@ return {
         end,
       }
     },
-    init = function()
+    -- init = function()
+    config = function()
       require("snacks").scratch({ ft = "markdown" })
       vim.api.nvim_create_autocmd("User", {
         pattern = "VeryLazy",

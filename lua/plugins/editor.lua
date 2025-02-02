@@ -55,27 +55,6 @@ return {
     end,
   },
   {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    -- build = function() vim.fn["mkdp#util#install"]() end,
-    -- enabled = false,
-    -- ft = { "markdown" },
-    keys = {
-      { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
-    },
-    config = function()
-      if vim.g.is_linux then
-        vim.g.mkdp_browser = "qutebrowser"
-      end
-      -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
-      vim.g.mkdp_theme = "light"
-      vim.g.mkdp_auto_start = 1
-      vim.g.mkdp_auto_close = 0
-      vim.g.mkdp_page_title = "${name}"
-      vim.g.mkdp_filetypes = { "markdown", "md" }
-    end,
-  },
-  {
     'MeanderingProgrammer/render-markdown.nvim',
     ft = { "markdown", "md" },
     keys = {
@@ -87,11 +66,7 @@ return {
     }, -- if you prefer nvim-web-devicons
     opts = {
       latex = {
-        enabled = true,
-        converter = 'latex2text',
-        highlight = 'RenderMarkdownMath',
-        top_pad = 1,
-        bottom_pad = 0,
+        enabled = false,
       },
     },
   },
@@ -360,6 +335,27 @@ return {
     config = function(_, opts)
       require("obsidian").setup(opts)
       -- see also: 'follow_url_func' config option above.
+    end,
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install",
+    -- build = function() vim.fn["mkdp#util#install"]() end,
+    enabled = false,
+    -- ft = { "markdown" },
+    keys = {
+      { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
+    },
+    config = function()
+      if vim.g.is_linux then
+        vim.g.mkdp_browser = "qutebrowser"
+      end
+      -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
+      vim.g.mkdp_theme = "light"
+      vim.g.mkdp_auto_start = 1
+      vim.g.mkdp_auto_close = 0
+      vim.g.mkdp_page_title = "${name}"
+      vim.g.mkdp_filetypes = { "markdown", "md" }
     end,
   },
 }

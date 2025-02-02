@@ -15,7 +15,7 @@ return {
       "rachartier/tiny-inline-diagnostic.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "saghen/blink.cmp",
+      -- "saghen/blink.cmp",
       {
         "smjonas/inc-rename.nvim",
         enabled = false,
@@ -72,7 +72,7 @@ return {
         -- grammarly = {},
         -- mdformat = {},
         -- alex = {},
-        markdown_oxide = {},
+        -- markdown_oxide = {},
         -- ltex     = {},
         -- digestif = {},
         -- textlsp  = {},
@@ -433,7 +433,7 @@ return {
         preset = "powerline", -- Can be: "modern", "classic", "minimal", "powerline", ghost", "simple", "nonerdfont", "amongus"
         options = {
           show_source = true,
-          multiple_diag_under_cursor = true,
+          -- multiple_diag_under_cursor = true,
         },
       })
     end

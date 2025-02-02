@@ -110,11 +110,11 @@ return {
           -- { name = "nvim_lua" },
           {
             name = 'nvim_lsp',
-            option = {
-              markdown_oxide = {
-                keyword_pattern = [[\(\k\| \|\/\|#\)\+]]
-              }
-            }
+            -- option = {
+            --   markdown_oxide = {
+            --     keyword_pattern = [[\(\k\| \|\/\|#\)\+]]
+            --   }
+            -- }
           },
           -- { name = 'nvim_lsp' },
           { name = "copilot",  max_item_count = 3, },

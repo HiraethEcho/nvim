@@ -201,7 +201,12 @@ return {
   },
   {
     'FluxxField/bionic-reading.nvim',
-    ft = { 'help', 'lua', 'markdown', 'text' },
+    ft = {
+      'help',
+      'lua',
+      'markdown',
+      'text'
+    },
     opts = {
       -- determines if the file types below will be
       -- automatically highlighted on buffer open

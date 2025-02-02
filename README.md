@@ -8,6 +8,8 @@ I'm using nvim as a code editor, mainly for latex and markdown.
 
 ### latex
 
+using `vimtex` and `texlab`
+
 ### markdown
 
 ### lsp
@@ -40,7 +42,7 @@ I am using lazy.nvim as my plugins manager. Plugins are divided in serval classe
   - [cmp-path](https://github.com/hrsh7th/cmp-path), path source
 - editor: enhance for latex and markdown
   - [vimtex](https://github.com/lervag/vimtex), for latex
-  - [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim), preview md in browser
+  - ~~[markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim), preview md in browser~~
   - ~~[markview.nvim](https://github.com/OXY2DEV/markview.nvim)~~ [render-markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim), view md in nvim
   - [mkdnflow.nvim](https://github.com/jakewvincent/mkdnflow.nvim), help edit list, table etc in nvim
 - git: using git in nvim
