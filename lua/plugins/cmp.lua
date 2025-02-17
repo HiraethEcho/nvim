@@ -1,18 +1,16 @@
 return {
   {
     'saghen/blink.cmp',
-    enabled = false,
-    event = "InsertEnter",
-    version = "*",
+    -- enabled = false,
+    -- event = "InsertEnter",
+    lazy = false,
+    -- version = "*",
     dependencies = {
       -- 'rafamadriz/friendly-snippets'
-      "SirVer/ultisnips",
+      { 'L3MON4D3/LuaSnip', version = 'v2.*' },
     },
     opts = {
-      -- 'default' for mappings similar to built-in completion
-      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-      -- See the full "keymap" documentation for information on defining your own keymap.
+      snippets = { preset = 'luasnip' },
       keymap = {
         preset = 'none',
         ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
@@ -25,27 +23,35 @@ return {
         ['<Down>'] = { 'select_next', 'fallback' },
         ['<CR>'] = { 'accept', 'fallback' },
         ['<C-e>'] = { 'hide', 'fallback' },
-        -- show with a list of providers
-        -- ['<C-space>'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end },
-
-        -- control whether the next command will be run when using a function
-        -- optionally, separate cmdline keymaps
-        -- cmdline = {}
       },
-
-      -- Default list of enabled providers defined so that you can extend it
-      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      completion = {
+        keyword = {
+          range = 'full',
+        },
+        list = {
+          selection = {
+            preselect = false,
+            auto_insert = false,
+          },
+        },
+        ghost_text = {
+          enabled = true,
+        }
+      },
       sources = {
-        cmdline = {},
         default = { 'lsp', 'path', 'snippets', 'buffer' },
       },
+      cmdline = {
+        enabled = false,
+      }
     },
+
     opts_extend = { "sources.default" }
   },
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       {
