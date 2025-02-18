@@ -146,3 +146,4 @@ M.in_bullets = cond_obj.make_condition(in_bullets)
 M.in_xymatrix = cond_obj.make_condition(in_xymatrix)
 
 return M
+

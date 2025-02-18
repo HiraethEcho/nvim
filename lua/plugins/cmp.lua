@@ -4,10 +4,23 @@ return {
     -- enabled = false,
     -- event = "InsertEnter",
     lazy = false,
-    -- version = "*",
+    version = "*",
     dependencies = {
       -- 'rafamadriz/friendly-snippets'
-      { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+      {
+        'L3MON4D3/LuaSnip',
+        version = 'v2.*',
+        dependencies = {
+          "mathjiajia/mysnippets",
+        },
+        config = function()
+          require("luasnip").config.set_config({
+            enable_autosnippets = true,
+            store_selection_keys = "<Tab>",
+          })
+          require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/LuaSnip/" })
+        end
+      },
     },
     opts = {
       snippets = { preset = 'luasnip' },
@@ -31,7 +44,7 @@ return {
         list = {
           selection = {
             preselect = false,
-            auto_insert = false,
+            -- auto_insert = false,
           },
         },
         ghost_text = {
@@ -45,7 +58,6 @@ return {
         enabled = false,
       }
     },
-
     opts_extend = { "sources.default" }
   },
   {
