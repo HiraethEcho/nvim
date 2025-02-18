@@ -1,4 +1,6 @@
 # NVIM
+Hello, world!
+
 
 ## Usage
 

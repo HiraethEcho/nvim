@@ -108,21 +108,6 @@ local function in_bullets()
 	return math_bullets
 end
 
----Check if cursor is in treesitter node of 'math_environment': 'tikzcd'
----@return boolean
--- local function in_tikzcd()
--- 	local cursor_node = get_node_insert_mode()
--- 	local ancestor_node = cursor_node:tree():root()
--- 	local math_tikz = false
--- 	while ancestor_node do
--- 		if ancestor_node:type() == "generic_environment" and get_environment(ancestor_node) == "tikzcd" then
--- 			math_tikz = true
--- 		end
--- 		ancestor_node = ancestor_node:child_containing_descendant(cursor_node)
--- 	end
--- 	return math_tikz
--- end
-
 ---Check if cursor is in treesitter node of 'generic_command': '\xymatrix'
 ---@return boolean
 local function in_xymatrix()
@@ -142,7 +127,18 @@ M.in_math = cond_obj.make_condition(in_math)
 M.in_text = cond_obj.make_condition(in_text)
 M.in_align = cond_obj.make_condition(in_align)
 M.in_bullets = cond_obj.make_condition(in_bullets)
--- M.in_tikzcd = cond_obj.make_condition(in_tikzcd)
 M.in_xymatrix = cond_obj.make_condition(in_xymatrix)
+
+local ls = require("luasnip")
+local sn = ls.snippet_node
+local i = ls.insert_node
+
+function M.get_visual(args, parent)
+  if (#parent.snippet.env.LS_SELECT_RAW > 0) then
+    return sn(nil, i(1, parent.snippet.env.LS_SELECT_RAW))
+  else
+    return sn(nil, i(1, ''))
+  end
+end
 
 return M
