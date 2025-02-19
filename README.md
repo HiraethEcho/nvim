@@ -1,5 +1,5 @@
 # NVIM
-
+Hello, world!
 
 
 ## Usage
