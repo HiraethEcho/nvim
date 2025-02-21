@@ -19,7 +19,7 @@ return {
   },
   {
     'echasnovski/mini.starter',
-    -- enabled = false,
+    enabled = false,
     version = '*',
     event = "VimEnter",
     dependencies = {
@@ -389,6 +389,7 @@ return {
   {
     "rcarriga/nvim-notify",
     event = "BufRead",
+    enabled = false,
     config = function()
       require("notify").setup({
         fps = 60,

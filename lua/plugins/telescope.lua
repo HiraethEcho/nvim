@@ -1,7 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    -- enabled = false,
+    enabled = false,
     -- cmd = { "Telescope oldfiles", },
     keys = {
       -- telescope builtin
