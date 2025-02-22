@@ -1,6 +1,7 @@
 return {
   {
     "lewis6991/gitsigns.nvim",
+    -- enabled = false,
     keys = {
       { "<leader>hj", "<cmd>Gitsigns next_hunk <cr>",                                 desc = "nexthunk" },
       { "<leader>hk", "<cmd>Gitsigns prev_hunk<cr>",                                  desc = "prevhunk" },
@@ -20,7 +21,7 @@ return {
       { "<leader>hw", "<cmd>Gitsigns toggle_word_diff<cr>",                           desc = "toggle word diff" },
       -- { "<leader>hh" , "<cmd>Gitsigns get_hunks<cr>"    , desc = "get hunk list" } ,
     },
-    dependencies = { "akinsho/git-conflict.nvim" },
+    -- dependencies = { "akinsho/git-conflict.nvim" },
     config = function()
       require("gitsigns").setup({
         signcolumn = false, -- toggle with `:gitsigns toggle_signs`
@@ -47,6 +48,7 @@ return {
   {
     "akinsho/git-conflict.nvim",
     version = "*",
+    enabled = false,
     config = function()
       require("git-conflict").setup({
         default_mappings = true,     -- disable buffer local mapping created by this plugin

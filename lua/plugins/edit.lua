@@ -1,9 +1,9 @@
 local vim = vim
 return {
   {
-    'echasnovski/mini.surround',
+    "echasnovski/mini.surround",
     enabled = false,
-    version = '*',
+    version = "*",
     event = "InsertEnter",
   },
   {
@@ -14,17 +14,17 @@ return {
       require("nvim-surround").setup({
         -- Configuration here, or leave empty to use defaults
       })
-    end
+    end,
   },
   {
     "numToStr/Comment.nvim",
     keys = {
-      { "gcc", mode = "n",          desc = "Comment toggle current line" },
-      { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
-      { "gc",  mode = "x",          desc = "Comment toggle linewise (visual)" },
-      { "gbc", mode = "n",          desc = "Comment toggle current block" },
-      { "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-      { "gb",  mode = "x",          desc = "Comment toggle blockwise (visual)" },
+      { "gcc", mode = "n", desc = "Comment toggle current line" },
+      { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
+      { "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
+      { "gbc", mode = "n", desc = "Comment toggle current block" },
+      { "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+      { "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
     },
     config = function()
       require("Comment").setup()
@@ -35,14 +35,14 @@ return {
     -- enabled = false,
     event = "InsertEnter",
     version = false,
-    opts = { mappings = { toggle = '', split = 'gK', join = 'gJ' } }
+    opts = { mappings = { toggle = "", split = "gK", join = "gJ" } },
   },
   {
-    'echasnovski/mini.align',
+    "echasnovski/mini.align",
     event = "InsertEnter",
     version = false,
     -- lazy = false,
-    opts = { mappings = { start = '', start_with_preview = '<leader>a' } },
+    opts = { mappings = { start = "", start_with_preview = "<leader>a" } },
   },
   {
     "smartding/fcitx.nvim",
@@ -144,7 +144,7 @@ return {
         NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
       },
       gui_style = {
-        bg = "BOLD",         -- The gui style to use for the bg highlight group.
+        bg = "BOLD", -- The gui style to use for the bg highlight group.
       },
       merge_keywords = true, -- when true, custom keywords will be merged with the defaults
       -- list of named colors where we try to extract the guifg from the
@@ -161,6 +161,7 @@ return {
   },
   {
     "folke/zen-mode.nvim",
+    enabled = false,
     dependencies = { "folke/twilight.nvim" },
     keys = {
       { "<leader>z", "<cmd>ZenMode<cr>", desc = "toggle zen mode" },
@@ -168,8 +169,8 @@ return {
     opts = {
       window = {
         backdrop = 0.90, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-        width = 100,     -- width of the Zen window
-        height = 1,      -- height of the Zen window
+        width = 100, -- width of the Zen window
+        height = 1, -- height of the Zen window
       },
       plugins = {
         -- disable some global vim options (vim.o...)
@@ -179,13 +180,13 @@ return {
     },
   },
   {
-    'mbbill/undotree',
+    "mbbill/undotree",
     keys = {
-      { "U", "<cmd>UndotreeToggle<cr>", desc = "open undotree" }
+      { "U", "<cmd>UndotreeToggle<cr>", desc = "open undotree" },
     },
     config = function()
       vim.g.undotree_WindowLayout = 2
-    end
+    end,
   },
   {
     "voldikss/vim-translator",
@@ -200,12 +201,9 @@ return {
     end,
   },
   {
-    'FluxxField/bionic-reading.nvim',
-    ft = {
-      'help',
-      'lua',
-      'markdown',
-      'text'
+    "FluxxField/bionic-reading.nvim",
+    keys = {
+      { "<leader>ub", "<cmd>BRToggle<cr>", mode = { "n", "v" }, desc = "Toggle Bionic Read" },
     },
     opts = {
       -- determines if the file types below will be
@@ -223,20 +221,12 @@ return {
           "comment",
         },
       },
-      -- the highlighting styles applied as val to nvim_set_hl()
-      -- Please see :help nvim_set_hl() to see vals that can be passed
-      hl_group_value = {
-        bold = true
-      },
       -- Flag used to control if the user is prompted
       -- if BRToggle is called on a file type that is not
       -- explicitly defined above
       prompt_user = true,
       -- Enable or disable the use of treesitter
       treesitter = true,
-      -- Flag used to control if highlighting is applied as
-      -- you type
-      update_in_insert_mode = true,
     },
   },
 }
