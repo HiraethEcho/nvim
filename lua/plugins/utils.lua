@@ -24,115 +24,122 @@ return {
       explorer = { enabled = true },
       indent = { enabled = false },
       input = { enabled = true },
-      notifier = {
-        enabled = true,
-        timeout = 3000,
+      notifier = { enabled = true, },
+      picker = {
+        sources = {
+          explorer = {
+            -- layout = { layout = { position = "right" } },
+            win = {
+              list = {
+                keys = {
+                  ["."] = "tcd",
+                  ["zh"] = "toggle_hidden",
+                },
+              },
+            },
+          },
+        },
+        layout = {
+          cycle = false,
+        },
+        matcher = {
+          frecency = true,
+          history_bonus = true,
+        },
+        win = {
+          input = {
+            keys = {
+              ["<Esc>"] = { "close", mode = { "n" } },
+              ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+              ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+              ["<c-b>"] = { "list_scroll_up", mode = { "i", "n" } },
+              ["<c-f>"] = { "list_scroll_down", mode = { "i", "n" } },
+            },
+          },
+        },
       },
-      picker = { enabled = true },
       quickfile = { enabled = true },
       scope = { enabled = true },
-      scroll = { enabled = true },
+      debug = { enabled = false },
+      scroll = { enabled = false },
       lazygit = { enabled = true },
       statuscolumn = {
-        enabled = false,
-        left = {}, -- priority of signs on the left (high to low)
-        right = { "fold", "git" }, -- priority of signs on the right (high to low)
-        folds = {
-          open = true, -- show open fold icons
-          git_hl = true, -- use Git Signs hl for fold icons
-        },
-        git = {
-          -- patterns to match Git signs
-          patterns = { "GitSign" },
-        },
-        refresh = 50, -- refresh at most every 50ms
+        enabled = true,
+        left = {},                 -- priority of signs on the left (high to low)
       },
       words = { enabled = true },
       styles = {
         notification = {
-          -- wo = { wrap = true } -- Wrap notifications
+          wo = { wrap = true } -- Wrap notifications
         },
       },
     },
     keys = {
-      -- { "<leader>.",  function() Snacks.scratch() end,               desc = "Toggle Scratch Buffer" },
-      -- { "<leader>S",  function() Snacks.scratch.select() end,        desc = "Select Scratch Buffer" },
-      -- { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
-      -- { "<leader>bd", function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
-      -- { "<leader>cR", function() Snacks.rename.rename_file() end,    desc = "Rename File" },
-      -- { "<leader>gW", function() Snacks.gitbrowse() end,             desc = "Git Browse" },
-      -- { "<leader>gb", function() Snacks.git.blame_line() end,        desc = "Git Blame Line" },
-      -- { "<leader>gf", function() Snacks.lazygit.log_file() end,      desc = "Lazygit Current File History" },
-      -- { "<leader>gg", function() Snacks.lazygit() end,               desc = "Lazygit" },
-      -- { "<leader>gl", function() Snacks.lazygit.log() end,           desc = "Lazygit Log (cwd)" },
-      -- { "<leader>un", function() Snacks.notifier.hide() end,         desc = "Dismiss All Notifications" },
-      -- { "<c-/>",      function() Snacks.terminal() end,              desc = "Toggle Terminal" },
-      -- { "<c-_>",      function() Snacks.terminal() end,              desc = "which_key_ignore" },
-      -- { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",              mode = { "n", "t" } },
-      -- { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",              mode = { "n", "t" } },
       -- Top Pickers & Explorer
-      { "<leader>ff", function() Snacks.picker.smart() end, desc = "Smart Find Files", },
-      { "<leader>b", function() Snacks.picker.buffers() end, desc = "Buffers", },
-      { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep", },
-      { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History", },
-      { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer", },
+      { "<leader>ff", function() Snacks.picker.smart() end,                                                  desc = "Smart Find Files", },
+      { "<leader>b",  function() Snacks.picker.buffers() end,                                                desc = "Buffers", },
+      { "<leader>/",  function() Snacks.picker.grep() end,                                                   desc = "Grep", },
+      { "<leader>:",  function() Snacks.picker.command_history() end,                                        desc = "Command History", },
+      { "<leader>e",  function() Snacks.explorer() end,                                                      desc = "File Explorer", },
       -- find
-      { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File", },
-      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects", },
-      { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent", },
+      { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,                desc = "Find Config File", },
+      { "<leader>fp", function() Snacks.picker.projects() end,                                               desc = "Projects", },
+      { "<leader>fr", function() Snacks.picker.recent() end,                                                 desc = "Recent", },
       -- git
-      { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" }, },
-      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit", },
-      { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches", },
-      { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log", },
-      { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line", },
-      { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status", },
-      { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash", },
-      { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)", },
-      { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File", },
+      { "<leader>gB", function() Snacks.gitbrowse() end,                                                     desc = "Git Browse",                mode = { "n", "v" }, },
+      { "<leader>gg", function() Snacks.lazygit() end,                                                       desc = "Lazygit", },
+      { "<leader>gb", function() Snacks.picker.git_branches() end,                                           desc = "Git Branches", },
+      { "<leader>gl", function() Snacks.picker.git_log() end,                                                desc = "Git Log", },
+      { "<leader>gL", function() Snacks.picker.git_log_line() end,                                           desc = "Git Log Line", },
+      { "<leader>gs", function() Snacks.picker.git_status() end,                                             desc = "Git Status", },
+      { "<leader>gS", function() Snacks.picker.git_stash() end,                                              desc = "Git Stash", },
+      { "<leader>gd", function() Snacks.picker.git_diff() end,                                               desc = "Git Diff (Hunks)", },
+      { "<leader>gf", function() Snacks.picker.git_log_file() end,                                           desc = "Git Log File", },
       -- Grep
-      { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines", },
-      { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers", },
+      { "<leader>sb", function() Snacks.picker.lines() end,                                                  desc = "Buffer Lines", },
+      { "<leader>sB", function() Snacks.picker.grep_buffers() end,                                           desc = "Grep Open Buffers", },
       -- { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" }, },
       -- search
-      { '<leader>"', function() Snacks.picker.registers() end, desc = "Registers", },
-      { "<leader>s/", function() Snacks.picker.search_history() end, desc = "Search History", },
-      { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds", },
-      { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands", },
-      { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics", },
-      { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics", },
-      { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages", },
-      { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights", },
-      { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons", },
-      { "<leader>j", function() Snacks.picker.jumps() end, desc = "Jumps", },
-      { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps", },
-      { "<leader>m", function() Snacks.picker.marks() end, desc = "Marks", },
-      { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages", },
-      { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec", },
-      { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List", },
-      { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List", },
-      { "<leader>ss", function() Snacks.picker.resume() end, desc = "Resume", },
-      { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History", },
-      { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes", },
+      { '<leader>"',  function() Snacks.picker.registers() end,                                              desc = "Registers", },
+      { "<leader>s/", function() Snacks.picker.search_history() end,                                         desc = "Search History", },
+      { "<leader>sa", function() Snacks.picker.autocmds() end,                                               desc = "Autocmds", },
+      { "<leader>sC", function() Snacks.picker.commands() end,                                               desc = "Commands", },
+      { "<leader>sd", function() Snacks.picker.diagnostics() end,                                            desc = "Diagnostics", },
+      { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end,                                     desc = "Buffer Diagnostics", },
+      { "<leader>sh", function() Snacks.picker.help() end,                                                   desc = "Help Pages", },
+      { "<leader>sH", function() Snacks.picker.highlights() end,                                             desc = "Highlights", },
+      { "<leader>si", function() Snacks.picker.icons() end,                                                  desc = "Icons", },
+      { "<leader>j",  function() Snacks.picker.jumps() end,                                                  desc = "Jumps", },
+      { "<leader>sk", function() Snacks.picker.keymaps() end,                                                desc = "Keymaps", },
+      { "<leader>m",  function() Snacks.picker.marks() end,                                                  desc = "Marks", },
+      { "<leader>sM", function() Snacks.picker.man() end,                                                    desc = "Man Pages", },
+      { "<leader>sp", function() Snacks.picker.lazy() end,                                                   desc = "Search for Plugin Spec", },
+      { "<leader>sq", function() Snacks.picker.qflist() end,                                                 desc = "Quickfix List", },
+      { "<leader>sl", function() Snacks.picker.loclist() end,                                                desc = "Location List", },
+      { "<leader>ss", function() Snacks.picker.resume() end,                                                 desc = "Resume", },
+      { "<leader>su", function() Snacks.picker.undo() end,                                                   desc = "Undo History", },
+      { "<leader>uC", function() Snacks.picker.colorschemes() end,                                           desc = "Colorschemes", },
       -- LSP
-      { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition", },
-      { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration", },
-      { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References", },
-      { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation", },
-      { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition", },
+      { "gd",         function() Snacks.picker.lsp_definitions() end,                                        desc = "Goto Definition", },
+      { "gD",         function() Snacks.picker.lsp_declarations() end,                                       desc = "Goto Declaration", },
+      { "gr",         function() Snacks.picker.lsp_references() end,                                         nowait = true,                      desc = "References", },
+      { "gI",         function() Snacks.picker.lsp_implementations() end,                                    desc = "Goto Implementation", },
+      { "gy",         function() Snacks.picker.lsp_type_definitions() end,                                   desc = "Goto T[y]pe Definition", },
       -- { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols", },
-      { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols", },
+      { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end,                                  desc = "LSP Workspace Symbols", },
       -- Other
-      { "<leader>z", function() Snacks.zen() end, desc = "Toggle Zen Mode", },
-      { "<leader>Z", function() Snacks.zen.zoom() end, desc = "Toggle Zoom", },
-      { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History", },
-      { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", },
+      { "<leader>z",  function() Snacks.zen() end,                                                           desc = "Toggle Zen Mode", },
+      { "<leader>Z",  function() Snacks.zen.zoom() end,                                                      desc = "Toggle Zoom", },
+      { "<leader>n",  function() Snacks.notifier.show_history() end,                                         desc = "Notification History", },
+      { "<leader>cR", function() Snacks.rename.rename_file() end,                                            desc = "Rename File", },
 
-      { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History", },
-      { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications", },
-      { "<c-/>", function() Snacks.terminal() end, desc = "Toggle Terminal", },
-      { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" }, },
-      { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" }, },
+      { "<leader>n",  function() Snacks.picker.notifications() end,                                          desc = "Notification History", },
+      { "<leader>un", function() Snacks.notifier.hide() end,                                                 desc = "Dismiss All Notifications", },
+      { "<c-/>",      function() Snacks.terminal() end,                                                      desc = "Toggle Terminal", },
+      { "]]",         function() Snacks.words.jump(vim.v.count1) end,                                        desc = "Next Reference",            mode = { "n", "t" }, },
+      { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                                       desc = "Prev Reference",            mode = { "n", "t" }, },
+
+      { "<leader>iT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
       {
         "<leader>N",
         desc = "Neovim News",
@@ -156,15 +163,6 @@ return {
       vim.api.nvim_create_autocmd("User", {
         pattern = "VeryLazy",
         callback = function()
-          -- Setup some globals for debugging (lazy-loaded)
-          _G.dd = function(...)
-            Snacks.debug.inspect(...)
-          end
-          _G.bt = function()
-            Snacks.debug.backtrace()
-          end
-          vim.print = _G.dd -- Override print to use snacks for `:=` command
-
           -- Create some toggle mappings
           Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
           Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
@@ -173,7 +171,6 @@ return {
           Snacks.toggle.line_number():map("<leader>ul")
           Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
           Snacks.toggle.treesitter():map("<leader>uT")
-          -- Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }) :map("<leader>ub")
           Snacks.toggle.inlay_hints():map("<leader>uh")
           Snacks.toggle.indent():map("<leader>ug")
         end,
@@ -226,11 +223,11 @@ return {
       })
       local popupmenu_palette = wilder.popupmenu_renderer(wilder.popupmenu_palette_theme({
         border = "rounded",
-        max_height = "75%", -- max height of the palette
-        min_height = 0, -- set to the same as 'max_height' for a fixed height window
+        max_height = "75%",      -- max height of the palette
+        min_height = 0,          -- set to the same as 'max_height' for a fixed height window
         prompt_position = "top", -- 'top' or 'bottom' to set the location of the prompt
         pumblend = 20,
-        reverse = 0, -- set to 1 to reverse the order of the list, use in combination with 'prompt_position'
+        reverse = 0,             -- set to 1 to reverse the order of the list, use in combination with 'prompt_position'
         winblend = 30,
         left = { " ", wilder.popupmenu_devicons() },
         right = { " ", wilder.popupmenu_scrollbar() },
@@ -265,8 +262,8 @@ return {
     keys = {
       -- {'<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>",  mode={"n","v"}},
       -- {'F', "<cmd>lua require'hop'.hint_char1()<cr>", mode={"n","v"}},
-      { "f", ":HopChar1<cr>", desc = "Hop Char", { noremap = true, silent = true } },
-      { "F", ":HopWord<cr>", desc = "Hop Word", { noremap = true, silent = true } },
+      { "f",                ":HopChar1<cr>",    desc = "Hop Char",    { noremap = true, silent = true } },
+      { "F",                ":HopWord<cr>",     desc = "Hop Word",    { noremap = true, silent = true } },
       { "<leader><leader>", ":HopAnywhere<cr>", desc = "HopAnywhere", { noremap = true, silent = true } },
     },
     -- TODO: more keys
@@ -390,13 +387,13 @@ return {
           end
         end
         return require("ufo")
-          .getFolds(bufnr, "lsp")
-          :catch(function(err)
-            return handleFallbackException(err, "treesitter")
-          end)
-          :catch(function(err)
-            return handleFallbackException(err, "indent")
-          end)
+            .getFolds(bufnr, "lsp")
+            :catch(function(err)
+              return handleFallbackException(err, "treesitter")
+            end)
+            :catch(function(err)
+              return handleFallbackException(err, "indent")
+            end)
       end
       require("ufo").setup({
         provider_selector = function(bufnr, filetype, buftype)
@@ -477,7 +474,7 @@ return {
         prompt_no_cr = false,
         autosave = {
           current = true, -- or fun(name): boolean
-          tmp = true, -- or fun(): boolean
+          tmp = true,     -- or fun(): boolean
           tmp_name = "tmp",
           on_load = true,
           on_quit = true,
@@ -547,7 +544,7 @@ return {
           "sagaoutline",
           "Outline",
         },
-        autosave_only_in_session = true, -- Always autosaves session. If true, only autosaves after a session is active.
+        autosave_only_in_session = true,              -- Always autosaves session. If true, only autosaves after a session is active.
         autoload_mode = config.AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
       })
     end,
@@ -584,11 +581,11 @@ return {
   },
   {
     "olimorris/persisted.nvim",
-    -- enabled = false,
+    enabled = false,
     opts = {
       save_dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"), -- Directory where session files are saved
-      allowed_dirs = {}, -- Table of dirs that the plugin will start and autoload from
-      ignored_dirs = {}, -- Table of dirs that are ignored for starting and autoloading
+      allowed_dirs = {},                                                 -- Table of dirs that the plugin will start and autoload from
+      ignored_dirs = {},                                                 -- Table of dirs that are ignored for starting and autoloading
     },
   },
   {
@@ -608,21 +605,21 @@ return {
     config = function()
       require("jabs").setup({
         -- options
-        position = "center", -- left or right
+        position = "center",      -- left or right
         symbols = {
-          current = "C", -- default 
-          split = "S", -- default 
-          alternate = "A", -- default 
-          hidden = "H", -- default ﬘
-          locked = "L", -- default 
-          ro = "R", -- default 
-          edited = "E", -- default 
-          terminal = "T", -- default 
-          default_file = "D", -- Filetype icon if not present in nvim-web-devicons. Default 
+          current = "C",          -- default 
+          split = "S",            -- default 
+          alternate = "A",        -- default 
+          hidden = "H",           -- default ﬘
+          locked = "L",           -- default 
+          ro = "R",               -- default 
+          edited = "E",           -- default 
+          terminal = "T",         -- default 
+          default_file = "D",     -- Filetype icon if not present in nvim-web-devicons. Default 
           terminal_symbol = ">_", -- Filetype icon for a terminal split. Default 
         },
         keymap = {
-          close = "d", -- Close buffer. Default D
+          close = "d",   -- Close buffer. Default D
           preview = "p", -- Open buffer preview. Default P
         },
       })
@@ -669,11 +666,11 @@ return {
     config = function()
       require("cybu").setup({
         position = {
-          relative_to = "win", -- win, editor, cursor
+          relative_to = "win",  -- win, editor, cursor
           anchor = "topcenter", -- topleft, topcenter, topright,
           -- centerleft, center, centerright,
           -- bottomleft, bottomcenter, bottomright
-          vertical_offset = 10, -- vertical offset from anchor in lines
+          vertical_offset = 10,  -- vertical offset from anchor in lines
           horizontal_offset = 0, -- vertical offset from anchor in columns
           -- float for relative to win/editor width
         },
@@ -681,11 +678,11 @@ return {
           mode = {
             default = {
               switch = "immediate", -- immediate, on_close
-              view = "rolling", -- paging, rolling
+              view = "rolling",     -- paging, rolling
             },
             last_used = {
               switch = "immediate", -- immediate, on_close
-              view = "paging", -- paging, rolling
+              view = "paging",      -- paging, rolling
             },
             auto = {
               view = "rolling", -- paging, rolling
@@ -693,8 +690,8 @@ return {
           },
           show_on_autocmd = false, -- event to trigger cybu (eg. "BufEnter")
         },
-        display_time = 750, -- time the cybu window is displayed
-        exclude = { -- filetypes, cybu will not be active
+        display_time = 750,        -- time the cybu window is displayed
+        exclude = {                -- filetypes, cybu will not be active
           "neo-tree",
           "fugitive",
           "qf",
