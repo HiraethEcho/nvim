@@ -1,7 +1,7 @@
 return {
   {
     "saghen/blink.cmp",
-    -- enabled = false,
+    enabled = false,
     event = "InsertEnter",
     -- lazy = false,
     version = "*",
@@ -64,7 +64,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
-    enabled = false,
+    -- enabled = false,
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       {
