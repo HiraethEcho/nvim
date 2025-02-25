@@ -29,7 +29,8 @@ return {
   },
   {
     "EdenEast/nightfox.nvim",
-    event = "VimEnter",
+    -- event = "VimEnter",
+    event = "BufRead",
     config = function()
       require('nightfox').setup({
         options = {
@@ -122,12 +123,12 @@ return {
           lualine_a = {
             -- { "fancy_cwd", substitute_home = true },
             { "fancy_branch" },
+            -- "filetype"
             -- "branch",
             -- "fancy_lsp_servers",
           },
           lualine_b = {
             { "fancy_diff" },
-            "fancy_lsp_servers",
           },
           lualine_c = {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
@@ -149,7 +150,10 @@ return {
             { "fancy_searchcount" },
           },
           -- lualine_y = { "filetype" },
-          lualine_y = {},
+          lualine_y = {
+            "fancy_diagnostics",
+            "fancy_lsp_servers",
+          },
           lualine_z = {
             "progress",
             "location",
@@ -165,6 +169,7 @@ return {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           },
           lualine_b = {
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
               file_status = true,    -- Displays file status (readonly status, modified status)
@@ -186,8 +191,8 @@ return {
             -- "diff",
           },
           lualine_x = {
-            "fancy_diagnostics",
-            "fancy_lsp_servers",
+            -- "fancy_diagnostics",
+            -- "fancy_lsp_servers",
           },
           lualine_y = { "progress" },
           lualine_z = {},
@@ -306,6 +311,7 @@ return {
       "kevinhwang91/nvim-ufo",
       "petertriho/nvim-scrollbar",
     },
+    cmd = "EnableHL",
     keys = {
       { "<leader>uh", "<cmd>EnableHL<cr>", desc = "Enable hlchunk" },
     },
@@ -346,10 +352,6 @@ return {
         { "[", "]" },
       }, -- config
     },
-    init = function()
-      -- `matchparen.vim` needs to be disabled manually in case of lazy loading
-      vim.g.loaded_matchparen = 1
-    end,
   },
   {
     "rcarriga/nvim-notify",

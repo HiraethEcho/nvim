@@ -70,3 +70,5 @@ opt.autowrite = true          -- Enable auto write
 opt.foldmethod = "indent"
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevel = 99
+
+vim.g.loaded_matchparen = 1  -- "utilyre/sentiment.nvim",
