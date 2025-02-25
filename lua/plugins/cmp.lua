@@ -11,7 +11,7 @@ return {
         "L3MON4D3/LuaSnip",
         version = "v2.*",
         dependencies = {
-          "mathjiajia/mysnippets",
+          -- "mathjiajia/mysnippets",
         },
         config = function()
           require("luasnip").config.set_config({

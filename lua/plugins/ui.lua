@@ -18,42 +18,6 @@ return {
     end
   },
   {
-    'echasnovski/mini.starter',
-    enabled = false,
-    version = '*',
-    event = "VimEnter",
-    dependencies = {
-      -- 'rmagatti/auto-session',
-      'echasnovski/mini.sessions',
-    },
-    config = function()
-      local starter = require('mini.starter')
-      starter.setup({
-        evaluate_single = true,
-        items = {
-          starter.sections.sessions(8, true),
-          starter.sections.recent_files(5, false),
-          -- starter.sections.telescope(),
-          -- starter.sections.recent_files(3, true), -- local
-          -- starter.sections.builtin_actions(),
-          { name = 'start up time', action = [[StartupTime]], section = 'actions' },
-          { name = 'lazy.nvim',     action = [[Lazy]],        section = 'actions' },
-          { name = 'quit',          action = [[quit]],        section = 'actions' },
-          { name = 'new file',      action = 'enew',          section = 'actions' },
-        },
-        header = '',
-        footer = '',
-        content_hooks = {
-          -- starter.gen_hook.adding_bullet(),
-          starter.gen_hook.indexing('all', { 'Sessions', 'actions' }),
-          -- starter.gen_hook.indexing('all', { 'Builtin actions' }),
-          starter.gen_hook.padding(3, 2),
-          starter.gen_hook.aligning('center', 'center'),
-        },
-      })
-    end,
-  },
-  {
     'eandrju/cellular-automaton.nvim',
     keys = {
       { "<leader>uR", "<cmd>CellularAutomaton make_it_rain<cr>", desc = "Rain" },
@@ -163,6 +127,7 @@ return {
           },
           lualine_b = {
             { "fancy_diff" },
+            "fancy_lsp_servers",
           },
           lualine_c = {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
@@ -221,8 +186,8 @@ return {
             -- "diff",
           },
           lualine_x = {
-            -- "fancy_diagnostics",
-            -- "fancy_lsp_servers",
+            "fancy_diagnostics",
+            "fancy_lsp_servers",
           },
           lualine_y = { "progress" },
           lualine_z = {},
@@ -403,7 +368,7 @@ return {
   },
   {
     'b0o/incline.nvim',
-    -- enabled = false,
+    enabled = false,
     config = function()
       local devicons = require 'nvim-web-devicons'
       require('incline').setup {
