@@ -316,6 +316,7 @@ return {
   {
     "dnlhc/glance.nvim",
     -- lazy = false,
+    enabled = false,
     event = "LspAttach",
     keys = {
       { "gd", "<cmd>Glance definitions<cr>",      desc = "Glance definitions" },
@@ -375,7 +376,7 @@ return {
   },
   {
     "folke/trouble.nvim",
-    -- enabled = false,
+    enabled = false,
     opts = {
       modes = {
         split = {
@@ -392,32 +393,32 @@ return {
     cmd = "Trouble",
     keys = {
       {
-        "<leader>XX",
+        "<leader>xx",
         "<cmd>Trouble diagnostics toggle<cr>",
         desc = "Diagnostics (Trouble)",
       },
       {
-        "<leader>x",
+        "<leader>xb",
         "<cmd>Trouble diagnostics toggle filter.buf=0 focus=false<cr>",
         desc = "Buffer Diagnostics (Trouble)",
       },
       {
-        "<leader>Xs",
+        "<leader>xs",
         "<cmd>Trouble symbols toggle focus=false<cr>",
         desc = "Symbols (Trouble)",
       },
       {
-        "<leader>Xl",
+        "<leader>xl",
         "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
         desc = "LSP Definitions / references / ... (Trouble)",
       },
       {
-        "<leader>XL",
+        "<leader>xL",
         "<cmd>Trouble loclist toggle<cr>",
         desc = "Location List (Trouble)",
       },
       {
-        "<leader>XQ",
+        "<leader>xq",
         "<cmd>Trouble qflist toggle<cr>",
         desc = "Quickfix List (Trouble)",
       },

@@ -70,7 +70,7 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
     -- Check if a session is currently active
     if vim.v.this_session == "" then
       -- Define the session file path
-      local session_path = vim.fn.stdpath("data") .. "/sessions/tmp"
+      local session_path = vim.fn.stdpath("state") .. "/sessions/tmp"
       -- Create the session
       vim.cmd("mksession! " .. session_path)
     end
