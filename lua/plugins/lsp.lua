@@ -50,8 +50,8 @@ return {
     config = function()
       -- An example nvim-lspconfig capabilities setting
       -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-      -- local capabilities = require('blink.cmp').get_lsp_capabilities()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
       capabilities.textDocument.foldingRange = {
         -- dynamicRegistration = false,
         lineFoldingOnly = true
