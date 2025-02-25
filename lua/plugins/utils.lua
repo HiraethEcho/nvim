@@ -7,23 +7,29 @@ return {
     },
   },
   {
-    'MagicDuck/grug-far.nvim',
+    "MagicDuck/grug-far.nvim",
     keys = {
-      { "<C-f>", function() require('grug-far').open({ prefills = { paths = vim.fn.expand("%") } }) end, desc = "search and replace" },
+      {
+        "<C-f>",
+        function()
+          require("grug-far").open({ prefills = { paths = vim.fn.expand("%") } })
+        end,
+        desc = "search and replace",
+      },
     },
     config = function()
-      require('grug-far').setup({
+      require("grug-far").setup({
         -- options, see Configuration section below
         -- there are no required options atm
         -- engine = 'ripgrep' is default, but 'astgrep' can be specified
-      });
-    end
+      })
+    end,
   },
   {
     "OXY2DEV/helpview.nvim",
     ft = "help",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter"
+      "nvim-treesitter/nvim-treesitter",
     },
   },
   {
@@ -52,11 +58,11 @@ return {
       })
       local popupmenu_palette = wilder.popupmenu_renderer(wilder.popupmenu_palette_theme({
         border = "rounded",
-        max_height = "75%",      -- max height of the palette
-        min_height = 0,          -- set to the same as 'max_height' for a fixed height window
+        max_height = "75%", -- max height of the palette
+        min_height = 0, -- set to the same as 'max_height' for a fixed height window
         prompt_position = "top", -- 'top' or 'bottom' to set the location of the prompt
         pumblend = 20,
-        reverse = 0,             -- set to 1 to reverse the order of the list, use in combination with 'prompt_position'
+        reverse = 0, -- set to 1 to reverse the order of the list, use in combination with 'prompt_position'
         winblend = 30,
         left = { " ", wilder.popupmenu_devicons() },
         right = { " ", wilder.popupmenu_scrollbar() },
@@ -91,8 +97,8 @@ return {
     keys = {
       -- {'<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>",  mode={"n","v"}},
       -- {'F', "<cmd>lua require'hop'.hint_char1()<cr>", mode={"n","v"}},
-      { 'f',                ":HopChar1<cr>",    desc = "Hop Char",    { noremap = true, silent = true } },
-      { 'F',                ":HopWord<cr>",     desc = "Hop Word",    { noremap = true, silent = true } },
+      { "f", ":HopChar1<cr>", desc = "Hop Char", { noremap = true, silent = true } },
+      { "F", ":HopWord<cr>", desc = "Hop Word", { noremap = true, silent = true } },
       { "<leader><leader>", ":HopAnywhere<cr>", desc = "HopAnywhere", { noremap = true, silent = true } },
     },
     -- TODO: more keys
@@ -104,7 +110,13 @@ return {
     "folke/which-key.nvim",
     cmd = "WhichKey",
     keys = {
-      { "?", function() require("which-key").show() end, desc = "Buffer Local Keymaps (which-key)" },
+      {
+        "?",
+        function()
+          require("which-key").show()
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
     },
     event = "BufRead",
     opts = {
@@ -118,15 +130,15 @@ return {
       vim.o.timeoutlen = 300
       local wk = require("which-key")
       wk.add({
-        { "<leader>i", group = "list", },
-        { "<leader>D", group = "Diff", },
-        { "<leader>u", group = "ui", },
-        { "<leader>f", group = "find", },
-        { "<leader>g", group = "git", },
-        { "<leader>l", group = "lsp", },
-        { "<leader>m", group = "markdown", },
-        { "<leader>h", group = "hunk", },
-        { "<leader>c", group = "Copilot", },
+        { "<leader>i", group = "list" },
+        { "<leader>D", group = "Diff" },
+        { "<leader>u", group = "ui" },
+        { "<leader>f", group = "find" },
+        { "<leader>g", group = "git" },
+        { "<leader>l", group = "lsp" },
+        { "<leader>m", group = "markdown" },
+        { "<leader>h", group = "hunk" },
+        { "<leader>c", group = "Copilot" },
         -- { "m", group = "bookmark", },
       })
     end,
@@ -139,11 +151,60 @@ return {
     end,
   },
   {
-    'rmagatti/auto-session',
+    'echasnovski/mini.starter',
+    -- enabled = false,
+    version = '*',
+    event = "VimEnter",
+    dependencies = {
+      -- 'rmagatti/auto-session',
+      'echasnovski/mini.sessions',
+    },
+    config = function()
+      local starter = require('mini.starter')
+      starter.setup({
+        evaluate_single = true,
+        items = {
+          starter.sections.sessions(8, true),
+          starter.sections.recent_files(5, false),
+          -- starter.sections.telescope(),
+          -- starter.sections.recent_files(3, true), -- local
+          -- starter.sections.builtin_actions(),
+          { name = 'start up time', action = [[StartupTime]], section = 'actions' },
+          { name = 'lazy.nvim',     action = [[Lazy]],        section = 'actions' },
+          { name = 'quit',          action = [[quit]],        section = 'actions' },
+          { name = 'new file',      action = 'enew',          section = 'actions' },
+        },
+        header = '',
+        footer = '',
+        content_hooks = {
+          -- starter.gen_hook.adding_bullet(),
+          starter.gen_hook.indexing('all', { 'Sessions', 'actions' }),
+          -- starter.gen_hook.indexing('all', { 'Builtin actions' }),
+          starter.gen_hook.padding(3, 2),
+          starter.gen_hook.aligning('center', 'center'),
+        },
+      })
+    end,
+  },
+  {
+    "echasnovski/mini.sessions",
+    version = "*",
+    opts = {
+      directory = vim.fn.stdpath("state") .. "/sessions",
+    },
+  },
+  {
+    "rmagatti/auto-session",
     -- enabled = false,
     event = "BufRead",
+    keys = {
+      -- Will use Telescope if installed or a vim.ui.select picker otherwise
+      { "<leader>Sr", "<cmd>SessionSearch<CR>", desc = "Session search" },
+      { "<leader>Ss", "<cmd>SessionSave<CR>", desc = "Save session" },
+      { "<leader>Sa", "<cmd>SessionToggleAutoSave<CR>", desc = "Toggle autosave" },
+    },
     config = function()
-      require("auto-session").setup {
+      require("auto-session").setup({
         -- log_level = "error",
         --[[ pre_save_cmds = {
           "tabdo Neotree close" -- Close NERDTree before saving session
@@ -151,9 +212,9 @@ return {
         post_cwd_changed_cmds = {
           function()
             require("lualine").refresh() -- example refreshing the lualine status line _after_ the cwd changes
-          end
+          end,
         },
-        auto_session_root_dir = vim.fn.stdpath('data') .. "/sessions/",
+        auto_session_root_dir = vim.fn.stdpath("state") .. "/sessions/",
         auto_create = false,
         auto_save = true, -- Enables/disables auto saving session on exit
         previewer = true, -- File preview for session picker
@@ -162,17 +223,9 @@ return {
           alternate_session = { "n", "<CR>" },
           copy_session = { "n", "Y" },
         },
-      }
-      vim.keymap.set("n", "<leader>is", require("auto-session.session-lens").search_session, { noremap = true, })
+      })
       vim.o.sessionoptions = "blank,buffers,curdir,help,tabpages,terminal,localoptions"
-    end
-  },
-  {
-    'echasnovski/mini.sessions',
-    version = '*',
-    opts = {
-      directory = vim.fn.stdpath("data") .. "/sessions",
-    },
+    end,
   },
   {
     "kevinhwang91/nvim-ufo",
@@ -183,13 +236,13 @@ return {
       "kevinhwang91/promise-async",
       {
         enabled = false,
-        'yaocccc/nvim-foldsign',
+        "yaocccc/nvim-foldsign",
         opts = {
           foldsigns = {
-            open = '', -- mark the beginning of a fold
-            close = '', -- show a closed fold
-            seps = { '│', '┃' }, -- open fold middle marker
-          }
+            open = "", -- mark the beginning of a fold
+            close = "", -- show a closed fold
+            seps = { "│", "┃" }, -- open fold middle marker
+          },
         },
       },
     },
@@ -198,33 +251,42 @@ return {
       -- { "zM", function() require('ufo').closeAllFolds() end,              desc = "Close All Folds" },
       -- { "zr", function() require('ufo').openFoldsExceptKinds() end,       desc = "Open Folds Except Kinds" },
       -- { "zm", function() require('ufo').closeFoldsWith() end,             desc = "Close Folds With" },
-      { "KK", function() require('ufo').peekFoldedLinesUnderCursor() end, desc = "Peek Folded Lines Under Cursor" },
+      {
+        "KK",
+        function()
+          require("ufo").peekFoldedLinesUnderCursor()
+        end,
+        desc = "Peek Folded Lines Under Cursor",
+      },
     },
     config = function()
       -- vim.o.foldcolumn = 'auto:3' -- '0' is not bad
-      vim.o.foldcolumn = '0' -- '0' is not bad
+      vim.o.foldcolumn = "0" -- '0' is not bad
       vim.o.foldenable = true
       -- vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       local function customizeSelector(bufnr)
         local function handleFallbackException(err, providerName)
-          if type(err) == 'string' and err:match('UfoFallbackException') then
-            return require('ufo').getFolds(bufnr, providerName)
+          if type(err) == "string" and err:match("UfoFallbackException") then
+            return require("ufo").getFolds(bufnr, providerName)
           else
-            return require('promise').reject(err)
+            return require("promise").reject(err)
           end
         end
-        return require('ufo').getFolds(bufnr, 'lsp'):catch(function(err)
-          return handleFallbackException(err, 'treesitter')
-        end):catch(function(err)
-          return handleFallbackException(err, 'indent')
-        end)
+        return require("ufo")
+          .getFolds(bufnr, "lsp")
+          :catch(function(err)
+            return handleFallbackException(err, "treesitter")
+          end)
+          :catch(function(err)
+            return handleFallbackException(err, "indent")
+          end)
       end
       require("ufo").setup({
         provider_selector = function(bufnr, filetype, buftype)
           -- return customizeSelector
-          return { 'treesitter', 'indent' }
+          return { "treesitter", "indent" }
           -- return ''
         end,
         preview = {
@@ -300,7 +362,7 @@ return {
         prompt_no_cr = false,
         autosave = {
           current = true, -- or fun(name): boolean
-          tmp = true,     -- or fun(): boolean
+          tmp = true, -- or fun(): boolean
           tmp_name = "tmp",
           on_load = true,
           on_quit = true,
@@ -352,61 +414,61 @@ return {
     end,
   },
   {
-    'Shatur/neovim-session-manager',
+    "Shatur/neovim-session-manager",
     enabled = false,
     dependencies = {
-      'stevearc/dressing.nvim',
+      "stevearc/dressing.nvim",
     },
     config = function()
-      local config = require('session_manager.config')
-      require('session_manager').setup({
-        sessions_dir = vim.fn.stdpath('data') .. '/sessions/',
+      local config = require("session_manager.config")
+      require("session_manager").setup({
+        sessions_dir = vim.fn.stdpath("data") .. "/sessions/",
         autosave_last_session = true, -- Automatically save last session on exit and on session switch.
         autosave_ignore_filetypes = { -- All buffers of these file types will be closed before the session is saved.
-          'gitcommit',
-          'gitrebase',
-          'undotree',
-          'neo-tree',
+          "gitcommit",
+          "gitrebase",
+          "undotree",
+          "neo-tree",
           "sagaoutline",
           "Outline",
         },
-        autosave_only_in_session = true,              -- Always autosaves session. If true, only autosaves after a session is active.
+        autosave_only_in_session = true, -- Always autosaves session. If true, only autosaves after a session is active.
         autoload_mode = config.AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
       })
     end,
   },
   {
-    'ActivityWatch/aw-watcher-vim',
+    "ActivityWatch/aw-watcher-vim",
     -- lazy = false,
     event = "BufRead",
     enabled = false,
     cmd = "AWStart",
   },
   {
-    'matbme/JABS.nvim',
+    "matbme/JABS.nvim",
     -- lazy = false,
     enabled = false,
     keys = {
       { "<leader>b", "<cmd>JABSOpen<cr>", desc = "buffer lists" },
     },
     config = function()
-      require('jabs').setup({
+      require("jabs").setup({
         -- options
-        position = 'center',     -- left or right
+        position = "center", -- left or right
         symbols = {
-          current = "C",         -- default 
-          split = "S",           -- default 
-          alternate = "A",       -- default 
-          hidden = "H",          -- default ﬘
-          locked = "L",          -- default 
-          ro = "R",              -- default 
-          edited = "E",          -- default 
-          terminal = "T",        -- default 
-          default_file = "D",    -- Filetype icon if not present in nvim-web-devicons. Default 
-          terminal_symbol = ">_" -- Filetype icon for a terminal split. Default 
+          current = "C", -- default 
+          split = "S", -- default 
+          alternate = "A", -- default 
+          hidden = "H", -- default ﬘
+          locked = "L", -- default 
+          ro = "R", -- default 
+          edited = "E", -- default 
+          terminal = "T", -- default 
+          default_file = "D", -- Filetype icon if not present in nvim-web-devicons. Default 
+          terminal_symbol = ">_", -- Filetype icon for a terminal split. Default 
         },
         keymap = {
-          close = "d",   -- Close buffer. Default D
+          close = "d", -- Close buffer. Default D
           preview = "p", -- Open buffer preview. Default P
         },
       })
@@ -416,7 +478,7 @@ return {
     "EL-MASTOR/bufferlist.nvim",
     -- lazy = true,
     enabled = false,
-    keys = { { "<Leader>b", ':BufferList<CR>', desc = "Open bufferlist" } },
+    keys = { { "<Leader>b", ":BufferList<CR>", desc = "Open bufferlist" } },
     dependencies = "nvim-tree/nvim-web-devicons",
     cmd = "BufferList",
     opts = {
@@ -432,7 +494,7 @@ return {
         save_all_unsaved = "a",
         close_all_saved = "d0",
         toggle_path = "p",
-        close_bufferlist = "q"
+        close_bufferlist = "q",
       },
       win_keymaps = {}, -- add keymaps to the BufferList window
       bufs_keymaps = {}, -- add keymaps to each line number in the BufferList window
@@ -453,11 +515,11 @@ return {
     config = function()
       require("cybu").setup({
         position = {
-          relative_to = "win",  -- win, editor, cursor
+          relative_to = "win", -- win, editor, cursor
           anchor = "topcenter", -- topleft, topcenter, topright,
           -- centerleft, center, centerright,
           -- bottomleft, bottomcenter, bottomright
-          vertical_offset = 10,  -- vertical offset from anchor in lines
+          vertical_offset = 10, -- vertical offset from anchor in lines
           horizontal_offset = 0, -- vertical offset from anchor in columns
           -- float for relative to win/editor width
         },
@@ -465,11 +527,11 @@ return {
           mode = {
             default = {
               switch = "immediate", -- immediate, on_close
-              view = "rolling",     -- paging, rolling
+              view = "rolling", -- paging, rolling
             },
             last_used = {
               switch = "immediate", -- immediate, on_close
-              view = "paging",      -- paging, rolling
+              view = "paging", -- paging, rolling
             },
             auto = {
               view = "rolling", -- paging, rolling
@@ -477,8 +539,8 @@ return {
           },
           show_on_autocmd = false, -- event to trigger cybu (eg. "BufEnter")
         },
-        display_time = 750,        -- time the cybu window is displayed
-        exclude = {                -- filetypes, cybu will not be active
+        display_time = 750, -- time the cybu window is displayed
+        exclude = { -- filetypes, cybu will not be active
           "neo-tree",
           "fugitive",
           "qf",
@@ -503,24 +565,24 @@ return {
     end,
   },
   {
-    'anuvyklack/pretty-fold.nvim',
+    "anuvyklack/pretty-fold.nvim",
     -- lazy = false,
     enabled = false,
     config = function()
-      require('pretty-fold').setup()
-    end
+      require("pretty-fold").setup()
+    end,
   },
   {
-    'echasnovski/mini.test',
+    "echasnovski/mini.test",
     enabled = false,
-    version = '*'
+    version = "*",
   },
   {
     "Zeioth/hot-reload.nvim",
     enabled = false,
     dependencies = "nvim-lua/plenary.nvim",
     event = "BufEnter",
-    opts = {}
+    opts = {},
   },
   {
     "folke/snacks.nvim",
@@ -539,24 +601,96 @@ return {
       words = { enabled = true },
       styles = {
         notification = {
-          wo = { wrap = true } -- Wrap notifications
-        }
-      }
+          wo = { wrap = true }, -- Wrap notifications
+        },
+      },
     },
     keys = {
-      { "<leader>.",  function() Snacks.scratch() end,               desc = "Toggle Scratch Buffer" },
-      { "<leader>S",  function() Snacks.scratch.select() end,        desc = "Select Scratch Buffer" },
-      { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
+      {
+        "<leader>.",
+        function()
+          Snacks.scratch()
+        end,
+        desc = "Toggle Scratch Buffer",
+      },
+      {
+        "<leader>S",
+        function()
+          Snacks.scratch.select()
+        end,
+        desc = "Select Scratch Buffer",
+      },
+      {
+        "<leader>n",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "Notification History",
+      },
       -- { "<leader>bd", function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
-      { "<leader>cR", function() Snacks.rename.rename_file() end,    desc = "Rename File" },
-      { "<leader>gW", function() Snacks.gitbrowse() end,             desc = "Git Browse" },
-      { "<leader>gb", function() Snacks.git.blame_line() end,        desc = "Git Blame Line" },
-      { "<leader>gf", function() Snacks.lazygit.log_file() end,      desc = "Lazygit Current File History" },
-      { "<leader>gg", function() Snacks.lazygit() end,               desc = "Lazygit" },
-      { "<leader>gl", function() Snacks.lazygit.log() end,           desc = "Lazygit Log (cwd)" },
-      { "<leader>un", function() Snacks.notifier.hide() end,         desc = "Dismiss All Notifications" },
-      { "<c-/>",      function() Snacks.terminal() end,              desc = "Toggle Terminal" },
-      { "<c-_>",      function() Snacks.terminal() end,              desc = "which_key_ignore" },
+      {
+        "<leader>cR",
+        function()
+          Snacks.rename.rename_file()
+        end,
+        desc = "Rename File",
+      },
+      {
+        "<leader>gW",
+        function()
+          Snacks.gitbrowse()
+        end,
+        desc = "Git Browse",
+      },
+      {
+        "<leader>gb",
+        function()
+          Snacks.git.blame_line()
+        end,
+        desc = "Git Blame Line",
+      },
+      {
+        "<leader>gf",
+        function()
+          Snacks.lazygit.log_file()
+        end,
+        desc = "Lazygit Current File History",
+      },
+      {
+        "<leader>gg",
+        function()
+          Snacks.lazygit()
+        end,
+        desc = "Lazygit",
+      },
+      {
+        "<leader>gl",
+        function()
+          Snacks.lazygit.log()
+        end,
+        desc = "Lazygit Log (cwd)",
+      },
+      {
+        "<leader>un",
+        function()
+          Snacks.notifier.hide()
+        end,
+        desc = "Dismiss All Notifications",
+      },
+      {
+        "<c-/>",
+        function()
+          Snacks.terminal()
+        end,
+        desc = "Toggle Terminal",
+      },
+      {
+        "<c-_>",
+        function()
+          Snacks.terminal()
+        end,
+        desc = "which_key_ignore",
+      },
       -- { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",              mode = { "n", "t" } },
       -- { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",              mode = { "n", "t" } },
       {
@@ -576,7 +710,7 @@ return {
             },
           })
         end,
-      }
+      },
     },
     -- init = function()
     config = function()
@@ -599,22 +733,31 @@ return {
           Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
           Snacks.toggle.diagnostics():map("<leader>ud")
           Snacks.toggle.line_number():map("<leader>ul")
-          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
-            "<leader>uc")
+          Snacks.toggle
+            .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+            :map("<leader>uc")
           Snacks.toggle.treesitter():map("<leader>uT")
-          Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+          Snacks.toggle
+            .option("background", { off = "light", on = "dark", name = "Dark Background" })
+            :map("<leader>ub")
           Snacks.toggle.inlay_hints():map("<leader>uh")
         end,
       })
     end,
   },
   {
-    'stevearc/quicker.nvim',
+    "stevearc/quicker.nvim",
     enabled = false,
     lazy = false,
     event = "FileType qf",
     keys = {
-      { "<leader>x", function() require("quicker").toggle() end, desc = "toggle quicker" },
+      {
+        "<leader>x",
+        function()
+          require("quicker").toggle()
+        end,
+        desc = "toggle quicker",
+      },
     },
     opts = {},
   },
