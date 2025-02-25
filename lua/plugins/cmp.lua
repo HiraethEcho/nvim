@@ -1,6 +1,6 @@
 return {
   {
-    'saghen/blink.cmp',
+    "saghen/blink.cmp",
     -- enabled = false,
     event = "InsertEnter",
     -- lazy = false,
@@ -8,8 +8,8 @@ return {
     dependencies = {
       -- 'rafamadriz/friendly-snippets'
       {
-        'L3MON4D3/LuaSnip',
-        version = 'v2.*',
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
         dependencies = {
           "mathjiajia/mysnippets",
         },
@@ -19,27 +19,28 @@ return {
             store_selection_keys = "<Tab>",
           })
           require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/LuaSnip/" })
-        end
+          require("luasnip.loaders.from_snipmate").load({ paths = vim.fn.stdpath("config") .. "/snipmate/" })
+        end,
       },
     },
     opts = {
-      snippets = { preset = 'luasnip' },
+      snippets = { preset = "luasnip" },
       keymap = {
-        preset = 'none',
-        ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
-        ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
-        ['<C-j>'] = { 'snippet_forward', 'fallback' },
-        ['<C-k>'] = { 'snippet_backward', 'fallback' },
-        ['<S-Tab>'] = { 'select_prev', 'fallback' },
-        ['<Tab>'] = { 'select_next', 'fallback' },
-        ['<Up>'] = { 'select_prev', 'fallback' },
-        ['<Down>'] = { 'select_next', 'fallback' },
-        ['<CR>'] = { 'accept', 'fallback' },
-        ['<C-e>'] = { 'hide', 'fallback' },
+        preset = "none",
+        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+        ["<C-j>"] = { "snippet_forward", "fallback" },
+        ["<C-k>"] = { "snippet_backward", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
+        ["<C-e>"] = { "hide", "fallback" },
       },
       completion = {
         keyword = {
-          range = 'full',
+          range = "full",
         },
         list = {
           selection = {
@@ -49,16 +50,16 @@ return {
         },
         ghost_text = {
           enabled = true,
-        }
+        },
       },
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { "lsp", "path", "snippets", "buffer" },
       },
       cmdline = {
         enabled = false,
-      }
+      },
     },
-    opts_extend = { "sources.default" }
+    opts_extend = { "sources.default" },
   },
   {
     "hrsh7th/nvim-cmp",
@@ -69,7 +70,7 @@ return {
       {
         "SirVer/ultisnips",
       },
-      { "quangnguyen30192/cmp-nvim-ultisnips", config = true, },
+      { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
       "hrsh7th/cmp-buffer",
       -- { "micangl/cmp-vimtex", },
       "zbirenbaum/copilot.lua",
@@ -93,11 +94,11 @@ return {
       },
     },
     config = function()
-      local lspkind = require('lspkind')
+      local lspkind = require("lspkind")
       local cmp = require("cmp")
       local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
       cmp.setup({
-        completion = { completeopt = "menu,popup,menuone,noselect", }, -- see :help 'completeopt'
+        completion = { completeopt = "menu,popup,menuone,noselect" }, -- see :help 'completeopt'
         snippet = {
           expand = function(args)
             vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
@@ -106,18 +107,12 @@ return {
         mapping = {
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
-          ["<c-j>"] = cmp.mapping(
-            function(fallback)
-              cmp_ultisnips_mappings.jump_forwards(fallback)
-            end,
-            { "i", "s", }
-          ),
-          ["<c-k>"] = cmp.mapping(
-            function(fallback)
-              cmp_ultisnips_mappings.jump_backwards(fallback)
-            end,
-            { "i", "s", }
-          ),
+          ["<c-j>"] = cmp.mapping(function(fallback)
+            cmp_ultisnips_mappings.jump_forwards(fallback)
+          end, { "i", "s" }),
+          ["<c-k>"] = cmp.mapping(function(fallback)
+            cmp_ultisnips_mappings.jump_backwards(fallback)
+          end, { "i", "s" }),
           ["<Tab>"] = cmp.mapping.select_next_item(fallback),
           ["<S-Tab>"] = cmp.mapping.select_prev_item(fallback),
           ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -127,7 +122,7 @@ return {
           -- { name = "vimtex" },
           -- { name = "nvim_lua" },
           {
-            name = 'nvim_lsp',
+            name = "nvim_lsp",
             -- option = {
             --   markdown_oxide = {
             --     keyword_pattern = [[\(\k\| \|\/\|#\)\+]]
@@ -135,27 +130,35 @@ return {
             -- }
           },
           -- { name = 'nvim_lsp' },
-          { name = "copilot",  max_item_count = 3, },
-          { name = "buffer",   option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end, }, max_item_count = 3, },
+          { name = "copilot", max_item_count = 3 },
+          {
+            name = "buffer",
+            option = {
+              get_bufnrs = function()
+                return vim.api.nvim_list_bufs()
+              end,
+            },
+            max_item_count = 3,
+          },
           { name = "path" },
           -- { name = "lazydev",  group_index = 0, },
         }),
         formatting = {
           format = lspkind.cmp_format({
-            mode = 'symbol', -- show only symbol annotations
+            mode = "symbol", -- show only symbol annotations
             maxwidth = {
               -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
               -- can also be a function to dynamically calculate max width such as
               -- menu = function() return math.floor(0.45 * vim.o.columns) end,
-              menu = 50,              -- leading text (labelDetails)
-              abbr = 50,              -- actual suggestion item
+              menu = 50, -- leading text (labelDetails)
+              abbr = 50, -- actual suggestion item
             },
             show_labelDetails = true, -- show labelDetails in menu. Disabled by default
             before = function(entry, vim_item)
               vim_item.menu = entry.source.name
               return vim_item
-            end
-          })
+            end,
+          }),
         },
       })
     end,
@@ -164,20 +167,20 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     keys = { -- Example mapping to toggle outline
-      { "<leader>cc", "<cmd>Copilot<CR>",        desc = "Copilot" },
+      { "<leader>cc", "<cmd>Copilot<CR>", desc = "Copilot" },
       { "<leader>ct", "<cmd>Copilot toggle<CR>", desc = "Copilot toggle" },
       { "<leader>cd", "<cmd>Copilot detach<CR>", desc = "Copilot detach" },
       { "<leader>ca", "<cmd>Copilot attach<CR>", desc = "Copilot attach" },
-      { "<leader>cp", "<cmd>Copilot panel<CR>",  desc = "Copilot panel" },
+      { "<leader>cp", "<cmd>Copilot panel<CR>", desc = "Copilot panel" },
     },
     dependencies = {
       "zbirenbaum/copilot-cmp",
       config = function()
         require("copilot_cmp").setup()
-      end
+      end,
     },
     config = function()
-      require('copilot').setup({
+      require("copilot").setup({
         panel = {
           enabled = true,
           auto_refresh = true,
@@ -187,7 +190,7 @@ return {
           },
           layout = {
             position = "bottom", -- | top | left | right
-            ratio = 0.4
+            ratio = 0.4,
           },
         },
         suggestion = {
