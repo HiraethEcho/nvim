@@ -1,5 +1,8 @@
 # NVIM
 Hello, world!
+> [!tip]
+> a
+
 
 > [tips] 
 > 

@@ -6,9 +6,12 @@ return {
     -- lazy = false,
     version = "*",
     dependencies = {
-      -- 'rafamadriz/friendly-snippets'
+      { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
+      {'saghen/blink.compat', version = '*', opts = {},},
+        "SirVer/ultisnips",
       {
         "L3MON4D3/LuaSnip",
+        -- enabled = false,
         version = "v2.*",
         dependencies = {
           -- "mathjiajia/mysnippets",
@@ -53,7 +56,13 @@ return {
         },
       },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "ultisnips", "snippets", "lsp", "path", "buffer" },
+        providers = {
+          ultisnips = {
+            name = "ultisnips",
+            module = "blink.compat.source",
+          },
+        },
       },
       cmdline = {
         enabled = false,
