@@ -1,0 +1,25 @@
+#b - Beginning of line.
+#i - In-word expansion.
+#w - Word boundary.
+#r - Regular expression
+#A - Snippet will be triggered automatically, when condition matches.
+
+
+snippet meta-wiki "meta data of a wiki" w
+	---
+	title: $1
+	toc: true
+	tags: $2
+	date: $3
+	---
+
+snippet meta-blog "meta data of a blog" w
+	---
+	title: $1
+	tags: $2
+	published: false
+	version: draft
+	date: $3
+	updated:
+	excerpt: $4 
+	---
