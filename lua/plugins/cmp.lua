@@ -46,6 +46,11 @@ return {
         keyword = {
           range = "full",
         },
+        menu = {
+          draw ={
+            columns = { { "label", gap = 1 }, { "kind_icon" },{"source_name"} },
+          },
+        },
         list = {
           selection = {
             preselect = false,
@@ -59,6 +64,10 @@ return {
       sources = {
         default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot" },
         providers = {
+          buffer = {
+            opts = { get_bufnrs = vim.api.nvim_list_bufs },
+            -- score_offset = 10000,
+          },
           copilot = {
             name = "copilot",
             module = "blink-copilot",
@@ -68,6 +77,7 @@ return {
           ultisnips = {
             name = "ultisnips",
             module = "blink.compat.source",
+            score_offset = 300,
           },
         },
       },
