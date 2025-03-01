@@ -229,4 +229,54 @@ return {
       treesitter = true,
     },
   },
+  {
+    "tris203/precognition.nvim",
+    keys = {
+      { "<leader>uP", "<cmd>Precognition Toggle<cr>", mode = "n", desc = "Toggle precognition" },
+    },
+    opts = {
+      -- startVisible = true,
+      -- showBlankVirtLine = true,
+      -- highlightColor = { link = "Comment" },
+      -- hints = {
+      --      Caret = { text = "^", prio = 2 },
+      --      Dollar = { text = "$", prio = 1 },
+      --      MatchingPair = { text = "%", prio = 5 },
+      --      Zero = { text = "0", prio = 1 },
+      --      w = { text = "w", prio = 10 },
+      --      b = { text = "b", prio = 9 },
+      --      e = { text = "e", prio = 8 },
+      --      W = { text = "W", prio = 7 },
+      --      B = { text = "B", prio = 6 },
+      --      E = { text = "E", prio = 5 },
+      -- },
+      -- gutterHints = {
+      --     G = { text = "G", prio = 10 },
+      --     gg = { text = "gg", prio = 9 },
+      --     PrevParagraph = { text = "{", prio = 8 },
+      --     NextParagraph = { text = "}", prio = 8 },
+      -- },
+      -- disabled_fts = {
+      --     "startify",
+      -- },
+    },
+  },
+  {
+    "m4xshen/hardtime.nvim",
+    keys = {
+      { "<leader>uH", "<cmd>HardTime toggle<cr>", mode = "n", desc = "Toggle hardtime" },
+    },
+    config = function()
+      require("hardtime").setup({
+        -- Set time in milliseconds for timeout
+        timeout = 500,
+        -- Set time in milliseconds to delay before hardtime starts
+        ttc = 1000,
+        -- Set time in milliseconds to delay before hardtime ends
+        delay = 500,
+        -- Set time in milliseconds for which key is to be blocked
+        block = 10,
+      })
+    end,
+  },
 }

@@ -7,6 +7,7 @@ return {
     version = "*",
     dependencies = {
       { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
+      { "fang2hou/blink-copilot" },
       {'saghen/blink.compat', version = '*', opts = {},},
         "SirVer/ultisnips",
       {
@@ -56,8 +57,14 @@ return {
         },
       },
       sources = {
-        default = { "ultisnips", "snippets", "lsp", "path", "buffer" },
+        default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot" },
         providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-copilot",
+            score_offset = 100,
+            async = true,
+          },
           ultisnips = {
             name = "ultisnips",
             module = "blink.compat.source",

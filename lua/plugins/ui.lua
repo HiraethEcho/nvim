@@ -74,7 +74,7 @@ return {
         },
       })
       -- setup must be called before loading
-      vim.cmd("colorscheme nightfox")
+      -- vim.cmd("colorscheme nightfox")
     end,
   },
   {
@@ -736,7 +736,7 @@ return {
   },
   {
     "neanias/everforest-nvim",
-    enabled = false,
+    -- enabled = false,
     -- lazy = false,
     -- cmd = "colorscheme",
     version = false,
@@ -765,7 +765,7 @@ return {
   {
     "rose-pine/neovim",
     -- cmd = "colorscheme",
-    enabled = false,
+    -- enabled = false,
     -- name = "rose-pine",
     config = function()
       require("rose-pine").setup({
@@ -791,7 +791,7 @@ return {
   },
   {
     'AlexvZyl/nordic.nvim',
-    enabled = false,
+    -- enabled = false,
     -- event = "VimEnter",
     -- cmd = "colorscheme",
     config = function()
@@ -836,7 +836,7 @@ return {
           style = 'classic',
         },
       }
-      vim.cmd.colorscheme 'nordic'
+      -- vim.cmd.colorscheme 'nordic'
     end
   },
 }

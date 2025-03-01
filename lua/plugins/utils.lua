@@ -142,7 +142,6 @@ return {
       {"<c-/>", function() Snacks.terminal() end, desc = "Toggle Terminal",},
       {"]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" },},
       {"[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" },},
-      {"<leader>iT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme",},
       {
         "<leader>N",
         desc = "Neovim News",
