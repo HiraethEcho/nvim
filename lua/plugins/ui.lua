@@ -1,10 +1,11 @@
 return {
   {
-    'mvllow/modes.nvim',
-    tag = 'v0.2.0',
+    "mvllow/modes.nvim",
+    enabled = false,
+    tag = "v0.2.0",
     event = "InsertEnter",
     config = function()
-      require('modes').setup({
+      require("modes").setup({
         colors = {
           bg = "", -- Optional bg param, defaults to Normal hl group
           copy = "#f5c359",
@@ -15,32 +16,40 @@ return {
         -- Set opacity for cursorline and number background
         line_opacity = 0.2,
       })
-    end
+    end,
   },
   {
-    'eandrju/cellular-automaton.nvim',
+    "eandrju/cellular-automaton.nvim",
     keys = {
       { "<leader>uR", "<cmd>CellularAutomaton make_it_rain<cr>", desc = "Rain" },
       { "<leader>uG", "<cmd>CellularAutomaton game_of_life<cr>", desc = "Rain" },
     },
     config = function()
       -- vim.api.nvim_create_user_command("Rain", require("cellular-automaton").start_animation("make_it_rain"), {})
-    end
+    end,
+  },
+  {
+    "shaunsingh/nord.nvim",
+    --Lua:
+    event = "BufRead",
+    config = function()
+      vim.cmd([[colorscheme nord]])
+    end,
   },
   {
     "EdenEast/nightfox.nvim",
     -- event = "VimEnter",
     event = "BufRead",
     config = function()
-      require('nightfox').setup({
+      require("nightfox").setup({
         options = {
-          dim_inactive = true,     -- Non focused panes set to alternative background
-          module_default = true,   -- Default enable value for modules
+          dim_inactive = true, -- Non focused panes set to alternative background
+          module_default = true, -- Default enable value for modules
           colorblind = {
-            enable = true,         -- Enable colorblind support
+            enable = true, -- Enable colorblind support
             simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
           },
-          styles = {               -- Style to be applied to different syntax groups
+          styles = { -- Style to be applied to different syntax groups
             -- bold
             -- underline
             -- undercurl  curly underline
@@ -65,11 +74,6 @@ return {
             strings = "underdotted",
             types = "NONE",
             variables = "NONE",
-          },
-          inverse = { -- Inverse highlight for different types
-            match_paren = false,
-            visual = false,
-            search = false,
           },
         },
       })
@@ -101,7 +105,7 @@ return {
       require("lualine").setup({
         options = {
           icons_enabled = true,
-          theme = "onedark",
+          theme = "nord",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           -- section_separators = { left = '', right = '' },
@@ -134,7 +138,7 @@ return {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
-              file_status = true,    -- Displays file status (readonly status, modified status)
+              file_status = true, -- Displays file status (readonly status, modified status)
               newfile_status = true, -- Display new file status (new file means no write after created)
               path = 1,
               symbols = {
@@ -172,9 +176,9 @@ return {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
-              file_status = true,    -- Displays file status (readonly status, modified status)
+              file_status = true, -- Displays file status (readonly status, modified status)
               newfile_status = true, -- Display new file status (new file means no write after created)
-              path = 1,              -- 0: Just the filename
+              path = 1, -- 0: Just the filename
               -- 1: Relative path
               -- 2: Absolute path
               -- 3: Absolute path, with tilde as the home directory
@@ -198,12 +202,12 @@ return {
           lualine_z = {},
         },
         winbar = {
-          lualine_a={},
-          lualine_b={},
-          lualine_c={},
-          lualine_x={},
-          lualine_y={},
-          lualine_z={},
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {},
           --[[ lualine_b = {
             "fancy_lsp_servers",
             "fancy_diagnostics",
@@ -228,7 +232,7 @@ return {
             {
               "tabs",
               max_length = vim.o.columns / 3, -- Maximum width of tabs component.
-              mode = 1,                       -- 0: Shows tab_nr
+              mode = 1, -- 0: Shows tab_nr
               -- 1: Shows tab_name
               -- 2: Shows tab_nr + tab_name
             },
@@ -261,8 +265,7 @@ return {
               mode = 0,
             },
           },
-          lualine_x = {
-          },
+          lualine_x = {},
           lualine_y = {
             -- "fancy_lsp_servers",
             --[[ {
@@ -282,8 +285,8 @@ return {
             -- session_name,
             {
               function()
-                return require('auto-session.lib').current_session_name(true)
-              end
+                return require("auto-session.lib").current_session_name(true)
+              end,
             },
             -- "branch",
             --[[ {
@@ -335,7 +338,7 @@ return {
           },
           style = {
             { bg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("cursorline")), "bg", "gui") },
-            { bg = "",                                                                         fg = "" },
+            { bg = "", fg = "" },
           },
         },
       })
@@ -369,20 +372,20 @@ return {
     end,
   },
   {
-    'b0o/incline.nvim',
+    "b0o/incline.nvim",
     enabled = false,
     config = function()
-      local devicons = require 'nvim-web-devicons'
-      require('incline').setup {
+      local devicons = require("nvim-web-devicons")
+      require("incline").setup({
         render = function(props)
-          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
-          if filename == '' then
-            filename = '[No Name]'
+          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+          if filename == "" then
+            filename = "[No Name]"
           end
           local ft_icon, ft_color = devicons.get_icon_color(filename)
 
           local function get_git_diff()
-            local icons = { removed = '', changed = '', added = '' }
+            local icons = { removed = "", changed = "", added = "" }
             local signs = vim.b[props.buf].gitsigns_status_dict
             local labels = {}
             if signs == nil then
@@ -390,32 +393,35 @@ return {
             end
             for name, icon in pairs(icons) do
               if tonumber(signs[name]) and signs[name] > 0 then
-                table.insert(labels, { icon .. signs[name] .. ' ', group = 'Diff' .. name })
+                table.insert(labels, { icon .. signs[name] .. " ", group = "Diff" .. name })
               end
             end
             if #labels > 0 then
-              table.insert(labels, { '┊ ' })
+              table.insert(labels, { "┊ " })
             end
             return labels
           end
 
           local function get_diagnostic_label()
             local icons = {
-              error = ' ',
-              warn = ' ',
-              info = ' ',
-              hint = '󰌵 ',
+              error = " ",
+              warn = " ",
+              info = " ",
+              hint = "󰌵 ",
             }
             local label = {}
 
             for severity, icon in pairs(icons) do
-              local n = #vim.diagnostic.get(props.buf, { severity = vim.diagnostic.severity[string.upper(severity)] })
+              local n = #vim.diagnostic.get(
+                props.buf,
+                { severity = vim.diagnostic.severity[string.upper(severity)] }
+              )
               if n > 0 then
-                table.insert(label, { icon .. n .. ' ', group = 'DiagnosticSign' .. severity })
+                table.insert(label, { icon .. n .. " ", group = "DiagnosticSign" .. severity })
               end
             end
             if #label > 0 then
-              table.insert(label, { '┊ ' })
+              table.insert(label, { "┊ " })
             end
             return label
           end
@@ -428,9 +434,9 @@ return {
             -- { '┊  ' .. vim.api.nvim_win_get_number(props.win), group = 'DevIconWindows' },
           }
         end,
-      }
+      })
     end,
-    event = 'BufReadPost',
+    event = "BufReadPost",
   },
   -- disable
   {
@@ -439,8 +445,7 @@ return {
     enabled = false,
     config = function()
       local builtin = require("statuscol.builtin")
-      require("statuscol").setup({
-      })
+      require("statuscol").setup({})
     end,
   },
   {
@@ -450,7 +455,7 @@ return {
       "hiphish/rainbow-delimiters.nvim",
     },
     keys = {
-      { "<leader>ui", "<cmd>IBLToggle<cr>",      desc = "toggle indent" },
+      { "<leader>ui", "<cmd>IBLToggle<cr>", desc = "toggle indent" },
       { "<leader>uf", "<cmd>IBLToggleScope<cr>", desc = "toggle scope" },
     },
     main = "ibl",
@@ -465,7 +470,7 @@ return {
         "RainbowViolet",
         "RainbowCyan",
       }
-      local hooks = require "ibl.hooks"
+      local hooks = require("ibl.hooks")
       hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
         vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
         vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
@@ -477,14 +482,14 @@ return {
       end)
       vim.g.rainbow_delimiters = { highlight = highlight }
 
-      require "ibl".setup({
+      require("ibl").setup({
         scope = {
           enabled = true,
           highlight = highlight,
         },
         indent = {
           highlight = highlight,
-          char = ""
+          char = "",
         },
         whitespace = {
           highlight = highlight,
@@ -509,7 +514,7 @@ return {
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
-    }
+    },
   },
   {
     "petertriho/nvim-scrollbar",
@@ -542,14 +547,14 @@ return {
       local codewindow = require("codewindow")
       codewindow.setup({
         exclude_filetypes = { "help" }, -- Choose certain filetypes to not show minimap on
-        minimap_width = 5,              -- The width of the text part of the minimap
-        use_lsp = true,                 -- Use the builtin LSP to show errors and warnings
-        use_treesitter = false,         -- Use nvim-treesitter to highlight the code
-        use_git = true,                 -- Show small dots to indicate git additions and deletions
-        width_multiplier = 8,           -- How many characters one dot represents
-        z_index = 1,                    -- The z-index the floating window will be on
-        show_cursor = true,             -- Show the cursor position in the minimap
-        window_border = "single",       -- The border style of the floating window (accepts all usual options)
+        minimap_width = 5, -- The width of the text part of the minimap
+        use_lsp = true, -- Use the builtin LSP to show errors and warnings
+        use_treesitter = false, -- Use nvim-treesitter to highlight the code
+        use_git = true, -- Show small dots to indicate git additions and deletions
+        width_multiplier = 8, -- How many characters one dot represents
+        z_index = 1, -- The z-index the floating window will be on
+        show_cursor = true, -- Show the cursor position in the minimap
+        window_border = "single", -- The border style of the floating window (accepts all usual options)
       })
     end,
   },
@@ -561,33 +566,33 @@ return {
     -- Optional
     keys = {
       -- Global Minimap Controls
-      { "<leader>nm",  "<cmd>Neominimap toggle<cr>",      desc = "Toggle global minimap" },
-      { "<leader>no",  "<cmd>Neominimap on<cr>",          desc = "Enable global minimap" },
-      { "<leader>nc",  "<cmd>Neominimap off<cr>",         desc = "Disable global minimap" },
-      { "<leader>nr",  "<cmd>Neominimap refresh<cr>",     desc = "Refresh global minimap" },
+      { "<leader>nm", "<cmd>Neominimap toggle<cr>", desc = "Toggle global minimap" },
+      { "<leader>no", "<cmd>Neominimap on<cr>", desc = "Enable global minimap" },
+      { "<leader>nc", "<cmd>Neominimap off<cr>", desc = "Disable global minimap" },
+      { "<leader>nr", "<cmd>Neominimap refresh<cr>", desc = "Refresh global minimap" },
 
       -- Window-Specific Minimap Controls
-      { "<leader>nwt", "<cmd>Neominimap winToggle<cr>",   desc = "Toggle minimap for current window" },
-      { "<leader>nwr", "<cmd>Neominimap winRefresh<cr>",  desc = "Refresh minimap for current window" },
-      { "<leader>nwo", "<cmd>Neominimap winOn<cr>",       desc = "Enable minimap for current window" },
-      { "<leader>nwc", "<cmd>Neominimap winOff<cr>",      desc = "Disable minimap for current window" },
+      { "<leader>nwt", "<cmd>Neominimap winToggle<cr>", desc = "Toggle minimap for current window" },
+      { "<leader>nwr", "<cmd>Neominimap winRefresh<cr>", desc = "Refresh minimap for current window" },
+      { "<leader>nwo", "<cmd>Neominimap winOn<cr>", desc = "Enable minimap for current window" },
+      { "<leader>nwc", "<cmd>Neominimap winOff<cr>", desc = "Disable minimap for current window" },
 
       -- Tab-Specific Minimap Controls
-      { "<leader>ntt", "<cmd>Neominimap tabToggle<cr>",   desc = "Toggle minimap for current tab" },
-      { "<leader>ntr", "<cmd>Neominimap tabRefresh<cr>",  desc = "Refresh minimap for current tab" },
-      { "<leader>nto", "<cmd>Neominimap tabOn<cr>",       desc = "Enable minimap for current tab" },
-      { "<leader>ntc", "<cmd>Neominimap tabOff<cr>",      desc = "Disable minimap for current tab" },
+      { "<leader>ntt", "<cmd>Neominimap tabToggle<cr>", desc = "Toggle minimap for current tab" },
+      { "<leader>ntr", "<cmd>Neominimap tabRefresh<cr>", desc = "Refresh minimap for current tab" },
+      { "<leader>nto", "<cmd>Neominimap tabOn<cr>", desc = "Enable minimap for current tab" },
+      { "<leader>ntc", "<cmd>Neominimap tabOff<cr>", desc = "Disable minimap for current tab" },
 
       -- Buffer-Specific Minimap Controls
-      { "<leader>nbt", "<cmd>Neominimap bufToggle<cr>",   desc = "Toggle minimap for current buffer" },
-      { "<leader>nbr", "<cmd>Neominimap bufRefresh<cr>",  desc = "Refresh minimap for current buffer" },
-      { "<leader>nbo", "<cmd>Neominimap bufOn<cr>",       desc = "Enable minimap for current buffer" },
-      { "<leader>nbc", "<cmd>Neominimap bufOff<cr>",      desc = "Disable minimap for current buffer" },
+      { "<leader>nbt", "<cmd>Neominimap bufToggle<cr>", desc = "Toggle minimap for current buffer" },
+      { "<leader>nbr", "<cmd>Neominimap bufRefresh<cr>", desc = "Refresh minimap for current buffer" },
+      { "<leader>nbo", "<cmd>Neominimap bufOn<cr>", desc = "Enable minimap for current buffer" },
+      { "<leader>nbc", "<cmd>Neominimap bufOff<cr>", desc = "Disable minimap for current buffer" },
 
       ---Focus Controls
-      { "<leader>nf",  "<cmd>Neominimap focus<cr>",       desc = "Focus on minimap" },
-      { "<leader>nu",  "<cmd>Neominimap unfocus<cr>",     desc = "Unfocus minimap" },
-      { "<leader>ns",  "<cmd>Neominimap toggleFocus<cr>", desc = "Switch focus on minimap" },
+      { "<leader>nf", "<cmd>Neominimap focus<cr>", desc = "Focus on minimap" },
+      { "<leader>nu", "<cmd>Neominimap unfocus<cr>", desc = "Unfocus minimap" },
+      { "<leader>ns", "<cmd>Neominimap toggleFocus<cr>", desc = "Switch focus on minimap" },
     },
     init = function()
       vim.g.neominimap = {
@@ -609,7 +614,7 @@ return {
     event = { "BufRead", "BufNewFile" },
   },
   {
-    'edluffy/hologram.nvim',
+    "edluffy/hologram.nvim",
     enabled = false,
   },
   { -- lazy.nvim
@@ -643,7 +648,7 @@ return {
             if basename ~= "config" and basename ~= "tmp" and basename ~= "blog" then
               -- if basename ~= "tmp" then
               local button =
-                  dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
+                dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
               table.insert(group.val, button)
               i = i + 1
               -- end
@@ -710,14 +715,14 @@ return {
     end,
   },
   {
-    'gen740/SmoothCursor.nvim',
+    "gen740/SmoothCursor.nvim",
     lazy = false,
     enabled = false,
     config = function()
-      require('smoothcursor').setup({
+      require("smoothcursor").setup({
         type = "default", -- Cursor movement calculation method, choose "default", "exp" (exponential) or "matrix".
       })
-    end
+    end,
   },
   {
     "stevearc/dressing.nvim",
@@ -769,14 +774,14 @@ return {
     -- name = "rose-pine",
     config = function()
       require("rose-pine").setup({
-        variant = "dawn",      -- auto, main, moon, or dawn
+        variant = "dawn", -- auto, main, moon, or dawn
         dark_variant = "main", -- main, moon, or dawn
         dim_inactive_windows = true,
         extend_background_behind_borders = true,
         enable = {
           terminal = false,
           legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-          migrations = true,        -- Handle deprecated options automatically
+          migrations = true, -- Handle deprecated options automatically
         },
         styles = {
           bold = true,
@@ -790,15 +795,17 @@ return {
     end,
   },
   {
-    'AlexvZyl/nordic.nvim',
+    "AlexvZyl/nordic.nvim",
     -- enabled = false,
     -- event = "VimEnter",
     -- cmd = "colorscheme",
     config = function()
-      local palette = require 'nordic.colors'
-      require 'nordic'.setup {
+      local palette = require("nordic.colors")
+      require("nordic").setup({
         -- This callback can be used to override the colors used in the palette.
-        on_palette = function(palette) return palette end,
+        on_palette = function(palette)
+          return palette
+        end,
         -- Enable bold keywords.
         bold_keywords = true,
         -- Enable italic comments.
@@ -813,8 +820,8 @@ return {
             italic = true,
             underline = true,
             sp = palette.yellow.dim,
-            undercurl = false
-          }
+            undercurl = false,
+          },
         },
         -- Cursorline options.  Also includes visual/selection.
         cursorline = {
@@ -823,20 +830,20 @@ return {
           -- Bold cursorline number.
           bold_number = true,
           -- Available styles: 'dark', 'light'.
-          theme = 'dark',
+          theme = "dark",
           -- Blending the cursorline bg with the buffer bg.
           blend = 0.85,
         },
         noice = {
           -- Available styles: `classic`, `flat`.
-          style = 'fat',
+          style = "fat",
         },
         telescope = {
           -- Available styles: `classic`, `flat`.
-          style = 'classic',
+          style = "classic",
         },
-      }
+      })
       -- vim.cmd.colorscheme 'nordic'
-    end
+    end,
   },
 }
