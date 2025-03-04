@@ -64,7 +64,7 @@ return {
         },
       },
       quickfile = { enabled = true },
-      scope = { enabled = false },
+      scope = { enabled = true },
       debug = { enabled = false },
       scroll = { enabled = false },
       lazygit = { enabled = true },
