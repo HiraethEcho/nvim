@@ -64,13 +64,13 @@ return {
         },
       },
       quickfile = { enabled = true },
-      scope = { enabled = true },
+      scope = { enabled = false },
       debug = { enabled = false },
       scroll = { enabled = false },
       lazygit = { enabled = true },
       statuscolumn = {
-        enabled = true,
-        left = {}, -- priority of signs on the left (high to low)
+        enabled = false,
+        -- left = {},
       },
       words = { enabled = true },
       styles = {
@@ -395,7 +395,8 @@ return {
   },
   {
     "kevinhwang91/nvim-ufo",
-    event = "LspAttach",
+    -- event = "LspAttach",
+    event = "BufRead",
     -- enabled = false,
     dependencies = {
       -- "luukvbaal/statuscol.nvim",
@@ -438,9 +439,7 @@ return {
       end
       require("ufo").setup({
         provider_selector = function(bufnr, filetype, buftype)
-          -- return customizeSelector
-          return { "treesitter", "indent" }
-          -- return ''
+          return customizeSelector
         end,
         preview = {
           mappings = {

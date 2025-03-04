@@ -48,34 +48,13 @@ return {
       },
     },
     config = function()
-      -- An example nvim-lspconfig capabilities setting
-      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
       capabilities.textDocument.foldingRange = {
         -- dynamicRegistration = false,
         lineFoldingOnly = true
       }
-      capabilities = vim.tbl_deep_extend(
-        'force',
-        capabilities,
-        {
-          workspace = {
-            didChangeWatchedFiles = {
-              dynamicRegistration = true,
-            },
-          },
-        }
-      )
       local servers = {
-        -- textlsp = {},
-        -- grammarly = {},
-        -- mdformat = {},
-        -- alex = {},
-        -- markdown_oxide = {},
-        -- ltex     = {},
-        -- digestif = {},
-        -- textlsp  = {},
         texlab   = {
           texlab = {
             build = {
