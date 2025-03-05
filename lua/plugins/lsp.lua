@@ -50,10 +50,6 @@ return {
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      capabilities.textDocument.foldingRange = {
-        -- dynamicRegistration = false,
-        lineFoldingOnly = true
-      }
       local servers = {
         texlab   = {
           texlab = {
@@ -119,7 +115,6 @@ return {
         handlers = {
           function(server_name)
             require("lspconfig")[server_name].setup({
-              -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
               capabilities = capabilities,
               offset_encoding = "utf-8",
               settings = servers[server_name],

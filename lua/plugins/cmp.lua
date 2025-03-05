@@ -87,6 +87,7 @@ return {
     },
     opts_extend = { "sources.default" },
   },
+
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
