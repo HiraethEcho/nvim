@@ -1,18 +1,20 @@
 # NVIM
+
 Hello, world!
+
 > [!tip]
 > a
 
-
-> [tips] 
-> 
+> [tips]
 
 Hello, world!
-> [tips] 
-> 
-> [tips] 
+
+> [tips]
+>
+> [tips]
 
 what a hell
+
 ## Usage
 
 I'm using nvim as a code editor, mainly for latex and markdown.

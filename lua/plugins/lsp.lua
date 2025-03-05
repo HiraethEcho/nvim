@@ -11,19 +11,12 @@ return {
       { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
     dependencies = {
-      -- { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
       "rachartier/tiny-inline-diagnostic.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       -- "saghen/blink.cmp",
-      {
-        "smjonas/inc-rename.nvim",
-        enabled = false,
-        opts = {},
-      },
       -- "nvimdev/guard.nvim",
       -- "hrsh7th/cmp-nvim-lsp",
-      "kevinhwang91/nvim-ufo",
       {
         "Dan7h3x/signup.nvim",
         enabled = false,

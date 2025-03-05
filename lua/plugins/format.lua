@@ -2,7 +2,7 @@ return {
   {
     "stevearc/conform.nvim",
     -- enabled = false,
-    event = { "BufWritePre" },
+    -- event = { "BufWritePre" },
     -- lazy = false,
     keys = {
       { "<leader>F", function() require("conform").format({ async = true, lsp_format = "fallback" }) end, mode = "", desc = "Format buffer", },
@@ -11,8 +11,8 @@ return {
     config = function()
       require("conform").setup({
         formatters_by_ft = {
-          lua = { "stylua" },
-          markdown = { "prettier" },
+          lua = { "lua-language-server" },
+          markdown = {"prettierd"},
           latex = { "latexindent" },
           -- Conform will run multiple formatters sequentially
         },
