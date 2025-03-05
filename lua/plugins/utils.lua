@@ -81,12 +81,12 @@ return {
     },
     keys = {
       -- Top Pickers & Explorer
-      {"<leader>ff", function() Snacks.picker.smart() end, desc = "Smart Find Files",},
       {"<leader>b", function() Snacks.picker.buffers() end, desc = "Buffers",},
       {"<leader>/", function() Snacks.picker.grep() end, desc = "Grep",},
       {"<leader>:", function() Snacks.picker.command_history() end, desc = "Command History",},
       {"<leader>e", function() Snacks.explorer() end, desc = "File Explorer",},
       -- find
+      {"<leader>ff", function() Snacks.picker.smart() end, desc = "Smart Find Files",},
       {"<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File",},
       {"<leader>fp", function() Snacks.picker.projects() end, desc = "Projects",},
       {"<leader>fr", function() Snacks.picker.recent() end, desc = "Recent",},
@@ -399,7 +399,6 @@ return {
     event = "BufRead",
     -- enabled = false,
     dependencies = {
-      -- "luukvbaal/statuscol.nvim",
       "kevinhwang91/promise-async",
     },
     keys = {
@@ -416,7 +415,7 @@ return {
       },
     },
     config = function()
-      vim.o.foldcolumn = 'auto:3' -- '0' is not bad
+      vim.o.foldcolumn = '0' -- '0' is not bad
       vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]

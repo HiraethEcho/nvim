@@ -4,9 +4,8 @@ return {
     -- enabled = false,
     ft = { "bib", "tex" },
     config = function()
-      vim.g.vimtex_view_method = 'zathura'
-      -- vim.g.vimtex_view_method = "sioyek"
-      --nmap <localleader>ll <Plug>(vimtex-compile)
+      -- vim.g.vimtex_view_method = 'zathura'
+      vim.g.vimtex_view_method = "sioyek"
       vim.g.vimtex_imaps_leader = ';'
 
       -- this works
@@ -14,16 +13,13 @@ return {
       -- vim.g.vimtex_view_general_options = [[ --unique file:@pdf\#src:@line@tex]]
       -- in okular, set 'nvr --remote-silent +%l %f' in settings - configure - editor
 
-      vim.g.vimtex_syntax_enabled = 0
-      vim.g.vimtex_syntax_conceal_disable = 1
+      -- vim.g.vimtex_syntax_enabled = 1
+      -- vim.g.vimtex_syntax_conceal_disable = 1
       vim.g.vimtex_fold_enabled = 1
-
       -- vim.g.vimtex_indent_enabled = 0           -- turn off vimtex indentation
       -- vim.g.vimtex_mappings_enabled = 0         -- disable default mappings
       -- vim.g.vimtex_imaps_enabled = 0            -- disable insert mode mappings (I use UltiSnips)
       -- vim.g.vimtex_complete_enabled = 0         -- turn off completion (not currently used so more efficient to turn off)
-      -- vim.g.vimtex_syntax_conceal_disable = 1   -- disable syntax conceal
-      -- vim.g.vimtex_fold_enabled= 1
       -- vim.g.vimtex_fold_manual=0
       -- vim.g.vimtex_fold_levelmarker      =1
       -- vim.g.vimtex_fold_types            =1
