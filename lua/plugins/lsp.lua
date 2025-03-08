@@ -75,9 +75,9 @@ return {
           },
         },
       })
-      require("lspconfig").lua_ls.setup({})
+      -- require("lspconfig").lua_ls.setup({})
       -- require("lspconfig").marksman.setup({})
-      require("lspconfig").clangd.setup({})
+      -- require("lspconfig").clangd.setup({})
       require("lspconfig").tinymist.setup({
         single_file_support = true,
         on_attach = function(client, bufnr)
