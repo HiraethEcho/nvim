@@ -3,9 +3,9 @@ return {
     "lewis6991/gitsigns.nvim",
     -- enabled = false,
     keys = {
-      { "<leader>hj", "<cmd>Gitsigns next_hunk <cr>",                                 desc = "nexthunk" },
+      { "<leader>hj", "<cmd>Gitsigns next_hunk<cr>",                                 desc = "nexthunk" },
       { "<leader>hk", "<cmd>Gitsigns prev_hunk<cr>",                                  desc = "prevhunk" },
-      { "]h",         "<cmd>Gitsigns next_hunk <cr>",                                 desc = "nexthunk" },
+      { "]h",         "<cmd>Gitsigns next_hunk<cr>",                                 desc = "nexthunk" },
       { "[h",         "<cmd>Gitsigns prev_hunk<cr>",                                  desc = "prevhunk" },
       { "<leader>hD", "<cmd>Gitsigns diffthis<cr>",                                   desc = "gitdiff" },
       { "<leader>hd", "<cmd>Gitsigns toggle_deleted<cr>",                             desc = "toggle deleted" },
@@ -18,6 +18,7 @@ return {
       { "<leader>hP", "<cmd>Gitsigns preview_hunk<cr>",                               desc = "preview a hunk" },
       -- { "<leader>hp", "<cmd>Gitsigns preview_hunk_inline<cr>",       desc = "preview a hunk" },
       { "<leader>hb", "<cmd>Gitsigns toggle_current_line_blame<cr>",                  desc = "toggle blame inline" },
+      { "<leader>gb", "<cmd>Gitsigns blame<cr>",                  desc = "toggle blame inline" },
       { "<leader>hw", "<cmd>Gitsigns toggle_word_diff<cr>",                           desc = "toggle word diff" },
       -- { "<leader>hh" , "<cmd>Gitsigns get_hunks<cr>"    , desc = "get hunk list" } ,
     },
@@ -44,6 +45,14 @@ return {
       })
       -- require("scrollbar.handlers.gitsigns").setup()
     end,
+  },
+  {
+    "Yu-Leo/blame-column.nvim",
+    opts = {}, -- for default options. Refer to the configuration section for custom setup.
+    keys = {
+      { "<leader>hb", "<cmd>BlameColumnToggle<cr>", desc = "toggle blame inline" },
+    },
+    cmd = "BlameColumnToggle",
   },
   {
     "akinsho/git-conflict.nvim",

@@ -115,7 +115,7 @@ return {
                 return vim.fs.root(bufnr, { ".git", ".obsidian" }) or vim.fn.expand("%:p:h")
               end,
               on_attach = function(client, bufnr)
-                require("nvim-navic").attach(client, bufnr)
+                -- require("nvim-navic").attach(client, bufnr)
                 vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end,
                   -- vim.keymap.set("n", "gR", function() return ":IncRename " .. vim.fn.expand("<cword>") end,
                   { noremap = true, silent = true, buffer = bufnr, desc = "lsp rename" })
@@ -151,6 +151,25 @@ return {
     build = ":MasonUpdate",
     config = function()
       require("mason").setup()
+    end,
+  },
+  {
+    "bassamsdata/namu.nvim",
+    keys = {
+      { "<leader>O", "<cmd>Namu symbols<cr>", desc = "Jump by symbol" },
+    },
+    enabled = false,
+    config = function()
+      require("namu").setup({
+        -- Enable the modules you want
+        namu_symbols = {
+          enable = true,
+          options = {}, -- here you can configure namu
+        },
+        -- Optional: Enable other modules if needed
+        ui_select = { enable = true }, -- vim.ui.select() wrapper
+        colorscheme = {enable = false,},
+      })
     end,
   },
   {
