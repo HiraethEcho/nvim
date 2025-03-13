@@ -41,13 +41,14 @@ return {
           delay = 200,
           ignore_whitespace = true,
         },
-        current_line_blame_formatter = "<summary> - <author>, <author_time:%y-%m-%d>",
+        current_line_blame_formatter = "<summary>, <author_time:%y-%m-%d>",
       })
       -- require("scrollbar.handlers.gitsigns").setup()
     end,
   },
   {
     "Yu-Leo/blame-column.nvim",
+    enabled = false,
     opts = {}, -- for default options. Refer to the configuration section for custom setup.
     keys = {
       { "<leader>hb", "<cmd>BlameColumnToggle<cr>", desc = "toggle blame inline" },

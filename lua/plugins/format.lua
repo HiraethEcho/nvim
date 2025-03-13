@@ -14,7 +14,6 @@ return {
           lua = { "lua-language-server" },
           markdown = {"prettierd"},
           latex = { "latexindent" },
-          -- Conform will run multiple formatters sequentially
         },
       })
     end,

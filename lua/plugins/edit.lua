@@ -61,6 +61,7 @@ return {
   },
   {
     "folke/todo-comments.nvim",
+    enabled = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
       {
@@ -181,6 +182,7 @@ return {
   },
   {
     "mbbill/undotree",
+    enabled = false,
     keys = {
       { "U", "<cmd>UndotreeToggle<cr>", desc = "open undotree" },
     },

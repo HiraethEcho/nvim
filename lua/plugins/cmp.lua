@@ -6,12 +6,12 @@ return {
     -- lazy = false,
     version = "*",
     dependencies = {
-      { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
-      { "fang2hou/blink-copilot" },
+      { 'quangnguyen30192/cmp-nvim-ultisnips', config = true },
+      { 'fang2hou/blink-copilot' },
       {'saghen/blink.compat', version = '*', opts = {},},
-        "SirVer/ultisnips",
+        'SirVer/ultisnips',
       {
-        "L3MON4D3/LuaSnip",
+        'L3MON4D3/LuaSnip',
         -- enabled = false,
         version = "v2.*",
         dependencies = {
