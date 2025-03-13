@@ -81,7 +81,7 @@ return {
       require("lspconfig").tinymist.setup({
         single_file_support = true,
         on_attach = function(client, bufnr)
-          vim.keymap.set("n", "<cr><cr>", "<cmd>TypstPreviewSyncCursor<cr>", { noremap = true, silent = true, buffer = bufnr, desc = "Typst Preview" })
+          vim.keymap.set("n", "<cr>", "<cmd>TypstPreviewSyncCursor<cr>", { noremap = true, silent = true, buffer = bufnr, desc = "Typst Preview" })
         end,
       })
     end,
