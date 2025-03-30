@@ -61,18 +61,18 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 -- Automatically save session to Neovim's state directory
---[[ vim.api.nvim_create_autocmd("VimLeavePre", {
+vim.api.nvim_create_autocmd("VimLeavePre", {
   callback = function()
-    if vim.fn.exists(":Neotree") == 2 then
+    --[[ if vim.fn.exists(":Neotree") == 2 then
       vim.cmd("Neotree close")
-    end
+    end ]]
     if vim.v.this_session == "" then
       local session_path = vim.fn.stdpath("state") .. "/sessions/tmp"
       vim.cmd("mksession! " .. session_path)
     end
   end,
   desc = "Save session to 'stdpath(state)/session' when no active session exists",
-}) ]]
+})
 -- go to last loc when opening a buffer
 --[[ --
 vim.api.nvim_create_autocmd("BufReadPost", {

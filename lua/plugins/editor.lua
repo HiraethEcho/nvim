@@ -51,18 +51,33 @@ return {
     end,
   },
   {
-    'MeanderingProgrammer/render-markdown.nvim',
+    "OXY2DEV/markview.nvim",
+    dependencies = {
+      "saghen/blink.cmp"
+    },
     ft = { "markdown", "md" },
     keys = {
-      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
+      { "<C-e>", "<cmd>Markview<cr>", desc = "Markiview toggle", ft = "markdown" },
     },
+  },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    enabled = false,
+    -- ft = { "markdown", "md" },
+    --[[ keys = {
+      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
+    }, ]]
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
       'nvim-tree/nvim-web-devicons'
-    }, -- if you prefer nvim-web-devicons
+    },
     opts = {
+      completions = { blink = { enabled = true } },
+      heading = {
+        width = 'block',
+      },
       latex = {
-        enabled = false,
+        enabled = true,
       },
     },
   },

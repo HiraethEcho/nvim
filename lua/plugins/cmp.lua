@@ -8,8 +8,9 @@ return {
     dependencies = {
       { 'quangnguyen30192/cmp-nvim-ultisnips', config = true },
       { 'fang2hou/blink-copilot' },
-      {'saghen/blink.compat', version = '*', opts = {},},
-        'SirVer/ultisnips',
+      { 'saghen/blink.compat',                 version = '*', opts = {}, },
+      'SirVer/ultisnips',
+      { "rafamadriz/friendly-snippets", },
       {
         'L3MON4D3/LuaSnip',
         -- enabled = false,
@@ -47,8 +48,8 @@ return {
           range = "full",
         },
         menu = {
-          draw ={
-            columns = { { "label", gap = 1 }, { "kind_icon" },{"source_name"} },
+          draw = {
+            columns = { { "label", gap = 1 }, { "kind_icon" }, { "source_name" } },
           },
         },
         list = {
@@ -157,7 +158,7 @@ return {
             -- }
           },
           -- { name = 'nvim_lsp' },
-          { name = "copilot", max_item_count = 3 },
+          { name = "copilot",  max_item_count = 3 },
           {
             name = "buffer",
             option = {
@@ -177,8 +178,8 @@ return {
               -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
               -- can also be a function to dynamically calculate max width such as
               -- menu = function() return math.floor(0.45 * vim.o.columns) end,
-              menu = 50, -- leading text (labelDetails)
-              abbr = 50, -- actual suggestion item
+              menu = 50,              -- leading text (labelDetails)
+              abbr = 50,              -- actual suggestion item
             },
             show_labelDetails = true, -- show labelDetails in menu. Disabled by default
             before = function(entry, vim_item)
@@ -194,11 +195,11 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     keys = { -- Example mapping to toggle outline
-      { "<leader>cc", "<cmd>Copilot<CR>", desc = "Copilot" },
+      { "<leader>cc", "<cmd>Copilot<CR>",        desc = "Copilot" },
       { "<leader>ct", "<cmd>Copilot toggle<CR>", desc = "Copilot toggle" },
       { "<leader>cd", "<cmd>Copilot detach<CR>", desc = "Copilot detach" },
       { "<leader>ca", "<cmd>Copilot attach<CR>", desc = "Copilot attach" },
-      { "<leader>cp", "<cmd>Copilot panel<CR>", desc = "Copilot panel" },
+      { "<leader>cp", "<cmd>Copilot panel<CR>",  desc = "Copilot panel" },
     },
     dependencies = {
       "zbirenbaum/copilot-cmp",

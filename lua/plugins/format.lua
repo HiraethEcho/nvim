@@ -11,8 +11,7 @@ return {
     config = function()
       require("conform").setup({
         formatters_by_ft = {
-          lua = { "lua-language-server" },
-          markdown = {"prettierd"},
+          markdown = { "prettierd" },
           latex = { "latexindent" },
         },
       })

@@ -67,13 +67,13 @@ return {
       quickfile = { enabled = true },
       scope = { enabled = true },
       debug = { enabled = false },
-      scroll = { enabled = false },
+      scroll = { enabled = true },
       lazygit = { enabled = true },
       statuscolumn = {
         enabled = false,
         -- left = {},
       },
-      words = { enabled = true },
+      words = { enabled = false },
       styles = {
         notification = {
           wo = { wrap = true }, -- Wrap notifications
@@ -86,8 +86,8 @@ return {
       { "<leader>/",  function() Snacks.picker.grep() end,                                    desc = "Grep", },
       { "<leader>:",  function() Snacks.picker.command_history() end,                         desc = "Command History", },
       { "<leader>e",  function() Snacks.explorer() end,                                       desc = "File Explorer", },
-      { "<leader>pP", function() Snacks.picker.pick() end,                                    desc = "pickers", },
-      { "<leader>pp", function() Snacks.picker.resume() end,                                  desc = "Resume", },
+      { "<leader>P", function() Snacks.picker.pick() end,                                    desc = "pickers", },
+      { "<leader>p", function() Snacks.picker.resume() end,                                  desc = "Resume", },
       -- find
       { "<leader>ff", function() Snacks.picker.smart() end,                                   desc = "Smart Find Files", },
       { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File", },
@@ -115,7 +115,7 @@ return {
       { "<leader>si", function() Snacks.picker.icons() end,                                   desc = "Icons", },
       { "<leader>j",  function() Snacks.picker.jumps() end,                                   desc = "Jumps", },
       { "<leader>sk", function() Snacks.picker.keymaps() end,                                 desc = "Keymaps", },
-      { "<leader>m",  function() Snacks.picker.marks() end,                                   desc = "Marks", },
+      { "<leader>M",  function() Snacks.picker.marks() end,                                   desc = "Marks", },
       { "<leader>sM", function() Snacks.picker.man() end,                                     desc = "Man Pages", },
       { "<leader>sp", function() Snacks.picker.lazy() end,                                    desc = "Search for Plugin Spec", },
       { "<leader>sq", function() Snacks.picker.qflist() end,                                  desc = "Quickfix List", },
@@ -140,8 +140,8 @@ return {
       { "<leader>n",  function() Snacks.picker.notifications() end,                           desc = "Notification History", },
       { "<leader>un", function() Snacks.notifier.hide() end,                                  desc = "Dismiss All Notifications", },
       { "<c-/>",      function() Snacks.terminal() end,                                       desc = "Toggle Terminal", },
-      { "]]",         function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",            mode = { "n", "t" }, },
-      { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",            mode = { "n", "t" }, },
+      -- { "]]",         function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",            mode = { "n", "t" }, },
+      -- { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",            mode = { "n", "t" }, },
       {
         "<leader>N",
         desc = "Neovim News",
@@ -171,8 +171,7 @@ return {
           Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
           Snacks.toggle.diagnostics():map("<leader>ud")
           Snacks.toggle.line_number():map("<leader>ul")
-          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
-          "<leader>uc")
+          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
           Snacks.toggle.treesitter():map("<leader>uT")
           Snacks.toggle.inlay_hints():map("<leader>uI")
           -- Snacks.toggle.indent():map("<leader>ug")
