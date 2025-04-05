@@ -175,6 +175,7 @@ return {
           Snacks.toggle.treesitter():map("<leader>uT")
           Snacks.toggle.inlay_hints():map("<leader>uI")
           -- Snacks.toggle.indent():map("<leader>ug")
+          Snacks.toggle.animate():map("<leader>ua")
         end,
       })
     end,
