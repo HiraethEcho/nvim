@@ -1,1 +1,1 @@
-vim.lsp.enable('c')
+vim.lsp.enable('clangd')
