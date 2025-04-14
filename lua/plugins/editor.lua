@@ -1,9 +1,10 @@
 return {
   {
     "lervag/vimtex",
+    lazy =false,
     -- enabled = false,
-    ft = { "bib", "tex" },
-    config = function()
+    -- ft = { "bib", "tex" },
+    init = function()
       -- vim.g.vimtex_view_method = 'zathura'
       vim.g.vimtex_view_method = "sioyek"
       vim.g.vimtex_imaps_leader = ';'
