@@ -12,7 +12,7 @@ return {
       require("conform").setup({
         formatters_by_ft = {
           markdown = { "prettierd" },
-          latex = { "latexindent" },
+          tex = { "tex-fmt" },
         },
       })
     end,
