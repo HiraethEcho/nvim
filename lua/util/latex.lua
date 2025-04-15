@@ -1,144 +1,104 @@
 local M = {}
 
-local cond_obj = require("luasnip.extras.conditions")
+local MATH_NODES = {
+  displayed_equation = true,
+  inline_formula = true,
+  math_environment = true,
+}
 
-local MATH_IGNORE = { "label_definition", "label_reference", "text_mode" }
-local MATH_NODES = { "displayed_equation", "inline_formula", "math_environment" }
-local MATH_ENVIRONMENTS = { "aligned" }
-local MATH_IGNORE_COMMANDS = { "SI", "tag", "textbf", "textit" }
+local ts_utils = require("nvim-treesitter.ts_utils")
 
-local ALIGN_ENVS = { "multline", "eqnarray", "align", "array", "split", "alignat", "gather", "flalign" }
-local BULLET_ENVS = { "itemize", "enumerate" }
-
----An insert mode implementation of `vim.treesitter`'s `get_node`
----@param opts table? Opts to be passed to `get_node`
----@return TSNode|nil node The node at the cursor
-local function get_node_insert_mode(opts)
-  opts = opts or {}
-  local ins_curs = vim.api.nvim_win_get_cursor(0)
-  ins_curs[1] = ins_curs[1] - 1
-  ins_curs[2] = ins_curs[2] - 1
-  opts.pos = ins_curs
-  return vim.treesitter.get_node(opts)
-end
-
----@param node TSNode
----@return string|nil
-local function get_environment(node)
-  local node_text = vim.treesitter.get_node_text(node, 0)
-  local first_line = vim.split(node_text, "\n")[1]
-  local env_name = first_line:match("\\begin{([^*}]+)%*?}")
-  return env_name
-end
-
----@param node TSNode
----@return string|nil
-local function get_command(node)
-  local cmd = node:named_child(0)
-  if cmd then
-    local cmd_name = vim.treesitter.get_node_text(cmd, 0):gsub("^\\", "")
-    return cmd_name
-  end
-end
-
----Check if cursor is in treesitter node of 'math'
----@return boolean
-local function in_math()
-  local cursor_node = get_node_insert_mode()
-  local ancestor_node = cursor_node:tree():root()
-  local in_mathzone = false
-  while ancestor_node do
-    if vim.list_contains(MATH_IGNORE, ancestor_node:type()) then
-      in_mathzone = false
-    elseif vim.list_contains(MATH_NODES, ancestor_node:type()) then
-      in_mathzone = true
-    elseif
-        ancestor_node:type() == "generic_command"
-        and vim.list_contains(MATH_IGNORE_COMMANDS, get_command(ancestor_node))
-    then
-      in_mathzone = false
-    elseif
-        ancestor_node:type() == "generic_environment"
-        and vim.list_contains(MATH_ENVIRONMENTS, get_environment(ancestor_node))
-    then
-      in_mathzone = true
+M.in_env_md = function(env)
+  local node = ts_utils.get_node_at_cursor()
+  local bufnr = vim.api.nvim_get_current_buf()
+  while node do
+    if node:type() == "generic_environment" then
+      local begin = node:child(0)
+      local name = begin:field("name")
+      if name[1] and vim.treesitter.get_node_text(name[1], bufnr, nil) == "{" .. env .. "}" then
+        return true
+      end
     end
-    ancestor_node = ancestor_node:child_containing_descendant(cursor_node)
+    node = node:parent()
   end
-  return in_mathzone
+  return false
 end
 
----Check if cursor is in treesitter node of 'text'
----@return boolean
-local function in_text()
-  return not M.in_math()
+M.in_env = function(env)
+  local pos = vim.fn["vimtex#env#is_inside"](env)
+  return pos[1] ~= 0 or pos[2] ~= 0
 end
 
----Check if cursor is in treesitter node of 'math_environment': 'align'
----@return boolean
-local function in_align()
-  local cursor_node = get_node_insert_mode()
-  local ancestor_node = cursor_node:tree():root()
-  local math_align = false
-  while ancestor_node do
-    if
-        ancestor_node:type() == "math_environment"
-        and vim.list_contains(ALIGN_ENVS, get_environment(ancestor_node))
-    then
-      math_align = true
+M.in_mathzone = function()
+  local ft = vim.bo.filetype
+  if ft == "tex" then
+    return vim.api.nvim_eval("vimtex#syntax#in_mathzone()") == 1
+  elseif ft == "markdown" then
+    return M.in_mathzone_md()
+  end
+end
+
+M.in_text = function()
+  return not M.in_mathzone()
+end
+
+M.in_item = function()
+  return M.in_env("itemize") or M.in_env("enumerate")
+end
+M.in_bib = function()
+  return M.in_env("thebibliography")
+end
+M.in_tikz = function()
+  return M.in_env("tikzpicture")
+end
+M.in_quantikz = function()
+  return M.in_env("quantikz")
+end
+M.in_algo = function()
+  return M.in_env("algorithmic")
+end
+
+-- For markdown
+M.in_mathzone_md = function()
+  local node = ts_utils.get_node_at_cursor()
+  while node do
+    if MATH_NODES[node:type()] then
+      return true
     end
-    ancestor_node = ancestor_node:child_containing_descendant(cursor_node)
+    node = node:parent()
   end
-  return math_align
+  return false
+end
+M.in_text_md = function()
+  return not M.in_mathzone_md()
 end
 
-local function in_bullets()
-  local cursor_node = get_node_insert_mode()
-  local ancestor_node = cursor_node:tree():root()
-  local math_bullets = false
-  while ancestor_node do
-    if
-        ancestor_node:type() == "generic_environment"
-        and vim.list_contains(BULLET_ENVS, get_environment(ancestor_node))
-    then
-      math_bullets = true
-    end
-    ancestor_node = ancestor_node:child_containing_descendant(cursor_node)
-  end
-  return math_bullets
-end
-
----Check if cursor is in treesitter node of 'generic_command': '\xymatrix'
----@return boolean
-local function in_xymatrix()
-  local cursor_node = get_node_insert_mode()
-  local ancestor_node = cursor_node:tree():root()
-  local math_xym = false
-  while ancestor_node do
-    if ancestor_node:type() == "generic_command" and get_command(ancestor_node) == "xymatrix" then
-      math_xym = true
-    end
-    ancestor_node = ancestor_node:child_containing_descendant(cursor_node)
-  end
-  return math_xym
-end
-
-M.in_math = cond_obj.make_condition(in_math)
-M.in_text = cond_obj.make_condition(in_text)
-M.in_align = cond_obj.make_condition(in_align)
-M.in_bullets = cond_obj.make_condition(in_bullets)
-M.in_xymatrix = cond_obj.make_condition(in_xymatrix)
-
-local ls = require("luasnip")
-local sn = ls.snippet_node
-local i = ls.insert_node
-
-function M.get_visual(args, parent)
-  if (#parent.snippet.env.LS_SELECT_RAW > 0) then
-    return sn(nil, i(1, parent.snippet.env.LS_SELECT_RAW))
-  else
-    return sn(nil, i(1, ''))
-  end
-end
+-- M.clean = function()
+--   local current_dir = vim.fn.expand("%:p:h")
+--   local file_types = { "aux", "log", "out", "fls", "fdb_latexmk", "bcf", "run.xml", "toc", "DS_Store", "bak*", "dvi" }
+--   for _, file_type in ipairs(file_types) do
+--     local command = "rm " .. current_dir .. "/*." .. file_type
+--     vim.api.nvim_call_function("system", { command })
+--   end
+-- end
+--
+-- M.format = function()
+--   local current_file = vim.fn.expand("%:p")
+--   local latexindent = "latexindent -g /dev/null " .. current_file .. " -wd -l ~/Documents/Latex/latexindent.yaml"
+--   local build = "pdflatex " .. current_file
+--   vim.api.nvim_call_function("system", { build })
+--   vim.cmd("w")
+--   M.clean()
+--   vim.api.nvim_call_function("system", { latexindent })
+--   vim.cmd("e")
+--   vim.cmd("normal! zz")
+--   -- vim.cmd("TexlabForward")
+-- end
+--
+-- M.sympy_calc = function()
+--   local selected_text = vim.fn.getreg("v")
+--   print(selected_text)
+--   vim.api.nvim_out_write(selected_text)
+-- end
 
 return M

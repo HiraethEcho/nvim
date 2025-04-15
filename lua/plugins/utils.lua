@@ -12,7 +12,42 @@ return {
     },
     opts = {
       bigfile = { enabled = true },
-      image = { enabled = true },
+      image = {
+        enabled = true,
+        force = true,
+        doc = {
+          enabled = true,
+          inline = false,
+          float = true,
+        },
+        math = {
+          enabled = true,
+          typst = {
+            tpl = [[
+        #set page(width: auto, height: auto, margin: (x: 2pt, y: 2pt))
+        #show math.equation.where(block: false): set text(top-edge: "bounds", bottom-edge: "bounds")
+        #set text(size: 12pt, fill: rgb("${color}"))
+        ${header}
+        ${content}]],
+          },
+          latex = {
+            font_size = "Large", -- see https://www.sascha-frank.com/latex-font-size.html
+            -- for latex documents, the doc packages are included automatically,
+            -- but you can add more packages here. Useful for markdown documents.
+            packages = { "amsmath", "amssymb", "amsfonts", "amscd", "mathtools" },
+            color = "#ffffff",
+            tpl = [[
+        \documentclass[preview,border=0pt,varwidth,12pt]{standalone}
+        \usepackage{${packages}}
+        \begin{document}
+        ${header}
+        { \${font_size} \selectfont
+          \color[HTML]{${color}}
+        ${content}}
+        \end{document}]],
+          },
+        },
+      },
       dashboard = {
         enabled = false,
         sections = {
@@ -86,8 +121,8 @@ return {
       { "<leader>/",  function() Snacks.picker.grep() end,                                    desc = "Grep", },
       { "<leader>:",  function() Snacks.picker.command_history() end,                         desc = "Command History", },
       { "<leader>e",  function() Snacks.explorer() end,                                       desc = "File Explorer", },
-      { "<leader>P", function() Snacks.picker.pick() end,                                    desc = "pickers", },
-      { "<leader>p", function() Snacks.picker.resume() end,                                  desc = "Resume", },
+      { "<leader>P",  function() Snacks.picker.pick() end,                                    desc = "pickers", },
+      { "<leader>p",  function() Snacks.picker.resume() end,                                  desc = "Resume", },
       -- find
       { "<leader>ff", function() Snacks.picker.smart() end,                                   desc = "Smart Find Files", },
       { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File", },
@@ -171,7 +206,8 @@ return {
           Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
           Snacks.toggle.diagnostics():map("<leader>ud")
           Snacks.toggle.line_number():map("<leader>ul")
-          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
+          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
+            "<leader>uc")
           Snacks.toggle.treesitter():map("<leader>uT")
           Snacks.toggle.inlay_hints():map("<leader>uI")
           -- Snacks.toggle.indent():map("<leader>ug")

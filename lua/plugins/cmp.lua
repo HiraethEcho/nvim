@@ -3,30 +3,13 @@ return {
     "saghen/blink.cmp",
     -- enabled = false,
     event = "InsertEnter",
-    -- lazy = false,
     version = "*",
     dependencies = {
       { 'quangnguyen30192/cmp-nvim-ultisnips', config = true },
       { 'fang2hou/blink-copilot' },
       { 'saghen/blink.compat',                 version = '*', opts = {}, },
-      'SirVer/ultisnips',
-      { "rafamadriz/friendly-snippets", },
-      {
-        'L3MON4D3/LuaSnip',
-        -- enabled = false,
-        version = "v2.*",
-        dependencies = {
-          -- "mathjiajia/mysnippets",
-        },
-        config = function()
-          require("luasnip").config.set_config({
-            enable_autosnippets = true,
-            store_selection_keys = "<Tab>",
-          })
-          -- require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/LuaSnip/" })
-          -- require("luasnip.loaders.from_snipmate").load({ paths = vim.fn.stdpath("config") .. "/snipmate/" })
-        end,
-      },
+      { 'SirVer/ultisnips' },
+      -- 'L3MON4D3/LuaSnip',
     },
     opts = {
       snippets = { preset = "luasnip" },
@@ -63,7 +46,9 @@ return {
         },
       },
       sources = {
-        default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot" },
+        default = { "ultisnips", "lsp", "path", "buffer", "copilot" },
+        -- default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot" },
+        -- default = { "snippets", "lsp", "path", "buffer", "copilot" },
         providers = {
           buffer = {
             opts = { get_bufnrs = vim.api.nvim_list_bufs },
@@ -86,7 +71,7 @@ return {
         enabled = false,
       },
     },
-    opts_extend = { "sources.default" },
+    -- opts_extend = { "sources.default" },
   },
 
   {
@@ -234,6 +219,24 @@ return {
           -- ["."] = false,
         },
       })
+    end,
+  },
+  {
+    'L3MON4D3/LuaSnip',
+    -- enabled = false,
+    version = "v2.*",
+    config = function()
+      require("luasnip").config.set_config({
+        enable_autosnippets = true,
+        store_selection_keys = "<Tab>",
+      })
+      -- require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/LuaSnip/" })
+      -- require("luasnip.loaders.from_snipmate").load({ paths = vim.fn.stdpath("config") .. "/snipmate/" })
+      local auto_expand = require("luasnip").expand_auto
+      require("luasnip").expand_auto = function(...)
+        vim.o.undolevels = vim.o.undolevels
+        auto_expand(...)
+      end
     end,
   },
 }
