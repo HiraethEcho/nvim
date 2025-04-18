@@ -27,7 +27,7 @@ opt.sidescrolloff = 4  -- Columns of context
 opt.shortmess:append({ W = true, I = true, c = true })
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.list = true -- Show some invisible characters (tabs...
-opt.listchars:append("eol:↴")
+-- opt.listchars:append("eol:↴")
 opt.listchars:append "space:⋅"
 -- opt.whichwrap = "bs<>[]"     -- which "horizontal" keys are allowed to travel to prev/next line
 opt.winminwidth = 10                -- Minimum window width
