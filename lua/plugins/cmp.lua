@@ -72,14 +72,6 @@ return {
       },
     },
     -- opts_extend = { "sources.default" },
-    config = function()
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-      -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      vim.lsp.config('*', {
-        capabilities = capabilities,
-        offset_encoding = "utf-8",
-      })
-    end,
   },
 
   {

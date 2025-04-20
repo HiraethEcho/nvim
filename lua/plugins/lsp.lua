@@ -20,6 +20,13 @@ return {
       -- "kevinhwang91/nvim-ufo",
     },
     config = function()
+      --[[ local capabilities = require("blink.cmp").get_lsp_capabilities()
+      -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      vim.lsp.config('*', {
+        root_markers = { '.obsidian', '.git' },
+        capabilities = capabilities,
+        offset_encoding = "utf-8",
+      }) ]]
       --[[ require("lspconfig").texlab.setup({
         offset_encoding = "utf-8",
         on_attach = function(client, bufnr)
