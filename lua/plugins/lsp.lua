@@ -11,7 +11,7 @@ return {
       { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
     dependencies = {
-      "rachartier/tiny-inline-diagnostic.nvim",
+      -- "rachartier/tiny-inline-diagnostic.nvim",
       -- "williamboman/mason.nvim",
       -- "williamboman/mason-lspconfig.nvim",
       -- "saghen/blink.cmp",
@@ -20,14 +20,7 @@ return {
       -- "kevinhwang91/nvim-ufo",
     },
     config = function()
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-      -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      vim.lsp.config('*', {
-        root_markers = { '.obsidian', '.git' },
-        capabilities = capabilities,
-        offset_encoding = "utf-8",
-      })
-      require("lspconfig").texlab.setup({
+      --[[ require("lspconfig").texlab.setup({
         offset_encoding = "utf-8",
         on_attach = function(client, bufnr)
           vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>",
@@ -44,7 +37,7 @@ return {
             },
             forwardSearch = {
               -- https://github.com/latex-lsp/texlab/wiki/Previewing#inverse-search-3
-              --[[ executable = "sioyek",
+              executable = "sioyek",
               args = {
                 "--reuse-window",
                 "--inverse-search",
@@ -54,7 +47,7 @@ return {
                 "--forward-search-line",
                 "%l",
                 "%p",
-              }, ]]
+              },
               executable = "zathura",
               args = {
                 "--synctex-forward",
@@ -77,17 +70,17 @@ return {
             formatterLineLength = 80,
           },
         },
-      })
+      }) ]]
       -- require("lspconfig").lua_ls.setup({})
       -- require("lspconfig").marksman.setup({})
       -- require("lspconfig").clangd.setup({})
-      require("lspconfig").tinymist.setup({
+      --[[ require("lspconfig").tinymist.setup({
         single_file_support = true,
         on_attach = function(client, bufnr)
           vim.keymap.set("n", "<cr>", "<cmd>TypstPreviewSyncCursor<cr>",
             { noremap = true, silent = true, buffer = bufnr, desc = "Typst Preview" })
         end,
-      })
+      }) ]]
     end,
   },
   {
@@ -103,21 +96,17 @@ return {
     end,
   },
   {
-    "bassamsdata/namu.nvim",
-    keys = {
-      { "<leader>O", "<cmd>Namu symbols<cr>", desc = "Jump by symbol" },
-    },
-    enabled = false,
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "LspAttach", -- Or `LspAttach`
+    priority = 1000,     -- needs to be loaded in first
     config = function()
-      require("namu").setup({
-        -- Enable the modules you want
-        namu_symbols = {
-          enable = true,
-          options = {}, -- here you can configure namu
+      vim.diagnostic.config({ virtual_text = false })
+      require("tiny-inline-diagnostic").setup({
+        preset = "powerline", -- Can be: "modern", "classic", "minimal", "powerline", ghost", "simple", "nonerdfont", "amongus"
+        options = {
+          show_source = true,
+          -- multiple_diag_under_cursor = true,
         },
-        -- Optional: Enable other modules if needed
-        ui_select = { enable = true }, -- vim.ui.select() wrapper
-        colorscheme = { enable = false, },
       })
     end,
   },
@@ -132,7 +121,7 @@ return {
     dependencies = {
       "SmiteshP/nvim-navic",
       "MunifTanjim/nui.nvim",
-      "neovim/nvim-lspconfig",
+      -- "neovim/nvim-lspconfig",
     },
     -- opts = { lsp = { auto_attach = true } },
     config = function()
@@ -248,6 +237,26 @@ return {
       },
     },
   },
+  -- disabled
+  {
+    "bassamsdata/namu.nvim",
+    keys = {
+      { "<leader>O", "<cmd>Namu symbols<cr>", desc = "Jump by symbol" },
+    },
+    enabled = false,
+    config = function()
+      require("namu").setup({
+        -- Enable the modules you want
+        namu_symbols = {
+          enable = true,
+          options = {}, -- here you can configure namu
+        },
+        -- Optional: Enable other modules if needed
+        ui_select = { enable = true }, -- vim.ui.select() wrapper
+        colorscheme = { enable = false, },
+      })
+    end,
+  },
   {
     "dnlhc/glance.nvim",
     -- lazy = false,
@@ -359,22 +368,6 @@ return {
       },
     },
   },
-  {
-    "rachartier/tiny-inline-diagnostic.nvim",
-    event = "LspAttach", -- Or `LspAttach`
-    priority = 1000,     -- needs to be loaded in first
-    config = function()
-      vim.diagnostic.config({ virtual_text = false })
-      require("tiny-inline-diagnostic").setup({
-        preset = "powerline", -- Can be: "modern", "classic", "minimal", "powerline", ghost", "simple", "nonerdfont", "amongus"
-        options = {
-          show_source = true,
-          -- multiple_diag_under_cursor = true,
-        },
-      })
-    end,
-  },
-  -- disabled
   {
     "glepnir/lspsaga.nvim",
     enabled = false,
