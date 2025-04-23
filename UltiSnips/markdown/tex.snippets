@@ -1,14 +1,21 @@
+global !p
+import re
+from mypy import pymath
+endglobal
+
 snippet dm "displaymath" w
 $$
 $1
 $$
 endsnippet
 
+context "pymath()"
 snippet frac "Fraction" wA
 \frac{$1}{$2}$0
 endsnippet
 
 
+context "pymath()"
 snippet \\\ "setminus" i
 \setminus
 endsnippet
@@ -17,6 +24,7 @@ endsnippet
 # \oplus
 # endsnippet
 
+context "pymath()"
 snippet set "set" w
 \\{$1\\} $0
 endsnippet
@@ -29,10 +37,12 @@ endsnippet
 # \times 
 # endsnippet
 
+context "pymath()"
 snippet ^^ "super script ^{}" iA
 ^{$1}$0
 endsnippet
 
+context "pymath()"
 snippet  __ "sub script _{}" iA
 _{$1}$0
 endsnippet
@@ -57,6 +67,7 @@ endsnippet
 # \text{$1}$0
 # endsnippet
 
+context "pymath()"
 snippet op "operatorname" w
 \operatorname{${1:${VISUAL}}}$0
 endsnippet
@@ -95,6 +106,7 @@ snippet CC "Complex number" w
 $\mathbb{C}$
 endsnippet
 
+context "pymath()"
 snippet "([A-Z])(cal)" "auto mathcal" riA
 \mathcal{`!p snip.rv = match.group(1)`}
 endsnippet

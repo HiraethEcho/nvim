@@ -1,5 +1,6 @@
 # NVIM
 
+
 Hello, world!
 <>
 asdfghjklzxcvbnmqwertyuiop
@@ -43,7 +44,7 @@ using `vimtex` and `texlab`
 
 ### plugins
 
-I am using lazy.nvim as my plugins manager. Plugins are divided in serval classes, and following are some of mostly used plugins:
+I am using lazy.nvim as my plugins manager. Plugins are divided in several classes, and following are some of mostly used plugins:
 
 - edit: enhance for editing
   - [mini.surround](https://github.com/echasnovski/mini.surround),
@@ -79,7 +80,7 @@ I am using lazy.nvim as my plugins manager. Plugins are divided in serval classe
 - file explorer:
   - [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim), file tree
   - [yazi.nvim](https://github.com/mikavilpas/yazi.nvim), yazi (tui file manager) in float terminal
-- telescope: [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim), fozzy finder
+- telescope: [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim), fuzzy finder
 - ui:
   - [nightfox.nvim](https://github.com/EdenEast/nightfox.nvim), my theme
   - [nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua), show color like `#123dfe`
