@@ -79,10 +79,10 @@ return {
               },
             },
           },
+          buffers = { layout = { preset = "ivy" }, },
+          colorschemes = { layout = { preset = "bottom" }, },
         },
-        layout = {
-          cycle = false,
-        },
+        layout = { cycle = false, },
         matcher = {
           frecency = true,
           history_bonus = true,
@@ -95,8 +95,30 @@ return {
               ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
               ["<c-b>"] = { "list_scroll_up", mode = { "i", "n" } },
               ["<c-f>"] = { "list_scroll_down", mode = { "i", "n" } },
+              ["s"] = { "flash" },
+              ["<C-s>"] = { "flash", mode = { "n", "i" } },
             },
           },
+        },
+        actions = {
+          flash = function(picker)
+            require("flash").jump({
+              pattern = "^",
+              label = { after = { 0, 0 } },
+              search = {
+                mode = "search",
+                exclude = {
+                  function(win)
+                    return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "snacks_picker_list"
+                  end,
+                },
+              },
+              action = function(match)
+                local idx = picker.list:row2idx(match.pos[1])
+                picker.list:_move(idx, true, true)
+              end,
+            })
+          end,
         },
       },
       quickfile = { enabled = true },
@@ -104,14 +126,24 @@ return {
       debug = { enabled = false },
       scroll = { enabled = true },
       lazygit = { enabled = true },
-      statuscolumn = {
-        enabled = false,
-        -- left = {},
-      },
+      statuscolumn = { enabled = false, },
       words = { enabled = false },
+      zen = {
+        toggles = {
+          dim = false,
+          git_signs = true,
+          mini_diff_signs = true,
+          diagnostics = true,
+        },
+      },
       styles = {
         notification = {
           wo = { wrap = true }, -- Wrap notifications
+        },
+        snacks_image = {
+          relative = "editor",
+          col = 10,
+          row = -1,
         },
       },
     },
@@ -357,7 +389,7 @@ return {
       -- {'<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>",  mode={"n","v"}},
       -- {'F', "<cmd>lua require'hop'.hint_char1()<cr>", mode={"n","v"}},
       -- { "f",               ":HopChar1<cr>",    desc = "Hop Char",    { noremap = true, silent = true } },
-      { "W", ":HopWord<cr>", desc = "Hop Word", { noremap = true, silent = true } },
+      { "W",               ":HopWord<cr>",     desc = "Hop Word",    { noremap = true, silent = true } },
       { "<leader><space>", ":HopAnywhere<cr>", desc = "HopAnywhere", { noremap = true, silent = true } },
     },
     config = function()
