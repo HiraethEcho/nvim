@@ -296,13 +296,68 @@ return {
     end,
   },
   {
+    "folke/flash.nvim",
+    -- event = "VeryLazy",
+    opts = {
+      -- labels = "abcdefghijklmnopqrstuvwxyz",
+      -- labels = "asdfghjklqwertyuiopzxcvbnm",
+      labels = "asdfjklzxcvuioewr",
+      search = {
+        -- Each mode will take ignorecase and smartcase into account.
+        -- * exact: exact match
+        -- * search: regular search
+        -- * fuzzy: fuzzy search
+        -- * fun(str): custom function that returns a pattern
+        --   For example, to only match at the beginning of a word:
+        --   mode = function(str)
+        --     return "\\<" .. str
+        --   end,
+        mode = "search", -- default exact
+      },
+      label = {
+        -- Enable this to use rainbow colors to highlight labels
+        -- Can be useful for visualizing Treesitter ranges.
+        rainbow = {
+          enabled = true, --default false
+        },
+      },
+      -- You can override the default options for a specific mode.
+      -- Use it with `require("flash").jump({mode = "forward"})`
+      modes = {
+        -- options used when flash is activated through
+        -- `f`, `F`, `t`, `T`, `;` and `,` motions
+        char = {
+          enabled = true, -- default true
+          -- by default all keymaps are enabled, but you can disable some of them,
+          -- by removing them from the list.
+          -- If you rather use another key, you can map them
+          -- to something else, e.g., { [";"] = "L", [","] = H }
+          keys = { "f", "F", ";", "," },
+          -- keys = { "f", "F", "t", "T", ";", "," }, -- default
+        },
+        treesitter = {
+          labels = "asdfjklzxcviouqwernm", -- default asdfghjklzxcvbnmqwertyuiop
+        },
+      },
+    },
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      -- { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      -- { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      -- { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    },
+  },
+  {
     "phaazon/hop.nvim",
     -- event = "BufRead",
+    -- enabled = false,
     keys = {
       -- {'<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>",  mode={"n","v"}},
       -- {'F', "<cmd>lua require'hop'.hint_char1()<cr>", mode={"n","v"}},
-      { "f",               ":HopChar1<cr>",    desc = "Hop Char",    { noremap = true, silent = true } },
-      { "F",               ":HopWord<cr>",     desc = "Hop Word",    { noremap = true, silent = true } },
+      -- { "f",               ":HopChar1<cr>",    desc = "Hop Char",    { noremap = true, silent = true } },
+      { "W", ":HopWord<cr>", desc = "Hop Word", { noremap = true, silent = true } },
       { "<leader><space>", ":HopAnywhere<cr>", desc = "HopAnywhere", { noremap = true, silent = true } },
     },
     config = function()
@@ -693,5 +748,21 @@ return {
     -- keys = {
     --   { "<leader>B", "<cmd>StartMarkdownPreview<cr>", desc = "markdown Html Preview" },
     -- },
+  },
+  {
+    "rainzm/flash-zh.nvim",
+    enabled = false,
+    event = "VeryLazy",
+    dependencies = "folke/flash.nvim",
+    keys = { {
+      "s",
+      mode = { "n", "x", "o" },
+      function()
+        require("flash-zh").jump({
+          chinese_only = false
+        })
+      end,
+      desc = "Flash between Chinese"
+    } }
   },
 }

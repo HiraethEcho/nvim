@@ -10,7 +10,7 @@ end
 map({ "n", "v" }, ";", ":")
 map({ "v", "n" }, "x", '"_x')
 map("n", "<Space>", "<Nop>", { noremap = true, silent = true })
-map("n", 's', '<NOP>', { noremap = true, silent = true })
+-- map("n", 's', '<NOP>', { noremap = true, silent = true })
 map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 map("v", "<", "<gv")
 map("v", ">", ">gv")
@@ -49,7 +49,7 @@ map("i", ";", ";<c-g>u")
 -- map("i", "<C-j>", "<Down>")
 
 -- file
-map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
+-- map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 map("n", "Q", "<c-w>q", { desc = "Close window" })
 map("n", "<leader>H", ":cd %:h<cr>", { desc = "set cwd to parent of current file" })
 map("n", "<leader>q", "<cmd>wqa<cr>", { desc = "Quit all" })
