@@ -3,7 +3,7 @@ return {
     "neovim/nvim-lspconfig",
     -- event = { "BufReadPost", "BufNewFile" },
     -- lazy=false,
-    cmd = "LspStart",
+    -- cmd = "LspStart",
     keys = {
       { "<leader>ll", "<cmd>LspStart<cr>",   desc = "Start lsp" },
       { "<leader>ls", "<cmd>LspStop<cr>",    desc = "stop lsp" },
