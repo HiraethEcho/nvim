@@ -32,6 +32,7 @@ return {
     "shaunsingh/nord.nvim",
     --Lua:
     event = "BufRead",
+    -- event = "VimEnter",
     config = function()
       vim.cmd([[colorscheme nord]])
     end,
@@ -39,7 +40,7 @@ return {
   {
     "EdenEast/nightfox.nvim",
     -- event = "VimEnter",
-    event = "BufRead",
+    -- event = "BufRead",
     config = function()
       require("nightfox").setup({
         options = {
@@ -371,6 +372,7 @@ return {
       vim.notify = require("notify")
     end,
   },
+  -- disable
   {
     "b0o/incline.nvim",
     enabled = false,
@@ -438,7 +440,6 @@ return {
     end,
     event = "BufReadPost",
   },
-  -- disable
   {
     "luukvbaal/statuscol.nvim",
     -- lazy = false,
