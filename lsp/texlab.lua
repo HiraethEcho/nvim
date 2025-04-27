@@ -175,7 +175,7 @@ return {
       },
       forwardSearch = {
         -- https://github.com/latex-lsp/texlab/wiki/Previewing#inverse-search-3
-        --[[ executable = "sioyek",
+        executable = "sioyek",
               args = {
                 "--reuse-window",
                 "--inverse-search",
@@ -185,15 +185,15 @@ return {
                 "--forward-search-line",
                 "%l",
                 "%p",
-              }, ]]
-        executable = "zathura",
+              },
+        --[[ executable = "zathura",
         args = {
           "--synctex-forward",
           "%l:1:%f",
           "%p",
           -- "--synctex-editor-command",
           -- "texlab inverse-search -i %{input} -l %{line}", -- add this in zathurarc, not here
-        },
+        }, ]]
       },
       chktex = {
         onOpenAndSave = false,
