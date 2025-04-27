@@ -19,23 +19,24 @@ return {
   {
     "numToStr/Comment.nvim",
     keys = {
-      { "gcc", mode = "n", desc = "Comment toggle current line" },
-      { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
-      { "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
-      { "gbc", mode = "n", desc = "Comment toggle current block" },
-      { "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-      { "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
+      { "gcc", mode = "n",          desc = "Comment toggle current line" },
+      { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
+      { "gc",  mode = "x",          desc = "Comment toggle linewise (visual)" },
+      { "gbc", mode = "n",          desc = "Comment toggle current block" },
+      { "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+      { "gb",  mode = "x",          desc = "Comment toggle blockwise (visual)" },
     },
     config = function()
       require("Comment").setup()
     end,
   },
   {
-    "echasnovski/mini.splitjoin",
-    -- enabled = false,
-    event = "InsertEnter",
-    version = false,
-    opts = { mappings = { toggle = "", split = "gK", join = "gJ" } },
+    'Wansmer/treesj',
+    keys = {
+      { "gK", "<cmd>TSJSplit<CR>", desc = "treesj split" },
+      { "gJ", "<cmd>TSJJoin<CR>", desc = "treesj join" },
+    },
+    opts = { use_default_keymaps = false },
   },
   {
     "echasnovski/mini.align",
@@ -60,71 +61,94 @@ return {
     config = true,
   },
   {
+    "echasnovski/mini.splitjoin",
+    enabled = false,
+    event = "InsertEnter",
+    version = false,
+    opts = { mappings = { toggle = "", split = "gK", join = "gJ" } },
+  },
+  {
+    "y3owk1n/time-machine.nvim",
+    enabled = false,
+    cmd = {
+      "TimeMachineToggle",
+      "TimeMachinePurgeBuffer",
+      "TimeMachinePurgeAll",
+    },
+    opts = {},
+    --[[ keys = {
+  {
+   "<leader>t",
+   "",
+   desc = "Time Machine",
+  },
+  {
+   "<leader>tt",
+   "<cmd>TimeMachineToggle<cr>",
+   desc = "[Time Machine] Toggle Tree",
+  },
+  {
+   "<leader>tx",
+   "<cmd>TimeMachinePurgeCurrent<cr>",
+   desc = "[Time Machine] Purge current",
+  },
+  {
+   "<leader>tX",
+   "<cmd>TimeMachinePurgeAll<cr>",
+   desc = "[Time Machine] Purge all",
+  },
+ }, ]]
+  },
+  {
     "folke/todo-comments.nvim",
     enabled = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
       {
         "]t",
-        function()
-          require("todo-comments").jump_next()
-        end,
+        function() require("todo-comments").jump_next() end,
         desc = "Next todo comments",
         mode = { "n" },
       },
       {
         "[t",
-        function()
-          require("todo-comments").jump_prev()
-        end,
+        function() require("todo-comments").jump_prev() end,
         desc = "Previous todo comments",
         mode = { "n" },
       },
       {
         "]f",
-        function()
-          require("todo-comments").jump_next({ keywords = { "FIX", "WARN" } })
-        end,
+        function() require("todo-comments").jump_next({ keywords = { "FIX", "WARN" } }) end,
         desc = "Next error/warning comments",
         mode = { "n" },
       },
       {
         "[f",
-        function()
-          require("todo-comments").jump_prev({ keywords = { "FIX", "WARN" } })
-        end,
+        function() require("todo-comments").jump_prev({ keywords = { "FIX", "WARN" } }) end,
         desc = "Previous error/warning comments",
         mode = { "n" },
       },
       {
         "]q",
-        function()
-          require("todo-comments").jump_next({ keywords = { "QUES" } })
-        end,
+        function() require("todo-comments").jump_next({ keywords = { "QUES" } }) end,
         desc = "Next question",
         mode = { "n" },
       },
       {
         "[q",
-        function()
-          require("todo-comments").jump_prev({ keywords = { "QUES" } })
-        end,
+        function() require("todo-comments").jump_prev({ keywords = { "QUES" } }) end,
         desc = "Previous question",
         mode = { "n" },
       },
       {
         "]n",
-        function()
-          require("todo-comments").jump_next({ keywords = { "NOTE" } })
-        end,
+        function() require("todo-comments").jump_next({ keywords = { "NOTE" } }) end,
         desc = "Next note",
         mode = { "n" },
       },
       {
         "[n",
-        function()
-          require("todo-comments").jump_prev({ keywords = { "NOTE" } })
-        end,
+        function() require("todo-comments").jump_prev({ keywords = { "NOTE" } }) end,
         desc = "Previous note",
         mode = { "n" },
       },
@@ -145,7 +169,7 @@ return {
         NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
       },
       gui_style = {
-        bg = "BOLD", -- The gui style to use for the bg highlight group.
+        bg = "BOLD",         -- The gui style to use for the bg highlight group.
       },
       merge_keywords = true, -- when true, custom keywords will be merged with the defaults
       -- list of named colors where we try to extract the guifg from the
@@ -170,8 +194,8 @@ return {
     opts = {
       window = {
         backdrop = 0.90, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-        width = 100, -- width of the Zen window
-        height = 1, -- height of the Zen window
+        width = 100,     -- width of the Zen window
+        height = 1,      -- height of the Zen window
       },
       plugins = {
         -- disable some global vim options (vim.o...)
