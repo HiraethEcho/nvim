@@ -5,9 +5,9 @@ return {
     -- lazy=false,
     -- cmd = "LspStart",
     keys = {
-      { "<leader>ll", "<cmd>LspStart<cr>",   desc = "Start lsp" },
-      { "<leader>ls", "<cmd>LspStop<cr>",    desc = "stop lsp" },
-      { "<leader>li", "<cmd>LspInfo<cr>",    desc = "lsp info" },
+      { "<leader>ll", "<cmd>LspStart<cr>", desc = "Start lsp" },
+      { "<leader>ls", "<cmd>LspStop<cr>", desc = "stop lsp" },
+      { "<leader>li", "<cmd>LspInfo<cr>", desc = "lsp info" },
       { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
     dependencies = {
@@ -105,7 +105,7 @@ return {
   {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "LspAttach", -- Or `LspAttach`
-    priority = 1000,     -- needs to be loaded in first
+    priority = 1000, -- needs to be loaded in first
     config = function()
       vim.diagnostic.config({ virtual_text = false })
       require("tiny-inline-diagnostic").setup({
@@ -136,9 +136,9 @@ return {
       local actions = require("nvim-navbuddy.actions")
       navbuddy.setup({
         window = {
-          size = "80%",     -- Or table format example: { height = "40%", width = "100%"}
+          size = "80%", -- Or table format example: { height = "40%", width = "100%"}
           position = "50%", -- Or table format example: { row = "100%", col = "0%"}
-          scrolloff = nil,  -- scrolloff value within navbuddy window
+          scrolloff = nil, -- scrolloff value within navbuddy window
           sections = {
             left = {
               size = "20%",
@@ -157,60 +157,60 @@ return {
             },
           },
         },
-        use_default_mappings = false,  -- If set to false, only mappings set by user are set. Else default mappings are used for keys that are not set by user
+        use_default_mappings = false, -- If set to false, only mappings set by user are set. Else default mappings are used for keys that are not set by user
         mappings = {
           ["<esc>"] = actions.close(), -- Close and cursor to original location
           ["q"] = actions.close(),
 
-          ["j"] = actions.next_sibling(),     -- down
+          ["j"] = actions.next_sibling(), -- down
           ["k"] = actions.previous_sibling(), -- up
 
-          ["h"] = actions.parent(),           -- Move to left panel
-          ["l"] = actions.children(),         -- Move to right panel
+          ["h"] = actions.parent(), -- Move to left panel
+          ["l"] = actions.children(), -- Move to right panel
           -- ["0"] = actions.root(),           -- Move to first panel
 
-          ["v"] = actions.visual_name(),  -- Visual selection of name
+          ["v"] = actions.visual_name(), -- Visual selection of name
           ["V"] = actions.visual_scope(), -- Visual selection of scope
 
-          ["y"] = actions.yank_name(),    -- Yank the name to system clipboard "+
-          ["Y"] = actions.yank_scope(),   -- Yank the scope to system clipboard "+
+          ["y"] = actions.yank_name(), -- Yank the name to system clipboard "+
+          ["Y"] = actions.yank_scope(), -- Yank the scope to system clipboard "+
 
-          ["i"] = actions.insert_name(),  -- Insert at start of name
+          ["i"] = actions.insert_name(), -- Insert at start of name
           ["I"] = actions.insert_scope(), -- Insert at start of scope
 
-          ["a"] = actions.append_name(),  -- Insert at end of name
+          ["a"] = actions.append_name(), -- Insert at end of name
           ["A"] = actions.append_scope(), -- Insert at end of scope
 
-          ["r"] = actions.rename(),       -- Rename currently focused symbol
+          ["r"] = actions.rename(), -- Rename currently focused symbol
 
-          ["x"] = actions.delete(),       -- Delete scope
+          ["x"] = actions.delete(), -- Delete scope
 
-          ["f"] = actions.fold_create(),  -- Create fold of current scope
-          ["F"] = actions.fold_delete(),  -- Delete fold of current scope
+          ["f"] = actions.fold_create(), -- Create fold of current scope
+          ["F"] = actions.fold_delete(), -- Delete fold of current scope
 
-          ["c"] = actions.comment(),      -- Comment out current scope
+          ["c"] = actions.comment(), -- Comment out current scope
 
           ["<enter>"] = actions.select(), -- Goto selected symbol
           ["o"] = actions.select(),
 
-          ["J"] = actions.move_down(),      -- Move focused node down
-          ["K"] = actions.move_up(),        -- Move focused node up
+          ["J"] = actions.move_down(), -- Move focused node down
+          ["K"] = actions.move_up(), -- Move focused node up
 
           ["p"] = actions.toggle_preview(), -- Show preview of current node
 
-          ["<C-v>"] = actions.vsplit(),     -- Open selected node in a vertical split
-          ["<C-s>"] = actions.hsplit(),     -- Open selected node in a horizontal split
+          ["<C-v>"] = actions.vsplit(), -- Open selected node in a vertical split
+          ["<C-s>"] = actions.hsplit(), -- Open selected node in a horizontal split
 
-          ["t"] = actions.telescope({       -- Fuzzy finder at current level.
-            layout_config = {               -- All options that can be
-              height = 0.60,                -- passed to telescope.nvim's
-              width = 0.60,                 -- default can be passed here.
+          ["t"] = actions.telescope({ -- Fuzzy finder at current level.
+            layout_config = { -- All options that can be
+              height = 0.60, -- passed to telescope.nvim's
+              width = 0.60, -- default can be passed here.
               prompt_position = "top",
               preview_width = 0.50,
             },
             layout_strategy = "horizontal",
           }),
-          ["g?"] = actions.help(),    -- Open mappings help window
+          ["g?"] = actions.help(), -- Open mappings help window
         },
         lsp = { auto_attach = true }, -- If set to true, you don't need to manually use attach function },
       })
@@ -260,7 +260,7 @@ return {
         },
         -- Optional: Enable other modules if needed
         ui_select = { enable = true }, -- vim.ui.select() wrapper
-        colorscheme = { enable = false, },
+        colorscheme = { enable = false },
       })
     end,
   },
@@ -270,10 +270,10 @@ return {
     enabled = false,
     event = "LspAttach",
     keys = {
-      { "gd", "<cmd>Glance definitions<cr>",      desc = "Glance definitions" },
-      { "gr", "<cmd>Glance references<cr>",       desc = "Glance references" },
+      { "gd", "<cmd>Glance definitions<cr>", desc = "Glance definitions" },
+      { "gr", "<cmd>Glance references<cr>", desc = "Glance references" },
       { "gy", "<cmd>Glance type_definitions<cr>", desc = "Glance type_definitions" },
-      { "gm", "<cmd>Glance implementations<cr>",  desc = "Glance implementations" },
+      { "gm", "<cmd>Glance implementations<cr>", desc = "Glance implementations" },
     },
     config = function()
       local actions = require("glance").actions
@@ -292,15 +292,15 @@ return {
 
         list = {
           position = "left", -- Position of the list window 'left'|'right'
-          width = 0.2,       -- 33% width relative to the active window, min 0.1, max 0.5
+          width = 0.2, -- 33% width relative to the active window, min 0.1, max 0.5
         },
         mappings = {
           list = {
-            ["j"] = actions.next,     -- Bring the cursor to the next item in the list
+            ["j"] = actions.next, -- Bring the cursor to the next item in the list
             ["k"] = actions.previous, -- Bring the cursor to the previous item in the list
             ["<Down>"] = actions.next,
             ["<Up>"] = actions.previous,
-            ["<Tab>"] = actions.next_location,       -- Bring the cursor to the next location skipping groups in the list
+            ["<Tab>"] = actions.next_location, -- Bring the cursor to the next location skipping groups in the list
             ["<S-Tab>"] = actions.previous_location, -- Bring the cursor to the previous location skipping groups in the list
             ["<C-u>"] = actions.preview_scroll_win(5),
             ["<C-d>"] = actions.preview_scroll_win(-5),
@@ -387,16 +387,16 @@ return {
     },
     keys = {
       -- { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "hover doc" },
-      { "<leader>lo", "<cmd>Lspsaga outline<cr>",                    desc = "lsp outline" },
-      { "<leader>la", "<cmd>Lspsaga code_action<cr>",                desc = "lsp code_action" },
-      { "<leader>ld", "<cmd>Lspsaga show_buf_diagnostics<cr>",       desc = "lsp buff diagnostic" },
+      { "<leader>lo", "<cmd>Lspsaga outline<cr>", desc = "lsp outline" },
+      { "<leader>la", "<cmd>Lspsaga code_action<cr>", desc = "lsp code_action" },
+      { "<leader>ld", "<cmd>Lspsaga show_buf_diagnostics<cr>", desc = "lsp buff diagnostic" },
       { "<leader>lD", "<cmd>Lspsaga show_workspace_diagnostics<cr>", desc = "lsp workspace diagnostic" },
-      { "<leader>lf", "<cmd>Lspsaga finder<cr>",                     desc = "lsp finder" },
+      { "<leader>lf", "<cmd>Lspsaga finder<cr>", desc = "lsp finder" },
       -- { "<leader>lF", ":lua vim.lsp.buf.format()<cr>",               desc = "lsp formart" },
-      { "gp",         "<cmd>Lspsaga peek_definition<cr>",            desc = "lsp peek definition" },
-      { "gd",         "<cmd>Lspsaga goto_definition<cr>",            desc = "go to definition" },
-      { "[d",         "<cmd>Lspsaga diagnostic_jump_prev<cr>",       desc = "previous diagnostic" },
-      { "]d",         "<cmd>Lspsaga diagnostic_jump_next<cr>",       desc = "next diagnostic" },
+      { "gp", "<cmd>Lspsaga peek_definition<cr>", desc = "lsp peek definition" },
+      { "gd", "<cmd>Lspsaga goto_definition<cr>", desc = "go to definition" },
+      { "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "previous diagnostic" },
+      { "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "next diagnostic" },
     },
     config = function()
       require("lspsaga").setup({
