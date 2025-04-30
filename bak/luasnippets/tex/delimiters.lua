@@ -1,7 +1,7 @@
 local autosnips = {}
 
-local conds_expand = require("luasnip.extras.conditions.expand")
-local tex = require("mySnippets.latex")
+local expand_line_begin = require("luasnip.extras.conditions.expand").line_begin
+local tex = require("math-snippets.latex")
 
 local brackets = {
 	a = { "\\langle", "\\rangle" },
@@ -79,7 +79,7 @@ autosnips = {
 			trig = "cvec",
 			name = "column vector",
 			hidden = true,
-			condition = conds_expand.line_begin * tex.in_math,
+			condition = expand_line_begin * tex.in_math,
 		},
 		fmta(
 			[[

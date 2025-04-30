@@ -1,6 +1,6 @@
 local M = {}
 
-local cond_obj = require("luasnip.extras.conditions")
+local mkcond = require("luasnip.extras.conditions").make_condition
 
 local MATH_IGNORE = { "label_definition", "label_reference", "text_mode" }
 local MATH_NODES = { "displayed_equation", "inline_formula", "math_environment" }
@@ -16,8 +16,8 @@ local BULLET_ENVS = { "itemize", "enumerate" }
 local function get_node_insert_mode(opts)
 	opts = opts or {}
 	local ins_curs = vim.api.nvim_win_get_cursor(0)
-	ins_curs[1] = ins_curs[1] - 1
-	ins_curs[2] = ins_curs[2] - 1
+	ins_curs[1] = math.max(ins_curs[1] - 1, 0)
+	ins_curs[2] = math.max(ins_curs[2] - 1, 0)
 	opts.pos = ins_curs
 	return vim.treesitter.get_node(opts)
 end
@@ -46,26 +46,25 @@ end
 local function in_math()
 	local cursor_node = get_node_insert_mode()
 	local ancestor_node = cursor_node:tree():root()
-	local in_mathzone = false
 	while ancestor_node do
 		if vim.list_contains(MATH_IGNORE, ancestor_node:type()) then
-			in_mathzone = false
+			return false
 		elseif vim.list_contains(MATH_NODES, ancestor_node:type()) then
-			in_mathzone = true
+			return true
 		elseif
 			ancestor_node:type() == "generic_command"
 			and vim.list_contains(MATH_IGNORE_COMMANDS, get_command(ancestor_node))
 		then
-			in_mathzone = false
+			return false
 		elseif
 			ancestor_node:type() == "generic_environment"
 			and vim.list_contains(MATH_ENVIRONMENTS, get_environment(ancestor_node))
 		then
-			in_mathzone = true
+			return true
 		end
-		ancestor_node = ancestor_node:child_containing_descendant(cursor_node)
+		ancestor_node = ancestor_node:child_with_descendant(cursor_node)
 	end
-	return in_mathzone
+	return false
 end
 
 ---Check if cursor is in treesitter node of 'text'
@@ -79,70 +78,66 @@ end
 local function in_align()
 	local cursor_node = get_node_insert_mode()
 	local ancestor_node = cursor_node:tree():root()
-	local math_align = false
 	while ancestor_node do
 		if
 			ancestor_node:type() == "math_environment"
 			and vim.list_contains(ALIGN_ENVS, get_environment(ancestor_node))
 		then
-			math_align = true
+			return true
 		end
-		ancestor_node = ancestor_node:child_containing_descendant(cursor_node)
+		ancestor_node = ancestor_node:child_with_descendant(cursor_node)
 	end
-	return math_align
+	return false
 end
 
 local function in_bullets()
 	local cursor_node = get_node_insert_mode()
 	local ancestor_node = cursor_node:tree():root()
-	local math_bullets = false
 	while ancestor_node do
 		if
 			ancestor_node:type() == "generic_environment"
 			and vim.list_contains(BULLET_ENVS, get_environment(ancestor_node))
 		then
-			math_bullets = true
+			return true
 		end
-		ancestor_node = ancestor_node:child_containing_descendant(cursor_node)
+		ancestor_node = ancestor_node:child_with_descendant(cursor_node)
 	end
-	return math_bullets
+	return false
 end
 
 ---Check if cursor is in treesitter node of 'math_environment': 'tikzcd'
 ---@return boolean
--- local function in_tikzcd()
--- 	local cursor_node = get_node_insert_mode()
--- 	local ancestor_node = cursor_node:tree():root()
--- 	local math_tikz = false
--- 	while ancestor_node do
--- 		if ancestor_node:type() == "generic_environment" and get_environment(ancestor_node) == "tikzcd" then
--- 			math_tikz = true
--- 		end
--- 		ancestor_node = ancestor_node:child_containing_descendant(cursor_node)
--- 	end
--- 	return math_tikz
--- end
+local function in_tikzcd()
+	local cursor_node = get_node_insert_mode()
+	local ancestor_node = cursor_node:tree():root()
+	while ancestor_node do
+		if ancestor_node:type() == "generic_environment" and get_environment(ancestor_node) == "tikzcd" then
+			return true
+		end
+		ancestor_node = ancestor_node:child_with_descendant(cursor_node)
+	end
+	return false
+end
 
 ---Check if cursor is in treesitter node of 'generic_command': '\xymatrix'
 ---@return boolean
-local function in_xymatrix()
-	local cursor_node = get_node_insert_mode()
-	local ancestor_node = cursor_node:tree():root()
-	local math_xym = false
-	while ancestor_node do
-		if ancestor_node:type() == "generic_command" and get_command(ancestor_node) == "xymatrix" then
-			math_xym = true
-		end
-		ancestor_node = ancestor_node:child_containing_descendant(cursor_node)
-	end
-	return math_xym
-end
+-- local function in_xymatrix()
+-- 	local cursor_node = get_node_insert_mode()
+-- 	local ancestor_node = cursor_node:tree():root()
+-- 	while ancestor_node do
+-- 		if ancestor_node:type() == "generic_command" and get_command(ancestor_node) == "xymatrix" then
+-- 			return true
+-- 		end
+-- 		ancestor_node = ancestor_node:child_with_descendant(cursor_node)
+-- 	end
+-- 	return false
+-- end
 
-M.in_math = cond_obj.make_condition(in_math)
-M.in_text = cond_obj.make_condition(in_text)
-M.in_align = cond_obj.make_condition(in_align)
-M.in_bullets = cond_obj.make_condition(in_bullets)
--- M.in_tikzcd = cond_obj.make_condition(in_tikzcd)
-M.in_xymatrix = cond_obj.make_condition(in_xymatrix)
+M.in_math = mkcond(in_math)
+M.in_text = mkcond(in_text)
+M.in_align = mkcond(in_align)
+M.in_bullets = mkcond(in_bullets)
+M.in_tikzcd = mkcond(in_tikzcd)
+-- M.in_xymatrix = mkcond(in_xymatrix)
 
 return M

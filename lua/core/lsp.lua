@@ -1,21 +1,27 @@
-vim.api.nvim_create_user_command('Lspstart', function(info)
+local function map(mode, lhs, rhs, opts)
+  opts = opts or {}
+  opts.silent = opts.silent ~= false
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+vim.api.nvim_create_user_command("Lspstart", function(info)
   local server_name = string.len(info.args) > 0 and info.args or nil
   if server_name then
     vim.lsp.enable(server_name)
   end
 end, {
-  desc = 'Manually launches a language server',
-  nargs = '?',
+  desc = "Manually launches a language server",
+  nargs = "?",
   complete = lsp_complete_configured_servers,
 })
 
-vim.api.nvim_create_user_command('Lspstop', function(info)
+vim.api.nvim_create_user_command("Lspstop", function(info)
   ---@type string
   local args = info.args
   local force = false
-  args = args:gsub('%+%+force', function()
+  args = args:gsub("%+%+force", function()
     force = true
-    return ''
+    return ""
   end)
 
   local clients = {}
@@ -33,7 +39,16 @@ vim.api.nvim_create_user_command('Lspstop', function(info)
     client.stop(force)
   end
 end, {
-  desc = 'Manually stops the given language client(s)',
-  nargs = '?',
+  desc = "Manually stops the given language client(s)",
+  nargs = "?",
   complete = lsp_get_active_clients,
 })
+
+map("n", "ga", vim.lsp.buf.code_action, { silent = true, buffer = bufnr, desc = "LSP code action" })
+map("n", "gR", vim.lsp.buf.rename, { silent = true, buffer = bufnr, desc = "LSP renamecode_action" })
+
+-- map("n", "K", vim.lsp.buf.hover, { silent = true, buffer = bufnr, desc = "LSP hover" })
+-- map("n", "gD", vim.lsp.buf.implementation, { silent = true, buffer = bufnr, desc = "LSP implementation" })
+-- map("n", "<c-k>", vim.lsp.buf.signature_help, { silent = true, buffer = bufnr, desc = "LSP signature help" })
+-- Goto previous/next diagnostic warning/error
+map("v", "<leader>F", vim.lsp.buf.format, { silent = true, buffer = bufnr, desc = "LSP format in range" })

@@ -1,8 +1,8 @@
 local snips, autosnips = {}, {}
 
-local conds_expand = require("luasnip.extras.conditions.expand")
-local tex = require("mySnippets.latex")
-local pos = require("mySnippets.position")
+local expand_line_begin = require("luasnip.extras.conditions.expand").line_begin
+local tex = require("math-snippets.latex")
+local pos = require("math-snippets.position")
 
 local reference_snippet_table = {
 	a = "auto",
@@ -12,8 +12,8 @@ local reference_snippet_table = {
 
 local opts = { condition = tex.in_text, show_condition = tex.in_text }
 local opts2 = {
-	condition = conds_expand.line_begin * tex.in_text,
-	show_condition = pos.line_begin * tex.in_text,
+	condition = expand_line_begin * tex.in_text,
+	show_condition = pos.show_line_begin * tex.in_text,
 }
 
 local function phrase_snippet(trig, body)
@@ -21,25 +21,20 @@ local function phrase_snippet(trig, body)
 end
 
 snips = {
-	s(
-		{ trig = "cf", name = "cross refrence", condition = tex.in_text, show_condition = tex.in_text },
-		fmta([[\cite[<>]{<>}<>]], { i(1), i(2), i(0) })
-		-- {
-		-- 	callbacks = {
-		-- 		[1] = {
-		-- 			[events.enter] = function()
-		-- 				require("telescope").extensions.bibtex.bibtex(
-		-- 					require("telescope.themes").get_dropdown({ previewer = false })
-		-- 				)
-		-- 			end,
-		-- 		},
-		-- 	},
-		-- }
-	),
+	s({
+		trig = "cf",
+		name = "cross refrence",
+		condition = tex.in_text,
+		show_condition = tex.in_text,
+	}, fmta([[\cite[<>]{<>}<>]], { i(1), i(2), i(0) })),
 }
 
 autosnips = {
-	s({ trig = "alab", name = "label", dscr = "add a label" }, fmta([[\zlabel{<>:<>}<>]], { i(1), i(2), i(0) })),
+	s({
+		trig = "alab",
+		name = "label",
+		dscr = "add a label",
+	}, fmta([[\zlabel{<>:<>}<>]], { i(1), i(2), i(0) })),
 
 	s(
 		{
@@ -67,7 +62,7 @@ autosnips = {
 			callbacks = {
 				[1] = {
 					[events.enter] = function()
-						require("cmp").complete()
+						require("blink.cmp").show({ providers = { "lsp" } })
 					end,
 				},
 			},
@@ -117,6 +112,7 @@ local auto_phrase_specs = {
 	ggg = "generically globally generated",
 	iee = "i.e., ",
 	iff = "if and only if ",
+	lci = "local complete intersection",
 	lmm = "log minimal model",
 	mfs = "Mori fibre space",
 	nbhd = "neighbourhood",

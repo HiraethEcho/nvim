@@ -1,13 +1,42 @@
 local snips, autosnips = {}, {}
 
-local tex = require("mySnippets.latex")
+local tex = require("math-snippets.latex")
 
 local opts = { condition = tex.in_math, show_condition = tex.in_math }
+
+local function auto_trigger(trig)
+	return "(?<!\\\\)" .. "(" .. trig .. ")"
+end
+
+-- visual util to add insert node - thanks ejmastnak!
+local get_visual = function(_, parent)
+	return sn(nil, i(1, parent.snippet.env.SELECT_RAW))
+end
+
+-- fractions (parentheses case)
+-- local generate_fraction = function(_, snip)
+-- 	local stripped = snip.captures[1]
+-- 	local depth = 0
+-- 	local j = #stripped
+-- 	while true do
+-- 		local c = stripped:sub(j, j)
+-- 		if c == "(" then
+-- 			depth = depth + 1
+-- 		elseif c == ")" then
+-- 			depth = depth - 1
+-- 		end
+-- 		if depth == 0 then
+-- 			break
+-- 		end
+-- 		j = j - 1
+-- 	end
+-- 	return sn(nil, fmta([[<>\frac{<>}{<>}]], { t(stripped:sub(1, j - 1)), t(stripped:sub(j + 1, -2)), i(1) }))
+-- end
 
 local function sequence_snippet(trig, cmd, desc)
 	return s(
 		{
-			trig = "(?<!\\\\)" .. "(" .. trig .. ")",
+			trig = auto_trigger(trig),
 			name = desc,
 			desc = desc .. "with automatic backslash",
 			trigEngine = "ecma",
@@ -21,16 +50,14 @@ local function sequence_snippet(trig, cmd, desc)
 	)
 end
 
-local function auto_backslash_snippet(trig)
+local function auto_backslash_snippet(context)
+	context.dscr = context.dscr or (context.trig .. "with automatic backslash")
+	context.name = context.name or context.trig
+	context.docstring = context.docstring or ([[\]] .. context.trig)
+	context.trigEngine = "ecma"
+	context.trig = "(?<!\\\\)" .. "(" .. context.trig .. ")"
 	return s(
-		{
-			trig = "(?<!\\\\)" .. "(" .. trig .. ")",
-			name = trig,
-			desc = trig .. "with automatic backslash",
-			trigEngine = "ecma",
-			docstring = [[\]] .. trig,
-			hidden = true,
-		},
+		context,
 		fmta([[\<><>]], { f(function(_, snip)
 			return snip.captures[1]
 		end), i(0) }),
@@ -72,30 +99,32 @@ autosnips = {
 		opts
 	),
 
-	s(
-		{ trig = "(%w)//", name = "fraction with a single numerator", trigEngine = "pattern", hidden = true },
-		fmta([[\frac{<>}{<>}<>]], { f(function(_, snip)
-			return snip.captures[1]
-		end), i(1), i(0) }),
-		opts
-	),
-
 	-- fractions
 	s(
-		{ trig = "//", name = "fraction", desc = "fraction (general)" },
-		fmta([[\frac{<>}{<>}<>]], { i(1), i(2), i(0) }),
+		{ trig = "//", name = "fraction", dscr = "fraction (general)" },
+		fmta([[\frac{<>}{<>}<>]], { d(1, get_visual), i(2), i(0) }),
 		opts
 	),
-	s(
-		{ trig = "(%d+)/", name = "fraction", desc = "auto fraction 1", trigEngine = "pattern", hidden = true },
-		fmta([[\frac{<>}{<>}<>]], { f(function(_, snip)
-			return snip.captures[1]
-		end), i(1), i(0) }),
-		opts
-	),
+	-- s(
+	-- 	{
+	-- 		trig = "((\\d+)|(\\d*)(\\\\)?([A-Za-z]+)((\\^|_)(\\{\\d+\\}|\\d))*)\\/",
+	-- 		name = "fraction",
+	-- 		dscr = "auto fraction 1",
+	-- 		trigEngine = "ecma",
+	-- 	},
+	-- 	fmta([[\frac{<>}{<>}<>]], { f(function(_, snip)
+	-- 		return snip.captures[1]
+	-- 	end), i(1), i(0) }),
+	-- 	opts
+	-- ),
+	-- s(
+	-- 	{ trig = "(^.*\\))/", name = "fraction", dscr = "auto fraction 2", trigEngine = "ecma" },
+	-- 	{ d(1, generate_fraction) },
+	-- 	opts
+	-- ),
 
 	s(
-		{ trig = "lim", name = "lim(sup|inf)", desc = "lim(sup|inf)" },
+		{ trig = auto_trigger("lim"), name = "lim(sup|inf)", desc = "lim(sup|inf)", trigEngine = "ecma" },
 		fmta([[\lim<><><>]], {
 			c(1, { t(""), t("sup"), t("inf") }),
 			c(2, { t(""), fmta([[_{<> \to <>}]], { i(1, "n"), i(2, "\\infty") }) }),
@@ -194,7 +223,7 @@ for k, v in pairs(sequence_specs) do
 end
 
 for _, v in ipairs(operator_specs) do
-	table.insert(autosnips, auto_backslash_snippet(v))
+	table.insert(autosnips, auto_backslash_snippet({ trig = v }))
 end
 
 return snips, autosnips
