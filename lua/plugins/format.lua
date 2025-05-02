@@ -21,6 +21,7 @@ return {
           lua = { "stylua" },
           markdown = { "prettierd" },
           tex = { "tex-fmt" },
+          sh = { "shfmt" },
         },
       })
     end,
