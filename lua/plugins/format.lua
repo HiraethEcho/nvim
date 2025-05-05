@@ -19,7 +19,8 @@ return {
       require("conform").setup({
         formatters_by_ft = {
           lua = { "stylua" },
-          markdown = { "prettierd" },
+          markdown = { "prettier" },
+          html = { "prettier" },
           tex = { "tex-fmt" },
           sh = { "shfmt" },
         },

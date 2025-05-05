@@ -1,15 +1,14 @@
 # NVIM
 
-
 Hello, world!
 <>
 asdfghjklzxcvbnmqwertyuiop
-all for ill jijojlaljfh.,nbvkciozjboijuiouioafdsroiwezkldxj  => <> cloud !==   |-> ->   asdfghjklzxcvbnmqwertyuiop
-*all follow for ill jijojlaljfh.,nbvkciozjboijuiouioafdsroiwezkldxj  => <> cloud !==   |-> ->   asdfghjklzxcvbnmqwertyuiop*
+all for ill jijojlaljfh.,nbvkciozjboijuiouioafdsroiwezkldxj => <> cloud !== |-> -> asdfghjklzxcvbnmqwertyuiop
+_all follow for ill jijojlaljfh.,nbvkciozjboijuiouioafdsroiwezkldxj => <> cloud !== |-> -> asdfghjklzxcvbnmqwertyuiop_
 **asdfghjklzxcvbnmqwertyuiop**
-***allsdfghjklzxcvbnmqwertyuiop***
+**_allsdfghjklzxcvbnmqwertyuiop_**
 
-*allsdfghjklzxcvbnmqwertyuiop*
+_allsdfghjklzxcvbnmqwertyuiop_
 
 > [!tip]
 > a

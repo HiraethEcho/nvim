@@ -5,6 +5,7 @@ return {
     'markdown',
     'typst',
     'latex',
+    'tex',
   },
   single_file_support = true,
   settings = {
