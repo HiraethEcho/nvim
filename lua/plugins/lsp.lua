@@ -259,12 +259,16 @@ return {
           margin = { horizontal = 0, vertical = 0 },
         },
         render = function(props)
-          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-          if filename == "" then
-            filename = "[No Name]"
+          local function get_lsp_clients()
+            local buf_clients = nil
+            buf_clients = vim.lsp.get_clients({ bufnr = 0 })
+            local buf_client_names = {}
+            for _, client in pairs(buf_clients) do
+              table.insert(buf_client_names, client.name)
+            end
+            return table.concat(buf_client_names, ",")
+            -- return buf_client_names
           end
-          local ft_icon, ft_color = devicons.get_icon_color(filename)
-
           local function get_diagnostic_label()
             local icons = {
               error = " ",
@@ -273,22 +277,21 @@ return {
               hint = "󰌵 ",
             }
             local label = {}
-
             for severity, icon in pairs(icons) do
               local n = #vim.diagnostic.get(props.buf, { severity = vim.diagnostic.severity[string.upper(severity)] })
               if n > 0 then
                 table.insert(label, { icon .. n .. " ", group = "DiagnosticSign" .. severity })
               end
             end
-            if #label > 0 then
-              table.insert(label, { "┊ " })
-            end
+            -- if #label > 0 then
+            --   table.insert(label, { "" })
+            -- end
             return label
           end
-
           return {
-            { filename },
+            -- { filename },
             { get_diagnostic_label() },
+            { get_lsp_clients() },
           }
         end,
       })

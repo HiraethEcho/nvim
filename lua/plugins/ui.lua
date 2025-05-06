@@ -44,13 +44,13 @@ return {
     config = function()
       require("nightfox").setup({
         options = {
-          dim_inactive = true,     -- Non focused panes set to alternative background
-          module_default = true,   -- Default enable value for modules
+          dim_inactive = true, -- Non focused panes set to alternative background
+          module_default = true, -- Default enable value for modules
           colorblind = {
-            enable = true,         -- Enable colorblind support
+            enable = true, -- Enable colorblind support
             simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
           },
-          styles = {               -- Style to be applied to different syntax groups
+          styles = { -- Style to be applied to different syntax groups
             -- bold
             -- underline
             -- undercurl  curly underline
@@ -95,7 +95,7 @@ return {
     event = "BufReadPost",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "meuter/lualine-so-fancy.nvim",
+      -- "meuter/lualine-so-fancy.nvim",
     },
     -- event = "BufRead",
     -- event = "VeryLazy",
@@ -103,6 +103,15 @@ return {
       --[[ local function session_name()
         return require('possession.session').get_session_name() or ''
       end ]]
+
+      local function cwd_fancy()
+        local result = vim.fn.getcwd()
+        local home = os.getenv("HOME")
+        if home and vim.startswith(result, home) then
+          result = "~" .. result:sub(home:len() + 1)
+        end
+        return result
+      end
       require("lualine").setup({
         options = {
           icons_enabled = true,
@@ -127,19 +136,20 @@ return {
         sections = {
           lualine_a = {
             -- { "fancy_cwd", substitute_home = true },
-            { "fancy_branch" },
+            -- { "fancy_branch" },
             -- "filetype"
-            -- "branch",
+            "branch",
             -- "fancy_lsp_servers",
           },
           lualine_b = {
-            { "fancy_diff" },
+            -- { "fancy_diff" },
+            "diff",
           },
           lualine_c = {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
-              file_status = true,    -- Displays file status (readonly status, modified status)
+              file_status = true, -- Displays file status (readonly status, modified status)
               newfile_status = true, -- Display new file status (new file means no write after created)
               path = 1,
               symbols = {
@@ -151,18 +161,21 @@ return {
             },
           },
           lualine_x = {
-            -- "searchcount",
-            { "fancy_searchcount" },
+            "searchcount",
+            -- { "fancy_searchcount" },
+            -- "lsp_status",
           },
           -- lualine_y = { "filetype" },
           lualine_y = {
-            "fancy_diagnostics",
-            "fancy_lsp_servers",
+            -- "fancy_diagnostics",
+            -- "fancy_lsp_servers",
           },
           lualine_z = {
-            "progress",
-            "location",
-            -- "%:L",
+            -- "progress",
+            -- "location",
+            {
+              "%l/%L:%c",
+            },
             -- { "fancy_location" },
             --[[ function()
               return " " .. os.date("%R")
@@ -177,9 +190,9 @@ return {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
-              file_status = true,    -- Displays file status (readonly status, modified status)
+              file_status = true, -- Displays file status (readonly status, modified status)
               newfile_status = true, -- Display new file status (new file means no write after created)
-              path = 1,              -- 0: Just the filename
+              path = 1, -- 0: Just the filename
               -- 1: Relative path
               -- 2: Absolute path
               -- 3: Absolute path, with tilde as the home directory
@@ -230,30 +243,25 @@ return {
         },
         tabline = {
           lualine_a = {
-            {
-              "tabs",
-              max_length = vim.o.columns / 3, -- Maximum width of tabs component.
-              mode = 1,                       -- 0: Shows tab_nr
-              -- 1: Shows tab_name
-              -- 2: Shows tab_nr + tab_name
-            },
+            cwd_fancy,
           },
           lualine_b = {
-            -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          },
-          lualine_c = {
-            --[[ {
+            {
               "buffers",
-              show_filename_only = true,   -- Shows shortened relative path when set to false.
+              show_filename_only = true, -- Shows shortened relative path when set to false.
+              hide_filename_extension = true,
               show_modified_status = false, -- Shows indicator when the buffer is modified.
-              mode = 0,                    -- 0: Shows buffer name
+              mode = 2, -- 0: Shows buffer name 1: Shows buffer index 2: Shows buffer name + buffer index 3: Shows buffer number 4: Shows buffer name + buffer number
               symbols = {
                 modified = "", -- Text to show when the buffer is modified
                 alternate_file = "", -- Text to show to identify the alternate file
                 directory = "", -- Text to show when the buffer is a directory
               },
-            }, ]]
-            {
+            },
+            -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          },
+          lualine_c = {
+            --[[ {
               "windows",
               show_filename_only = true, -- Shows shortened relative path when set to false.
               show_modified_status = true, -- Shows indicator when the window is modified.
@@ -264,26 +272,23 @@ return {
                 newfile = "", -- Text to show for newly created file before first write
               },
               mode = 0,
-            },
-          },
-          lualine_x = {},
-          lualine_y = {
-            -- "fancy_lsp_servers",
-            --[[ {
-              "buffers",
-              show_filename_only = true,   -- Shows shortened relative path when set to false.
-              show_modified_status = true, -- Shows indicator when the buffer is modified.
-              mode = 0,                    -- 0: Shows buffer name
-              symbols = {
-                modified = "", -- Text to show when the buffer is modified
-                alternate_file = "", -- Text to show to identify the alternate file
-                directory = "", -- Text to show when the buffer is a directory
-              },
             }, ]]
-            { "fancy_cwd", substitute_home = true },
+          },
+          lualine_x = {
+          },
+          lualine_y = {
+            -- { "fancy_cwd", substitute_home = true },
+            {
+              "tabs",
+              max_length = vim.o.columns / 3, -- Maximum width of tabs component.
+              mode = 1, -- 0: Shows tab_nr
+              -- 1: Shows tab_name
+              -- 2: Shows tab_nr + tab_name
+            },
           },
           lualine_z = {
             -- session_name,
+            -- cwd_fancy,
             {
               function()
                 return require("auto-session.lib").current_session_name(true)
@@ -339,7 +344,7 @@ return {
           },
           style = {
             { bg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("cursorline")), "bg", "gui") },
-            { bg = "",                                                                         fg = "" },
+            { bg = "", fg = "" },
           },
         },
       })
@@ -389,7 +394,7 @@ return {
       "hiphish/rainbow-delimiters.nvim",
     },
     keys = {
-      { "<leader>ui", "<cmd>IBLToggle<cr>",      desc = "toggle indent" },
+      { "<leader>ui", "<cmd>IBLToggle<cr>", desc = "toggle indent" },
       { "<leader>uf", "<cmd>IBLToggleScope<cr>", desc = "toggle scope" },
     },
     main = "ibl",
@@ -459,11 +464,11 @@ return {
     end,
   },
   {
-    'wsdjeg/scrollbar.vim',
+    "wsdjeg/scrollbar.vim",
     enabled = false,
     event = "BufRead",
     config = function()
-      require('scrollbar').setup()
+      require("scrollbar").setup()
     end,
   },
   {
@@ -489,14 +494,14 @@ return {
       local codewindow = require("codewindow")
       codewindow.setup({
         exclude_filetypes = { "help" }, -- Choose certain filetypes to not show minimap on
-        minimap_width = 5,              -- The width of the text part of the minimap
-        use_lsp = true,                 -- Use the builtin LSP to show errors and warnings
-        use_treesitter = false,         -- Use nvim-treesitter to highlight the code
-        use_git = true,                 -- Show small dots to indicate git additions and deletions
-        width_multiplier = 8,           -- How many characters one dot represents
-        z_index = 1,                    -- The z-index the floating window will be on
-        show_cursor = true,             -- Show the cursor position in the minimap
-        window_border = "single",       -- The border style of the floating window (accepts all usual options)
+        minimap_width = 5, -- The width of the text part of the minimap
+        use_lsp = true, -- Use the builtin LSP to show errors and warnings
+        use_treesitter = false, -- Use nvim-treesitter to highlight the code
+        use_git = true, -- Show small dots to indicate git additions and deletions
+        width_multiplier = 8, -- How many characters one dot represents
+        z_index = 1, -- The z-index the floating window will be on
+        show_cursor = true, -- Show the cursor position in the minimap
+        window_border = "single", -- The border style of the floating window (accepts all usual options)
       })
     end,
   },
@@ -508,33 +513,33 @@ return {
     -- Optional
     keys = {
       -- Global Minimap Controls
-      { "<leader>nm",  "<cmd>Neominimap toggle<cr>",      desc = "Toggle global minimap" },
-      { "<leader>no",  "<cmd>Neominimap on<cr>",          desc = "Enable global minimap" },
-      { "<leader>nc",  "<cmd>Neominimap off<cr>",         desc = "Disable global minimap" },
-      { "<leader>nr",  "<cmd>Neominimap refresh<cr>",     desc = "Refresh global minimap" },
+      { "<leader>nm", "<cmd>Neominimap toggle<cr>", desc = "Toggle global minimap" },
+      { "<leader>no", "<cmd>Neominimap on<cr>", desc = "Enable global minimap" },
+      { "<leader>nc", "<cmd>Neominimap off<cr>", desc = "Disable global minimap" },
+      { "<leader>nr", "<cmd>Neominimap refresh<cr>", desc = "Refresh global minimap" },
 
       -- Window-Specific Minimap Controls
-      { "<leader>nwt", "<cmd>Neominimap winToggle<cr>",   desc = "Toggle minimap for current window" },
-      { "<leader>nwr", "<cmd>Neominimap winRefresh<cr>",  desc = "Refresh minimap for current window" },
-      { "<leader>nwo", "<cmd>Neominimap winOn<cr>",       desc = "Enable minimap for current window" },
-      { "<leader>nwc", "<cmd>Neominimap winOff<cr>",      desc = "Disable minimap for current window" },
+      { "<leader>nwt", "<cmd>Neominimap winToggle<cr>", desc = "Toggle minimap for current window" },
+      { "<leader>nwr", "<cmd>Neominimap winRefresh<cr>", desc = "Refresh minimap for current window" },
+      { "<leader>nwo", "<cmd>Neominimap winOn<cr>", desc = "Enable minimap for current window" },
+      { "<leader>nwc", "<cmd>Neominimap winOff<cr>", desc = "Disable minimap for current window" },
 
       -- Tab-Specific Minimap Controls
-      { "<leader>ntt", "<cmd>Neominimap tabToggle<cr>",   desc = "Toggle minimap for current tab" },
-      { "<leader>ntr", "<cmd>Neominimap tabRefresh<cr>",  desc = "Refresh minimap for current tab" },
-      { "<leader>nto", "<cmd>Neominimap tabOn<cr>",       desc = "Enable minimap for current tab" },
-      { "<leader>ntc", "<cmd>Neominimap tabOff<cr>",      desc = "Disable minimap for current tab" },
+      { "<leader>ntt", "<cmd>Neominimap tabToggle<cr>", desc = "Toggle minimap for current tab" },
+      { "<leader>ntr", "<cmd>Neominimap tabRefresh<cr>", desc = "Refresh minimap for current tab" },
+      { "<leader>nto", "<cmd>Neominimap tabOn<cr>", desc = "Enable minimap for current tab" },
+      { "<leader>ntc", "<cmd>Neominimap tabOff<cr>", desc = "Disable minimap for current tab" },
 
       -- Buffer-Specific Minimap Controls
-      { "<leader>nbt", "<cmd>Neominimap bufToggle<cr>",   desc = "Toggle minimap for current buffer" },
-      { "<leader>nbr", "<cmd>Neominimap bufRefresh<cr>",  desc = "Refresh minimap for current buffer" },
-      { "<leader>nbo", "<cmd>Neominimap bufOn<cr>",       desc = "Enable minimap for current buffer" },
-      { "<leader>nbc", "<cmd>Neominimap bufOff<cr>",      desc = "Disable minimap for current buffer" },
+      { "<leader>nbt", "<cmd>Neominimap bufToggle<cr>", desc = "Toggle minimap for current buffer" },
+      { "<leader>nbr", "<cmd>Neominimap bufRefresh<cr>", desc = "Refresh minimap for current buffer" },
+      { "<leader>nbo", "<cmd>Neominimap bufOn<cr>", desc = "Enable minimap for current buffer" },
+      { "<leader>nbc", "<cmd>Neominimap bufOff<cr>", desc = "Disable minimap for current buffer" },
 
       ---Focus Controls
-      { "<leader>nf",  "<cmd>Neominimap focus<cr>",       desc = "Focus on minimap" },
-      { "<leader>nu",  "<cmd>Neominimap unfocus<cr>",     desc = "Unfocus minimap" },
-      { "<leader>ns",  "<cmd>Neominimap toggleFocus<cr>", desc = "Switch focus on minimap" },
+      { "<leader>nf", "<cmd>Neominimap focus<cr>", desc = "Focus on minimap" },
+      { "<leader>nu", "<cmd>Neominimap unfocus<cr>", desc = "Unfocus minimap" },
+      { "<leader>ns", "<cmd>Neominimap toggleFocus<cr>", desc = "Switch focus on minimap" },
     },
     init = function()
       vim.g.neominimap = {
@@ -589,8 +594,7 @@ return {
             local basename = vim.fs.basename(file):gsub("%.json", "")
             if basename ~= "config" and basename ~= "tmp" and basename ~= "blog" then
               -- if basename ~= "tmp" then
-              local button =
-                  dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
+              local button = dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
               table.insert(group.val, button)
               i = i + 1
               -- end
@@ -709,7 +713,7 @@ return {
       -- require("everforest").load()
     end,
   },
-{ 'projekt0n/github-nvim-theme', name = 'github-theme' },
+  { "projekt0n/github-nvim-theme", name = "github-theme" },
   {
     "rose-pine/neovim",
     -- cmd = "colorscheme",
@@ -717,14 +721,14 @@ return {
     -- name = "rose-pine",
     config = function()
       require("rose-pine").setup({
-        variant = "dawn",      -- auto, main, moon, or dawn
+        variant = "dawn", -- auto, main, moon, or dawn
         dark_variant = "main", -- main, moon, or dawn
         dim_inactive_windows = true,
         extend_background_behind_borders = true,
         enable = {
           terminal = false,
           legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-          migrations = true,        -- Handle deprecated options automatically
+          migrations = true, -- Handle deprecated options automatically
         },
         styles = {
           bold = true,
