@@ -120,7 +120,7 @@ return {
   {
     "SmiteshP/nvim-navbuddy",
     -- enabled = false,
-    event = "LspAttach",
+    -- event = "LspAttach",
     keys = {
       { "<leader>O", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
     },
@@ -255,7 +255,7 @@ return {
       local devicons = require("nvim-web-devicons")
       require("incline").setup({
         window = {
-          padding = 0,
+          padding = 2,
           margin = { horizontal = 0, vertical = 0 },
         },
         render = function(props)
@@ -263,11 +263,11 @@ return {
             local buf_clients = nil
             buf_clients = vim.lsp.get_clients({ bufnr = 0 })
             local buf_client_names = {}
+            -- table.insert(buf_client_names, "")
             for _, client in pairs(buf_clients) do
               table.insert(buf_client_names, client.name)
             end
             return table.concat(buf_client_names, ",")
-            -- return buf_client_names
           end
           local function get_diagnostic_label()
             local icons = {

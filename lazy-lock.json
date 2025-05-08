@@ -6,6 +6,7 @@
   "alpha-nvim": { "branch": "main", "commit": "de72250e054e5e691b9736ee30db72c65d560771" },
   "auto-session": { "branch": "main", "commit": "00334ee24b9a05001ad50221c8daffbeedaa0842" },
   "aw-watcher-vim": { "branch": "master", "commit": "4ba86d05a940574000c33f280fd7f6eccc284331" },
+  "aw-watcher.nvim": { "branch": "master", "commit": "be7b03748f59b6602502baf08e7f7736cc7279a5" },
   "bionic-reading.nvim": { "branch": "main", "commit": "418a81c8995f1cd827307006f4771dded0b02bd3" },
   "blame-column.nvim": { "branch": "main", "commit": "46dfc8acc2a1d23064c06e024d2887997f1cf468" },
   "blink-copilot": { "branch": "main", "commit": "bdc45bbbed2ec252b3a29f4adecf031e157b5573" },
