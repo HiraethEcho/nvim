@@ -13,13 +13,9 @@ return {
     opts = {
       bigfile = { enabled = true },
       image = {
-        enabled = true,
+        enabled = false,
         force = true,
-        doc = {
-          enabled = true,
-          inline = false,
-          float = true,
-        },
+        doc = { enabled = true, inline = false, float = true },
         math = {
           enabled = true,
           typst = {
@@ -155,6 +151,13 @@ return {
           Snacks.picker.buffers()
         end,
         desc = "Buffers",
+      },
+      {
+        "<leader>D",
+        function()
+          Snacks.bufdelete.other()
+        end,
+        desc = "Delete other Buffers",
       },
       {
         "<leader>/",

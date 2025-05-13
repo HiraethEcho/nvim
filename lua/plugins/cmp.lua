@@ -26,9 +26,13 @@ return {
         ["<CR>"] = { "accept", "fallback" },
         ["<C-e>"] = { "hide", "fallback" },
       },
+      signature = { enabled = true },
       completion = {
         keyword = {
           range = "full",
+        },
+        documentation = {
+          auto_show = true,
         },
         menu = {
           draw = {
@@ -41,9 +45,7 @@ return {
             -- auto_insert = false,
           },
         },
-        ghost_text = {
-          enabled = true,
-        },
+        ghost_text = { enabled = true },
       },
       sources = {
         default = { "ultisnips", "lsp", "path", "buffer", "copilot" },
@@ -143,7 +145,7 @@ return {
             -- }
           },
           -- { name = 'nvim_lsp' },
-          { name = "copilot",  max_item_count = 3 },
+          { name = "copilot", max_item_count = 3 },
           {
             name = "buffer",
             option = {
@@ -163,8 +165,8 @@ return {
               -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
               -- can also be a function to dynamically calculate max width such as
               -- menu = function() return math.floor(0.45 * vim.o.columns) end,
-              menu = 50,              -- leading text (labelDetails)
-              abbr = 50,              -- actual suggestion item
+              menu = 50, -- leading text (labelDetails)
+              abbr = 50, -- actual suggestion item
             },
             show_labelDetails = true, -- show labelDetails in menu. Disabled by default
             before = function(entry, vim_item)
@@ -180,11 +182,11 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     keys = { -- Example mapping to toggle outline
-      { "<leader>cc", "<cmd>Copilot<CR>",        desc = "Copilot" },
+      { "<leader>cc", "<cmd>Copilot<CR>", desc = "Copilot" },
       { "<leader>ct", "<cmd>Copilot toggle<CR>", desc = "Copilot toggle" },
       { "<leader>cd", "<cmd>Copilot detach<CR>", desc = "Copilot detach" },
       { "<leader>ca", "<cmd>Copilot attach<CR>", desc = "Copilot attach" },
-      { "<leader>cp", "<cmd>Copilot panel<CR>",  desc = "Copilot panel" },
+      { "<leader>cp", "<cmd>Copilot panel<CR>", desc = "Copilot panel" },
     },
     dependencies = {
       "zbirenbaum/copilot-cmp",
@@ -222,7 +224,7 @@ return {
     end,
   },
   {
-    'L3MON4D3/LuaSnip',
+    "L3MON4D3/LuaSnip",
     -- enabled = false,
     version = "v2.*",
     config = function()
@@ -232,11 +234,11 @@ return {
       })
       -- require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/LuaSnip/" })
       -- require("luasnip.loaders.from_snipmate").load({ paths = vim.fn.stdpath("config") .. "/snipmate/" })
-      local auto_expand = require("luasnip").expand_auto
+      --[[ local auto_expand = require("luasnip").expand_auto
       require("luasnip").expand_auto = function(...)
         vim.o.undolevels = vim.o.undolevels
         auto_expand(...)
-      end
+      end ]]
     end,
   },
 }
