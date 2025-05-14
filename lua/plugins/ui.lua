@@ -57,7 +57,7 @@ return {
         end
         return result
       end
-      vim.cmd("colorscheme github_dark")
+      -- vim.cmd("colorscheme github_dark")
       require("lualine").setup({
         options = {
           icons_enabled = true,

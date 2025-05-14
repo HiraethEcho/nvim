@@ -94,7 +94,7 @@ I am using lazy.nvim as my plugins manager. Plugins are divided in several class
   - [vim-startuptime](https://github.com/dstein64/vim-startuptime), show start up time
   - [suda.vim](https://github.com/lambdalisue/suda.vim), sudo write files
 
-## miscellanea
+## Miscellanies
 
 ### windows and linux
 
