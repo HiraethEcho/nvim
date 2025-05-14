@@ -1,4 +1,3 @@
-local vim = vim
 return {
   {
     "echasnovski/mini.surround",
