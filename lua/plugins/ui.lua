@@ -61,15 +61,15 @@ return {
       require("lualine").setup({
         extensions = { "quickfix" },
         options = {
-          icons_enabled = true,
-          theme = "base16",
-          -- component_separators = { left = "", right = "" },
-          -- section_separators = { left = "", right = "" },
-          -- section_separators = { left = "", right = "" },
-          -- section_separators = { left = '', right = '' },
+          -- icons_enabled = true,
+          -- theme = "OceanicNext",
+          -- theme = "material",
+          theme = "jellybeans",
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
           -- section_separators = { left = '', right = '' },
+          -- component_separators = { left = '', right = '' },
+          -- section_separators = { left = '', right = '' },
           disabled_filetypes = {
             statusline = {
               "neo-tree",
@@ -108,20 +108,15 @@ return {
           },
           lualine_x = {
             "searchcount",
-            -- { "fancy_searchcount" },
             -- "lsp_status",
           },
           -- lualine_y = { "filetype" },
           lualine_y = {
-            -- "fancy_diagnostics",
-            -- "fancy_lsp_servers",
-          },
-          lualine_z = {
-            -- "progress",
-            -- "location",
             {
               "%l/%L:%c",
             },
+          },
+          lualine_z = {
             --[[ function()
               return " " .. os.date("%R")
             end, ]]
@@ -187,7 +182,21 @@ return {
           }, ]]
         },
         tabline = {
-          lualine_a = {},
+          lualine_a = {
+            {
+              "tabs",
+              max_length = vim.o.columns / 3, -- Maximum width of tabs component.
+              mode = 1, -- 0: Shows tab_nr
+              symbols = {
+                modified = "", -- Text to show when the file is modified.
+                readonly = "", -- Text to show when the file is non-modifiable or readonly.
+                unnamed = "", -- Text to show for unnamed buffers.
+                newfile = "", -- Text to show for newly created file before first write
+              },
+              -- 1: Shows tab_name
+              -- 2: Shows tab_nr + tab_name
+            },
+          },
           lualine_b = {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
@@ -196,10 +205,13 @@ return {
               hide_filename_extension = true,
               show_modified_status = false, -- Shows indicator when the buffer is modified.
               mode = 2, -- 0: Shows buffer name 1: Shows buffer index 2: Shows buffer name + buffer index 3: Shows buffer number 4: Shows buffer name + buffer number
+
               symbols = {
-                modified = "", -- Text to show when the buffer is modified
+                modified = "", -- Text to show when the file is modified.
+                readonly = "", -- Text to show when the file is non-modifiable or readonly.
+                unnamed = "", -- Text to show for unnamed buffers.
+                newfile = "", -- Text to show for newly created file before first write
                 alternate_file = "", -- Text to show to identify the alternate file
-                directory = "", -- Text to show when the buffer is a directory
               },
             },
           },
@@ -220,34 +232,14 @@ return {
           lualine_x = {
           },
           lualine_y = {
-            {
-              "tabs",
-              max_length = vim.o.columns / 3, -- Maximum width of tabs component.
-              mode = 1, -- 0: Shows tab_nr
-              -- 1: Shows tab_name
-              -- 2: Shows tab_nr + tab_name
-            },
-            -- { "fancy_cwd", substitute_home = true },
+            cwd_fancy,
           },
           lualine_z = {
-            -- session_name,
-            cwd_fancy,
             {
               function()
                 return require("auto-session.lib").current_session_name(true)
               end,
             },
-            -- "branch",
-            --[[ {
-              "tabs",
-              max_length = vim.o.columns / 3, -- Maximum width of tabs component.
-              -- Note:
-              -- It can also be a function that returns
-              -- the value of `max_length` dynamically.
-              mode = 1, -- 0: Shows tab_nr
-              -- 1: Shows tab_name
-              -- 2: Shows tab_nr + tab_name
-            }, ]]
           },
         },
       })
