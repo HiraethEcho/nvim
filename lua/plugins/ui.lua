@@ -59,16 +59,16 @@ return {
       end
       -- vim.cmd("colorscheme github_dark")
       require("lualine").setup({
+        extensions = { "quickfix" },
         options = {
           icons_enabled = true,
-          theme = "nord",
-          component_separators = { left = "", right = "" },
-          section_separators = { left = "", right = "" },
+          theme = "base16",
+          -- component_separators = { left = "", right = "" },
+          -- section_separators = { left = "", right = "" },
+          -- section_separators = { left = "", right = "" },
           -- section_separators = { left = '', right = '' },
-          -- component_separators = { left = '', right = '' },
-          -- section_separators = { left = '', right = '' },
-          -- component_separators = '',
-          -- section_separators = '',
+          component_separators = { left = '', right = '' },
+          section_separators = { left = '', right = '' },
           -- section_separators = { left = '', right = '' },
           disabled_filetypes = {
             statusline = {
@@ -122,7 +122,6 @@ return {
             {
               "%l/%L:%c",
             },
-            -- { "fancy_location" },
             --[[ function()
               return " " .. os.date("%R")
             end, ]]
@@ -188,10 +187,9 @@ return {
           }, ]]
         },
         tabline = {
-          lualine_a = {
-            cwd_fancy,
-          },
+          lualine_a = {},
           lualine_b = {
+            -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "buffers",
               show_filename_only = true, -- Shows shortened relative path when set to false.
@@ -204,7 +202,6 @@ return {
                 directory = "", -- Text to show when the buffer is a directory
               },
             },
-            -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           },
           lualine_c = {
             --[[ {
@@ -220,9 +217,9 @@ return {
               mode = 0,
             }, ]]
           },
-          lualine_x = {},
+          lualine_x = {
+          },
           lualine_y = {
-            -- { "fancy_cwd", substitute_home = true },
             {
               "tabs",
               max_length = vim.o.columns / 3, -- Maximum width of tabs component.
@@ -230,10 +227,11 @@ return {
               -- 1: Shows tab_name
               -- 2: Shows tab_nr + tab_name
             },
+            -- { "fancy_cwd", substitute_home = true },
           },
           lualine_z = {
             -- session_name,
-            -- cwd_fancy,
+            cwd_fancy,
             {
               function()
                 return require("auto-session.lib").current_session_name(true)
@@ -252,7 +250,6 @@ return {
             }, ]]
           },
         },
-        extensions = { "neo-tree", "lazy" },
       })
     end,
   },
