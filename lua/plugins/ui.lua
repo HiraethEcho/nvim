@@ -1,24 +1,5 @@
 return {
   {
-    "mvllow/modes.nvim",
-    enabled = false,
-    tag = "v0.2.0",
-    event = "InsertEnter",
-    config = function()
-      require("modes").setup({
-        colors = {
-          bg = "", -- Optional bg param, defaults to Normal hl group
-          copy = "#f5c359",
-          delete = "#c75c6a",
-          insert = "#78ccc5",
-          visual = "#9745be",
-        },
-        -- Set opacity for cursorline and number background
-        line_opacity = 0.2,
-      })
-    end,
-  },
-  {
     "eandrju/cellular-automaton.nvim",
     keys = {
       { "<leader>uR", "<cmd>CellularAutomaton make_it_rain<cr>", desc = "Rain" },
@@ -296,6 +277,7 @@ return {
       }, -- config
     },
   },
+  -- disable
   {
     "rcarriga/nvim-notify",
     event = "BufRead",
@@ -311,7 +293,6 @@ return {
       vim.notify = require("notify")
     end,
   },
-  -- disable
   {
     "luukvbaal/statuscol.nvim",
     -- lazy = false,
@@ -617,6 +598,25 @@ return {
     -- lazy=false,
     config = function()
       require("transparent").setup({})
+    end,
+  },
+  {
+    "mvllow/modes.nvim",
+    enabled = false,
+    tag = "v0.2.0",
+    event = "InsertEnter",
+    config = function()
+      require("modes").setup({
+        colors = {
+          bg = "", -- Optional bg param, defaults to Normal hl group
+          copy = "#f5c359",
+          delete = "#c75c6a",
+          insert = "#78ccc5",
+          visual = "#9745be",
+        },
+        -- Set opacity for cursorline and number background
+        line_opacity = 0.2,
+      })
     end,
   },
 }

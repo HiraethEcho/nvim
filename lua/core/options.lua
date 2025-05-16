@@ -70,5 +70,7 @@ opt.autowrite = true          -- Enable auto write
 opt.foldmethod = "indent"
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevel = 99
+opt.foldminlines = 0 -- Allow folding/hiding single lines
+opt.fillchars = "fold: " -- Remove the trailing dots
 
 vim.g.loaded_matchparen = 1  -- "utilyre/sentiment.nvim",

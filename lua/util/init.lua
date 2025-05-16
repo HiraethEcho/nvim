@@ -1,6 +1,7 @@
 local M = {}
 local Util = require("lazy.core.util")
 
+-- only used in neotree
 function M.system_open(path)
   -- TODO: REMOVE WHEN DROPPING NEOVIM <0.10
   if vim.ui.open then
