@@ -23,6 +23,7 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       -- "meuter/lualine-so-fancy.nvim",
+      -- "Rics-Dev/flow",
     },
     -- event = "BufRead",
     -- event = "VeryLazy",
@@ -42,12 +43,12 @@ return {
       require("lualine").setup({
         extensions = { "quickfix" },
         options = {
-          -- icons_enabled = true,
-          -- theme = "OceanicNext",
+          theme = "OceanicNext",
           -- theme = "material",
-          theme = "jellybeans",
-          component_separators = { left = '', right = '' },
-          section_separators = { left = '', right = '' },
+          -- theme = "jellybeans",
+          -- theme = "flow",
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
           -- section_separators = { left = '', right = '' },
           -- component_separators = { left = '', right = '' },
           -- section_separators = { left = '', right = '' },
@@ -164,6 +165,8 @@ return {
         },
         tabline = {
           lualine_a = {
+          },
+          lualine_b = {
             {
               "tabs",
               max_length = vim.o.columns / 3, -- Maximum width of tabs component.
@@ -177,9 +180,9 @@ return {
               -- 1: Shows tab_name
               -- 2: Shows tab_nr + tab_name
             },
-          },
-          lualine_b = {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          },
+          lualine_c = {
             {
               "buffers",
               show_filename_only = true, -- Shows shortened relative path when set to false.
@@ -195,8 +198,6 @@ return {
                 alternate_file = "", -- Text to show to identify the alternate file
               },
             },
-          },
-          lualine_c = {
             --[[ {
               "windows",
               show_filename_only = true, -- Shows shortened relative path when set to false.
@@ -210,8 +211,7 @@ return {
               mode = 0,
             }, ]]
           },
-          lualine_x = {
-          },
+          lualine_x = {},
           lualine_y = {
             cwd_fancy,
           },

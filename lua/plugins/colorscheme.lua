@@ -179,4 +179,12 @@ return {
       -- vim.cmd("colorscheme nightfox")
     end,
   },
+  {
+    "Rics-Dev/flow",
+    -- lazy = false,
+    config = function()
+      require("flow").setup() -- Optional: for customization
+      vim.cmd("colorscheme flow")
+    end,
+  },
 }

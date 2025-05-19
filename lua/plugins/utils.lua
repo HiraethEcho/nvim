@@ -153,7 +153,7 @@ return {
         desc = "Buffers",
       },
       {
-        "<leader>D",
+        "<leader>X",
         function()
           Snacks.bufdelete.other()
         end,
