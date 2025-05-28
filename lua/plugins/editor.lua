@@ -1,13 +1,13 @@
 return {
   {
     "lervag/vimtex",
-    lazy =false,
+    lazy = false,
     -- enabled = false,
     -- ft = { "bib", "tex" },
     init = function()
-      vim.g.vimtex_view_method = 'zathura'
+      vim.g.vimtex_view_method = "zathura"
       -- vim.g.vimtex_view_method = "sioyek"
-      vim.g.vimtex_imaps_leader = ';'
+      vim.g.vimtex_imaps_leader = ";"
 
       -- this works
       -- vim.g.vimtex_view_general_viewer = "okular"
@@ -54,7 +54,7 @@ return {
   {
     "OXY2DEV/markview.nvim",
     dependencies = {
-      "saghen/blink.cmp"
+      "saghen/blink.cmp",
     },
     ft = { "markdown", "md" },
     keys = {
@@ -62,20 +62,20 @@ return {
     },
   },
   {
-    'MeanderingProgrammer/render-markdown.nvim',
+    "MeanderingProgrammer/render-markdown.nvim",
     enabled = false,
     -- ft = { "markdown", "md" },
     --[[ keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
     }, ]]
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-tree/nvim-web-devicons'
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
     },
     opts = {
       completions = { blink = { enabled = true } },
       heading = {
-        width = 'block',
+        width = "block",
       },
       latex = {
         enabled = true,
@@ -149,14 +149,14 @@ return {
     end,
   },
   {
-    'chomosuke/typst-preview.nvim',
+    "chomosuke/typst-preview.nvim",
     -- lazy = false, -- or
-    ft = 'typst',
-    version = '1.*',
+    ft = "typst",
+    version = "1.*",
     opts = {
       dependencies_bin = {
-        ['tinymist'] = 'tinymist',
-        ['websocat'] = 'websocat',
+        ["tinymist"] = "tinymist",
+        ["websocat"] = "websocat",
       },
     }, -- lazy.nvim will implicitly calls `setup {}`
   },
@@ -177,29 +177,28 @@ return {
     "epwalsh/obsidian.nvim",
     -- lazy=false,
     enabled = false,
-    event = { "BufRead " .. vim.fn.expand("~") .. "/Documents/obsidian/**.md" },
+    event = { "BufRead " .. vim.fn.expand("~") .. "/obsidian/**.md" },
     keys = {
-      { "<leader>oo", "<cmd>ObsidianOpen<cr>",       desc = "Open Obsidian" },
-      { "<leader>os", "<cmd>ObsidianSearch<cr>",     desc = "Search in Obsidian" },
-      { "<leader>ot", "<cmd>ObsidianTemplate<cr>",   desc = "Templates in Obsidian" },
-      { "<leader>ob", "<cmd>ObsidianBacklink<cr>",   desc = "Backlink" },
+      { "<leader>oo", "<cmd>ObsidianOpen<cr>", desc = "Open Obsidian" },
+      { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Search in Obsidian" },
+      { "<leader>ot", "<cmd>ObsidianTemplate<cr>", desc = "Templates in Obsidian" },
+      { "<leader>ob", "<cmd>ObsidianBacklink<cr>", desc = "Backlink" },
       { "<leader>ol", "<cmd>ObsidianFollowLink<cr>", desc = "Follow link" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    opts =
-    {
+    opts = {
       workspaces = {
         {
           name = "personal",
-          path = "~/Documents/obsidian/",
+          path = "~/obsidian/",
         },
       },
       -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
       completion = {
         -- Set to false to disable completion.
-        nvim_cmp = true,
+        nvim_cmp = false,
         -- Trigger completion at 2 chars.
         min_chars = 2,
       },
@@ -215,19 +214,13 @@ return {
           opts = { noremap = false, expr = true, buffer = true },
         },
         -- Toggle check-boxes.
-        ["<leader>ch"] = {
-          action = function()
-            return require("obsidian").util.toggle_checkbox()
-          end,
-          opts = { buffer = true },
-        },
         -- Smart action depending on context, either follow link or toggle checkbox.
         ["<cr>"] = {
           action = function()
             return require("obsidian").util.smart_action()
           end,
           opts = { buffer = true, expr = true },
-        }
+        },
       },
 
       -- Where to put new notes. Valid options are
@@ -241,9 +234,6 @@ return {
       --  * "prepend_note_path", e.g. '[[foo-bar.md|Foo Bar]]'
       --  * "use_path_only", e.g. '[[foo-bar.md]]'
       -- Or you can set it to a function that takes a table of options and returns a string, like this:
-      wiki_link_func = function(opts)
-        return require("obsidian.util").wiki_link_id_prefix(opts)
-      end,
 
       -- Optional, customize how markdown links are formatted.
       markdown_link_func = function(opts)
@@ -260,24 +250,6 @@ return {
       -- Optional, set to true to force ':ObsidianOpen' to bring the app to the foreground.
       open_app_foreground = true,
 
-      picker = {
-        -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
-        name = "telescope.nvim",
-        -- Optional, configure key mappings for the picker. These are the defaults.
-        -- Not all pickers support all mappings.
-        note_mappings = {
-          -- Create a new note from your query.
-          new = "<C-x>",
-          -- Insert a link to the selected note.
-          insert_link = "<C-l>",
-        },
-        tag_mappings = {
-          -- Add tag(s) to current note.
-          tag_note = "<C-x>",
-          -- Insert a tag at the current location.
-          insert_tag = "<C-l>",
-        },
-      },
 
       -- Optional, sort search results by "path", "modified", "accessed", or "created".
       -- The recommend value is "modified" and `true` for `sort_reversed`, which means, for example,
@@ -294,17 +266,14 @@ return {
       -- Optional, configure additional syntax highlighting / extmarks.
       -- This requires you have `conceallevel` set to 1 or 2. See `:help conceallevel` for more details.
       ui = {
-        enable = true,          -- set to false to disable all additional syntax features
-        update_debounce = 200,  -- update delay after a text change (in milliseconds)
+        enable = true, -- set to false to disable all additional syntax features
+        update_debounce = 200, -- update delay after a text change (in milliseconds)
         max_file_length = 5000, -- disable UI features for files with more than this many lines
         -- Define how various check-boxes are displayed
         checkboxes = {
           -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
           [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
           ["x"] = { char = "", hl_group = "ObsidianDone" },
-          [">"] = { char = "", hl_group = "ObsidianRightArrow" },
-          ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
-          ["!"] = { char = "", hl_group = "ObsidianImportant" },
           -- Replace the above with this if you don't have a patched font:
           -- [" "] = { char = "☐", hl_group = "ObsidianTodo" },
           -- ["x"] = { char = "✔", hl_group = "ObsidianDone" },
@@ -312,28 +281,10 @@ return {
           -- You can also add more custom ones...
         },
         -- Use bullet marks for non-checkbox lists.
-        bullets = { char = "•", hl_group = "ObsidianBullet" },
-        external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
         -- Replace the above with this if you don't have a patched font:
         -- external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
         reference_text = { hl_group = "ObsidianRefText" },
-        highlight_text = { hl_group = "ObsidianHighlightText" },
-        tags = { hl_group = "ObsidianTag" },
         block_ids = { hl_group = "ObsidianBlockID" },
-        hl_groups = {
-          -- The options are passed directly to `vim.api.nvim_set_hl()`. See `:help nvim_set_hl`.
-          ObsidianTodo = { bold = true, fg = "#f78c6c" },
-          ObsidianDone = { bold = true, fg = "#89ddff" },
-          ObsidianRightArrow = { bold = true, fg = "#f78c6c" },
-          ObsidianTilde = { bold = true, fg = "#ff5370" },
-          ObsidianImportant = { bold = true, fg = "#d73128" },
-          ObsidianBullet = { bold = true, fg = "#89ddff" },
-          ObsidianRefText = { underline = true, fg = "#c792ea" },
-          ObsidianExtLinkIcon = { fg = "#c792ea" },
-          ObsidianTag = { italic = true, fg = "#89ddff" },
-          ObsidianBlockID = { italic = true, fg = "#89ddff" },
-          ObsidianHighlightText = { bg = "#75662e" },
-        },
       },
 
       -- Specify how to handle attachments.
@@ -341,7 +292,7 @@ return {
         -- The default folder to place images in via `:ObsidianPasteImg`.
         -- If this is a relative path it will be interpreted as relative to the vault root.
         -- You can always override this per image by passing a full path to the command instead of just a filename.
-        img_folder = "assets/imgs", -- This is the default
+        img_folder = "assets", -- This is the default
       },
     },
     config = function(_, opts)
@@ -369,5 +320,10 @@ return {
       vim.g.mkdp_page_title = "${name}"
       vim.g.mkdp_filetypes = { "markdown", "md" }
     end,
+  },
+  {
+    "askfiy/nvim-picgo",
+    cmd = "UploadClipboard",
+    config = true,
   },
 }
