@@ -160,6 +160,18 @@ return {
       },
     }, -- lazy.nvim will implicitly calls `setup {}`
   },
+  {
+    "willothy/flatten.nvim",
+    enabled = false,
+    lazy = false,
+    priority = 1001,
+    -- event = "VimEnter",
+    opts = {
+      window = {
+        open = "vsplit",
+      },
+    },
+  },
   -- disabled
   {
     "antonk52/markdowny.nvim",
@@ -249,7 +261,6 @@ return {
 
       -- Optional, set to true to force ':ObsidianOpen' to bring the app to the foreground.
       open_app_foreground = true,
-
 
       -- Optional, sort search results by "path", "modified", "accessed", or "created".
       -- The recommend value is "modified" and `true` for `sort_reversed`, which means, for example,
