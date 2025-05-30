@@ -63,6 +63,7 @@ return {
   },
   {
     "Rawnly/gist.nvim",
+    enabled = false,
     cmd = { "GistCreate", "GistCreateFromFile", "GistsList" },
     dependencies = {},
     config = true,
@@ -73,7 +74,8 @@ return {
   --
   {
     "samjwill/nvim-unception",
-    lazy = false,
+    -- lazy = false,
+    enabled = false,
     init = function()
       vim.g.unception_block_while_host_edits = true
     end,

@@ -49,9 +49,9 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-context",
     -- enabled = false,
-    cmd = "TSContextEnable",
+    cmd = "TSContext enable",
     keys = {
-      { "<leader>ut", "<cmd>TSContextToggle<cr>", desc = "toggle treesitter context" },
+      { "<leader>ut", "<cmd>TSContext toggle<cr>", desc = "toggle treesitter context" },
     },
     opts = {
       max_lines = 3,

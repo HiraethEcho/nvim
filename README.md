@@ -1,5 +1,7 @@
 # NVIM
 
+![trees](https://hiraeth-picbed.oss-cn-beijing.aliyuncs.com/img/trees.webp)
+
 Hello, world!
 <>
 asdfghjklzxcvbnmqwertyuiop
@@ -8,7 +10,7 @@ _all follow for ill jijojlaljfh.,nbvkciozjboijuiouioafdsroiwezkldxj => <> cloud 
 **asdfghjklzxcvbnmqwertyuiop**
 **_allsdfghjklzxcvbnmqwertyuiop_**
 
-***asdfg***
+**_asdfg_**
 _allsdfghjklzxcvbnmqwertyuiop_
 
 > [!tip]
@@ -23,6 +25,8 @@ Hello, world!
 > [tips]
 
 what a hell
+
+![trees](https://hiraeth-picbed.oss-cn-beijing.aliyuncs.com/img/trees.webp)
 
 ## Usage
 
