@@ -13,7 +13,7 @@ return {
     opts = {
       bigfile = { enabled = true },
       image = {
-        enabled = false,
+        enabled = true,
         force = true,
         doc = { enabled = true, inline = false, float = true },
         math = {

@@ -53,21 +53,22 @@ return {
   },
   {
     "OXY2DEV/markview.nvim",
+    enabled = false,
     dependencies = {
       "saghen/blink.cmp",
     },
     ft = { "markdown", "md" },
     keys = {
-      { "<C-e>", "<cmd>Markview<cr>", desc = "Markiview toggle", ft = "markdown" },
+      { "<C-e>", "<cmd>Markview Toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
     },
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    enabled = false,
-    -- ft = { "markdown", "md" },
-    --[[ keys = {
+    -- enabled = false,
+    ft = { "markdown", "md" },
+    keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
-    }, ]]
+    },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
@@ -159,6 +160,44 @@ return {
         ["websocat"] = "websocat",
       },
     }, -- lazy.nvim will implicitly calls `setup {}`
+  },
+  {
+    "HakonHarnes/img-clip.nvim",
+    -- event = "VeryLazy",
+    opts = {
+      -- add options here
+      -- or leave it empty to use the default settings
+    },
+    keys = {
+      { "<leader>mP", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
+    },
+  },
+  {
+    "3rd/image.nvim",
+    build = false,
+    enabled = false,
+    keys = {
+      {
+        "<leader>up",
+        function()
+          local image = require("image")
+          if image.is_enabled() then
+            image.disable()
+          else
+            image.enable()
+          end
+        end,
+        desc = "show pictures",
+      },
+    },
+    opts = {
+      integrations = {
+        markdown = {
+          only_render_image_at_cursor = true, -- defaults to false
+          only_render_image_at_cursor_mode = "inline", -- "popup" or "inline", defaults to "popup"
+        },
+      },
+    },
   },
   {
     "willothy/flatten.nvim",

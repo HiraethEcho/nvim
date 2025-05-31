@@ -164,8 +164,7 @@ return {
           }, ]]
         },
         tabline = {
-          lualine_a = {
-          },
+          lualine_a = {},
           lualine_b = {
             {
               "tabs",
@@ -224,6 +223,16 @@ return {
           },
         },
       })
+      vim.keymap.set("n", "<C-1>", "<cmd>LualineBuffersJump 1<CR>")
+      vim.keymap.set("n", "<C-2>", "<cmd>LualineBuffersJump 2<CR>")
+      vim.keymap.set("n", "<C-3>", "<cmd>LualineBuffersJump 3<CR>")
+      vim.keymap.set("n", "<C-4>", "<cmd>LualineBuffersJump 4<CR>")
+      vim.keymap.set("n", "<C-5>", "<cmd>LualineBuffersJump 5<CR>")
+      vim.keymap.set("n", "<C-6>", "<cmd>LualineBuffersJump 6<CR>")
+      vim.keymap.set("n", "<C-7>", "<cmd>LualineBuffersJump 7<CR>")
+      vim.keymap.set("n", "<C-8>", "<cmd>LualineBuffersJump 8<CR>")
+      vim.keymap.set("n", "<C-9>", "<cmd>LualineBuffersJump 9<CR>")
+      vim.keymap.set("n", "<C-0>", "<cmd>LualineBuffersJump 10<CR>")
     end,
   },
   {

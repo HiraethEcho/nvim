@@ -28,6 +28,7 @@ what a hell
 
 ![trees](https://hiraeth-picbed.oss-cn-beijing.aliyuncs.com/img/trees.webp)
 
+
 ## Usage
 
 I'm using nvim as a code editor, mainly for latex and markdown.
