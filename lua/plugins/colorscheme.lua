@@ -187,4 +187,5 @@ return {
       vim.cmd("colorscheme flow")
     end,
   },
+  { "DonJulve/NeoCyberVim", config = true },
 }

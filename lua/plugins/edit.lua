@@ -197,6 +197,17 @@ return {
     },
   },
   {
+    "joshuadanpeterson/typewriter",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    cmd = {"TWToggle","TWTop"},
+    config = function()
+      require("typewriter").setup()
+    end,
+    opts = {},
+  },
+  {
     "mbbill/undotree",
     enabled = false,
     keys = {

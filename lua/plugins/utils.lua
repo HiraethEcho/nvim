@@ -17,7 +17,7 @@ return {
         force = true,
         doc = { enabled = true, inline = false, float = true },
         math = {
-          enabled = true,
+          enabled = false,
           typst = {
             tpl = [[
         #set page(width: auto, height: auto, margin: (x: 2pt, y: 2pt))
@@ -125,6 +125,10 @@ return {
       statuscolumn = { enabled = false },
       words = { enabled = false },
       zen = {
+        zoom = {
+          toggles = {},
+          show = { statusline = true, tabline = false },
+        },
         toggles = {
           dim = false,
           git_signs = true,
@@ -554,7 +558,7 @@ return {
             :map("<leader>uc")
           Snacks.toggle.treesitter():map("<leader>uT")
           Snacks.toggle.inlay_hints():map("<leader>uI")
-          -- Snacks.toggle.indent():map("<leader>ug")
+          Snacks.toggle.indent():map("<leader>ug")
           Snacks.toggle.animate():map("<leader>ua")
         end,
       })

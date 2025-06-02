@@ -164,8 +164,7 @@ return {
           }, ]]
         },
         tabline = {
-          lualine_a = {},
-          lualine_b = {
+          lualine_a = {
             {
               "tabs",
               max_length = vim.o.columns / 3, -- Maximum width of tabs component.
@@ -179,6 +178,8 @@ return {
               -- 1: Shows tab_name
               -- 2: Shows tab_nr + tab_name
             },
+          },
+          lualine_b = {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           },
           lualine_c = {
@@ -241,8 +242,8 @@ return {
     -- enabled = false,
     dependencies = {
       -- "rcarriga/nvim-notify",
-      "kevinhwang91/nvim-ufo",
-      "petertriho/nvim-scrollbar",
+      -- "kevinhwang91/nvim-ufo",
+      -- "petertriho/nvim-scrollbar",
     },
     cmd = "EnableHL",
     keys = {
