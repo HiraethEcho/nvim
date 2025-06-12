@@ -11,7 +11,7 @@ title: $1
 toc: true
 tags: $2
 date: `!v strftime("%Y-%m-%d")`
-dg-publish: false
+dg-publish: true
 ---
 endsnippet
 
@@ -20,11 +20,9 @@ snippet meta-blog "meta data of a blog" w
 title: $1
 tags: $2
 published: false
-version: draft
 date: `!v strftime("%Y-%m-%d")`
 updated:
 excerpt: $3 
-dg-publish: false
 ---
 endsnippet
 
@@ -33,9 +31,8 @@ snippet meta-hugo "meta data of a hugo blog" w
 title: $1
 tags: $2
 date: `!v strftime("%Y-%m-%d")`
-dg-publish: false
-category: $3
 summary: $4
 weight: $5
+draft: true
 ---
 endsnippet
