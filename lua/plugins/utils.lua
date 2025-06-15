@@ -502,7 +502,7 @@ return {
         desc = "Rename File",
       },
       {
-        "<leader>n",
+        "<leader>N",
         function()
           Snacks.picker.notifications()
         end,
@@ -524,7 +524,7 @@ return {
       },
       -- { "]]",         function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",            mode = { "n", "t" }, },
       -- { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",            mode = { "n", "t" }, },
-      {
+      --[[ {
         "<leader>N",
         desc = "Neovim News",
         function()
@@ -541,7 +541,7 @@ return {
             },
           })
         end,
-      },
+      }, ]]
     },
     init = function()
       vim.api.nvim_create_autocmd("User", {
@@ -869,7 +869,7 @@ return {
     config = function()
       vim.o.foldcolumn = "0" -- '0' is not bad
       vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-      vim.o.foldlevelstart = 1
+      vim.o.foldlevelstart = 99
       vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       require("ufo").setup({
         provider_selector = function(bufnr, filetype, buftype)

@@ -219,3 +219,8 @@ Value = " ",
 Variable = " ",
 }
 ```
+
+
+$query{status:done}
+
+
