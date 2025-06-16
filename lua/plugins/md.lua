@@ -11,6 +11,42 @@ return {
     },
   },
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    -- enabled = false,
+    ft = { "markdown", "md" },
+    keys = {
+      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
+    },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      completions = { blink = { enabled = true } },
+      -- completions = { lsp = { enabled = true } },
+      heading = {
+        width = "block",
+        position = "inline",
+        -- left_margin = 0.5,
+        -- left_pad = 0.2,
+        -- right_pad = 0.2,
+      },
+      bullet = { render_modes = true },
+      latex = { enabled = false },
+      checkbox = {
+        right_pad = 0,
+        custom = {
+          doing = { raw = "[>]", rendered = "󰁕 ", highlight = "RenderMarkdownTodo", scope_highlight = nil },
+        },
+      },
+      code = {
+        width = "block",
+        min_width = 30,
+        position = "right",
+      },
+    },
+  },
+  {
     "antonk52/markdowny.nvim",
     enabled = false,
     ft = { "md", "markdown" },
@@ -188,42 +224,6 @@ return {
         },
       })
     end,
-  },
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    -- enabled = false,
-    ft = { "markdown", "md" },
-    keys = {
-      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
-    },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {
-      completions = { blink = { enabled = true } },
-      -- completions = { lsp = { enabled = true } },
-      heading = {
-        width = "block",
-        position = "inline",
-        -- left_margin = 0.5,
-        -- left_pad = 0.2,
-        -- right_pad = 0.2,
-      },
-      bullet = { render_modes = true },
-      latex = { enabled = false },
-      checkbox = {
-        right_pad = 0,
-        custom = {
-          doing = { raw = "[>]", rendered = "󰁕 ", highlight = "RenderMarkdownTodo", scope_highlight = nil },
-        },
-      },
-      code = {
-        width = "block",
-        min_width = 30,
-        position = "right",
-      },
-    },
   },
   -- enabled
   {
