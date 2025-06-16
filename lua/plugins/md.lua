@@ -1,57 +1,5 @@
 return {
-  {
-    "lervag/vimtex",
-    lazy = false,
-    -- enabled = false,
-    -- ft = { "bib", "tex" },
-    init = function()
-      vim.g.vimtex_view_method = "zathura"
-      -- vim.g.vimtex_view_method = "sioyek"
-      vim.g.vimtex_imaps_leader = ";"
-
-      -- this works
-      -- vim.g.vimtex_view_general_viewer = "okular"
-      -- vim.g.vimtex_view_general_options = [[ --unique file:@pdf\#src:@line@tex]]
-      -- in okular, set 'nvr --remote-silent +%l %f' in settings - configure - editor
-
-      -- vim.g.vimtex_syntax_enabled = 1
-      -- vim.g.vimtex_syntax_conceal_disable = 1
-      vim.g.vimtex_fold_enabled = 1
-      -- vim.g.vimtex_indent_enabled = 0           -- turn off vimtex indentation
-      -- vim.g.vimtex_mappings_enabled = 0         -- disable default mappings
-      -- vim.g.vimtex_imaps_enabled = 0            -- disable insert mode mappings (I use UltiSnips)
-      -- vim.g.vimtex_complete_enabled = 0         -- turn off completion (not currently used so more efficient to turn off)
-      -- vim.g.vimtex_fold_manual=0
-      -- vim.g.vimtex_fold_levelmarker      =1
-      -- vim.g.vimtex_fold_types            =1
-      -- vim.g.vimtex_fold_types_defaults   =1
-      -- vim.g.vimtex_fold_bib_enabled      =1
-      -- vim.g.vimtex_fold_bib_max_key_width=1
-
-      vim.g.vimtex_toc_config = {
-        name = "TOC",
-        layers = { "label", "todo", "include", "content" },
-        split_width = 30,
-        todo_sorted = 1,
-        show_help = 1,
-        show_numbers = 2,
-      }
-
-      vim.g.vimtex_quickfix_enabled = 0
-      vim.g.vimtex_quickfix_ignore_filters = {
-        "Underfull \\\\hbox",
-        "Overfull \\\\hbox",
-        "LaTeX Warning:  float specifier changed to",
-        "LaTeX Warning: The counter will not be printed",
-        "LaTeX Warning: Marginpair on page ",
-        "LaTeX Font Warning: Font shape ",
-        "LaTeX hooks Warning",
-        'Package siunitx Warning: Detected the "physics" package:',
-        "Package hyperref Warning: Token not allowed in a PDF string",
-      }
-    end,
-  },
-  {
+  { -- markview
     "OXY2DEV/markview.nvim",
     enabled = false,
     dependencies = {
@@ -63,24 +11,53 @@ return {
     },
   },
   {
-    "MeanderingProgrammer/render-markdown.nvim",
-    -- enabled = false,
-    ft = { "markdown", "md" },
+    "antonk52/markdowny.nvim",
+    enabled = false,
+    ft = { "md", "markdown" },
+    config = function()
+      require("markdowny").setup()
+      vim.keymap.set("v", "<C-e>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })
+      vim.keymap.set("v", "<C-i>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
+      -- vim.keymap.set("v", "<C-l>", ":lua require('markdowny').link()<cr>", { buffer = 0 })
+      -- vim.keymap.set("v", "<C-k>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
+    end,
+  },
+  {
+    "3rd/image.nvim",
+    build = false,
+    enabled = false,
     keys = {
-      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
-    },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
+      {
+        "<leader>up",
+        function()
+          local image = require("image")
+          if image.is_enabled() then
+            image.disable()
+          else
+            image.enable()
+          end
+        end,
+        desc = "show pictures",
+      },
     },
     opts = {
-      completions = { blink = { enabled = true } },
-      heading = {
-        width = "block",
+      integrations = {
+        markdown = {
+          only_render_image_at_cursor = true, -- defaults to false
+          only_render_image_at_cursor_mode = "inline", -- "popup" or "inline", defaults to "popup"
+        },
       },
-      latex = {
-        enabled = true,
-      },
+    },
+  },
+  {
+    "HakonHarnes/img-clip.nvim",
+    -- event = "VeryLazy",
+    opts = {
+      -- add options here
+      -- or leave it empty to use the default settings
+    },
+    keys = {
+      { "<leader>mP", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
     },
   },
   {
@@ -150,152 +127,46 @@ return {
     end,
   },
   {
-    "chomosuke/typst-preview.nvim",
-    -- lazy = false, -- or
-    ft = "typst",
-    version = "1.*",
-    opts = {
-      dependencies_bin = {
-        ["tinymist"] = "tinymist",
-        ["websocat"] = "websocat",
-      },
-    }, -- lazy.nvim will implicitly calls `setup {}`
-  },
-  {
-    "HakonHarnes/img-clip.nvim",
-    -- event = "VeryLazy",
-    opts = {
-      -- add options here
-      -- or leave it empty to use the default settings
-    },
+    "MeanderingProgrammer/render-markdown.nvim",
+    -- enabled = false,
+    ft = { "markdown", "md" },
     keys = {
-      { "<leader>mP", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
+      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
     },
-  },
-  {
-    "3rd/image.nvim",
-    build = false,
-    enabled = false,
-    keys = {
-      {
-        "<leader>up",
-        function()
-          local image = require("image")
-          if image.is_enabled() then
-            image.disable()
-          else
-            image.enable()
-          end
-        end,
-        desc = "show pictures",
-      },
-    },
-    opts = {
-      integrations = {
-        markdown = {
-          only_render_image_at_cursor = true, -- defaults to false
-          only_render_image_at_cursor_mode = "inline", -- "popup" or "inline", defaults to "popup"
-        },
-      },
-    },
-  },
-  {
-    "willothy/flatten.nvim",
-    enabled = false,
-    lazy = false,
-    priority = 1001,
-    -- event = "VimEnter",
-    opts = {
-      window = {
-        open = "vsplit",
-      },
-    },
-  },
-  {
-    "huantrinh1802/m_taskwarrior_d.nvim",
-    version = "*",
-    enabled = false,
-    -- lazy = false,
-    dependencies = { "MunifTanjim/nui.nvim" },
-    config = function()
-      -- Require
-      require("m_taskwarrior_d").setup()
-      -- Optional
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>te",
-        "<cmd>TWEditTask<cr>",
-        { desc = "TaskWarrior Edit", noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap("n", "<leader>tv", "<cmd>TWView<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>tu", "<cmd>TWUpdateCurrent<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>ts", "<cmd>TWSyncTasks<cr>", { noremap = true, silent = true })
-      -- vim.api.nvim_set_keymap( "n", "<c-space>", "<cmd>TWToggle<cr>", { silent = true })
-      -- Be caution: it may be slow to open large files, because it scan the whole buffer
-      --[[ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
-        group = vim.api.nvim_create_augroup("TWTask", { clear = true }),
-        pattern = "*.md,*.markdown", -- Pattern to match Markdown files
-        callback = function()
-          vim.cmd('TWSyncTasks')
-        end,
-      }) ]]
-    end,
-  },
-  {
-    "duckdm/neowarrior.nvim",
-    event = "VeryLazy",
-    enabled = false,
     dependencies = {
-      -- 'nvim-telescope/telescope.nvim',
-      --- Optional but recommended for nicer inputs
-      --- 'folke/noice.nvim',
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      completions = { blink = { enabled = true } },
+      heading = {
+        width = "block",
+      },
+      latex = {
+        enabled = true,
+      },
+    },
+  },
+  -- enabled
+  {
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install",
+    -- build = function() vim.fn["mkdp#util#install"]() end,
+    enabled = false,
+    -- ft = { "markdown" },
+    keys = {
+      { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
     },
     config = function()
-      local nw = require("neowarrior")
-      local home = vim.env.HOME
-      nw.setup({
-        -- report = "next",
-        -- filter = "\\(due.before:2d or due: \\)",
-        -- dir_setup = {
-        --   {
-        --     dir = home .. "/dev/nvim/neowarrior.nvim",
-        --     filter = "project:neowarrior",
-        --     mode = "tree",
-        --     expanded = true,
-        --   },
-        -- }
-      })
-      vim.keymap.set("n", "<leader>nl", function()
-        nw.open_left()
-      end, { desc = "Open nwarrior on the left side" })
-      vim.keymap.set("n", "<leader>nc", function()
-        nw.open_current()
-      end, { desc = "Open nwarrior below current buffer" })
-      vim.keymap.set("n", "<leader>nb", function()
-        nw.open_below()
-      end, { desc = "Open nwarrior below current buffer" })
-      vim.keymap.set("n", "<leader>na", function()
-        nw.open_above()
-      end, { desc = "Open nwarrior above current buffer" })
-      vim.keymap.set("n", "<leader>nr", function()
-        nw.open_right()
-      end, { desc = "Open nwarrior on the right side" })
-      vim.keymap.set("n", "<leader>nt", function()
-        nw.focus()
-      end, { desc = "Focus nwarrior" })
-    end,
-  },
-  -- disabled
-  {
-    "antonk52/markdowny.nvim",
-    enabled = false,
-    ft = { "md", "markdown" },
-    config = function()
-      require("markdowny").setup()
-      vim.keymap.set("v", "<C-e>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })
-      vim.keymap.set("v", "<C-i>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
-      -- vim.keymap.set("v", "<C-l>", ":lua require('markdowny').link()<cr>", { buffer = 0 })
-      -- vim.keymap.set("v", "<C-k>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
+      if vim.g.is_linux then
+        vim.g.mkdp_browser = "qutebrowser"
+      end
+      -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
+      vim.g.mkdp_theme = "light"
+      vim.g.mkdp_auto_start = 1
+      vim.g.mkdp_auto_close = 0
+      vim.g.mkdp_page_title = "${name}"
+      vim.g.mkdp_filetypes = { "markdown", "md" }
     end,
   },
   {
@@ -423,31 +294,5 @@ return {
       require("obsidian").setup(opts)
       -- see also: 'follow_url_func' config option above.
     end,
-  },
-  {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    -- build = function() vim.fn["mkdp#util#install"]() end,
-    enabled = false,
-    -- ft = { "markdown" },
-    keys = {
-      { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
-    },
-    config = function()
-      if vim.g.is_linux then
-        vim.g.mkdp_browser = "qutebrowser"
-      end
-      -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
-      vim.g.mkdp_theme = "light"
-      vim.g.mkdp_auto_start = 1
-      vim.g.mkdp_auto_close = 0
-      vim.g.mkdp_page_title = "${name}"
-      vim.g.mkdp_filetypes = { "markdown", "md" }
-    end,
-  },
-  {
-    "askfiy/nvim-picgo",
-    cmd = "UploadClipboard",
-    config = true,
   },
 }

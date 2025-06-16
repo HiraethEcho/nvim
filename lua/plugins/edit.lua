@@ -30,15 +30,6 @@ return {
     end,
   },
   {
-    "soemre/commentless.nvim",
-    enabled = false,
-    cmd = "Commentless",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = true,
-  },
-  {
     "Wansmer/treesj",
     keys = {
       { "gK", "<cmd>TSJSplit<CR>", desc = "treesj split" },
@@ -201,7 +192,7 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
-    cmd = {"TWToggle","TWTop"},
+    cmd = { "TWToggle", "TWTop" },
     config = function()
       require("typewriter").setup()
     end,
@@ -321,5 +312,14 @@ return {
         block = 10,
       })
     end,
+  },
+  {
+    "soemre/commentless.nvim",
+    enabled = false,
+    cmd = "Commentless",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = true,
   },
 }

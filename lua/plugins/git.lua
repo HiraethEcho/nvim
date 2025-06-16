@@ -2,6 +2,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     -- enabled = false,
+    event = { "BufReadPost", "BufNewFile" },
     keys = {
       -- { "<leader>hj", "<cmd>Gitsigns next_hunk<cr>",                                  desc = "nexthunk" },
       -- { "<leader>hk", "<cmd>Gitsigns prev_hunk<cr>",                                  desc = "prevhunk" },
