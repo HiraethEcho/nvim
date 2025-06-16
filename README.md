@@ -13,6 +13,10 @@ _all follow for ill jijojlaljfh.,nbvkciozjboijuiouioafdsroiwezkldxj => <> cloud 
 **_asdfg_**
 _allsdfghjklzxcvbnmqwertyuiop_
 
+
+- [ ] klsadjf
+- [>] sasd
+
 > [!tip]
 > a
 
@@ -104,6 +108,10 @@ I am using lazy.nvim as my plugins manager. Plugins are divided in several class
 ### windows and linux
 
 ### callouts
+
+> asdf
+> asfd
+> sdfklfsjdkljfakl
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
@@ -222,5 +230,3 @@ Variable = " ",
 
 
 $query{status:done}
-
-

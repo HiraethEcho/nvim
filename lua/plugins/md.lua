@@ -51,6 +51,7 @@ return {
   },
   {
     "HakonHarnes/img-clip.nvim",
+    enabled = false,
     -- event = "VeryLazy",
     opts = {
       -- add options here
@@ -62,11 +63,27 @@ return {
   },
   {
     "jakewvincent/mkdnflow.nvim",
-    ft = "markdown",
-    -- cmd = { "Mkdnflow", },
+    -- enabled = false,
+    -- ft = "markdown",
+    cmd = { "Mkdnflow", },
     -- lazy=false,
     config = function()
       require("mkdnflow").setup({
+        modules = {
+          bib = true,
+          buffers = true,
+          conceal = true,
+          cursor = true,
+          folds = true,
+          foldtext = true,
+          links = true,
+          lists = true,
+          maps = true,
+          paths = true,
+          tables = true,
+          yaml = false,
+          cmp = false,
+        },
         perspective = {
           priority = "root",
           fallback = "current",
@@ -76,10 +93,10 @@ return {
         },
         silent = false,
         to_do = {
-          symbols = { " ", "x" },
+          symbols = { " ", "x", ">" },
           update_parents = true,
           not_started = " ",
-          -- in_progress = "-",
+          in_progress = ">",
           complete = "x",
         },
         mappings = {
@@ -123,6 +140,52 @@ return {
           MkdnTablePrevCell = false,
           MkdnUnfoldSection = false,
         },
+        foldtext = {
+          title_transformer = function()
+            local function my_title_transformer(text)
+              local updated_title = text:gsub("%b{}", "")
+              updated_title = updated_title:gsub("^%s*", "")
+              updated_title = updated_title:gsub("%s*$", "")
+              updated_title = updated_title:gsub("^######", "░░░░░▓")
+              updated_title = updated_title:gsub("^#####", "░░░░▓▓")
+              updated_title = updated_title:gsub("^####", "░░░▓▓▓")
+              updated_title = updated_title:gsub("^###", "░░▓▓▓▓")
+              updated_title = updated_title:gsub("^##", "░▓▓▓▓▓")
+              updated_title = updated_title:gsub("^#", "▓▓▓▓▓▓")
+              return updated_title
+            end
+            return my_title_transformer
+          end,
+          object_count_icon_set = "nerdfont", -- Use/fall back on the nerdfont icon set
+          object_count_opts = function()
+            local opts = {
+              link = false, -- Prevent links from being counted
+              blockquote = { -- Count block quotes (these aren't counted by default)
+                icon = " ",
+                count_method = {
+                  pattern = { "^>.+$" },
+                  tally = "blocks",
+                },
+              },
+              fncblk = {
+                -- Override the icon for fenced code blocks with 
+                icon = " ",
+              },
+            }
+            return opts
+          end,
+          line_count = false, -- Prevent lines from being counted
+          word_count = true, -- Count the words in the section
+          fill_chars = {
+            left_edge = "╾─",
+            right_edge = "──╼",
+            item_separator = " · ",
+            section_separator = " // ",
+            left_inside = " ┝",
+            right_inside = "┥ ",
+            middle = "─",
+          },
+        },
       })
     end,
   },
@@ -139,11 +202,26 @@ return {
     },
     opts = {
       completions = { blink = { enabled = true } },
+      -- completions = { lsp = { enabled = true } },
       heading = {
         width = "block",
+        position = "inline",
+        -- left_margin = 0.5,
+        -- left_pad = 0.2,
+        -- right_pad = 0.2,
       },
-      latex = {
-        enabled = true,
+      bullet = { render_modes = true },
+      latex = { enabled = false },
+      checkbox = {
+        right_pad = 0,
+        custom = {
+          doing = { raw = "[>]", rendered = "󰁕 ", highlight = "RenderMarkdownTodo", scope_highlight = nil },
+        },
+      },
+      code = {
+        width = "block",
+        min_width = 30,
+        position = "right",
       },
     },
   },
