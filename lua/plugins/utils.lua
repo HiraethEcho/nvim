@@ -849,7 +849,7 @@ return {
     "kevinhwang91/nvim-ufo",
     -- event = "LspAttach",
     event = "BufRead",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       "kevinhwang91/promise-async",
     },
