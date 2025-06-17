@@ -100,8 +100,8 @@ return {
   {
     "jakewvincent/mkdnflow.nvim",
     -- enabled = false,
-    -- ft = "markdown",
-    cmd = { "Mkdnflow", },
+    ft = "markdown",
+    -- cmd = { "Mkdnflow", },
     -- lazy=false,
     config = function()
       require("mkdnflow").setup({
