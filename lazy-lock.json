@@ -104,6 +104,7 @@
   "suda.vim": { "branch": "master", "commit": "9adda7d195222d4e2854efb2a88005a120296c47" },
   "tardis.nvim": { "branch": "main", "commit": "a6ee00a217529490e79d349b1f1a9cf5831180d3" },
   "time-machine.nvim": { "branch": "main", "commit": "93c527136aa7839a972890071aeea4f630bf8b21" },
+  "tiny-code-action.nvim": { "branch": "main", "commit": "747a42be79be802bbe882cc22c2a8d00a6e6a2fd" },
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "cac10593c4baaacd0f2a1f4d8ba9508667bf3f79" },
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },
   "treesj": { "branch": "main", "commit": "3b4a2bc42738a63de17e7485d4cc5e49970ddbcc" },
