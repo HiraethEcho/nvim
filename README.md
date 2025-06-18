@@ -229,6 +229,3 @@ Variable = " ",
 ```
 
 
-$query{status:done}
-
-

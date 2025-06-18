@@ -22,8 +22,8 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     opts = {
-      completions = { blink = { enabled = true } },
-      -- completions = { lsp = { enabled = true } },
+      -- completions = { blink = { enabled = true } }, -- no cmp
+      -- completions = { lsp = { enabled = true } }, -- error loading lsp
       heading = {
         width = "block",
         position = "inline",
@@ -37,6 +37,7 @@ return {
         right_pad = 0,
         custom = {
           doing = { raw = "[>]", rendered = "󰁕 ", highlight = "RenderMarkdownTodo", scope_highlight = nil },
+          deleted = { raw = "[~]", rendered = "󰅙 ", highlight = "DiagnosticWarning", scope_highlight = nil },
         },
       },
       code = {
@@ -108,7 +109,7 @@ return {
         modules = {
           bib = true,
           buffers = true,
-          conceal = true,
+          conceal = false,
           cursor = true,
           folds = true,
           foldtext = true,
@@ -129,11 +130,12 @@ return {
         },
         silent = false,
         to_do = {
-          symbols = { " ", "x", ">" },
+          symbols = { " ", "x", ">", "~" },
           update_parents = true,
           not_started = " ",
           in_progress = ">",
           complete = "x",
+          deleted = "~",
         },
         mappings = {
           MkdnTab = { "i", "<c-l>" },
@@ -141,6 +143,7 @@ return {
           MkdnNextLink = { "n", "]l" },
           MkdnPrevLink = { "n", "[l" },
           MkdnFollowLink = { { "n", "v" }, "<leader>ma" },
+          -- MkdnFollowLink = false,
           MkdnCreateLink = { "v", "<leader>mA" },
           MkdnCreateLinkFromClipboard = { { "n", "v" }, "<leader>mL" },
           MkdnDestroyLink = { "n", "<leader>md" },
@@ -225,7 +228,7 @@ return {
       })
     end,
   },
-  -- enabled
+  -- disabled
   {
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",

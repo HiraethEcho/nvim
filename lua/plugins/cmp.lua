@@ -5,10 +5,10 @@ return {
     event = "InsertEnter",
     version = "*",
     dependencies = {
-      { 'quangnguyen30192/cmp-nvim-ultisnips', config = true },
-      { 'fang2hou/blink-copilot' },
-      { 'saghen/blink.compat',                 version = '*', opts = {}, },
-      { 'SirVer/ultisnips' },
+      { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
+      { "fang2hou/blink-copilot" },
+      { "saghen/blink.compat", version = "*", opts = {} },
+      { "SirVer/ultisnips" },
       -- 'L3MON4D3/LuaSnip',
     },
     opts = {
