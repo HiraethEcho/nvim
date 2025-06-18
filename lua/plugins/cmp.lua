@@ -31,9 +31,7 @@ return {
         keyword = {
           range = "full",
         },
-        documentation = {
-          auto_show = true,
-        },
+        documentation = { auto_show = true, auto_show_delay_ms = 50 },
         menu = {
           draw = {
             columns = { { "label", gap = 1 }, { "kind_icon" }, { "source_name" } },
@@ -69,9 +67,7 @@ return {
           },
         },
       },
-      cmdline = {
-        enabled = false,
-      },
+      cmdline = { enabled = false },
     },
     -- opts_extend = { "sources.default" },
   },

@@ -8,9 +8,10 @@ nmap <localleader>s <plug>(vimtex-env-toggle-star)
    " tss              |<plug>(vimtex-env-toggle-star)|                `n`
    " tsd              |<plug>(vimtex-delim-toggle-modifier)|          `nx`
 
-setlocal foldmethod=expr
-setlocal foldexpr=vimtex#fold#level(v:lnum)
-setlocal foldtext=vimtex#fold#text()
+" setlocal foldmethod=expr
+" setlocal foldexpr=vimtex#fold#level(v:lnum)
+" setlocal foldtext=vimtex#fold#text()
+" vim.o.foldlevel = 2
 
    " <localleader>li  |<plug>(vimtex-info)|                           `n`
    " <localleader>lI  |<plug>(vimtex-info-full)|                      `n`

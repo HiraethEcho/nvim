@@ -39,5 +39,3 @@ function _G.custom_foldtext()
   return result
 end
 vim.o.foldtext = 'v:lua.custom_foldtext()'
-
-vim.notify("load fold")
