@@ -585,4 +585,10 @@ return {
       },
     },
   },
+  {
+    "seandewar/actually-doom.nvim", -- what the fuck? why would I play DOOM in nvim?
+    enabled = false,
+    cmd = "Doom",
+    config = true,
+  },
 }
