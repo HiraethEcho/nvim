@@ -51,7 +51,7 @@ return {
   {
     "huantrinh1802/m_taskwarrior_d.nvim",
     version = "*",
-    cmd = { "TWView", "TWQueryTasks","TWBufQueryTasks" },
+    cmd = { "TWView", "TWQueryTasks", "TWBufQueryTasks" },
     -- enabled = false,
     -- lazy = false,
     dependencies = { "MunifTanjim/nui.nvim" },
@@ -59,9 +59,9 @@ return {
       -- Require
       require("m_taskwarrior_d").setup({
         -- The order of toggling task statuses
-        task_statuses = { " ", ">", "x", "~","-" },
+        task_statuses = { " ", ">", "x", "~", "-" },
         -- The mapping between status and symbol in checkbox
-        status_map = { [" "] = "pending", [">"] = "active", ["x"] = "completed", ["~"] = "deleted" , ["-"]="waiting"},
+        status_map = { [" "] = "pending", [">"] = "active", ["x"] = "completed", ["~"] = "deleted", ["-"] = "waiting" },
         -- The checkbox prefix and suffix
         checkbox_prefix = "[",
         checkbox_suffix = "]",
@@ -90,6 +90,19 @@ return {
           vim.cmd('TWSyncTasks')
         end,
       }) ]]
+    end,
+  },
+  {
+    "huantrinh1802/khal_endar.nvim",
+    enabled = false,
+    version = "*",
+    cmd = {"KLInteract","KLList","KLShow"},
+    dependencies = { "MunifTanjim/nui.nvim", "chrisbra/Colorizer" },
+    config = function()
+      -- Require
+      require("khal_endar").setup()
+      -- Optional
+      -- vim.api.nvim_set_keymap("n", "<leader>ki", "<cmd>KLInteract<cr>", { desc = "[K]hal [I]interact", noremap = true, silent = true })
     end,
   },
   {
