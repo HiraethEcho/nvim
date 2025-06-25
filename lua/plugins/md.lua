@@ -13,6 +13,7 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     -- enabled = false,
+    lazy = false,
     ft = { "markdown", "md" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
@@ -24,13 +25,7 @@ return {
     opts = {
       -- completions = { blink = { enabled = true } }, -- no cmp
       -- completions = { lsp = { enabled = true } }, -- error loading lsp
-      heading = {
-        width = "block",
-        position = "inline",
-        -- left_margin = 0.5,
-        -- left_pad = 0.2,
-        -- right_pad = 0.2,
-      },
+      heading = { width = "block", position = "inline" },
       bullet = { render_modes = true },
       latex = { enabled = false },
       checkbox = {
@@ -40,12 +35,16 @@ return {
           deleted = { raw = "[~]", rendered = "󰅙 ", highlight = "DiagnosticWarning", scope_highlight = nil },
         },
       },
-      code = {
-        width = "block",
-        min_width = 30,
-        position = "right",
-      },
+      code = { width = "block", min_width = 30, position = "right" },
     },
+  },
+  {
+    "yelog/marklive.nvim",
+    enabled = false,
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    keys = { { "<C-e>", "<cmd>MarkliveToggle<cr>", desc = "Markiview toggle", ft = "markdown" } },
+    ft = "markdown",
+    config = true,
   },
   {
     "antonk52/markdowny.nvim",
@@ -57,6 +56,19 @@ return {
       vim.keymap.set("v", "<C-i>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
       -- vim.keymap.set("v", "<C-l>", ":lua require('markdowny').link()<cr>", { buffer = 0 })
       -- vim.keymap.set("v", "<C-k>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
+    end,
+  },
+  {
+    "Zeioth/markmap.nvim",
+    -- build = "yarn global add markmap-cli",
+    cmd = { "MarkmapOpen", "MarkmapSave", "MarkmapWatch", "MarkmapWatchStop" },
+    opts = {
+      html_output = "/tmp/markmap.html", -- (default) Setting a empty string "" here means: [Current buffer path].html
+      hide_toolbar = false, -- (default)
+      grace_period = 3600000, -- (default) Stops markmap watch after 60 minutes. Set it to 0 to disable the grace_period.
+    },
+    config = function(_, opts)
+      require("markmap").setup(opts)
     end,
   },
   {
