@@ -239,7 +239,7 @@ return {
   {
     "shellRaining/hlchunk.nvim",
     -- event = "BufRead",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       -- "rcarriga/nvim-notify",
       -- "kevinhwang91/nvim-ufo",

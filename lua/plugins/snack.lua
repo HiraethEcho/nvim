@@ -49,7 +49,29 @@ return {
       },
     },
     explorer = { enabled = true },
-    indent = { enabled = false },
+    indent = {
+      enabled = false,
+      animate = { enabled = false },
+      indent = { enabled = true },
+      scope = { enabled = false },
+      chunk = {
+        enabled = true,
+        char = {
+          corner_top = "╭",
+          corner_bottom = "╰",
+        },
+        hl = {
+          "SnacksIndent1",
+          "SnacksIndent2",
+          "SnacksIndent3",
+          "SnacksIndent4",
+          "SnacksIndent5",
+          "SnacksIndent6",
+          "SnacksIndent7",
+          "SnacksIndent8",
+        },
+      },
+    },
     input = { enabled = true },
     notifier = { enabled = true },
     picker = {
