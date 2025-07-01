@@ -19,7 +19,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     -- enabled = false,
-    event = "BufReadPost",
+    event = "BufEnter",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       -- "meuter/lualine-so-fancy.nvim",
