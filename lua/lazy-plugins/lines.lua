@@ -1,21 +1,5 @@
 return {
-  {
-    "eandrju/cellular-automaton.nvim",
-    keys = {
-      { "<leader>uR", "<cmd>CellularAutomaton make_it_rain<cr>", desc = "Rain" },
-      { "<leader>uG", "<cmd>CellularAutomaton game_of_life<cr>", desc = "Rain" },
-    },
-    config = function()
-      -- vim.api.nvim_create_user_command("Rain", require("cellular-automaton").start_animation("make_it_rain"), {})
-    end,
-  },
-  {
-    "norcalli/nvim-colorizer.lua",
-    cmd = "ColorizerToggle",
-    config = function()
-      require("colorizer").setup()
-    end,
-  },
+  -- top and bottom
   {
     "nvim-lualine/lualine.nvim",
     -- enabled = false,
@@ -236,73 +220,7 @@ return {
       vim.keymap.set("n", "<C-0>", "<cmd>LualineBuffersJump 10<CR>")
     end,
   },
-  {
-    "shellRaining/hlchunk.nvim",
-    -- event = "BufRead",
-    enabled = false,
-    dependencies = {
-      -- "rcarriga/nvim-notify",
-      -- "kevinhwang91/nvim-ufo",
-      -- "petertriho/nvim-scrollbar",
-    },
-    cmd = "EnableHL",
-    keys = {
-      { "<leader>uh", "<cmd>EnableHL<cr>", desc = "Enable hlchunk" },
-    },
-    config = function()
-      require("hlchunk").setup({
-        chunk = {
-          enable = true,
-          use_treesitter = true,
-          style = {
-            { fg = "#806d9c" },
-          },
-        },
-        indent = {
-          enable = true,
-          use_treesitter = true,
-        },
-        blank = {
-          enable = true,
-          chars = {
-            " ",
-          },
-          style = {
-            { bg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("cursorline")), "bg", "gui") },
-            { bg = "", fg = "" },
-          },
-        },
-      })
-    end,
-  },
-  {
-    "utilyre/sentiment.nvim",
-    version = "*",
-    event = "InsertEnter", -- keep for lazy loading
-    opts = {
-      pairs = {
-        { "(", ")" },
-        { "{", "}" },
-        { "[", "]" },
-      }, -- config
-    },
-  },
-  -- disable
-  {
-    "rcarriga/nvim-notify",
-    event = "BufRead",
-    enabled = false,
-    config = function()
-      require("notify").setup({
-        fps = 60,
-        level = 2,
-        render = "default",
-        stages = "slide",
-        timeout = 2000,
-      })
-      vim.notify = require("notify")
-    end,
-  },
+  -- left
   {
     "luukvbaal/statuscol.nvim",
     -- lazy = false,
@@ -312,74 +230,7 @@ return {
       require("statuscol").setup({})
     end,
   },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    enabled = false,
-    dependencies = {
-      "hiphish/rainbow-delimiters.nvim",
-    },
-    keys = {
-      { "<leader>ui", "<cmd>IBLToggle<cr>", desc = "toggle indent" },
-      { "<leader>uf", "<cmd>IBLToggleScope<cr>", desc = "toggle scope" },
-    },
-    main = "ibl",
-    -- opts = { },
-    config = function()
-      local highlight = {
-        "RainbowRed",
-        "RainbowYellow",
-        "RainbowBlue",
-        "RainbowOrange",
-        "RainbowGreen",
-        "RainbowViolet",
-        "RainbowCyan",
-      }
-      local hooks = require("ibl.hooks")
-      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-        vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-        vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-        vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-        vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-        vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-        vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-        vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-      end)
-      vim.g.rainbow_delimiters = { highlight = highlight }
-
-      require("ibl").setup({
-        scope = {
-          enabled = true,
-          highlight = highlight,
-        },
-        indent = {
-          highlight = highlight,
-          char = "",
-        },
-        whitespace = {
-          highlight = highlight,
-          remove_blankline_trail = false,
-        },
-      })
-      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-    end,
-  },
-  {
-    "folke/noice.nvim",
-    enabled = false,
-    event = "BufReadPost",
-    opts = {
-      -- add any options here
-      -- cmdline = {enabled = false,}
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-    },
-  },
+  -- right
   {
     "petertriho/nvim-scrollbar",
     enabled = false,
@@ -479,140 +330,17 @@ return {
       }
     end,
   },
+  -- inside
   {
     "nvim-zh/colorful-winsep.nvim",
     enabled = false,
     config = true,
     event = { "BufRead", "BufNewFile" },
   },
-  {
-    "edluffy/hologram.nvim",
-    enabled = false,
-  },
-  {
-    "goolord/alpha-nvim",
-    enabled = false,
-    dependencies = {
-      "jedrzejboczar/possession.nvim",
-      -- "nvim-telescope/telescope.nvim",
-      -- "Shatur/neovim-session-manager",
-    },
-    event = "VimEnter",
-    opts = function()
-      local dashboard = require("alpha.themes.dashboard")
-      dashboard.section.buttons.val = {
-        (function()
-          local group = { type = "group", opts = { spacing = 0 } }
-          group.val = {
-            {
-              type = "text",
-              val = "Sessions",
-              opts = {
-                position = "center",
-              },
-            },
-          }
-          local path = vim.fn.stdpath("data") .. "/sessions"
-          local files = vim.split(vim.fn.glob(path .. "/*.json"), "\n")
-          local i = 1
-          for _, file in pairs(files) do
-            local basename = vim.fs.basename(file):gsub("%.json", "")
-            if basename ~= "config" and basename ~= "tmp" and basename ~= "blog" then
-              -- if basename ~= "tmp" then
-              local button = dashboard.button(tostring(i), "● " .. basename, "<cmd>PLoad " .. basename .. "<cr>")
-              table.insert(group.val, button)
-              i = i + 1
-              -- end
-            end
-          end
-          return group
-        end)(),
-        dashboard.button("e", " " .. " New Files", "<cmd>enew<CR>"),
-        dashboard.button("t", "󰃨 " .. " TMP", [[<cmd>PLoad tmp<CR>]]),
-        -- dashboard.button("h", " " .. " history files", [[<cmd>Telescope oldfiles<CR>]]),
-        -- dashboard.button("s", " " .. " Sessions", ":SessionManager load_session<CR>"),
-        dashboard.button("c", " " .. " Nvim Config", [[<cmd>PLoad config<CR>]]),
-        dashboard.button("b", "󰖟 " .. " blog", [[<cmd>PLoad blog<CR>]]),
-        dashboard.button("l", "󰒲 " .. " Lazy", "<cmd>Lazy<CR>"),
-        dashboard.button("q", " " .. " Quit", "<cmd>qa<CR>"),
-      }
-      for _, button in ipairs(dashboard.section.buttons.val) do
-        button.opts.hl = "AlphaButtons"
-        button.opts.hl_shortcut = "AlphaShortcut"
-      end
-      dashboard.section.footer.opts.hl = "Type"
-      dashboard.section.header.opts.hl = "AlphaHeader"
-      dashboard.section.buttons.opts.hl = "AlphaButtons"
-      dashboard.opts.layout[1].val = 8
-      return dashboard
-    end,
-    config = function(_, dashboard)
-      require("alpha").setup(dashboard.opts)
-      -- config = function()
-      local alpha = require("alpha")
-      local startify = require("alpha.themes.startify")
-
-      startify.section.header.val = {
-        [[                                   __                ]],
-        [[      ___     ___    ___   __  __ /\_\    ___ ___    ]],
-        [[     / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-        [[    /\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-        [[    \ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-        [[     \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
-      }
-      startify.section.top_buttons.val = {
-        startify.button("e", " " .. " New Files", ":enew<CR>"),
-        -- startify.button("s", "  Sessions", ":SessionManager load_session  <CR>"),
-        -- startify.button("c", " " .. " Nvim Config", ":<cmd>e $MYVIMRC<CR>"),
-        -- startify.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
-      }
-      startify.section.mru.val = { { type = "padding", val = 3 } }
-      startify.section.mru_cwd.val = { { type = "padding", val = 3 } }
-      startify.section.bottom_buttons.val = {
-        startify.button("q", "󰅚  Quit NVIM", ":qa<CR>"),
-      }
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "LazyVimStarted",
-        callback = function()
-          local stats = require("lazy").stats()
-          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-          dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-          -- startify.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-          pcall(vim.cmd.AlphaRedraw)
-        end,
-      })
-
-      -- alpha.setup(startify.config)
-    end,
-  },
-  {
-    "gen740/SmoothCursor.nvim",
-    lazy = false,
-    enabled = false,
-    config = function()
-      require("smoothcursor").setup({
-        type = "default", -- Cursor movement calculation method, choose "default", "exp" (exponential) or "matrix".
-      })
-    end,
-  },
-  {
-    "stevearc/dressing.nvim",
-    enabled = false,
-    event = "BufReadPost",
-    opts = {},
-  },
-  {
-    "xiyaowong/nvim-transparent",
-    enabled = false,
-    cmd = "TransparentEnable",
-    -- lazy=false,
-    config = function()
-      require("transparent").setup({})
-    end,
-  },
+  -- inside horizontal
   {
     "mvllow/modes.nvim",
-    enabled = false,
+    -- enabled = false,
     tag = "v0.2.0",
     event = "InsertEnter",
     config = function()
@@ -627,6 +355,97 @@ return {
         -- Set opacity for cursorline and number background
         line_opacity = 0.2,
       })
+    end,
+  },
+  -- inside verticle
+  {
+    "shellRaining/hlchunk.nvim",
+    -- event = "BufRead",
+    enabled = false,
+    dependencies = {
+      -- "rcarriga/nvim-notify",
+      -- "kevinhwang91/nvim-ufo",
+      -- "petertriho/nvim-scrollbar",
+    },
+    cmd = "EnableHL",
+    keys = {
+      { "<leader>uh", "<cmd>EnableHL<cr>", desc = "Enable hlchunk" },
+    },
+    config = function()
+      require("hlchunk").setup({
+        chunk = {
+          enable = true,
+          use_treesitter = true,
+          style = {
+            { fg = "#806d9c" },
+          },
+        },
+        indent = {
+          enable = true,
+          use_treesitter = true,
+        },
+        blank = {
+          enable = true,
+          chars = {
+            " ",
+          },
+          style = {
+            { bg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("cursorline")), "bg", "gui") },
+            { bg = "", fg = "" },
+          },
+        },
+      })
+    end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    enabled = false,
+    dependencies = {
+      "hiphish/rainbow-delimiters.nvim",
+    },
+    keys = {
+      { "<leader>ui", "<cmd>IBLToggle<cr>", desc = "toggle indent" },
+      { "<leader>uf", "<cmd>IBLToggleScope<cr>", desc = "toggle scope" },
+    },
+    main = "ibl",
+    -- opts = { },
+    config = function()
+      local highlight = {
+        "RainbowRed",
+        "RainbowYellow",
+        "RainbowBlue",
+        "RainbowOrange",
+        "RainbowGreen",
+        "RainbowViolet",
+        "RainbowCyan",
+      }
+      local hooks = require("ibl.hooks")
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+        vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+        vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+        vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+        vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+        vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+        vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+      end)
+      vim.g.rainbow_delimiters = { highlight = highlight }
+
+      require("ibl").setup({
+        scope = {
+          enabled = true,
+          highlight = highlight,
+        },
+        indent = {
+          highlight = highlight,
+          char = "",
+        },
+        whitespace = {
+          highlight = highlight,
+          remove_blankline_trail = false,
+        },
+      })
+      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
     end,
   },
 }

@@ -1,4 +1,5 @@
 return {
+  -- render
   { -- markview
     "OXY2DEV/markview.nvim",
     enabled = false,
@@ -13,7 +14,7 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     -- enabled = false,
-    lazy = false,
+    -- lazy = false,
     ft = { "markdown", "md" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
@@ -47,69 +48,27 @@ return {
     config = true,
   },
   {
-    "antonk52/markdowny.nvim",
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install",
+    -- build = function() vim.fn["mkdp#util#install"]() end,
     enabled = false,
-    ft = { "md", "markdown" },
+    -- ft = { "markdown" },
+    keys = {
+      { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
+    },
     config = function()
-      require("markdowny").setup()
-      vim.keymap.set("v", "<C-e>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })
-      vim.keymap.set("v", "<C-i>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
-      -- vim.keymap.set("v", "<C-l>", ":lua require('markdowny').link()<cr>", { buffer = 0 })
-      -- vim.keymap.set("v", "<C-k>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
+      if vim.g.is_linux then
+        vim.g.mkdp_browser = "qutebrowser"
+      end
+      -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
+      vim.g.mkdp_theme = "light"
+      vim.g.mkdp_auto_start = 1
+      vim.g.mkdp_auto_close = 0
+      vim.g.mkdp_page_title = "${name}"
+      vim.g.mkdp_filetypes = { "markdown", "md" }
     end,
   },
-  {
-    "Zeioth/markmap.nvim",
-    -- build = "yarn global add markmap-cli",
-    cmd = { "MarkmapOpen", "MarkmapSave", "MarkmapWatch", "MarkmapWatchStop" },
-    opts = {
-      html_output = "/tmp/markmap.html", -- (default) Setting a empty string "" here means: [Current buffer path].html
-      hide_toolbar = false, -- (default)
-      grace_period = 3600000, -- (default) Stops markmap watch after 60 minutes. Set it to 0 to disable the grace_period.
-    },
-    config = function(_, opts)
-      require("markmap").setup(opts)
-    end,
-  },
-  {
-    "3rd/image.nvim",
-    build = false,
-    enabled = false,
-    keys = {
-      {
-        "<leader>up",
-        function()
-          local image = require("image")
-          if image.is_enabled() then
-            image.disable()
-          else
-            image.enable()
-          end
-        end,
-        desc = "show pictures",
-      },
-    },
-    opts = {
-      integrations = {
-        markdown = {
-          only_render_image_at_cursor = true, -- defaults to false
-          only_render_image_at_cursor_mode = "inline", -- "popup" or "inline", defaults to "popup"
-        },
-      },
-    },
-  },
-  {
-    "HakonHarnes/img-clip.nvim",
-    enabled = false,
-    -- event = "VeryLazy",
-    opts = {
-      -- add options here
-      -- or leave it empty to use the default settings
-    },
-    keys = {
-      { "<leader>mP", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
-    },
-  },
+  -- enhance
   {
     "jakewvincent/mkdnflow.nvim",
     -- enabled = false,
@@ -240,26 +199,16 @@ return {
       })
     end,
   },
-  -- disabled
   {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    -- build = function() vim.fn["mkdp#util#install"]() end,
+    "antonk52/markdowny.nvim",
     enabled = false,
-    -- ft = { "markdown" },
-    keys = {
-      { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "markdown Html Preview" },
-    },
+    ft = { "md", "markdown" },
     config = function()
-      if vim.g.is_linux then
-        vim.g.mkdp_browser = "qutebrowser"
-      end
-      -- vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/colors/markdown.css"
-      vim.g.mkdp_theme = "light"
-      vim.g.mkdp_auto_start = 1
-      vim.g.mkdp_auto_close = 0
-      vim.g.mkdp_page_title = "${name}"
-      vim.g.mkdp_filetypes = { "markdown", "md" }
+      require("markdowny").setup()
+      vim.keymap.set("v", "<C-e>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })
+      vim.keymap.set("v", "<C-i>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
+      -- vim.keymap.set("v", "<C-l>", ":lua require('markdowny').link()<cr>", { buffer = 0 })
+      -- vim.keymap.set("v", "<C-k>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
     end,
   },
   {
@@ -387,5 +336,58 @@ return {
       require("obsidian").setup(opts)
       -- see also: 'follow_url_func' config option above.
     end,
+  },
+  {
+    "Zeioth/markmap.nvim",
+    -- build = "yarn global add markmap-cli",
+    cmd = { "MarkmapOpen", "MarkmapSave", "MarkmapWatch", "MarkmapWatchStop" },
+    opts = {
+      html_output = "/tmp/markmap.html", -- (default) Setting a empty string "" here means: [Current buffer path].html
+      hide_toolbar = false, -- (default)
+      grace_period = 3600000, -- (default) Stops markmap watch after 60 minutes. Set it to 0 to disable the grace_period.
+    },
+    config = function(_, opts)
+      require("markmap").setup(opts)
+    end,
+  },
+  -- img
+  {
+    "3rd/image.nvim",
+    build = false,
+    enabled = false,
+    keys = {
+      {
+        "<leader>up",
+        function()
+          local image = require("image")
+          if image.is_enabled() then
+            image.disable()
+          else
+            image.enable()
+          end
+        end,
+        desc = "show pictures",
+      },
+    },
+    opts = {
+      integrations = {
+        markdown = {
+          only_render_image_at_cursor = true, -- defaults to false
+          only_render_image_at_cursor_mode = "inline", -- "popup" or "inline", defaults to "popup"
+        },
+      },
+    },
+  },
+  {
+    "HakonHarnes/img-clip.nvim",
+    enabled = false,
+    -- event = "VeryLazy",
+    opts = {
+      -- add options here
+      -- or leave it empty to use the default settings
+    },
+    keys = {
+      { "<leader>mP", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
+    },
   },
 }

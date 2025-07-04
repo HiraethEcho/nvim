@@ -54,9 +54,7 @@ return {
   {
     "NeogitOrg/neogit",
     cmd = "Neogit",
-    opts = {
-      graph_style = "kitty",
-    },
+    opts = { graph_style = "kitty" },
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
       "sindrets/diffview.nvim", -- optional - Diff integration
