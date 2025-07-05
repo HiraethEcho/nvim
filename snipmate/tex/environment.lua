@@ -31,7 +31,7 @@ return {
     { condition = tex.in_text }
   ),
   s(
-    { trig = "dm", snippetType = "autosnippet" },
+    { trig = "dd", snippetType = "autosnippet" },
     fmta(
       [[
       \[

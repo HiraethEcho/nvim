@@ -1,5 +1,8 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+-- vim.g.mapleader = " "
+-- vim.g.maplocalleader = ","
+
+vim.g.mapleader = vim.keycode("<space>")
+vim.g.maplocalleader = vim.keycode("<cr>")
 
 local opt = vim.opt
 -- edit
@@ -28,7 +31,14 @@ opt.shortmess:append({ W = true, I = true, c = true })
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.list = true -- Show some invisible characters (tabs...
 -- opt.listchars:append("eol:↴")
-opt.listchars:append("space:⋅")
+-- opt.listchars:append("space:⋅")
+opt.listchars = { -- NOTE: using `vim.opt` instead of `vim.o` to pass rich object
+  tab = "▏ ",
+  trail = "·",
+  extends = "»",
+  precedes = "«",
+  space = "⋅",
+}
 -- opt.whichwrap = "bs<>[]"     -- which "horizontal" keys are allowed to travel to prev/next line
 opt.winminwidth = 10 -- Minimum window width
 opt.wrap = false -- Disable line wrap
@@ -79,3 +89,5 @@ opt.autowrite = true -- Enable auto write
 -- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 vim.g.loaded_matchparen = 1 -- "utilyre/sentiment.nvim",
+
+vim.opt.completeopt = { "menu", "popup", "menuone", "noinsert", "noselect", "fuzzy", "preview" }

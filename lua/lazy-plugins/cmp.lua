@@ -5,11 +5,12 @@ return {
     event = "InsertEnter",
     version = "*",
     dependencies = {
-      { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
+      -- { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
+      "nvim-treesitter/nvim-treesitter",
       { "fang2hou/blink-copilot" },
       { "saghen/blink.compat", version = "*", opts = {} },
-      { "SirVer/ultisnips" },
-      -- 'L3MON4D3/LuaSnip',
+      -- { "SirVer/ultisnips" },
+      "L3MON4D3/LuaSnip",
     },
     opts = {
       snippets = { preset = "luasnip" },
@@ -24,47 +25,24 @@ return {
         ["<Up>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
-        ["<C-e>"] = { "hide", "fallback" },
+        -- ["<C-e>"] = { "hide", "fallback" },
       },
       signature = { enabled = true },
       completion = {
-        keyword = {
-          range = "full",
-        },
+        keyword = { range = "full" },
         documentation = { auto_show = true, auto_show_delay_ms = 50 },
-        menu = {
-          draw = {
-            columns = { { "label", gap = 1 }, { "kind_icon" }, { "source_name" } },
-          },
-        },
-        list = {
-          selection = {
-            preselect = false,
-            -- auto_insert = false,
-          },
-        },
+        menu = { draw = { columns = { { "label", gap = 1 }, { "kind_icon" }, { "source_name" } } } },
+        list = { selection = { preselect = false } },
         ghost_text = { enabled = true },
       },
       sources = {
-        default = { "ultisnips", "lsp", "path", "buffer", "copilot" },
+        -- default = { "ultisnips", "lsp", "path", "buffer", "copilot" },
         -- default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot" },
-        -- default = { "snippets", "lsp", "path", "buffer", "copilot" },
+        default = { "snippets", "lsp", "path", "buffer", "copilot" },
         providers = {
-          buffer = {
-            opts = { get_bufnrs = vim.api.nvim_list_bufs },
-            -- score_offset = 10000,
-          },
-          copilot = {
-            name = "copilot",
-            module = "blink-copilot",
-            score_offset = 100,
-            async = true,
-          },
-          ultisnips = {
-            name = "ultisnips",
-            module = "blink.compat.source",
-            score_offset = 300,
-          },
+          buffer = { opts = { get_bufnrs = vim.api.nvim_list_bufs } },
+          copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
+          -- ultisnips = { name = "ultisnips", module = "blink.compat.source", score_offset = 300 },
         },
       },
       cmdline = { enabled = false },
@@ -224,17 +202,50 @@ return {
     -- enabled = false,
     version = "v2.*",
     config = function()
-      require("luasnip").config.set_config({
+      local ls=require("luasnip")
+      local types = require("luasnip.util.types")
+      ls.setup({
         enable_autosnippets = true,
-        store_selection_keys = "<Tab>",
+        store_selection_keys = "<BS>",
+        -- say tex code block in markdown, but not work
+        -- ft_func = require("luasnip.extras.filetype_functions").from_cursor(),
+        ext_opts = {
+          [types.choiceNode] = {
+            active = {
+              virt_text = { { "●", "RainbowBlue" } },
+            },
+          },
+          [types.insertNode] = {
+            active = {
+              virt_text = { { "●", "RainbowOrange" } },
+            },
+          },
+        },
       })
-      -- require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/LuaSnip/" })
-      -- require("luasnip.loaders.from_snipmate").load({ paths = vim.fn.stdpath("config") .. "/snipmate/" })
+      require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/LuaSnip/" })
+      require("luasnip.loaders.from_snipmate").load({ paths = vim.fn.stdpath("config") .. "/snipmate/" })
       --[[ local auto_expand = require("luasnip").expand_auto
       require("luasnip").expand_auto = function(...)
         vim.o.undolevels = vim.o.undolevels
         auto_expand(...)
       end ]]
+
+      -- set keybinds for both INSERT and VISUAL.
+      -- vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
+      -- vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
+      -- vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", {})
+      -- vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
+      vim.keymap.set("i", "<C-n>", function()
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
+      end)
+      vim.keymap.set("i", "<C-p>", function()
+        if ls.choice_active() then
+          ls.change_choice(-1)
+        end
+      end)
+
     end,
   },
 }
