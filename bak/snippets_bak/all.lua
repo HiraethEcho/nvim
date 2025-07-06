@@ -40,7 +40,8 @@ local function copy(args)
 end
 
 -- 'recursive' dynamic snippet. Expands to some text followed by itself.
-local rec_ls = function()
+local rec_ls
+rec_ls = function()
   return sn(
     nil,
     c(1, {
@@ -90,11 +91,21 @@ return {
 
   s("fmt5", fmta("foo() { return <>; }", i(1, "x"))),
 
+  s("cond2", {
+    t("will only expand at the beginning of the line"),
+  }, {
+    condition = conds_expand.line_begin,
+  }),
+  s("cond3", {
+    t("will only expand at the end of the line"),
+  }, {
+    condition = conds_expand.line_end,
+  }),
 
   -- ls.parser.parse_snippet({ trig = "%d", regTrig = true }, "A Number!!"),
   -- ls.parser.parse_snipmate("year", "The year is `strftime('%Y')`"),
   -- ls.parser.parse_snippet("lspsyn", "Wow! This ${1:Stuff} really ${2:works. ${3:Well, a bit.}}"),
-  --[[ s("paren_change", {
+  s("paren_change", {
     c(1, {
       sn(nil, { t("("), r(1, "user_text"), t(")") }),
       sn(nil, { t("["), r(1, "user_text"), t("]") }),
@@ -105,8 +116,7 @@ return {
       -- key passed to restoreNodes.
       ["user_text"] = i(1, "default_text"),
     },
-  }), ]]
-  --[[
+  }),
   ms({
     common = { snippetType = "autosnippet" },
     { trig = "a", snippetType = "snippet" },
@@ -120,7 +130,6 @@ return {
   }, {
     t("a or b (but autotriggered!!)"),
   }),
-]]
   s("extras4", { i(1), t({ "", "" }), i(2), rep(1), rep(2) }),
   s(
     { trig = "a%d", regTrig = true },
@@ -194,15 +203,5 @@ return {
   s("nempty", {
     i(1, "sample_text"),
     n(1, "i(1) is not empty!"),
-  }),
-  s("cond2", {
-    t("will only expand at the beginning of the line"),
-  }, {
-    condition = conds_expand.line_begin,
-  }),
-  s("cond3", {
-    t("will only expand at the end of the line"),
-  }, {
-    condition = conds_expand.line_end,
   }),
 }

@@ -2,7 +2,7 @@
 -- vim.g.maplocalleader = ","
 
 vim.g.mapleader = vim.keycode("<space>")
-vim.g.maplocalleader = vim.keycode("<cr>")
+vim.g.maplocalleader = vim.keycode(",")
 
 local opt = vim.opt
 -- edit

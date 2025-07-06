@@ -1,5 +1,41 @@
 return {
   {
+    "echasnovski/mini.starter",
+    -- enabled = false,
+    version = "*",
+    event = "VimEnter",
+    dependencies = {
+      "echasnovski/mini.sessions",
+    },
+    config = function()
+      local starter = require("mini.starter")
+      starter.setup({
+        evaluate_single = true,
+        items = {
+          starter.sections.sessions(8, true),
+          starter.sections.recent_files(5, false),
+          -- starter.sections.telescope(),
+          -- starter.sections.recent_files(3, true), -- local
+          -- starter.sections.builtin_actions(),
+          { name = "start up time", action = [[StartupTime]], section = "actions" },
+          { name = "lazy.nvim", action = [[Lazy]], section = "actions" },
+          { name = "quit", action = [[quit]], section = "actions" },
+          -- { name = "profile", action = [[lua Snacks.profiler.toggle()]], section = "actions" },
+          { name = "new file", action = "enew", section = "actions" },
+        },
+        header = "",
+        footer = "",
+        content_hooks = {
+          -- starter.gen_hook.adding_bullet(),
+          starter.gen_hook.indexing("all", { "Sessions", "actions" }),
+          -- starter.gen_hook.indexing('all', { 'Builtin actions' }),
+          starter.gen_hook.padding(3, 2),
+          starter.gen_hook.aligning("center", "center"),
+        },
+      })
+    end,
+  },
+  {
     "goolord/alpha-nvim",
     enabled = false,
     dependencies = {
@@ -98,46 +134,11 @@ return {
   {
     "echasnovski/mini.sessions",
     version = "*",
+    cmd = {"SessionSave", "SessionSearch"},
     -- enabled = false,
     opts = {
       directory = vim.fn.stdpath("state") .. "/sessions",
     },
-  },
-  {
-    "echasnovski/mini.starter",
-    -- enabled = false,
-    version = "*",
-    event = "VimEnter",
-    dependencies = {
-      -- 'rmagatti/auto-session',
-      "echasnovski/mini.sessions",
-    },
-    config = function()
-      local starter = require("mini.starter")
-      starter.setup({
-        evaluate_single = true,
-        items = {
-          starter.sections.sessions(8, true),
-          starter.sections.recent_files(5, false),
-          -- starter.sections.telescope(),
-          -- starter.sections.recent_files(3, true), -- local
-          -- starter.sections.builtin_actions(),
-          { name = "start up time", action = [[StartupTime]], section = "actions" },
-          { name = "lazy.nvim", action = [[Lazy]], section = "actions" },
-          { name = "quit", action = [[quit]], section = "actions" },
-          { name = "new file", action = "enew", section = "actions" },
-        },
-        header = "",
-        footer = "",
-        content_hooks = {
-          -- starter.gen_hook.adding_bullet(),
-          starter.gen_hook.indexing("all", { "Sessions", "actions" }),
-          -- starter.gen_hook.indexing('all', { 'Builtin actions' }),
-          starter.gen_hook.padding(3, 2),
-          starter.gen_hook.aligning("center", "center"),
-        },
-      })
-    end,
   },
   {
     "rmagatti/auto-session",

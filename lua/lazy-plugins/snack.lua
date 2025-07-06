@@ -4,6 +4,7 @@ return {
   lazy = false,
   dependencies = {
     -- "Shatur/neovim-session-manager",
+    "echasnovski/mini.sessions",
   },
   opts = {
     bigfile = { enabled = true },
@@ -42,9 +43,27 @@ return {
     dashboard = {
       enabled = false,
       sections = {
-        { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-        { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+        { section = "header" },
+        { title = "Sessions", section = "projects", padding = 1 },
+        -- { title = "Sessions", section = "sessions", padding = 1 },
+        -- { title = "Projects", section = "projects", padding = 1 },
+        { title = "Recent Files", section = "recent_files", padding = 1 },
+        -- { icon = " ", title = "Recent Files", section = "recent_files", padding = 1 },
+        { title = "Actions", padding = 0 },
+        {
+          icon = " ",
+          key = "c",
+          desc = "Config",
+          action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+        },
+        { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+        { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+        { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+        { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+        { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+        { icon = " ", key = "s", desc = "Startup Time", action = ":StartupTime" },
+        -- { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+        { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         { section = "startup" },
       },
     },
@@ -73,7 +92,7 @@ return {
       },
     },
     input = { enabled = true },
-    notifier = { enabled = true },
+    notifier = { enabled = false },
     picker = {
       sources = {
         explorer = {
@@ -154,14 +173,8 @@ return {
       },
     },
     styles = {
-      notification = {
-        wo = { wrap = true }, -- Wrap notifications
-      },
-      snacks_image = {
-        relative = "editor",
-        col = 10,
-        row = 1,
-      },
+      notification = { wo = { wrap = true } },
+      snacks_image = { relative = "editor", col = 10, row = 1 },
     },
   },
   keys = {
@@ -179,6 +192,13 @@ return {
         Snacks.bufdelete.other()
       end,
       desc = "Delete other Buffers",
+    },
+    {
+      "<leader>Q",
+      function()
+        Snacks.bufdelete.delete()
+      end,
+      desc = "Delete Buffer",
     },
     {
       "<leader>/",
@@ -512,7 +532,7 @@ return {
       desc = "Toggle Zoom",
     },
     {
-      "<leader>cR",
+      "<leader>gR",
       function()
         Snacks.rename.rename_file()
       end,
@@ -576,8 +596,25 @@ return {
         Snacks.toggle.treesitter():map("<leader>uT")
         Snacks.toggle.inlay_hints():map("<leader>uI")
         Snacks.toggle.indent():map("<leader>ug")
+        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
         Snacks.toggle.animate():map("<leader>ua")
+        Snacks.toggle.scroll():map("<leader>us")
+        Snacks.toggle.words():map("<leader>uW")
       end,
     })
+    --[[ vim.api.nvim_create_autocmd("LspProgress", {
+      ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+      callback = function(ev)
+        local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+        vim.notify(vim.lsp.status(), "info", {
+          id = "lsp_progress",
+          title = "LSP Progress",
+          opts = function(notif)
+            notif.icon = ev.data.params.value.kind == "end" and " "
+              or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+          end,
+        })
+      end,
+    }) ]]
   end,
 }

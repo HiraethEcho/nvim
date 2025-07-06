@@ -1,0 +1,34 @@
+#b - Beginning of line.
+#i - In-word expansion.
+#w - Word boundary.
+#r - Regular expression
+#A - Snippet will be triggered automatically, when condition matches.
+
+snippet note "callout note" w
+> [!note]
+> $1
+endsnippet
+
+snippet tip "callout tip" w
+> [!tip]
+> $1
+endsnippet
+
+snippet important "callout important" w
+> [!important]
+> $1
+endsnippet
+
+snippet warning "callout warning" w
+> [!warning]
+> $1
+endsnippet
+
+snippet caution "callout caution" w
+> [!caution]
+> $1
+endsnippet
+
+snippet link "markdown link" i
+[${1:${VISUAL}}]($2)
+endsnippet

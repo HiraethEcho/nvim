@@ -5,11 +5,11 @@ return {
     event = "InsertEnter",
     version = "*",
     dependencies = {
-      -- { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
+      { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
       "nvim-treesitter/nvim-treesitter",
-      { "fang2hou/blink-copilot" },
+      -- { "fang2hou/blink-copilot" },
       { "saghen/blink.compat", version = "*", opts = {} },
-      -- { "SirVer/ultisnips" },
+      { "SirVer/ultisnips" },
       "L3MON4D3/LuaSnip",
     },
     opts = {
@@ -38,18 +38,18 @@ return {
       sources = {
         -- default = { "ultisnips", "lsp", "path", "buffer", "copilot" },
         -- default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot" },
-        default = { "snippets", "lsp", "path", "buffer", "copilot" },
+        -- default = { "snippets", "lsp", "path", "buffer", "copilot" },
+        default = { "ultisnips", "snippets", "lsp", "path", "buffer" },
         providers = {
           buffer = { opts = { get_bufnrs = vim.api.nvim_list_bufs } },
-          copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
-          -- ultisnips = { name = "ultisnips", module = "blink.compat.source", score_offset = 300 },
+          -- copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
+          ultisnips = { name = "ultisnips", module = "blink.compat.source", score_offset = 300 },
         },
       },
       cmdline = { enabled = false },
     },
     -- opts_extend = { "sources.default" },
   },
-
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -201,27 +201,32 @@ return {
     "L3MON4D3/LuaSnip",
     -- enabled = false,
     version = "v2.*",
+    cmd = {"LuaSnipEdit"},
     config = function()
-      local ls=require("luasnip")
+      local ls = require("luasnip")
       local types = require("luasnip.util.types")
+      -- vim.api.nvim_create_user_command("LuaSnipEdit", function() require("luasnip.loaders").edit_snippet_files() end, {desc = "Edit Snippets"})
+
       ls.setup({
         enable_autosnippets = true,
-        store_selection_keys = "<BS>",
+        store_selection_keys = "<TAB>",
         -- say tex code block in markdown, but not work
         -- ft_func = require("luasnip.extras.filetype_functions").from_cursor(),
         ext_opts = {
           [types.choiceNode] = {
             active = {
-              virt_text = { { "●", "RainbowBlue" } },
+              virt_text = { { "", "RainbowBlue" } },
             },
           },
           [types.insertNode] = {
             active = {
-              virt_text = { { "●", "RainbowOrange" } },
+              virt_text = { { "", "RainbowOrange" } },
             },
           },
         },
       })
+      -- require("luasnip.loaders.from_lua").load()
+      -- require("luasnip.loaders.from_snipmate").load()
       require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/LuaSnip/" })
       require("luasnip.loaders.from_snipmate").load({ paths = vim.fn.stdpath("config") .. "/snipmate/" })
       --[[ local auto_expand = require("luasnip").expand_auto
@@ -245,7 +250,6 @@ return {
           ls.change_choice(-1)
         end
       end)
-
     end,
   },
 }

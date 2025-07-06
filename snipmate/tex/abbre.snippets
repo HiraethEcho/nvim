@@ -1,20 +1,11 @@
-snippet iff "if and only if" wA
-  if and only if
+snippet lcd "log canonical divisor" w
+  $(K_{X$1}+B)$$0
 
-snippet st "such that " w
-  such that $0
+snippet cite "Description" w
+  \cite[$1]{$2}
 
-snippet mfs "Mori Fibre Space" w
-  Mori fibre space$0
-
-snippet gt "general type" w
-  general type$0
-
-snippet wrt "with respect to" wA
-  with respect to
-
-snippet wma "we may assume" wA
-  we may assume
+snippet bdiv "b-divisor" w
+  $\mathbf{b}$-divisor
 
 snippet pair "(X,B)" w
   $(X$1,B)$$0
@@ -28,29 +19,38 @@ snippet mm "minimal model" w
 snippet fg "finitely generated" w
   finitely generated
 
+snippet st "such that " w
+  such that $0
+
+snippet mfs "Mori Fibre Space" w
+  Mori fibre space$0
+
+snippet gt "general type" w
+  general type$0
+
 snippet wlcm "weak log canonical model" w
   weak log canonical model$0
 
-snippet Qfac "Q-factorial" wA
+autosnippet Qfac "Q-factorial" 
   $\mathbb{Q}$-factorial
 
-snippet bdiv "b-divisor" w
-  $\mathbf{b}$-divisor
+autosnippet iff "if and only if" wA
+  if and only if
 
-snippet Rdiv "R-div" wA
+autosnippet wrt "with respect to" 
+  with respect to
+
+autosnippet wma "we may assume" 
+  we may assume
+
+autosnippet Rdiv "R-div" 
   $\mathbb{R}$-divisor
 
-snippet bdiv "b-div" wA
+autosnippet bdiv "b-div" 
   $\bf{b}$-divisor
 
-snippet Rcar "R-Cartier" wA
+autosnippet Rcar "R-Cartier" 
   $\mathbb{R}$-Cartier
 
-snippet Qdiv "Q-divisor" wA
+autosnippet Qdiv "Q-divisor" 
   $\mathbb{Q}$-divisor
-
-snippet lcd "log canonical divisor" w
-  $(K_{X$1}+B)$$0
-
-snippet cite "Description" w
-  \cite[$1]{$2}
