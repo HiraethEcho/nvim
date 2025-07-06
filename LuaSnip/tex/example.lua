@@ -19,32 +19,6 @@ end
 
 return {
   s(
-    { trig = "ii", snippetType = "autosnippet" },
-    fmta(
-      [[
-      \(<>\)
-      ]],
-      {
-        i(1),
-      }
-    ),
-    { condition = tex.in_text }
-  ),
-  s(
-    { trig = "dm", snippetType = "autosnippet" },
-    fmta(
-      [[
-      \[
-        <>
-      \]
-      ]],
-      {
-        i(1),
-      }
-    ),
-    { condition = tex.in_text }
-  ),
-  s(
     { trig = "bad", snippetType = "autosnippet" },
     fmta(
       [[
@@ -163,11 +137,7 @@ return {
     ),
     { condition = line_begin }
   ),
-  s(
-    { trig = "bib", snippetType = "autosnippet" },
-    {t("\\bibitem"),},
-    { condition = tex.in_bib * line_begin }
-  ),
+  s({ trig = "bib", snippetType = "autosnippet" }, { t("\\bibitem") }, { condition = tex.in_bib * line_begin }),
   s(
     { trig = "bfi", snippetType = "autosnippet" },
     fmta(
@@ -401,18 +371,6 @@ return {
     { condition = line_begin }
   ),
   s(
-    { trig = "cha", snippetType = "autosnippet" },
-    fmta(
-      [[
-        \chapter{<>}
-      ]],
-      {
-        i(1),
-      }
-    ),
-    { condition = line_begin }
-  ),
-  s(
     { trig = "par", snippetType = "autosnippet" },
     fmta(
       [[
@@ -434,21 +392,47 @@ return {
     c(1, { sn(nil, { t("\\subsection{"), i(1), t("}") }), sn(nil, { t("\\subsection*{"), i(1), t("}") }) }),
     { condition = tex.in_text * line_begin }
   ),
-  s(
-    { trig = "sss", snippetType = "autosnippet" },
+  s({ trig = "sss" }, {
     c(1, { sn(nil, { t("\\subsubsection{"), i(1), t("}") }), sn(nil, { t("\\subsubsection*{"), i(1), t("}") }) }),
-    { condition = tex.in_text * line_begin }
-  ),
+    i(2,"fjsadklfkl"),
+  }, { condition = tex.in_text * line_begin }),
+}, {
   s(
-    { trig = "sss", snippetType = "autosnippet" },
+    { trig = "cha", snippetType = "autosnippet" },
     fmta(
       [[
-        \subsubsection{<>}
+        \chapter{<>}
       ]],
       {
-        i(0),
+        i(1),
       }
     ),
-    { condition = line_begin * line_begin }
+    { condition = line_begin }
+  ),
+  s(
+    { trig = "ii", snippetType = "autosnippet" },
+    fmta(
+      [[
+      $<>$
+      ]],
+      {
+        i(1),
+      }
+    ),
+    { condition = tex.in_text }
+  ),
+  s(
+    { trig = "dm", snippetType = "autosnippet" },
+    fmta(
+      [[
+      \[
+        <>
+      \]
+      ]],
+      {
+        i(1),
+      }
+    ),
+    { condition = tex.in_text }
   ),
 }

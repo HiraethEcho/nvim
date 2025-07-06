@@ -18,8 +18,8 @@ return {
         preset = "none",
         ["<C-u>"] = { "scroll_documentation_up", "fallback" },
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-        ["<C-j>"] = { "snippet_forward", "fallback" },
-        ["<C-k>"] = { "snippet_backward", "fallback" },
+        -- ["<C-j>"] = { "snippet_forward", "fallback" },
+        -- ["<C-k>"] = { "snippet_backward", "fallback" },
         ["<S-Tab>"] = { "select_prev", "fallback" },
         ["<Tab>"] = { "select_next", "fallback" },
         ["<Up>"] = { "select_prev", "fallback" },
@@ -39,7 +39,9 @@ return {
         -- default = { "ultisnips", "lsp", "path", "buffer", "copilot" },
         -- default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot" },
         -- default = { "snippets", "lsp", "path", "buffer", "copilot" },
+        -- default = { "ultisnips", "lsp", "path", "buffer" },
         default = { "ultisnips", "snippets", "lsp", "path", "buffer" },
+        -- default = { "snippets", "lsp", "path", "buffer" },
         providers = {
           buffer = { opts = { get_bufnrs = vim.api.nvim_list_bufs } },
           -- copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
@@ -201,7 +203,7 @@ return {
     "L3MON4D3/LuaSnip",
     -- enabled = false,
     version = "v2.*",
-    cmd = {"LuaSnipEdit"},
+    cmd = { "LuaSnipEdit" },
     config = function()
       local ls = require("luasnip")
       local types = require("luasnip.util.types")
@@ -235,11 +237,15 @@ return {
         auto_expand(...)
       end ]]
 
-      -- set keybinds for both INSERT and VISUAL.
-      -- vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
-      -- vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
-      -- vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", {})
-      -- vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
+      vim.keymap.set({ "i", "s" }, "<C-j>", function()
+        ls.jump(1)
+      end, { silent = true })
+      vim.keymap.set({ "i", "s" }, "<C-k>", function()
+        ls.jump(-1)
+      end, { silent = true })
+      vim.keymap.set({ "i", "s" }, "<C-e>", function()
+        require("luasnip.extras.select_choice")()
+      end, { silent = true })
       vim.keymap.set("i", "<C-n>", function()
         if ls.choice_active() then
           ls.change_choice(1)

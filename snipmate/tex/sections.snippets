@@ -1,0 +1,56 @@
+snippet sec "section" b
+  \section{$1}
+  $0
+
+snippet ## "section" b
+  \section{$1}
+  $0
+
+snippet ssec "subsection" b
+  \subsection{$1}
+  $0
+
+snippet ### "subsection" b
+  \subsection{$1}
+  $0
+
+snippet sssec "subsubsection" b
+  \subsubsection{$1}
+  $0
+
+snippet #### "subsubsection" b
+  \subsubsection{$1}
+  $0
+
+
+# small environment
+snippet cnt "Center" bi
+  \begin{center}
+    ${0:${VISUAL}}
+  \end{center}
+
+snippet ol "Enumerate" b
+  \begin{enumerate}
+    \item $0
+  \end{enumerate}
+
+snippet ul "Itemize" b
+  \begin{itemize}
+    \item $0
+  \end{itemize}
+
+snippet fun "Big function" i
+  \begin{align*}
+    $1: $2 &\longrightarrow $3 \\\\
+    $4 &\longmapsto $1($4) = $0
+  .\end{align*}
+
+
+snippet ali "Align" b
+  \begin{equation}
+  \begin{aligned}
+    ${1:${VISUAL}}
+  .\end{aligned}
+  \end{equation}
+
+

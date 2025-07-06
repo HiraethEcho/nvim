@@ -89,6 +89,8 @@ return {
   }),
 
   s("fmt5", fmta("foo() { return <>; }", i(1, "x"))),
+  -- s("fmt6", fmta("foo() { return <>; }", i(1, ${TM_SELECTED_TEXT}))),
+  s("fmt6", fmta("foo() { return <>; }", d(1, get_visual ))),
 
 
   -- ls.parser.parse_snippet({ trig = "%d", regTrig = true }, "A Number!!"),
@@ -122,6 +124,7 @@ return {
   }),
 ]]
   s("extras4", { i(1), t({ "", "" }), i(2), rep(1), rep(2) }),
+
   s(
     { trig = "a%d", regTrig = true },
     f(function(_, snip)
@@ -130,7 +133,7 @@ return {
   ),
   -- It's possible to use capture-groups inside regex-triggers.
   s(
-    { trig = "b(%d)", regTrig = true },
+    { trig = "b(%d)", regTrig = true, snippetType="autosnippet" },
     f(function(_, snip)
       return "Captured Text: " .. snip.captures[1] .. "."
     end, {})
