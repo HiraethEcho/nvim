@@ -156,6 +156,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
+    enabled = false,
     cmd = "Copilot",
     keys = { -- Example mapping to toggle outline
       { "<leader>cc", "<cmd>Copilot<CR>", desc = "Copilot" },

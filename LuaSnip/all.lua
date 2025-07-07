@@ -1,7 +1,4 @@
--- local helpers = require('util.luasnip-helper')
--- local get_visual = helpers.get_visual
-
---[[ local ls = require("luasnip")
+local ls = require("luasnip")
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
@@ -24,10 +21,21 @@ local types = require("luasnip.util.types")
 local events = require("luasnip.util.events")
 
 local conds = require("luasnip.extras.expand_conditions")
-local conds_expand = require("luasnip.extras.conditions.expand") ]]
--- local conds_expand = require("luasnip.extras.conditions.expand")
+local conds_expand = require("luasnip.extras.conditions.expand")
+
+local line_begin = require("luasnip.extras.expand_conditions").line_begin
 
 local tex = require("util.latex")
+
+-- local maths = require("luasnip").extend_decorator.apply(s, { condition = tex.in_mathzone, show_condition = tex.in_mathzone })
+
+local get_visual = function(args, parent)
+  if #parent.snippet.env.SELECT_RAW > 0 then
+    return sn(nil, t(parent.snippet.env.SELECT_RAW))
+  else -- If SELECT_RAW is empty, return a blank insert node
+    return sn(nil, i(1))
+  end
+end
 
 -- args is a table, where 1 is the text in Placeholder 1, 2 the text in
 -- placeholder 2,...
@@ -62,7 +70,6 @@ local function bash(_, _, command)
 end
 
 return {
-
   s("trig", {
     t("text: "),
     i(1),

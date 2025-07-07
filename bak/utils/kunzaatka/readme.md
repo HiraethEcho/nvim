@@ -7,5 +7,5 @@ local in_mathzone = require('snippets.tex.utils').conditions.in_mathzone
 ```
 
 ```luasnip
-    {condition = inmathzone}
+    {condition = in_mathzone}
 ```

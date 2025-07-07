@@ -25,8 +25,8 @@ return {
     -- lazy = false,
     cmd = "UrlView",
     keys = {
-      { "<leader>iu", "<cmd>UrlView<cr>", desc = "List URL" },
-      { "<leader>iL", "<cmd>UrlView<cr>", desc = "List Lazy plugin url" },
+      { "<leader>sU", "<cmd>UrlView<cr>", desc = "List URL" },
+      { "<leader>sL", "<cmd>UrlView<cr>", desc = "List Lazy plugin url" },
     },
     opts = {
       -- default_picker = "telescope",

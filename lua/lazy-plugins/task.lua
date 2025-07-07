@@ -37,7 +37,7 @@ return {
         comment_suffix = "-->",
         -- The file pattern to trigger the conceal
         -- file_patterns = { "*.md", "*.markdown" },
-        display_due_or_scheduled = false,
+        display_due_or_scheduled = true,
         -- More configurations will be added in the future
       })
       -- Optional

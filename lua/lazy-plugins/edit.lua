@@ -30,6 +30,51 @@ return {
     end,
   },
   {
+    "tigion/swap.nvim",
+    enabled = true,
+    -- event = { 'BufReadPost', 'BufNewFile' },
+    keys = {
+      {
+        "<Leader>i",
+        function()
+          require("swap").switch()
+        end,
+        desc = "Swap word",
+      },
+      -- { '<Leader>I', function() require('swap').opposites.switch() end, desc = 'Swap to opposite word' },
+      -- { '<Leader>I', function() require('swap').chains.switch() end, desc = 'Swap to next word' },
+      -- { '<Leader>I', function() require('swap').cases.switch() end, desc = 'Swap naming convention' },
+      -- { '<Leader>I', function() require('swap').todos.switch() end, desc = 'Swap todo state' },
+    },
+    opts = {
+      cases = { types = { "snake", "kebab", "camel", "pascal" } },
+      opposites = {
+        words = {},
+        words_by_ft = { -- File type specific opposite words.
+          markdown = {
+            ["and"] = nil, -- Removes a default.
+            [">"] = nil,
+          },
+          ["lua"] = { -- since `lua` is an illegal name
+            ["=="] = "~=", -- Replaces the default `['=='] = '!='` for lua files.
+          },
+        },
+      },
+      chains = {
+        use_case_sensitive_mask = true,
+        words_by_ft = {
+          markdown = {
+            { "[!note]", "[!tip]", "[!important]", "[!warning]", "[!caution]" }, -- markdown (github) alerts
+          },
+        },
+      },
+      all = {
+        -- modules = { "opposites", "chains", "cases", "todos" },
+        modules = { "opposites", "chains", "cases" },
+      },
+    },
+  },
+  {
     "Wansmer/treesj",
     keys = {
       { "gK", "<cmd>TSJSplit<CR>", desc = "treesj split" },
@@ -68,7 +113,7 @@ return {
   },
   {
     "folke/todo-comments.nvim",
-    -- enabled = false,
+    enabled = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
       {

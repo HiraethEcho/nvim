@@ -113,10 +113,13 @@ I am using lazy.nvim as my plugins manager. Plugins are divided in several class
 > asfd
 > sdfklfsjdkljfakl
 
-> [!NOTE]
+> [!TIP]
+> ok 
+
+> [!IMPORTANT]
 > Useful information that users should know, even when skimming content.
 
-> [!TIP]
+> [!IMPORTANT]
 > Helpful advice for doing things better or more easily.
 
 > [!IMPORTANT]

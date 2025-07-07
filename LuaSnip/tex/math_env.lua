@@ -1,4 +1,5 @@
 local tex = require("util.latex")
+
 local snip = {
   s({ trig = "bigfun", name = "Big function" }, {
     t({ "\\begin{align*}", "\t" }),
@@ -21,9 +22,10 @@ local snip = {
     { condition = tex.in_text, show_condition = tex.in_text }
   ),
 }
-local autosnippet = {
+local autosnip = {
+  s({ trig = "ii" }, { t("$"), i(0), t("$") }, { condition = tex.in_text }),
   s(
-    { trig = "dm", snippetType = "autosnippet" },
+    { trig = "dm", name = "display math", desc = "\\[\\]" },
     fmta(
       [[
       \[

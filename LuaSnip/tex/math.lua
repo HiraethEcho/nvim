@@ -1,4 +1,4 @@
-local ls = require("luasnip")
+--[[ local ls = require("luasnip")
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
@@ -6,10 +6,10 @@ local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
 local fmta = require("luasnip.extras.fmt").fmta
-local rep = require("luasnip.extras").rep
+local rep = require("luasnip.extras").rep ]]
+
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
 local tex = require("util.latex")
-local tex_utils=require("util.luasnip-helper").tex_utils
 local get_visual = function(args, parent)
   if #parent.snippet.env.SELECT_RAW > 0 then
     return sn(nil, t(parent.snippet.env.SELECT_RAW))
@@ -17,6 +17,10 @@ local get_visual = function(args, parent)
     return sn(nil, i(1))
   end
 end
+local maths =
+  require("luasnip").extend_decorator.apply(s, { condition = tex.in_mathzone, show_condition = tex.in_mathzone })
+
+-- local tex_utils=require("util.luasnip-helper").tex_utils
 
 local snip_bak = {
   s(
@@ -77,6 +81,7 @@ local snip_bak = {
 }
 
 return {
+  maths({ trig = "ff", name = "fraction", desc = "\\frac{}{}" }, fmta("\\frac{<>}{<>}", { i(1), i(2) })),
   s(
     { trig = "roundup", name = "round up", desc = "\\left\\lceil\\right\\rceil" },
     fmta("\\left\\lceil <> \\right\\rceil", d(1, get_visual)),

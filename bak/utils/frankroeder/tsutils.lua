@@ -80,14 +80,6 @@ function M.in_mathzone()
   end
 end
 
--- function M.in_comment()
--- 	return vim.fn["vimtex#syntax#in_comment"]() == 1
--- end
---
--- function M.in_mathzone()
--- 	return vim.fn["vimtex#syntax#in_mathzone"]() == 1
--- end
-
 function M.in_text()
   return not M.in_mathzone() and not M.in_comment()
 end

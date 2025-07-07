@@ -373,13 +373,7 @@ return {
       end,
       desc = "Highlights",
     },
-    {
-      "<leader>si",
-      function()
-        Snacks.picker.icons()
-      end,
-      desc = "Icons",
-    },
+    -- { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons", },
     {
       "<leader>j",
       function()
