@@ -1,4 +1,7 @@
-local ls = require("luasnip")
+-- local helpers = require('util.luasnip-helper')
+-- local get_visual = helpers.get_visual
+
+--[[ local ls = require("luasnip")
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
@@ -21,17 +24,10 @@ local types = require("luasnip.util.types")
 local events = require("luasnip.util.events")
 
 local conds = require("luasnip.extras.expand_conditions")
-local conds_expand = require("luasnip.extras.conditions.expand")
-local line_begin = conds.line_begin
+local conds_expand = require("luasnip.extras.conditions.expand") ]]
+-- local conds_expand = require("luasnip.extras.conditions.expand")
 
 local tex = require("util.latex")
-local get_visual = function(args, parent)
-  if #parent.snippet.env.SELECT_RAW > 0 then
-    return sn(nil, t(parent.snippet.env.SELECT_RAW))
-  else -- If SELECT_RAW is empty, return a blank insert node
-    return sn(nil, i(1))
-  end
-end
 
 -- args is a table, where 1 is the text in Placeholder 1, 2 the text in
 -- placeholder 2,...
@@ -66,6 +62,20 @@ local function bash(_, _, command)
 end
 
 return {
+
+  s("trig", {
+    t("text: "),
+    i(1),
+    t({ "", "copy: " }),
+    d(2, function(args)
+      -- the returned snippetNode doesn't need a position; it's inserted
+      -- "inside" the dynamicNode.
+      return sn(nil, {
+        -- jump-indices are local to each snippetNode, so restart at 1.
+        i(1, args[1]),
+      })
+    end, { 1 }),
+  }),
   s({ trig = "date", name = "Current date", dscr = "YYYY-MM-DD" }, {
     p(os.date, "%Y-%m-%d"),
   }),
@@ -201,11 +211,13 @@ return {
   s("cond2", {
     t("will only expand at the beginning of the line"),
   }, {
-    condition = conds_expand.line_begin,
+    condition = line_begin,
+    -- condition = conds_expand.line_begin,
   }),
   s("cond3", {
     t("will only expand at the end of the line"),
   }, {
-    condition = conds_expand.line_end,
+    -- condition = conds.line_end,
+    condition = line_end,
   }),
 }

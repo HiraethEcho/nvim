@@ -9,6 +9,7 @@ local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
 local tex = require("util.latex")
+local tex_utils=require("util.luasnip-helper").tex_utils
 local get_visual = function(args, parent)
   if #parent.snippet.env.SELECT_RAW > 0 then
     return sn(nil, t(parent.snippet.env.SELECT_RAW))
@@ -17,7 +18,7 @@ local get_visual = function(args, parent)
   end
 end
 
-local snip = {
+local snip_bak = {
   s(
     { trig = "xym" },
     c(1, {

@@ -29,33 +29,3 @@ snippet ul "Itemize" b
 	\item $0
 \end{itemize}
 endsnippet
-
-snippet li "list item" b
-\item$0
-endsnippet
-
-snippet fun "Big function" i
-\begin{align*}
-	$1: $2 &\longrightarrow $3 \\\\
-	$4 &\longmapsto $1($4) = $0
-.\end{align*}
-endsnippet
-
-snippet ali "Align" b
-\begin{equation}
-\begin{aligned}
-	${1:${VISUAL}}
-.\end{aligned}
-\end{equation}
-endsnippet
-
-
-context "math()"
-snippet upround "round up" wA
-\left\lceil ${1:${VISUAL}}  \right\rceil $0
-endsnippet
-
-context "math()"
-snippet downdown "round down" w
-\left\lfloor ${1:${VISUAL}} \right\rfloor$0
-endsnippet

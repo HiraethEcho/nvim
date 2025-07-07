@@ -236,12 +236,15 @@ return {
         vim.o.undolevels = vim.o.undolevels
         auto_expand(...)
       end ]]
-
       vim.keymap.set({ "i", "s" }, "<C-j>", function()
-        ls.jump(1)
+        if ls.jumpable() then
+          ls.jump(1)
+        end
       end, { silent = true })
       vim.keymap.set({ "i", "s" }, "<C-k>", function()
-        ls.jump(-1)
+        if ls.jumpable() then
+          ls.jump(-1)
+        end
       end, { silent = true })
       vim.keymap.set({ "i", "s" }, "<C-e>", function()
         require("luasnip.extras.select_choice")()

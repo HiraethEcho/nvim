@@ -74,5 +74,4 @@ M.in_text_md = function()
   return not M.in_mathzone_md()
 end
 
-
 return M
