@@ -20,7 +20,6 @@ return {
         "lua",
         "markdown",
         "markdown_inline",
-        "latex",
       },
       incremental_selection = {
         enable = true,
@@ -43,6 +42,7 @@ return {
           return true
         end, opts.ensure_installed)
       end
+      table.insert(opts.ensure_installed, "latex") -- extend but not merge
       require("nvim-treesitter.configs").setup(opts)
     end,
   },

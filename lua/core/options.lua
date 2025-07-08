@@ -7,6 +7,7 @@ vim.g.maplocalleader = vim.keycode(",")
 local opt = vim.opt
 -- edit
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
+vim.o.timeout = true
 opt.timeoutlen = 300
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.expandtab = true -- Use spaces instead of tabs
@@ -45,7 +46,7 @@ opt.wrap = false -- Disable line wrap
 opt.linebreak = true -- companion to wrap, don't split words
 
 -- bottom line: command search statusline
-opt.wildmode = "longest:full,full" -- Command-line completion mode
+-- opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.showmode = false -- Dont show mode since we have a statusline

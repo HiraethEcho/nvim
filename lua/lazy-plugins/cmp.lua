@@ -2,7 +2,7 @@ return {
   {
     "saghen/blink.cmp",
     -- enabled = false,
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
     dependencies = {
       { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
@@ -43,12 +43,42 @@ return {
         default = { "ultisnips", "snippets", "lsp", "path", "buffer" },
         -- default = { "snippets", "lsp", "path", "buffer" },
         providers = {
+          snippets = { score_offset = 200 },
           buffer = { opts = { get_bufnrs = vim.api.nvim_list_bufs } },
           -- copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
           ultisnips = { name = "ultisnips", module = "blink.compat.source", score_offset = 300 },
         },
       },
-      cmdline = { enabled = false },
+      -- cmdline = { enabled = false },
+      cmdline = {
+        -- enabled = false,
+        sources = function()
+          local type = vim.fn.getcmdtype()
+          -- Search forward and backward
+          if type == "/" or type == "?" then
+            return { "buffer" }
+          end
+          -- Commands
+          if type == ":" or type == "@" then
+            return { "cmdline" }
+          end
+          return {}
+        end,
+        -- keymap = { preset = "cmdline" },
+        keymap = {
+          preset = "none",
+          ["<Down>"] = { "select_next", "fallback" },
+          ["<Up>"] = { "select_prev", "fallback" },
+          ["<Tab>"] = { "select_next", "fallback" },
+          ["<S-Tab>"] = { "select_prev", "fallback" },
+          -- ["<CR>"] = { "select_and_accept" },
+        },
+        completion = {
+          list = { selection = { preselect = false } },
+          ghost_text = { enabled = true },
+          menu = { auto_show = true },
+        },
+      },
     },
     -- opts_extend = { "sources.default" },
   },
@@ -171,34 +201,32 @@ return {
         require("copilot_cmp").setup()
       end,
     },
-    config = function()
-      require("copilot").setup({
-        panel = {
-          enabled = true,
-          auto_refresh = true,
-          keymap = {
-            jump_prev = "K",
-            jump_next = "J",
-          },
-          layout = {
-            position = "bottom", -- | top | left | right
-            ratio = 0.4,
-          },
+    opts = {
+      panel = {
+        enabled = true,
+        auto_refresh = true,
+        keymap = {
+          jump_prev = "K",
+          jump_next = "J",
         },
-        suggestion = {
-          enabled = true,
-          auto_trigger = false,
-          hide_during_completion = true,
-          debounce = 75,
+        layout = {
+          position = "bottom", -- | top | left | right
+          ratio = 0.4,
         },
-        filetypes = {
-          lua = true,
-          markdown = true,
-          latex = true,
-          -- ["."] = false,
-        },
-      })
-    end,
+      },
+      suggestion = {
+        enabled = true,
+        auto_trigger = false,
+        hide_during_completion = true,
+        debounce = 75,
+      },
+      filetypes = {
+        lua = true,
+        markdown = true,
+        latex = true,
+        -- ["."] = false,
+      },
+    },
   },
   {
     "L3MON4D3/LuaSnip",

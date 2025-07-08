@@ -74,16 +74,19 @@ return {
             },
           },
           lualine_x = {
+            --[[ {
+              require("noice").api.status.command.get,
+              cond = require("noice").api.status.command.has,
+              color = { fg = "#ff9e64" },
+            }, ]]
             "searchcount",
-            -- "lsp_status",
           },
           -- lualine_y = { "filetype" },
           lualine_y = {
-            {
-              "%l/%L:%c",
-            },
+            "lsp_status",
           },
           lualine_z = {
+            { "%l/%L:%c" },
             --[[ function()
               return " " .. os.date("%R")
             end, ]]
@@ -221,6 +224,21 @@ return {
       vim.keymap.set("n", "<C-0>", "<cmd>LualineBuffersJump 10<CR>")
     end,
   },
+  {
+    "folke/noice.nvim",
+    -- enabled = false,
+    event = "BufReadPost",
+    -- event = {"InsertEnter","CmdlineEnter"},
+    opts = {
+      -- lsp = { progress = { enabled = false } },
+      cmdline = { view = "cmdline" },
+      presets = {
+        bottom_search = true,
+      },
+      -- cmdline = { enabled = false },
+    },
+    dependencies = { "MunifTanjim/nui.nvim" },
+  },
   -- left
   {
     "luukvbaal/statuscol.nvim",
@@ -341,7 +359,7 @@ return {
   -- inside horizontal
   {
     "mvllow/modes.nvim",
-    -- enabled = false,
+    enabled = false,
     tag = "v0.2.0",
     event = "InsertEnter",
     config = function()

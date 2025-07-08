@@ -4,7 +4,7 @@ return {
   lazy = false,
   dependencies = {
     -- "Shatur/neovim-session-manager",
-    "echasnovski/mini.sessions",
+    -- "echasnovski/mini.sessions",
   },
   opts = {
     bigfile = { enabled = true },
@@ -156,7 +156,7 @@ return {
     quickfile = { enabled = true },
     scope = { enabled = true },
     debug = { enabled = false },
-    scroll = { enabled = true },
+    scroll = { enabled = false },
     lazygit = { enabled = true },
     statuscolumn = { enabled = false },
     words = { enabled = false },

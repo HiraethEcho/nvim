@@ -34,8 +34,53 @@ return {
     cmd = { "SudaRead", "SudaWrite" },
   },
   {
+    "folke/which-key.nvim",
+    -- cmd = "WhichKey",
+    keys = {
+      {
+        "?",
+        function()
+          require("which-key").show()
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+      {
+        "<c-w><space>",
+        function()
+          require("which-key").show({ keys = "<c-w>", loop = true })
+        end,
+        desc = "Window Hydra Mode (which-key)",
+      },
+    },
+    event = "BufRead",
+    opts = {
+      preset = "helix", -- classic, helix, modern
+      -- layout = { align = "center" },
+      defaults = {},
+    },
+    config = function()
+      local wk = require("which-key")
+      wk.add({
+        -- { "<leader>i", group = "list" },
+        { "<leader>D", group = "Diff" },
+        { "<leader>u", group = "toggle" },
+        { "<leader>f", group = "find" },
+        { "<leader>g", group = "git" },
+        { "<leader>l", group = "lsp" },
+        { "<leader>m", group = "markdown" },
+        { "<leader>h", group = "hunk" },
+        { "<leader>c", group = "copilot" },
+        { "<leader>s", group = "search" },
+        { "<leader>S", group = "Session" },
+        -- { "<leader>x", group = "troube" },
+        -- { "m", group = "bookmark", },
+      })
+    end,
+  },
+  -- disable
+  {
     "gelguy/wilder.nvim",
-    -- enabled = false,
+    enabled = false,
     event = "CmdlineEnter",
     -- event = "CmdlineEnter",
     config = function()
@@ -88,47 +133,6 @@ return {
       )
     end,
   },
-  {
-    "folke/which-key.nvim",
-    cmd = "WhichKey",
-    keys = {
-      {
-        "?",
-        function()
-          require("which-key").show()
-        end,
-        desc = "Buffer Local Keymaps (which-key)",
-      },
-    },
-    event = "BufRead",
-    opts = {
-      preset = "classic",
-      layout = {
-        align = "center", -- align columns left, center or right
-      },
-    },
-    config = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-      local wk = require("which-key")
-      wk.add({
-        { "<leader>i", group = "list" },
-        { "<leader>D", group = "Diff" },
-        { "<leader>u", group = "ui" },
-        { "<leader>f", group = "find" },
-        { "<leader>g", group = "git" },
-        { "<leader>l", group = "lsp" },
-        { "<leader>m", group = "markdown" },
-        { "<leader>h", group = "hunk" },
-        { "<leader>c", group = "copilot" },
-        { "<leader>s", group = "search" },
-        { "<leader>S", group = "Session" },
-        { "<leader>x", group = "trouble" },
-        -- { "m", group = "bookmark", },
-      })
-    end,
-  },
-  -- disable
   {
     "kevinhwang91/nvim-ufo",
     -- event = "LspAttach",

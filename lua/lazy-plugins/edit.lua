@@ -25,13 +25,11 @@ return {
       { "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
       { "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
     },
-    config = function()
-      require("Comment").setup()
-    end,
+    opts = {},
   },
   {
     "tigion/swap.nvim",
-    enabled = true,
+    -- enabled = false,
     -- event = { 'BufReadPost', 'BufNewFile' },
     keys = {
       {
@@ -116,6 +114,20 @@ return {
     enabled = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
+      {
+        "<leader>st",
+        function()
+          Snacks.picker.todo_comments()
+        end,
+        desc = "Todo",
+      },
+      {
+        "<leader>sT",
+        function()
+          Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
+        end,
+        desc = "Todo/Fix/Fixme",
+      },
       {
         "]t",
         function()
