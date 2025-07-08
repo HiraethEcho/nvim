@@ -84,12 +84,12 @@ return {
           cursor = true,
           folds = true,
           foldtext = true,
-          links = true,
+          links = false,
           lists = true,
           maps = true,
           paths = true,
           tables = true,
-          yaml = false,
+          yaml = true,
           cmp = false,
         },
         perspective = {
@@ -113,8 +113,6 @@ return {
           MkdnSTab = { "i", "<c-h>" },
           MkdnNextLink = { "n", "]l" },
           MkdnPrevLink = { "n", "[l" },
-          MkdnFollowLink = { { "n", "v" }, "<leader>ma" },
-          -- MkdnFollowLink = false,
           MkdnCreateLink = { "v", "<leader>mA" },
           MkdnCreateLinkFromClipboard = { { "n", "v" }, "<leader>mL" },
           MkdnDestroyLink = { "n", "<leader>md" },
@@ -129,16 +127,20 @@ return {
           MkdnNewListItemAboveInsert = { "n", "O" },
           MkdnUpdateNumbering = { "n", "<leader>mn" },
           MkdnTableFormat = { "n", "<leader>mt" },
-          MkdnTableNextRow = { "i", "<c-j>" },
-          MkdnTablePrevRow = { "i", "<c-k>" },
           MkdnTableNewRowBelow = { "n", "<leader>mj" },
           MkdnTableNewRowAbove = { "n", "<leader>mk" },
           MkdnTableNewColAfter = { "n", "<leader>ml" },
           MkdnTableNewColBefore = { "n", "<leader>mh" },
+          -- MkdnFollowLink = { { "n", "v" }, "<leader>ma" },
           -- MkdnNextHeading             = {'n', ']]'},
           -- MkdnPrevHeading             = {'n', '[['},
           -- MkdnGoBack                  = {'n', '<BS>'},
           -- MkdnGoForward               = {'n', '<Del>'},
+          -- MkdnTableNextRow = { "i", "<c-j>" },
+          -- MkdnTablePrevRow = { "i", "<c-k>" },
+          MkdnTableNextRow = false,
+          MkdnTablePrevRow = false,
+          MkdnFollowLink = false,
           MkdnEnter = false,
           MkdnNextHeading = false,
           MkdnPrevHeading = false,
@@ -156,12 +158,12 @@ return {
               local updated_title = text:gsub("%b{}", "")
               updated_title = updated_title:gsub("^%s*", "")
               updated_title = updated_title:gsub("%s*$", "")
-              updated_title = updated_title:gsub("^######", "░░░░░▓")
-              updated_title = updated_title:gsub("^#####", "░░░░▓▓")
-              updated_title = updated_title:gsub("^####", "░░░▓▓▓")
-              updated_title = updated_title:gsub("^###", "░░▓▓▓▓")
-              updated_title = updated_title:gsub("^##", "░▓▓▓▓▓")
-              updated_title = updated_title:gsub("^#", "▓▓▓▓▓▓")
+              updated_title = updated_title:gsub("^######", "h6")
+              updated_title = updated_title:gsub("^#####", "h5")
+              updated_title = updated_title:gsub("^####", "h4")
+              updated_title = updated_title:gsub("^###", "h3")
+              updated_title = updated_title:gsub("^##", "h2")
+              updated_title = updated_title:gsub("^#", "h1")
               return updated_title
             end
             return my_title_transformer
@@ -184,7 +186,7 @@ return {
             }
             return opts
           end,
-          line_count = false, -- Prevent lines from being counted
+          line_count = true, -- Prevent lines from being counted
           word_count = true, -- Count the words in the section
           fill_chars = {
             left_edge = "╾─",

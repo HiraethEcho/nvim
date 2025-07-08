@@ -74,11 +74,12 @@ return {
             },
           },
           lualine_x = {
-            --[[ {
+            {
               require("noice").api.status.command.get,
               cond = require("noice").api.status.command.has,
-              color = { fg = "#ff9e64" },
-            }, ]]
+              color = { fg = "#8098d0" },
+            },
+            -- "%S",
             "searchcount",
           },
           -- lualine_y = { "filetype" },
@@ -125,32 +126,7 @@ return {
           lualine_y = { "progress" },
           lualine_z = {},
         },
-        winbar = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = {},
-          lualine_x = {},
-          lualine_y = {},
-          lualine_z = {},
-          --[[ lualine_b = {
-            "fancy_lsp_servers",
-            "fancy_diagnostics",
-          },
-          lualine_c = {
-            {
-              "navic",
-            },
-          },
-          lualine_y = {
-            "fancy_lsp_servers",
-          },
-          lualine_x = {
-            "filetype",
-            "fancy_diagnostics",
-          },
-          lualine_z = {
-          }, ]]
-        },
+        winbar = {},
         tabline = {
           lualine_a = {
             {
