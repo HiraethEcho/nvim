@@ -83,11 +83,15 @@ return {
       })
     end, { 1 }),
   }),
-  s({ trig = "date", name = "Current date", dscr = "YYYY-MM-DD" }, {
+  s({ trig = "date", name = "Current date", dscr = "YYYY-MM-DD and other" }, {
+    c(1,{
     p(os.date, "%Y-%m-%d"),
-  }),
-  s({ trig = "datetime", name = "Current date", dscr = "YYYY-MM-DD hh:mm" }, {
     p(os.date, "%Y-%m-%d %H:%M"),
+    p(os.date, "%H:%M"),
+    f(function()
+      return os.date("%D - %H:%M")
+    end)
+    })
   }),
 
   s(
@@ -166,7 +170,6 @@ return {
   s("bash", f(bash, {}, { user_args = { "ls" } })),
 
   s("repeat", { i(1, "text"), t({ "", "" }), rep(1) }),
-  s("part", p(os.date, "%Y")),
 
   -- use matchNodes (`m(argnode, condition, then, else)`) to insert text
   -- based on a pattern/function/lambda-evaluation.
