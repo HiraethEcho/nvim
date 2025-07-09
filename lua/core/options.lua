@@ -79,9 +79,6 @@ opt.hidden = true -- 允许隐藏被修改过的buffer
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.autowrite = true -- Enable auto write
 
--- fold
--- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-
 vim.g.loaded_matchparen = 1 -- "utilyre/sentiment.nvim",
 
 vim.opt.completeopt = { "menu", "popup", "menuone", "noinsert", "noselect", "fuzzy", "preview" }
