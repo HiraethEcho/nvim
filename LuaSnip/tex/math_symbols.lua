@@ -28,16 +28,7 @@ context "math()"
 snippet QQ "Rational number" wA
 \mathbb{Q}
 endsnippet
-
-
-context "math()"
-snippet PP "Projectiv space" wA
-\mathbb{P}^{${1:n}}
-endsnippet
-
-context "math()"
-snippet CC "Complex number" wA
-\mathbb{C} ]]
+  ]]
 local tex = require("util.latex")
 local get_visual = function(args, parent)
   if #parent.snippet.env.SELECT_RAW > 0 then
@@ -48,22 +39,21 @@ local get_visual = function(args, parent)
 end
 local maths =
   require("luasnip").extend_decorator.apply(s, { condition = tex.in_mathzone, show_condition = tex.in_mathzone })
-local snip = {
-}
+local snip = {}
 local autosnip = {
   maths(
     { trig = "CC", wordTrig = true },
     c(1, {
       sn(nil, fmta("\\mathbb{C} <>", i(1))),
-      sn(nil, fmta("\\mathbb{C}^{<>}", i(1,"n"))),
-      sn(nil, fmta("\\mathbb{C}^{<>}", i(1,"*"))),
+      sn(nil, fmta("\\mathbb{C}^{<>}", i(1, "n"))),
+      sn(nil, fmta("\\mathbb{C}^{<>}", i(1, "*"))),
     })
   ),
   maths(
     { trig = "PP", wordTrig = true },
     c(1, {
       sn(nil, fmta("\\mathbb{P} <>", i(1))),
-      sn(nil, fmta("\\mathbb{P}^{<>}", i(1,"n"))),
+      sn(nil, fmta("\\mathbb{P}^{<>}", i(1, "n"))),
       sn(nil, fmta("\\mathbb{P}(<>)", i(1))),
     })
   ),
@@ -72,7 +62,7 @@ local autosnip = {
     c(1, {
       sn(nil, fmta("\\mathbb{R} <>", i(1))),
       sn(nil, fmta("\\mathbb{R}_{\\geqslant 0} <>", i(1))),
-      sn(nil, fmta("\\mathbb{R}^{<>}", i(1,"n"))),
+      sn(nil, fmta("\\mathbb{R}^{<>}", i(1, "n"))),
     })
   ),
   maths(
@@ -88,7 +78,7 @@ local autosnip = {
       sn(nil, fmta("\\times <>", i(1))),
       sn(nil, fmta("\\otimes <>", i(1))),
       sn(nil, fmta("\\oplus <>", i(1))),
-      sn(nil, fmta("\\bigotimes_{<>}^{<>} <>", { i(1), i(2),i(0) })),
+      sn(nil, fmta("\\bigotimes_{<>}^{<>} <>", { i(1), i(2), i(0) })),
     })
   ),
   maths(
