@@ -19,6 +19,22 @@ end
 
 local snip = {
   s(
+    { trig = "ul", name = "item list", desc = "\\begin{itemize}" },
+    fmta("\\begin{itemize}<option>\n\t\\item <content>\n\\end{itemize}", {
+      option = c(1, { t(""), sn(nil, { t("["), i(1), t("]") }) }),
+      content = i(0),
+    }),
+    { condition = tex.in_text, show_condition = tex.in_text }
+  ),
+  s(
+    { trig = "ol", name = "ordered list", desc = "\\begin{enumerate}" },
+    fmta("\\begin{enumerate}<option>\n\t\\item <content>\n\\end{enumerate}", {
+      option = c(1, { t(""), sn(nil, { t("["), i(1), t("]") }) }),
+      content = i(0),
+    }),
+    { condition = tex.in_text, show_condition = tex.in_text }
+  ),
+  s(
     { trig = "table", name = "table in tex", desc = "table, htbp, center, tabular" },
     fmta(
       [[
@@ -107,7 +123,7 @@ local snip = {
     { condition = line_begin }
   ),
   s(
-    { trig = "minipage", desc="minipages in figure" },
+    { trig = "minipage", desc = "minipages in figure" },
     fmta(
       [[
       \begin{figure}[htbp]

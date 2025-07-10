@@ -236,7 +236,7 @@ return {
     config = function()
       local ls = require("luasnip")
       local types = require("luasnip.util.types")
-      -- vim.api.nvim_create_user_command("LuaSnipEdit", function() require("luasnip.loaders").edit_snippet_files() end, {desc = "Edit Snippets"})
+      vim.api.nvim_create_user_command("LuaSnipEdit", function() require("luasnip.loaders").edit_snippet_files() end, {desc = "Edit Snippets"})
 
       ls.setup({
         enable_autosnippets = true,

@@ -7,36 +7,6 @@ endglobal
 
 # symbols
 
-context "math()"
-snippet R+ "R+" wA
-\mathbb{R}_{\geqslant 0}
-endsnippet
-
-context "math()"
-snippet cc "subset" wA
-\subset
-endsnippet
-
-context "math()"
-snippet nn "cap" wA
-\cap 
-endsnippet
-
-context "math()"
-snippet uu "cup" wA
-\cup 
-endsnippet
-
-context "math()"
-snippet Uu "bigcup" wA
-\bigcup_{${1:i \in  I} }} $0
-endsnippet
-
-context "math()"
-snippet Nn "bigcap" wA
-\bigcap_{${1:i \in ${2: I}} } $0
-endsnippet
-
 snippet vv "Vee" i
 \vee
 endsnippet
@@ -71,10 +41,6 @@ snippet set "set" wA
 \\{$1\\} $0
 endsnippet
 
-context "math()"
-snippet ~~ "~" wA
-\sim 
-endsnippet
 
 context "math()"
 snippet oo "\infty" w
@@ -84,21 +50,6 @@ endsnippet
 context "math()"
 snippet => "implies" iA
 \implies
-endsnippet
-
-context "math()"
-snippet ... "ldots" iA
-\ldots 
-endsnippet
-
-context "math()"
-snippet *** "cdots" iA
-\cdots
-endsnippet
-
-context "math()"
-snippet xx "cross" wA
-\times 
 endsnippet
 
 context "math()"
@@ -127,63 +78,9 @@ snippet Ee "\exists" wA
 endsnippet
 
 # sub sup
-context "math()"
-snippet ^^ "super script ^{}" iA
-^{$1}$0
-endsnippet
-
-context "math()"
-snippet  __ "sub script _{}" iA
-_{$1}$0
-endsnippet
-
-context "math()"
-snippet inv "inverse ^{-1}" i
-^{-1$1}$0
-endsnippet
 
 context "math()"
 snippet over "overset" wA
 \overset{$1}{${VISUAL}}$0
 endsnippet
 
-context "math()"
-snippet "([^\s]*)~~" "widetilde" riA
-\widetilde{`!p snip.rv=match.group(1)`${VISUAL}}$0
-endsnippet
-
-context "math()"
-snippet "([^\s]*)Bar" "Bar" riA
-\overline{`!p snip.rv=match.group(1)`${VISUAL}}$0
-endsnippet
-
-context "math()"
-snippet "([\w]*)bar" "bar" riA
-\bar{`!p snip.rv=match.group(1)`${VISUAL}}$0
-endsnippet
-
-context "math()"
-snippet "([^\s]*)Hat" "hat" riA
-\widehat{`!p snip.rv=match.group(1)`${VISUAL}}$0
-endsnippet
-
-context "math()"
-snippet "([\w]*)hat" "hat" riA
-\hat{`!p snip.rv=match.group(1)`${VISUAL}}$0
-endsnippet
-
-snippet __ "subscript" i
-_{$1}$0
-endsnippet
-
-priority 1000
-context "math()"
-snippet '([A-Za-z\]}'])([\d])' "auto subscript" wrA
-`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
-endsnippet
-
-
-context "math()"
-snippet "([A-Za-z\]}'])([A-Za-z])\2{1}" "auto subscript" irA
-`!p snip.rv = match.group(1)+'_{'+match.group(2)+'}'`
-endsnippet

@@ -23,7 +23,7 @@ local snip = {
   ),
 }
 local autosnip = {
-  s({ trig = "ii" }, { t("$"), i(0), t("$") }, { condition = tex.in_text }),
+  s({ trig = "ii" }, { t("$ "), i(1), t(" $") }, { condition = tex.in_text }),
   s(
     { trig = "dm", name = "display math", desc = "\\[\\]" },
     fmta(

@@ -55,18 +55,6 @@ local autosnip = {
     ),
     { condition = line_begin }
   ),
-  s(
-    { trig = "ii", snippetType = "autosnippet" },
-    fmta(
-      [[
-      $<>$
-      ]],
-      {
-        i(0),
-      }
-    ),
-    { condition = tex.in_text }
-  ),
 }
 
 return snip, autosnip

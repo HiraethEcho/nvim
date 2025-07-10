@@ -16,10 +16,6 @@ snippet ee "emph" w
 \emph{${1:${VISUAL}} }$0
 endsnippet
 
-snippet tt "text" w
-\text{$1}$0
-endsnippet
-
 snippet op "operatorname" w
 \operatorname{${1:${VISUAL}}}$0
 endsnippet
@@ -29,9 +25,6 @@ snippet Aa "Affine space" wA
 $\mathbb{A}^{${1:n}}$
 endsnippet
 
-snippet RR "Real number" wA
-$\mathbb{R}$
-endsnippet
 
 snippet FF "FF" wA
 $\mathbb{F}_{${1:n}}$0$
@@ -50,28 +43,6 @@ $\mathbb{Q}$
 endsnippet
 
 
-snippet PP "Projectiv space" wA
-$\mathbb{P}^{${1:n}}$
-endsnippet
-
-snippet CC "Complex number" wA
-$\mathbb{C}$
-endsnippet
-
-# math environment letters
-# snippet "([a-zA-Z])SS" "short inline math" irA
-# $`!p snip.rv = match.group(1)`$`!p
-# if t[1] and t[1][0] not in [',', '.', '?', '-', ' ']:
-#		snip.rv = ' '
-# else:
-#		snip.rv = ''
-# `$1 
-# endsnippet
-
-snippet "([a-zA-Z])SS" "short inline math" irA
-$`!p snip.rv = match.group(1)`$$1 
-endsnippet
-
 context "math()"
 snippet "([A-Z])(mb)" "auto mathbb" irA
 \mathbb{`!p snip.rv = match.group(1)`}
@@ -87,16 +58,6 @@ snippet "([a-zA-Z])(rm)" "auto mathrm" irA
 \mathrm{`!p snip.rv = match.group(1)`}
 endsnippet
 
-# context "math()"
-# snippet rm "mathrm" iA
-# \mathrm{${1:${VISUAL} }}$0
-# endsnippet
-
-context "math()"
-snippet "([A-Z])(cal)" "auto mathcal" irA
-\mathcal{`!p snip.rv = match.group(1)`}
-endsnippet
-
 context "math()"
 snippet "([A-Za-z])(frak)" "auto mathfrak" irA
 \mathfrak{`!p snip.rv = match.group(1)`}
@@ -110,11 +71,6 @@ endsnippet
 context "math()"
 snippet Aa "Affine space" wA
 \mathbb{A}^{${1:n}}
-endsnippet
-
-context "math()"
-snippet RR "Real number" wA
-\mathbb{R}
 endsnippet
 
 context "math()"
@@ -137,13 +93,3 @@ snippet QQ "Rational number" wA
 \mathbb{Q}
 endsnippet
 
-
-context "math()"
-snippet PP "Projectiv space" wA
-\mathbb{P}^{${1:n}}
-endsnippet
-
-context "math()"
-snippet CC "Complex number" wA
-\mathbb{C}
-endsnippet
