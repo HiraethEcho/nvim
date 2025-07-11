@@ -26,13 +26,15 @@ return {
         ["<Down>"] = { "select_next", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
         -- ["<C-e>"] = { "hide", "fallback" },
+        ["<C-e>"] = { "cancel", "fallback" },
       },
       signature = { enabled = true },
       completion = {
+        trigger = { show_on_backspace = true, show_on_insert = false },
         keyword = { range = "full" },
         documentation = { auto_show = true, auto_show_delay_ms = 50 },
-        menu = { draw = { columns = { { "label", gap = 1 }, { "kind_icon" }, { "source_name" } } } },
-        list = { selection = { preselect = false } },
+        menu = { draw = { treesitter = {}, columns = { { "label", gap = 1 }, { "kind_icon" }, { "source_name" } } } },
+        list = { selection = { preselect = false, auto_insert = false } },
         ghost_text = { enabled = true },
       },
       sources = {
@@ -43,10 +45,10 @@ return {
         default = { "ultisnips", "snippets", "lsp", "path", "buffer" },
         -- default = { "snippets", "lsp", "path", "buffer" },
         providers = {
-          snippets = { score_offset = 200 },
+          snippets = { score_offset = 300 },
           buffer = { opts = { get_bufnrs = vim.api.nvim_list_bufs } },
           -- copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
-          ultisnips = { name = "ultisnips", module = "blink.compat.source", score_offset = 300 },
+          ultisnips = { name = "ultisnips", module = "blink.compat.source", score_offset = 200 },
         },
       },
       -- cmdline = { enabled = false },
@@ -71,11 +73,10 @@ return {
           ["<Up>"] = { "select_prev", "fallback" },
           ["<Tab>"] = { "select_next", "fallback" },
           ["<S-Tab>"] = { "select_prev", "fallback" },
-          -- ["<CR>"] = { "select_and_accept" },
+          -- ["<CR>"] = { "accept" },
         },
         completion = {
           list = { selection = { preselect = false } },
-          ghost_text = { enabled = true },
           menu = { auto_show = true },
         },
       },
@@ -236,7 +237,9 @@ return {
     config = function()
       local ls = require("luasnip")
       local types = require("luasnip.util.types")
-      vim.api.nvim_create_user_command("LuaSnipEdit", function() require("luasnip.loaders").edit_snippet_files() end, {desc = "Edit Snippets"})
+      vim.api.nvim_create_user_command("LuaSnipEdit", function()
+        require("luasnip.loaders").edit_snippet_files()
+      end, { desc = "Edit Snippets" })
 
       ls.setup({
         enable_autosnippets = true,
@@ -275,9 +278,9 @@ return {
           ls.jump(-1)
         end
       end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<C-e>", function()
+      --[[ vim.keymap.set({ "i", "s" }, "<C-e>", function()
         require("luasnip.extras.select_choice")()
-      end, { silent = true })
+      end, { silent = true }) ]]
       vim.keymap.set("i", "<C-n>", function()
         if ls.choice_active() then
           ls.change_choice(1)
