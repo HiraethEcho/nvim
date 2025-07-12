@@ -34,7 +34,7 @@ return {
         keyword = { range = "full" },
         documentation = { auto_show = true, auto_show_delay_ms = 50 },
         menu = { draw = { treesitter = {}, columns = { { "label", gap = 1 }, { "kind_icon" }, { "source_name" } } } },
-        list = { selection = { preselect = false, auto_insert = false } },
+        list = { selection = { preselect = false, auto_insert = true } },
         ghost_text = { enabled = true },
       },
       sources = {
