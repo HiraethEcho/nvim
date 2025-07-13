@@ -56,7 +56,7 @@ opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
-opt.laststatus = 0
+opt.laststatus = 2
 opt.showtabline = 2
 --[[
   'laststatus' = 0  never a status line
@@ -64,7 +64,7 @@ opt.showtabline = 2
   'laststatus' = 2  always a status line
   'laststatus' = 3  have a global statusline at the bottom instead of one for each window
 ]]
-opt.cmdheight = 0              -- more space in the neovim command line for displaying messages
+-- opt.cmdheight = 1              -- more space in the neovim command line for displaying messages
 -- vim.opt.showcmdloc="statusline" -- useful when 'cmdheight' is 0.
 
 -- file

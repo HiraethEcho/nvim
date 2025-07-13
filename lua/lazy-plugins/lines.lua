@@ -32,8 +32,8 @@ return {
           -- theme = "material",
           -- theme = "jellybeans",
           -- theme = "flow",
-          component_separators = { left = "", right = "" },
-          section_separators = { left = "", right = "" },
+          -- component_separators = { left = "", right = "" },
+          -- section_separators = { left = "", right = "" },
           -- section_separators = { left = '', right = '' },
           -- component_separators = { left = '', right = '' },
           -- section_separators = { left = '', right = '' },
@@ -74,16 +74,26 @@ return {
             },
           },
           lualine_x = {
-            {
+            --[[ {
               require("noice").api.status.command.get,
               cond = require("noice").api.status.command.has,
               color = { fg = "#8098d0" },
-            },
-            -- "%S",
+            }, ]]
+            "%S",
             "searchcount",
           },
           -- lualine_y = { "filetype" },
           lualine_y = {
+            {
+              require("minuet.lualine"),
+              -- the follwing is the default configuration
+              -- the name displayed in the lualine. Set to "provider", "model" or "both"
+              display_name = 'model',
+              -- separator between provider and model name for option "both"
+              -- provider_model_separator = ':',
+              -- whether show display_name when no completion requests are active
+              -- display_on_idle = false,
+            },
             "lsp_status",
           },
           lualine_z = {
@@ -202,7 +212,7 @@ return {
   },
   {
     "folke/noice.nvim",
-    -- enabled = false,
+    enabled = false,
     event = "BufReadPost",
     -- event = {"InsertEnter","CmdlineEnter"},
     opts = {

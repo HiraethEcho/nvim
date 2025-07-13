@@ -58,6 +58,27 @@ return {
     },
   },
   {
+    "code-biscuits/nvim-biscuits",
+    keys = {
+      {
+        "<leader>ub",
+        function()
+          local nvim_biscuits = require("nvim-biscuits")
+          nvim_biscuits.BufferAttach()
+          nvim_biscuits.toggle_biscuits()
+        end,
+        mode = "n",
+        desc = "Enable Biscuits",
+      },
+    },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      cursor_line_only = true,
+    },
+  },
+  {
     "nvim-treesitter/nvim-treesitter-textobjects",
     enabled = false,
     config = function()

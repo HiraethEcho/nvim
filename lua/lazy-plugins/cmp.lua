@@ -6,11 +6,13 @@ return {
     version = "*",
     dependencies = {
       { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
-      "nvim-treesitter/nvim-treesitter",
-      -- { "fang2hou/blink-copilot" },
       { "saghen/blink.compat", version = "*", opts = {} },
-      { "SirVer/ultisnips" },
+      "SirVer/ultisnips",
       "L3MON4D3/LuaSnip",
+      "nvim-treesitter/nvim-treesitter",
+      "fang2hou/blink-copilot",
+      "milanglacier/minuet-ai.nvim",
+      "Kaiser-Yang/blink-cmp-avante",
     },
     opts = {
       snippets = { preset = "luasnip" },
@@ -39,16 +41,19 @@ return {
       },
       sources = {
         -- default = { "ultisnips", "lsp", "path", "buffer", "copilot" },
-        -- default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot" },
+        -- default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot", "minuet", "avante" },
+        default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot", "minuet" },
         -- default = { "snippets", "lsp", "path", "buffer", "copilot" },
         -- default = { "ultisnips", "lsp", "path", "buffer" },
-        default = { "ultisnips", "snippets", "lsp", "path", "buffer" },
+        -- default = { "ultisnips", "snippets", "lsp", "path", "buffer" },
         -- default = { "snippets", "lsp", "path", "buffer" },
         providers = {
           snippets = { score_offset = 300 },
           buffer = { opts = { get_bufnrs = vim.api.nvim_list_bufs } },
-          -- copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
+          copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
           ultisnips = { name = "ultisnips", module = "blink.compat.source", score_offset = 200 },
+          minuet = { name = "minuet", module = "minuet.blink", score_offset = 200 },
+          -- avante = { name = "avante", module = "blink-cmp-avante", opts = {} },
         },
       },
       -- cmdline = { enabled = false },
@@ -187,7 +192,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    enabled = false,
+    -- enabled = false,
     cmd = "Copilot",
     keys = { -- Example mapping to toggle outline
       { "<leader>cc", "<cmd>Copilot<CR>", desc = "Copilot" },
@@ -204,7 +209,7 @@ return {
     },
     opts = {
       panel = {
-        enabled = true,
+        enabled = false,
         auto_refresh = true,
         keymap = {
           jump_prev = "K",

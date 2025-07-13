@@ -15,7 +15,7 @@ return {
     "MeanderingProgrammer/render-markdown.nvim",
     -- enabled = false,
     -- lazy = false,
-    ft = { "markdown", "md" },
+    ft = { "markdown", "md", "codecompanion", "Avante" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
     },
@@ -24,6 +24,7 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     opts = {
+      file_types = { "markdown", "codecompanion", "Avante" },
       -- completions = { blink = { enabled = true } }, -- no cmp
       -- completions = { lsp = { enabled = true } }, -- error loading lsp
       heading = { width = "block", position = "inline" },
@@ -385,8 +386,14 @@ return {
     enabled = false,
     -- event = "VeryLazy",
     opts = {
-      -- add options here
-      -- or leave it empty to use the default settings
+      default = {
+        embed_image_as_base64 = false,
+        prompt_for_file_name = false,
+        drag_and_drop = {
+          insert_mode = true,
+        },
+        use_absolute_path = true,
+      },
     },
     keys = {
       { "<leader>mP", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },

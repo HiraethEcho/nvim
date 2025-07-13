@@ -18,10 +18,17 @@ return {
       }, -- config
     },
   },
+  {
+    "OXY2DEV/helpview.nvim",
+    ft = "help",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+  },
   -- disable
   {
     "rcarriga/nvim-notify",
-    event = "BufRead",
+    event = "BufReadPost",
     enabled = false,
     config = function()
       require("notify").setup({

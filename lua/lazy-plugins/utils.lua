@@ -23,13 +23,6 @@ return {
     end,
   },
   {
-    "OXY2DEV/helpview.nvim",
-    ft = "help",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-  },
-  {
     "lambdalisue/suda.vim",
     cmd = { "SudaRead", "SudaWrite" },
   },
