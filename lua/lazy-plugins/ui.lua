@@ -1,3 +1,4 @@
+vim.g.loaded_matchparen = 1 -- "utilyre/sentiment.nvim",
 return {
   {
     "norcalli/nvim-colorizer.lua",

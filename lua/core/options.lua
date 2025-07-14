@@ -42,15 +42,15 @@ opt.listchars = { -- NOTE: using `vim.opt` instead of `vim.o` to pass rich objec
   -- eol = "↴",
 }
 -- opt.whichwrap = "bs<>[]"     -- which "horizontal" keys are allowed to travel to prev/next line
-opt.winminwidth = 10 -- Minimum window width
--- opt.wrap = false -- Disable line wrap
--- opt.linebreak = true -- companion to wrap, don't split words
+-- opt.winminwidth = 10 -- Minimum window width
+opt.wrap = false -- Disable line wrap
+opt.linebreak = true -- companion to wrap, don't split words
 
 -- bottom line: command search statusline
 -- opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.pumblend = 10 -- Popup blend
-opt.pumheight = 10 -- Maximum number of entries in a popup
-opt.showmode = false -- Dont show mode since we have a statusline
+-- opt.pumblend = 10 -- Popup blend
+-- opt.pumheight = 10 -- Maximum number of entries in a popup
+-- opt.showmode = false -- Dont show mode since we have a statusline
 opt.smartcase = true -- Don't ignore case with capitals
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
@@ -79,6 +79,5 @@ opt.hidden = true -- 允许隐藏被修改过的buffer
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.autowrite = true -- Enable auto write
 
-vim.g.loaded_matchparen = 1 -- "utilyre/sentiment.nvim",
 
 vim.opt.completeopt = { "menu", "popup", "menuone", "noinsert", "noselect", "fuzzy", "preview" }

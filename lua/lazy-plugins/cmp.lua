@@ -42,8 +42,7 @@ return {
       sources = {
         -- default = { "ultisnips", "lsp", "path", "buffer", "copilot" },
         -- default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot", "minuet", "avante" },
-        default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot", "minuet" },
-        -- default = { "snippets", "lsp", "path", "buffer", "copilot" },
+        default = { "snippets", "lsp", "path", "buffer", "copilot", "lazydev" },
         -- default = { "ultisnips", "lsp", "path", "buffer" },
         -- default = { "ultisnips", "snippets", "lsp", "path", "buffer" },
         -- default = { "snippets", "lsp", "path", "buffer" },
@@ -53,7 +52,8 @@ return {
           copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
           ultisnips = { name = "ultisnips", module = "blink.compat.source", score_offset = 200 },
           minuet = { name = "minuet", module = "minuet.blink", score_offset = 200 },
-          -- avante = { name = "avante", module = "blink-cmp-avante", opts = {} },
+          avante = { name = "avante", module = "blink-cmp-avante", opts = {} },
+          lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
         },
       },
       -- cmdline = { enabled = false },
@@ -297,5 +297,14 @@ return {
         end
       end)
     end,
+  },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = { { path = "${3rd}/luv/library", words = { "vim%.uv" } } },
+      integrations = { lspconfig = false, cmp = false },
+      enabled = true,
+    },
   },
 }
