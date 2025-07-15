@@ -100,9 +100,14 @@ return {
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    opts ={
+    opts = {
       map_bs = false,
-    }
+    },
+  },
+  {
+    "sontungexpt/bim.nvim",
+    event = "InsertEnter",
+    config = true,
   },
   {
     "echasnovski/mini.splitjoin",
