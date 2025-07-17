@@ -6,6 +6,7 @@ local get_visual = function(args, parent)
   end
 end
 local snip = {
+  s({ trig = "link", name = "link", desc = "[]()", wordTrig = false }, fmt("[{}]({})", { d(1, get_visual), i(2) })),
   s(
     { trig = "callout", name = "callout", desc = "[!note]" },
     fmt("> [!{}] {}\n> {}", {
@@ -22,7 +23,7 @@ local snip = {
 }
 local autosnip = {
   s(
-    { trig = "ii", name = "font", desc = "italic, bold, code" },
+    { trig = "ii", name = "font", desc = "italic, bold, code", wordTrig = false },
     fmt("{}{}{}", {
       c(2, { t("*"), t("**"), t("`"), t("~~"), t("***") }),
       d(1, get_visual),
