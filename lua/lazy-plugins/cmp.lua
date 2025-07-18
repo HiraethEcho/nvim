@@ -11,8 +11,8 @@ return {
       "L3MON4D3/LuaSnip",
       "nvim-treesitter/nvim-treesitter",
       "fang2hou/blink-copilot",
-      "milanglacier/minuet-ai.nvim",
-      "Kaiser-Yang/blink-cmp-avante",
+      -- "milanglacier/minuet-ai.nvim",
+      -- "Kaiser-Yang/blink-cmp-avante",
     },
     opts = {
       snippets = { preset = "luasnip" },

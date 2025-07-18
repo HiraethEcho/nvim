@@ -40,8 +40,13 @@ return {
         end, mappings)
         return vim.list_extend(mappings, keys)
       end,
-      provider = "copilot",
+      -- provider = "copilot",
+      provider = "ollama",
       providers = {
+        ollama = {
+          endpoint = "http://localhost:11434",
+          model = "qwen2.5-coder:7b",
+        },
         deepseek = {
           __inherited_from = "openai",
           api_key_name = "sk-e229a6f4cadf426ea7e3972b09d03f02",
@@ -59,7 +64,7 @@ return {
   },
   { -- codecompanion
     "olimorris/codecompanion.nvim",
-    enabled = false,
+    -- enabled = false,
     event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -69,6 +74,17 @@ return {
     config = function()
       require("codecompanion").setup({
         adapters = {
+          ollama = function()
+            return require("codecompanion.adapters").extend("ollama", {
+              env = {
+                url = "http://localhost:11434",
+              },
+              parameters = {
+                sync = true,
+              },
+              schema = { model = { default = "qwen2.5-coder:7b" } },
+            })
+          end,
           deepseek = function()
             return require("codecompanion.adapters").extend("deepseek", {
               env = {
@@ -78,16 +94,27 @@ return {
           end,
         },
         strategies = {
-          chat = { adapter = "deepseek" },
+          chat = { adapter = "ollama" },
           inline = { adapter = "copilot" },
           agent = { adapter = "deepseek" },
+          cmd = { adapter = "deepseek" },
         },
       })
+      vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+      vim.keymap.set(
+        { "n", "v" },
+        "<LocalLeader>c",
+        "<cmd>CodeCompanionChat Toggle<cr>",
+        { noremap = true, silent = true }
+      )
+      vim.keymap.set("v", "gA", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+      -- Expand 'cc' into 'CodeCompanion' in the command line
+      vim.cmd([[cabbrev cc CodeCompanion]])
     end,
   },
   { -- minuet-ai
     "milanglacier/minuet-ai.nvim",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       { "nvim-lua/plenary.nvim" },
     },
@@ -97,7 +124,26 @@ return {
         -- provider = "openai_compatible",
         provider_options = {
           openai_fim_compatible = {
-            end_point = "https://api.deepseek.com/beta/completions",
+            api_key = "TERM",
+            name = "Ollama",
+            end_point = "http://localhost:11434/v1/completions",
+            model = "qwen2.5-coder:7b",
+            optional = {
+              max_tokens = 56,
+              top_p = 0.9,
+            },
+            --[[ end_point = "https://api.deepseek.com/beta/completions",
+            api_key = function()
+              return "sk-e229a6f4cadf426ea7e3972b09d03f02"
+            end,
+            name = "deepseek",
+            optional = {
+              max_tokens = 256,
+              top_p = 0.9,
+            }, ]]
+          },
+          openai_compatible = {
+            end_point = "https://api.deepseek.com",
             api_key = function()
               return "sk-e229a6f4cadf426ea7e3972b09d03f02"
             end,
@@ -106,17 +152,6 @@ return {
               max_tokens = 256,
               top_p = 0.9,
             },
-          },
-        },
-        openai_compatible = {
-          end_point = "https://api.deepseek.com",
-          api_key = function()
-            return "sk-e229a6f4cadf426ea7e3972b09d03f02"
-          end,
-          name = "deepseek",
-          optional = {
-            max_tokens = 256,
-            top_p = 0.9,
           },
         },
       })
@@ -128,7 +163,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
+    -- build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
     config = function()
       require("mcphub").setup({
         --- `mcp-hub` binary related options-------------------

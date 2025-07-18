@@ -6,9 +6,12 @@ return {
     dependencies = {
       "saghen/blink.cmp",
     },
-    ft = { "markdown", "md" },
+    ft = { "markdown", "md", "codecompanion" },
     keys = {
       { "<C-e>", "<cmd>Markview Toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
+    },
+    opts = {
+      filetypes = { "markdown", "codecompanion" },
     },
   },
   {
