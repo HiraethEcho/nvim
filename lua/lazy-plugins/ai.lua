@@ -2,10 +2,14 @@ return {
   { -- codecompanion
     "olimorris/codecompanion.nvim",
     -- enabled = false,
-    -- event = "VeryLazy",
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "ravitemer/mcphub.nvim",
       "nvim-treesitter/nvim-treesitter",
+    },
+    keys = {
+      { "<localleader>c", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle codecompanion chat" },
     },
     opts = {
       adapters = {
@@ -34,15 +38,147 @@ return {
         agent = { adapter = "copilot" },
         cmd = { adapter = "copilot" },
       },
+      extensions = {
+        mcphub = {
+          callback = "mcphub.extensions.codecompanion",
+          opts = {
+            -- MCP Tools
+            make_tools = true, -- Make individual tools (@server__tool) and server groups (@server) from MCP servers
+            show_server_tools_in_chat = true, -- Show individual tools in chat completion (when make_tools=true)
+            add_mcp_prefix_to_tool_names = false, -- Add mcp__ prefix (e.g `@mcp__github`, `@mcp__neovim__list_issues`)
+            show_result_in_chat = true, -- Show tool results directly in chat buffer
+            format_tool = nil, -- function(tool_name:string, tool: CodeCompanion.Agent.Tool) : string Function to format tool names to show in the chat buffer
+            -- MCP Resources
+            make_vars = true, -- Convert MCP resources to #variables for prompts
+            -- MCP Prompts
+            make_slash_commands = true, -- Add MCP prompts as /slash commands
+          },
+        },
+      },
     },
-    config = function()
-      -- vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+    --[[ config = function()
+      require("codecompanion").setup({
+        strategies = { chat = { adapter = "anthropic" }, inline = { adapter = "anthropic" } },
+      })
+      vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
       vim.keymap.set({ "n", "v" }, "<LocalLeader>c", "<cmd>CodeCompanionChat Toggle<cr>")
       vim.keymap.set("v", "gA", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
-      -- Expand 'cc' into 'CodeCompanion' in the command line
-      vim.cmd([[cabbrev cc CodeCompanion]])
+    end, ]]
+    -- vim.cmd([[cabbrev cc CodeCompanion]])
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    -- enabled = false,
+    cmd = "Copilot",
+    keys = { -- Example mapping to toggle outline
+      { "<leader>cc", "<cmd>Copilot<CR>", desc = "Copilot" },
+      { "<leader>ct", "<cmd>Copilot toggle<CR>", desc = "Copilot toggle" },
+      { "<leader>cd", "<cmd>Copilot detach<CR>", desc = "Copilot detach" },
+      { "<leader>ca", "<cmd>Copilot attach<CR>", desc = "Copilot attach" },
+      { "<leader>cp", "<cmd>Copilot panel<CR>", desc = "Copilot panel" },
+    },
+    dependencies = {
+      --[[ "zbirenbaum/copilot-cmp",
+      config = function()
+        require("copilot_cmp").setup()
+      end, ]]
+    },
+    opts = {
+      panel = {
+        enabled = false,
+        auto_refresh = true,
+        keymap = {
+          jump_prev = "K",
+          jump_next = "J",
+        },
+        layout = {
+          position = "bottom", -- | top | left | right
+          ratio = 0.4,
+        },
+      },
+      suggestion = {
+        enabled = true,
+        auto_trigger = false,
+        hide_during_completion = true,
+        debounce = 75,
+      },
+      filetypes = {
+        lua = true,
+        markdown = true,
+        latex = true,
+        -- ["."] = false,
+      },
+    },
+  },
+  { -- mcphub
+    "ravitemer/mcphub.nvim",
+    -- enabled = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
+    config = function()
+      require("mcphub").setup({
+        --- `mcp-hub` binary related options-------------------
+        config = vim.fn.expand("~/.config/mcphub/servers.json"), -- Absolute path to MCP Servers config file (will create if not exists)
+        port = 37373, -- The port `mcp-hub` server listens to
+        shutdown_delay = 60 * 10 * 000, -- Delay in ms before shutting down the server when last instance closes (default: 10 minutes)
+        use_bundled_binary = false, -- Use local `mcp-hub` binary (set this to true when using build = "bundled_build.lua")
+        mcp_request_timeout = 60000, --Max time allowed for a MCP tool or resource to execute in milliseconds, set longer for long running tasks
+
+        ---Chat-plugin related options-----------------
+        auto_approve = false, -- Auto approve mcp tool calls
+        auto_toggle_mcp_servers = true, -- Let LLMs start and stop MCP servers automatically
+        extensions = {
+          avante = { make_slash_commands = true },
+        },
+        builtin_tools = {
+          edit_file = {
+            parser = {
+              track_issues = true, -- Track parsing issues for LLM feedback
+              extract_inline_content = true, -- Handle content on marker lines
+            },
+            locator = {
+              fuzzy_threshold = 0.8, -- Minimum similarity for fuzzy matches (0.0-1.0)
+              enable_fuzzy_matching = true, -- Allow fuzzy matching when exact fails
+            },
+            ui = {
+              go_to_origin_on_complete = true, -- Jump back to original file on completion
+              keybindings = {
+                accept = ".", -- Accept current change
+                reject = ",", -- Reject current change
+                next = "n", -- Next diff
+                prev = "p", -- Previous diff
+                accept_all = "ga", -- Accept all remaining changes
+                reject_all = "gr", -- Reject all remaining changes
+              },
+            },
+            feedback = {
+              include_parser_feedback = true, -- Include parsing feedback for LLM
+              include_locator_feedback = true, -- Include location feedback for LLM
+              include_ui_summary = true, -- Include UI interaction summary
+              ui = {
+                include_session_summary = true, -- Include session summary in feedback
+                include_final_diff = true, -- Include final diff in feedback
+                send_diagnostics = true, -- Include diagnostics after editing
+                wait_for_diagnostics = 500, -- Wait time for diagnostics (ms)
+                diagnostic_severity = vim.diagnostic.severity.WARN, -- Min severity to include
+              },
+            },
+          },
+        },
+        --- Plugin specific options-------------------
+        native_servers = {}, -- add your custom lua native servers here
+        on_ready = function(hub)
+          vim.notify("MCP HUB is ready")
+        end,
+        on_error = function(err)
+          vim.notify("MCP HUB error")
+        end,
+      })
     end,
   },
+
   { -- minuet-ai
     "milanglacier/minuet-ai.nvim",
     enabled = false,
@@ -150,60 +286,5 @@ return {
       "folke/snacks.nvim", -- for input provider snacks
       "zbirenbaum/copilot.lua", -- for providers='copilot'
     },
-  },
-  { -- mcphub
-    "ravitemer/mcphub.nvim",
-    enabled = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    -- build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
-    config = function()
-      require("mcphub").setup({
-        --- `mcp-hub` binary related options-------------------
-        config = vim.fn.expand("~/.config/mcphub/servers.json"), -- Absolute path to MCP Servers config file (will create if not exists)
-        port = 37373, -- The port `mcp-hub` server listens to
-        shutdown_delay = 60 * 10 * 000, -- Delay in ms before shutting down the server when last instance closes (default: 10 minutes)
-        use_bundled_binary = false, -- Use local `mcp-hub` binary (set this to true when using build = "bundled_build.lua")
-        mcp_request_timeout = 60000, --Max time allowed for a MCP tool or resource to execute in milliseconds, set longer for long running tasks
-
-        ---Chat-plugin related options-----------------
-        auto_approve = false, -- Auto approve mcp tool calls
-        auto_toggle_mcp_servers = true, -- Let LLMs start and stop MCP servers automatically
-        extensions = {
-          avante = {
-            make_slash_commands = true, -- make /slash commands from MCP server prompts
-          },
-        },
-
-        --- Plugin specific options-------------------
-        native_servers = {}, -- add your custom lua native servers here
-        ui = {
-          window = {
-            width = 0.8, -- 0-1 (ratio); "50%" (percentage); 50 (raw number)
-            height = 0.8, -- 0-1 (ratio); "50%" (percentage); 50 (raw number)
-            align = "center", -- "center", "top-left", "top-right", "bottom-left", "bottom-right", "top", "bottom", "left", "right"
-            relative = "editor",
-            zindex = 50,
-            border = "rounded", -- "none", "single", "double", "rounded", "solid", "shadow"
-          },
-          wo = { -- window-scoped options (vim.wo)
-            winhl = "Normal:MCPHubNormal,FloatBorder:MCPHubBorder",
-          },
-        },
-        on_ready = function(hub)
-          -- Called when hub is ready
-        end,
-        on_error = function(err)
-          -- Called on errors
-        end,
-        log = {
-          level = vim.log.levels.WARN,
-          to_file = false,
-          file_path = nil,
-          prefix = "MCPHub",
-        },
-      })
-    end,
   },
 }
