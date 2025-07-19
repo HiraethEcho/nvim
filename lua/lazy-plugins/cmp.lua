@@ -11,6 +11,7 @@ return {
       "L3MON4D3/LuaSnip",
       "nvim-treesitter/nvim-treesitter",
       "fang2hou/blink-copilot",
+      "olimorris/codecompanion.nvim",
       -- "milanglacier/minuet-ai.nvim",
       -- "Kaiser-Yang/blink-cmp-avante",
     },
@@ -87,6 +88,50 @@ return {
       },
     },
     -- opts_extend = { "sources.default" },
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    -- enabled = false,
+    cmd = "Copilot",
+    keys = { -- Example mapping to toggle outline
+      { "<leader>cc", "<cmd>Copilot<CR>", desc = "Copilot" },
+      { "<leader>ct", "<cmd>Copilot toggle<CR>", desc = "Copilot toggle" },
+      { "<leader>cd", "<cmd>Copilot detach<CR>", desc = "Copilot detach" },
+      { "<leader>ca", "<cmd>Copilot attach<CR>", desc = "Copilot attach" },
+      { "<leader>cp", "<cmd>Copilot panel<CR>", desc = "Copilot panel" },
+    },
+    dependencies = {
+      "zbirenbaum/copilot-cmp",
+      config = function()
+        require("copilot_cmp").setup()
+      end,
+    },
+    opts = {
+      panel = {
+        enabled = false,
+        auto_refresh = true,
+        keymap = {
+          jump_prev = "K",
+          jump_next = "J",
+        },
+        layout = {
+          position = "bottom", -- | top | left | right
+          ratio = 0.4,
+        },
+      },
+      suggestion = {
+        enabled = true,
+        auto_trigger = false,
+        hide_during_completion = true,
+        debounce = 75,
+      },
+      filetypes = {
+        lua = true,
+        markdown = true,
+        latex = true,
+        -- ["."] = false,
+      },
+    },
   },
   {
     "hrsh7th/nvim-cmp",
@@ -189,50 +234,6 @@ return {
         },
       })
     end,
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    -- enabled = false,
-    cmd = "Copilot",
-    keys = { -- Example mapping to toggle outline
-      { "<leader>cc", "<cmd>Copilot<CR>", desc = "Copilot" },
-      { "<leader>ct", "<cmd>Copilot toggle<CR>", desc = "Copilot toggle" },
-      { "<leader>cd", "<cmd>Copilot detach<CR>", desc = "Copilot detach" },
-      { "<leader>ca", "<cmd>Copilot attach<CR>", desc = "Copilot attach" },
-      { "<leader>cp", "<cmd>Copilot panel<CR>", desc = "Copilot panel" },
-    },
-    dependencies = {
-      "zbirenbaum/copilot-cmp",
-      config = function()
-        require("copilot_cmp").setup()
-      end,
-    },
-    opts = {
-      panel = {
-        enabled = false,
-        auto_refresh = true,
-        keymap = {
-          jump_prev = "K",
-          jump_next = "J",
-        },
-        layout = {
-          position = "bottom", -- | top | left | right
-          ratio = 0.4,
-        },
-      },
-      suggestion = {
-        enabled = true,
-        auto_trigger = false,
-        hide_during_completion = true,
-        debounce = 75,
-      },
-      filetypes = {
-        lua = true,
-        markdown = true,
-        latex = true,
-        -- ["."] = false,
-      },
-    },
   },
   {
     "L3MON4D3/LuaSnip",

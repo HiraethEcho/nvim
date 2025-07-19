@@ -1,4 +1,93 @@
 return {
+  { -- codecompanion
+    "olimorris/codecompanion.nvim",
+    -- enabled = false,
+    -- event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      adapters = {
+        ollama = function()
+          return require("codecompanion.adapters").extend("ollama", {
+            env = {
+              url = "http://localhost:11434",
+            },
+            parameters = {
+              sync = true,
+            },
+            schema = { model = { default = "qwen2.5-coder:7b" } },
+          })
+        end,
+        deepseek = function()
+          return require("codecompanion.adapters").extend("deepseek", {
+            env = {
+              api_key = "sk-e229a6f4cadf426ea7e3972b09d03f02",
+            },
+          })
+        end,
+      },
+      strategies = {
+        chat = { adapter = "copilot" },
+        inline = { adapter = "copilot" },
+        agent = { adapter = "copilot" },
+        cmd = { adapter = "copilot" },
+      },
+    },
+    config = function()
+      -- vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+      vim.keymap.set({ "n", "v" }, "<LocalLeader>c", "<cmd>CodeCompanionChat Toggle<cr>")
+      vim.keymap.set("v", "gA", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+      -- Expand 'cc' into 'CodeCompanion' in the command line
+      vim.cmd([[cabbrev cc CodeCompanion]])
+    end,
+  },
+  { -- minuet-ai
+    "milanglacier/minuet-ai.nvim",
+    enabled = false,
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+    },
+    config = function()
+      require("minuet").setup({
+        provider = "openai_fim_compatible",
+        -- provider = "openai_compatible",
+        provider_options = {
+          openai_fim_compatible = {
+            api_key = "TERM",
+            name = "Ollama",
+            end_point = "http://localhost:11434/v1/completions",
+            model = "qwen2.5-coder:7b",
+            optional = {
+              max_tokens = 56,
+              top_p = 0.9,
+            },
+            --[[ end_point = "https://api.deepseek.com/beta/completions",
+            api_key = function()
+              return "sk-e229a6f4cadf426ea7e3972b09d03f02"
+            end,
+            name = "deepseek",
+            optional = {
+              max_tokens = 256,
+              top_p = 0.9,
+            }, ]]
+          },
+          openai_compatible = {
+            end_point = "https://api.deepseek.com",
+            api_key = function()
+              return "sk-e229a6f4cadf426ea7e3972b09d03f02"
+            end,
+            name = "deepseek",
+            optional = {
+              max_tokens = 256,
+              top_p = 0.9,
+            },
+          },
+        },
+      })
+    end,
+  },
   { -- avante
     "yetone/avante.nvim",
     enabled = false,
@@ -61,101 +150,6 @@ return {
       "folke/snacks.nvim", -- for input provider snacks
       "zbirenbaum/copilot.lua", -- for providers='copilot'
     },
-  },
-  { -- codecompanion
-    "olimorris/codecompanion.nvim",
-    -- enabled = false,
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = {},
-    config = function()
-      require("codecompanion").setup({
-        adapters = {
-          ollama = function()
-            return require("codecompanion.adapters").extend("ollama", {
-              env = {
-                url = "http://localhost:11434",
-              },
-              parameters = {
-                sync = true,
-              },
-              schema = { model = { default = "qwen2.5-coder:7b" } },
-            })
-          end,
-          deepseek = function()
-            return require("codecompanion.adapters").extend("deepseek", {
-              env = {
-                api_key = "sk-e229a6f4cadf426ea7e3972b09d03f02",
-              },
-            })
-          end,
-        },
-        strategies = {
-          chat = { adapter = "ollama" },
-          inline = { adapter = "copilot" },
-          agent = { adapter = "deepseek" },
-          cmd = { adapter = "deepseek" },
-        },
-      })
-      vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-      vim.keymap.set(
-        { "n", "v" },
-        "<LocalLeader>c",
-        "<cmd>CodeCompanionChat Toggle<cr>",
-        { noremap = true, silent = true }
-      )
-      vim.keymap.set("v", "gA", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
-      -- Expand 'cc' into 'CodeCompanion' in the command line
-      vim.cmd([[cabbrev cc CodeCompanion]])
-    end,
-  },
-  { -- minuet-ai
-    "milanglacier/minuet-ai.nvim",
-    enabled = false,
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-    },
-    config = function()
-      require("minuet").setup({
-        provider = "openai_fim_compatible",
-        -- provider = "openai_compatible",
-        provider_options = {
-          openai_fim_compatible = {
-            api_key = "TERM",
-            name = "Ollama",
-            end_point = "http://localhost:11434/v1/completions",
-            model = "qwen2.5-coder:7b",
-            optional = {
-              max_tokens = 56,
-              top_p = 0.9,
-            },
-            --[[ end_point = "https://api.deepseek.com/beta/completions",
-            api_key = function()
-              return "sk-e229a6f4cadf426ea7e3972b09d03f02"
-            end,
-            name = "deepseek",
-            optional = {
-              max_tokens = 256,
-              top_p = 0.9,
-            }, ]]
-          },
-          openai_compatible = {
-            end_point = "https://api.deepseek.com",
-            api_key = function()
-              return "sk-e229a6f4cadf426ea7e3972b09d03f02"
-            end,
-            name = "deepseek",
-            optional = {
-              max_tokens = 256,
-              top_p = 0.9,
-            },
-          },
-        },
-      })
-    end,
   },
   { -- mcphub
     "ravitemer/mcphub.nvim",
