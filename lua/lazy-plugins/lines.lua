@@ -1,6 +1,6 @@
 return {
   -- top and bottom
-  {
+  { -- lualine
     "nvim-lualine/lualine.nvim",
     -- enabled = false,
     -- event = "BufEnter",
@@ -111,7 +111,7 @@ return {
               end,
               color = function()
                 if not vim.g.loaded_mcphub then
-                  return { fg = "#6c7086" } -- Gray for not loaded
+                  return { fg = "#18181f" } -- Gray for not loaded
                 end
 
                 local status = vim.g.mcphub_status or "stopped"
@@ -241,7 +241,7 @@ return {
     end,
   },
   -- cmdline
-  {
+  { -- "hachy/cmdpalette.nvim",
     "hachy/cmdpalette.nvim",
     enabled = false,
     event = "CmdlineEnter",
@@ -249,8 +249,7 @@ return {
       require("cmdpalette").setup()
     end,
   },
-
-  {
+  { -- wilder
     "gelguy/wilder.nvim",
     enabled = false,
     event = "CmdlineEnter",
@@ -305,7 +304,7 @@ return {
       )
     end,
   },
-  {
+  { -- "folke/noice.nvim",
     "folke/noice.nvim",
     enabled = false,
     event = "BufReadPost",
@@ -321,7 +320,7 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
   },
   -- left
-  {
+  { -- "luukvbaal/statuscol.nvim",
     "luukvbaal/statuscol.nvim",
     -- lazy = false,
     enabled = false,
@@ -331,7 +330,7 @@ return {
     end,
   },
   -- right
-  {
+  { -- "petertriho/nvim-scrollbar",
     "petertriho/nvim-scrollbar",
     enabled = false,
     cmd = "ScrollbarToggle",
@@ -339,7 +338,7 @@ return {
       require("scrollbar").setup()
     end,
   },
-  {
+  { -- "wsdjeg/scrollbar.vim",
     "wsdjeg/scrollbar.vim",
     enabled = false,
     event = "BufRead",
@@ -347,7 +346,7 @@ return {
       require("scrollbar").setup()
     end,
   },
-  {
+  { -- "gorbit99/codewindow.nvim",
     "gorbit99/codewindow.nvim",
     enabled = false,
     keys = {
@@ -431,14 +430,14 @@ return {
     end,
   },
   -- inside
-  {
+  { -- "nvim-zh/colorful-winsep.nvim",
     "nvim-zh/colorful-winsep.nvim",
     enabled = false,
     config = true,
     event = { "BufRead", "BufNewFile" },
   },
   -- inside horizontal
-  {
+  { -- "mvllow/modes.nvim",
     "mvllow/modes.nvim",
     enabled = false,
     tag = "v0.2.0",
@@ -458,9 +457,9 @@ return {
     end,
   },
   -- inside verticle
-  {
+  { -- "shellRaining/hlchunk.nvim",
     "shellRaining/hlchunk.nvim",
-    -- event = "BufRead",
+    event = "BufRead",
     enabled = false,
     dependencies = {
       -- "rcarriga/nvim-notify",
@@ -497,7 +496,7 @@ return {
       })
     end,
   },
-  {
+  { -- "lukas-reineke/indent-blankline.nvim",
     "lukas-reineke/indent-blankline.nvim",
     enabled = false,
     dependencies = {

@@ -1,5 +1,5 @@
 return {
-  {
+  { -- CopilotChat
     "CopilotC-Nvim/CopilotChat.nvim",
     cmd = { "CopilotChatToggle" },
     dependencies = {
@@ -12,7 +12,7 @@ return {
       local chat = require("CopilotChat")
       chat.setup({
         mappings = {
-          reset = { normal = "<C-L>", insert = "C-L" },
+          reset = { normal = "<C-S-L>", insert = "<C-S-L>" },
           show_diff = { full_diff = true },
         },
       })
@@ -172,7 +172,7 @@ return {
     end, ]]
     -- vim.cmd([[cabbrev cc CodeCompanion]])
   },
-  {
+  { -- copilot
     "zbirenbaum/copilot.lua",
     -- enabled = false,
     cmd = "Copilot",
@@ -371,6 +371,18 @@ return {
         end, mappings)
         return vim.list_extend(mappings, keys)
       end,
+      -- mcp-hub
+      -- system_prompt as function ensures LLM always has latest MCP server state This is evaluated for every message, even in existing chats
+      system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        return hub and hub:get_active_servers_prompt() or ""
+      end,
+      -- Using function prevents requiring mcphub before it's loaded
+      custom_tools = function()
+        return {
+          require("mcphub.extensions.avante").mcp_tool(),
+        }
+      end,
       -- provider = "copilot",
       provider = "ollama",
       providers = {
@@ -391,6 +403,7 @@ return {
       "MunifTanjim/nui.nvim",
       "folke/snacks.nvim", -- for input provider snacks
       "zbirenbaum/copilot.lua", -- for providers='copilot'
+      "ravitemer/mcphub.nvim",
     },
   },
 }

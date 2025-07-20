@@ -1,5 +1,5 @@
 return {
-  {
+  { -- "saghen/blink.cmp",
     "saghen/blink.cmp",
     -- enabled = false,
     event = { "InsertEnter", "CmdlineEnter" },
@@ -110,7 +110,7 @@ return {
     },
     -- opts_extend = { "sources.default" },
   },
-  {
+  { -- "hrsh7th/nvim-cmp",
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     enabled = false,
@@ -212,7 +212,7 @@ return {
       })
     end,
   },
-  {
+  { -- "L3MON4D3/LuaSnip",
     "L3MON4D3/LuaSnip",
     -- enabled = false,
     version = "v2.*",
@@ -281,7 +281,7 @@ return {
       vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
     end,
   },
-  {
+  { -- "folke/lazydev.nvim",
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
     opts = {
