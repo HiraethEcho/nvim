@@ -94,6 +94,7 @@ return {
     input = { enabled = true },
     notifier = { enabled = false },
     picker = {
+      ui_select = true,
       sources = {
         explorer = {
           -- layout = { layout = { position = "right" } },
@@ -115,10 +116,7 @@ return {
         colorschemes = { layout = { preset = "bottom" } },
       },
       layout = { cycle = false },
-      matcher = {
-        frecency = true,
-        history_bonus = true,
-      },
+      matcher = { frecency = true, history_bonus = true },
       win = {
         input = {
           keys = {

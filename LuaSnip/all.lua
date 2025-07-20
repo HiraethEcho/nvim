@@ -31,7 +31,7 @@ local tex = require("util.latex")
 
 local get_visual = function(args, parent)
   if #parent.snippet.env.SELECT_RAW > 0 then
-    return sn(nil, i(1,parent.snippet.env.SELECT_RAW))
+    return sn(nil, i(1, parent.snippet.env.SELECT_RAW))
   else -- If SELECT_RAW is empty, return a blank insert node
     return sn(nil, i(1))
   end
@@ -70,6 +70,36 @@ local function bash(_, _, command)
 end
 
 return {
+
+  s("index", {
+    i(2), -- ai[2]: indices based on jump-index, not position.
+    sn(1, { -- ai[1]
+      i(1), -- ai[1][1]
+      t("lel"), -- not addressable.
+      i(2), -- ai[1][2]
+    }),
+    c(3, { -- ai[3]
+      i(nil), -- ai[3][1]
+      t("lel"), -- ai[3][2]: choices are always addressable.
+    }),
+    d(4, function() -- ai[4]
+      return sn(nil, { -- ai[4][0]
+        i(1), -- ai[4][0][1]
+      })
+    end, {}),
+    r(
+      5,
+      "restore_key", -- ai[5]
+      i(1) -- ai[5][0][1]: restoreNodes always store snippetNodes.
+    ),
+    r(
+      6,
+      "restore_key_2", -- ai[6]
+      sn(nil, { -- ai[6][0]
+        i(1), -- ai[6][0][1]
+      })
+    ),
+  }),
   s("trig", {
     t("text: "),
     i(1),
@@ -84,14 +114,14 @@ return {
     end, { 1 }),
   }),
   s({ trig = "date", name = "Current date", dscr = "YYYY-MM-DD and other" }, {
-    c(1,{
-    p(os.date, "%Y-%m-%d"),
-    p(os.date, "%Y-%m-%d %H:%M"),
-    p(os.date, "%H:%M"),
-    f(function()
-      return os.date("%D - %H:%M")
-    end)
-    })
+    c(1, {
+      p(os.date, "%Y-%m-%d"),
+      p(os.date, "%Y-%m-%d %H:%M"),
+      p(os.date, "%H:%M"),
+      f(function()
+        return os.date("%D - %H:%M")
+      end),
+    }),
   }),
 
   s(
@@ -111,8 +141,7 @@ return {
 
   s("fmt5", fmta("foo() { return <>; }", i(1, "x"))),
   -- s("fmt6", fmta("foo() { return <>; }", i(1, ${TM_SELECTED_TEXT}))),
-  s("fmt6", fmta("foo() { return <>; }", d(1, get_visual ))),
-
+  s("fmt6", fmta("foo() { return <>; }", d(1, get_visual))),
 
   -- ls.parser.parse_snippet({ trig = "%d", regTrig = true }, "A Number!!"),
   -- ls.parser.parse_snipmate("year", "The year is `strftime('%Y')`"),
@@ -154,7 +183,7 @@ return {
   ),
   -- It's possible to use capture-groups inside regex-triggers.
   s(
-    { trig = "b(%d)", regTrig = true, snippetType="autosnippet" },
+    { trig = "b(%d)", regTrig = true, snippetType = "autosnippet" },
     f(function(_, snip)
       return "Captured Text: " .. snip.captures[1] .. "."
     end, {})

@@ -8,12 +8,12 @@ return {
       { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
       { "saghen/blink.compat", version = "*", opts = {} },
       "SirVer/ultisnips",
-      "L3MON4D3/LuaSnip",
       "nvim-treesitter/nvim-treesitter",
       "fang2hou/blink-copilot",
       "olimorris/codecompanion.nvim",
       -- "milanglacier/minuet-ai.nvim",
       -- "Kaiser-Yang/blink-cmp-avante",
+      "L3MON4D3/LuaSnip",
     },
     opts = {
       snippets = { preset = "luasnip" },
@@ -21,13 +21,35 @@ return {
         preset = "none",
         ["<C-u>"] = { "scroll_documentation_up", "fallback" },
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-        -- ["<C-j>"] = { "snippet_forward", "fallback" },
-        -- ["<C-k>"] = { "snippet_backward", "fallback" },
+        ["<C-j>"] = { "snippet_forward", "fallback" },
+        ["<C-k>"] = { "snippet_backward", "fallback" },
         ["<S-Tab>"] = { "select_prev", "fallback" },
         ["<Tab>"] = { "select_next", "fallback" },
         ["<Up>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
+
+        --[[ ["<C-n>"] = {
+          function()
+            local ls = require("luasnip")
+            if ls.choice_active() then
+              ls.change_choice(1)
+              return true
+            end
+          end,
+          "fallback",
+        },
+        ["<C-p>"] = {
+          function()
+            local ls = require("luasnip")
+            if ls.choice_active() then
+              ls.change_choice(-1)
+              return true
+            end
+          end,
+          "fallback",
+        }, ]]
+
         -- ["<C-e>"] = { "hide", "fallback" },
         ["<C-e>"] = { "cancel", "fallback" },
       },
@@ -209,14 +231,10 @@ return {
         -- ft_func = require("luasnip.extras.filetype_functions").from_cursor(),
         ext_opts = {
           [types.choiceNode] = {
-            active = {
-              virt_text = { { "", "RainbowBlue" } },
-            },
+            active = { virt_text = { { "", "RainbowBlue" } } },
           },
           [types.insertNode] = {
-            active = {
-              virt_text = { { "", "RainbowOrange" } },
-            },
+            active = { virt_text = { { "", "RainbowOrange" } } },
           },
         },
       })
@@ -229,7 +247,7 @@ return {
         vim.o.undolevels = vim.o.undolevels
         auto_expand(...)
       end ]]
-      vim.keymap.set({ "i", "s" }, "<C-j>", function()
+      --[[ vim.keymap.set({ "i", "s" }, "<C-j>", function()
         if ls.jumpable() then
           ls.jump(1)
         end
@@ -238,11 +256,16 @@ return {
         if ls.jumpable() then
           ls.jump(-1)
         end
-      end, { silent = true })
+      end, { silent = true }) ]]
+      --[[ vim.keymap.set({ "i", "s" }, "<C-e>", function()
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
+      end, { silent = true }) ]]
       --[[ vim.keymap.set({ "i", "s" }, "<C-e>", function()
         require("luasnip.extras.select_choice")()
       end, { silent = true }) ]]
-      vim.keymap.set("i", "<C-n>", function()
+      --[[ vim.keymap.set("i", "<C-n>", function()
         if ls.choice_active() then
           ls.change_choice(1)
         end
@@ -251,7 +274,11 @@ return {
         if ls.choice_active() then
           ls.change_choice(-1)
         end
-      end)
+      end) ]]
+      vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
+      vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
+      vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", {})
+      vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
     end,
   },
   {

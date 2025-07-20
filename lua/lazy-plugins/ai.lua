@@ -1,8 +1,121 @@
 return {
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    cmd = { "CopilotChatToggle" },
+    dependencies = {
+      "zbirenbaum/copilot.lua",
+      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    -- See Commands section for default commands if you want to lazy load on them
+    config = function()
+      local chat = require("CopilotChat")
+      chat.setup({
+        mappings = {
+          reset = { normal = "<C-L>", insert = "C-L" },
+          show_diff = { full_diff = true },
+        },
+      })
+      local mcp = require("mcphub")
+      --[[ mcp.on({ "servers_updated", "tool_list_changed", "resource_list_changed" }, function()
+        local hub = mcp.get_hub_instance()
+        if not hub then
+          return
+        end
+        local async = require("plenary.async")
+        local call_tool = async.wrap(function(server, tool, input, callback)
+          hub:call_tool(server, tool, input, {
+            callback = function(res, err)
+              callback(res, err)
+            end,
+          })
+        end, 4)
+        local access_resource = async.wrap(function(server, uri, callback)
+          hub:access_resource(server, uri, {
+            callback = function(res, err)
+              callback(res, err)
+            end,
+          })
+        end, 3)
+        for name, tool in pairs(chat.config.functions) do
+          if tool.id and tool.id:sub(1, 3) == "mcp" then
+            chat.config.functions[name] = nil
+          end
+        end
+        local resources = hub:get_resources()
+        for _, resource in ipairs(resources) do
+          local name = resource.name:lower():gsub(" ", "_"):gsub(":", "")
+          chat.config.functions[name] = {
+            id = "mcp:" .. resource.server_name .. ":" .. name,
+            uri = resource.uri,
+            description = type(resource.description) == "string" and resource.description or "",
+            resolve = function()
+              local res, err = access_resource(resource.server_name, resource.uri)
+              if err then
+                error(err)
+              end
+
+              res = res or {}
+              local result = res.result or {}
+              local content = result.contents or {}
+              local out = {}
+
+              for _, message in ipairs(content) do
+                if message.text then
+                  table.insert(out, {
+                    uri = message.uri,
+                    data = message.text,
+                    mimetype = message.mimeType,
+                  })
+                end
+              end
+
+              return out
+            end,
+          }
+        end
+        local tools = hub:get_tools()
+        for _, tool in ipairs(tools) do
+          chat.config.functions[tool.name] = {
+            id = "mcp:" .. tool.server_name .. ":" .. tool.name,
+            group = tool.server_name,
+            description = tool.description,
+            schema = tool.inputSchema,
+            resolve = function(input)
+              local res, err = call_tool(tool.server_name, tool.name, input)
+              if err then
+                error(err)
+              end
+
+              res = res or {}
+              local result = res.result or {}
+              local content = result.content or {}
+              local out = {}
+
+              for _, message in ipairs(content) do
+                if message.type == "text" then
+                  table.insert(out, {
+                    data = message.text,
+                  })
+                elseif message.type == "resource" and message.resource and message.resource.text then
+                  table.insert(out, {
+                    uri = message.resource.uri,
+                    data = message.resource.text,
+                    mimetype = message.resource.mimeType,
+                  })
+                end
+              end
+              return out
+            end,
+          }
+        end
+      end) ]]
+    end,
+  },
   { -- codecompanion
     "olimorris/codecompanion.nvim",
     -- enabled = false,
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "ravitemer/mcphub.nvim",
@@ -13,17 +126,13 @@ return {
     },
     opts = {
       adapters = {
-        ollama = function()
+        --[[ ollama = function()
           return require("codecompanion.adapters").extend("ollama", {
-            env = {
-              url = "http://localhost:11434",
-            },
-            parameters = {
-              sync = true,
-            },
+            env = { url = "http://localhost:11434" },
+            parameters = { sync = true },
             schema = { model = { default = "qwen2.5-coder:7b" } },
           })
-        end,
+        end, ]]
         deepseek = function()
           return require("codecompanion.adapters").extend("deepseek", {
             env = {
@@ -42,15 +151,12 @@ return {
         mcphub = {
           callback = "mcphub.extensions.codecompanion",
           opts = {
-            -- MCP Tools
             make_tools = true, -- Make individual tools (@server__tool) and server groups (@server) from MCP servers
             show_server_tools_in_chat = true, -- Show individual tools in chat completion (when make_tools=true)
             add_mcp_prefix_to_tool_names = false, -- Add mcp__ prefix (e.g `@mcp__github`, `@mcp__neovim__list_issues`)
             show_result_in_chat = true, -- Show tool results directly in chat buffer
             format_tool = nil, -- function(tool_name:string, tool: CodeCompanion.Agent.Tool) : string Function to format tool names to show in the chat buffer
-            -- MCP Resources
             make_vars = true, -- Convert MCP resources to #variables for prompts
-            -- MCP Prompts
             make_slash_commands = true, -- Add MCP prompts as /slash commands
           },
         },
