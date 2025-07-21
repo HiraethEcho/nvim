@@ -21,36 +21,13 @@ return {
         preset = "none",
         ["<C-u>"] = { "scroll_documentation_up", "fallback" },
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-        ["<C-j>"] = { "snippet_forward", "fallback" },
-        ["<C-k>"] = { "snippet_backward", "fallback" },
+        -- ["<C-j>"] = { "snippet_forward", "fallback" },
+        -- ["<C-k>"] = { "snippet_backward", "fallback" },
         ["<S-Tab>"] = { "select_prev", "fallback" },
         ["<Tab>"] = { "select_next", "fallback" },
         ["<Up>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
-
-        --[[ ["<C-n>"] = {
-          function()
-            local ls = require("luasnip")
-            if ls.choice_active() then
-              ls.change_choice(1)
-              return true
-            end
-          end,
-          "fallback",
-        },
-        ["<C-p>"] = {
-          function()
-            local ls = require("luasnip")
-            if ls.choice_active() then
-              ls.change_choice(-1)
-              return true
-            end
-          end,
-          "fallback",
-        }, ]]
-
-        -- ["<C-e>"] = { "hide", "fallback" },
         ["<C-e>"] = { "cancel", "fallback" },
       },
       signature = { enabled = true },
