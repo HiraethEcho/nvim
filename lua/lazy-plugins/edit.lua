@@ -106,6 +106,7 @@ return {
   },
   {
     "sontungexpt/bim.nvim",
+    enabled = false,
     event = "InsertEnter",
     config = true,
   },

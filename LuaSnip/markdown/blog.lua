@@ -16,15 +16,40 @@ local snip = {
     date: <>
     <>
     ---
+
+    # <head>
     ]],
       {
+        i(1),
         i(2),
-        i(3),
-        p(os.date, "%Y-%m-%d %H:%M"),
-        c(1, { t({ "published: false", "excerpt:" }), t({ "draft: true", "summary:" }), t("status: draft") }),
-        -- i(2),
+        p(os.date, "%Y-%m-%d"),
+        c(3, {
+          sn(
+            nil,
+            fmta(
+              [[
+              published : false
+              excerpt: <>
+              ]],
+              { i(1) }
+            )
+          ),
+          sn(
+            nil,
+            fmta(
+              [[
+              draft : true
+              summary: <>
+              ]],
+              { i(1) }
+            )
+          ),
+          t("status: draft"),
+        }),
+        head = i(0),
       }
-    )
+    ),
+    {}
   ),
 }
 local autosnip = {}

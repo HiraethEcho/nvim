@@ -72,19 +72,19 @@ end
 return {
 
   s("index", {
-    i(2), -- ai[2]: indices based on jump-index, not position.
+    i(2,"2"), -- ai[2]: indices based on jump-index, not position.
     sn(1, { -- ai[1]
-      i(1), -- ai[1][1]
+      i(1,"11"), -- ai[1][1]
       t("lel"), -- not addressable.
-      i(2), -- ai[1][2]
+      i(2,"12"), -- ai[1][2]
     }),
     c(3, { -- ai[3]
       i(nil), -- ai[3][1]
-      t("lel"), -- ai[3][2]: choices are always addressable.
+      t("32"), -- ai[3][2]: choices are always addressable.
     }),
     d(4, function() -- ai[4]
       return sn(nil, { -- ai[4][0]
-        i(1), -- ai[4][0][1]
+        i(1,"401"), -- ai[4][0][1]
       })
     end, {}),
     r(
