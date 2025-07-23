@@ -27,7 +27,7 @@ opt.spelllang = { "en_US" }
 -- opt.cursorline = true -- Enable highlighting of the current line
 -- opt.cursorcolumn = false -- Enable highlighting of the current column
 opt.scrolloff = 4 -- Lines of context
--- opt.sidescrolloff = 4 -- Columns of context
+opt.sidescrolloff = 4 -- Columns of context
 opt.shortmess:append({ W = true, I = true, c = true })
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.list = true -- Show some invisible characters (tabs...

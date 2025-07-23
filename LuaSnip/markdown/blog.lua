@@ -11,42 +11,37 @@ local snip = {
     fmta(
       [[
     ---
-    title: <>
-    tags:<>
-    date: <>
-    <>
+    title: <title>
+    tags:<tag>
+    date: <date>
+    <other>
     ---
 
     # <head>
     ]],
       {
-        i(1),
-        i(2),
-        p(os.date, "%Y-%m-%d"),
-        c(3, {
-          sn(
-            nil,
-            fmta(
-              [[
+        title = i(1),
+        tag = i(2),
+        date = p(os.date, "%Y-%m-%d"),
+        other = c(3, {
+          fmta(
+            [[
               published : false
               excerpt: <>
               ]],
-              { i(1) }
-            )
+            { i(1) }
           ),
-          sn(
-            nil,
-            fmta(
-              [[
+          fmta(
+            [[
               draft : true
               summary: <>
               ]],
-              { i(1) }
-            )
+            { i(1) }
           ),
           t("status: draft"),
+          t(""),
         }),
-        head = i(0),
+        head = i(4),
       }
     ),
     {}

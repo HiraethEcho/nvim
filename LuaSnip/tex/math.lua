@@ -70,27 +70,24 @@ local snip_bak = {
   ),
 }
 
-return {
+local snip = {
   maths({ trig = "ff", name = "fraction", desc = "\\frac{}{}" }, fmta("\\frac{<>}{<>}", { i(1), i(2) })),
-  s(
+  maths(
     { trig = "roundup", name = "round up", desc = "\\left\\lceil\\right\\rceil" },
-    fmta("\\left\\lceil <> \\right\\rceil", d(1, get_visual)),
-    { condition = tex.in_mathzone, show_condition = tex.in_mathzone }
+    fmta("\\left\\lceil <> \\right\\rceil", d(1, get_visual))
   ),
-  s(
+  maths(
     { trig = "rounddown", name = "round down", desc = "\\left\\lfoor\\right\\rfloor" },
-    fmta("\\left\\lfloor <> \\right\\rfloor", d(1, get_visual)),
-    { condition = tex.in_mathzone, show_condition = tex.in_mathzone }
+    fmta("\\left\\lfloor <> \\right\\rfloor", d(1, get_visual))
   ),
-  s(
+  maths(
     { trig = "round", name = "round down or down", desc = "ceil or floor" },
     c(1, {
       sn(nil, fmta("\\left\\lfloor <> \\right\\rfloor", d(1, get_visual))),
       sn(nil, fmta("\\left\\lceil <> \\right\\rceil", d(1, get_visual))),
-    }),
-    { condition = tex.in_mathzone, show_condition = tex.in_mathzone }
+    })
   ),
-  s(
+  maths(
     { trig = "flip" },
     fmta(
       [[
@@ -103,10 +100,9 @@ return {
         i(2, "Y"),
         i(3, "V"),
       }
-    ),
-    { condition = tex.in_mathzone }
+    )
   ),
-  s(
+  maths(
     { trig = "resolvemap" },
     fmta(
       [[
@@ -120,7 +116,8 @@ return {
         i(2, "X"),
         i(3, "Y"),
       }
-    ),
-    { condition = tex.in_mathzone }
+    )
   ),
-}, {}
+}
+
+return snip, {}

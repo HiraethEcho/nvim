@@ -124,64 +124,22 @@ return {
     }),
   }),
 
-  s(
-    "fmt1",
-    fmt("To {title} {} {}.", {
-      i(2, "Name"),
-      i(3, "Surname"),
-      title = c(1, { t("Mr."), t("Ms.") }),
-    })
-  ),
-
   s("novel", {
     t("It was a dark and stormy night on "),
     d(1, date_input, {}, { user_args = { "%A, %B %d of %Y" } }),
     t(" and the clocks were striking thirteen."),
   }),
 
-  s("fmt5", fmta("foo() { return <>; }", i(1, "x"))),
-  -- s("fmt6", fmta("foo() { return <>; }", i(1, ${TM_SELECTED_TEXT}))),
   s("fmt6", fmta("foo() { return <>; }", d(1, get_visual))),
 
-  -- ls.parser.parse_snippet({ trig = "%d", regTrig = true }, "A Number!!"),
   -- ls.parser.parse_snipmate("year", "The year is `strftime('%Y')`"),
   -- ls.parser.parse_snippet("lspsyn", "Wow! This ${1:Stuff} really ${2:works. ${3:Well, a bit.}}"),
-  --[[ s("paren_change", {
-    c(1, {
-      sn(nil, { t("("), r(1, "user_text"), t(")") }),
-      sn(nil, { t("["), r(1, "user_text"), t("]") }),
-      sn(nil, { t("{"), r(1, "user_text"), t("}") }),
-    }),
-  }, {
-    stored = {
-      -- key passed to restoreNodes.
-      ["user_text"] = i(1, "default_text"),
-    },
-  }), ]]
-  --[[
-  ms({
-    common = { snippetType = "autosnippet" },
-    { trig = "a", snippetType = "snippet" },
-    "b",
-    {
-      trig = "c",
-      condition = function(line_to_cursor)
-        return line_to_cursor == ""
-      end,
-    },
-  }, {
-    t("a or b (but autotriggered!!)"),
-  }),
-]]
-  s("extras4", { i(1), t({ "", "" }), i(2), rep(1), rep(2) }),
-
   s(
     { trig = "a%d", regTrig = true },
     f(function(_, snip)
       return "Triggered with " .. snip.trigger .. "."
     end, {})
   ),
-  -- It's possible to use capture-groups inside regex-triggers.
   s(
     { trig = "b(%d)", regTrig = true, snippetType = "autosnippet" },
     f(function(_, snip)
@@ -251,12 +209,10 @@ return {
     t("will only expand at the beginning of the line"),
   }, {
     condition = line_begin,
-    -- condition = conds_expand.line_begin,
   }),
   s("cond3", {
     t("will only expand at the end of the line"),
   }, {
-    -- condition = conds.line_end,
     condition = line_end,
   }),
 }

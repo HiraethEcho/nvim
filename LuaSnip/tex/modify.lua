@@ -1,60 +1,3 @@
---[[ 
-snippet bb "textbf" w
-\textbf{${1:${VISUAL} }}$0
-endsnippet
-
-snippet ee "emph" w
-\emph{${1:${VISUAL}} }$0
-endsnippet
-
-snippet tt "text" w
-\text{$1}$0
-endsnippet
-
-snippet op "operatorname" w
-\operatorname{${1:${VISUAL}}}$0
-endsnippet
-
-snippet "([a-zA-Z])SS" "short inline math" irA
-$`!p snip.rv = match.group(1)`$$1 
-endsnippet
-
-context "math()"
-snippet "([A-Z])(mb)" "auto mathbb" irA
-\mathbb{`!p snip.rv = match.group(1)`}
-endsnippet
-
-context "math()"
-snippet "([a-zA-Z])(bf)" "auto mathbf" irA
-\mathbf{`!p snip.rv = match.group(1)`}
-endsnippet
-
-context "math()"
-snippet "([a-zA-Z])(rm)" "auto mathrm" irA
-\mathrm{`!p snip.rv = match.group(1)`}
-endsnippet
-
-# context "math()"
-# snippet rm "mathrm" iA
-# \mathrm{${1:${VISUAL} }}$0
-# endsnippet
-
-context "math()"
-snippet "([A-Z])(cal)" "auto mathcal" irA
-\mathcal{`!p snip.rv = match.group(1)`}
-endsnippet
-
-context "math()"
-snippet "([A-Za-z])(frak)" "auto mathfrak" irA
-\mathfrak{`!p snip.rv = match.group(1)`}
-endsnippet
-
-context "math()"
-snippet "([A-Z])(scr)" "auto mathscr" irA
-\mathscr{`!p snip.rv = match.group(1)`}
-endsnippet
-
-]]
 local get_visual = function(args, parent)
   if #parent.snippet.env.SELECT_RAW > 0 then
     return sn(nil, t(parent.snippet.env.SELECT_RAW))
@@ -68,13 +11,6 @@ local maths =
 local texts = require("luasnip").extend_decorator.apply(s, { condition = tex.in_text, show_condition = tex.in_text })
 
 local snip = {
-  maths(
-    { trig = "tt", wordTrig = true },
-    fmta("\\<>{<>} ", {
-      c(1, { t("text"), t("textit"), t("textbf"), t("mathbb"), t("bm"), t("mathrm") }),
-      i(0),
-    })
-  ),
 
   maths(
     { trig = "Bar", wordTrig = true },
@@ -118,7 +54,6 @@ local autosnip = {
     })
   ),
   maths({ trig = "cal", regTrig = true, wordTrig = true }, fmta("\\mathcal{<>}", i(1))),
-
   maths(
     { trig = "([%u])cal", regTrig = true, wordTrig = false },
     fmta("\\mathcal{<>}", {

@@ -1,12 +1,3 @@
-local ls = require("luasnip")
-local s = ls.snippet
-local sn = ls.snippet_node
-local t = ls.text_node
-local i = ls.insert_node
-local f = ls.function_node
-local d = ls.dynamic_node
-local fmta = require("luasnip.extras.fmt").fmta
-local rep = require("luasnip.extras").rep
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
 local tex = require("util.latex")
 local get_visual = function(args, parent)
@@ -16,25 +7,24 @@ local get_visual = function(args, parent)
     return sn(nil, i(1))
   end
 end
+local texts = require("luasnip").extend_decorator.apply(s, { condition = tex.in_text, show_condition = tex.in_text })
 
 local snip = {
-  s(
+  texts(
     { trig = "ul", name = "item list", desc = "\\begin{itemize}" },
     fmta("\\begin{itemize}<option>\n\t\\item <content>\n\\end{itemize}", {
       option = c(1, { t(""), sn(nil, { t("["), i(1), t("]") }) }),
       content = i(0),
-    }),
-    { condition = tex.in_text, show_condition = tex.in_text }
+    })
   ),
-  s(
+  texts(
     { trig = "ol", name = "ordered list", desc = "\\begin{enumerate}" },
     fmta("\\begin{enumerate}<option>\n\t\\item <content>\n\\end{enumerate}", {
       option = c(1, { t(""), sn(nil, { t("["), i(1), t("]") }) }),
       content = i(0),
-    }),
-    { condition = tex.in_text, show_condition = tex.in_text }
+    })
   ),
-  s(
+  texts(
     { trig = "table", name = "table in tex", desc = "table, htbp, center, tabular" },
     fmta(
       [[
@@ -59,7 +49,7 @@ local snip = {
     { condition = line_begin }
   ),
 
-  s(
+  texts(
     { trig = "tabular", name = "tabular in tex", desc = "tabular" },
     fmta(
       [[
@@ -76,7 +66,7 @@ local snip = {
     ),
     { condition = line_begin }
   ),
-  s(
+  texts(
     { trig = "bcr" },
     fmta(
       [[
@@ -91,7 +81,7 @@ local snip = {
     { condition = line_begin }
   ),
 
-  s(
+  texts(
     { trig = "box" },
     fmta(
       [[
@@ -103,9 +93,9 @@ local snip = {
         i(0),
       }
     ),
-    { condition = tex.in_text * line_begin }
+    { condition = line_begin }
   ),
-  s(
+  texts(
     { trig = "beg" },
     fmta(
       [[
@@ -122,7 +112,7 @@ local snip = {
     ),
     { condition = line_begin }
   ),
-  s(
+  texts(
     { trig = "minipage", desc = "minipages in figure" },
     fmta(
       [[
@@ -146,7 +136,7 @@ local snip = {
     ),
     { condition = line_begin }
   ),
-  s(
+  texts(
     { trig = "figure" },
     fmta(
       [[
