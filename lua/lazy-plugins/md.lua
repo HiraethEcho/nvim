@@ -18,7 +18,7 @@ return {
     "MeanderingProgrammer/render-markdown.nvim",
     -- enabled = false,
     -- lazy = false,
-    ft = { "markdown", "md", "codecompanion", "Avante" },
+    ft = { "markdown", "md", "codecompanion", "Avante", "copilot-chat" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
     },
@@ -27,7 +27,7 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     opts = {
-      file_types = { "markdown", "codecompanion", "Avante" },
+      file_types = { "markdown", "codecompanion", "Avante", "copilot-chat" },
       -- completions = { blink = { enabled = true } }, -- no cmp
       -- completions = { lsp = { enabled = true } }, -- error loading lsp
       heading = { width = "block", position = "inline" },
