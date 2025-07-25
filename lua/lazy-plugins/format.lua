@@ -55,7 +55,7 @@ return {
       lint.linters_by_ft = {
         -- bash = { "bash" },
         bash = { "bash" },
-        -- sh = { "bash", "shellharden" },
+        sh = { "bash", "shellcheck" },
         --[[ javascript = { "eslint_d" },
         typescript = { "eslint_d" },
         javascriptreact = { "eslint_d" },
