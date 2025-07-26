@@ -1,4 +1,4 @@
-# NVIM
+# Neovim
 
 ![trees](https://hiraeth-picbed.oss-cn-beijing.aliyuncs.com/img/trees.webp)
 
