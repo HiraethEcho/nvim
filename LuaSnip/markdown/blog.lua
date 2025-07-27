@@ -34,17 +34,17 @@ local snip = {
           fmta(
             [[
               draft : true
+              password: <>
               summary: <>
               ]],
-            { i(1) }
+            { i(1),i(2) }
           ),
           t("status: draft"),
           t(""),
         }),
-        head = i(4),
+        head = rep(1),
       }
-    ),
-    {}
+    )
   ),
 }
 local autosnip = {}
