@@ -18,6 +18,7 @@ return {
           -- starter.sections.recent_files(3, true), -- local
           -- starter.sections.builtin_actions(),
           { name = "start up time", action = [[StartupTime]], section = "actions" },
+          { name = "find files", action = [[lua Snacks.dashboard.pick('oldfiles')]], section = "actions" },
           { name = "lazy.nvim", action = [[Lazy]], section = "actions" },
           { name = "quit", action = [[quit]], section = "actions" },
           -- { name = "profile", action = [[lua Snacks.profiler.toggle()]], section = "actions" },
