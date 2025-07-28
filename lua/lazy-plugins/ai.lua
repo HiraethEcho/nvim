@@ -92,8 +92,9 @@ return {
     },
     dependencies = { { "zbirenbaum/copilot-cmp", config = true } },
     opts = {
+      filetypes = { ["*"] = true },
       panel = {
-        enabled = false,
+        enabled = true,
         auto_refresh = true,
         keymap = {
           jump_prev = "K",
@@ -121,8 +122,7 @@ return {
     build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
     config = function()
       require("mcphub").setup({
-        --- `mcp-hub` binary related options-------------------
-        config = vim.fn.expand("~/.config/mcphub/servers.json"), -- Absolute path to MCP Servers config file (will create if not exists)
+        config = vim.fn.expand("~/.config/mcphub/global.json"), -- Absolute path to MCP Servers config file (will create if not exists)
         ---Chat-plugin related options-----------------
         auto_approve = false, -- Auto approve mcp tool calls
         auto_toggle_mcp_servers = true, -- Let LLMs start and stop MCP servers automatically

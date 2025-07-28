@@ -295,7 +295,7 @@ return {
     ft = "lua", -- only load on lua files
     opts = {
       library = { { path = "${3rd}/luv/library", words = { "vim%.uv" } } },
-      integrations = { lspconfig = false, cmp = false },
+      integrations = { lspconfig = true, cmp = true },
       enabled = true,
     },
   },
