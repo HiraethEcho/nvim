@@ -297,4 +297,27 @@ return {
       "ravitemer/mcphub.nvim",
     },
   },
+  {
+    "NickvanDyke/opencode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    -- enabled = false,
+    opts = {
+      -- Set these according to https://models.dev/
+      provider_id = ...,
+      model_id = ...,
+    },
+    -- stylua: ignore
+    keys = {
+      { '<localleader>ot', function() require('opencode').toggle() end, desc = 'Toggle embedded opencode', },
+      { '<localleader>oa', function() require('opencode').ask() end, desc = 'Ask opencode', mode = { 'n', 'v' }, },
+      { '<localleader>oA', function() require('opencode').ask('@file ') end, desc = 'Ask opencode about current file', mode = { 'n', 'v' }, },
+      { '<localleader>on', function() require('opencode').create_session() end, desc = 'New session', },
+      { '<localleader>oe', function() require('opencode').prompt('Explain @cursor and its context') end, desc = 'Explain code near cursor', },
+      { '<localleader>or', function() require('opencode').prompt('Review @file for correctness and readability') end, desc = 'Review file', },
+      { '<localleader>of', function() require('opencode').prompt('Fix these @diagnostics') end, desc = 'Fix errors', },
+      { '<localleader>oo', function() require('opencode').prompt('Optimize @selection for performance and readability') end, desc = 'Optimize selection', mode = 'v', },
+      { '<localleader>od', function() require('opencode').prompt('Add documentation comments for @selection') end, desc = 'Document selection', mode = 'v', },
+      { '<localleader>ot', function() require('opencode').prompt('Add tests for @selection') end, desc = 'Test selection', mode = 'v', },
+    },
+  },
 }
