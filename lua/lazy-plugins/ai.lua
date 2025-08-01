@@ -175,6 +175,65 @@ return {
       })
     end,
   },
+  { -- "sudo-tee/opencode.nvim",
+    "sudo-tee/opencode.nvim",
+    -- enabled = false,
+    cmd = { "Opencode" },
+    opts = {
+      prefered_picker = snacks, -- 'telescope', 'fzf', 'mini.pick', 'snacks', if nil, it will use the best available picker
+      default_global_keymaps = false, -- If false, disables all default global keymaps
+      default_mode = "build", -- 'build' or 'plan' or any custom configured. @see [OpenCode Modes](https://opencode.ai/docs/modes/)
+      keymap = {
+        global = {
+          toggle = "<localleader>oa", -- Open opencode. Close if opened
+          open_input = "<localleader>oi", -- Opens and focuses on input window on insert mode
+          open_input_new_session = "<localleader>oI", -- Opens and focuses on input window on insert mode. Creates a new session
+          open_output = "<localleader>oo", -- Opens and focuses on output window
+          toggle_focus = "<localleader>ot", -- Toggle focus between opencode and last window
+          close = "<localleader>oq", -- Close UI windows
+          select_session = "<localleader>os", -- Select and load a opencode session
+          configure_provider = "<localleader>op", -- Quick provider and model switch from predefined list
+          diff_open = "<localleader>od", -- Opens a diff tab of a modified file since the last opencode prompt
+          diff_next = "<localleader>o]", -- Navigate to next file diff
+          diff_prev = "<localleader>o[", -- Navigate to previous file diff
+          diff_close = "<localleader>oc", -- Close diff view tab and return to normal editing
+          diff_revert_all_last_prompt = "<localleader>ora", -- Revert all file changes since the last opencode prompt
+          diff_revert_this_last_prompt = "<localleader>ort", -- Revert current file changes since the last opencode prompt
+          diff_revert_all = "<localleader>oRa", -- Revert all file changes since the last opencode session
+          diff_revert_this = "<localleader>oRt", -- Revert current file changes since the last opencode session
+          swap_position = "<localleader>ox", -- Swap Opencode pane left/right
+        },
+        window = {
+          submit = "<cr>", -- Submit prompt (normal mode)
+          submit_insert = "<C-s>", -- Submit prompt (insert mode)
+          close = "q", -- Close UI windows
+          stop = "<C-c>", -- Stop opencode while it is running
+          next_message = "]]", -- Navigate to next message in the conversation
+          prev_message = "[[", -- Navigate to previous message in the conversation
+          mention_file = "@", -- Pick a file and add to context. See File Mentions section
+          toggle_pane = "<tab>", -- Toggle between input and output panes
+          prev_prompt_history = "<up>", -- Navigate to previous prompt in history
+          next_prompt_history = "<down>", -- Navigate to next prompt in history
+          switch_mode = "<M-m>", -- Switch between modes (build/plan)
+          focus_input = "i", -- Focus on input window and enter insert mode at the end of the input from the output window
+          debug_messages = "<localleader>oD", -- Open raw message in new buffer for debugging
+          debug_output = "<localleader>oO", -- Open raw output in new buffer for debugging
+        },
+      },
+      ui = {
+        window_width = 0.30,
+        input_height = 0.20,
+        output = {
+          tools = {
+            show_output = true, -- Show tools output [diffs, cmd output, etc.] (default: true)
+          },
+        },
+      },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
 
   { -- minuet-ai
     "milanglacier/minuet-ai.nvim",
@@ -295,29 +354,6 @@ return {
       "folke/snacks.nvim", -- for input provider snacks
       "zbirenbaum/copilot.lua", -- for providers='copilot'
       "ravitemer/mcphub.nvim",
-    },
-  },
-  {
-    "NickvanDyke/opencode.nvim",
-    dependencies = { "folke/snacks.nvim" },
-    -- enabled = false,
-    opts = {
-      -- Set these according to https://models.dev/
-      provider_id = ...,
-      model_id = ...,
-    },
-    -- stylua: ignore
-    keys = {
-      { '<localleader>ot', function() require('opencode').toggle() end, desc = 'Toggle embedded opencode', },
-      { '<localleader>oa', function() require('opencode').ask() end, desc = 'Ask opencode', mode = { 'n', 'v' }, },
-      { '<localleader>oA', function() require('opencode').ask('@file ') end, desc = 'Ask opencode about current file', mode = { 'n', 'v' }, },
-      { '<localleader>on', function() require('opencode').create_session() end, desc = 'New session', },
-      { '<localleader>oe', function() require('opencode').prompt('Explain @cursor and its context') end, desc = 'Explain code near cursor', },
-      { '<localleader>or', function() require('opencode').prompt('Review @file for correctness and readability') end, desc = 'Review file', },
-      { '<localleader>of', function() require('opencode').prompt('Fix these @diagnostics') end, desc = 'Fix errors', },
-      { '<localleader>oo', function() require('opencode').prompt('Optimize @selection for performance and readability') end, desc = 'Optimize selection', mode = 'v', },
-      { '<localleader>od', function() require('opencode').prompt('Add documentation comments for @selection') end, desc = 'Document selection', mode = 'v', },
-      { '<localleader>ot', function() require('opencode').prompt('Add tests for @selection') end, desc = 'Test selection', mode = 'v', },
     },
   },
 }
