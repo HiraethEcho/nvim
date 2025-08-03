@@ -11,4 +11,4 @@ function! WrapSelected(wrapper)
   normal! gv
 endfunction
 
-vnoremap <buffer> <c-i> :<C-u>call WrapSelected('*')<CR>
+" vnoremap <buffer> <c-i> :<C-u>call WrapSelected('*')<CR>
