@@ -311,13 +311,11 @@ return {
     -- event = {"InsertEnter","CmdlineEnter"},
     opts = {
       -- lsp = { progress = { enabled = false } },
-      cmdline = { view = "cmdline" },
       presets = {
         bottom_search = true,
       },
-      -- cmdline = { enabled = false },
     },
-    dependencies = { "MunifTanjim/nui.nvim" },
+    -- dependencies = { "MunifTanjim/nui.nvim" },
   },
   -- left
   { -- "luukvbaal/statuscol.nvim",

@@ -82,9 +82,9 @@ return {
         default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot", "lazydev" },
         -- default = { "snippets", "lsp", "path", "buffer" },
         providers = {
-          snippets = { score_offset = 300 },
-          buffer = { opts = { get_bufnrs = vim.api.nvim_list_bufs } },
-          copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
+          snippets = { score_offset = 100 },
+          buffer = { score_offset = 150, opts = { get_bufnrs = vim.api.nvim_list_bufs } },
+          copilot = { name = "copilot", module = "blink-copilot", score_offset = 200, async = true },
           ultisnips = { name = "ultisnips", module = "blink.compat.source", score_offset = 200 },
           minuet = { name = "minuet", module = "minuet.blink", score_offset = 200 },
           avante = { name = "avante", module = "blink-cmp-avante", opts = {} },

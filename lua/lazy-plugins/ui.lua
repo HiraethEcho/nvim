@@ -1,6 +1,11 @@
 vim.g.loaded_matchparen = 1 -- "utilyre/sentiment.nvim",
 return {
   {
+    "j-hui/fidget.nvim",
+    event = "LspAttach",
+    opts = {},
+  },
+  {
     "catgoose/nvim-colorizer.lua",
     cmd = { "ColorizerToggle", "ColorizerAttachToBuffer" },
     opts = { -- set to setup table

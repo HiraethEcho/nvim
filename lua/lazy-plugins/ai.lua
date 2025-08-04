@@ -128,6 +128,12 @@ return {
         auto_toggle_mcp_servers = true, -- Let LLMs start and stop MCP servers automatically
         extensions = {
           avante = { make_slash_commands = true },
+          copilotchat = {
+            enabled = true,
+            convert_tools_to_functions = true, -- Convert MCP tools to CopilotChat functions
+            convert_resources_to_functions = true, -- Convert MCP resources to CopilotChat functions
+            add_mcp_prefix = false, -- Add "mcp_" prefix to function names
+          },
         },
         builtin_tools = {
           edit_file = {
