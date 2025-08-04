@@ -5,3 +5,5 @@ vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
 vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
 vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
 vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+
+vim.api.nvim_set_hl(0, "SearchCountVirtualText", { fg = "#688af4", bold = true })
