@@ -13,13 +13,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local opts = {
-  defaults = {
-    lazy = true, -- should plugins be lazy-loaded?
-  },
-  install = {
-    -- try to load one of these colorschemes when starting an installation during startup
-    colorscheme = { "nordfox" },
-  },
+  defaults = { lazy = true },
+  dev = {path= "~/Code/nvim/plugin"},
+  checker = { enabled = true },
+  profiling = { loader = true, require = true },
   performance = {
     rtp = {
       disabled_plugins = {

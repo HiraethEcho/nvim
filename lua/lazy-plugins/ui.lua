@@ -3,7 +3,13 @@ return {
   {
     "j-hui/fidget.nvim",
     event = "LspAttach",
-    opts = {},
+    opts = {
+      notification = {
+        filter = vim.log.levels.TRACE,
+        override_vim_notify = true,
+        window = { border = "none", align = "top", tabstop = 2 },
+      },
+    },
   },
   {
     "catgoose/nvim-colorizer.lua",

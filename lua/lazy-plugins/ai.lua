@@ -9,14 +9,31 @@ return {
     build = "make tiktoken", -- Only on MacOS or Linux
     -- See Commands section for default commands if you want to lazy load on them
     config = function()
-      local chat = require("CopilotChat")
-      chat.setup({
+      local vectorcode_ctx = require("vectorcode.integrations.copilotchat").make_context_provider({
+        prompt_header = "Here are relevant files from the repository:", -- Customize header text
+        prompt_footer = "\nConsider this context when answering:", -- Customize footer text
+        skip_empty = true, -- Skip adding context when no files are retrieved
+      })
+
+      require("CopilotChat").setup({
+        sticky = {
+          "#vectorcode",
+        },
         mappings = {
           reset = { normal = "<C-S-L>", insert = "<C-S-L>" },
           show_diff = { full_diff = true },
         },
+        contexts = {
+          -- Add the VectorCode context provider
+          vectorcode = vectorcode_ctx,
+        },
+        prompts = {
+          Explain = {
+            prompt = "Explain the following code in detail:\n$input",
+            context = { "selection", "vectorcode" }, -- Add vectorcode to the context
+          },
+        },
       })
-      -- local mcp = require("mcphub")
     end,
   },
   { -- codecompanion
@@ -25,36 +42,61 @@ return {
     -- event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "franco-ruggeri/codecompanion-spinner.nvim",
       "ravitemer/mcphub.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "Davidyz/VectorCode",
     },
     keys = {
       { "<localleader>c", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle codecompanion chat" },
     },
     opts = {
       adapters = {
-        --[[ ollama = function()
+        ollama = function()
           return require("codecompanion.adapters").extend("ollama", {
             env = { url = "http://localhost:11434" },
             parameters = { sync = true },
-            schema = { model = { default = "qwen2.5-coder:7b" } },
-          })
-        end, ]]
-        deepseek = function()
-          return require("codecompanion.adapters").extend("deepseek", {
-            env = {
-              api_key = "sk-e229a6f4cadf426ea7e3972b09d03f02",
-            },
+            schema = { model = { default = "qwen3:8b" } },
           })
         end,
       },
-      strategies = {
-        chat = { adapter = "copilot" },
-        inline = { adapter = "copilot" },
-        agent = { adapter = "copilot" },
-        cmd = { adapter = "copilot" },
-      },
+      -- stylua: ignore
+      strategies = { chat = { adapter = "copilot" }, inline = { adapter = "copilot" }, agent = { adapter = "copilot" }, cmd = { adapter = "copilot" }, },
       extensions = {
+        vectorcode = {
+          opts = {
+            tool_group = {
+              -- this will register a tool group called `@vectorcode_toolbox` that contains all 3 tools
+              enabled = true,
+              -- a list of extra tools that you want to include in `@vectorcode_toolbox`.
+              -- if you use @vectorcode_vectorise, it'll be very handy to include
+              -- `file_search` here.
+              extras = {},
+              collapse = false, -- whether the individual tools should be shown in the chat
+            },
+            tool_opts = {
+              ["*"] = {},
+              ls = {},
+              vectorise = {},
+              query = {
+                max_num = { chunk = -1, document = -1 },
+                default_num = { chunk = 50, document = 10 },
+                include_stderr = false,
+                use_lsp = false,
+                no_duplicate = true,
+                chunk_mode = false,
+                summarise = {
+                  enabled = false,
+                  adapter = nil,
+                  query_augmented = true,
+                },
+              },
+              files_ls = {},
+              files_rm = {},
+            },
+          },
+        },
+        spinner = {},
         mcphub = {
           callback = "mcphub.extensions.codecompanion",
           opts = {
@@ -288,72 +330,7 @@ return {
   },
   { -- avante
     "yetone/avante.nvim",
-    enabled = false,
-    build = "make",
-    event = "VeryLazy",
-    version = false, -- Never set this value to "*"! Never!
-    opts = {
-      keys = function(_, keys)
-        local opts =
-          require("lazy.core.plugin").values(require("lazy.core.config").spec.plugins["avante.nvim"], "opts", false)
-        local mappings = {
-          {
-            opts.mappings.ask,
-            function()
-              require("avante.api").ask()
-            end,
-            desc = "avante: ask",
-            mode = { "n", "v" },
-          },
-          {
-            opts.mappings.refresh,
-            function()
-              require("avante.api").refresh()
-            end,
-            desc = "avante: refresh",
-            mode = "v",
-          },
-          {
-            opts.mappings.edit,
-            function()
-              require("avante.api").edit()
-            end,
-            desc = "avante: edit",
-            mode = { "n", "v" },
-          },
-        }
-        mappings = vim.tbl_filter(function(m)
-          return m[1] and #m[1] > 0
-        end, mappings)
-        return vim.list_extend(mappings, keys)
-      end,
-      -- mcp-hub
-      -- system_prompt as function ensures LLM always has latest MCP server state This is evaluated for every message, even in existing chats
-      system_prompt = function()
-        local hub = require("mcphub").get_hub_instance()
-        return hub and hub:get_active_servers_prompt() or ""
-      end,
-      -- Using function prevents requiring mcphub before it's loaded
-      custom_tools = function()
-        return {
-          require("mcphub.extensions.avante").mcp_tool(),
-        }
-      end,
-      -- provider = "copilot",
-      provider = "ollama",
-      providers = {
-        ollama = {
-          endpoint = "http://localhost:11434",
-          model = "qwen2.5-coder:7b",
-        },
-        deepseek = {
-          __inherited_from = "openai",
-          api_key_name = "sk-e229a6f4cadf426ea7e3972b09d03f02",
-          endpoint = "https://api.deepseek.com",
-          model = "deepseek-coder",
-        },
-      },
-    },
+    -- enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
@@ -361,5 +338,71 @@ return {
       "zbirenbaum/copilot.lua", -- for providers='copilot'
       "ravitemer/mcphub.nvim",
     },
+    build = "make",
+    event = "VeryLazy",
+    version = false, -- Never set this value to "*"! Never!
+    opts = {
+      system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        return hub and hub:get_active_servers_prompt() or ""
+      end,
+      custom_tools = function()
+        return {
+          require("mcphub.extensions.avante").mcp_tool(),
+        }
+      end,
+      provider = "copilot",
+      providers = {
+        ollama = {
+          endpoint = "http://localhost:11434",
+          model = "qwen3:8b",
+        },
+      },
+      behaviour = {
+        auto_set_keymaps = false,
+        support_paste_from_clipboard = true,
+        enable_token_counting = true,
+      },
+      mappings = {
+        diff = {
+          ours = "co",
+          theirs = "ct",
+          all_theirs = "ca",
+          both = "cb",
+          cursor = "cc",
+          next = "]x",
+          prev = "[x",
+        },
+        suggestion = {},
+        jump = {
+          next = "]]",
+          prev = "[[",
+        },
+        cancel = {
+          normal = { "<C-c>", "<Esc>", "q" },
+          insert = { "<C-c>" },
+        },
+        sidebar = {
+          apply_all = "A",
+          apply_cursor = "a",
+          retry_user_request = "r",
+          edit_user_request = "e",
+          switch_windows = "<Tab>",
+          reverse_switch_windows = "<S-Tab>",
+          remove_file = "d",
+          add_file = "@",
+          close = { "<Esc>", "q" },
+          close_from_input = nil, -- e.g., { normal = "<Esc>", insert = "<C-d>" }
+        },
+      },
+      windows = { position = "left" },
+    },
+  },
+  {
+    "Davidyz/VectorCode",
+    version = "*", -- optional, depending on whether you're on nightly or release
+    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = "VectorCode", -- if you're lazy-loading VectorCode
+    build = "uv tool upgrade vectorcode",
   },
 }

@@ -82,6 +82,7 @@ return {
   },
   {
     "echasnovski/mini.align",
+    enabled = false,
     event = "InsertEnter",
     version = false,
     -- lazy = false,
