@@ -1,5 +1,4 @@
 -- search text
-
 local ns = vim.api.nvim_create_namespace("search_count_virtualtext")
 
 local function clear_virtual_text()

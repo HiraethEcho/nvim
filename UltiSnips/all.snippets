@@ -43,28 +43,6 @@ snip += box[3]`
 $0
 endsnippet
 
-##########################
-# VIM MODELINE GENERATOR #
-##########################
-# See advice on `:help 'tabstop'` for why these values are set. Uses second
-# modeline form ('set') to work in languages with comment terminators
-# (/* like C */).
-snippet modeline "Vim modeline"
-vim`!v ':set '. (&expandtab ? printf('et sw=%i ts=%i', &sw, &ts) : printf('noet sts=%i sw=%i ts=%i', &sts, &sw, &ts)) . (&tw ? ' tw='. &tw : '') . ':'`
-endsnippet
-
-#########
-# DATES #
-#########
-
-snippet time "hh:mm" w
-`!v strftime("%H:%M")`
-endsnippet
-
-snippet datetime "YYYY-MM-DD hh:mm" w
-`!v strftime("%Y-%m-%d %H:%M")`
-endsnippet
-
 snippet todo "TODO comment" bw
 `!p snip.rv=get_comment_format()[0]` ${2:TODO}: $0${3: <${4:`!v strftime('%d-%m-%y')`}${5:, `!v g:snips_author`}>} `!p snip.rv=get_comment_format()[2]`
 endsnippet

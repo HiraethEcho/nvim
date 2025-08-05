@@ -2,6 +2,11 @@ return {
   { -- CopilotChat
     "CopilotC-Nvim/CopilotChat.nvim",
     cmd = { "CopilotChatToggle" },
+    keys = {
+      { "<localleader>Cc", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChatToggle" },
+      { "<localleader>Ce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChatExplain" },
+      { "<localleader>Cm", "<cmd>CopilotChatCommit<cr>", desc = "CopilotChatCommit" },
+    },
     dependencies = {
       "zbirenbaum/copilot.lua",
       { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
@@ -14,19 +19,13 @@ return {
         prompt_footer = "\nConsider this context when answering:", -- Customize footer text
         skip_empty = true, -- Skip adding context when no files are retrieved
       })
-
       require("CopilotChat").setup({
-        sticky = {
-          "#vectorcode",
-        },
+        sticky = { "#vectorcode" },
         mappings = {
           reset = { normal = "<C-S-L>", insert = "<C-S-L>" },
           show_diff = { full_diff = true },
         },
-        contexts = {
-          -- Add the VectorCode context provider
-          vectorcode = vectorcode_ctx,
-        },
+        contexts = { vectorcode = vectorcode_ctx },
         prompts = {
           Explain = {
             prompt = "Explain the following code in detail:\n$input",
@@ -48,7 +47,8 @@ return {
       "Davidyz/VectorCode",
     },
     keys = {
-      { "<localleader>c", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle codecompanion chat" },
+      { "<localleader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle codecompanion chat" },
+      { "<localleader>ca", "<cmd>CodeCompanionActions<cr>", desc = "codecompanion action" },
     },
     opts = {
       adapters = {
@@ -66,11 +66,7 @@ return {
         vectorcode = {
           opts = {
             tool_group = {
-              -- this will register a tool group called `@vectorcode_toolbox` that contains all 3 tools
               enabled = true,
-              -- a list of extra tools that you want to include in `@vectorcode_toolbox`.
-              -- if you use @vectorcode_vectorise, it'll be very handy to include
-              -- `file_search` here.
               extras = {},
               collapse = false, -- whether the individual tools should be shown in the chat
             },
@@ -155,6 +151,176 @@ return {
       },
     },
   },
+  { -- "sudo-tee/opencode.nvim",
+    "sudo-tee/opencode.nvim",
+    -- enabled = false,
+    keys = {
+      { "<localleader>oo", "<cmd>Opencode<cr>", desc = "Toggle Opencode" },
+    },
+    cmd = { "Opencode" },
+    opts = {
+      prefered_picker = snacks, -- 'telescope', 'fzf', 'mini.pick', 'snacks', if nil, it will use the best available picker
+      default_global_keymaps = false, -- If false, disables all default global keymaps
+      default_mode = "build", -- 'build' or 'plan' or any custom configured. @see [OpenCode Modes](https://opencode.ai/docs/modes/)
+      keymap = {
+        global = {
+          toggle = "<localleader>oo", -- Open opencode. Close if opened
+          open_input = "<localleader>oi", -- Opens and focuses on input window on insert mode
+          open_input_new_session = "<localleader>oI", -- Opens and focuses on input window on insert mode. Creates a new session
+          open_output = "<localleader>oO", -- Opens and focuses on output window
+          toggle_focus = "<localleader>ot", -- Toggle focus between opencode and last window
+          close = "<localleader>oq", -- Close UI windows
+          select_session = "<localleader>os", -- Select and load a opencode session
+          configure_provider = "<localleader>op", -- Quick provider and model switch from predefined list
+          diff_open = "<localleader>od", -- Opens a diff tab of a modified file since the last opencode prompt
+          diff_next = "<localleader>o]", -- Navigate to next file diff
+          diff_prev = "<localleader>o[", -- Navigate to previous file diff
+          diff_close = "<localleader>oc", -- Close diff view tab and return to normal editing
+          diff_revert_all_last_prompt = "<localleader>ora", -- Revert all file changes since the last opencode prompt
+          diff_revert_this_last_prompt = "<localleader>ort", -- Revert current file changes since the last opencode prompt
+          diff_revert_all = "<localleader>oRa", -- Revert all file changes since the last opencode session
+          diff_revert_this = "<localleader>oRt", -- Revert current file changes since the last opencode session
+          swap_position = "<localleader>ox", -- Swap Opencode pane left/right
+        },
+        window = {
+          submit = "<cr>", -- Submit prompt (normal mode)
+          submit_insert = "<C-s>", -- Submit prompt (insert mode)
+          close = "q", -- Close UI windows
+          stop = "<C-c>", -- Stop opencode while it is running
+          next_message = "]]", -- Navigate to next message in the conversation
+          prev_message = "[[", -- Navigate to previous message in the conversation
+          mention_file = "@", -- Pick a file and add to context. See File Mentions section
+          toggle_pane = "<tab>", -- Toggle between input and output panes
+          prev_prompt_history = "<up>", -- Navigate to previous prompt in history
+          next_prompt_history = "<down>", -- Navigate to next prompt in history
+          switch_mode = "<localleader>om", -- Switch between modes (build/plan)
+          focus_input = "i", -- Focus on input window and enter insert mode at the end of the input from the output window
+          debug_messages = "<localleader>oD", -- Open raw message in new buffer for debugging
+          debug_output = "<localleader>oO", -- Open raw output in new buffer for debugging
+        },
+      },
+      ui = {
+        window_width = 0.30,
+        input_height = 0.20,
+        output = {
+          tools = {
+            show_output = true, -- Show tools output [diffs, cmd output, etc.] (default: true)
+          },
+        },
+      },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
+  { -- avante
+    "yetone/avante.nvim",
+    -- enabled = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "folke/snacks.nvim", -- for input provider snacks
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      "ravitemer/mcphub.nvim",
+    },
+    build = "make",
+    -- event = "VeryLazy",
+    version = false, -- Never set this value to "*"! Never!
+    -- stylua: ignore
+    keys = {
+      { "<localleader>aa", "<cmd>AvanteChat<cr>", desc = "Avante chat" },
+      { "<localleader>at", "<cmd>AvanteToggle<cr>", desc = "Toggle Avante chat" },
+      { "<localleader>ar", "<cmd>AvanteRefresh<cr>", desc = "AvanteRefresh" },
+      { "<localleader>af", "<cmd>AvanteFocus<cr>", desc = "Change focus" },
+      { "<localleader>a?", "<cmd>AvanteModels<cr>", desc = "select model" },
+      { "<localleader>an", "<cmd>AvanteChatNew<cr>", desc = "New Ask" },
+      { "<localleader>ae", "<cmd>AvanteEdit<cr>", desc = "Edit selected block" },
+      { "<localleader>aS", "<cmd>AvanteStop<cr>", desc = "Stop current AI request" },
+      { "<localleader>ah", "<cmd>AvanteHistory<cr>", desc = "select between chat histories" },
+      -- { "<localleader>ad", "<cmd>Avante<cr>", desc = "select between chat histories" },
+      { "<localleader>aC", "<cmd>AvanteClear<cr>", desc = "Clear Avante chat" },
+    },
+    opts = {
+      system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        return hub and hub:get_active_servers_prompt() or ""
+      end,
+      custom_tools = function()
+        return { require("mcphub.extensions.avante").mcp_tool() }
+      end,
+      provider = "copilot",
+      providers = {
+        ollama = {
+          endpoint = "http://localhost:11434",
+          model = "qwen3:8b",
+        },
+      },
+      behaviour = {
+        auto_set_keymaps = false,
+        support_paste_from_clipboard = true,
+        enable_token_counting = true,
+      },
+      mappings = {
+        files = {
+          add_current = "<localleader>ac", -- Add current buffer to selected files
+          add_all_buffers = "<localleader>aB", -- Add all buffer files to selected files
+        },
+        select_model = "<localleader>a?", -- Select model command
+        select_history = "<localleader>ah", -- Select history command
+        confirm = {
+          focus_window = "<C-w>f",
+          code = "c",
+          resp = "r",
+          input = "i",
+        },
+        ask = "<localleader>aa",
+        new_ask = "<localleader>an",
+        edit = "<localleader>ae",
+        refresh = "<localleader>ar",
+        focus = "<localleader>af",
+        stop = "<localleader>aS",
+        toggle = {
+          default = "<localleader>at",
+          debug = "<localleader>ad",
+          hint = "<localleader>ah",
+          suggestion = "<localleader>as",
+          repomap = "<localleader>aR",
+        },
+        diff = {
+          ours = "co",
+          theirs = "ct",
+          all_theirs = "ca",
+          both = "cb",
+          cursor = "cc",
+          next = "]x",
+          prev = "[x",
+        },
+        suggestion = {},
+        jump = {
+          next = "]]",
+          prev = "[[",
+        },
+        cancel = {
+          normal = { "<C-c>", "<Esc>", "q" },
+          insert = { "<C-c>" },
+        },
+        sidebar = {
+          apply_all = "A",
+          apply_cursor = "a",
+          retry_user_request = "r",
+          edit_user_request = "e",
+          switch_windows = "<Tab>",
+          reverse_switch_windows = "<S-Tab>",
+          remove_file = "d",
+          add_file = "@",
+          close = { "<Esc>", "q" },
+          close_from_input = nil, -- e.g., { normal = "<Esc>", insert = "<C-d>" }
+        },
+      },
+      input = { provider = "snacks" },
+    },
+  },
+
   { -- mcphub
     "ravitemer/mcphub.nvim",
     -- enabled = false,
@@ -223,66 +389,6 @@ return {
       })
     end,
   },
-  { -- "sudo-tee/opencode.nvim",
-    "sudo-tee/opencode.nvim",
-    -- enabled = false,
-    cmd = { "Opencode" },
-    opts = {
-      prefered_picker = snacks, -- 'telescope', 'fzf', 'mini.pick', 'snacks', if nil, it will use the best available picker
-      default_global_keymaps = false, -- If false, disables all default global keymaps
-      default_mode = "build", -- 'build' or 'plan' or any custom configured. @see [OpenCode Modes](https://opencode.ai/docs/modes/)
-      keymap = {
-        global = {
-          toggle = "<localleader>oa", -- Open opencode. Close if opened
-          open_input = "<localleader>oi", -- Opens and focuses on input window on insert mode
-          open_input_new_session = "<localleader>oI", -- Opens and focuses on input window on insert mode. Creates a new session
-          open_output = "<localleader>oo", -- Opens and focuses on output window
-          toggle_focus = "<localleader>ot", -- Toggle focus between opencode and last window
-          close = "<localleader>oq", -- Close UI windows
-          select_session = "<localleader>os", -- Select and load a opencode session
-          configure_provider = "<localleader>op", -- Quick provider and model switch from predefined list
-          diff_open = "<localleader>od", -- Opens a diff tab of a modified file since the last opencode prompt
-          diff_next = "<localleader>o]", -- Navigate to next file diff
-          diff_prev = "<localleader>o[", -- Navigate to previous file diff
-          diff_close = "<localleader>oc", -- Close diff view tab and return to normal editing
-          diff_revert_all_last_prompt = "<localleader>ora", -- Revert all file changes since the last opencode prompt
-          diff_revert_this_last_prompt = "<localleader>ort", -- Revert current file changes since the last opencode prompt
-          diff_revert_all = "<localleader>oRa", -- Revert all file changes since the last opencode session
-          diff_revert_this = "<localleader>oRt", -- Revert current file changes since the last opencode session
-          swap_position = "<localleader>ox", -- Swap Opencode pane left/right
-        },
-        window = {
-          submit = "<cr>", -- Submit prompt (normal mode)
-          submit_insert = "<C-s>", -- Submit prompt (insert mode)
-          close = "q", -- Close UI windows
-          stop = "<C-c>", -- Stop opencode while it is running
-          next_message = "]]", -- Navigate to next message in the conversation
-          prev_message = "[[", -- Navigate to previous message in the conversation
-          mention_file = "@", -- Pick a file and add to context. See File Mentions section
-          toggle_pane = "<tab>", -- Toggle between input and output panes
-          prev_prompt_history = "<up>", -- Navigate to previous prompt in history
-          next_prompt_history = "<down>", -- Navigate to next prompt in history
-          switch_mode = "<M-m>", -- Switch between modes (build/plan)
-          focus_input = "i", -- Focus on input window and enter insert mode at the end of the input from the output window
-          debug_messages = "<localleader>oD", -- Open raw message in new buffer for debugging
-          debug_output = "<localleader>oO", -- Open raw output in new buffer for debugging
-        },
-      },
-      ui = {
-        window_width = 0.30,
-        input_height = 0.20,
-        output = {
-          tools = {
-            show_output = true, -- Show tools output [diffs, cmd output, etc.] (default: true)
-          },
-        },
-      },
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
-
   { -- minuet-ai
     "milanglacier/minuet-ai.nvim",
     enabled = false,
@@ -327,76 +433,6 @@ return {
         },
       })
     end,
-  },
-  { -- avante
-    "yetone/avante.nvim",
-    -- enabled = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "folke/snacks.nvim", -- for input provider snacks
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
-      "ravitemer/mcphub.nvim",
-    },
-    build = "make",
-    event = "VeryLazy",
-    version = false, -- Never set this value to "*"! Never!
-    opts = {
-      system_prompt = function()
-        local hub = require("mcphub").get_hub_instance()
-        return hub and hub:get_active_servers_prompt() or ""
-      end,
-      custom_tools = function()
-        return {
-          require("mcphub.extensions.avante").mcp_tool(),
-        }
-      end,
-      provider = "copilot",
-      providers = {
-        ollama = {
-          endpoint = "http://localhost:11434",
-          model = "qwen3:8b",
-        },
-      },
-      behaviour = {
-        auto_set_keymaps = false,
-        support_paste_from_clipboard = true,
-        enable_token_counting = true,
-      },
-      mappings = {
-        diff = {
-          ours = "co",
-          theirs = "ct",
-          all_theirs = "ca",
-          both = "cb",
-          cursor = "cc",
-          next = "]x",
-          prev = "[x",
-        },
-        suggestion = {},
-        jump = {
-          next = "]]",
-          prev = "[[",
-        },
-        cancel = {
-          normal = { "<C-c>", "<Esc>", "q" },
-          insert = { "<C-c>" },
-        },
-        sidebar = {
-          apply_all = "A",
-          apply_cursor = "a",
-          retry_user_request = "r",
-          edit_user_request = "e",
-          switch_windows = "<Tab>",
-          reverse_switch_windows = "<S-Tab>",
-          remove_file = "d",
-          add_file = "@",
-          close = { "<Esc>", "q" },
-          close_from_input = nil, -- e.g., { normal = "<Esc>", insert = "<C-d>" }
-        },
-      },
-      windows = { position = "left" },
-    },
   },
   {
     "Davidyz/VectorCode",

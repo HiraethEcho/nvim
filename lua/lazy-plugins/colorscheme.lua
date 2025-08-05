@@ -1,6 +1,6 @@
 -- vim.cmd.colorscheme("wildcharm")
 -- vim.cmd.colorscheme("lunaperche")
-vim.cmd.colorscheme("habamax")
+-- vim.cmd.colorscheme("habamax")
 -- vim.cmd.colorscheme("sorbet")
 -- vim.cmd.colorscheme("retrobox")
 return {

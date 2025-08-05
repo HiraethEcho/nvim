@@ -2,7 +2,6 @@ local function augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
-
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
@@ -74,7 +73,6 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
   desc = "Save session to 'stdpath(state)/session' when no active session exists",
 })
 -- go to last loc when opening a buffer
---[[ --
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
   callback = function()
@@ -89,4 +87,4 @@ vim.api.nvim_create_autocmd("BufReadPost", {
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
   end,
-}) ]]
+})
