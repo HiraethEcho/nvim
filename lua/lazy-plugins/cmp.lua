@@ -29,42 +29,11 @@ return {
         ["<C-e>"] = { "cancel", "fallback" },
         --[[ ["<C-j>"] = { "snippet_forward", "fallback" },
         ["<C-k>"] = { "snippet_backward", "fallback" },
-        ["<C-n>"] = {
-          function()
-            if require("luasnip").choice_active() then
-              require("luasnip").change_choice(1)
-              return true
-            end
-          end,
-          "fallback",
-        },
-        ["<C-p>"] = {
-          function()
-            if require("luasnip").choice_active() then
-              require("luasnip").change_choice(-1)
-              return true
-            end
-          end,
-          "fallback",
-        }, ]]
-        --[[ ["<C-f>"] = {
-          function()
-            if require("luasnip").choice_active() then
-              require("luasnip").change_choice(1)
-              return true
-            end
-          end,
-          "fallback",
-        },
-        ["<C-b>"] = {
-          function()
-            if require("luasnip").choice_active() then
-              require("luasnip").change_choice(-1)
-              return true
-            end
-          end,
-          "fallback",
-        }, ]]
+        ["<C-n>"] = { function() if require("luasnip").choice_active() then require("luasnip").change_choice(1) return true end end, "fallback", },
+        ["<C-p>"] = { function() if require("luasnip").choice_active() then require("luasnip").change_choice(-1) return true end end, "fallback", }, 
+        ["<C-f>"] = { function() if require("luasnip").choice_active() then require("luasnip").change_choice(1) return true end end, "fallback", },
+        ["<C-b>"] = { function() if require("luasnip").choice_active() then require("luasnip").change_choice(-1) return true end end, "fallback", }, 
+        ]]
       },
       signature = { enabled = true },
       completion = {
@@ -82,31 +51,27 @@ return {
         default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot", "lazydev" },
         -- default = { "snippets", "lsp", "path", "buffer" },
         providers = {
-          snippets = { score_offset = 100 },
+          snippets = { score_offset = 200 },
+          ultisnips = { score_offset = 200, name = "ultisnips", module = "blink.compat.source" },
           buffer = { score_offset = 150, opts = { get_bufnrs = vim.api.nvim_list_bufs } },
-          copilot = { name = "copilot", module = "blink-copilot", score_offset = 200, async = true },
-          ultisnips = { name = "ultisnips", module = "blink.compat.source", score_offset = 200 },
-          minuet = { name = "minuet", module = "minuet.blink", score_offset = 200 },
+          copilot = { score_offset = 100, name = "copilot", module = "blink-copilot", async = true },
+          minuet = { score_offset = 200, name = "minuet", module = "minuet.blink" },
           avante = { name = "avante", module = "blink-cmp-avante", opts = {} },
-          lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
+          lazydev = { score_offset = 100, name = "LazyDev", module = "lazydev.integrations.blink" },
         },
       },
-      -- cmdline = { enabled = false },
       cmdline = {
         -- enabled = false,
         sources = function()
           local type = vim.fn.getcmdtype()
-          -- Search forward and backward
           if type == "/" or type == "?" then
             return { "buffer" }
           end
-          -- Commands
           if type == ":" or type == "@" then
             return { "cmdline" }
           end
           return {}
         end,
-        -- keymap = { preset = "cmdline" },
         keymap = {
           preset = "none",
           ["<Down>"] = { "select_next", "fallback" },

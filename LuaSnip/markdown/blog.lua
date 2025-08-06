@@ -33,11 +33,12 @@ local snip = {
           ),
           fmta(
             [[
-              draft : true
+              draft: true
               password: <>
               summary: <>
+              categories: <>
               ]],
-            { i(1),i(2) }
+            { i(1), i(2), i(3) }
           ),
           t("status: draft"),
           t(""),

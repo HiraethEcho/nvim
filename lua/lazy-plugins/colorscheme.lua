@@ -6,22 +6,19 @@
 return {
   {
     "V4N1LLA-1CE/xcodedark.nvim",
-    config = function()
-      require("xcodedark").setup({
-        transparent = true,
-        integrations = {
-          telescope = true,
-          nvim_tree = true,
-          gitsigns = true,
-          bufferline = true,
-          incline = true,
-          lazygit = true,
-          which_key = true,
-          notify = true,
-        },
-      })
-      -- vim.cmd.colorscheme("xcodedark")
-    end,
+    opts = {
+      transparent = true,
+      integrations = {
+        telescope = true,
+        nvim_tree = true,
+        gitsigns = true,
+        bufferline = true,
+        incline = true,
+        lazygit = true,
+        which_key = true,
+        notify = true,
+      },
+    },
   },
   {
     "AlexvZyl/nordic.nvim",

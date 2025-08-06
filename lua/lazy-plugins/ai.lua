@@ -318,6 +318,7 @@ return {
         },
       },
       input = { provider = "snacks" },
+      hints = { enabled = false },
     },
   },
 
