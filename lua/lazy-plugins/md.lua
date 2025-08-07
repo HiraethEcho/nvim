@@ -14,20 +14,19 @@ return {
       filetypes = { "markdown", "codecompanion" },
     },
   },
-  {
+
+  { -- MeanderingProgrammer/render-markdown.nvim
     "MeanderingProgrammer/render-markdown.nvim",
-    -- enabled = false,
-    -- lazy = false,
     ft = { "markdown", "md", "codecompanion", "Avante", "copilot-chat" },
     keys = {
-      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
+      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markdown Render Toggle", ft = "markdown" },
     },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
     opts = {
-      file_types = { "markdown", "codecompanion", "Avante", "copilot-chat" },
+      file_types = { "markdown", "codecompanion", "Avante", "copilot-chat", "opencode-output" },
       -- completions = { blink = { enabled = true } }, -- no cmp
       -- completions = { lsp = { enabled = true } }, -- error loading lsp
       heading = { width = "block", position = "inline" },
@@ -43,7 +42,8 @@ return {
       code = { width = "block", min_width = 30, position = "right" },
     },
   },
-  {
+
+  { -- yelog/marklive.nvim
     "yelog/marklive.nvim",
     enabled = false,
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -51,7 +51,8 @@ return {
     ft = "markdown",
     config = true,
   },
-  {
+
+  { -- iamcco/markdown-preview.nvim
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
     -- build = function() vim.fn["mkdp#util#install"]() end,
@@ -73,12 +74,11 @@ return {
     end,
   },
   -- enhance
-  {
+  { -- jakewvincent/mkdnflow.nvim
     "jakewvincent/mkdnflow.nvim",
     -- enabled = false,
     ft = "markdown",
     -- cmd = { "Mkdnflow", },
-    -- lazy=false,
     config = function()
       require("mkdnflow").setup({
         modules = {
@@ -158,7 +158,7 @@ return {
         },
         foldtext = {
           title_transformer = function()
-            local function my_title_transformer(text)
+            return function(text)
               local updated_title = text:gsub("%b{}", "")
               updated_title = updated_title:gsub("^%s*", "")
               updated_title = updated_title:gsub("%s*$", "")
@@ -170,28 +170,17 @@ return {
               updated_title = updated_title:gsub("^#", "h1")
               return updated_title
             end
-            return my_title_transformer
           end,
-          object_count_icon_set = "nerdfont", -- Use/fall back on the nerdfont icon set
+          object_count_icon_set = "nerdfont",
           object_count_opts = function()
-            local opts = {
-              link = false, -- Prevent links from being counted
-              blockquote = { -- Count block quotes (these aren't counted by default)
-                icon = " ",
-                count_method = {
-                  pattern = { "^>.+$" },
-                  tally = "blocks",
-                },
-              },
-              fncblk = {
-                -- Override the icon for fenced code blocks with 
-                icon = " ",
-              },
+            return {
+              link = false,
+              blockquote = { icon = " ", count_method = { pattern = { "^>.+$" }, tally = "blocks" } },
+              fncblk = { icon = " " },
             }
-            return opts
           end,
-          line_count = true, -- Prevent lines from being counted
-          word_count = true, -- Count the words in the section
+          line_count = true,
+          word_count = true,
           fill_chars = {
             left_edge = "╾─",
             right_edge = "──╼",
@@ -205,7 +194,8 @@ return {
       })
     end,
   },
-  {
+
+  { -- antonk52/markdowny.nvim
     "antonk52/markdowny.nvim",
     enabled = false,
     ft = { "md", "markdown" },
@@ -217,9 +207,9 @@ return {
       -- vim.keymap.set("v", "<C-k>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
     end,
   },
-  {
+
+  { -- epwalsh/obsidian.nvim
     "epwalsh/obsidian.nvim",
-    -- lazy=false,
     enabled = false,
     event = { "BufRead " .. vim.fn.expand("~") .. "/obsidian/**.md" },
     keys = {
@@ -239,26 +229,17 @@ return {
           path = "~/obsidian/",
         },
       },
-      -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
       completion = {
-        -- Set to false to disable completion.
         nvim_cmp = false,
-        -- Trigger completion at 2 chars.
         min_chars = 2,
       },
-
-      -- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this
-      -- way then set 'mappings = {}'.
       mappings = {
-        -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
         ["gf"] = {
           action = function()
             return require("obsidian").util.gf_passthrough()
           end,
           opts = { noremap = false, expr = true, buffer = true },
         },
-        -- Toggle check-boxes.
-        -- Smart action depending on context, either follow link or toggle checkbox.
         ["<cr>"] = {
           action = function()
             return require("obsidian").util.smart_action()
@@ -343,9 +324,9 @@ return {
       -- see also: 'follow_url_func' config option above.
     end,
   },
-  {
+
+  { -- Zeioth/markmap.nvim
     "Zeioth/markmap.nvim",
-    -- build = "yarn global add markmap-cli",
     cmd = { "MarkmapOpen", "MarkmapSave", "MarkmapWatch", "MarkmapWatchStop" },
     opts = {
       html_output = "/tmp/markmap.html", -- (default) Setting a empty string "" here means: [Current buffer path].html
@@ -356,8 +337,8 @@ return {
       require("markmap").setup(opts)
     end,
   },
-  -- img
-  {
+
+  { -- 3rd/image.nvim
     "3rd/image.nvim",
     build = false,
     enabled = false,
@@ -378,16 +359,16 @@ return {
     opts = {
       integrations = {
         markdown = {
-          only_render_image_at_cursor = true, -- defaults to false
-          only_render_image_at_cursor_mode = "inline", -- "popup" or "inline", defaults to "popup"
+          only_render_image_at_cursor = true,
+          only_render_image_at_cursor_mode = "inline",
         },
       },
     },
   },
-  {
+
+  { -- HakonHarnes/img-clip.nvim
     "HakonHarnes/img-clip.nvim",
     enabled = false,
-    -- event = "VeryLazy",
     opts = {
       default = {
         embed_image_as_base64 = false,
