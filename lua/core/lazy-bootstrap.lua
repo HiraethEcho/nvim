@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 local opts = {
   defaults = { lazy = true },
   dev = {path= "~/Code/nvim/plugin"},
-  checker = { enabled = true },
+  -- checker = { enabled = true },
   profiling = { loader = true, require = true },
   performance = {
     rtp = {
