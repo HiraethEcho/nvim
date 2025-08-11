@@ -2,6 +2,7 @@ vim.g.loaded_matchparen = 1 -- "utilyre/sentiment.nvim",
 return {
   {
     "j-hui/fidget.nvim",
+    -- enabled = false,
     event = "LspAttach",
     opts = {
       notification = {
@@ -10,6 +11,21 @@ return {
         window = { border = "none", align = "top", tabstop = 2 },
       },
     },
+  },
+  {
+    "y3owk1n/notifier.nvim",
+    enabled = false,
+    config = function()
+      require("notifier").setup({
+        -- your configuration here
+      })
+    end,
+  },
+  {
+    "echasnovski/mini.notify",
+    opts = {},
+    enabled = false,
+    event = "LspAttach",
   },
   {
     "catgoose/nvim-colorizer.lua",

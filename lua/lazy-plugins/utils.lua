@@ -27,11 +27,33 @@ return {
     cmd = { "SudaRead", "SudaWrite" },
   },
   {
+    "y3owk1n/cmd.nvim",
+    cmd = { "Cmd" },
+    opts = {
+      progress_notifier = {
+        -- adapter = require("cmd.nvim").builtins.spinner_adapters.mini,
+        -- adapter = require("cmd").builtins.spinner_adapters.fidget,
+      },
+    },
+  },
+  {
     "folke/which-key.nvim",
     -- cmd = "WhichKey",
     keys = {
-      { "?", function() require("which-key").show() end, desc = "Buffer Local Keymaps (which-key)" },
-      { "<c-w><space>", function() require("which-key").show({ keys = "<c-w>", loop = true }) end, desc = "Window Hydra Mode (which-key)", },
+      {
+        "?",
+        function()
+          require("which-key").show()
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+      {
+        "<c-w><space>",
+        function()
+          require("which-key").show({ keys = "<c-w>", loop = true })
+        end,
+        desc = "Window Hydra Mode (which-key)",
+      },
     },
     event = "BufRead",
     opts = {

@@ -209,4 +209,6 @@ return {
     end,
   },
   { "DonJulve/NeoCyberVim", config = true },
+  { "echasnovski/mini.hues", version = false },
+  { "echasnovski/mini.base16", version = false },
 }
