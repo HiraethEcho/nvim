@@ -16,7 +16,7 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- tabs
-map("n", "<c-t>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+-- map("n", "<c-t>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 -- map("n", "<C-n>", "<C-W>T", { desc = "Window to new tab" })
 map("n", "t", "<cmd>tabNext<cr>", { desc = "Next Tab" })
 map("n", "T", "<cmd>tabprevious<cr>", { desc = "previous Tab" })

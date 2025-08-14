@@ -84,6 +84,26 @@ return {
       })
     end,
   },
+  {
+    "ingur/floatty.nvim",
+    -- event = "VeryLazy",
+    config = function()
+      -- initialize config
+      local term = require("floatty").setup({
+        window = {
+          row = function()
+            return vim.o.lines - 11
+          end,
+          width = 1.0,
+          height = 8,
+        },
+      })
+      -- stylua: ignore start
+      vim.keymap.set("n", "<C-t>", function() term.toggle() end)
+      vim.keymap.set("t", "<C-t>", function() term.toggle() end)
+      -- sytlua: ignore stop
+    end,
+  },
   -- disable
   {
     "kevinhwang91/nvim-ufo",
