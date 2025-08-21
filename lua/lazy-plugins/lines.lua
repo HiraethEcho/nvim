@@ -74,7 +74,7 @@ return {
             },
           },
           lualine_x = {
-            {
+            --[[ {
               function()
                 if not vim.g.loaded_mcphub then
                   return "󰐻 -"
@@ -105,7 +105,7 @@ return {
                   return { fg = "#ff5555" } -- Red for error/stopped
                 end
               end,
-            },
+            }, ]]
           },
           -- lualine_y = { "filetype" },
           lualine_y = {

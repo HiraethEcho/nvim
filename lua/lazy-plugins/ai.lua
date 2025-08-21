@@ -20,16 +20,16 @@ return {
         skip_empty = true, -- Skip adding context when no files are retrieved
       })
       require("CopilotChat").setup({
-        sticky = { "#vectorcode" },
+        -- sticky = { "#vectorcode" },
         mappings = {
           reset = { normal = "<C-S-L>", insert = "<C-S-L>" },
           show_diff = { full_diff = true },
         },
-        contexts = { vectorcode = vectorcode_ctx },
+        -- contexts = { vectorcode = vectorcode_ctx },
         prompts = {
           Explain = {
             prompt = "Explain the following code in detail:\n$input",
-            context = { "selection", "vectorcode" }, -- Add vectorcode to the context
+            context = { "selection" }, -- Add vectorcode to the context
           },
         },
       })
@@ -42,9 +42,9 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "franco-ruggeri/codecompanion-spinner.nvim",
-      "ravitemer/mcphub.nvim",
+      -- "ravitemer/mcphub.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "Davidyz/VectorCode",
+      -- "Davidyz/VectorCode",
     },
     keys = {
       { "<localleader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle codecompanion chat" },
@@ -63,6 +63,7 @@ return {
       -- stylua: ignore
       strategies = { chat = { adapter = "copilot" }, inline = { adapter = "copilot" }, agent = { adapter = "copilot" }, cmd = { adapter = "copilot" }, },
       extensions = {
+      --[[
         vectorcode = {
           opts = {
             tool_group = {
@@ -92,8 +93,9 @@ return {
             },
           },
         },
+        --]]
         spinner = {},
-        mcphub = {
+        --[[ mcphub = {
           callback = "mcphub.extensions.codecompanion",
           opts = {
             make_tools = true, -- Make individual tools (@server__tool) and server groups (@server) from MCP servers
@@ -104,7 +106,7 @@ return {
             make_vars = true, -- Convert MCP resources to #variables for prompts
             make_slash_commands = true, -- Add MCP prompts as /slash commands
           },
-        },
+        }, ]]
       },
     },
     --[[ config = function()
@@ -324,7 +326,7 @@ return {
 
   { -- mcphub
     "ravitemer/mcphub.nvim",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
