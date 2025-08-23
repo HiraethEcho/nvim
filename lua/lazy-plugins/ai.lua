@@ -63,7 +63,7 @@ return {
       -- stylua: ignore
       strategies = { chat = { adapter = "copilot" }, inline = { adapter = "copilot" }, agent = { adapter = "copilot" }, cmd = { adapter = "copilot" }, },
       extensions = {
-      --[[
+        --[[
         vectorcode = {
           opts = {
             tool_group = {
@@ -439,6 +439,7 @@ return {
   },
   {
     "Davidyz/VectorCode",
+    enabled = false,
     version = "*", -- optional, depending on whether you're on nightly or release
     dependencies = { "nvim-lua/plenary.nvim" },
     cmd = "VectorCode", -- if you're lazy-loading VectorCode

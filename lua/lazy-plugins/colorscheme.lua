@@ -3,7 +3,12 @@
 -- vim.cmd.colorscheme("habamax")
 -- vim.cmd.colorscheme("sorbet")
 -- vim.cmd.colorscheme("retrobox")
+-- vim.cmd.colorscheme("techbase")
 return {
+  {
+    "mcauley-penney/techbase.nvim",
+    opts = { italic_comments = true, transparent = true },
+  },
   {
     "V4N1LLA-1CE/xcodedark.nvim",
     opts = {

@@ -135,7 +135,7 @@ return {
   {
     "echasnovski/mini.sessions",
     version = "*",
-    cmd = {"SessionSave", "SessionSearch"},
+    cmd = { "SessionSave", "SessionSearch" },
     -- enabled = false,
     opts = {
       directory = vim.fn.stdpath("state") .. "/sessions",

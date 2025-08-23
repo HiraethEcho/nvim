@@ -40,4 +40,5 @@ function _G.custom_foldtext()
   table.insert(result, { ' ... ↙ ' .. nline .. ' lines', 'DapBreakpointCondition' })
   return result
 end
+
 vim.o.foldtext = 'v:lua.custom_foldtext()'

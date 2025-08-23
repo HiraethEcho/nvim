@@ -1,4 +1,4 @@
-vim.o.guifont = "Maple Mono NF:h8"
+vim.o.guifont = "CodeNewRoman Nerd Font Mono:h12"
 vim.opt.termguicolors = true -- True color support
 if vim.g.neovide then
   vim.opt.linespace = -1
@@ -9,7 +9,7 @@ if vim.g.neovide then
   -- vim.g.neovide_background_color = "#ff1117" .. alpha()
   -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
   -- vim.g.transparency = 0.3
-  vim.g.neovide_transparency = 1
+  vim.g.neovide_opacity = 1
   -- vim.g.neovide_window_blurred = true
   vim.keymap.set({ "n", "v" }, "<C-=>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
   vim.keymap.set({ "n", "v" }, "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
