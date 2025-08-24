@@ -210,7 +210,6 @@ return {
     -- lazy = false,
     config = function()
       require("flow").setup() -- Optional: for customization
-      vim.cmd("colorscheme flow")
     end,
   },
   { "DonJulve/NeoCyberVim", config = true },
