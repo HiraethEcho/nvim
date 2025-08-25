@@ -9,6 +9,7 @@ return {
       { "saghen/blink.compat", version = "*", opts = {} },
       "SirVer/ultisnips",
       "nvim-treesitter/nvim-treesitter",
+      "zbirenbaum/copilot.lua",
       "fang2hou/blink-copilot",
       "olimorris/codecompanion.nvim",
       -- "milanglacier/minuet-ai.nvim",
