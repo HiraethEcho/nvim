@@ -1,6 +1,6 @@
 vim.g.loaded_matchparen = 1 -- "utilyre/sentiment.nvim",
 return {
-  {
+  { -- "j-hui/fidget.nvim",
     "j-hui/fidget.nvim",
     -- enabled = false,
     event = "LspAttach",
@@ -12,7 +12,7 @@ return {
       },
     },
   },
-  {
+  { -- "y3owk1n/notifier.nvim",
     "y3owk1n/notifier.nvim",
     enabled = false,
     config = function()
@@ -21,13 +21,13 @@ return {
       })
     end,
   },
-  {
+  { -- "echasnovski/mini.notify",
     "echasnovski/mini.notify",
     opts = {},
     enabled = false,
     event = "LspAttach",
   },
-  {
+  { -- "catgoose/nvim-colorizer.lua",
     "catgoose/nvim-colorizer.lua",
     cmd = { "ColorizerToggle", "ColorizerAttachToBuffer" },
     opts = { -- set to setup table
@@ -58,7 +58,7 @@ return {
   -- { "norcalli/nvim-colorizer.lua", cmd = "ColorizerToggle", opts = true },
   { "nvzone/volt", lazy = true },
   { "nvzone/minty", cmd = { "Shades", "Huefy" } },
-  {
+  { -- "utilyre/sentiment.nvim",
     "utilyre/sentiment.nvim",
     version = "*",
     event = "InsertEnter", -- keep for lazy loading
@@ -72,7 +72,7 @@ return {
   },
   { "OXY2DEV/helpview.nvim", ft = "help", dependencies = { "nvim-treesitter/nvim-treesitter" } },
   -- disable
-  {
+  { -- "rcarriga/nvim-notify",
     "rcarriga/nvim-notify",
     event = "BufReadPost",
     enabled = false,
@@ -87,30 +87,8 @@ return {
       vim.notify = require("notify")
     end,
   },
-  {
-    "edluffy/hologram.nvim",
-    enabled = false,
-  },
-  {
-    "gen740/SmoothCursor.nvim",
-    enabled = false,
-    config = function()
-      require("smoothcursor").setup({
-        type = "default", -- Cursor movement calculation method, choose "default", "exp" (exponential) or "matrix".
-      })
-    end,
-  },
-  {
-    "stevearc/dressing.nvim",
-    enabled = false,
-    event = "BufReadPost",
-    opts = true,
-  },
-  {
-    "xiyaowong/nvim-transparent",
-    enabled = false,
-    cmd = "TransparentEnable",
-    -- lazy=false,
-    opts = true,
-  },
+  { "edluffy/hologram.nvim", enabled = false },
+  { "gen740/SmoothCursor.nvim", enabled = false, opts = { type = "default" } },
+  { "stevearc/dressing.nvim", enabled = false, event = "BufReadPost", opts = true },
+  { "xiyaowong/nvim-transparent", enabled = false, cmd = "TransparentEnable", opts = true },
 }

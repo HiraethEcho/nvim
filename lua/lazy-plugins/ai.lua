@@ -437,7 +437,7 @@ return {
       })
     end,
   },
-  {
+  { -- "Davidyz/VectorCode",
     "Davidyz/VectorCode",
     enabled = false,
     version = "*", -- optional, depending on whether you're on nightly or release

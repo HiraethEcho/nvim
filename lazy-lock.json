@@ -83,6 +83,7 @@
   "neominimap.nvim": { "branch": "main", "commit": "7e4657f1ce04d74be87a77bd442257ad293308b9" },
   "neovim": { "branch": "main", "commit": "72befaffeac38db7bdd49e0549eaa2c4806dd878" },
   "neovim-session-manager": { "branch": "master", "commit": "3409dc920d40bec4c901c0a122a80bee03d6d1e1" },
+  "neovim-tips": { "branch": "master", "commit": "39db578a6eee508039ed562483ed76930022ae64" },
   "neowarrior.nvim": { "branch": "main", "commit": "197cd4a7a56d07374fcda09b5b56baa433e40549" },
   "nightfox.nvim": { "branch": "main", "commit": "ba47d4b4c5ec308718641ba7402c143836f35aa9" },
   "noice.nvim": { "branch": "main", "commit": "0427460c2d7f673ad60eb02b35f5e9926cf67c59" },

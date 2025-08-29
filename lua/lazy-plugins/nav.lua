@@ -1,5 +1,5 @@
 return {
-  {
+  { -- "phaazon/hop.nvim",
     "phaazon/hop.nvim",
     -- event = "BufRead",
     -- enabled = false,
@@ -14,7 +14,7 @@ return {
       require("hop").setup()
     end,
   },
-  {
+  { -- "folke/flash.nvim",
     "folke/flash.nvim",
     -- event = "VeryLazy",
     opts = {
@@ -68,7 +68,7 @@ return {
       -- { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
-  {
+  { -- "SmiteshP/nvim-navbuddy",
     "SmiteshP/nvim-navbuddy",
     -- enabled = false,
     -- event = "LspAttach",
@@ -167,7 +167,7 @@ return {
       })
     end,
   },
-  {
+  { -- "hedyhli/outline.nvim",
     "hedyhli/outline.nvim",
     cmd = { "Outline", "OutlineOpen" },
     keys = { -- Example mapping to toggle outline
@@ -196,7 +196,7 @@ return {
     },
   },
 
-  {
+  { -- "dnlhc/glance.nvim",
     "dnlhc/glance.nvim",
     -- lazy = false,
     enabled = false,
@@ -257,7 +257,7 @@ return {
       })
     end,
   },
-  {
+  { -- "bassamsdata/namu.nvim",
     "bassamsdata/namu.nvim",
     keys = {
       { "<leader>O", "<cmd>Namu symbols<cr>", desc = "Jump by symbol" },
@@ -276,7 +276,7 @@ return {
       })
     end,
   },
-  {
+  { -- "rainzm/flash-zh.nvim",
     "rainzm/flash-zh.nvim",
     enabled = false,
     event = "VeryLazy",

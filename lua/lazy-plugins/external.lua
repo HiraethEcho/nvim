@@ -1,5 +1,5 @@
 return {
-  {
+  { -- "lowitea/aw-watcher.nvim",
     "lowitea/aw-watcher.nvim",
     event = "BufRead",
     enabled = false,
@@ -9,7 +9,7 @@ return {
       vim.cmd([[ AWStart ]])
     end,
   },
-  {
+  { -- "ActivityWatch/aw-watcher-vim",
     "ActivityWatch/aw-watcher-vim",
     -- lazy = false,
     event = "BufRead",
@@ -19,7 +19,7 @@ return {
       vim.cmd([[ AWStart ]])
     end,
   },
-  {
+  { -- "axieax/urlview.nvim",
     "axieax/urlview.nvim",
     -- enabled = false,
     -- lazy = false,
@@ -32,7 +32,7 @@ return {
       -- default_picker = "telescope",
     },
   },
-  {
+  { -- "sontungexpt/url-open",
     "sontungexpt/url-open",
     -- enabled = false,
     branch = "mini",

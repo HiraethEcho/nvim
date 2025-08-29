@@ -1,5 +1,5 @@
 return {
-  {
+  { -- "neovim/nvim-lspconfig",
     "neovim/nvim-lspconfig",
     -- event = { "BufReadPost", "BufNewFile" },
     -- lazy=false,
@@ -90,7 +90,7 @@ return {
       }) ]]
     end,
   },
-  {
+  { -- "williamboman/mason.nvim",
     "williamboman/mason.nvim",
     -- enabled = false,
     cmd = "Mason",
@@ -102,7 +102,7 @@ return {
       require("mason").setup()
     end,
   },
-  {
+  { -- "rachartier/tiny-inline-diagnostic.nvim",
     "rachartier/tiny-inline-diagnostic.nvim",
     enabled = false,
     event = "LspAttach", -- Or `LspAttach`
@@ -118,7 +118,7 @@ return {
       })
     end,
   },
-  {
+  { -- "rachartier/tiny-code-action.nvim",
     "rachartier/tiny-code-action.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -158,7 +158,7 @@ return {
     },
   },
   -- disabled
-  {
+  { -- "b0o/incline.nvim",
     "b0o/incline.nvim",
     enabled = false,
     event = "LspAttach",
@@ -210,7 +210,7 @@ return {
       })
     end,
   },
-  {
+  { -- "folke/trouble.nvim",
     "folke/trouble.nvim",
     enabled = false,
     opts = {
@@ -260,7 +260,7 @@ return {
       },
     },
   },
-  {
+  { -- "glepnir/lspsaga.nvim",
     "glepnir/lspsaga.nvim",
     enabled = false,
     event = "LspAttach",
@@ -353,7 +353,7 @@ return {
       })
     end,
   },
-  {
+  { -- "jinzhongjia/LspUI.nvim",
     "jinzhongjia/LspUI.nvim",
     branch = "main",
     enabled = false,

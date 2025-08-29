@@ -1,5 +1,5 @@
 return {
-  {
+  { -- "echasnovski/mini.starter",
     "echasnovski/mini.starter",
     -- enabled = false,
     version = "*",
@@ -36,7 +36,7 @@ return {
       })
     end,
   },
-  {
+  { -- "goolord/alpha-nvim",
     "goolord/alpha-nvim",
     enabled = false,
     dependencies = {
@@ -132,7 +132,7 @@ return {
       -- alpha.setup(startify.config)
     end,
   },
-  {
+  { -- "echasnovski/mini.sessions",
     "echasnovski/mini.sessions",
     version = "*",
     cmd = { "SessionSave", "SessionSearch" },
@@ -141,7 +141,7 @@ return {
       directory = vim.fn.stdpath("state") .. "/sessions",
     },
   },
-  {
+  { -- "rmagatti/auto-session",
     "rmagatti/auto-session",
     -- enabled = false,
     event = "BufRead",
@@ -177,14 +177,14 @@ return {
       vim.o.sessionoptions = "buffers,curdir,help,tabpages,terminal,localoptions"
     end,
   },
-  {
+  { -- "dstein64/vim-startuptime",
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
     config = function()
       vim.g.startuptime_tries = 10
     end,
   },
-  {
+  { -- "folke/persistence.nvim",
     "folke/persistence.nvim",
     enabled = false,
     opts = {
@@ -212,7 +212,7 @@ return {
       end)
     end,
   },
-  {
+  { -- "olimorris/persisted.nvim",
     "olimorris/persisted.nvim",
     enabled = false,
     opts = {
@@ -221,7 +221,7 @@ return {
       ignored_dirs = {}, -- Table of dirs that are ignored for starting and autoloading
     },
   },
-  {
+  { -- "Shatur/neovim-session-manager",
     "Shatur/neovim-session-manager",
     -- enabled = false,
     dependencies = {
@@ -245,7 +245,7 @@ return {
       })
     end,
   },
-  {
+  { -- "jedrzejboczar/possession.nvim",
     "jedrzejboczar/possession.nvim",
     enabled = false,
     -- lazy = false,

@@ -1,11 +1,11 @@
 return {
-  {
+  { -- "echasnovski/mini.surround",
     "echasnovski/mini.surround",
     enabled = false,
     version = "*",
     event = "InsertEnter",
   },
-  {
+  { -- "kylechui/nvim-surround",
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "BufRead",
@@ -15,7 +15,7 @@ return {
       })
     end,
   },
-  {
+  { -- "numToStr/Comment.nvim",
     "numToStr/Comment.nvim",
     keys = {
       { "gcc", mode = "n", desc = "Comment toggle current line" },
@@ -27,7 +27,7 @@ return {
     },
     opts = {},
   },
-  {
+  { -- "tigion/swap.nvim",
     "tigion/swap.nvim",
     -- enabled = false,
     -- event = { 'BufReadPost', 'BufNewFile' },
@@ -72,7 +72,7 @@ return {
       },
     },
   },
-  {
+  { -- "Wansmer/treesj",
     "Wansmer/treesj",
     keys = {
       { "gK", "<cmd>TSJSplit<CR>", desc = "treesj split" },
@@ -80,7 +80,7 @@ return {
     },
     opts = { use_default_keymaps = false },
   },
-  {
+  { -- "echasnovski/mini.align",
     "echasnovski/mini.align",
     enabled = false,
     event = "InsertEnter",
@@ -88,7 +88,7 @@ return {
     -- lazy = false,
     opts = { mappings = { start = "", start_with_preview = "<leader>a" } },
   },
-  {
+  { -- "smartding/fcitx.nvim",
     "smartding/fcitx.nvim",
     -- lazy = false,
     ft = "markdown,md",
@@ -98,27 +98,27 @@ return {
       require("fcitx").setup()
     end,
   },
-  {
+  { -- "windwp/nvim-autopairs",
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {
       map_bs = false,
     },
   },
-  {
+  { -- "sontungexpt/bim.nvim",
     "sontungexpt/bim.nvim",
     enabled = false,
     event = "InsertEnter",
     config = true,
   },
-  {
+  { -- "echasnovski/mini.splitjoin",
     "echasnovski/mini.splitjoin",
     enabled = false,
     event = "InsertEnter",
     version = false,
     opts = { mappings = { toggle = "", split = "gK", join = "gJ" } },
   },
-  {
+  { -- "folke/todo-comments.nvim",
     "folke/todo-comments.nvim",
     enabled = false,
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -233,7 +233,7 @@ return {
       },
     },
   },
-  {
+  { -- "folke/zen-mode.nvim",
     "folke/zen-mode.nvim",
     enabled = false,
     dependencies = { "folke/twilight.nvim" },
@@ -253,7 +253,7 @@ return {
       },
     },
   },
-  {
+  { -- "joshuadanpeterson/typewriter",
     "joshuadanpeterson/typewriter",
     enabled = false,
     dependencies = {
@@ -265,7 +265,7 @@ return {
     end,
     opts = {},
   },
-  {
+  { -- "mbbill/undotree",
     "mbbill/undotree",
     enabled = false,
     keys = {
@@ -314,7 +314,7 @@ return {
       ignore_filesize = nil, -- e.g. 10 * 1024 * 1024
     },
   },
-  {
+  { -- "voldikss/vim-translator",
     "voldikss/vim-translator",
     cmd = "TranslateW",
     keys = {
@@ -326,7 +326,7 @@ return {
       vim.g.translator_default_engines = { "bing", "youdao" }
     end,
   },
-  {
+  { -- "soemre/commentless.nvim",
     "soemre/commentless.nvim",
     enabled = false,
     cmd = "Commentless",

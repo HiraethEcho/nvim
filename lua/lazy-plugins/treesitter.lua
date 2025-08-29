@@ -1,5 +1,5 @@
 return {
-  {
+  { -- "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter",
     -- version = false, -- last release is way too old and doesn't work on Windows
     -- lazy = false,
@@ -46,7 +46,7 @@ return {
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
-  {
+  { -- "nvim-treesitter/nvim-treesitter-context",
     "nvim-treesitter/nvim-treesitter-context",
     -- enabled = false,
     cmd = "TSContext enable",
@@ -57,7 +57,7 @@ return {
       max_lines = 3,
     },
   },
-  {
+  { -- "code-biscuits/nvim-biscuits",
     "code-biscuits/nvim-biscuits",
     keys = {
       {
@@ -78,7 +78,7 @@ return {
       cursor_line_only = true,
     },
   },
-  {
+  { -- "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-treesitter/nvim-treesitter-textobjects",
     enabled = false,
     config = function()

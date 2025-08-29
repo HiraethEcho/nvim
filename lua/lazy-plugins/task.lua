@@ -1,5 +1,5 @@
 return {
-  {
+  { -- "huantrinh1802/khal_endar.nvim",
     "huantrinh1802/khal_endar.nvim",
     enabled = false,
     version = "*",
@@ -12,7 +12,7 @@ return {
       -- vim.api.nvim_set_keymap("n", "<leader>ki", "<cmd>KLInteract<cr>", { desc = "[K]hal [I]interact", noremap = true, silent = true })
     end,
   },
-  {
+  { -- "huantrinh1802/m_taskwarrior_d.nvim",
     "huantrinh1802/m_taskwarrior_d.nvim",
     version = "*",
     cmd = { "TWView", "TWQueryTasks", "TWBufQueryTasks" },

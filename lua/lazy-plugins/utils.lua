@@ -1,9 +1,6 @@
 return {
-  {
-    "folke/lazy.nvim",
-    version = "*",
-  },
-  {
+  { "folke/lazy.nvim", version = "*" },
+  { -- "MagicDuck/grug-far.nvim",
     "MagicDuck/grug-far.nvim",
     keys = {
       {
@@ -14,19 +11,10 @@ return {
         desc = "search and replace",
       },
     },
-    config = function()
-      require("grug-far").setup({
-        -- options, see Configuration section below
-        -- there are no required options atm
-        -- engine = 'ripgrep' is default, but 'astgrep' can be specified
-      })
-    end,
+    opts = {},
   },
-  {
-    "lambdalisue/suda.vim",
-    cmd = { "SudaRead", "SudaWrite" },
-  },
-  {
+  { "lambdalisue/suda.vim", cmd = { "SudaRead", "SudaWrite" } },
+  { -- "y3owk1n/cmd.nvim",
     "y3owk1n/cmd.nvim",
     cmd = { "Cmd" },
     opts = {
@@ -36,7 +24,7 @@ return {
       },
     },
   },
-  {
+  { -- "folke/which-key.nvim",
     "folke/which-key.nvim",
     -- cmd = "WhichKey",
     keys = {
@@ -84,7 +72,7 @@ return {
       })
     end,
   },
-  {
+  { -- "ingur/floatty.nvim",
     "ingur/floatty.nvim",
     -- event = "VeryLazy",
     config = function()
@@ -105,7 +93,7 @@ return {
     end,
   },
   -- disable
-  {
+  { -- "kevinhwang91/nvim-ufo",
     "kevinhwang91/nvim-ufo",
     -- event = "LspAttach",
     event = "BufRead",
@@ -146,7 +134,7 @@ return {
       })
     end,
   },
-  {
+  { -- "nvim-pack/nvim-spectre",
     "nvim-pack/nvim-spectre",
     enabled = false,
     build = false,
@@ -158,11 +146,7 @@ return {
       { "<leader>sW", function() require("spectre").open_file_search({ select_word = true }) end, mode = { "x", "v" },    desc = "search word on current file" },
     },
   },
-  {
-    "echasnovski/mini.test",
-    enabled = false,
-    version = "*",
-  },
+  { "echasnovski/mini.test", enabled = false, version = "*" },
   {
     "Zeioth/hot-reload.nvim",
     enabled = false,
@@ -170,7 +154,7 @@ return {
     event = "BufEnter",
     opts = {},
   },
-  {
+  { -- "stevearc/quicker.nvim",
     "stevearc/quicker.nvim",
     enabled = false,
     lazy = false,
@@ -185,13 +169,5 @@ return {
       },
     },
     opts = {},
-  },
-  {
-    "rhysd/nyaovim-mini-browser",
-    enabled = false,
-    event = "CmdlineEnter",
-    -- keys = {
-    --   { "<leader>B", "<cmd>StartMarkdownPreview<cr>", desc = "markdown Html Preview" },
-    -- },
   },
 }
