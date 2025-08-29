@@ -223,7 +223,7 @@ return {
       "MunifTanjim/nui.nvim",
       "folke/snacks.nvim", -- for input provider snacks
       "zbirenbaum/copilot.lua", -- for providers='copilot'
-      "ravitemer/mcphub.nvim",
+      -- "ravitemer/mcphub.nvim",
     },
     build = "make",
     -- event = "VeryLazy",
@@ -243,13 +243,13 @@ return {
       { "<localleader>aC", "<cmd>AvanteClear<cr>", desc = "Clear Avante chat" },
     },
     opts = {
-      system_prompt = function()
+      --[[ system_prompt = function()
         local hub = require("mcphub").get_hub_instance()
         return hub and hub:get_active_servers_prompt() or ""
       end,
       custom_tools = function()
         return { require("mcphub.extensions.avante").mcp_tool() }
-      end,
+      end, ]]
       provider = "copilot",
       providers = {
         ollama = {
