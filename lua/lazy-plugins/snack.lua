@@ -79,16 +79,7 @@ return {
           corner_top = "╭",
           corner_bottom = "╰",
         },
-        hl = {
-          "SnacksIndent1",
-          "SnacksIndent2",
-          "SnacksIndent3",
-          "SnacksIndent4",
-          "SnacksIndent5",
-          "SnacksIndent6",
-          "SnacksIndent7",
-          "SnacksIndent8",
-        },
+        hl = { "SnacksIndent1", "SnacksIndent2", "SnacksIndent3", "SnacksIndent4", "SnacksIndent5", "SnacksIndent6", "SnacksIndent7", "SnacksIndent8", },
       },
     },
     input = { enabled = true },
@@ -172,7 +163,7 @@ return {
     },
     styles = {
       notification = { wo = { wrap = true } },
-      snacks_image = { relative = "editor", col = -1, row = -1 },
+      snacks_image = { relative = "editor", col = -1, row = 1 },
     },
   },
   -- stylua: ignore
@@ -280,19 +271,5 @@ return {
         Snacks.toggle.words():map("<leader>uW")
       end,
     })
-    --[[ vim.api.nvim_create_autocmd("LspProgress", {
-      ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-      callback = function(ev)
-        local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-        vim.notify(vim.lsp.status(), "info", {
-          id = "lsp_progress",
-          title = "LSP Progress",
-          opts = function(notif)
-            notif.icon = ev.data.params.value.kind == "end" and " "
-              or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-          end,
-        })
-      end,
-    }) ]]
   end,
 }

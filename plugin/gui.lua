@@ -1,4 +1,4 @@
-vim.o.guifont = "CodeNewRoman Nerd Font Mono:h12"
+vim.o.guifont = "CodeNewRoman Nerd Font Mono:h8"
 vim.opt.termguicolors = true -- True color support
 if vim.g.neovide then
   vim.opt.linespace = -1
