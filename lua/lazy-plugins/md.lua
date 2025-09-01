@@ -14,29 +14,45 @@ return {
       filetypes = { "markdown", "codecompanion" },
     },
   },
-
   { -- MeanderingProgrammer/render-markdown.nvim
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown", "md", "codecompanion", "Avante", "copilot-chat" },
     keys = {
-      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markdown Render Toggle", ft = "markdown" },
+      { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markdown Render Toggle" },
     },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
+      "saghen/blink.cmp",
     },
     opts = {
       file_types = { "markdown", "codecompanion", "Avante", "copilot-chat", "opencode-output" },
-      -- completions = { blink = { enabled = true } }, -- no cmp
-      -- completions = { lsp = { enabled = true } }, -- error loading lsp
-      heading = { width = "block", position = "inline" },
+      -- completions = { blink = { enabled = true }, lsp = { enabled = true } },
+      heading = {
+        -- width = "block",
+        -- position = "inline",
+        icons = { " 󰼏 ", " 󰎨 ", " 󰼑 ", " 󰎲 ", " 󰼓 ", " 󰎴 " },
+        border = true,
+        render_modes = true,
+        border_virtual = true,
+      },
       bullet = { render_modes = true },
       latex = { enabled = false },
+      anti_conceal = {
+        disabled_modes = { "n" },
+        ignore = {
+          bullet = true,
+          head_border = true,
+          head_background = true,
+        },
+      },
+      -- https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/509
+      win_options = { concealcursor = { rendered = "nvc" } },
       checkbox = {
         right_pad = 0,
         custom = {
           doing = { raw = "[>]", rendered = "󰁕 ", highlight = "RenderMarkdownTodo", scope_highlight = nil },
-          deleted = { raw = "[~]", rendered = "󰅙 ", highlight = "DiagnosticWarning", scope_highlight = nil },
+          deleted = { raw = "[-]", rendered = "󰅙 ", highlight = "DiagnosticWarning", scope_highlight = nil },
         },
       },
       code = { width = "block", min_width = 30, position = "right" },
@@ -76,7 +92,7 @@ return {
   -- enhance
   { -- jakewvincent/mkdnflow.nvim
     "jakewvincent/mkdnflow.nvim",
-    -- enabled = false,
+    enabled = false,
     ft = "markdown",
     -- cmd = { "Mkdnflow", },
     config = function()
@@ -105,12 +121,12 @@ return {
         },
         silent = false,
         to_do = {
-          symbols = { " ", "x", ">", "~" },
+          symbols = { " ", "x", ">", "-" },
           update_parents = true,
           not_started = " ",
           in_progress = ">",
           complete = "x",
-          deleted = "~",
+          deleted = "-",
         },
         mappings = {
           MkdnTab = { "i", "<c-l>" },
@@ -373,10 +389,8 @@ return {
       default = {
         embed_image_as_base64 = false,
         prompt_for_file_name = false,
-        drag_and_drop = {
-          insert_mode = true,
-        },
-        use_absolute_path = true,
+        drag_and_drop = { insert_mode = true },
+        use_absolute_path = false,
       },
     },
     keys = {

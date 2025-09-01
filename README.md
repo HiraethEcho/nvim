@@ -12,25 +12,22 @@ _all follow for ill jijojlaljfh.,nbvkciozjboijuiouioafdsroiwezkldxj => <> cloud 
 **_asdfg_**
 _allsdfghjklzxcvbnmqwertyuiop_
 
-
 - [ ] klsadjf
 - [>] sasd
 
-> [!tip]
-> a
+> [!tip] a
 
-> [tips]
+> [!tip] tip
+> test
+
+> [!note]
+> note
 
 Hello, world!
-
-> [tips]
->
-> [tips]
 
 what a hell
 
 ![trees](https://hiraeth-picbed.oss-cn-beijing.aliyuncs.com/img/trees.webp)
-
 
 ## Usage
 
@@ -113,7 +110,7 @@ I am using lazy.nvim as my plugins manager. Plugins are divided in several class
 > sdfklfsjdkljfakl
 
 > [!TIP]
-> ok 
+> ok
 
 > [!IMPORTANT]
 > Useful information that users should know, even when skimming content.
@@ -233,5 +230,3 @@ Variable = " ",
 ```icons
 󰝬󰎐󰐊  󰏄󰝵󰮾󰮺
 ```
-
-

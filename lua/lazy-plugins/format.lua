@@ -10,16 +10,22 @@ return {
         function()
           require("conform").format({ async = true, lsp_format = "fallback" })
         end,
-        mode = "",
+        mode = "n",
         desc = "Format buffer",
       },
     },
     opts = {
+      notify_on_error = true,
+      formatters = {
+        cbfmt = {
+          command = "cbfmt",
+          args = { "-w", "--config", vim.fn.expand("~") .. "/.config/cbfmt.toml", "$FILENAME" },
+        },
+      },
       formatters_by_ft = {
         lua = { "stylua" },
-        markdown = { "prettier" },
-        json = { "prettier" },
-        html = { "prettier" },
+        markdown = { "prettier", "cbfmt" },
+        ["*"] = { "prettier" },
         tex = { "tex-fmt" },
         sh = { "shfmt" },
       },
