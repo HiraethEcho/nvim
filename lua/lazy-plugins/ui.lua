@@ -61,13 +61,13 @@ return {
   { -- "utilyre/sentiment.nvim",
     "utilyre/sentiment.nvim",
     version = "*",
-    event = "InsertEnter", -- keep for lazy loading
+    event = "InsertEnter",
     opts = {
       pairs = {
         { "(", ")" },
         { "{", "}" },
         { "[", "]" },
-      }, -- config
+      },
     },
   },
   { "OXY2DEV/helpview.nvim", ft = "help", dependencies = { "nvim-treesitter/nvim-treesitter" } },

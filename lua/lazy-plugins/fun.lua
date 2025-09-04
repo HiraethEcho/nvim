@@ -52,6 +52,7 @@ return { -- {
     opts = {},
   },
   { -- "FluxxField/bionic-reading.nvim",
+    enabled = false,
     "FluxxField/bionic-reading.nvim",
     keys = {
       { "<leader>ub", "<cmd>BRToggle<cr>", mode = { "n", "v" }, desc = "Toggle Bionic Read" },

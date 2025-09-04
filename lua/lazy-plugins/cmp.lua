@@ -49,16 +49,16 @@ return {
         -- default = { "ultisnips", "lsp", "path", "buffer", "copilot" },
         -- default = { "snippets", "lsp", "path", "buffer", "copilot", "lazydev" },
         -- default = { "ultisnips", "lsp", "path", "buffer" },
-        default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot", "lazydev" },
+        default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot" },
         -- default = { "snippets", "lsp", "path", "buffer" },
         providers = {
           snippets = { score_offset = 200 },
           ultisnips = { score_offset = 200, name = "ultisnips", module = "blink.compat.source" },
           buffer = { score_offset = 150, opts = { get_bufnrs = vim.api.nvim_list_bufs } },
           copilot = { score_offset = 100, name = "copilot", module = "blink-copilot", async = true },
-          minuet = { score_offset = 200, name = "minuet", module = "minuet.blink" },
-          avante = { name = "avante", module = "blink-cmp-avante", opts = {} },
-          lazydev = { score_offset = 100, name = "LazyDev", module = "lazydev.integrations.blink" },
+          -- minuet = { score_offset = 200, name = "minuet", module = "minuet.blink" },
+          -- avante = { name = "avante", module = "blink-cmp-avante", opts = {} },
+          -- lazydev = { score_offset = 100, name = "LazyDev", module = "lazydev.integrations.blink" },
         },
       },
       cmdline = {
@@ -145,8 +145,9 @@ return {
           ["<S-Tab>"] = cmp.mapping.select_prev_item(fallback),
           ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         },
+        -- stylua: ignore
         sources = cmp.config.sources({
-          { name = "ultisnips" }, -- For ultisnips users.
+          { name = "ultisnips" },
           -- { name = "vimtex" },
           -- { name = "nvim_lua" },
           {
@@ -159,17 +160,8 @@ return {
           },
           -- { name = 'nvim_lsp' },
           { name = "copilot", max_item_count = 3 },
-          {
-            name = "buffer",
-            option = {
-              get_bufnrs = function()
-                return vim.api.nvim_list_bufs()
-              end,
-            },
-            max_item_count = 3,
-          },
+          { name = "buffer", option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end }, max_item_count = 3 },
           { name = "path" },
-          -- { name = "lazydev",  group_index = 0, },
         }),
         formatting = {
           format = lspkind.cmp_format({

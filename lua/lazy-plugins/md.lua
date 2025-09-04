@@ -2,7 +2,7 @@ return {
   -- render
   { -- markview
     "OXY2DEV/markview.nvim",
-    enabled = false,
+    -- enabled = false,
     dependencies = {
       "saghen/blink.cmp",
     },
@@ -16,6 +16,7 @@ return {
   },
   { -- MeanderingProgrammer/render-markdown.nvim
     "MeanderingProgrammer/render-markdown.nvim",
+    enabled = false,
     ft = { "markdown", "md", "codecompanion", "Avante", "copilot-chat" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markdown Render Toggle" },
@@ -23,25 +24,14 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
-      "saghen/blink.cmp",
     },
     opts = {
       file_types = { "markdown", "codecompanion", "Avante", "copilot-chat", "opencode-output" },
-      -- completions = { blink = { enabled = true }, lsp = { enabled = true } },
-      heading = {
-        -- width = "block",
-        -- position = "inline",
-        icons = { " 󰼏 ", " 󰎨 ", " 󰼑 ", " 󰎲 ", " 󰼓 ", " 󰎴 " },
-        border = true,
-        render_modes = true,
-        border_virtual = true,
-      },
-      bullet = { render_modes = true },
-      latex = { enabled = false },
+      heading = { border = true, render_modes = true },
+      bullet = { render_modes = false },
       anti_conceal = {
-        disabled_modes = { "n" },
         ignore = {
-          bullet = true,
+          bullet = false,
           head_border = true,
           head_background = true,
         },
@@ -92,7 +82,7 @@ return {
   -- enhance
   { -- jakewvincent/mkdnflow.nvim
     "jakewvincent/mkdnflow.nvim",
-    enabled = false,
+    -- enabled = false,
     ft = "markdown",
     -- cmd = { "Mkdnflow", },
     config = function()

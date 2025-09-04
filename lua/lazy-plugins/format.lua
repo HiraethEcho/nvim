@@ -24,24 +24,12 @@ return {
       },
       formatters_by_ft = {
         lua = { "stylua" },
-        markdown = { "prettier", "cbfmt" },
+        -- markdown = { "prettier", "cbfmt" },
         ["*"] = { "prettier" },
         tex = { "tex-fmt" },
         sh = { "shfmt" },
       },
     },
-    --[[ config = function()
-      require("conform").setup({
-        formatters_by_ft = {
-          lua = { "stylua" },
-          markdown = { "prettier" },
-          json = { "prettier" },
-          html = { "prettier" },
-          tex = { "tex-fmt" },
-          sh = { "shfmt" },
-        },
-      })
-    end, ]]
   },
   {
     "mfussenegger/nvim-lint",

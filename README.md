@@ -17,10 +17,10 @@ _allsdfghjklzxcvbnmqwertyuiop_
 
 > [!tip] a
 
-> [!tip] tip
+> [!tip] 
 > test
 
-> [!note]
+> [!NOTE]
 > note
 
 Hello, world!
