@@ -8,7 +8,7 @@ return {
     },
     ft = { "markdown", "md", "codecompanion" },
     keys = {
-      { "<C-e>", "<cmd>Markview Toggle<cr>", desc = "Markiview toggle", ft = "markdown" },
+      { "<C-e>", "<cmd>Markview Toggle<cr>", desc = "Markiview toggle" },
     },
     opts = {
       filetypes = { "markdown", "codecompanion" },
