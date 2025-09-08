@@ -4,14 +4,17 @@ return {
     "OXY2DEV/markview.nvim",
     -- enabled = false,
     dependencies = {
-      "saghen/blink.cmp",
+      "nvim-treesitter/nvim-treesitter",
     },
     ft = { "markdown", "md", "codecompanion" },
     keys = {
       { "<C-e>", "<cmd>Markview Toggle<cr>", desc = "Markiview toggle" },
     },
     opts = {
-      filetypes = { "markdown", "codecompanion" },
+      experimental = { check_rtp = false },
+      preview = {
+        filetypes = { "markdown", "codecompanion" },
+      },
     },
   },
   { -- MeanderingProgrammer/render-markdown.nvim
