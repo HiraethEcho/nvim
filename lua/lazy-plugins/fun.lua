@@ -1,4 +1,4 @@
-return { -- {
+return {
   { -- "saxon1964/neovim-tips",
     "saxon1964/neovim-tips",
     cmd = {

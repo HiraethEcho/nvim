@@ -48,7 +48,6 @@ return {
       code = { width = "block", min_width = 30, position = "right" },
     },
   },
-
   { -- yelog/marklive.nvim
     "yelog/marklive.nvim",
     enabled = false,
@@ -57,7 +56,6 @@ return {
     ft = "markdown",
     config = true,
   },
-
   { -- iamcco/markdown-preview.nvim
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
@@ -200,7 +198,6 @@ return {
       })
     end,
   },
-
   { -- antonk52/markdowny.nvim
     "antonk52/markdowny.nvim",
     enabled = false,
@@ -213,7 +210,6 @@ return {
       -- vim.keymap.set("v", "<C-k>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
     end,
   },
-
   { -- epwalsh/obsidian.nvim
     "epwalsh/obsidian.nvim",
     enabled = false,
@@ -330,7 +326,6 @@ return {
       -- see also: 'follow_url_func' config option above.
     end,
   },
-
   { -- Zeioth/markmap.nvim
     "Zeioth/markmap.nvim",
     cmd = { "MarkmapOpen", "MarkmapSave", "MarkmapWatch", "MarkmapWatchStop" },
@@ -343,7 +338,6 @@ return {
       require("markmap").setup(opts)
     end,
   },
-
   { -- 3rd/image.nvim
     "3rd/image.nvim",
     build = false,
@@ -371,7 +365,6 @@ return {
       },
     },
   },
-
   { -- HakonHarnes/img-clip.nvim
     "HakonHarnes/img-clip.nvim",
     enabled = false,

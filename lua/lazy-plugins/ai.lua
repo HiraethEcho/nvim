@@ -51,15 +51,6 @@ return {
       { "<localleader>ca", "<cmd>CodeCompanionActions<cr>", desc = "codecompanion action" },
     },
     opts = {
-      adapters = {
-        ollama = function()
-          return require("codecompanion.adapters").extend("ollama", {
-            env = { url = "http://localhost:11434" },
-            parameters = { sync = true },
-            schema = { model = { default = "qwen3:8b" } },
-          })
-        end,
-      },
       -- stylua: ignore
       strategies = { chat = { adapter = "copilot" }, inline = { adapter = "copilot" }, agent = { adapter = "copilot" }, cmd = { adapter = "copilot" }, },
       extensions = {
