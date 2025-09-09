@@ -1,3 +1,4 @@
+vim.o.sessionoptions = "buffers,curdir,help,tabpages,terminal,localoptions,folds"
 return {
   { -- "echasnovski/mini.starter",
     "echasnovski/mini.starter",
@@ -135,7 +136,7 @@ return {
   { -- "echasnovski/mini.sessions",
     "echasnovski/mini.sessions",
     version = "*",
-    cmd = { "SessionSave", "SessionSearch" },
+    -- cmd = { "SessionSave", "SessionSearch" },
     -- enabled = false,
     opts = {
       directory = vim.fn.stdpath("state") .. "/sessions",
@@ -147,9 +148,9 @@ return {
     event = "BufRead",
     keys = {
       -- Will use Telescope if installed or a vim.ui.select picker otherwise
-      { "<leader>Sr", "<cmd>SessionSearch<CR>", desc = "Session search" },
-      { "<leader>Ss", "<cmd>SessionSave<CR>", desc = "Save session" },
-      { "<leader>Sa", "<cmd>SessionToggleAutoSave<CR>", desc = "Toggle autosave" },
+      { "<leader>Ss", "<cmd>AutoSession search<CR>", desc = "Session search" },
+      { "<leader>Ss", "<cmd>AutoSession save<CR>", desc = "Save session" },
+      { "<leader>Sa", "<cmd>AutoSession toggle<CR>", desc = "Toggle autosave" },
     },
     config = function()
       require("auto-session").setup({
@@ -174,7 +175,6 @@ return {
           },
         },
       })
-      vim.o.sessionoptions = "buffers,curdir,help,tabpages,terminal,localoptions"
     end,
   },
   { -- "dstein64/vim-startuptime",
