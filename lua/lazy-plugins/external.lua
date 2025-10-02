@@ -1,4 +1,15 @@
 return {
+  {
+    "hat0uma/prelive.nvim",
+    opts = {},
+    cmd = {
+      "PreLiveGo",
+      "PreLiveStatus",
+      "PreLiveClose",
+      "PreLiveCloseAll",
+      "PreLiveLog",
+    },
+  },
   { -- "lowitea/aw-watcher.nvim",
     "lowitea/aw-watcher.nvim",
     event = "BufRead",
