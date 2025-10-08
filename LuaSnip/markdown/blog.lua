@@ -7,6 +7,64 @@ local get_visual = function(args, parent)
 end
 local snip = {
   s(
+    { trig = "memexbak", name = "memex front meta", desc = "title, date, tag" },
+    fmta(
+      [[
+    ---
+    title: <title>
+    summary: <summary>
+    date: <date><tag><category><topic><series><status><draft>
+    ---
+
+    # <head>
+    ]],
+      {
+        title = i(1),
+        summary = i(2),
+        date = p(os.date, "%Y-%m-%d"),
+        tag = c(3, { t({ "", "tags: " }), t("") }),
+        category = c(4, { t({ "", "category: " }), t("") }),
+        topic = c(5, { t({ "", "topic: " }), t("") }),
+        series = c(6, { t({ "", "series: " }), t("") }),
+        status = c(7, {
+          sn(1, { t({ "", "status: " }), c(1, { t("progress"), t("draft") }) }),
+          sn(1,t("")),
+        }),
+        draft = c(8, { t({ "", "draft: true" }), t("") }),
+        head = rep(1),
+      }
+    )
+  ),
+  s(
+    { trig = "memex", name = "memex front meta", desc = "title, date, tag" },
+    fmta(
+      [[
+    ---
+    title: <title>
+    date: <date>
+    tags: <tag>
+    categories: <category>
+    topics: <topic>
+    series: <series>
+    status: <status><draft>
+    ---
+
+    # <head>
+    ]],
+      {
+        title = i(1),
+        date = p(os.date, "%Y-%m-%d"),
+        tag = i(2),
+        category = i(3),
+        topic = i(4),
+        series = i(5),
+        status = c(6,{t("draft"),t("in progress"),t("beta"),t("stable")}),
+        draft = c(7,{t({"","draft: true"}), t("")}),
+        head = rep(1),
+      }
+    )
+  ),
+  s(
     { trig = "meta", name = "meta data", desc = "title, date, tag" },
     fmta(
       [[
