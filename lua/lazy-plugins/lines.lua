@@ -51,7 +51,7 @@ return {
             -- { "fancy_cwd", substitute_home = true },
             -- { "fancy_branch" },
             -- "filetype"
-            "branch",
+            -- "branch",
             -- "fancy_lsp_servers",
           },
           lualine_b = {
@@ -109,10 +109,10 @@ return {
           },
           -- lualine_y = { "filetype" },
           lualine_y = {
-            "lsp_status",
+            -- "lsp_status",
+            { "%l/%L:%c" },
           },
           lualine_z = {
-            { "%l/%L:%c" },
             --[[ function()
               return " " .. os.date("%R")
             end, ]]
@@ -200,11 +200,14 @@ return {
               mode = 0,
             }, ]]
           },
-          lualine_x = {},
+          lualine_x = {
+            "lsp_status",
+          },
           lualine_y = {
             cwd_fancy,
           },
           lualine_z = {
+            "branch",
             {
               function()
                 return require("auto-session.lib").current_session_name(true)
