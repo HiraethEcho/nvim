@@ -2,7 +2,7 @@ return {
   -- render
   { -- markview
     "OXY2DEV/markview.nvim",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
@@ -19,7 +19,7 @@ return {
   },
   { -- MeanderingProgrammer/render-markdown.nvim
     "MeanderingProgrammer/render-markdown.nvim",
-    enabled = false,
+    -- enabled = false,
     ft = { "markdown", "md", "codecompanion", "Avante", "copilot-chat" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markdown Render Toggle" },
