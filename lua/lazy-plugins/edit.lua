@@ -314,8 +314,31 @@ return {
       ignore_filesize = nil, -- e.g. 10 * 1024 * 1024
     },
   },
+  {
+    "uga-rosa/translate.nvim",
+    enabled = false,
+    cmd = "Translate",
+    opts = {
+      default = {
+        command = "translate_shell",
+        output = "floating",
+      },
+      preset = {
+        output = {
+          insert = {
+            base = "top",
+            off = -1,
+          },
+          split = {
+            append = true,
+          },
+        },
+      },
+    },
+  },
   { -- "voldikss/vim-translator",
     "voldikss/vim-translator",
+    -- enabled = false,
     cmd = "TranslateW",
     keys = {
       { "<leader>W", "<cmd>TranslateW<cr>", mode = { "n", "v" }, desc = "translate" },
