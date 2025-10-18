@@ -55,10 +55,6 @@ return {
             -- "fancy_lsp_servers",
           },
           lualine_b = {
-            -- { "fancy_diff" },
-            "diff",
-          },
-          lualine_c = {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
@@ -72,6 +68,10 @@ return {
                 newfile = "", -- Text to show for newly created file before first write
               },
             },
+          },
+          lualine_c = {
+            -- { "fancy_diff" },
+            "diff",
           },
           lualine_x = {
             --[[ {
@@ -128,7 +128,7 @@ return {
               "filename",
               file_status = true, -- Displays file status (readonly status, modified status)
               newfile_status = true, -- Display new file status (new file means no write after created)
-              path = 1, -- 0: Just the filename
+              path = 0, -- 0: Just the filename
               -- 1: Relative path
               -- 2: Absolute path
               -- 3: Absolute path, with tilde as the home directory
