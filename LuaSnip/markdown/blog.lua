@@ -28,7 +28,7 @@ local snip = {
         series = c(6, { t({ "", "series: " }), t("") }),
         status = c(7, {
           sn(1, { t({ "", "status: " }), c(1, { t("progress"), t("draft") }) }),
-          sn(1,t("")),
+          sn(1, t("")),
         }),
         draft = c(8, { t({ "", "draft: true" }), t("") }),
         head = rep(1),
@@ -42,6 +42,7 @@ local snip = {
     ---
     title: <title>
     date: <date>
+    summary: <summary>
     tags: <tag>
     categories: <category>
     topics: <topic>
@@ -54,12 +55,13 @@ local snip = {
       {
         title = i(1),
         date = p(os.date, "%Y-%m-%d"),
-        tag = i(2),
-        category = i(3),
-        topic = i(4),
-        series = i(5),
-        status = c(6,{t("draft"),t("in progress"),t("beta"),t("stable")}),
-        draft = c(7,{t({"","draft: true"}), t("")}),
+        summary = i(2),
+        tag = i(3),
+        category = i(4),
+        topic = i(5),
+        series = i(6),
+        status = c(7, { t("draft"), t("in progress"), t("beta"), t("stable") }),
+        draft = c(8, { t({ "", "draft: true" }), t("") }),
         head = rep(1),
       }
     )
