@@ -1,9 +1,36 @@
+vim.o.background = "dark"
 -- vim.cmd.colorscheme("wildcharm")
-vim.cmd.colorscheme("lunaperche")
+-- vim.cmd.colorscheme("lunaperche")
 -- vim.cmd.colorscheme("habamax")
 -- vim.cmd.colorscheme("sorbet")
 -- vim.cmd.colorscheme("retrobox")
 return {
+  {
+    "jpwol/thorn.nvim",
+    opts = {
+      background = "cold", -- options are 'warm' and 'cold'
+      styles = {
+        keywords = { italics = true, bold = true },
+        comments = { italics = true, bold = false },
+        strings = { italics = true, bold = false },
+        diagnostic = {
+          -- true will apply the bg highlight, false applies the fg highlight
+          error = { highlight = true },
+          hint = { highlight = false },
+          info = { highlight = false },
+          warn = { highlight = false },
+        },
+      },
+      transparent = true, -- transparent background
+    },
+  },
+  {
+    "anttikivi/lucid.nvim",
+    lazy = false,
+    config = function()
+      vim.cmd.colorscheme("lucid")
+    end,
+  },
   {
     "mcauley-penney/techbase.nvim",
     opts = { italic_comments = true, transparent = true },

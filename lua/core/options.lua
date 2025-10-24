@@ -9,7 +9,7 @@ local opt = vim.opt
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
 -- vim.o.timeout = true --default on
 -- opt.timeoutlen = 300 -- default 1000
--- opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
+opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.expandtab = true -- Use spaces instead of tabs
 opt.mouse = "a" -- Enable mouse mode
 opt.shiftround = true -- Round indent
@@ -20,12 +20,13 @@ opt.smartindent = true -- Insert indents automatically
 opt.formatoptions = "jcqnt" -- tcqj
 opt.spell = false
 opt.spelllang = { "en_US" }
+opt.completeopt = { "menu", "popup", "menuone", "noinsert", "noselect", "fuzzy", "preview" }
 
 -- vertical horizontal miscellaneou
--- opt.splitbelow = true -- Put new windows below current
--- opt.splitright = true -- Put new windows right of current
--- opt.cursorline = true -- Enable highlighting of the current line
--- opt.cursorcolumn = false -- Enable highlighting of the current column
+opt.splitbelow = true -- Put new windows below current
+opt.splitright = true -- Put new windows right of current
+opt.cursorline = true -- Enable highlighting of the current line
+opt.cursorcolumn = true -- Enable highlighting of the current column
 opt.scrolloff = 4 -- Lines of context
 opt.sidescrolloff = 4 -- Columns of context
 opt.shortmess:append({ W = true, I = true, c = true })
@@ -39,7 +40,7 @@ opt.listchars = { -- NOTE: using `vim.opt` instead of `vim.o` to pass rich objec
   -- extends = "»",
   -- precedes = "«",
   space = "⋅",
-  -- eol = "↴",
+  eol = "↴",
 }
 -- opt.whichwrap = "bs<>[]"     -- which "horizontal" keys are allowed to travel to prev/next line
 -- opt.winminwidth = 10 -- Minimum window width
@@ -79,5 +80,3 @@ opt.hidden = true -- 允许隐藏被修改过的buffer
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.autowrite = true -- Enable auto write
 
-
-vim.opt.completeopt = { "menu", "popup", "menuone", "noinsert", "noselect", "fuzzy", "preview" }
