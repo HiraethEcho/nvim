@@ -1,10 +1,17 @@
 vim.o.background = "dark"
 -- vim.cmd.colorscheme("wildcharm")
 -- vim.cmd.colorscheme("lunaperche")
--- vim.cmd.colorscheme("habamax")
+vim.cmd.colorscheme("habamax")
 -- vim.cmd.colorscheme("sorbet")
 -- vim.cmd.colorscheme("retrobox")
 return {
+  {
+    "ricardoraposo/nightwolf.nvim",
+    opts = {
+      theme = "dark-gray", -- 'black', 'dark-blue', 'gray', 'dark-gray', 'light'
+      italic = true,
+    },
+  },
   {
     "jpwol/thorn.nvim",
     opts = {
@@ -26,7 +33,7 @@ return {
   },
   {
     "anttikivi/lucid.nvim",
-    lazy = false,
+    -- lazy = false,
     config = function()
       vim.cmd.colorscheme("lucid")
     end,
