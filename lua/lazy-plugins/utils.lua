@@ -72,6 +72,40 @@ return {
       })
     end,
   },
+  {
+    "markgandolfo/lightswitch.nvim",
+    cmd = { "LightSwitchShow" },
+    keys = { { "<leader>uu", ":LightSwitchShow<CR>" } },
+    dependencies = { "MunifTanjim/nui.nvim" },
+    opts = {
+      toggles = {
+        {
+          name = "color",
+          enable_cmd = "ColorizerAttachToBuffer",
+          disable_cmd = "ColorizerAttachToBuffer",
+          state = false, -- Initially enabled
+        },
+        {
+          name = "Copilot",
+          enable_cmd = "Copilot enable",
+          disable_cmd = "Copilot disable",
+          state = true, -- Initially enabled
+        },
+        {
+          name = "LSP",
+          enable_cmd = ":Lspstart<CR>",
+          disable_cmd = ":Lspstop<CR>",
+          state = true, -- Initially disabled
+        },
+        {
+          name = "Diagnostics",
+          enable_cmd = "lua vim.diagnostic.enable()",
+          disable_cmd = "lua vim.diagnostic.disable()",
+          state = true,
+        },
+      },
+    },
+  },
   { -- "ingur/floatty.nvim",
     "ingur/floatty.nvim",
     -- event = "VeryLazy",
