@@ -25,8 +25,8 @@ opt.completeopt = { "menu", "popup", "menuone", "noinsert", "noselect", "fuzzy",
 -- vertical horizontal miscellaneou
 opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows right of current
-opt.cursorline = true -- Enable highlighting of the current line
-opt.cursorcolumn = true -- Enable highlighting of the current column
+opt.cursorline = false -- Enable highlighting of the current line
+opt.cursorcolumn = false -- Enable highlighting of the current column
 opt.scrolloff = 4 -- Lines of context
 opt.sidescrolloff = 4 -- Columns of context
 opt.shortmess:append({ W = true, I = true, c = true })
