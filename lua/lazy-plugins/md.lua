@@ -30,7 +30,7 @@ return {
     },
     opts = {
       file_types = { "markdown", "codecompanion", "Avante", "copilot-chat", "opencode-output" },
-      heading = { border = true, render_modes = true },
+      heading = { border = false, render_modes = true },
       bullet = { render_modes = false },
       anti_conceal = {
         ignore = {

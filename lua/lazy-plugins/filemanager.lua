@@ -1,5 +1,5 @@
 return {
-  {
+  { -- "mikavilpas/yazi.nvim",
     "mikavilpas/yazi.nvim",
     keys = {
       { "<leader>R", "<cmd>Yazi<cr>", desc = "Open yazi at the current file", },
@@ -24,7 +24,7 @@ return {
       },
     },
   },
-  {
+  { -- "echasnovski/mini.files",
     "echasnovski/mini.files",
     -- version = false,
     -- enabled = false,
@@ -58,7 +58,7 @@ return {
     },
   },
   -- disable
-  {
+  { -- "nvim-neo-tree/neo-tree.nvim",
     "nvim-neo-tree/neo-tree.nvim",
     enabled = false,
     keys = {
@@ -216,7 +216,7 @@ return {
       },
     },
   },
-  {
+  { -- 'stevearc/oil.nvim',
     'stevearc/oil.nvim',
     enabled = false,
     cmd = "Oil",

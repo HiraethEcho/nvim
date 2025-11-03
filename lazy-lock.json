@@ -7,6 +7,7 @@
   "VectorCode": { "branch": "main", "commit": "747e8a0482ff731fc082200bd4804d846145a5a0" },
   "actually-doom.nvim": { "branch": "master", "commit": "09ee60b622ad2299ca191dfb0427dbe33ed7915f" },
   "alpha-nvim": { "branch": "main", "commit": "de72250e054e5e691b9736ee30db72c65d560771" },
+  "atone.nvim": { "branch": "main", "commit": "7a5ef04a0a1934a397096efbcab74fae79065ccd" },
   "auto-session": { "branch": "main", "commit": "788ada98f840cd17e2abdb067d48bd9477a65c48" },
   "avante.nvim": { "branch": "main", "commit": "7e9f7b57de46534a9113980ec950a2b05eb8861f" },
   "aw-watcher-vim": { "branch": "master", "commit": "4ba86d05a940574000c33f280fd7f6eccc284331" },

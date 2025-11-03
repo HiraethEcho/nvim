@@ -1,5 +1,5 @@
 return {
-  {
+  { -- "hat0uma/prelive.nvim",
     "hat0uma/prelive.nvim",
     opts = {},
     cmd = {

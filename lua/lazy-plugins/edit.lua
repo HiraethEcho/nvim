@@ -275,7 +275,12 @@ return {
       vim.g.undotree_WindowLayout = 2
     end,
   },
-  {
+  { -- "XXiaoA/atone.nvim",
+    "XXiaoA/atone.nvim",
+    cmd = "Atone",
+    opts = {}, -- your configuration here
+  },
+  { -- "y3owk1n/time-machine.nvim",
     "y3owk1n/time-machine.nvim",
     version = "*", -- remove this if you want to use the `main` branch
     cmd = {
@@ -314,7 +319,7 @@ return {
       ignore_filesize = nil, -- e.g. 10 * 1024 * 1024
     },
   },
-  {
+  { -- "uga-rosa/translate.nvim",
     "uga-rosa/translate.nvim",
     enabled = false,
     cmd = "Translate",

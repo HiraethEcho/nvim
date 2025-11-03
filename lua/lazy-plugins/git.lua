@@ -1,5 +1,5 @@
 return {
-  {
+  { -- "lewis6991/gitsigns.nvim",
     "lewis6991/gitsigns.nvim",
     -- enabled = false,
     event = { "BufReadPost", "BufNewFile" },
@@ -51,7 +51,7 @@ return {
       -- require("scrollbar.handlers.gitsigns").setup()
     end,
   },
-  {
+  { -- "NeogitOrg/neogit",
     "NeogitOrg/neogit",
     cmd = "Neogit",
     opts = { graph_style = "kitty" },
@@ -60,26 +60,7 @@ return {
       "sindrets/diffview.nvim", -- optional - Diff integration
     },
   },
-  {
-    "Rawnly/gist.nvim",
-    enabled = false,
-    cmd = { "GistCreate", "GistCreateFromFile", "GistsList" },
-    dependencies = {},
-    config = true,
-  },
-  -- `GistsList` opens the selected gist in a terminal buffer,
-  -- nvim-unception uses neovim remote rpc functionality to open the gist in an actual buffer
-  -- and prevents neovim buffer inception
-  --
-  {
-    "samjwill/nvim-unception",
-    -- lazy = false,
-    enabled = false,
-    init = function()
-      vim.g.unception_block_while_host_edits = true
-    end,
-  },
-  {
+  { -- "sindrets/diffview.nvim",
     "sindrets/diffview.nvim",
     keys = {
       { "<leader>DD", "<cmd>DiffviewOpen<cr>", desc = "Diff View" },
@@ -114,22 +95,13 @@ return {
       })
     end,
   },
-  {
+  { -- "fredeeb/tardis.nvim",
     "fredeeb/tardis.nvim",
     cmd = "Tardis",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
   },
-  {
-    "Yu-Leo/blame-column.nvim",
-    enabled = false,
-    opts = {}, -- for default options. Refer to the configuration section for custom setup.
-    keys = {
-      { "<leader>hb", "<cmd>BlameColumnToggle<cr>", desc = "toggle blame inline" },
-    },
-    cmd = "BlameColumnToggle",
-  },
-  {
+  { -- "akinsho/git-conflict.nvim",
     "akinsho/git-conflict.nvim",
     version = "*",
     enabled = false,
@@ -144,5 +116,32 @@ return {
         },
       })
     end,
+  },
+  { -- "Rawnly/gist.nvim",
+    "Rawnly/gist.nvim",
+    enabled = false,
+    cmd = { "GistCreate", "GistCreateFromFile", "GistsList" },
+    dependencies = {},
+    config = true,
+    -- `GistsList` opens the selected gist in a terminal buffer,
+    -- nvim-unception uses neovim remote rpc functionality to open the gist in an actual buffer
+    -- and prevents neovim buffer inception
+  },
+  { -- "samjwill/nvim-unception",
+    "samjwill/nvim-unception",
+    -- lazy = false,
+    enabled = false,
+    init = function()
+      vim.g.unception_block_while_host_edits = true
+    end,
+  },
+  { -- "Yu-Leo/blame-column.nvim",
+    "Yu-Leo/blame-column.nvim",
+    enabled = false,
+    opts = {}, -- for default options. Refer to the configuration section for custom setup.
+    keys = {
+      { "<leader>hb", "<cmd>BlameColumnToggle<cr>", desc = "toggle blame inline" },
+    },
+    cmd = "BlameColumnToggle",
   },
 }

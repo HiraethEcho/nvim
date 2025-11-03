@@ -72,7 +72,7 @@ return {
       })
     end,
   },
-  {
+  { -- "markgandolfo/lightswitch.nvim",
     "markgandolfo/lightswitch.nvim",
     cmd = { "LightSwitchShow" },
     keys = { { "<leader>uu", ":LightSwitchShow<CR>" } },

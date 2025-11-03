@@ -367,6 +367,7 @@ return {
     end,
   },
   {
+    -- "Isrothy/neominimap.nvim",
     "Isrothy/neominimap.nvim",
     version = "v3.*.*",
     enabled = false,

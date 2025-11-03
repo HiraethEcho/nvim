@@ -1,5 +1,5 @@
 return {
-  {
+  { -- "stevearc/conform.nvim",
     "stevearc/conform.nvim",
     -- enabled = false,
     -- event = { "BufWritePre" },
@@ -31,7 +31,7 @@ return {
       },
     },
   },
-  {
+  { -- "mfussenegger/nvim-lint",
     "mfussenegger/nvim-lint",
     -- event = { "BufReadPre", "BufNewFile" },
     keys = {
