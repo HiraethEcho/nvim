@@ -29,8 +29,8 @@ local snip = {
 }
 
 local autosnip = {
-  maths({ trig = "__", regTrig = true, wordTrig = false }, { t("_{"), i(1), t("}") }),
-  maths({ trig = "^^", regTrig = true, wordTrig = false }, { t("^{"), i(1), t("}") }),
+  maths({ trig = "__", regTrig = false, wordTrig = false }, { t("_{"), i(1), t("}") }),
+  maths({ trig = "/^/^", regTrig = true, wordTrig = false }, { t("^{"), i(1), t("}") }),
   maths(
     { trig = "([%a%)%]%}])(%a)%2", regTrig = true, wordTrig = false },
     fmta("<>_{<>}", {

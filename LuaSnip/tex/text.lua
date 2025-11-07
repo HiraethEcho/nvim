@@ -13,7 +13,7 @@ local texts = require("luasnip").extend_decorator.apply(s, { condition = tex.in_
 
 local snip = {
   texts({ trig = "tt", desc = "\\text{}" }, fmta("\\<>{<>} ", { c(1, { t("textbf"), t("emph") }), i(2) })),
-  maths({ trig = "op", desc = "operation" }, { t("\\operatorname"), d(1, get_visual) }),
+  maths({ trig = "op", desc = "operation" }, { t("\\operatorname{"), d(1, get_visual),t("}") }),
   maths(
     { trig = "tt", wordTrig = true },
     fmta("\\<>{<>} ", {

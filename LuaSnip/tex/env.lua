@@ -10,6 +10,7 @@ end
 local texts = require("luasnip").extend_decorator.apply(s, { condition = tex.in_text, show_condition = tex.in_text })
 
 local snip = {
+  texts({trig="sec"},{t("\\section{"), i(1), t({"}",""}),i(0)},{condition=line_begin}),
   texts(
     { trig = "ul", name = "item list", desc = "\\begin{itemize}" },
     fmta("\\begin{itemize}<option>\n\t\\item <content>\n\\end{itemize}", {

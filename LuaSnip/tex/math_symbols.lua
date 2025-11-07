@@ -9,7 +9,9 @@ end
 local maths =
   require("luasnip").extend_decorator.apply(s, { condition = tex.in_mathzone, show_condition = tex.in_mathzone })
 local texts = require("luasnip").extend_decorator.apply(s, { condition = tex.in_text, show_condition = tex.in_text })
-local snip = {}
+local snip = {
+  maths({ trig = "set", wordTrig = true }, { t("\\{ "), i(1), t(" \\}") }),
+}
 local autosnip = {
   maths({ trig = "AA", wordTrig = true }, fmta("\\mathbb{A}^{<>} <>", { i(1, "n"), i(0) })),
   maths({ trig = "FF", wordTrig = true }, fmta("\\mathbb{F}_{<>} <>", { i(1, "n"), i(0) })),
