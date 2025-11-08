@@ -80,6 +80,11 @@ return {
     opts = {
       toggles = {
         {
+          name = "readonly",
+          enable_cmd = "setl ma! ma?",
+          disable_cmd = "setl ma! ma?",
+        },
+        {
           name = "color",
           enable_cmd = "ColorizerAttachToBuffer",
           disable_cmd = "ColorizerAttachToBuffer",
