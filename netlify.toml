@@ -13,4 +13,4 @@ ZOLA_VERSION = "0.21.0"
 # `$DEPLOY_PRIME_URL`.
 
 [context.deploy-preview]
-command = "zola build --base-url $DEPLOY_PRIME_URL"
+command = "zola build" 
