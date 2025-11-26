@@ -1,0 +1,3 @@
+[submodule "themes/neovim-theme"]
+	path = themes/neovim-theme
+	url = https://github.com/Super-Botman/neovim-theme
