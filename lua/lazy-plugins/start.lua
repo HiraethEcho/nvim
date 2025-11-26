@@ -149,7 +149,7 @@ return {
     keys = {
       -- Will use Telescope if installed or a vim.ui.select picker otherwise
       { "<leader>Ss", "<cmd>AutoSession search<CR>", desc = "Session search" },
-      { "<leader>Ss", "<cmd>AutoSession save<CR>", desc = "Save session" },
+      { "<leader>SS", "<cmd>AutoSession save<CR>", desc = "Save session" },
       { "<leader>Sa", "<cmd>AutoSession toggle<CR>", desc = "Toggle autosave" },
     },
     config = function()
@@ -223,7 +223,7 @@ return {
   },
   { -- "Shatur/neovim-session-manager",
     "Shatur/neovim-session-manager",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       "stevearc/dressing.nvim",
     },
