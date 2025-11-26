@@ -40,8 +40,8 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Build with Zola
         run: |
-          zola build \\
-            --base-url "${{ steps.pages.outputs.base_url }}/" \\
+          zola build \
+            --base-url "${{ steps.pages.outputs.base_url }}/" \
             --force
       # https://github.com/marketplace/actions/upload-github-pages-artifact
       - name: Upload artifact
