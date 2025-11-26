@@ -1,0 +1,36 @@
+# The URL the site will be built for
+base_url = "https://hiraethecho.github.io/nvim"
+theme = "neovim-theme"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = true
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+
+[extra]
+######################
+# Mandatory settings #
+######################
+
+# set the name of the blog
+blog_name = "nvim"
+
+#####################
+# Optional settings #
+#####################
+
+# set the background image u want
+background-image = "assets/arch.png"
+
+# this parameter allow you to configure specific init functions/shortcuts and commands
+# the value has to be the path of you're config.js file
+config_js = "config.js"
+
+# allow you to include custom css into u're blog
+custom_css = "style.css"

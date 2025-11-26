@@ -41,6 +41,7 @@ jobs:
       - name: Build with Zola
         run: |
           zola build \
+            --config "github.toml" \
             --base-url "${{ steps.pages.outputs.base_url }}/" \
             --force
       # https://github.com/marketplace/actions/upload-github-pages-artifact
