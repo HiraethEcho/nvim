@@ -1,0 +1,13 @@
+pythonx/__pycache__
+.viminfo
+lazyplugin
+session
+posession
+sessions
+*.log
+*.aux
+*.fls
+*.out
+*.xdv
+*.fdb_latexmk
+*.gz

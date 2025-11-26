@@ -1,0 +1,360 @@
+snippet liu_template "Jihao Liu template" b
+\documentclass[11pt]{amsart}
+
+\usepackage{geometry}
+\geometry{a4paper,top=3.2cm,bottom=3.2cm,left=2.5cm,right=2.5cm}
+
+%\setcounter{tocdepth}{3}
+
+%\usepackage[pagewise]{lineno}\linenumbers
+%\usepackage[inline]{showlabels}
+
+\hyphenpenalty=5000
+\tolerance=1000
+
+\usepackage{todonotes}
+ \newcommand\liu[1]{\todo[color=green!40]{#1}} %Liu
+ \newcommand\liuinline[1]{\todo[inline,color=green!40]{#1}} %Liu inline
+ \newcommand\wang[1]{\todo[color=yellow!40]{#1}} %Wangn
+ \newcommand\haninline[1]{\todo[inline,color=yellow!40]{#1}} %Wang inline
+ \newcommand\chen[1]{\todo[color=pink!40]{#1}} %Chen
+ \newcommand\cheninline[1]{\todo[inline,color=pink!40]{#1}} %Chen inline
+
+
+\usepackage{amsfonts, adjustbox, amssymb, amscd}
+\numberwithin{equation}{section}
+
+%\usepackage[symbol]{footmisc}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand{\thepart}{\Roman{part}}
+
+\usepackage{bm}
+\usepackage{verbatim}
+%\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{subfiles}
+\usepackage[toc,page]{appendix}
+\usepackage{mathtools}
+\usepackage{comment}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[all]{xy}
+
+\usepackage{graphicx}
+\usepackage{appendix}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    citecolor=red,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=red,
+}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+\newcommand{\bir}{\dashrightarrow}
+
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\oE}{\overline{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\LD}{\mathcal{LD}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\bb}{\bm{b}}
+\newcommand{\Mm}{{\bf{M}}}
+\newcommand{\Nn}{{\bf{N}}}
+\newcommand{\PP}{{\bf{P}}}
+\newcommand{\Pp}{{\bf{P}}}
+\newcommand{\NN}{{\bf{N}}}
+\newcommand{\Dd}{{\bf{D}}}
+\newcommand{\oY}{\overline{Y}}
+\newcommand{\oL}{\overline{L}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\ind}{\mathrm{ind}}
+\newcommand{\Spec}{\mathrm{Spec}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\exc}{\mathrm{exc}}
+
+
+
+\newcommand{\Cc}{\mathbb{C}}
+\newcommand{\KK}{\mathbb{K}}
+\newcommand{\Qq}{\mathbb{Q}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\Rr}{\mathbb{R}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Zz}{\mathbb{Z}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+
+
+
+
+\newcommand{\zz}{\mathbf{z}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\ww}{\mathbf{w}}
+\newcommand{\vv}{\bm{v}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\kk}{\mathbf{k}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\alct}{a\operatorname{LCT}}
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\Center}{\operatorname{center}}
+\newcommand{\Cone}{\operatorname{Cone}}
+\newcommand{\Exc}{\operatorname{Exc}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\Fr}{\operatorname{Fr}}
+\newcommand{\Conv}{\operatorname{Conv}}
+\newcommand{\Bir}{\operatorname{Bir}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\glct}{\operatorname{glct}}
+\newcommand{\ct}{\operatorname{ct}}
+\newcommand{\GLCT}{\operatorname{GLCT}}
+\newcommand{\HH}{\operatorname{H}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\rk}{\operatorname{rank}}
+\newcommand{\red}{\operatorname{red}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Ima}{\operatorname{Im}}
+\newcommand{\ninv}{{\operatorname{ninv}}}
+\newcommand{\Nklt}{\operatorname{Nklt}}
+\newcommand{\mld}{{\operatorname{mld}}}
+\newcommand{\Bs}{{\operatorname{Bs}}}
+\newcommand{\Src}{{\operatorname{Src}}}
+\newcommand{\Spr}{{\operatorname{Spr}}}
+\newcommand{\num}{{\operatorname{num}}}
+\newcommand{\tang}{{\operatorname{tang}}}
+\newcommand{\pld}{{\operatorname{pld}}}
+\newcommand{\tmld}{{\operatorname{tmld}}}
+\newcommand{\relin}{\operatorname{relin}}
+
+\newcommand{\loc}{\operatorname{loc }}
+\newcommand{\expsing}{\mathrm{exp}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\Weil}{\operatorname{Weil}}
+\newcommand{\lct}{\operatorname{lct}}
+\newcommand{\LCT}{\operatorname{LCT}}
+\newcommand{\fol}{\operatorname{fol}}
+\newcommand{\CR}{\operatorname{CR}}
+\newcommand{\proj}{\operatorname{Proj}}
+\newcommand{\spec}{\operatorname{Spec}}
+\newcommand{\pet}{\operatorname{pet}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Ngklt}{\operatorname{Ngklt}}
+\newcommand{\Nlc}{\operatorname{Nlc}}
+\newcommand{\ld}{\operatorname{ld}}
+\newcommand{\Diff}{\operatorname{Diff}}
+\newcommand{\codim}{\operatorname{codim}}
+\newcommand{\mult}{\operatorname{mult}}
+\newcommand{\Rct}{\operatorname{Rct}}
+\newcommand{\RCT}{\operatorname{RCT}}
+\newcommand{\Div}{\operatorname{Div}}
+\newcommand{\cont}{\operatorname{cont}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\lf}{\lfloor}
+\newcommand{\rf}{\rfloor}
+
+
+\newcommand{\Aa}{{\bf{A}}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\Bb}{{\bf{B}}}
+\newcommand{\Ff}{\mathcal{F}}
+\newcommand{\Gg}{\mathcal{G}}
+\newcommand{\LCP}{\mathcal{LCP}}
+\newcommand{\Oo}{\mathcal{O}}
+\newcommand{\Ii}{\Gamma}
+\newcommand{\Jj}{\mathcal{J}}
+\newcommand{\Ee}{\mathcal{E}}
+\newcommand{\Hh}{\mathcal{H}}
+\newcommand{\Ll}{\mathcal{L}}
+\newcommand{\me}{\mathcal{E}}
+\newcommand{\mo}{\mathcal{O}}
+\newcommand{\nN}{\mathcal{N}}
+\newcommand{\anN}{\mathcal{AN}}
+\newcommand{\Tt}{\mathcal{T}}
+\newcommand{\Ww}{\mathcal{W}}
+\newcommand{\Xx}{\mathcal{X}}
+\newcommand{\Ss}{\mathcal{S}}
+\newcommand{\Yy}{\mathcal{Y}}
+
+
+\newcommand{\BB}{\mathfrak{B}}
+\newcommand{\mm}{\mathfrak{m}}
+
+\newcommand{\NE}{\mathrm{NE}}
+\newcommand{\Nef}{\mathrm{Nef}}
+\newcommand{\Sing}{\mathrm{Sing}}
+\newcommand{\Pic}{\mathrm{Pic}}
+\newcommand{\reg}{\mathrm{reg}}
+\newcommand{\creg}{\mathrm{creg}}
+\newcommand\MLD{{\rm{MLD}}}
+\newcommand\FT{{\rm{FT}}}
+\newcommand{\crt}{{\rm{crt}}}
+\newcommand{\CRT}{{\rm{CRT}}}
+\newcommand{\Coeff}{{\rm{Coeff}}}
+\newcommand\coeff{{\rm{coeff}}}
+\newcommand{\rank}{\mathrm{rank}}
+
+\makeatletter
+\newenvironment{subtheorem}[1]{%
+  \def\subtheoremcounter{#1}%
+  \refstepcounter{#1}%
+  \protected@edef\theparentnumber{\csname the#1\endcsname}%
+  \setcounter{parentnumber}{\value{#1}}%
+  \setcounter{#1}{0}%
+  \expandafter\def\csname the#1\endcsname{\theparentnumber.\Alph{#1}}%
+  \ignorespaces
+}{%
+  \setcounter{\subtheoremcounter}{\value{parentnumber}}%
+  \ignorespacesafterend
+}
+\makeatother
+\newcounter{parentnumber}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{exprop}[thm]{Example-Proposition}
+\newtheorem{claim}[thm]{Claim}
+
+\newtheorem{alphthm}{Theorem}
+\renewcommand{\thealphthm}{\Alph{alphthm}}
+\newtheorem{alphcor}{Corollary}
+\renewcommand{\thealphcor}{\Alph{alphthm}}
+
+\newtheorem{innercustomthm}{Theorem}
+\newenvironment{mythm}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+  \newtheorem{innercustomcor}{Corollary}
+\newenvironment{mycor}[1]
+  {\renewcommand\theinnercustomcor{#1}\innercustomcor}
+  {\endinnercustomcor}
+
+%\newtheorem{theorempart}{Theorem B.}[alphthm]
+
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{ques}[thm]{Question}
+\theoremstyle{definition}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{remdef}[thm]{Remark-Definition}
+\newtheorem{deflem}[thm]{Definition-Lemma}
+\newtheorem{defthm}[thm]{Definition-Theorem}
+\newtheorem{setup}[thm]{Set-up}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{sce}[thm]{Scenario}
+\newtheorem{nota}[thm]{Notation}
+\newtheorem{exlem}[thm]{Example-Lemma}
+\newtheorem{cons}[thm]{Construction}
+\newtheorem{code}[thm]{Code}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{notation}{Notation ($\star$)}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\begin{document}
+
+\title{Sarkisov program for algebraically integrable foliations on potentially klt varieties}
+\author{Yifei Chen, Jihao Liu, and Yanze Wang}
+
+\subjclass[2020]{14E30, 37F75}
+\keywords{Minimal model program. Algebraically integrable foliation. Sarkisov program.}
+\date{\today}
+
+
+\address{Department of Mathematics, Peking University, No. 5 Yiheyuan Road, Haidian District, Peking 100871, China}
+
+\email{liujihao@math.pku.edu.cn}
+
+
+\pagestyle{myheadings}\markboth{\hfill Yifei Chen, Jihao Liu, and Yanze Wang \hfill}{\hfill Flop between algebraically integrable foliations\hfill}
+
+\begin{abstract}
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}\label{sec: Introduction}
+
+\begin{thebibliography}{99}
+
+\end{thebibliography}
+\end{document}
+
+endsnippet
+
+snippet template(basic) "Basic template" b
+\documentclass{article}
+
+\usepackage{amsfonts}
+\usepackage[all]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{float}
+
+\usepackage{geometry}
+\geometry{a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{fact}[definition]{Fact}
+\newtheorem{assertion}[definition]{Assertion}
+\newtheorem{example}[definition]{Example}
+\newtheorem{problem}{Problem}
+\newtheorem*{ques}{Question}
+\setcounter{section}{0}
+
+\title{$1}
+\author{$2}
+%\date{\today}
+
+\begin{document}
+\maketitle
+%\tableofcontents
+%\newpage
+$0
+\end{document}
+endsnippet

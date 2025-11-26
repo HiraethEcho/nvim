@@ -1,0 +1,8 @@
+{
+    "workspace.checkThirdParty": false,
+    "diagnostics.disable": [
+        "undefined-global",
+        "unused-local",
+        "deprecated"
+    ]
+}
