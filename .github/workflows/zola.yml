@@ -24,10 +24,10 @@ jobs:
       # https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#adding-a-system-path
       - name: Install Zola CLI
         run: |
-          mkdir -p \${{ runner.temp }}/zola \\
-          && wget -O \${{ runner.temp }}/zola/zola.tar.gz "https://github.com/getzola/zola/releases/download/v\${ZOLA_VERSION}/zola-v\${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \\
-          && tar --directory \${{ runner.temp }}/zola -xzf \${{ runner.temp }}/zola/zola.tar.gz \\
-          && echo "\${{ runner.temp }}/zola" >> "\$GITHUB_PATH"
+          mkdir -p \${{ runner.temp }}/zola
+          wget -O \${{ runner.temp }}/zola/zola.tar.gz "https://github.com/getzola/zola/releases/download/v\${ZOLA_VERSION}/zola-v\${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          tar --directory \${{ runner.temp }}/zola -xzf \${{ runner.temp }}/zola/zola.tar.gz
+          echo "\${{ runner.temp }}/zola" >> "\$GITHUB_PATH"
       # https://github.com/marketplace/actions/checkout
       - name: Checkout
         uses: actions/checkout@v4
