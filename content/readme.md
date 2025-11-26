@@ -2,13 +2,22 @@
 title: readme
 ---
 
-This my nvim config, by a zola theme [neovim](https://github.com/Super-Botman/neovim-theme). Totally make sense.
+This my [neovim](https://neovim.io) config, by a zola theme named [neovim](https://github.com/Super-Botman/neovim-theme). Totally make sense.  
+And [here](https://github.com/hiraethecho/nvim) is my config repo on github. This site is maintained in `docs` branch.
 
-usually [~/.config/nvim/init.lua](/init) is the entrance of nvim config.
+The root `/` means `nvim/` in this docs.
 
-There is another file under `nvim/`, for formatting the config.
+- usually [/init.lua](/init) is the entrance of nvim config.
+- `require('file)` loads `/lua/file.lua`
+- `require('dir')` loads `/lua/dir/init.lua`, and `require('dir.file)` loads `/lua/dir/file.lua`
+- [/plugin](/plugin) is automatically loaded.
+- [/ftplugin](/ftplugin) is automatically loaded for corresponding file type. For example [/ftplugin/lua.lua](/ftplugin/lua) is loaded for all `lua` files
+- [/after](/after) is loaded after others
+- [/lsp](/lsp) is for lsp. For example, `vim.lsp.enable(lua)` loads [/lsp/lua.lua](/lsp/lua)
 
-For `lua-language-server`, need `.luarc.json`
+There are two other files under `nvim/`, for formatting the config.
+
+For `lua-language-server`, need `/.luarc.json`
 
 ```json
 {
@@ -17,7 +26,7 @@ For `lua-language-server`, need `.luarc.json`
 }
 ```
 
-and for style checking, need `.stylua.toml`
+and for style checking, need `/.stylua.toml`
 
 ```toml
 syntax = "All"

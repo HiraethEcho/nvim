@@ -16,4 +16,4 @@ This load three files
 
 [keymaps](/lua/core/keymaps) - this file set neovim keymaps
 
-[lazy-bootstrap](/lua/core/lazy-bootstrap) - this file bootstrap lazy.nvim plugin managerk
+[lazy-bootstrap](/lua/core/lazy-bootstrap) - this file bootstrap lazy.nvim plugin manager.

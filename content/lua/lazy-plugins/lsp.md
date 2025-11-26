@@ -1,97 +1,31 @@
 ---
 title: lsp
 ---
+
+# lsp config
+
+## now
+
+I use [nvim/plugin/lsp.lua](/plugin/lsp) to config lsp natively now.
+
+using lua files in [/ftplugin/](/ftplugin) to start lsp for each type of files. For example, [nvim/ftplugin/lua.lua](/ftplugin/lua) to start lsp for lua files.
+And lsp is configured by [/lsp/lua.lua](/lsp/lua)
+
+## old
+
+plugins to config lsp
+
 ```lua
 return {
   { -- "neovim/nvim-lspconfig",
     "neovim/nvim-lspconfig",
-    -- event = { "BufReadPost", "BufNewFile" },
-    -- lazy=false,
-    -- cmd = "LspStart",
     keys = {
       { "<leader>ll", "<cmd>LspStart<cr>", desc = "Start lsp" },
       { "<leader>ls", "<cmd>LspStop<cr>", desc = "stop lsp" },
       { "<leader>li", "<cmd>LspInfo<cr>", desc = "lsp info" },
       { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
-    dependencies = {
-      -- "rachartier/tiny-inline-diagnostic.nvim",
-      -- "williamboman/mason.nvim",
-      -- "williamboman/mason-lspconfig.nvim",
-      -- "saghen/blink.cmp",
-      -- "nvimdev/guard.nvim",
-      -- "hrsh7th/cmp-nvim-lsp",
-      -- "kevinhwang91/nvim-ufo",
-    },
     config = function()
-      --[[ local capabilities = require("blink.cmp").get_lsp_capabilities()
-      -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      vim.lsp.config('*', {
-        root_markers = { '.obsidian', '.git' },
-        capabilities = capabilities,
-        offset_encoding = "utf-8",
-      }) ]]
-      --[[ require("lspconfig").texlab.setup({
-        offset_encoding = "utf-8",
-        on_attach = function(client, bufnr)
-          vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>",
-            { noremap = true, silent = true, buffer = bufnr, desc = "texlab build" })
-          vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>",
-            { noremap = true, silent = true, buffer = bufnr, desc = "texlab forward" })
-        end,
-        settings = {
-          texlab = {
-            build = {
-              -- executable = 'xelatex',
-              onSave = true,
-              forwardSearchAfter = false,
-            },
-            forwardSearch = {
-              -- https://github.com/latex-lsp/texlab/wiki/Previewing#inverse-search-3
-              executable = "sioyek",
-              args = {
-                "--reuse-window",
-                "--inverse-search",
-                "texlab inverse-search -i %%1 -l %%2",
-                "--forward-search-file",
-                "%f",
-                "--forward-search-line",
-                "%l",
-                "%p",
-              },
-              executable = "zathura",
-              args = {
-                "--synctex-forward",
-                "%l:1:%f",
-                "%p",
-                -- "--synctex-editor-command",
-                -- "texlab inverse-search -i %{input} -l %{line}", -- add this in zathurarc, not here
-              },
-            },
-            chktex = {
-              onOpenAndSave = true,
-              onEdit = false,
-            },
-            bibtexFormatter = "texlab",
-            latexFormatter = "latexindent",
-            latexindent = {
-              ["local"] = nil, -- local is a reserved keyword
-              modifyLineBreaks = false,
-            },
-            formatterLineLength = 80,
-          },
-        },
-      }) ]]
-      -- require("lspconfig").lua_ls.setup({})
-      -- require("lspconfig").marksman.setup({})
-      -- require("lspconfig").clangd.setup({})
-      --[[ require("lspconfig").tinymist.setup({
-        single_file_support = true,
-        on_attach = function(client, bufnr)
-          vim.keymap.set("n", "<cr>", "<cmd>TypstPreviewSyncCursor<cr>",
-            { noremap = true, silent = true, buffer = bufnr, desc = "Typst Preview" })
-        end,
-      }) ]]
     end,
   },
   { -- "williamboman/mason.nvim",

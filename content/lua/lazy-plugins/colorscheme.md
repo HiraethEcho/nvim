@@ -1,13 +1,19 @@
 ---
 title: colorscheme
 ---
+
+Just some plugins for colorschemes.
+
+Configure some options before return plugin spec.
+
 ```lua
 vim.o.background = "dark"
-vim.cmd.colorscheme("wildcharm")
--- vim.cmd.colorscheme("lunaperche")
--- vim.cmd.colorscheme("habamax")
--- vim.cmd.colorscheme("sorbet")
--- vim.cmd.colorscheme("retrobox")
+vim.cmd.colorscheme("wildcharm") -- a native colorscheme
+```
+
+Then plugins
+
+```lua
 return {
   {
     "ricardoraposo/nightwolf.nvim",
@@ -116,7 +122,6 @@ return {
   },
   {
     "rose-pine/neovim",
-    -- cmd = "colorscheme",
     -- enabled = false,
     -- name = "rose-pine",
     config = function()

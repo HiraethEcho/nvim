@@ -2,6 +2,8 @@
 title: init
 ---
 
+# entrance
+
 This is the main initialization file for Neovim configuration.
 
 ```lua
@@ -17,11 +19,12 @@ if vim.env.PROF then
   })
 end
 
--- require("opts")
-require("core")
--- require("utils")
 ```
 
 Code on the top makes that one can use `PROF=1 nvim` to start Neovim with the profiler enabled. It shows a profile of nvim.
 
-`require("core")` load the file [lua/core/init.lua](/lua/core/init)
+```lua
+require("core")
+```
+
+`require("core")` load the file [/lua/core/init.lua](/lua/core/init)

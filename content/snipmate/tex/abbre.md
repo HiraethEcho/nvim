@@ -1,7 +1,6 @@
 ---
 title: abbre
 ---
-```snippets
 ```Snippets
 snippet lcd "log canonical divisor"
   $(K_{X$1}+B)$$0
@@ -56,5 +55,4 @@ autosnippet Rcar "R-Cartier"
 
 autosnippet Qdiv "Q-divisor"
   $\mathbb{Q}$-divisor
-```
 ```

@@ -1,6 +1,9 @@
 ---
 title: fun
 ---
+
+# fun plugins
+
 ```lua
 return {
   { -- "saxon1964/neovim-tips",

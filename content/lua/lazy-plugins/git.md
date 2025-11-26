@@ -1,6 +1,16 @@
 ---
 title: git
 ---
+
+# git
+
+use git in neovim
+
+- use lazygit in a float terminal by [snack](/lua/lazy-plugins/snack)`
+- gitsigns for hightlight hunks etc
+- Tardis travel in git commit history
+- diffview show diffs through commit history
+
 ```lua
 return {
   { -- "lewis6991/gitsigns.nvim",
@@ -55,15 +65,6 @@ return {
       -- require("scrollbar.handlers.gitsigns").setup()
     end,
   },
-  { -- "NeogitOrg/neogit",
-    "NeogitOrg/neogit",
-    cmd = "Neogit",
-    opts = { graph_style = "kitty" },
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
-    },
-  },
   { -- "sindrets/diffview.nvim",
     "sindrets/diffview.nvim",
     keys = {
@@ -104,49 +105,6 @@ return {
     cmd = "Tardis",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
-  },
-  { -- "akinsho/git-conflict.nvim",
-    "akinsho/git-conflict.nvim",
-    version = "*",
-    enabled = false,
-    config = function()
-      require("git-conflict").setup({
-        default_mappings = true, -- disable buffer local mapping created by this plugin
-        default_commands = true, -- disable commands created by this plugin
-        disable_diagnostics = false, -- this will disable the diagnostics in a buffer whilst it is conflicted
-        highlights = { -- they must have background color, otherwise the default color will be used
-          incoming = "difftext",
-          current = "diffadd",
-        },
-      })
-    end,
-  },
-  { -- "Rawnly/gist.nvim",
-    "Rawnly/gist.nvim",
-    enabled = false,
-    cmd = { "GistCreate", "GistCreateFromFile", "GistsList" },
-    dependencies = {},
-    config = true,
-    -- `GistsList` opens the selected gist in a terminal buffer,
-    -- nvim-unception uses neovim remote rpc functionality to open the gist in an actual buffer
-    -- and prevents neovim buffer inception
-  },
-  { -- "samjwill/nvim-unception",
-    "samjwill/nvim-unception",
-    -- lazy = false,
-    enabled = false,
-    init = function()
-      vim.g.unception_block_while_host_edits = true
-    end,
-  },
-  { -- "Yu-Leo/blame-column.nvim",
-    "Yu-Leo/blame-column.nvim",
-    enabled = false,
-    opts = {}, -- for default options. Refer to the configuration section for custom setup.
-    keys = {
-      { "<leader>hb", "<cmd>BlameColumnToggle<cr>", desc = "toggle blame inline" },
-    },
-    cmd = "BlameColumnToggle",
   },
 }
 ```

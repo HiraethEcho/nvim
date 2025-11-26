@@ -1,3 +1,3 @@
 ---
-title: snipmate/lua
+title: lua
 ---

@@ -1,16 +1,16 @@
 ---
 title: nav
 ---
+
+# nav
+
+nav and jump in neovim
+
 ```lua
 return {
   { -- "phaazon/hop.nvim",
     "phaazon/hop.nvim",
-    -- event = "BufRead",
-    -- enabled = false,
     keys = {
-      -- {'<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>",  mode={"n","v"}},
-      -- {'F', "<cmd>lua require'hop'.hint_char1()<cr>", mode={"n","v"}},
-      -- { "f",               ":HopChar1<cr>",    desc = "Hop Char",    { noremap = true, silent = true } },
       { "W", ":HopWord<cr>", desc = "Hop Word", { noremap = true, silent = true } },
       { "<leader><space>", ":HopAnywhere<cr>", desc = "HopAnywhere", { noremap = true, silent = true } },
     },
@@ -74,8 +74,6 @@ return {
   },
   { -- "SmiteshP/nvim-navbuddy",
     "SmiteshP/nvim-navbuddy",
-    -- enabled = false,
-    -- event = "LspAttach",
     keys = {
       { "<leader>O", "<cmd>Navbuddy<cr>", desc = "Jump by symbol" },
     },
@@ -196,105 +194,6 @@ return {
         toggle_preview = "p",
         fold_all = "zM",
         unfold_all = "zR",
-      },
-    },
-  },
-
-  { -- "dnlhc/glance.nvim",
-    "dnlhc/glance.nvim",
-    -- lazy = false,
-    enabled = false,
-    event = "LspAttach",
-    keys = {
-      { "gd", "<cmd>Glance definitions<cr>", desc = "Glance definitions" },
-      { "gr", "<cmd>Glance references<cr>", desc = "Glance references" },
-      { "gy", "<cmd>Glance type_definitions<cr>", desc = "Glance type_definitions" },
-      { "gm", "<cmd>Glance implementations<cr>", desc = "Glance implementations" },
-    },
-    config = function()
-      local actions = require("glance").actions
-      require("glance").setup({
-
-        -- By default glance will open preview "embedded" within your active window
-        -- when `detached` is enabled, glance will render above all existing windows
-        -- and won't be restiricted by the width of your active window
-        detached = true,
-
-        -- Or use a function to enable `detached` only when the active window is too small
-        -- (default behavior)
-        -- detached = function(winid)
-        --   return vim.api.nvim_win_get_width(winid) < 100
-        -- end,
-
-        list = {
-          position = "left", -- Position of the list window 'left'|'right'
-          width = 0.2, -- 33% width relative to the active window, min 0.1, max 0.5
-        },
-        mappings = {
-          list = {
-            ["j"] = actions.next, -- Bring the cursor to the next item in the list
-            ["k"] = actions.previous, -- Bring the cursor to the previous item in the list
-            ["<Down>"] = actions.next,
-            ["<Up>"] = actions.previous,
-            ["<Tab>"] = actions.next_location, -- Bring the cursor to the next location skipping groups in the list
-            ["<S-Tab>"] = actions.previous_location, -- Bring the cursor to the previous location skipping groups in the list
-            ["<C-u>"] = actions.preview_scroll_win(5),
-            ["<C-d>"] = actions.preview_scroll_win(-5),
-            ["v"] = actions.jump_vsplit,
-            ["s"] = actions.jump_split,
-            ["t"] = actions.jump_tab,
-            ["<CR>"] = actions.jump,
-            ["l"] = actions.open_fold,
-            ["h"] = actions.close_fold,
-            ["<space>"] = actions.enter_win("preview"), -- Focus preview window
-            ["q"] = actions.close,
-            ["Q"] = false,
-            ["<Esc>"] = actions.close,
-            ["<C-q>"] = actions.quickfix,
-          },
-          preview = {
-            ["<Tab>"] = actions.next_location,
-            ["<S-Tab>"] = actions.previous_location,
-            ["q"] = actions.enter_win("list"), -- Focus list window
-          },
-        },
-      })
-    end,
-  },
-  { -- "bassamsdata/namu.nvim",
-    "bassamsdata/namu.nvim",
-    keys = {
-      { "<leader>O", "<cmd>Namu symbols<cr>", desc = "Jump by symbol" },
-    },
-    enabled = false,
-    config = function()
-      require("namu").setup({
-        -- Enable the modules you want
-        namu_symbols = {
-          enable = true,
-          options = {}, -- here you can configure namu
-        },
-        -- Optional: Enable other modules if needed
-        ui_select = { enable = true }, -- vim.ui.select() wrapper
-        colorscheme = { enable = false },
-      })
-    end,
-  },
-  { -- "rainzm/flash-zh.nvim",
-    "rainzm/flash-zh.nvim",
-    enabled = false,
-    event = "VeryLazy",
-    dependencies = "folke/flash.nvim",
-    keys = {
-      {
-        "s",
-        mode = { "n", "x", "o" },
-        function()
-          require("flash-zh").jump({
-            chinese_only = false,
-          })
-        end,
-        desc = "Flash between Chinese",
       },
     },
   },

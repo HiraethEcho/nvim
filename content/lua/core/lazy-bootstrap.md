@@ -1,6 +1,11 @@
 ---
 title: lazy-bootstrap
 ---
+
+# plugin manager
+
+This file downloads `lazy.nvim`.
+
 ```lua
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -16,11 +21,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
+```
+
+options of `lazy.nvim`. lazy default. Disable some default plugins.
+
+```lua
 
 local opts = {
   defaults = { lazy = true },
-  dev = {path= "~/Code/nvim/plugin"},
-  -- checker = { enabled = true },
   profiling = { loader = true, require = true },
   performance = {
     rtp = {
@@ -37,6 +45,12 @@ local opts = {
     },
   },
 }
+
+```
+
+Manage plugins in folder [lua/lazy-plugins](/lua/lazy-plugins).
+
+```lua
 
 require("lazy").setup("lazy-plugins", opts)
 ```

@@ -1,12 +1,16 @@
 ---
 title: ui
 ---
+
+# ui
+
+ui other lines and colorscheme
+
 ```lua
 vim.g.loaded_matchparen = 1 -- "utilyre/sentiment.nvim",
 return {
   { -- "j-hui/fidget.nvim",
     "j-hui/fidget.nvim",
-    -- enabled = false,
     event = "LspAttach",
     opts = {
       notification = {
@@ -15,21 +19,6 @@ return {
         window = { border = "none", align = "top", tabstop = 2 },
       },
     },
-  },
-  { -- "y3owk1n/notifier.nvim",
-    "y3owk1n/notifier.nvim",
-    enabled = false,
-    config = function()
-      require("notifier").setup({
-        -- your configuration here
-      })
-    end,
-  },
-  { -- "echasnovski/mini.notify",
-    "echasnovski/mini.notify",
-    opts = {},
-    enabled = false,
-    event = "LspAttach",
   },
   { -- "catgoose/nvim-colorizer.lua",
     "catgoose/nvim-colorizer.lua",
@@ -58,8 +47,6 @@ return {
       },
     },
   },
-  { "brenoprata10/nvim-highlight-colors", enabled = false, opts = { enable_ansi = true } },
-  -- { "norcalli/nvim-colorizer.lua", cmd = "ColorizerToggle", opts = true },
   { "nvzone/volt", lazy = true },
   { "nvzone/minty", cmd = { "Shades", "Huefy" } },
   { -- "utilyre/sentiment.nvim",
@@ -76,25 +63,5 @@ return {
     },
   },
   { "OXY2DEV/helpview.nvim", ft = "help", dependencies = { "nvim-treesitter/nvim-treesitter" } },
-  -- disable
-  { -- "rcarriga/nvim-notify",
-    "rcarriga/nvim-notify",
-    event = "BufReadPost",
-    enabled = false,
-    config = function()
-      require("notify").setup({
-        fps = 60,
-        level = 2,
-        render = "default",
-        stages = "slide",
-        timeout = 2000,
-      })
-      vim.notify = require("notify")
-    end,
-  },
-  { "edluffy/hologram.nvim", enabled = false },
-  { "gen740/SmoothCursor.nvim", enabled = false, opts = { type = "default" } },
-  { "stevearc/dressing.nvim", enabled = false, event = "BufReadPost", opts = true },
-  { "xiyaowong/nvim-transparent", enabled = false, cmd = "TransparentEnable", opts = true },
 }
 ```

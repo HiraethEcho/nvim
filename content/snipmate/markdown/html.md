@@ -1,6 +1,7 @@
 ---
 title: html
 ---
+
 ```snippets
 snippet bilibili
   <div style="position: relative; width: 80%; height: 0; padding-bottom: 75%; margin: 0 auto;"><iframe src="https:${1:${VISUAL}}&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"> </iframe></div>
@@ -10,7 +11,7 @@ snippet bilibilimobile
   <iframe src="//www.bilibili.com/blackboard/html5mobileplayer.html?bvid=${1:${VISUAL}}&page=1&as_wide=1" allowfullscreen="allowfullscreen"></iframe>
   $0
 
-snippet details "details tag in html" 
+snippet details "details tag in html"
   <details><summary>$1</summary>
   $2
   </details>

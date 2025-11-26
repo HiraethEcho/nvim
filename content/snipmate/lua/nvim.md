@@ -1,6 +1,7 @@
 ---
 title: nvim
 ---
+
 ```snippets
 snippet cmd_block "vimscript"
   vim.cmd([[

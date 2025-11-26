@@ -1,6 +1,9 @@
 ---
 title: latex
 ---
+
+A helper used by luasnip for latex utils
+
 ```lua
 local M = {}
 

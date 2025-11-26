@@ -1,6 +1,7 @@
 ---
 title: bib
 ---
+
 ```lua
 local tex = require("util.latex")
 local snip = {

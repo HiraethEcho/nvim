@@ -1,6 +1,16 @@
 ---
 title: typst
 ---
+# typst
+
+To enable preview in browser and inverse search.
+
+- need websocat for inverse search
+- need lsp tinymist
+- and ofcourse typst installed
+
+If tinymist or websocat is not found, the plugin will download them
+
 ```lua
 return {
   {
@@ -13,8 +23,7 @@ return {
         ["tinymist"] = "tinymist",
         ["websocat"] = "websocat",
       },
-    }, -- lazy.nvim will implicitly calls `setup {}`
+    },
   },
-  -- disabled
 }
 ```

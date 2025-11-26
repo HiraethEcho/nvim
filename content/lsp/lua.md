@@ -1,6 +1,7 @@
 ---
 title: lua
 ---
+
 ```lua
 return {
     cmd = { "lua-language-server" },

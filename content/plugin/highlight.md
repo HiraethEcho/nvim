@@ -1,6 +1,11 @@
 ---
 title: highlight
 ---
+
+# hightlight
+
+define some hightlight
+
 ```lua
 vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
 vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })

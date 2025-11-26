@@ -1,6 +1,16 @@
 ---
 title: snack
 ---
+
+# snack
+
+folke's great snack, so many functions.
+
+The feature I don't use:
+
+- dashboard, see [/lua/lazy-plugins/start.lua](/lua/lazy-plugins/start)
+
+
 ```lua
 return {
   "folke/snacks.nvim",
@@ -44,33 +54,7 @@ return {
         },
       },
     },
-    dashboard = {
-      enabled = false,
-      sections = {
-        { section = "header" },
-        { title = "Sessions", section = "projects", padding = 1 },
-        -- { title = "Sessions", section = "sessions", padding = 1 },
-        -- { title = "Projects", section = "projects", padding = 1 },
-        { title = "Recent Files", section = "recent_files", padding = 1 },
-        -- { icon = " ", title = "Recent Files", section = "recent_files", padding = 1 },
-        { title = "Actions", padding = 0 },
-        {
-          icon = " ",
-          key = "c",
-          desc = "Config",
-          action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-        },
-        { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-        { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-        { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-        { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-        { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
-        { icon = " ", key = "s", desc = "Startup Time", action = ":StartupTime" },
-        -- { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-        { icon = " ", key = "q", desc = "Quit", action = ":qa" },
-        { section = "startup" },
-      },
-    },
+    dashboard = { enabled = false, },
     explorer = { enabled = true },
     indent = {
       enabled = false,

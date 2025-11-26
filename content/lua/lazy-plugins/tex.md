@@ -1,37 +1,23 @@
 ---
 title: tex
 ---
+
+# tex
+
+help to write latex.
+
+- using plugin vimtex. To enable inverse search, need `lazy=false`
+- and texlab, see [/lsp/texlab](/lsp/texlab)
+
 ```lua
 return {
   { -- vimtex
     "lervag/vimtex",
     lazy = false,
-    -- enabled = false,
-    -- ft = { "bib", "tex" },
     init = function()
       vim.g.vimtex_view_method = "zathura"
-      -- vim.g.vimtex_view_method = "sioyek"
       vim.g.vimtex_imaps_leader = ";"
-
-      -- this works
-      -- vim.g.vimtex_view_general_viewer = "okular"
-      -- vim.g.vimtex_view_general_options = [[ --unique file:@pdf\#src:@line@tex]]
-      -- in okular, set 'nvr --remote-silent +%l %f' in settings - configure - editor
-
-      -- vim.g.vimtex_syntax_enabled = 1
-      -- vim.g.vimtex_syntax_conceal_disable = 1
       vim.g.vimtex_fold_enabled = 1
-      -- vim.g.vimtex_indent_enabled = 0           -- turn off vimtex indentation
-      -- vim.g.vimtex_mappings_enabled = 0         -- disable default mappings
-      -- vim.g.vimtex_imaps_enabled = 0            -- disable insert mode mappings (I use UltiSnips)
-      -- vim.g.vimtex_complete_enabled = 0         -- turn off completion (not currently used so more efficient to turn off)
-      -- vim.g.vimtex_fold_manual=0
-      -- vim.g.vimtex_fold_levelmarker      =1
-      -- vim.g.vimtex_fold_types            =1
-      -- vim.g.vimtex_fold_types_defaults   =1
-      -- vim.g.vimtex_fold_bib_enabled      =1
-      -- vim.g.vimtex_fold_bib_max_key_width=1
-
       vim.g.vimtex_toc_config = {
         name = "TOC",
         layers = { "label", "todo", "include", "content" },

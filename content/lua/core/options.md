@@ -2,13 +2,18 @@
 title: options
 ---
 
-```lua
--- vim.g.mapleader = " "
--- vim.g.maplocalleader = ","
+# options
 
+better way to set mapleader (But I forget why this is better)
+
+```lua
 vim.g.mapleader = vim.keycode("<space>")
 vim.g.maplocalleader = vim.keycode(",")
+```
 
+options
+
+```
 local opt = vim.opt
 -- edit
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
