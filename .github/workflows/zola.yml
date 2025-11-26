@@ -5,16 +5,62 @@ on:
   branches:
    - docs
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
+  # Build Job
   build:
-    name: Publish site
+    # Define the type of machine to run the job on
     runs-on: ubuntu-latest
+    # Variables that are available to the steps of all jobs in the workflow
+    env:
+      ZOLA_VERSION: 0.21.0
+    # A job contains a sequence of tasks called steps. Not all steps run
+    # actions, but all actions run as a step.
     steps:
-    - name: Checkout main
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - name: Build and deploy
-      uses: shalzz/zola-deploy-action@v0.21.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#adding-a-system-path
+      - name: Install Zola CLI
+        run: |
+          mkdir -p \${{ runner.temp }}/zola \\
+          && wget -O \${{ runner.temp }}/zola/zola.tar.gz "https://github.com/getzola/zola/releases/download/v\${ZOLA_VERSION}/zola-v\${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \\
+          && tar --directory \${{ runner.temp }}/zola -xzf \${{ runner.temp }}/zola/zola.tar.gz \\
+          && echo "\${{ runner.temp }}/zola" >> "\$GITHUB_PATH"
+      # https://github.com/marketplace/actions/checkout
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          ref: docs
+      # https://github.com/marketplace/actions/configure-github-pages
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build with Zola
+        run: |
+          zola build \\
+            --base-url "\${{ steps.pages.outputs.base_url }}/" \\
+            --force
+      # https://github.com/marketplace/actions/upload-github-pages-artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+  deploy:
+    # Jobs that must complete successfully before this job will run
+    needs: build
+    # Define the type of machine to run the job on
+    runs-on: ubuntu-latest
+    # Define the environment that the job references
+    environment:
+      name: github-pages
+      url: \${{ steps.deployment.outputs.page_url }}
+    # A job contains a sequence of tasks called steps. Not all steps run
+    # actions, but all actions run as a step.
+    steps:
+      # https://github.com/marketplace/actions/deploy-github-pages-site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
