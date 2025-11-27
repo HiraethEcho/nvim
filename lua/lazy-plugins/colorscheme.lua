@@ -1,6 +1,6 @@
 vim.o.background = "dark"
-vim.cmd.colorscheme("wildcharm")
--- vim.cmd.colorscheme("lunaperche")
+-- vim.cmd.colorscheme("wildcharm")
+vim.cmd.colorscheme("lunaperche")
 -- vim.cmd.colorscheme("habamax")
 -- vim.cmd.colorscheme("sorbet")
 -- vim.cmd.colorscheme("retrobox")
@@ -196,7 +196,7 @@ return {
   {
     "EdenEast/nightfox.nvim",
     -- event = "VimEnter",
-    -- event = "BufRead",
+    event = "BufRead",
     config = function()
       require("nightfox").setup({
         options = {
@@ -235,7 +235,7 @@ return {
         },
       })
       -- setup must be called before loading
-      -- vim.cmd("colorscheme nightfox")
+      vim.cmd("colorscheme nightfox")
     end,
   },
   {
