@@ -26,7 +26,7 @@ blog_name = "nvim"
 #####################
 
 # set the background image u want
-background-image = "assets/arch.png"
+background_image = "/assets/arch.png"
 
 # this parameter allow you to configure specific init functions/shortcuts and commands
 # the value has to be the path of you're config.js file
