@@ -137,4 +137,4 @@ luasnip load [/LuaSnip/](/LuaSnip) and [/snipmate/](snipmate) for snippets.
 - [/luaSnip/lua.lua](/LuaSnip/lua) applies for `.lua` files. Or,
 - Files in [/luaSnip/tex/](/LuaSnip/tex) folder apply for `tex` files.
 
-Similar for `.snippets` files in [/snipmate/](snipmate).
+Similar for `.snippets` files in [/snipmate](/snipmate).
