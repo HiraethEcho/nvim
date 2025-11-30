@@ -190,13 +190,13 @@ return {
     -- event = "BufRead",
     -- event = "VimEnter",
     config = function()
-      -- vim.cmd([[colorscheme nord]])
+      vim.cmd([[colorscheme nord]])
     end,
   },
   {
     "EdenEast/nightfox.nvim",
     -- event = "VimEnter",
-    event = "BufRead",
+    -- event = "BufRead",
     config = function()
       require("nightfox").setup({
         options = {
