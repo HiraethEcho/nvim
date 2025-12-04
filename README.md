@@ -1,6 +1,5 @@
 # Neovim
 
-![trees](https://hiraeth-picbed.oss-cn-beijing.aliyuncs.com/img/trees.webp)
 \*\*
 abc == --> a fox jump over
 _abcilj a fox jump over a == ==>_
