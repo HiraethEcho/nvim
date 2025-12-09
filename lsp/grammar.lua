@@ -13,7 +13,7 @@
 ---@type vim.lsp.Config
 return {
   cmd = { "grammarly-languageserver", "--stdio" },
-  filetypes = { "markdown" },
+  filetypes = { "markdown", "latex", "tex" },
   root_markers = { ".git" },
   handlers = {
     ["$/updateDocumentState"] = function()

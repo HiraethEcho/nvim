@@ -12,71 +12,27 @@ return {
     },
     dependencies = {
       -- "rachartier/tiny-inline-diagnostic.nvim",
-      -- "williamboman/mason.nvim",
-      -- "williamboman/mason-lspconfig.nvim",
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      -- "barreiroleo/ltex_extra.nvim",
       -- "saghen/blink.cmp",
       -- "nvimdev/guard.nvim",
       -- "hrsh7th/cmp-nvim-lsp",
       -- "kevinhwang91/nvim-ufo",
     },
     config = function()
+      --[[ require("lspconfig").ltex.setup({
+        on_attach = function(client, bufnr)
+          require("ltex_extra").setup()
+        end,
+        settings = {},
+      }) ]]
       --[[ local capabilities = require("blink.cmp").get_lsp_capabilities()
       -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
       vim.lsp.config('*', {
         root_markers = { '.obsidian', '.git' },
         capabilities = capabilities,
         offset_encoding = "utf-8",
-      }) ]]
-      --[[ require("lspconfig").texlab.setup({
-        offset_encoding = "utf-8",
-        on_attach = function(client, bufnr)
-          vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>",
-            { noremap = true, silent = true, buffer = bufnr, desc = "texlab build" })
-          vim.keymap.set("n", "<cr>", "<cmd>TexlabForward<cr>",
-            { noremap = true, silent = true, buffer = bufnr, desc = "texlab forward" })
-        end,
-        settings = {
-          texlab = {
-            build = {
-              -- executable = 'xelatex',
-              onSave = true,
-              forwardSearchAfter = false,
-            },
-            forwardSearch = {
-              -- https://github.com/latex-lsp/texlab/wiki/Previewing#inverse-search-3
-              executable = "sioyek",
-              args = {
-                "--reuse-window",
-                "--inverse-search",
-                "texlab inverse-search -i %%1 -l %%2",
-                "--forward-search-file",
-                "%f",
-                "--forward-search-line",
-                "%l",
-                "%p",
-              },
-              executable = "zathura",
-              args = {
-                "--synctex-forward",
-                "%l:1:%f",
-                "%p",
-                -- "--synctex-editor-command",
-                -- "texlab inverse-search -i %{input} -l %{line}", -- add this in zathurarc, not here
-              },
-            },
-            chktex = {
-              onOpenAndSave = true,
-              onEdit = false,
-            },
-            bibtexFormatter = "texlab",
-            latexFormatter = "latexindent",
-            latexindent = {
-              ["local"] = nil, -- local is a reserved keyword
-              modifyLineBreaks = false,
-            },
-            formatterLineLength = 80,
-          },
-        },
       }) ]]
       -- require("lspconfig").lua_ls.setup({})
       -- require("lspconfig").marksman.setup({})
@@ -100,22 +56,6 @@ return {
     build = ":MasonUpdate",
     config = function()
       require("mason").setup()
-    end,
-  },
-  { -- "rachartier/tiny-inline-diagnostic.nvim",
-    "rachartier/tiny-inline-diagnostic.nvim",
-    enabled = false,
-    event = "LspAttach", -- Or `LspAttach`
-    priority = 1000, -- needs to be loaded in first
-    config = function()
-      vim.diagnostic.config({ virtual_text = false })
-      require("tiny-inline-diagnostic").setup({
-        preset = "powerline", -- Can be: "modern", "classic", "minimal", "powerline", ghost", "simple", "nonerdfont", "amongus"
-        options = {
-          show_source = true,
-          -- multiple_diag_under_cursor = true,
-        },
-      })
     end,
   },
   { -- "rachartier/tiny-code-action.nvim",
@@ -158,6 +98,35 @@ return {
     },
   },
   -- disabled
+  { -- "barreiroleo/ltex_extra.nvim",
+    "barreiroleo/ltex_extra.nvim",
+    enabled = false,
+    ft = { "markdown", "tex" },
+    -- dependencies = { "neovim/nvim-lspconfig" },
+    config = function()
+      require("ltex_extra").setup({
+        server_opts = {
+          on_attach = function(client, bufnr) end,
+        },
+      })
+    end,
+  },
+  { -- "rachartier/tiny-inline-diagnostic.nvim",
+    "rachartier/tiny-inline-diagnostic.nvim",
+    enabled = false,
+    event = "LspAttach", -- Or `LspAttach`
+    priority = 1000, -- needs to be loaded in first
+    config = function()
+      vim.diagnostic.config({ virtual_text = false })
+      require("tiny-inline-diagnostic").setup({
+        preset = "powerline", -- Can be: "modern", "classic", "minimal", "powerline", ghost", "simple", "nonerdfont", "amongus"
+        options = {
+          show_source = true,
+          -- multiple_diag_under_cursor = true,
+        },
+      })
+    end,
+  },
   { -- "b0o/incline.nvim",
     "b0o/incline.nvim",
     enabled = false,

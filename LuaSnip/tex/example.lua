@@ -10,9 +10,9 @@ local get_visual = function(args, parent)
   end
 end
 
-local autosnip = {
+local snip = {
   s(
-    { trig = "bad", snippetType = "autosnippet" },
+    { trig = "bad" },
     fmta(
       [[
       \begin{adjustbox}{width=0.<>\textwidth}
@@ -27,7 +27,7 @@ local autosnip = {
     { condition = line_begin * tex.in_text }
   ),
   s(
-    { trig = "(%d+)bp", regTrig = true, wordTrig = false, snippetType = "autosnippet", priority = 2000 },
+    { trig = "(%d+)bp", regTrig = true, wordTrig = false, priority = 2000 },
     fmta(
       [[
       \begin{homeworkProblem}[Problem <>.]
@@ -44,7 +44,7 @@ local autosnip = {
     { condition = line_begin }
   ),
   s(
-    { trig = "cha", snippetType = "autosnippet" },
+    { trig = "cha" },
     fmta(
       [[
         \chapter{<>}
