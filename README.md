@@ -1,8 +1,17 @@
 # Neovim
 
 \*\*
-abc == --> a fox jump over
-_abcilj a fox jump over a == ==>_
+
+A quick brown fox jumps over ******the****** lazy dog.
+_A quick brown fox jumps **over** **the** lazy dog._
+**A quick brown fox jumps over the lazy dog.**
+**_A quick brown fox jumps over the lazy dog._**
+
+我能吞下玻璃而不伤身体。
+*我能吞下玻璃而不伤身体。*
+**我能吞下玻璃而不伤身体。**
+***我能吞下玻璃而不伤身体。***
+
 **abcilj \* == ==> a fox jump over something **
 _what \* if_
 **_abcilj== ==> a fox jump overl _**
