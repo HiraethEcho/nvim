@@ -12,7 +12,7 @@ _A quick brown fox jumps **over** **the** lazy dog._
 **我能吞下玻璃而不伤身体。**
 ***我能吞下玻璃而不伤身体。***
 
-**abcilj \* == ==> a fox jump over something **
+**abcilj \* 
 _what \* if_
 **_abcilj== ==> a fox jump overl _**
 _**abcilj**_
