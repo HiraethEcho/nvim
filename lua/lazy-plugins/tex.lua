@@ -51,4 +51,7 @@ return {
       }
     end,
   },
+  {
+    "let-def/texpresso.vim",
+  },
 }

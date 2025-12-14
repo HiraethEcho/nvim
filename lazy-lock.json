@@ -74,6 +74,7 @@
   "swap.nvim": { "branch": "main", "commit": "c9e2a9fe1a24fc6167acf4e7fc9635923ff3c12a" },
   "tardis.nvim": { "branch": "main", "commit": "f050686a6c299dba95d07990550174c20aba56dd" },
   "techbase.nvim": { "branch": "main", "commit": "3c908d83ca18d3b3f3cc108555e718aad10d3131" },
+  "texpresso.vim": { "branch": "main", "commit": "d543df30b61ea886cb726a18c1d1d28ea36d30cc" },
   "thorn.nvim": { "branch": "main", "commit": "c328f3f44f86addf74fac79eb0cf5659571a8aaa" },
   "time-machine.nvim": { "branch": "main", "commit": "6657a7db8a07ecfa8a266be34bebfb6827bb2eab" },
   "tiny-code-action.nvim": { "branch": "main", "commit": "ac8bda582345efd99289e394370c84bab60b6104" },

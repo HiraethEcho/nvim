@@ -27,6 +27,7 @@ opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows right of current
 opt.cursorline = false -- Enable highlighting of the current line
 opt.cursorcolumn = false -- Enable highlighting of the current column
+opt.colorcolumn = "120" -- Line length marker at 80 columns
 opt.scrolloff = 4 -- Lines of context
 opt.sidescrolloff = 4 -- Columns of context
 opt.shortmess:append({ W = true, I = true, c = true })
