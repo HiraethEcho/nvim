@@ -2,28 +2,28 @@
 
 \*\*
 
-A quick brown fox jumps over ******the****** lazy dog.
+A quick brown fox jumps over **\*\***the**\*\*** lazy dog.
 _A quick brown fox jumps **over** **the** lazy dog._
 **A quick brown fox jumps over the lazy dog.**
 **_A quick brown fox jumps over the lazy dog._**
 
 我能吞下玻璃而不伤身体。
-*我能吞下玻璃而不伤身体。*
+_我能吞下玻璃而不伤身体。_
 **我能吞下玻璃而不伤身体。**
-***我能吞下玻璃而不伤身体。***
-
-**abcilj \* 
-_what \* if_
-**_abcilj== ==> a fox jump overl _**
-_**abcilj**_
+**_我能吞下玻璃而不伤身体。_**
 
 - [ ] klsadjf
 - [>] sasd
 
 > [!tip] a
 
+ok
+
 > [!tip]
 > test
+>
+> > [!warning] custom
+> > nest
 
 > [!NOTE]
 > note

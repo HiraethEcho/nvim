@@ -10,7 +10,47 @@ local snip = {
   s(
     { trig = "callout", name = "callout", desc = "[!note]" },
     fmt("> [!{}] {}\n> {}", {
-      c(1, { t("note"), t("tip"), t("important"), t("warning"), t("warning"), t("caution") }),
+      c(1, { t("NOTE"), t("TIP"), t("IMPORTANT"), t("WARNING"), t("WARNING"), t("CAUTION") }),
+      i(2),
+      i(3),
+    })
+  ),
+  s(
+    { trig = "note", name = "callout note", desc = "[!note]" },
+    fmt("> [!{}] {}\n> {}", {
+      t("NOTE"),
+      i(2),
+      i(3),
+    })
+  ),
+  s(
+    { trig = "tip", name = "callout tip", desc = "[!tip]" },
+    fmt("> [!{}] {}\n> {}", {
+      t("TIP"),
+      i(2),
+      i(3),
+    })
+  ),
+  s(
+    { trig = "important", name = "callout important", desc = "[!important]" },
+    fmt("> [!{}] {}\n> {}", {
+      t("IMPORTANT"),
+      i(2),
+      i(3),
+    })
+  ),
+  s(
+    { trig = "warning", name = "callout warning", desc = "[!warning]" },
+    fmt("> [!{}] {}\n> {}", {
+      t("WARNING"),
+      i(2),
+      i(3),
+    })
+  ),
+  s(
+    { trig = "caution", name = "callout caution", desc = "[!caution]" },
+    fmt("> [!{}] {}\n> {}", {
+      t("CAUTION"),
       i(2),
       i(3),
     })
