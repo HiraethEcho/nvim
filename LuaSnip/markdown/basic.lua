@@ -19,40 +19,40 @@ local snip = {
     { trig = "note", name = "callout note", desc = "[!note]" },
     fmt("> [!{}] {}\n> {}", {
       t("NOTE"),
+      i(1),
       i(2),
-      i(3),
     })
   ),
   s(
     { trig = "tip", name = "callout tip", desc = "[!tip]" },
     fmt("> [!{}] {}\n> {}", {
       t("TIP"),
+      i(1),
       i(2),
-      i(3),
     })
   ),
   s(
     { trig = "important", name = "callout important", desc = "[!important]" },
     fmt("> [!{}] {}\n> {}", {
       t("IMPORTANT"),
+      i(1),
       i(2),
-      i(3),
     })
   ),
   s(
     { trig = "warning", name = "callout warning", desc = "[!warning]" },
     fmt("> [!{}] {}\n> {}", {
       t("WARNING"),
+      i(1),
       i(2),
-      i(3),
     })
   ),
   s(
     { trig = "caution", name = "callout caution", desc = "[!caution]" },
     fmt("> [!{}] {}\n> {}", {
       t("CAUTION"),
+      i(1),
       i(2),
-      i(3),
     })
   ),
   s({ trig = "h([2-6])", name = "Heading", desc = "Add Heading", regTrig = true }, {
