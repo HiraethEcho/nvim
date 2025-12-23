@@ -25,7 +25,7 @@ return {
       formatters_by_ft = {
         toml = { "taplo" },
         kdl = { "kdlfmt" },
-        -- tex = { "tex-fmt" },
+        tex = { "tex-fmt" },
         sh = { "shfmt" },
         lua = { "stylua" },
         -- markdown = { "prettier", "cbfmt" },
