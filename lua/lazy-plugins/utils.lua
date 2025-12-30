@@ -85,6 +85,12 @@ return {
           disable_cmd = "setl ma! ma?",
         },
         {
+          name = "colorcolumn",
+          enable_cmd = "set cc=80",
+          disable_cmd = "set cc=0",
+          state = false, -- Initially enabled
+        },
+        {
           name = "color",
           enable_cmd = "ColorizerAttachToBuffer",
           disable_cmd = "ColorizerAttachToBuffer",
