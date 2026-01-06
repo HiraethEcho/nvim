@@ -1,6 +1,6 @@
 vim.lsp.enable("texlab")
 -- vim.lsp.enable("ltex")
-vim.lsp.enable("ltex-plus")
+-- vim.lsp.enable("ltex-plus")
 -- vim.lsp.enable("grammar")
 -- vim.lsp.enable("text")
 -- vim.lsp.enable("harper")
