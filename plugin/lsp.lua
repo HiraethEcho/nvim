@@ -52,7 +52,7 @@ end, {
 })
 
 -- map("n", "ga", vim.lsp.buf.code_action, { silent = true, buffer = bufnr, desc = "LSP code action" }) -- using tiny-code-action
-map("n", "gR", vim.lsp.buf.rename, { silent = true, buffer = bufnr, desc = "LSP renamecode_action" })
+-- map("n", "gR", vim.lsp.buf.rename, { silent = true, buffer = bufnr, desc = "LSP renamecode_action" })
 
 -- map("n", "K", vim.lsp.buf.hover, { silent = true, buffer = bufnr, desc = "LSP hover" })
 -- map("n", "gD", vim.lsp.buf.implementation, { silent = true, buffer = bufnr, desc = "LSP implementation" })
