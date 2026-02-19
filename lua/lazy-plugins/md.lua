@@ -131,14 +131,14 @@ return {
           update = true,
         },
         silent = false,
-        to_do = {
+        --[[ to_do = {
           symbols = { " ", "x", ">", "-" },
           update_parents = true,
           not_started = " ",
           in_progress = ">",
           complete = "x",
           deleted = "-",
-        },
+        }, ]]
         mappings = {
           MkdnTab = { "i", "<c-l>" },
           MkdnSTab = { "i", "<c-h>" },
@@ -182,41 +182,6 @@ return {
           MkdnTableNextCell = false,
           MkdnTablePrevCell = false,
           MkdnUnfoldSection = false,
-        },
-        foldtext = {
-          title_transformer = function()
-            return function(text)
-              local updated_title = text:gsub("%b{}", "")
-              updated_title = updated_title:gsub("^%s*", "")
-              updated_title = updated_title:gsub("%s*$", "")
-              updated_title = updated_title:gsub("^######", "h6")
-              updated_title = updated_title:gsub("^#####", "h5")
-              updated_title = updated_title:gsub("^####", "h4")
-              updated_title = updated_title:gsub("^###", "h3")
-              updated_title = updated_title:gsub("^##", "h2")
-              updated_title = updated_title:gsub("^#", "h1")
-              return updated_title
-            end
-          end,
-          object_count_icon_set = "nerdfont",
-          object_count_opts = function()
-            return {
-              link = false,
-              blockquote = { icon = " ", count_method = { pattern = { "^>.+$" }, tally = "blocks" } },
-              fncblk = { icon = " " },
-            }
-          end,
-          line_count = true,
-          word_count = true,
-          fill_chars = {
-            left_edge = "╾─",
-            right_edge = "──╼",
-            item_separator = " · ",
-            section_separator = " // ",
-            left_inside = " ┝",
-            right_inside = "┥ ",
-            middle = "─",
-          },
         },
       })
     end,
