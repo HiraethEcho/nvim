@@ -1,4 +1,36 @@
 return {
+  { -- "smit4k/snapshot.nvim",
+    enabled = false,
+    "smit4k/snapshot.nvim",
+    config = function()
+      require("snapshot").setup({
+        -- Optional config settings, defaults shown below
+        snapshot_dir = "~/Pictures/snapshots", -- Directory where snapshot images are saved to
+        padding = 25,
+        line_height = 28,
+        font_size = 24,
+        shadow = true,
+        line_numbers = false,
+        start_line = 1,
+        border_radius = 5,
+        outer_background = "#ffffff", -- use #00000000 for transparent
+        outer_padding = 15,
+      })
+    end,
+  },
+  { -- "letieu/hacker.nvim"
+    "letieu/hacker.nvim",
+    config = function()
+      require("hacker").setup({
+        speed = { -- characters insert each time, random from min -> max
+          min = 2,
+          max = 10,
+        },
+        is_popup = false, -- show random float window when typing
+        popup_after = 5,
+      })
+    end,
+  },
   { -- "saxon1964/neovim-tips",
     enabled = false,
     "saxon1964/neovim-tips",
