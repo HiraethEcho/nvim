@@ -13,14 +13,14 @@ return {
   { -- "lowitea/aw-watcher.nvim",
     "lowitea/aw-watcher.nvim",
     event = "BufRead",
-    enabled = false,
+    -- enabled = false,
     cmd = "AWStart",
     config = function()
       require("aw_watcher").setup({})
       vim.cmd([[ AWStart ]])
     end,
   },
-  { -- "ActivityWatch/aw-watcher-vim",
+  { -- "ActivityWatch/aw-watcher-vim", this is old
     "ActivityWatch/aw-watcher-vim",
     -- lazy = false,
     event = "BufRead",
