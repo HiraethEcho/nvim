@@ -9,7 +9,7 @@ return {
       { "]h", "<cmd>Gitsigns next_hunk<cr>", desc = "nexthunk" },
       { "[h", "<cmd>Gitsigns prev_hunk<cr>", desc = "prevhunk" },
       { "<leader>hD", "<cmd>Gitsigns diffthis<cr>", desc = "gitdiff" },
-      { "<leader>hd", "<cmd>Gitsigns toggle_deleted<cr>", desc = "toggle deleted" },
+      -- { "<leader>hd", "<cmd>Gitsigns toggle_deleted<cr>", desc = "toggle deleted" },
       { "<leader>hu", "<cmd>Gitsigns reset_hunk<cr>", desc = "undohunk" },
       { "<leader>ha", "<cmd>Gitsigns stage_hunk<cr>", desc = "stage hunk" },
       { "<leader>hA", "<cmd>Gitsigns undo_stage_hunk<cr>", desc = "undo stage hunk" },
@@ -50,6 +50,13 @@ return {
       })
       -- require("scrollbar.handlers.gitsigns").setup()
     end,
+  },
+  { -- "cvlmtg/inline-diff.nvim",
+    "cvlmtg/inline-diff.nvim",
+    keys = {
+      { "<leader>hd", "<cmd>InlineDiff<cr>", desc = "Toggle inline diff" },
+    },
+    opts = {},
   },
   { -- "NeogitOrg/neogit",
     "NeogitOrg/neogit",
