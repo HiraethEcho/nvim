@@ -80,9 +80,10 @@ return {
     opts = {
       toggles = {
         {
-          name = "readonly",
-          enable_cmd = "setl ma! ma?",
-          disable_cmd = "setl ma! ma?",
+          name = "md fold",
+          enable_cmd = "set foldlevel=2",
+          disable_cmd = "set foldlevel=99",
+          state = false, -- Initially disabled
         },
         {
           name = "colorcolumn",
@@ -97,22 +98,27 @@ return {
           state = false, -- Initially enabled
         },
         {
+          name = "LSP",
+          enable_cmd = ":Lspstart<CR>",
+          disable_cmd = ":Lspstop<CR>",
+          state = true,
+        },
+        {
           name = "Copilot",
           enable_cmd = "Copilot enable",
           disable_cmd = "Copilot disable",
           state = true, -- Initially enabled
         },
         {
-          name = "LSP",
-          enable_cmd = ":Lspstart<CR>",
-          disable_cmd = ":Lspstop<CR>",
-          state = true, -- Initially disabled
-        },
-        {
           name = "Diagnostics",
           enable_cmd = "lua vim.diagnostic.enable()",
           disable_cmd = "lua vim.diagnostic.disable()",
           state = true,
+        },
+        {
+          name = "readonly",
+          enable_cmd = "setl ma! ma?",
+          disable_cmd = "setl ma! ma?",
         },
       },
     },

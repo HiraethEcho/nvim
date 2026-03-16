@@ -50,9 +50,10 @@ return {
         -- default = { "snippets", "lsp", "path", "buffer", "copilot", "lazydev" },
         -- default = { "ultisnips", "lsp", "path", "buffer" },
         -- default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot" },
-        default = { "snippets", "lsp", "path", "buffer", "copilot" },
+        default = { "snippets", "lsp", "path", "buffer", "copilot", "mkdnflow" },
         -- default = { "snippets", "lsp", "path", "buffer" },
         providers = {
+          mkdnflow = { name = "Mkdnflow", module = "mkdnflow.completion.blink" },
           snippets = { score_offset = 200 },
           -- ultisnips = { score_offset = 200, name = "ultisnips", module = "blink.compat.source" },
           buffer = { score_offset = 150, opts = { get_bufnrs = vim.api.nvim_list_bufs } },

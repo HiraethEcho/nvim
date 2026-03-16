@@ -121,7 +121,7 @@ return {
           paths = true,
           tables = true,
           yaml = true,
-          cmp = false,
+          completion = true,
         },
         perspective = {
           priority = "root",
@@ -131,6 +131,23 @@ return {
           update = true,
         },
         silent = false,
+
+        to_do = {
+          highlight = false,
+          statuses = {
+            not_started = { marker = " " },
+            in_progress = { marker = ">" },
+            complete = { marker = { "X", "x" } },
+            deleted = { marker = { "-" } },
+          },
+          status_order = { "not_started", "complete", "in_progress", "deleted" },
+          status_propagation = { up = true, down = true },
+          sort = {
+            on_status_change = false,
+            recursive = false,
+            cursor_behavior = { track = true },
+          },
+        },
         --[[ to_do = {
           symbols = { " ", "x", ">", "-" },
           update_parents = true,
