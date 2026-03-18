@@ -48,7 +48,11 @@ return {
           deleted = { raw = "[-]", rendered = "󰅙 ", highlight = "DiagnosticWarning", scope_highlight = nil },
         },
       },
-      code = { width = "block", min_width = 30, position = "right" },
+      code = { width = "block", conceal_delimiters = false, min_width = 30, position = "right",
+
+            border = 'thin',
+            render_modes = true,
+      },
     },
   },
   { -- yelog/marklive.nvim
