@@ -49,6 +49,22 @@ local snip = {
     { condition = tex.in_text, show_condition = tex.in_text }
   ),
   s(
+    { trig = "cor", name = "Corollory", desc = "Corollory with or without title" },
+    fmta(
+      [[
+      \begin{corollory}<title>
+      <content>
+      \end{corollory}
+      ]],
+      {
+        title = c(1, { t(""), sn(nil, { t("["), i(1), t("]") }) }),
+        content = i(0),
+        -- content = d(0, get_visual),
+      }
+    ),
+    { condition = tex.in_text, show_condition = tex.in_text }
+  ),
+  s(
     { trig = "lem", name = "Lemma", desc = "Lemma with or without title" },
     fmta(
       [[
