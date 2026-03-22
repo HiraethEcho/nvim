@@ -125,6 +125,7 @@ return {
   },
   { -- "ingur/floatty.nvim",
     "ingur/floatty.nvim",
+    enabled = false,
     -- event = "VeryLazy",
     config = function()
       -- initialize config
