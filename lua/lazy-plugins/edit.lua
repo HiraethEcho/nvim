@@ -91,7 +91,7 @@ return {
   { -- "smartding/fcitx.nvim",
     "smartding/fcitx.nvim",
     -- lazy = false,
-    ft = "markdown,md",
+    ft = { "markdown", "md" },
     cmd = "Fcitx",
     config = function()
       vim.api.nvim_create_user_command("Fcitx", require("fcitx").setup, {})
