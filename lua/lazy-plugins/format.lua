@@ -26,6 +26,7 @@ return {
         toml = { "taplo" },
         kdl = { "kdlfmt" },
         tex = { "tex-fmt" },
+        typst = { "typstyle" },
         sh = { "shfmt" },
         lua = { "stylua" },
         -- markdown = { "prettier", "cbfmt" },
