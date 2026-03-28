@@ -1,4 +1,10 @@
 return {
+  { -- "ankushbhagats/liveserver.nvim",
+    "ankushbhagats/liveserver.nvim",
+    enabled = false,
+    build = "npm i -g live-server",
+    config = true,
+  },
   { -- "hat0uma/prelive.nvim",
     "hat0uma/prelive.nvim",
     opts = {},
