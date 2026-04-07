@@ -34,13 +34,6 @@ return {
     },
   },
   {
-    "anttikivi/lucid.nvim",
-    -- lazy = false,
-    config = function()
-      vim.cmd.colorscheme("lucid")
-    end,
-  },
-  {
     "mcauley-penney/techbase.nvim",
     opts = { italic_comments = true, transparent = true },
   },
