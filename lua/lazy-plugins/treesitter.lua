@@ -1,6 +1,7 @@
 return {
   { -- "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter",
+    branch = "master",
     -- version = false, -- last release is way too old and doesn't work on Windows
     -- lazy = false,
     -- cmd = "TSEnable",
@@ -42,7 +43,7 @@ return {
           return true
         end, opts.ensure_installed)
       end
-      table.insert(opts.ensure_installed, "latex") -- extend but not merge
+      -- table.insert(opts.ensure_installed, "latex") -- extend but not merge
       require("nvim-treesitter.configs").setup(opts)
     end,
   },

@@ -48,10 +48,14 @@ return {
           deleted = { raw = "[-]", rendered = "󰅙 ", highlight = "DiagnosticWarning", scope_highlight = nil },
         },
       },
-      code = { width = "block", conceal_delimiters = false, min_width = 30, position = "right",
+      code = {
+        width = "block",
+        conceal_delimiters = false,
+        min_width = 30,
+        position = "right",
 
-            border = 'thin',
-            render_modes = true,
+        border = "thin",
+        render_modes = true,
       },
     },
   },
@@ -127,17 +131,16 @@ return {
           yaml = true,
           completion = true,
         },
-        perspective = {
-          priority = "root",
+        path_resolution = {
+          primary = "root",
           fallback = "current",
-          root_tell = ".obsidian",
-          nvim_wd_heel = false,
-          update = true,
+          root_marker = ".obsidian",
+          sync_cwd = false,
+          update_on_navigate = true,
         },
         silent = false,
-
         to_do = {
-          highlight = false,
+          highlight = farse,
           statuses = {
             not_started = { marker = " " },
             in_progress = { marker = ">" },
@@ -146,11 +149,6 @@ return {
           },
           status_order = { "not_started", "complete", "in_progress", "deleted" },
           status_propagation = { up = true, down = true },
-          sort = {
-            on_status_change = false,
-            recursive = false,
-            cursor_behavior = { track = true },
-          },
         },
         --[[ to_do = {
           symbols = { " ", "x", ">", "-" },

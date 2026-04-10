@@ -1,7 +1,6 @@
 # Neovim
 
 \*\*
-
 A quick brown fox jumps over **\*\***the**\*\*** lazy dog.
 _A quick brown fox jumps **over** **the** lazy dog._
 **A quick brown fox jumps over the lazy dog.**
