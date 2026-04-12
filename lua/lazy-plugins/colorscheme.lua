@@ -8,6 +8,20 @@ vim.o.background = "dark"
 -- vim.cmd.colorscheme("unokai")
 return {
   {
+    "zitrocode/carvion.nvim",
+    opts = {
+      transparent = false,
+      styles = {
+        comments = { italic = true },
+        keywords = { bold = true },
+        functions = {},
+        variables = {},
+        strings = {},
+        types = {},
+      },
+    },
+  },
+  {
     "ricardoraposo/nightwolf.nvim",
     opts = {
       theme = "dark-gray", -- 'black', 'dark-blue', 'gray', 'dark-gray', 'light'

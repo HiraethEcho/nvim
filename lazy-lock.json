@@ -10,6 +10,7 @@
   "blink-copilot": { "branch": "main", "commit": "7ad8209b2f880a2840c94cdcd80ab4dc511d4f39" },
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
   "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
+  "carvion.nvim": { "branch": "master", "commit": "162732074f4f642d99eaa17cd69876f0d4b158dd" },
   "cellular-automaton.nvim": { "branch": "main", "commit": "1606e9d5d04ff254023c3f3c62842d065708d6d3" },
   "cmd.nvim": { "branch": "main", "commit": "7b790d24e1908b0d623d93324bcb56e6d3b0e333" },
   "codecompanion-spinner.nvim": { "branch": "main", "commit": "7797a81141e5de62eecebf2af561698ed58900dc" },
