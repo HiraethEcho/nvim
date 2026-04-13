@@ -13,7 +13,7 @@ local snip = {
     ---
     title: <title>
     summary: <summary>
-    date: <date><tag><category><topic><series><status><draft>
+    date: <date><tag><category><topic><series><genre><status><draft>
     ---
 
     # <head>
@@ -26,11 +26,12 @@ local snip = {
         category = c(4, { t({ "", "category: " }), t("") }),
         topic = c(5, { t({ "", "topic: " }), t("") }),
         series = c(6, { t({ "", "series: " }), t("") }),
-        status = c(7, {
-          sn(1, { t({ "", "status: " }), c(1, { t("progress"), t("draft") }) }),
+        genre = c(7, { t({ "", "genres: " }), t("") }),
+        status = c(8, {
+          sn(1, { t({ "", "status: " }), c(1, { t("idea"), t("outline") }) }),
           sn(1, t("")),
         }),
-        draft = c(8, { t({ "", "draft: true" }), t("") }),
+        draft = c(9, { t({ "", "draft: true" }), t("") }),
         head = rep(1),
       }
     )
