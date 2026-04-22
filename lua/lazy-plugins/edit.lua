@@ -101,9 +101,15 @@ return {
   { -- "windwp/nvim-autopairs",
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    opts = {
-      map_bs = false,
-    },
+    -- opts = { map_bs = false },
+    config = function()
+      require("nvim-autopairs").setup({ map_bs = false })
+      local Rule = require("nvim-autopairs.rule")
+      local npairs = require("nvim-autopairs")
+      npairs.add_rules({
+        Rule("「", "」", "markdown"),
+      })
+    end,
   },
   { -- "sontungexpt/bim.nvim",
     "sontungexpt/bim.nvim",
