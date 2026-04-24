@@ -1,6 +1,7 @@
 return {
   { -- "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter",
+    -- enabled = false,
     branch = "master",
     -- version = false, -- last release is way too old and doesn't work on Windows
     -- lazy = false,
@@ -16,11 +17,11 @@ return {
     opts = {
       indent = { enable = true },
       ensure_installed = {
-        "c",
-        "html",
-        "lua",
-        "markdown",
-        "markdown_inline",
+        -- "c",
+        -- "html",
+        -- "lua",
+        -- "markdown",
+        -- "markdown_inline",
       },
       incremental_selection = {
         enable = true,
@@ -49,7 +50,7 @@ return {
   },
   { -- "nvim-treesitter/nvim-treesitter-context",
     "nvim-treesitter/nvim-treesitter-context",
-    -- enabled = false,
+    enabled = false,
     cmd = "TSContext enable",
     keys = {
       { "<leader>ut", "<cmd>TSContext toggle<cr>", desc = "toggle treesitter context" },
