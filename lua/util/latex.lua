@@ -6,10 +6,10 @@ local MATH_NODES = {
   math_environment = true,
 }
 
-local ts_utils = require("nvim-treesitter.ts_utils")
+-- local ts_utils = require("nvim-treesitter.ts_utils")
 
 M.in_env_md = function(env)
-  local node = ts_utils.get_node_at_cursor()
+  local node = vim.treesitter.get_node()
   local bufnr = vim.api.nvim_get_current_buf()
   while node do
     if node:type() == "generic_environment" then
@@ -60,7 +60,7 @@ end
 
 -- For markdown
 M.in_mathzone_md = function()
-  local node = ts_utils.get_node_at_cursor()
+  local node = vim.treesitter.get_node()
   while node do
     if MATH_NODES[node:type()] then
       return true

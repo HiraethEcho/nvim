@@ -1,8 +1,9 @@
 return {
   { -- "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter",
-    -- enabled = false,
-    branch = "master",
+    enabled = false,
+    -- branch = "master",
+    branch = "main",
     -- version = false, -- last release is way too old and doesn't work on Windows
     -- lazy = false,
     -- cmd = "TSEnable",
@@ -14,6 +15,7 @@ return {
       -- "hiphish/rainbow-delimiters.nvim",
       -- 'anuvyklack/pretty-fold.nvim',
     },
+    --[[
     opts = {
       indent = { enable = true },
       ensure_installed = {
@@ -33,6 +35,16 @@ return {
         },
       },
     },
+  --]]
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          pcall(vim.treesitter.start)
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+    end,
+    --[[
     config = function(_, opts)
       if type(opts.ensure_installed) == "table" then
         local added = {}
@@ -44,9 +56,10 @@ return {
           return true
         end, opts.ensure_installed)
       end
-      -- table.insert(opts.ensure_installed, "latex") -- extend but not merge
+      table.insert(opts.ensure_installed, "latex") -- extend but not merge
       require("nvim-treesitter.configs").setup(opts)
     end,
+    ]]
   },
   { -- "nvim-treesitter/nvim-treesitter-context",
     "nvim-treesitter/nvim-treesitter-context",
