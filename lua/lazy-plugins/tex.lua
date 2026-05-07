@@ -7,7 +7,7 @@ return {
     init = function()
       vim.g.vimtex_view_method = "zathura"
       -- vim.g.vimtex_view_method = "sioyek"
-      vim.g.vimtex_imaps_leader = ";"
+      vim.g.vimtex_imaps_leader = ","
 
       -- this works
       -- vim.g.vimtex_view_general_viewer = "okular"
@@ -27,6 +27,7 @@ return {
       -- vim.g.vimtex_fold_types_defaults   =1
       -- vim.g.vimtex_fold_bib_enabled      =1
       -- vim.g.vimtex_fold_bib_max_key_width=1
+      vim.g.vimtex_compiler_latexmk_engines = { _ = '-xelatex' }
 
       vim.g.vimtex_toc_config = {
         name = "TOC",
@@ -53,5 +54,6 @@ return {
   },
   {
     "let-def/texpresso.vim",
+    enabled = false,
   },
 }

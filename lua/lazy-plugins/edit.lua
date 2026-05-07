@@ -16,7 +16,7 @@ return {
     end,
   },
   { -- "numToStr/Comment.nvim",
-    -- enabled = false,
+    enabled = false,
     "numToStr/Comment.nvim",
     keys = {
       { "gcc", mode = "n", desc = "Comment toggle current line" },
@@ -92,7 +92,7 @@ return {
   { -- "smartding/fcitx.nvim",
     "smartding/fcitx.nvim",
     -- lazy = false,
-    ft = { "markdown", "md" },
+    ft = { "markdown", "md", "latex", "typst" },
     cmd = "Fcitx",
     config = function()
       vim.api.nvim_create_user_command("Fcitx", require("fcitx").setup, {})

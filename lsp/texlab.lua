@@ -169,7 +169,7 @@ return {
       rootDirectory = nil,
       build = {
         executable = "latexmk",
-        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+        args = { "-pdf", "-interaction=nonstopmode", "-xelatex", "-synctex=1", "%f" },
         onSave = true,
         forwardSearchAfter = false,
       },
