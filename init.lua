@@ -11,6 +11,15 @@ if vim.env.PROF then
   })
 end
 
+-- vim.g.mapleader = " "
+-- vim.g.maplocalleader = ","
+
+vim.g.mapleader = vim.keycode("<space>")
+vim.g.maplocalleader = vim.keycode(",")
+
 -- require("opts")
-require("core")
+-- require("core")
 -- require("utils")
+require("options")
+require("keymaps")
+require("pm")

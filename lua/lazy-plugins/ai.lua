@@ -79,11 +79,11 @@ return {
     -- enabled = false,
     cmd = "Copilot",
     keys = { -- Example mapping to toggle outline
-      { "<leader>cc", "<cmd>Copilot<CR>", desc = "Copilot" },
-      { "<leader>ct", "<cmd>Copilot toggle<CR>", desc = "Copilot toggle" },
-      { "<leader>cd", "<cmd>Copilot detach<CR>", desc = "Copilot detach" },
-      { "<leader>ca", "<cmd>Copilot attach<CR>", desc = "Copilot attach" },
-      { "<leader>cp", "<cmd>Copilot panel<CR>", desc = "Copilot panel" },
+      { "<localleader>cc", "<cmd>Copilot<CR>", desc = "Copilot" },
+      { "<localleader>ct", "<cmd>Copilot toggle<CR>", desc = "Copilot toggle" },
+      { "<localleader>cd", "<cmd>Copilot detach<CR>", desc = "Copilot detach" },
+      { "<localleader>ca", "<cmd>Copilot attach<CR>", desc = "Copilot attach" },
+      { "<localleader>cp", "<cmd>Copilot panel<CR>", desc = "Copilot panel" },
     },
     dependencies = { { "zbirenbaum/copilot-cmp", config = true } },
     opts = {
