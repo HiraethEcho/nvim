@@ -28,20 +28,9 @@ return {
     "folke/which-key.nvim",
     -- cmd = "WhichKey",
     keys = {
-      {
-        "?",
-        function()
-          require("which-key").show()
-        end,
-        desc = "Buffer Local Keymaps (which-key)",
-      },
-      {
-        "<c-w><space>",
-        function()
-          require("which-key").show({ keys = "<c-w>", loop = true })
-        end,
-        desc = "Window Hydra Mode (which-key)",
-      },
+      -- stylua: ignore
+      { "?", function() require("which-key").show() end, desc = "Buffer Local Keymaps (which-key)", },
+      -- { "<c-w><space>", function() require("which-key").show({ keys = "<c-w>", loop = true }) end, desc = "Window Hydra Mode (which-key)", },
     },
     event = "BufRead",
     opts = {
@@ -67,6 +56,7 @@ return {
         { "<localleader>c", group = "CodeCompanion" },
         { "<localleader>C", group = "copilot Chat" },
         { "<localleader>o", group = "OpenCode" },
+        { "<localleader>s", group = "Sidekick" },
         -- { "<leader>x", group = "troube" },
         -- { "m", group = "bookmark", },
       })
