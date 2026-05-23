@@ -216,7 +216,7 @@ return {
       hints = { enabled = false },
     },
   },
-  {
+  { -- "folke/sidekick.nvim",
     "folke/sidekick.nvim",
     -- lazy = false,
     -- enabled = false,
@@ -244,6 +244,85 @@ return {
       { "<localleader>sv", function() require("sidekick.cli").send({ msg = "{selection}" }) end, mode = { "x" }, desc = "Send Visual Selection", },
       { "<localleader>sp", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Sidekick Select Prompt", },
       { "<localleader>sc", function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end, desc = "Sidekick Toggle Claude", },
+      -- sytlua: ignore stop
+    },
+  },
+  { -- "carlos-algms/agentic.nvim",
+    "carlos-algms/agentic.nvim",
+    opts = {
+      -- Any ACP-compatible provider works. Built-in: "claude-agent-acp" | "gemini-acp" | "codex-acp" | "opencode-acp" | "cursor-acp" | "copilot-acp" | "auggie-acp" | "mistral-vibe-acp" | "cline-acp" | "goose-acp" | "kiro-acp" | "pi-acp"
+      provider = "opencode-acp", -- setting the name here is all you need to get started
+      keymaps = {
+        -- Keybindings for ALL buffers in the widget (chat, prompt, code, files)
+        widget = {
+          close = "q", -- String for a single keybinding
+          change_mode = {
+            {
+              "<S-Tab>",
+              mode = { "i", "n", "v" }, -- Specify modes for this keybinding
+            },
+          },
+          switch_provider = "<localLeader>s", -- Switch ACP provider
+          switch_model = "<localLeader>m", -- Switch model
+          change_thought_level = "<localLeader>t", -- Select thought effort level
+        },
+        -- Keybindings for the prompt buffer only
+        prompt = {
+          submit = {
+            "<CR>", -- Normal mode, just Enter
+            {
+              "<C-s>",
+              mode = { "n", "v", "i" },
+            },
+          },
+          paste_image = {
+            {
+              "<localLeader>p",
+              mode = { "n" },
+            },
+            {
+              "<C-v>", -- Same as Claude-code in insert mode
+              mode = { "i" },
+            },
+          },
+        },
+        -- Keybindings for chat buffer navigation
+        chat = {
+          next_heading = "]]",
+          prev_heading = "[[",
+          next_tool_call = "]t",
+          prev_tool_call = "[t",
+        },
+        -- Keybindings for diff preview navigation
+        diff_preview = {
+          next_hunk = "]c",
+          prev_hunk = "[c",
+        },
+        -- Keybindings to cycle focus between pending permission blocks.
+        -- Once a block is focused, per-block keys work on its row N:
+        --   h / <Left>  : focus previous button
+        --   l / <Right> : focus next button
+        --   <CR>        : submit focused button
+        --   1..4        : submit option N directly
+        -- Per-block keys only fire when the cursor is on the focused row.
+        permission = {
+          cycle_next = "<C-n>",
+          cycle_prev = "<C-p>",
+        },
+      },
+    },
+    -- these are just suggested keymaps; customize as desired
+    keys = {
+      -- stylua: ignore start
+      { "<C-\\>", function() require("agentic").toggle() end, mode = { "n", "v", "i" }, desc = "Toggle Agentic Chat", },
+      { "<C-'>", function() require("agentic").add_selection_or_file_to_context() end, mode = { "n", "v" }, desc = "Add file or selection to Agentic to Context", },
+      { "<C-,>", function() require("agentic").new_session() end, mode = { "n", "v", "i" }, desc = "New Agentic Session", },
+      -- ai Restore
+      { "<A-i>r",  function() require("agentic").restore_session() end, desc = "Agentic Restore session", silent = true, mode = { "n", "v", "i" }, },
+      -- ai Diagnostics
+      { "<leader>ad",  function() require("agentic").add_current_line_diagnostics() end, desc = "Add current line diagnostic to Agentic", mode = { "n" }, },
+      -- ai all Diagnostics
+      { "<leader>aD", function() require("agentic").add_buffer_diagnostics() end, desc = "Add all buffer diagnostics to Agentic", mode = { "n" }, },
       -- sytlua: ignore stop
     },
   },
