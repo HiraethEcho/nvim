@@ -1,27 +1,4 @@
 return {
-  { -- codecompanion
-    "olimorris/codecompanion.nvim",
-    -- enabled = false,
-    -- event = "VeryLazy",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "franco-ruggeri/codecompanion-spinner.nvim",
-      -- "ravitemer/mcphub.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      -- "Davidyz/VectorCode",
-    },
-    keys = {
-      { "<localleader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle codecompanion chat" },
-      { "<localleader>ca", "<cmd>CodeCompanionActions<cr>", desc = "codecompanion action" },
-    },
-    opts = {
-      -- stylua: ignore
-      strategies = { chat = { adapter = "copilot" }, inline = { adapter = "copilot" }, agent = { adapter = "copilot" }, cmd = { adapter = "copilot" }, },
-      extensions = {
-        spinner = {},
-      },
-    },
-  },
   { -- copilot
     "zbirenbaum/copilot.lua",
     -- enabled = false,
@@ -54,37 +31,6 @@ return {
         hide_during_completion = false,
         debounce = 75,
       },
-    },
-  },
-  { -- "folke/sidekick.nvim",
-    "folke/sidekick.nvim",
-    -- lazy = false,
-    -- enabled = false,
-    opts = {
-      -- add any options here
-      cli = {
-        mux = {
-          backend = "zellij",
-          enabled = false,
-        },
-      },
-    },
-    keys = {
-      -- stylua: ignore start
-      -- if there is a next edit, jump to it, otherwise apply it if any
-      --  fallback to normal tab
-      { "<tab>", function() if not require("sidekick").nes_jump_or_apply() then return "<Tab>"  end end, expr = true, desc = "Goto/Apply Next Edit Suggestion", },
-      { "<c-.>", function() require("sidekick.cli").focus() end, desc = "Sidekick Focus", mode = { "n", "t", "i", "x" }, },
-      { "<localleader>sa", function() require("sidekick.cli").toggle() end, desc = "Sidekick Toggle CLI", },
-      -- { "<localleader>ss", function() require("sidekick.cli").select() end,  desc = "Select CLI", },
-      { "<localleader>ss", function()  require("sidekick.cli").select({ filter = { installed = true } }) end, desc = "Select CLI", },
-      { "<localleader>sd", function() require("sidekick.cli").close() end, desc = "Detach a CLI Session", },
-      { "<localleader>st", function() require("sidekick.cli").send({ msg = "{this}" }) end, mode = { "x", "n" }, desc = "Send This", },
-      { "<localleader>sf", function() require("sidekick.cli").send({ msg = "{file}" }) end, desc = "Send File", },
-      { "<localleader>sv", function() require("sidekick.cli").send({ msg = "{selection}" }) end, mode = { "x" }, desc = "Send Visual Selection", },
-      { "<localleader>sp", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Sidekick Select Prompt", },
-      { "<localleader>sc", function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end, desc = "Sidekick Toggle Claude", },
-      -- sytlua: ignore stop
     },
   },
   { -- "carlos-algms/agentic.nvim",
@@ -316,7 +262,73 @@ return {
       })
     end,
   },
+  { -- "folke/sidekick.nvim",
+    "folke/sidekick.nvim",
+    -- lazy = false,
+    enabled = false,
+    opts = {
+      -- add any options here
+      cli = {
+        mux = {
+          backend = "zellij",
+          enabled = false,
+        },
+      },
+    },
+    keys = {
+      -- stylua: ignore start
+      -- if there is a next edit, jump to it, otherwise apply it if any
+      --  fallback to normal tab
+      { "<tab>", function() if not require("sidekick").nes_jump_or_apply() then return "<Tab>"  end end, expr = true, desc = "Goto/Apply Next Edit Suggestion", },
+      { "<c-.>", function() require("sidekick.cli").focus() end, desc = "Sidekick Focus", mode = { "n", "t", "i", "x" }, },
+      { "<localleader>sa", function() require("sidekick.cli").toggle() end, desc = "Sidekick Toggle CLI", },
+      -- { "<localleader>ss", function() require("sidekick.cli").select() end,  desc = "Select CLI", },
+      { "<localleader>ss", function()  require("sidekick.cli").select({ filter = { installed = true } }) end, desc = "Select CLI", },
+      { "<localleader>sd", function() require("sidekick.cli").close() end, desc = "Detach a CLI Session", },
+      { "<localleader>st", function() require("sidekick.cli").send({ msg = "{this}" }) end, mode = { "x", "n" }, desc = "Send This", },
+      { "<localleader>sf", function() require("sidekick.cli").send({ msg = "{file}" }) end, desc = "Send File", },
+      { "<localleader>sv", function() require("sidekick.cli").send({ msg = "{selection}" }) end, mode = { "x" }, desc = "Send Visual Selection", },
+      { "<localleader>sp", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Sidekick Select Prompt", },
+      { "<localleader>sc", function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end, desc = "Sidekick Toggle Claude", },
+      -- sytlua: ignore stop
+    },
+  },
 
+  { -- codecompanion
+    "olimorris/codecompanion.nvim",
+    enabled = false,
+    -- event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "franco-ruggeri/codecompanion-spinner.nvim",
+      -- "ravitemer/mcphub.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      -- "Davidyz/VectorCode",
+    },
+    keys = {
+      { "<localleader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle codecompanion chat" },
+      { "<localleader>ca", "<cmd>CodeCompanionActions<cr>", desc = "codecompanion action" },
+    },
+    opts = {
+      interactions = {
+        chat = {
+          adapter = {
+            name = "opencode",
+            model = "gpt-4.1",
+          },
+        },
+      },
+      strategies = {
+        chat = { adapter = "copilot" },
+        inline = { adapter = "copilot" },
+        agent = { adapter = "copilot" },
+        cmd = { adapter = "copilot" },
+      },
+      extensions = {
+        spinner = {},
+      },
+    },
+  },
   { -- CopilotChat
     enabled = false,
     "CopilotC-Nvim/CopilotChat.nvim",
