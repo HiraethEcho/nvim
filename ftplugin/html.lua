@@ -1,1 +1,1 @@
-vim.lsp.enable('html')
+vim.lsp.enable('ast_grep')

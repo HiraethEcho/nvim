@@ -17,7 +17,7 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
-    ft = { "markdown", "md", "codecompanion" },
+    ft = { "markdown", "md", "codecompanion", "opencode_output" },
     keys = {
       { "<C-e>", "<cmd>Markview Toggle<cr>", desc = "Markiview toggle" },
     },
@@ -31,7 +31,7 @@ return {
   { -- MeanderingProgrammer/render-markdown.nvim
     "MeanderingProgrammer/render-markdown.nvim",
     enabled = false,
-    ft = { "markdown", "md", "codecompanion", "Avante", "copilot-chat" },
+    ft = { "markdown", "md", "codecompanion", "Avante", "copilot-chat", "opencode_output" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markdown Render Toggle" },
     },

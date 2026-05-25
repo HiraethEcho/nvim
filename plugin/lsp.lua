@@ -19,7 +19,16 @@ vim.api.nvim_create_user_command("Lspstart", function(info)
 end, {
   desc = "Manually launches a language server",
   nargs = "?",
-  complete = lsp_complete_configured_servers,
+  complete = function(arg_lead)
+    local configured = vim.tbl_keys(vim.lsp.get_config())
+    local running = vim.tbl_map(function(c)
+      return c.name
+    end, vim.lsp.get_clients())
+    return vim.iter(configured):filter(function(name)
+      return not vim.tbl_contains(running, name)
+        and name:find(arg_lead) ~= nil
+    end):totable()
+  end,
 })
 
 vim.api.nvim_create_user_command("Lspstop", function(info)
@@ -37,7 +46,10 @@ vim.api.nvim_create_user_command("Lspstop", function(info)
   if #args == 0 then
     clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
   else
-    clients = get_clients_from_cmd_args(args)
+    clients = {}
+    for _, name in ipairs(vim.split(args, "%s+")) do
+      vim.list_extend(clients, vim.lsp.get_clients({ name = name }))
+    end
   end
 
   for _, client in ipairs(clients) do
@@ -48,7 +60,13 @@ vim.api.nvim_create_user_command("Lspstop", function(info)
 end, {
   desc = "Manually stops the given language client(s)",
   nargs = "?",
-  complete = lsp_get_active_clients,
+  complete = function(arg_lead)
+    return vim.iter(vim.lsp.get_clients()):map(function(c)
+      return c.name
+    end):filter(function(name)
+      return name:find(arg_lead) ~= nil
+    end):totable()
+  end,
 })
 
 -- map("n", "ga", vim.lsp.buf.code_action, { silent = true, buffer = bufnr, desc = "LSP code action" }) -- using tiny-code-action

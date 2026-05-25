@@ -52,7 +52,7 @@ return {
         { "<leader>c", group = "copilot" },
         { "<leader>s", group = "search" },
         { "<leader>S", group = "Session" },
-        { "<localleader>a", group = "Avante" },
+        { "<localleader>a", group = "agentic" },
         { "<localleader>c", group = "CodeCompanion" },
         { "<localleader>C", group = "copilot Chat" },
         { "<localleader>o", group = "OpenCode" },
