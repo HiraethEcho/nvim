@@ -12,9 +12,10 @@ return {
     },
     dependencies = { { "zbirenbaum/copilot-cmp", config = true } },
     opts = {
+      auth_provider_url = "https://github.com",
       filetypes = { ["*"] = true },
       panel = {
-        enabled = true,
+        enabled = false,
         auto_refresh = true,
         keymap = {
           jump_prev = "K",

@@ -13,25 +13,25 @@ return {
   },
   { -- markview
     "OXY2DEV/markview.nvim",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
-    ft = { "markdown", "md", "codecompanion", "opencode_output" },
+    ft = { "markdown", "md", "codecompanion" },
     keys = {
       { "<C-e>", "<cmd>Markview Toggle<cr>", desc = "Markiview toggle" },
     },
     opts = {
       experimental = { check_rtp = false },
       preview = {
-        filetypes = { "markdown", "codecompanion" },
+        filetypes = { "markdown", "codecompanion", "opencode_output" },
       },
     },
   },
   { -- MeanderingProgrammer/render-markdown.nvim
     "MeanderingProgrammer/render-markdown.nvim",
-    enabled = false,
-    ft = { "markdown", "md", "codecompanion", "Avante", "copilot-chat", "opencode_output" },
+    -- enabled = false,
+    ft = { "markdown", "md", "codecompanion", "Avante", "copilot-chat" },
     keys = {
       { "<C-e>", "<cmd>RenderMarkdown toggle<cr>", desc = "Markdown Render Toggle" },
     },
@@ -41,6 +41,9 @@ return {
     },
     opts = {
       file_types = { "markdown", "codecompanion", "Avante", "copilot-chat", "opencode-output" },
+      html = { enabled = false },
+      latex = { enabled = false },
+      yaml = { enabled = false },
       heading = { border = false, render_modes = true },
       bullet = { render_modes = false },
       anti_conceal = {
