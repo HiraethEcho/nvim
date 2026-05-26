@@ -1,4 +1,13 @@
 return {
+  {
+    "so1ve/tiny-treesitter.nvim",
+    -- lazy = false,
+    -- enabled = false,
+    event = "InsertEnter",
+    build = function()
+      require("tiny-treesitter").install({ "lua", "markdown", "latex" }, { wait = true })
+    end,
+  },
   { -- "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter",
     enabled = false,

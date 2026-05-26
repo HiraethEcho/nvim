@@ -86,6 +86,7 @@
   "time-machine.nvim": { "branch": "main", "commit": "6657a7db8a07ecfa8a266be34bebfb6827bb2eab" },
   "tiny-code-action.nvim": { "branch": "main", "commit": "0d040ed81f7953118b81cd12681fcdfcac069803" },
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "38b06435305c30966b7ceb0a43e460dc43acaada" },
+  "tiny-treesitter.nvim": { "branch": "main", "commit": "0bb25019b7d89319a65c4e797e11b04b96eebe55" },
   "treesj": { "branch": "main", "commit": "5fa4e7ba3517f8fe743bb4488f9e9c7ce83330fc" },
   "typst-preview.nvim": { "branch": "master", "commit": "325036ee145ca51d9efb145c09ac16bce3bc8b7d" },
   "url-open": { "branch": "mini", "commit": "7727e6146afea2254de08d0e65fd2cf904be338d" },
