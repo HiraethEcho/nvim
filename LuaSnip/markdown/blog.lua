@@ -5,6 +5,29 @@ local get_visual = function(args, parent)
     return sn(nil, i(1))
   end
 end
+local function gen_calendar()
+  local t = os.date("*t")
+  local y, m = t.year, t.month
+  local days = os.date("*t", os.time({ year = y, month = m + 1, day = 0 })).day
+  local first = os.date("*t", os.time({ year = y, month = m, day = 1 }))
+  local offset = (first.wday - 2) % 7
+  local iso_ref = tonumber(os.date("%V", os.time({ year = y, month = m, day = 1 - offset })))
+  local lines, d = {}, 1
+  while d <= days do
+    local cells = {}
+    for col = 0, 6 do
+      if (d == 1 and col < offset) or d > days then
+        table.insert(cells, "   ")
+      else
+        table.insert(cells, string.format("%-3d", d))
+        d = d + 1
+      end
+    end
+    table.insert(lines, string.format("| %-4d | %s |", iso_ref, table.concat(cells, " | ")))
+    iso_ref = iso_ref + 1
+  end
+  return lines
+end
 local snip = {
   s(
     { trig = "memexbak", name = "memex front meta", desc = "title, date, tag" },
@@ -105,6 +128,43 @@ local snip = {
           t("status: draft"),
           t(""),
         }),
+        head = rep(1),
+      }
+    )
+  ),
+  s(
+    { trig = "monthlog", name = "monthly diary log", desc = "monthly diary with calendar table" },
+    fmta(
+      [[
+    ---
+    title: <title>
+    date: <date>
+    summary: 流水账
+    tags:
+      - monthlog
+    categories: log
+    topics:
+    series:
+    draft: true
+
+    ---
+
+    # <head>
+
+    | Week | Mo  | Tu  | We  | Th  | Fr  | Sa  | Su  |
+    | ---- | --- | --- | --- | --- | --- | --- | --- |
+    <calendar>
+
+    ## summary
+
+    ## log
+
+    ## plan
+    ]],
+      {
+        title = i(1, os.date("%Y年%m月")),
+        date = p(os.date, "%Y-%m-%d"),
+        calendar = f(gen_calendar),
         head = rep(1),
       }
     )
