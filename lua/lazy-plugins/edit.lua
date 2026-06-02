@@ -18,7 +18,7 @@ return {
   { -- "numToStr/Comment.nvim",
     -- enabled = false,
     "numToStr/Comment.nvim",
-    keys = {
+     keys = {
       { "gcc", mode = "n", desc = "Comment toggle current line" },
       { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
       { "gc", mode = "x", desc = "Comment toggle linewise (visual)" },

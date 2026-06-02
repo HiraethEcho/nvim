@@ -76,3 +76,10 @@ opt.hidden = true -- 允许隐藏被修改过的buffer
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.autowrite = true -- Enable auto write
 
+-- Treesitter (built-in foldexpr)
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldenable = true
+

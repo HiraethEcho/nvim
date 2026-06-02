@@ -1,7 +1,49 @@
 return {
+  { -- "copilotlsp-nvim/copilot-lsp",
+    "copilotlsp-nvim/copilot-lsp",
+    enabled = false,
+    init = function()
+      vim.g.copilot_nes_debounce = 500
+      vim.lsp.enable("copilot_ls")
+      vim.keymap.set("n", "<tab>", function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local state = vim.b[bufnr].nes_state
+        if state then
+          -- Try to jump to the start of the suggestion edit.
+          -- If already at the start, then apply the pending suggestion and jump to the end of the edit.
+          local _ = require("copilot-lsp.nes").walk_cursor_start_edit()
+            or (require("copilot-lsp.nes").apply_pending_nes() and require("copilot-lsp.nes").walk_cursor_end_edit())
+          return nil
+        else
+          -- Resolving the terminal's inability to distinguish between `TAB` and `<C-i>` in normal mode
+          return "<C-i>"
+        end
+      end, { desc = "Accept Copilot NES suggestion", expr = true })
+    end,
+  },
+  { -- "github/copilot.vim",
+    "github/copilot.vim",
+    cmd = "Copilot",
+    -- event = "BufWinEnter",
+    enabled = false,
+    init = function()
+      vim.g.copilot_no_maps = true
+    end,
+    config = function()
+      -- Block the normal Copilot suggestions
+      vim.api.nvim_create_augroup("github_copilot", { clear = true })
+      vim.api.nvim_create_autocmd({ "FileType", "BufUnload" }, {
+        group = "github_copilot",
+        callback = function(args)
+          vim.fn["copilot#On" .. args.event]()
+        end,
+      })
+      vim.fn["copilot#OnFileType"]()
+    end,
+  },
   { -- copilot
     "zbirenbaum/copilot.lua",
-    -- enabled = false,
+    enabled = false,
     cmd = "Copilot",
     keys = { -- Example mapping to toggle outline
       { "<localleader>Cc", "<cmd>Copilot<CR>", desc = "Copilot" },
@@ -10,26 +52,14 @@ return {
       { "<localleader>Ca", "<cmd>Copilot attach<CR>", desc = "Copilot attach" },
       { "<localleader>Cp", "<cmd>Copilot panel<CR>", desc = "Copilot panel" },
     },
-    dependencies = { { "zbirenbaum/copilot-cmp", config = true } },
     opts = {
-      auth_provider_url = "https://github.com",
+      -- auth_provider_url = "https://github.com/",
       filetypes = { ["*"] = true },
-      panel = {
-        enabled = false,
-        auto_refresh = true,
-        keymap = {
-          jump_prev = "K",
-          jump_next = "J",
-        },
-        layout = {
-          position = "bottom", -- | top | left | right
-          ratio = 0.4,
-        },
-      },
+      panel = { enabled = false },
       suggestion = {
-        enabled = true,
+        enabled = false,
         auto_trigger = false,
-        hide_during_completion = false,
+        hide_during_completion = true,
         debounce = 75,
       },
     },
@@ -115,7 +145,7 @@ return {
   },
   { -- "sudo-tee/opencode.nvim",
     "sudo-tee/opencode.nvim",
-    -- enabled = false,
+    enabled = false,
     keys = {
       { "<localleader>oo", "<cmd>Opencode<cr>", desc = "Toggle Opencode" },
     },
@@ -297,7 +327,7 @@ return {
 
   { -- codecompanion
     "olimorris/codecompanion.nvim",
-    enabled = false,
+    -- enabled = false,
     -- event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -311,14 +341,6 @@ return {
       { "<localleader>ca", "<cmd>CodeCompanionActions<cr>", desc = "codecompanion action" },
     },
     opts = {
-      interactions = {
-        chat = {
-          adapter = {
-            name = "opencode",
-            model = "gpt-4.1",
-          },
-        },
-      },
       strategies = {
         chat = { adapter = "copilot" },
         inline = { adapter = "copilot" },

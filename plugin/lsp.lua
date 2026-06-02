@@ -10,7 +10,7 @@ local function map(mode, lhs, rhs, opts)
   opts.silent = opts.silent ~= false
   vim.keymap.set(mode, lhs, rhs, opts)
 end
-
+--[[
 vim.api.nvim_create_user_command("Lspstart", function(info)
   local server_name = string.len(info.args) > 0 and info.args or nil
   if server_name then
@@ -30,7 +30,8 @@ end, {
     end):totable()
   end,
 })
-
+]]
+--[[
 vim.api.nvim_create_user_command("Lspstop", function(info)
   ---@type string
   local args = info.args
@@ -68,6 +69,7 @@ end, {
     end):totable()
   end,
 })
+]]
 
 -- map("n", "ga", vim.lsp.buf.code_action, { silent = true, buffer = bufnr, desc = "LSP code action" }) -- using tiny-code-action
 -- map("n", "gR", vim.lsp.buf.rename, { silent = true, buffer = bufnr, desc = "LSP renamecode_action" })
@@ -77,3 +79,5 @@ end, {
 -- map("n", "<c-k>", vim.lsp.buf.signature_help, { silent = true, buffer = bufnr, desc = "LSP signature help" })
 -- Goto previous/next diagnostic warning/error
 map("v", "<leader>F", vim.lsp.buf.format, { silent = true, buffer = bufnr, desc = "LSP format in range" })
+
+vim.lsp.enable("copilot")

@@ -36,6 +36,7 @@ return {
   },
   { -- "mfussenegger/nvim-lint",
     "mfussenegger/nvim-lint",
+    enabled = false,
     -- event = { "BufReadPre", "BufNewFile" },
     keys = {
       {

@@ -8,17 +8,40 @@ return {
       require("tiny-treesitter").install({ "lua", "markdown", "latex" }, { wait = true })
     end,
   },
+  { -- "nvim-treesitter/nvim-treesitter-context",
+    "nvim-treesitter/nvim-treesitter-context",
+    -- enabled = false,
+    cmd = "TSContext enable",
+    keys = {
+      { "<leader>ut", "<cmd>TSContext toggle<cr>", desc = "toggle treesitter context" },
+    },
+    opts = {
+      max_lines = 3,
+    },
+  },
   { -- "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter",
     enabled = false,
+    commit = nil,
     -- branch = "master",
     branch = "main",
     -- version = false, -- last release is way too old and doesn't work on Windows
     -- lazy = false,
     -- cmd = "TSEnable",
-    build = ":TSUpdate",
     -- event = "VeryLazy",
     -- event = { "BufReadPost", "BufNewFile" },
+    build = function()
+      local TS = require("nvim-treesitter")
+      if not TS.get_installed then
+        LazyVim.error("Please restart Neovim and run `:TSUpdate` to use the `nvim-treesitter` **main** branch.")
+        return
+      end
+      -- make sure we're using the latest treesitter util
+      package.loaded["lazyvim.util.treesitter"] = nil
+      LazyVim.treesitter.build(function()
+        TS.update(nil, { summary = true })
+      end)
+    end,
     dependencies = {
       -- "kevinhwang91/nvim-ufo",
       -- "hiphish/rainbow-delimiters.nvim",
@@ -70,17 +93,6 @@ return {
     end,
     ]]
   },
-  { -- "nvim-treesitter/nvim-treesitter-context",
-    "nvim-treesitter/nvim-treesitter-context",
-    enabled = false,
-    cmd = "TSContext enable",
-    keys = {
-      { "<leader>ut", "<cmd>TSContext toggle<cr>", desc = "toggle treesitter context" },
-    },
-    opts = {
-      max_lines = 3,
-    },
-  },
   { -- "code-biscuits/nvim-biscuits",
     "code-biscuits/nvim-biscuits",
     keys = {
@@ -96,7 +108,7 @@ return {
       },
     },
     dependencies = {
-      "nvim-treesitter/nvim-treesitter",
+      -- "nvim-treesitter/nvim-treesitter",
     },
     opts = {
       cursor_line_only = true,

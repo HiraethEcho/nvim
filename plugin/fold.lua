@@ -5,7 +5,6 @@ vim.o.foldenable = true
 vim.o.foldmethod = 'expr'
 vim.o.fillchars = [[eob: ,fold:·,foldopen:,foldsep: ,foldclose:]]
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
--- opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- vim.o.foldminlines = 0 -- Allow folding/hiding single lines
 
 -- Source: https://www.reddit.com/r/neovim/comments/1fzn1zt/custom_fold_text_function_with_treesitter_syntax/

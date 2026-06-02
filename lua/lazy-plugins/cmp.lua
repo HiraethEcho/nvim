@@ -6,7 +6,7 @@ return {
     version = "*",
     dependencies = {
       { "saghen/blink.compat", version = "*", opts = {} },
-      "nvim-treesitter/nvim-treesitter",
+      -- "nvim-treesitter/nvim-treesitter",
       "zbirenbaum/copilot.lua",
       "fang2hou/blink-copilot",
       -- "olimorris/codecompanion.nvim",
@@ -56,8 +56,8 @@ return {
           mkdnflow = { name = "Mkdnflow", module = "mkdnflow.completion.blink" },
           snippets = { score_offset = 200 },
           -- ultisnips = { score_offset = 200, name = "ultisnips", module = "blink.compat.source" },
-          buffer = { score_offset = 150, opts = { get_bufnrs = vim.api.nvim_list_bufs } },
-          copilot = { score_offset = 100, name = "copilot", module = "blink-copilot", async = true },
+          buffer = { score_offset = 100, opts = { get_bufnrs = vim.api.nvim_list_bufs } },
+          copilot = { score_offset = 150, name = "copilot", module = "blink-copilot", async = true },
           -- minuet = { score_offset = 200, name = "minuet", module = "minuet.blink" },
           -- avante = { name = "avante", module = "blink-cmp-avante", opts = {} },
           -- lazydev = { score_offset = 100, name = "LazyDev", module = "lazydev.integrations.blink" },
@@ -89,7 +89,6 @@ return {
         },
       },
     },
-    -- opts_extend = { "sources.default" },
   },
   { -- "hrsh7th/nvim-cmp",
     "hrsh7th/nvim-cmp",
@@ -249,15 +248,5 @@ return {
         require("luasnip.extras.select_choice")()
       end, { silent = true }) ]]
     end,
-  },
-  { -- "folke/lazydev.nvim",
-    "folke/lazydev.nvim",
-    enabled = false,
-    ft = "lua", -- only load on lua files
-    opts = {
-      library = { { path = "${3rd}/luv/library", words = { "vim%.uv" } } },
-      integrations = { lspconfig = true, cmp = true },
-      enabled = true,
-    },
   },
 }

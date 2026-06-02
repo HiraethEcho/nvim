@@ -1,19 +1,4 @@
 return {
-  { -- "phaazon/hop.nvim",
-    "phaazon/hop.nvim",
-    -- event = "BufRead",
-    -- enabled = false,
-    keys = {
-      -- {'<leader>j', "<cmd>lua require'hop'.hint_vertical()<cr>",  mode={"n","v"}},
-      -- {'F', "<cmd>lua require'hop'.hint_char1()<cr>", mode={"n","v"}},
-      -- { "f",               ":HopChar1<cr>",    desc = "Hop Char",    { noremap = true, silent = true } },
-      { "W", ":HopWord<cr>", desc = "Hop Word", { noremap = true, silent = true } },
-      { "<leader><space>", ":HopAnywhere<cr>", desc = "HopAnywhere", { noremap = true, silent = true } },
-    },
-    config = function()
-      require("hop").setup()
-    end,
-  },
   { -- "folke/flash.nvim",
     "folke/flash.nvim",
     -- event = "VeryLazy",
