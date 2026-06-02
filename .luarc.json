@@ -3,6 +3,7 @@
     "diagnostics.disable": [
         "undefined-global",
         "unused-local",
+        "missing-files",
         "deprecated"
     ]
 }

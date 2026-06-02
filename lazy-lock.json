@@ -17,7 +17,9 @@
   "codecompanion-spinner.nvim": { "branch": "main", "commit": "41c22e1fc2666c916b4be329e322368f5f86451e" },
   "codecompanion.nvim": { "branch": "main", "commit": "57989aca2e92083b16a2500ad47f285d82d5c43b" },
   "conform.nvim": { "branch": "master", "commit": "619363c30309d29ffa631e67c8183f2a72caa373" },
+  "copilot-lsp": { "branch": "main", "commit": "1b6d8273594643f51bb4c0c1d819bdb21b42159d" },
   "copilot.lua": { "branch": "master", "commit": "7b89909d0647c89298de880255b287b01b7e5d34" },
+  "copilot.vim": { "branch": "release", "commit": "a12fd5672110c8aa7e3c8419e28c96943ca179be" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "everforest-nvim": { "branch": "main", "commit": "d235ca0aa6a29546e661a020e2618612acbbffbe" },
   "fcitx.nvim": { "branch": "main", "commit": "fbfd1025aa2d314850f3114d6d2f27f5849ea1de" },
@@ -97,5 +99,5 @@
   "volt": { "branch": "main", "commit": "620de1321f275ec9d80028c68d1b88b409c0c8b1" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
   "xcodedark.nvim": { "branch": "main", "commit": "1e39372b9d40a4b690d5a21b9d49eaa5d50e3fbe" },
-  "yazi.nvim": { "branch": "main", "commit": "796cac37605611c19968c0b0cdfd16bb120bce01" }
+  "yazi.nvim": { "branch": "main", "commit": "0f4d83428b7c39e1bdb7e4813ea963b87a16697c" }
 }

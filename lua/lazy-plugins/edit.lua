@@ -10,15 +10,13 @@ return {
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "BufRead",
     config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
+      require("nvim-surround").setup({})
     end,
   },
   { -- "numToStr/Comment.nvim",
-    -- enabled = false,
     "numToStr/Comment.nvim",
-     keys = {
+    -- enabled = false,
+    keys = {
       { "gcc", mode = "n", desc = "Comment toggle current line" },
       { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
       { "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
@@ -32,14 +30,9 @@ return {
     "tigion/swap.nvim",
     -- enabled = false,
     -- event = { 'BufReadPost', 'BufNewFile' },
+    -- stylua: ignore
     keys = {
-      {
-        "<Leader>i",
-        function()
-          require("swap").switch()
-        end,
-        desc = "Swap word",
-      },
+      { "<Leader>i", function() require("swap").switch() end, desc = "Swap word", },
       -- { '<Leader>I', function() require('swap').opposites.switch() end, desc = 'Swap to opposite word' },
       -- { '<Leader>I', function() require('swap').chains.switch() end, desc = 'Swap to next word' },
       -- { '<Leader>I', function() require('swap').cases.switch() end, desc = 'Swap naming convention' },
@@ -103,20 +96,6 @@ return {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = { map_bs = false },
-    --[[ config = function()
-      require("nvim-autopairs").setup({ map_bs = false })
-      local Rule = require("nvim-autopairs.rule")
-      local npairs = require("nvim-autopairs")
-      npairs.add_rules({
-        Rule("「", "」", "markdown"),
-      })
-    end, ]]
-  },
-  { -- "sontungexpt/bim.nvim",
-    "sontungexpt/bim.nvim",
-    enabled = false,
-    event = "InsertEnter",
-    config = true,
   },
   { -- "echasnovski/mini.splitjoin",
     "echasnovski/mini.splitjoin",
@@ -129,85 +108,18 @@ return {
     "folke/todo-comments.nvim",
     enabled = false,
     dependencies = { "nvim-lua/plenary.nvim" },
+    -- stylua: ignore
     keys = {
-      {
-        "<leader>st",
-        function()
-          Snacks.picker.todo_comments()
-        end,
-        desc = "Todo",
-      },
-      {
-        "<leader>sT",
-        function()
-          Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
-        end,
-        desc = "Todo/Fix/Fixme",
-      },
-      {
-        "]t",
-        function()
-          require("todo-comments").jump_next()
-        end,
-        desc = "Next todo comments",
-        mode = { "n" },
-      },
-      {
-        "[t",
-        function()
-          require("todo-comments").jump_prev()
-        end,
-        desc = "Previous todo comments",
-        mode = { "n" },
-      },
-      {
-        "]f",
-        function()
-          require("todo-comments").jump_next({ keywords = { "FIX", "WARN" } })
-        end,
-        desc = "Next error/warning comments",
-        mode = { "n" },
-      },
-      {
-        "[f",
-        function()
-          require("todo-comments").jump_prev({ keywords = { "FIX", "WARN" } })
-        end,
-        desc = "Previous error/warning comments",
-        mode = { "n" },
-      },
-      {
-        "]q",
-        function()
-          require("todo-comments").jump_next({ keywords = { "QUES" } })
-        end,
-        desc = "Next question",
-        mode = { "n" },
-      },
-      {
-        "[q",
-        function()
-          require("todo-comments").jump_prev({ keywords = { "QUES" } })
-        end,
-        desc = "Previous question",
-        mode = { "n" },
-      },
-      {
-        "]n",
-        function()
-          require("todo-comments").jump_next({ keywords = { "NOTE" } })
-        end,
-        desc = "Next note",
-        mode = { "n" },
-      },
-      {
-        "[n",
-        function()
-          require("todo-comments").jump_prev({ keywords = { "NOTE" } })
-        end,
-        desc = "Previous note",
-        mode = { "n" },
-      },
+      { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo", },
+      { "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme", },
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comments", mode = { "n" }, },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comments", mode = { "n" }, },
+      { "]f", function() require("todo-comments").jump_next({ keywords = { "FIX", "WARN" } }) end, desc = "Next error/warning comments", mode = { "n" }, },
+      { "[f", function() require("todo-comments").jump_prev({ keywords = { "FIX", "WARN" } }) end, desc = "Previous error/warning comments", mode = { "n" }, },
+      { "]q", function() require("todo-comments").jump_next({ keywords = { "QUES" } }) end, desc = "Next question", mode = { "n" }, },
+      { "[q", function() require("todo-comments").jump_prev({ keywords = { "QUES" } }) end, desc = "Previous question", mode = { "n" }, },
+      { "]n", function() require("todo-comments").jump_next({ keywords = { "NOTE" } }) end, desc = "Next note", mode = { "n" }, },
+      { "[n", function() require("todo-comments").jump_prev({ keywords = { "NOTE" } }) end, desc = "Previous note", mode = { "n" }, },
     },
     cmd = { "TodoLocList", "TodoTelescope", "TodoQuickFix" },
     opts = {
@@ -224,9 +136,7 @@ return {
         WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
         NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
       },
-      gui_style = {
-        bg = "BOLD", -- The gui style to use for the bg highlight group.
-      },
+      gui_style = { bg = "BOLD" },
       merge_keywords = true, -- when true, custom keywords will be merged with the defaults
       -- list of named colors where we try to extract the guifg from the
       -- list of highlight groups or use the hex color if hl not found as a fallback
@@ -254,8 +164,6 @@ return {
         height = 1, -- height of the Zen window
       },
       plugins = {
-        -- disable some global vim options (vim.o...)
-        -- comment the lines to not apply the options
         twilight = { enabled = false }, -- enable to start Twilight when zen mode opens
       },
     },
@@ -292,6 +200,7 @@ return {
   },
   { -- "y3owk1n/time-machine.nvim",
     "y3owk1n/time-machine.nvim",
+    enabled = false,
     version = "*", -- remove this if you want to use the `main` branch
     cmd = {
       "TimeMachineToggle",
@@ -329,28 +238,6 @@ return {
       ignore_filesize = nil, -- e.g. 10 * 1024 * 1024
     },
   },
-  { -- "uga-rosa/translate.nvim",
-    "uga-rosa/translate.nvim",
-    enabled = false,
-    cmd = "Translate",
-    opts = {
-      default = {
-        command = "translate_shell",
-        output = "floating",
-      },
-      preset = {
-        output = {
-          insert = {
-            base = "top",
-            off = -1,
-          },
-          split = {
-            append = true,
-          },
-        },
-      },
-    },
-  },
   { -- "voldikss/vim-translator",
     "voldikss/vim-translator",
     -- enabled = false,
@@ -363,14 +250,5 @@ return {
       vim.g.translator_history_enable = true
       vim.g.translator_default_engines = { "bing", "youdao" }
     end,
-  },
-  { -- "soemre/commentless.nvim",
-    "soemre/commentless.nvim",
-    enabled = false,
-    cmd = "Commentless",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = true,
   },
 }
