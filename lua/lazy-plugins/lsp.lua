@@ -54,9 +54,7 @@ return {
       { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" },
     },
     build = ":MasonUpdate",
-    config = function()
-      require("mason").setup()
-    end,
+    opts = {},
   },
   { -- "rachartier/tiny-code-action.nvim",
     "rachartier/tiny-code-action.nvim",

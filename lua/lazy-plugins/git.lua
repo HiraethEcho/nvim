@@ -28,28 +28,25 @@ return {
       -- { "<leader>hh" , "<cmd>Gitsigns get_hunks<cr>"    , desc = "get hunk list" } ,
     },
     -- dependencies = { "akinsho/git-conflict.nvim" },
-    config = function()
-      require("gitsigns").setup({
-        signcolumn = false, -- toggle with `:gitsigns toggle_signs`
-        numhl = false, -- toggle with `:gitsigns toggle_numhl`
-        linehl = false, -- toggle with `:gitsigns toggle_linehl`
-        word_diff = false, -- toggle with `:gitsigns toggle_word_diff`
-        watch_gitdir = {
-          interval = 1000,
-          follow_files = true,
-        },
-        attach_to_untracked = true,
-        current_line_blame = false, -- toggle with `:gitsigns toggle_current_line_blame`
-        current_line_blame_opts = {
-          virt_text = true,
-          virt_text_pos = "overlay", -- 'eol' | 'overlay' | 'right_align'
-          delay = 200,
-          ignore_whitespace = true,
-        },
-        current_line_blame_formatter = "<summary>, <author_time:%y-%m-%d>",
-      })
-      -- require("scrollbar.handlers.gitsigns").setup()
-    end,
+    opts = {
+      signcolumn = false,
+      numhl = false,
+      linehl = false,
+      word_diff = false,
+      watch_gitdir = {
+        interval = 1000,
+        follow_files = true,
+      },
+      attach_to_untracked = true,
+      current_line_blame = false,
+      current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = "overlay",
+        delay = 200,
+        ignore_whitespace = true,
+      },
+      current_line_blame_formatter = "<summary>, <author_time:%y-%m-%d>",
+    },
   },
   { -- "cvlmtg/inline-diff.nvim",
     "cvlmtg/inline-diff.nvim",

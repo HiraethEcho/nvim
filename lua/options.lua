@@ -9,7 +9,6 @@ opt.expandtab = true -- Use spaces instead of tabs
 opt.mouse = "a" -- Enable mouse mode
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
-opt.expandtab = true -- convert tabs to spaces
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.smartindent = true -- Insert indents automatically
 opt.formatoptions = "jcqnt" -- tcqj
@@ -76,10 +75,4 @@ opt.hidden = true -- 允许隐藏被修改过的buffer
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.autowrite = true -- Enable auto write
 
--- Treesitter (built-in foldexpr)
-opt.foldmethod = "expr"
-opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-opt.foldlevel = 99
-opt.foldlevelstart = 99
-opt.foldenable = true
 

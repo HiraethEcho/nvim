@@ -1,23 +1,16 @@
---[[ local capabilities = require("blink.cmp").get_lsp_capabilities()
-      -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      vim.lsp.config('*', {
-        root_markers = { '.obsidian', '.git' },
-        capabilities = capabilities,
-        offset_encoding = "utf-8",
-      }) ]]
 local function map(mode, lhs, rhs, opts)
   opts = opts or {}
   opts.silent = opts.silent ~= false
   vim.keymap.set(mode, lhs, rhs, opts)
 end
---[[
+
 vim.api.nvim_create_user_command("Lspstart", function(info)
-  local server_name = string.len(info.args) > 0 and info.args or nil
+  local server_name = #info.args > 0 and info.args or nil
   if server_name then
     vim.lsp.enable(server_name)
   end
 end, {
-  desc = "Manually launches a language server",
+  desc = "Start a language server",
   nargs = "?",
   complete = function(arg_lead)
     local configured = vim.tbl_keys(vim.lsp.get_config())
@@ -30,36 +23,22 @@ end, {
     end):totable()
   end,
 })
-]]
---[[
+
 vim.api.nvim_create_user_command("Lspstop", function(info)
-  ---@type string
-  local args = info.args
-  local force = false
-  args = args:gsub("%+%+force", function()
-    force = true
-    return ""
-  end)
-
+  local args = vim.trim(info.args)
   local clients = {}
-
-  -- default to stopping all servers on current buffer
   if #args == 0 then
     clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
   else
-    clients = {}
     for _, name in ipairs(vim.split(args, "%s+")) do
       vim.list_extend(clients, vim.lsp.get_clients({ name = name }))
     end
   end
-
   for _, client in ipairs(clients) do
-    -- Can remove diagnostic disabling when changing to client:stop(force) in nvim 0.11+
-    --- @diagnostic disable: param-type-mismatch
-    client.stop(force)
+    client:stop()
   end
 end, {
-  desc = "Manually stops the given language client(s)",
+  desc = "Stop language client(s)",
   nargs = "?",
   complete = function(arg_lead)
     return vim.iter(vim.lsp.get_clients()):map(function(c)
@@ -69,15 +48,37 @@ end, {
     end):totable()
   end,
 })
-]]
 
--- map("n", "ga", vim.lsp.buf.code_action, { silent = true, buffer = bufnr, desc = "LSP code action" }) -- using tiny-code-action
--- map("n", "gR", vim.lsp.buf.rename, { silent = true, buffer = bufnr, desc = "LSP renamecode_action" })
+vim.api.nvim_create_user_command("Lsprestart", function(info)
+  local buf_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+  local names = {}
+  if #info.args > 0 then
+    names = vim.split(info.args, "%s+")
+  else
+    names = vim.tbl_map(function(c) return c.name end, buf_clients)
+  end
+  for _, name in ipairs(names) do
+    for _, client in ipairs(vim.lsp.get_clients({ name = name })) do
+      client:stop()
+    end
+    vim.lsp.enable(name)
+  end
+end, {
+  desc = "Restart language client(s)",
+  nargs = "?",
+  complete = function(arg_lead)
+    return vim.iter(vim.lsp.get_clients()):map(function(c)
+      return c.name
+    end):filter(function(name)
+      return name:find(arg_lead) ~= nil
+    end):totable()
+  end,
+})
 
--- map("n", "K", vim.lsp.buf.hover, { silent = true, buffer = bufnr, desc = "LSP hover" })
--- map("n", "gD", vim.lsp.buf.implementation, { silent = true, buffer = bufnr, desc = "LSP implementation" })
--- map("n", "<c-k>", vim.lsp.buf.signature_help, { silent = true, buffer = bufnr, desc = "LSP signature help" })
--- Goto previous/next diagnostic warning/error
-map("v", "<leader>F", vim.lsp.buf.format, { silent = true, buffer = bufnr, desc = "LSP format in range" })
+map("n", "<leader>ll", "<cmd>Lspstart<cr>", { desc = "Start LSP" })
+map("n", "<leader>ls", "<cmd>Lspstop<cr>", { desc = "Stop LSP" })
+map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP info" })
+map("n", "<leader>lL", "<cmd>Lsprestart<cr>", { desc = "Restart LSP" })
+map("v", "<leader>F", vim.lsp.buf.format, { desc = "LSP format range" })
 
 vim.lsp.enable("copilot")

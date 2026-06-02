@@ -1,7 +1,7 @@
 return {
   { -- "copilotlsp-nvim/copilot-lsp",
     "copilotlsp-nvim/copilot-lsp",
-    enabled = false,
+    -- enabled = false,
     init = function()
       vim.g.copilot_nes_debounce = 500
       vim.lsp.enable("copilot_ls")
@@ -25,7 +25,7 @@ return {
     "github/copilot.vim",
     cmd = "Copilot",
     -- event = "BufWinEnter",
-    enabled = false,
+    -- enabled = false,
     init = function()
       vim.g.copilot_no_maps = true
     end,
@@ -66,6 +66,7 @@ return {
   },
   { -- "carlos-algms/agentic.nvim",
     "carlos-algms/agentic.nvim",
+    enabled = false,
     opts = {
       -- Any ACP-compatible provider works. Built-in: "claude-agent-acp" | "gemini-acp" | "codex-acp" | "opencode-acp" | "cursor-acp" | "copilot-acp" | "auggie-acp" | "mistral-vibe-acp" | "cline-acp" | "goose-acp" | "kiro-acp" | "pi-acp"
       provider = "opencode-acp", -- setting the name here is all you need to get started
@@ -129,8 +130,8 @@ return {
       },
     },
     -- these are just suggested keymaps; customize as desired
+    -- stylua: ignored
     keys = {
-      -- stylua: ignore start
       { "<localleader>aa", function() require("agentic").toggle() end, mode = { "n", "v", "i" }, desc = "Toggle Agentic Chat", },
       { "<localleader>aA", function() require("agentic").add_selection_or_file_to_context() end, mode = { "n", "v" }, desc = "Add file or selection to Agentic to Context", },
       { "<localleader>an", function() require("agentic").new_session() end, mode = { "n", "v", "i" }, desc = "New Agentic Session", },
@@ -140,7 +141,6 @@ return {
       { "<localleader>ad",  function() require("agentic").add_current_line_diagnostics() end, desc = "Add current line diagnostic to Agentic", mode = { "n" }, },
       -- ai all Diagnostics
       { "<localleader>aD", function() require("agentic").add_buffer_diagnostics() end, desc = "Add all buffer diagnostics to Agentic", mode = { "n" }, },
-      -- sytlua: ignore stop
     },
   },
   { -- "sudo-tee/opencode.nvim",
@@ -333,7 +333,7 @@ return {
       "nvim-lua/plenary.nvim",
       "franco-ruggeri/codecompanion-spinner.nvim",
       -- "ravitemer/mcphub.nvim",
-      "nvim-treesitter/nvim-treesitter",
+      -- "nvim-treesitter/nvim-treesitter",
       -- "Davidyz/VectorCode",
     },
     keys = {
@@ -496,73 +496,5 @@ return {
       input = { provider = "snacks" },
       hints = { enabled = false },
     },
-  },
-  { -- mcphub
-    "ravitemer/mcphub.nvim",
-    enabled = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
-    config = function()
-      require("mcphub").setup({
-        config = vim.fn.expand("~/.config/mcphub/global.json"), -- Absolute path to MCP Servers config file (will create if not exists)
-        ---Chat-plugin related options-----------------
-        auto_approve = false, -- Auto approve mcp tool calls
-        auto_toggle_mcp_servers = true, -- Let LLMs start and stop MCP servers automatically
-        extensions = {
-          avante = { make_slash_commands = true },
-          copilotchat = {
-            enabled = true,
-            convert_tools_to_functions = true, -- Convert MCP tools to CopilotChat functions
-            convert_resources_to_functions = true, -- Convert MCP resources to CopilotChat functions
-            add_mcp_prefix = false, -- Add "mcp_" prefix to function names
-          },
-        },
-        builtin_tools = {
-          edit_file = {
-            parser = {
-              track_issues = true, -- Track parsing issues for LLM feedback
-              extract_inline_content = true, -- Handle content on marker lines
-            },
-            locator = {
-              fuzzy_threshold = 0.8, -- Minimum similarity for fuzzy matches (0.0-1.0)
-              enable_fuzzy_matching = true, -- Allow fuzzy matching when exact fails
-            },
-            ui = {
-              go_to_origin_on_complete = true, -- Jump back to original file on completion
-              keybindings = {
-                accept = ".", -- Accept current change
-                reject = ",", -- Reject current change
-                next = "n", -- Next diff
-                prev = "p", -- Previous diff
-                accept_all = "ga", -- Accept all remaining changes
-                reject_all = "gr", -- Reject all remaining changes
-              },
-            },
-            feedback = {
-              include_parser_feedback = true, -- Include parsing feedback for LLM
-              include_locator_feedback = true, -- Include location feedback for LLM
-              include_ui_summary = true, -- Include UI interaction summary
-              ui = {
-                include_session_summary = true, -- Include session summary in feedback
-                include_final_diff = true, -- Include final diff in feedback
-                send_diagnostics = true, -- Include diagnostics after editing
-                wait_for_diagnostics = 500, -- Wait time for diagnostics (ms)
-                diagnostic_severity = vim.diagnostic.severity.WARN, -- Min severity to include
-              },
-            },
-          },
-        },
-        --- Plugin specific options-------------------
-        native_servers = {}, -- add your custom lua native servers here
-        on_ready = function(hub)
-          vim.notify("MCP HUB is ready")
-        end,
-        on_error = function(err)
-          vim.notify("MCP HUB error")
-        end,
-      })
-    end,
   },
 }
