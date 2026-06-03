@@ -5,7 +5,7 @@ return {
     -- enabled = false,
     event = "InsertEnter",
     build = function()
-      require("tiny-treesitter").install({ "lua", "markdown", "latex" }, { wait = true })
+      require("tiny-treesitter").install({ "lua", "markdown", "latex", "bash" }, { wait = true })
     end,
   },
   { -- "nvim-treesitter/nvim-treesitter-context",
@@ -19,79 +19,26 @@ return {
       max_lines = 3,
     },
   },
-  { -- "nvim-treesitter/nvim-treesitter",
+  {
     "nvim-treesitter/nvim-treesitter",
     enabled = false,
-    commit = nil,
-    -- branch = "master",
+    lazy = false,
+    cmd = "TSEnable",
     branch = "main",
-    -- version = false, -- last release is way too old and doesn't work on Windows
-    -- lazy = false,
-    -- cmd = "TSEnable",
-    -- event = "VeryLazy",
-    -- event = { "BufReadPost", "BufNewFile" },
-    build = function()
-      local TS = require("nvim-treesitter")
-      if not TS.get_installed then
-        LazyVim.error("Please restart Neovim and run `:TSUpdate` to use the `nvim-treesitter` **main** branch.")
-        return
-      end
-      -- make sure we're using the latest treesitter util
-      package.loaded["lazyvim.util.treesitter"] = nil
-      LazyVim.treesitter.build(function()
-        TS.update(nil, { summary = true })
-      end)
-    end,
-    dependencies = {
-      -- "kevinhwang91/nvim-ufo",
-      -- "hiphish/rainbow-delimiters.nvim",
-      -- 'anuvyklack/pretty-fold.nvim',
-    },
-    --[[
-    opts = {
-      indent = { enable = true },
-      ensure_installed = {
-        -- "c",
-        -- "html",
-        -- "lua",
-        -- "markdown",
-        -- "markdown_inline",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "vv",
-          node_incremental = "<cr>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
-    },
-  --]]
+    build = ":TSUpdate",
     init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        callback = function()
-          pcall(vim.treesitter.start)
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end,
+      require("nvim-treesitter").install({
+        "python",
+        "javascript",
+        "typescript",
+        "html",
+        "css",
+        "lua",
+        "vim",
+        "markdown",
+        "latex",
       })
     end,
-    --[[
-    config = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        local added = {}
-        opts.ensure_installed = vim.tbl_filter(function(lang)
-          if added[lang] then
-            return false
-          end
-          added[lang] = true
-          return true
-        end, opts.ensure_installed)
-      end
-      table.insert(opts.ensure_installed, "latex") -- extend but not merge
-      require("nvim-treesitter.configs").setup(opts)
-    end,
-    ]]
   },
   { -- "code-biscuits/nvim-biscuits",
     "code-biscuits/nvim-biscuits",

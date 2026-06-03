@@ -14,8 +14,11 @@ return {
     end,
   },
   { -- "numToStr/Comment.nvim",
-    "numToStr/Comment.nvim",
+    "hiraethecho/Comment.nvim",
     -- enabled = false,
+    dependencies = {
+      -- "nvim-treesitter/nvim-treesitter",
+    },
     keys = {
       { "gcc", mode = "n", desc = "Comment toggle current line" },
       { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },

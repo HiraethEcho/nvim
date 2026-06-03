@@ -81,6 +81,25 @@ return {
     ft = "markdown",
     config = true,
   },
+  {
+    "brianhuster/live-preview.nvim",
+    -- lazy = false,
+    dependencies = {
+      "folke/snacks.nvim",
+    },
+    cmd = { "LivePreview Start" },
+    keys = {
+      { "<leader>mP", "<cmd>LivePreview start<cr>", desc = "Live Preview" },
+    },
+    opt = {
+      port = 5500,
+      browser = "default",
+      dynamic_root = false,
+      sync_scroll = true,
+      picker = "",
+      address = "127.0.0.1",
+    },
+  },
   { -- iamcco/markdown-preview.nvim
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",

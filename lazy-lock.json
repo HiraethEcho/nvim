@@ -1,5 +1,5 @@
 {
-  "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
+  "Comment.nvim": { "branch": "master", "commit": "a37bbe8ff90fa85b062917f55ba3b50aaf2f6a63" },
   "LuaSnip": { "branch": "master", "commit": "642b0c595e11608b4c18219e93b88d7637af27bc" },
   "NeoCyberVim": { "branch": "main", "commit": "40e2de86b6415ae6e0ece7f2aeb26e34017dd698" },
   "agentic.nvim": { "branch": "main", "commit": "b6529a4749ee72ba64e40401e4b25d0ef7cdb81e" },
@@ -36,6 +36,7 @@
   "inline-diff.nvim": { "branch": "main", "commit": "00cc027fe599e7b560849bee52826b6622860970" },
   "lazy.nvim": { "branch": "main", "commit": "85c7ff3711b730b4030d03144f6db6375044ae82" },
   "lightswitch.nvim": { "branch": "main", "commit": "3cf2f81a3720ca80d5798772dce6760df9aca4f4" },
+  "live-preview.nvim": { "branch": "main", "commit": "c1fcf75c5f9c9c01dd392852de44204b60f1b5b1" },
   "ltex_extra.nvim": { "branch": "master", "commit": "49ea83c231139d98b7c9668c99e7b4591421b056" },
   "lualine.nvim": { "branch": "master", "commit": "221ce6b2d999187044529f49da6554a92f740a96" },
   "m_taskwarrior_d.nvim": { "branch": "main", "commit": "e18ac5f3b73066113ebc153003c208d32ff752d3" },
