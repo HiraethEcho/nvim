@@ -5,15 +5,11 @@ return {
     event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
     dependencies = {
-      { "saghen/blink.compat", version = "*", opts = {} },
+      -- { "saghen/blink.compat", version = "*", opts = {} },
       -- "nvim-treesitter/nvim-treesitter",
-      "zbirenbaum/copilot.lua",
+      -- "zbirenbaum/copilot.lua",
+      "copilotlsp-nvim/copilot-lsp",
       "fang2hou/blink-copilot",
-      -- "olimorris/codecompanion.nvim",
-      -- "milanglacier/minuet-ai.nvim",
-      -- "Kaiser-Yang/blink-cmp-avante",
-      -- { "quangnguyen30192/cmp-nvim-ultisnips", config = true },
-      -- "SirVer/ultisnips",
       "L3MON4D3/LuaSnip",
     },
     opts = {
@@ -28,7 +24,8 @@ return {
         ["<Down>"] = { "select_next", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
         ["<C-e>"] = { "cancel", "fallback" },
-        --[[ ["<C-j>"] = { "snippet_forward", "fallback" },
+        --[[ 
+        ["<C-j>"] = { "snippet_forward", "fallback" },
         ["<C-k>"] = { "snippet_backward", "fallback" },
         ["<C-n>"] = { function() if require("luasnip").choice_active() then require("luasnip").change_choice(1) return true end end, "fallback", },
         ["<C-p>"] = { function() if require("luasnip").choice_active() then require("luasnip").change_choice(-1) return true end end, "fallback", }, 
@@ -46,25 +43,16 @@ return {
         ghost_text = { enabled = true },
       },
       sources = {
-        -- default = { "ultisnips", "lsp", "path", "buffer", "copilot" },
-        -- default = { "snippets", "lsp", "path", "buffer", "copilot", "lazydev" },
-        -- default = { "ultisnips", "lsp", "path", "buffer" },
-        -- default = { "ultisnips", "snippets", "lsp", "path", "buffer", "copilot" },
         default = { "snippets", "lsp", "path", "buffer", "copilot", "mkdnflow" },
         -- default = { "snippets", "lsp", "path", "buffer" },
         providers = {
           mkdnflow = { name = "Mkdnflow", module = "mkdnflow.completion.blink" },
           snippets = { score_offset = 200 },
-          -- ultisnips = { score_offset = 200, name = "ultisnips", module = "blink.compat.source" },
           buffer = { score_offset = 100, opts = { get_bufnrs = vim.api.nvim_list_bufs } },
           copilot = { score_offset = 150, name = "copilot", module = "blink-copilot", async = true },
-          -- minuet = { score_offset = 200, name = "minuet", module = "minuet.blink" },
-          -- avante = { name = "avante", module = "blink-cmp-avante", opts = {} },
-          -- lazydev = { score_offset = 100, name = "LazyDev", module = "lazydev.integrations.blink" },
         },
       },
       cmdline = {
-        -- enabled = false,
         sources = function()
           local type = vim.fn.getcmdtype()
           if type == "/" or type == "?" then
@@ -239,14 +227,6 @@ return {
           ls.change_choice(-1)
         end
       end)
-      --[[ vim.keymap.set({ "i", "s" }, "<C-e>", function()
-        if ls.choice_active() then
-          ls.change_choice(1)
-        end
-      end, { silent = true }) ]]
-      --[[ vim.keymap.set({ "i", "s" }, "<C-e>", function()
-        require("luasnip.extras.select_choice")()
-      end, { silent = true }) ]]
     end,
   },
 }

@@ -102,6 +102,13 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 }) ]]
 
+vim.api.nvim_create_autocmd("InsertEnter", {
+  callback = function()
+    -- vim.diagnostic.config({ virtual_text = false })
+    vim.lsp.enable("copilot_ls")
+  end,
+})
+
 --[[ vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     vim.diagnostic.config({ virtual_text = false })

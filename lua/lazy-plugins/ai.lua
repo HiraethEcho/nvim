@@ -2,30 +2,40 @@ return {
   { -- "copilotlsp-nvim/copilot-lsp",
     "copilotlsp-nvim/copilot-lsp",
     -- enabled = false,
-    init = function()
-      vim.g.copilot_nes_debounce = 500
-      vim.lsp.enable("copilot_ls")
-      vim.keymap.set("n", "<tab>", function()
-        local bufnr = vim.api.nvim_get_current_buf()
-        local state = vim.b[bufnr].nes_state
-        if state then
-          -- Try to jump to the start of the suggestion edit.
-          -- If already at the start, then apply the pending suggestion and jump to the end of the edit.
-          local _ = require("copilot-lsp.nes").walk_cursor_start_edit()
-            or (require("copilot-lsp.nes").apply_pending_nes() and require("copilot-lsp.nes").walk_cursor_end_edit())
-          return nil
-        else
-          -- Resolving the terminal's inability to distinguish between `TAB` and `<C-i>` in normal mode
-          return "<C-i>"
-        end
-      end, { desc = "Accept Copilot NES suggestion", expr = true })
-    end,
   },
+  { -- codecompanion
+    "olimorris/codecompanion.nvim",
+    -- enabled = false,
+    -- event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "franco-ruggeri/codecompanion-spinner.nvim",
+      -- "ravitemer/mcphub.nvim",
+      -- "nvim-treesitter/nvim-treesitter",
+      -- "Davidyz/VectorCode",
+    },
+    keys = {
+      { "<localleader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle codecompanion chat" },
+      { "<localleader>ca", "<cmd>CodeCompanionActions<cr>", desc = "codecompanion action" },
+    },
+    opts = {
+      strategies = {
+        chat = { adapter = "copilot" },
+        inline = { adapter = "copilot" },
+        agent = { adapter = "copilot" },
+        cmd = { adapter = "copilot" },
+      },
+      extensions = {
+        spinner = {},
+      },
+    },
+  },
+
   { -- "github/copilot.vim",
     "github/copilot.vim",
     cmd = "Copilot",
     -- event = "BufWinEnter",
-    -- enabled = false,
+    enabled = false,
     init = function()
       vim.g.copilot_no_maps = true
     end,
@@ -41,27 +51,23 @@ return {
       vim.fn["copilot#OnFileType"]()
     end,
   },
-  { -- copilot
+  { -- copilot.lua
     "zbirenbaum/copilot.lua",
+    -- lazy = false,
     enabled = false,
     cmd = "Copilot",
-    keys = { -- Example mapping to toggle outline
+    --[[ keys = { -- Example mapping to toggle outline
       { "<localleader>Cc", "<cmd>Copilot<CR>", desc = "Copilot" },
       { "<localleader>Ct", "<cmd>Copilot toggle<CR>", desc = "Copilot toggle" },
       { "<localleader>Cd", "<cmd>Copilot detach<CR>", desc = "Copilot detach" },
       { "<localleader>Ca", "<cmd>Copilot attach<CR>", desc = "Copilot attach" },
       { "<localleader>Cp", "<cmd>Copilot panel<CR>", desc = "Copilot panel" },
-    },
+    }, ]]
     opts = {
       -- auth_provider_url = "https://github.com/",
       filetypes = { ["*"] = true },
       panel = { enabled = false },
-      suggestion = {
-        enabled = false,
-        auto_trigger = false,
-        hide_during_completion = true,
-        debounce = 75,
-      },
+      suggestion = { enabled = false },
     },
   },
   { -- "carlos-algms/agentic.nvim",
@@ -132,15 +138,58 @@ return {
     -- these are just suggested keymaps; customize as desired
     -- stylua: ignored
     keys = {
-      { "<localleader>aa", function() require("agentic").toggle() end, mode = { "n", "v", "i" }, desc = "Toggle Agentic Chat", },
-      { "<localleader>aA", function() require("agentic").add_selection_or_file_to_context() end, mode = { "n", "v" }, desc = "Add file or selection to Agentic to Context", },
-      { "<localleader>an", function() require("agentic").new_session() end, mode = { "n", "v", "i" }, desc = "New Agentic Session", },
+      {
+        "<localleader>aa",
+        function()
+          require("agentic").toggle()
+        end,
+        mode = { "n", "v", "i" },
+        desc = "Toggle Agentic Chat",
+      },
+      {
+        "<localleader>aA",
+        function()
+          require("agentic").add_selection_or_file_to_context()
+        end,
+        mode = { "n", "v" },
+        desc = "Add file or selection to Agentic to Context",
+      },
+      {
+        "<localleader>an",
+        function()
+          require("agentic").new_session()
+        end,
+        mode = { "n", "v", "i" },
+        desc = "New Agentic Session",
+      },
       -- ai Restore
-      { "<localleader>ar",  function() require("agentic").restore_session() end, desc = "Agentic Restore session", silent = true, mode = { "n", "v", "i" }, },
+      {
+        "<localleader>ar",
+        function()
+          require("agentic").restore_session()
+        end,
+        desc = "Agentic Restore session",
+        silent = true,
+        mode = { "n", "v", "i" },
+      },
       -- ai Diagnostics
-      { "<localleader>ad",  function() require("agentic").add_current_line_diagnostics() end, desc = "Add current line diagnostic to Agentic", mode = { "n" }, },
+      {
+        "<localleader>ad",
+        function()
+          require("agentic").add_current_line_diagnostics()
+        end,
+        desc = "Add current line diagnostic to Agentic",
+        mode = { "n" },
+      },
       -- ai all Diagnostics
-      { "<localleader>aD", function() require("agentic").add_buffer_diagnostics() end, desc = "Add all buffer diagnostics to Agentic", mode = { "n" }, },
+      {
+        "<localleader>aD",
+        function()
+          require("agentic").add_buffer_diagnostics()
+        end,
+        desc = "Add all buffer diagnostics to Agentic",
+        mode = { "n" },
+      },
     },
   },
   { -- "sudo-tee/opencode.nvim",
@@ -322,34 +371,6 @@ return {
       { "<localleader>sp", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Sidekick Select Prompt", },
       { "<localleader>sc", function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end, desc = "Sidekick Toggle Claude", },
       -- sytlua: ignore stop
-    },
-  },
-
-  { -- codecompanion
-    "olimorris/codecompanion.nvim",
-    -- enabled = false,
-    -- event = "VeryLazy",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "franco-ruggeri/codecompanion-spinner.nvim",
-      -- "ravitemer/mcphub.nvim",
-      -- "nvim-treesitter/nvim-treesitter",
-      -- "Davidyz/VectorCode",
-    },
-    keys = {
-      { "<localleader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle codecompanion chat" },
-      { "<localleader>ca", "<cmd>CodeCompanionActions<cr>", desc = "codecompanion action" },
-    },
-    opts = {
-      strategies = {
-        chat = { adapter = "copilot" },
-        inline = { adapter = "copilot" },
-        agent = { adapter = "copilot" },
-        cmd = { adapter = "copilot" },
-      },
-      extensions = {
-        spinner = {},
-      },
     },
   },
   { -- CopilotChat
