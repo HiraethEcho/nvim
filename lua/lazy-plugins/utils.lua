@@ -113,6 +113,7 @@ return {
       },
     },
   },
+  -- disable
   { -- "ingur/floatty.nvim",
     "ingur/floatty.nvim",
     enabled = false,
@@ -134,7 +135,6 @@ return {
       -- sytlua: ignore stop
     end,
   },
-  -- disable
   { -- "kevinhwang91/nvim-ufo",
     "kevinhwang91/nvim-ufo",
     -- event = "LspAttach",
