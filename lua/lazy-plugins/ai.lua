@@ -1,32 +1,132 @@
 return {
-  { -- "copilotlsp-nvim/copilot-lsp",
-    "copilotlsp-nvim/copilot-lsp",
-    -- enabled = false,
-    init = function()
-        vim.g.copilot_nes_debounce = 500
-        vim.lsp.enable("copilot_ls")
-        vim.keymap.set("n", "<tab>", function()
-            local bufnr = vim.api.nvim_get_current_buf()
-            local state = vim.b[bufnr].nes_state
-            if state then
-                -- Try to jump to the start of the suggestion edit.
-                -- If already at the start, then apply the pending suggestion and jump to the end of the edit.
-                local _ = require("copilot-lsp.nes").walk_cursor_start_edit()
-                    or (
-                        require("copilot-lsp.nes").apply_pending_nes()
-                        and require("copilot-lsp.nes").walk_cursor_end_edit()
-                    )
-                return nil
-            else
-                -- Resolving the terminal's inability to distinguish between `TAB` and `<C-i>` in normal mode
-                return "<C-i>"
-            end
-        end, { desc = "Accept Copilot NES suggestion", expr = true })
-    end,
+  { -- "carlos-algms/agentic.nvim",
+    "carlos-algms/agentic.nvim",
+    enabled = false,
+    keys = {
+    {
+      "<localleader>aa",
+      function() require("agentic").toggle() end,
+      mode = { "n", "v", "i" },
+      desc = "Toggle Agentic Chat"
+    },
+  },
+    opts = {
+      -- Any ACP-compatible provider works. Built-in: "claude-agent-acp" | "gemini-acp" | "codex-acp" | "opencode-acp" | "cursor-acp" | "copilot-acp" | "auggie-acp" | "mistral-vibe-acp" | "cline-acp" | "goose-acp" | "kiro-acp" | "pi-acp"
+      provider = "pi-acp", -- setting the name here is all you need to get started
+      keymaps = {
+        widget = {
+          close = "q", -- String for a single keybinding
+          change_mode = {
+            { "<S-Tab>", mode = { "i", "n", "v" } },
+            switch_provider = "<localLeader>as", -- Switch ACP provider
+            switch_model = "<localLeader>am", -- Switch model
+            change_thought_level = "<localLeader>at", -- Select thought effort level
+          },
+          prompt = {
+            submit = {
+              "<CR>",
+              {
+                "<C-s>",
+                mode = { "n", "v", "i" },
+              },
+            },
+            paste_image = {
+              {
+                "<localLeader>p",
+                mode = { "n" },
+              },
+              {
+                "<C-v>", -- Same as Claude-code in insert mode
+                mode = { "i" },
+              },
+            },
+          },
+          -- Keybindings for chat buffer navigation
+          chat = {
+            next_heading = "]]",
+            prev_heading = "[[",
+            next_tool_call = "]t",
+            prev_tool_call = "[t",
+          },
+          -- Keybindings for diff preview navigation
+          diff_preview = {
+            next_hunk = "]c",
+            prev_hunk = "[c",
+          },
+          -- Keybindings to cycle focus between pending permission blocks.
+          -- Once a block is focused, per-block keys work on its row N:
+          --   h / <Left>  : focus previous button
+          --   l / <Right> : focus next button
+          --   <CR>        : submit focused button
+          --   1..4        : submit option N directly
+          -- Per-block keys only fire when the cursor is on the focused row.
+          permission = {
+            cycle_next = "<C-n>",
+            cycle_prev = "<C-p>",
+          },
+        },
+      },
+      -- these are just suggested keymaps; customize as desired
+      -- stylua: ignored
+      keys = {
+        {
+          "<localleader>aa",
+          function()
+            require("agentic").toggle()
+          end,
+          mode = { "n", "v", "i" },
+          desc = "Toggle Agentic Chat",
+        },
+        {
+          "<localleader>aA",
+          function()
+            require("agentic").add_selection_or_file_to_context()
+          end,
+          mode = { "n", "v" },
+          desc = "Add file or selection to Agentic to Context",
+        },
+        {
+          "<localleader>an",
+          function()
+            require("agentic").new_session()
+          end,
+          mode = { "n", "v", "i" },
+          desc = "New Agentic Session",
+        },
+        -- ai Restore
+        {
+          "<localleader>ar",
+          function()
+            require("agentic").restore_session()
+          end,
+          desc = "Agentic Restore session",
+          silent = true,
+          mode = { "n", "v", "i" },
+        },
+        -- ai Diagnostics
+        {
+          "<localleader>ad",
+          function()
+            require("agentic").add_current_line_diagnostics()
+          end,
+          desc = "Add current line diagnostic to Agentic",
+          mode = { "n" },
+        },
+        -- ai all Diagnostics
+        {
+          "<localleader>aD",
+          function()
+            require("agentic").add_buffer_diagnostics()
+          end,
+          desc = "Add all buffer diagnostics to Agentic",
+          mode = { "n" },
+        },
+      },
+    },
   },
   { -- codecompanion
     "olimorris/codecompanion.nvim",
-    -- enabled = false,
+    enabled = false,
     -- event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -51,7 +151,28 @@ return {
       },
     },
   },
-
+  { -- "copilotlsp-nvim/copilot-lsp",
+    "copilotlsp-nvim/copilot-lsp",
+    enabled = false,
+    init = function()
+      vim.g.copilot_nes_debounce = 500
+      vim.lsp.enable("copilot_ls")
+      vim.keymap.set("n", "<tab>", function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local state = vim.b[bufnr].nes_state
+        if state then
+          -- Try to jump to the start of the suggestion edit.
+          -- If already at the start, then apply the pending suggestion and jump to the end of the edit.
+          local _ = require("copilot-lsp.nes").walk_cursor_start_edit()
+            or (require("copilot-lsp.nes").apply_pending_nes() and require("copilot-lsp.nes").walk_cursor_end_edit())
+          return nil
+        else
+          -- Resolving the terminal's inability to distinguish between `TAB` and `<C-i>` in normal mode
+          return "<C-i>"
+        end
+      end, { desc = "Accept Copilot NES suggestion", expr = true })
+    end,
+  },
   { -- "github/copilot.vim",
     "github/copilot.vim",
     cmd = "Copilot",
@@ -89,128 +210,6 @@ return {
       filetypes = { ["*"] = true },
       panel = { enabled = false },
       suggestion = { enabled = false },
-    },
-  },
-  { -- "carlos-algms/agentic.nvim",
-    "carlos-algms/agentic.nvim",
-    enabled = false,
-    opts = {
-      -- Any ACP-compatible provider works. Built-in: "claude-agent-acp" | "gemini-acp" | "codex-acp" | "opencode-acp" | "cursor-acp" | "copilot-acp" | "auggie-acp" | "mistral-vibe-acp" | "cline-acp" | "goose-acp" | "kiro-acp" | "pi-acp"
-      provider = "opencode-acp", -- setting the name here is all you need to get started
-      keymaps = {
-        -- Keybindings for ALL buffers in the widget (chat, prompt, code, files)
-        widget = {
-          close = "q", -- String for a single keybinding
-          change_mode = {
-            {
-              "<S-Tab>",
-              mode = { "i", "n", "v" }, -- Specify modes for this keybinding
-            },
-          },
-          switch_provider = "<localLeader>as", -- Switch ACP provider
-          switch_model = "<localLeader>am", -- Switch model
-          change_thought_level = "<localLeader>at", -- Select thought effort level
-        },
-        -- Keybindings for the prompt buffer only
-        prompt = {
-          submit = {
-            "<CR>", -- Normal mode, just Enter
-            {
-              "<C-s>",
-              mode = { "n", "v", "i" },
-            },
-          },
-          paste_image = {
-            {
-              "<localLeader>p",
-              mode = { "n" },
-            },
-            {
-              "<C-v>", -- Same as Claude-code in insert mode
-              mode = { "i" },
-            },
-          },
-        },
-        -- Keybindings for chat buffer navigation
-        chat = {
-          next_heading = "]]",
-          prev_heading = "[[",
-          next_tool_call = "]t",
-          prev_tool_call = "[t",
-        },
-        -- Keybindings for diff preview navigation
-        diff_preview = {
-          next_hunk = "]c",
-          prev_hunk = "[c",
-        },
-        -- Keybindings to cycle focus between pending permission blocks.
-        -- Once a block is focused, per-block keys work on its row N:
-        --   h / <Left>  : focus previous button
-        --   l / <Right> : focus next button
-        --   <CR>        : submit focused button
-        --   1..4        : submit option N directly
-        -- Per-block keys only fire when the cursor is on the focused row.
-        permission = {
-          cycle_next = "<C-n>",
-          cycle_prev = "<C-p>",
-        },
-      },
-    },
-    -- these are just suggested keymaps; customize as desired
-    -- stylua: ignored
-    keys = {
-      {
-        "<localleader>aa",
-        function()
-          require("agentic").toggle()
-        end,
-        mode = { "n", "v", "i" },
-        desc = "Toggle Agentic Chat",
-      },
-      {
-        "<localleader>aA",
-        function()
-          require("agentic").add_selection_or_file_to_context()
-        end,
-        mode = { "n", "v" },
-        desc = "Add file or selection to Agentic to Context",
-      },
-      {
-        "<localleader>an",
-        function()
-          require("agentic").new_session()
-        end,
-        mode = { "n", "v", "i" },
-        desc = "New Agentic Session",
-      },
-      -- ai Restore
-      {
-        "<localleader>ar",
-        function()
-          require("agentic").restore_session()
-        end,
-        desc = "Agentic Restore session",
-        silent = true,
-        mode = { "n", "v", "i" },
-      },
-      -- ai Diagnostics
-      {
-        "<localleader>ad",
-        function()
-          require("agentic").add_current_line_diagnostics()
-        end,
-        desc = "Add current line diagnostic to Agentic",
-        mode = { "n" },
-      },
-      -- ai all Diagnostics
-      {
-        "<localleader>aD",
-        function()
-          require("agentic").add_buffer_diagnostics()
-        end,
-        desc = "Add all buffer diagnostics to Agentic",
-        mode = { "n" },
-      },
     },
   },
   { -- "sudo-tee/opencode.nvim",

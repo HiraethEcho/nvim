@@ -77,9 +77,7 @@ end, {
 
 map("n", "<leader>ll", "<cmd>Lspstart<cr>", { desc = "Start LSP" })
 map("n", "<leader>ls", "<cmd>Lspstop<cr>", { desc = "Stop LSP" })
--- map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP info" })
--- map("n", "<leader>lL", "<cmd>Lsprestart<cr>", { desc = "Restart LSP" })
 map("v", "<leader>F", vim.lsp.buf.format, { desc = "LSP format range" })
 
--- vim.lsp.enable("copilot")
+vim.lsp.enable("copilot")
 -- vim.lsp.enable("copilot_ls")
