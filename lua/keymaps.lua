@@ -1,5 +1,3 @@
--- local Util = require("lua.util.init")
-
 local function map(mode, lhs, rhs, opts)
   opts = opts or {}
   opts.silent = opts.silent ~= false
@@ -55,23 +53,7 @@ map("n", "<leader>H", ":cd %:h<cr>", { desc = "set cwd to parent of current file
 map("n", "<leader>q", "<cmd>wqa<cr>", { desc = "Quit all" })
 
 
--- toggle set
--- map("n", "<leader>uw", function() Util.toggle_set("wrap") end, { desc = "Toggle Word Wrap" })
--- map("n", "<leader>us", function() Util.toggle_set("spell") end, { desc = "Toggle Spelling" })
--- map("n", "<leader>ul", function() Util.toggle_set("number") end, { desc = "Toggle Line Numbers" })
--- map("n", "<leader>ur", function() Util.toggle_set("relativenumber") end, { desc = "Toggle Line Relative Numbers" })
--- map("n", "<leader>uc", function() Util.toggle_set("conceallevel", false, { 0, conceallevel }) end, { desc = "Toggle Conceal" })
--- toggle function
--- map("n", "<leader>ud", function() Util.toggle_diagnostics() end, { desc = "Toggle Diagnostics" })
--- map("n", "<leader>uI", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
--- map("n", "<leader>ub", "<cmd>BRToggle<cr>", { desc = "Toggle Bionic Read" })
-
 -- terminals
--- local lazyterm = function()
---   Util.float_term("zsh", { esc_esc = true, ctrl_hjkl = false })
--- end
--- map("n", "<leader>t", lazyterm, { desc = "Float Terminal" })
--- map("n", "<leader>gg", function() Util.lazygit() end, { desc = "Lazygit " })
 -- Terminal Mappings
 -- map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
 -- map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })

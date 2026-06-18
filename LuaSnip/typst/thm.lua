@@ -5,8 +5,12 @@ local get_visual = function(args, parent)
     return sn(nil, i(0))
   end
 end
+
+local typst = require("util.typst")
+local texts = require("luasnip").extend_decorator.apply(s, { condition = typst.in_text, show_condition = typst.in_text })
+
 local snip = {
-  s(
+  texts(
     { trig = "prop", name = "Proposition", desc = "proposition with or without title" },
     fmt(
       [[
@@ -20,7 +24,7 @@ local snip = {
       }
     )
   ),
-  s(
+  texts(
     { trig = "thm", name = "Theorem", desc = "Theorem" },
     fmt(
       [[
@@ -34,7 +38,7 @@ local snip = {
       }
     )
   ),
-  s(
+  texts(
     { trig = "lem", name = "Lemma", desc = "Lemma" },
     fmt(
       [[
@@ -48,7 +52,7 @@ local snip = {
       }
     )
   ),
-  s(
+  texts(
     { trig = "rem", name = "Remark", desc = "Remark" },
     fmt(
       [[
@@ -62,7 +66,7 @@ local snip = {
       }
     )
   ),
-  s(
+  texts(
     { trig = "def", name = "Definition", desc = "Definition" },
     fmt(
       [[
@@ -76,7 +80,7 @@ local snip = {
       }
     )
   ),
-  s(
+  texts(
     { trig = "cor", name = "Corollary", desc = "Corollary" },
     fmt(
       [[
@@ -90,7 +94,7 @@ local snip = {
       }
     )
   ),
-  s(
+  texts(
     { trig = "ex", name = "Example", desc = "Example" },
     fmt(
       [[
@@ -101,6 +105,19 @@ local snip = {
       {
         content = i(0),
         label = c(1, { t(""), sn(nil, { t("<"), t("ex:"), i(1), t(">") }) }),
+      }
+    )
+  ),
+  texts(
+    { trig = "pf", name = "Proof", desc = "Proof" },
+    fmt(
+      [[
+      #proof[
+        {content}
+      ]
+      ]],
+      {
+        content = i(0),
       }
     )
   ),

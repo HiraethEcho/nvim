@@ -5,10 +5,7 @@ return {
     event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
     dependencies = {
-      -- { "saghen/blink.compat", version = "*", opts = {} },
-      -- "nvim-treesitter/nvim-treesitter",
-      -- "zbirenbaum/copilot.lua",
-      "copilotlsp-nvim/copilot-lsp",
+      -- "copilotlsp-nvim/copilot-lsp",
       "fang2hou/blink-copilot",
       "L3MON4D3/LuaSnip",
     },
@@ -43,10 +40,9 @@ return {
         ghost_text = { enabled = true },
       },
       sources = {
-        default = { "snippets", "lsp", "path", "buffer", "copilot", "mkdnflow" },
         -- default = { "snippets", "lsp", "path", "buffer" },
+        default = { "snippets", "lsp", "path", "buffer", "copilot"},
         providers = {
-          mkdnflow = { name = "Mkdnflow", module = "mkdnflow.completion.blink" },
           snippets = { score_offset = 200 },
           buffer = { score_offset = 100, opts = { get_bufnrs = vim.api.nvim_list_bufs } },
           copilot = { score_offset = 150, name = "copilot", module = "blink-copilot", async = true },

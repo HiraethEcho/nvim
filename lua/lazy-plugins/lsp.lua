@@ -11,40 +11,10 @@ return {
       { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
     },
     dependencies = {
-      -- "rachartier/tiny-inline-diagnostic.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      -- "barreiroleo/ltex_extra.nvim",
-      -- "saghen/blink.cmp",
-      -- "nvimdev/guard.nvim",
-      -- "hrsh7th/cmp-nvim-lsp",
-      -- "kevinhwang91/nvim-ufo",
     },
-    config = function()
-      --[[ require("lspconfig").ltex.setup({
-        on_attach = function(client, bufnr)
-          require("ltex_extra").setup()
-        end,
-        settings = {},
-      }) ]]
-      --[[ local capabilities = require("blink.cmp").get_lsp_capabilities()
-      -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      vim.lsp.config('*', {
-        root_markers = { '.obsidian', '.git' },
-        capabilities = capabilities,
-        offset_encoding = "utf-8",
-      }) ]]
-      -- require("lspconfig").lua_ls.setup({})
-      -- require("lspconfig").marksman.setup({})
-      -- require("lspconfig").clangd.setup({})
-      --[[ require("lspconfig").tinymist.setup({
-        single_file_support = true,
-        on_attach = function(client, bufnr)
-          vim.keymap.set("n", "<cr>", "<cmd>TypstPreviewSyncCursor<cr>",
-            { noremap = true, silent = true, buffer = bufnr, desc = "Typst Preview" })
-        end,
-      }) ]]
-    end,
+    opts = {},
   },
   { -- "williamboman/mason.nvim",
     "williamboman/mason.nvim",
@@ -77,10 +47,6 @@ return {
       backend = "vim",
       -- The picker to use, "telescope", "snacks", "select" are supported
       picker = { "snacks" },
-
-      -- The icons to use for the code actions
-      -- You can add your own icons, you just need to set the exact action's kind of the code action
-      -- You can set the highlight like so: { link = "DiagnosticError" } or  like nvim_set_hl ({ fg ..., bg..., bold..., ...})
       signs = {
         quickfix = { "󰁨", { link = "DiagnosticInfo" } },
         others = { "?", { link = "DiagnosticWarning" } },
@@ -96,19 +62,6 @@ return {
     },
   },
   -- disabled
-  { -- "barreiroleo/ltex_extra.nvim",
-    "barreiroleo/ltex_extra.nvim",
-    enabled = false,
-    ft = { "markdown", "tex" },
-    -- dependencies = { "neovim/nvim-lspconfig" },
-    config = function()
-      require("ltex_extra").setup({
-        server_opts = {
-          on_attach = function(client, bufnr) end,
-        },
-      })
-    end,
-  },
   { -- "rachartier/tiny-inline-diagnostic.nvim",
     "rachartier/tiny-inline-diagnostic.nvim",
     enabled = false,
@@ -122,58 +75,6 @@ return {
           show_source = true,
           -- multiple_diag_under_cursor = true,
         },
-      })
-    end,
-  },
-  { -- "b0o/incline.nvim",
-    "b0o/incline.nvim",
-    enabled = false,
-    event = "LspAttach",
-    config = function()
-      local helpers = require("incline.helpers")
-      local navic = require("nvim-navic")
-      local devicons = require("nvim-web-devicons")
-      require("incline").setup({
-        window = {
-          padding = 2,
-          margin = { horizontal = 0, vertical = 0 },
-        },
-        render = function(props)
-          local function get_lsp_clients()
-            local buf_clients = nil
-            buf_clients = vim.lsp.get_clients({ bufnr = 0 })
-            local buf_client_names = {}
-            -- table.insert(buf_client_names, "")
-            for _, client in pairs(buf_clients) do
-              table.insert(buf_client_names, client.name)
-            end
-            return table.concat(buf_client_names, ",")
-          end
-          local function get_diagnostic_label()
-            local icons = {
-              error = " ",
-              warn = " ",
-              info = " ",
-              hint = "󰌵 ",
-            }
-            local label = {}
-            for severity, icon in pairs(icons) do
-              local n = #vim.diagnostic.get(props.buf, { severity = vim.diagnostic.severity[string.upper(severity)] })
-              if n > 0 then
-                table.insert(label, { icon .. n .. " ", group = "DiagnosticSign" .. severity })
-              end
-            end
-            -- if #label > 0 then
-            --   table.insert(label, { "" })
-            -- end
-            return label
-          end
-          return {
-            -- { filename },
-            { get_diagnostic_label() },
-            { get_lsp_clients() },
-          }
-        end,
       })
     end,
   },
@@ -317,16 +218,6 @@ return {
         severity_sort = true,
         signs = true,
         underline = false,
-      })
-    end,
-  },
-  { -- "jinzhongjia/LspUI.nvim",
-    "jinzhongjia/LspUI.nvim",
-    branch = "main",
-    enabled = false,
-    config = function()
-      require("LspUI").setup({
-        -- config options go here
       })
     end,
   },
