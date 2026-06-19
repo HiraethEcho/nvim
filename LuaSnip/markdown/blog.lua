@@ -71,6 +71,7 @@ local snip = {
     categories: <category>
     topics: <topic>
     series: <series>
+    genres: <genre>
     draft: true
     status: <status>
     ---
@@ -85,8 +86,9 @@ local snip = {
         category = i(4),
         topic = i(5),
         series = i(6),
+        genre = i(7),
         -- draft = c(7, { t({ "", "draft: true" }), t("") }),
-        status = i(7),
+        status = i(8),
         head = rep(1),
       }
     )
