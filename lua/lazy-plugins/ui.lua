@@ -8,24 +8,9 @@ return {
       notification = {
         filter = vim.log.levels.TRACE,
         override_vim_notify = true,
-        window = { border = "none", align = "top", tabstop = 2 },
+        window = { border = "single", align = "bottom", tabstop = 2 },
       },
     },
-  },
-  { -- "y3owk1n/notifier.nvim",
-    "y3owk1n/notifier.nvim",
-    enabled = false,
-    config = function()
-      require("notifier").setup({
-        -- your configuration here
-      })
-    end,
-  },
-  { -- "echasnovski/mini.notify",
-    "echasnovski/mini.notify",
-    opts = {},
-    enabled = false,
-    event = "LspAttach",
   },
   { -- "catgoose/nvim-colorizer.lua",
     "catgoose/nvim-colorizer.lua",
@@ -54,10 +39,6 @@ return {
       },
     },
   },
-  { "brenoprata10/nvim-highlight-colors", enabled = false, opts = { enable_ansi = true } },
-  -- { "norcalli/nvim-colorizer.lua", cmd = "ColorizerToggle", opts = true },
-  { "nvzone/volt", lazy = true },
-  { "nvzone/minty", cmd = { "Shades", "Huefy" } },
   { -- "utilyre/sentiment.nvim",
     "utilyre/sentiment.nvim",
     enabled = false,
@@ -73,6 +54,25 @@ return {
   },
   { "OXY2DEV/helpview.nvim", ft = "help", dependencies = { "nvim-treesitter/nvim-treesitter" } },
   -- disable
+  { -- "y3owk1n/notifier.nvim",
+    "y3owk1n/notifier.nvim",
+    enabled = false,
+    config = function()
+      require("notifier").setup({
+        -- your configuration here
+      })
+    end,
+  },
+  { -- "echasnovski/mini.notify",
+    "echasnovski/mini.notify",
+    opts = {},
+    enabled = false,
+    event = "LspAttach",
+  },
+  { "brenoprata10/nvim-highlight-colors", enabled = false, opts = { enable_ansi = true } },
+  -- { "norcalli/nvim-colorizer.lua", cmd = "ColorizerToggle", opts = true },
+  { "nvzone/volt", lazy = true },
+  { "nvzone/minty", cmd = { "Shades", "Huefy" } },
   { -- "rcarriga/nvim-notify",
     "rcarriga/nvim-notify",
     event = "BufReadPost",
