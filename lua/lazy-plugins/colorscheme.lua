@@ -1,11 +1,8 @@
 vim.o.background = "dark"
--- vim.cmd.colorscheme("wildcharm")
--- vim.cmd.colorscheme("lunaperche")
+-- vim.o.background = "light"
 -- vim.cmd.colorscheme("habamax")
--- vim.cmd.colorscheme("sorbet")
--- vim.cmd.colorscheme("retrobox")
--- vim.cmd.colorscheme("quiet")
--- vim.cmd.colorscheme("unokai")
+-- vim.cmd.colorscheme("industry")
+vim.cmd.colorscheme("retrobox")
 return {
   {
     "zitrocode/carvion.nvim",
@@ -245,13 +242,6 @@ return {
       })
       -- setup must be called before loading
       vim.cmd("colorscheme nightfox")
-    end,
-  },
-  {
-    "Rics-Dev/flow",
-    -- lazy = false,
-    config = function()
-      require("flow").setup() -- Optional: for customization
     end,
   },
   { "DonJulve/NeoCyberVim", config = true },

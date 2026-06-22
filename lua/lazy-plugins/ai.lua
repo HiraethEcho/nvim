@@ -1,15 +1,55 @@
 return {
+  { -- "milanglacier/minuet-ai.nvim",
+    -- this is too slow, not useful for now, but keep the config for later when local models are more viable
+    "milanglacier/minuet-ai.nvim",
+    enabled = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      provider = "openai_fim_compatible",
+      n_completions = 1, -- Use 1 for local models to save resources
+      context_window = 64, -- Adjust based on your GPU's capability
+      throttle = 500, -- Minimum time between requests in ms
+      debounce = 300, -- Wait time after typing stops before requesting
+      provider_options = {
+        openai_fim_compatible = {
+          api_key = "TERM", -- Ollama doesn't need a real API key
+          name = "Ollama",
+          end_point = "http://localhost:11434/v1/completions",
+          model = "qwen2.5-coder:1.5b",
+          optional = {
+            max_tokens = 256, -- Maximum tokens to generate
+            stop = { "\n\n" }, -- Stop at double newlines
+            top_p = 0.9, -- Nucleus sampling parameter
+          },
+        },
+      },
+      virtualtext = {
+        auto_trigger_ft = { "*" }, -- Enable for all filetypes
+        keymap = {
+          accept = "<Tab>",
+          accept_line = "<C-y>",
+          next = "<C-n>",
+          prev = "<C-p>",
+          dismiss = "<C-e>",
+        },
+      },
+    },
+  },
   { -- "carlos-algms/agentic.nvim",
     "carlos-algms/agentic.nvim",
     enabled = false,
     keys = {
-    {
-      "<localleader>aa",
-      function() require("agentic").toggle() end,
-      mode = { "n", "v", "i" },
-      desc = "Toggle Agentic Chat"
+      {
+        "<localleader>aa",
+        function()
+          require("agentic").toggle()
+        end,
+        mode = { "n", "v", "i" },
+        desc = "Toggle Agentic Chat",
+      },
     },
-  },
     opts = {
       -- Any ACP-compatible provider works. Built-in: "claude-agent-acp" | "gemini-acp" | "codex-acp" | "opencode-acp" | "cursor-acp" | "copilot-acp" | "auggie-acp" | "mistral-vibe-acp" | "cline-acp" | "goose-acp" | "kiro-acp" | "pi-acp"
       provider = "pi-acp", -- setting the name here is all you need to get started

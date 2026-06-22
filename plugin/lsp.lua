@@ -79,5 +79,5 @@ map("n", "<leader>ll", "<cmd>Lspstart<cr>", { desc = "Start LSP" })
 map("n", "<leader>ls", "<cmd>Lspstop<cr>", { desc = "Stop LSP" })
 map("v", "<leader>F", vim.lsp.buf.format, { desc = "LSP format range" })
 
-vim.lsp.enable("copilot")
--- vim.lsp.enable("copilot_ls")
+vim.lsp.enable("copilot") -- from nvim-lspconfig with LspCopilotSignIn. required by single fang2hou/blink-copilot
+-- vim.lsp.enable("copilot_ls") -- by copilotlsp-nvim/copilot-lsp

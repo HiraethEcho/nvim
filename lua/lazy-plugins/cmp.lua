@@ -5,11 +5,23 @@ return {
     event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
     dependencies = {
-      -- "copilotlsp-nvim/copilot-lsp",
       "fang2hou/blink-copilot",
+      -- "milanglacier/minuet-ai.nvim",
       "L3MON4D3/LuaSnip",
     },
     opts = {
+      sources = {
+        -- default = { "snippets", "lsp", "path", "buffer" },
+        -- default = { "snippets", "lsp", "path", "buffer", "minuet" },
+        default = { "snippets", "lsp", "path", "buffer", "copilot" },
+        -- default = { "snippets", "lsp", "path", "buffer", "copilot", "minuet" },
+        providers = {
+          snippets = { score_offset = 200 },
+          buffer = { score_offset = 100, opts = { get_bufnrs = vim.api.nvim_list_bufs } },
+          copilot = { score_offset = 150, name = "copilot", module = "blink-copilot", async = true },
+          -- minuet = { score_offset = 170, name = "minuet", module = "minuet.blink", async = true, timeout_ms = 3000 },
+        },
+      },
       snippets = { preset = "luasnip" },
       keymap = {
         preset = "none",
@@ -38,15 +50,6 @@ return {
         menu = { draw = { treesitter = {}, columns = { { "label", gap = 1 }, { "kind_icon" }, { "source_name" } } } },
         list = { selection = { preselect = false, auto_insert = true } },
         ghost_text = { enabled = true },
-      },
-      sources = {
-        -- default = { "snippets", "lsp", "path", "buffer" },
-        default = { "snippets", "lsp", "path", "buffer", "copilot"},
-        providers = {
-          snippets = { score_offset = 200 },
-          buffer = { score_offset = 100, opts = { get_bufnrs = vim.api.nvim_list_bufs } },
-          copilot = { score_offset = 150, name = "copilot", module = "blink-copilot", async = true },
-        },
       },
       cmdline = {
         sources = function()
