@@ -2,7 +2,7 @@ return {
   { -- "milanglacier/minuet-ai.nvim",
     -- this is too slow, not useful for now, but keep the config for later when local models are more viable
     "milanglacier/minuet-ai.nvim",
-    enabled = false,
+    -- enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -14,25 +14,17 @@ return {
       debounce = 300, -- Wait time after typing stops before requesting
       provider_options = {
         openai_fim_compatible = {
-          api_key = "TERM", -- Ollama doesn't need a real API key
           name = "Ollama",
           end_point = "http://localhost:11434/v1/completions",
-          model = "qwen2.5-coder:1.5b",
+          api_key = "TERM", -- Ollama doesn't need a real API key
+          -- api_key = "WSL_OLLAMA_API_KEY", -- Ollama doesn't need a real API key
+          -- end_point = "https://16wsllama.keinmal.top/v1/completions",
+          model = "qwen2.5-coder:0.5b",
           optional = {
             max_tokens = 256, -- Maximum tokens to generate
             stop = { "\n\n" }, -- Stop at double newlines
             top_p = 0.9, -- Nucleus sampling parameter
           },
-        },
-      },
-      virtualtext = {
-        auto_trigger_ft = { "*" }, -- Enable for all filetypes
-        keymap = {
-          accept = "<Tab>",
-          accept_line = "<C-y>",
-          next = "<C-n>",
-          prev = "<C-p>",
-          dismiss = "<C-e>",
         },
       },
     },
