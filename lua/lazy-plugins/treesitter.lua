@@ -1,11 +1,14 @@
 return {
-  {
+  { -- "so1ve/tiny-treesitter.nvim",
     "so1ve/tiny-treesitter.nvim",
     -- lazy = false,
     -- enabled = false,
     event = "InsertEnter",
     build = function()
-      require("tiny-treesitter").install({ "lua", "markdown", "latex", "bash" }, { wait = true })
+      require("tiny-treesitter").install(
+        { "lua", "markdown", "latex", "bash", "json", "toml", "yaml" },
+        { wait = true }
+      )
     end,
   },
   { -- "nvim-treesitter/nvim-treesitter-context",
@@ -18,27 +21,6 @@ return {
     opts = {
       max_lines = 3,
     },
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    enabled = false,
-    lazy = false,
-    cmd = "TSEnable",
-    branch = "main",
-    build = ":TSUpdate",
-    init = function()
-      require("nvim-treesitter").install({
-        "python",
-        "javascript",
-        "typescript",
-        "html",
-        "css",
-        "lua",
-        "vim",
-        "markdown",
-        "latex",
-      })
-    end,
   },
   { -- "code-biscuits/nvim-biscuits",
     "code-biscuits/nvim-biscuits",
@@ -60,6 +42,28 @@ return {
     opts = {
       cursor_line_only = true,
     },
+  },
+
+  { -- "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter",
+    enabled = false,
+    lazy = false,
+    cmd = "TSEnable",
+    branch = "main",
+    build = ":TSUpdate",
+    init = function()
+      require("nvim-treesitter").install({
+        "python",
+        "javascript",
+        "typescript",
+        "html",
+        "css",
+        "lua",
+        "vim",
+        "markdown",
+        "latex",
+      })
+    end,
   },
   { -- "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-treesitter/nvim-treesitter-textobjects",
