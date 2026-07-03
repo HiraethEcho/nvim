@@ -1,11 +1,11 @@
 vim.diagnostic.config({
-  virtual_text = { spacing = 4, prefix = "●" },
-  virtual_lines = false,
+  virtual_text = false,
+  virtual_lines = true,
 })
 
 local function toggle_virtual_diagnostic_mode()
   if vim.diagnostic.config().virtual_lines then
-    vim.diagnostic.config({ virtual_lines = false, virtual_text = { spacing = 4, prefix = "●" } })
+    vim.diagnostic.config({ virtual_lines = false, virtual_text = { spacing = 2, prefix = "●" } })
   else
     vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
   end
