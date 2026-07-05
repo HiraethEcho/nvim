@@ -15,3 +15,5 @@ vim.api.nvim_create_user_command("DiagToggleMode", toggle_virtual_diagnostic_mod
   { desc = "Toggle diagnostic mode: lines ↔ text" })
 vim.keymap.set("n", "<leader>uD", toggle_virtual_diagnostic_mode,
   { desc = "Toggle diag mode: lines ↔ text" })
+
+vim.diagnostic.enable(false)
