@@ -15,11 +15,12 @@ return {
       provider_options = {
         openai_fim_compatible = {
           name = "Ollama",
-          -- api_key = "TERM", -- Ollama doesn't need a real API key
+          api_key = "TERM", -- Ollama doesn't need a real API key
           end_point = "http://localhost:11434/v1/completions",
-          api_key = "WSL_OLLAMA_API_KEY",
-          -- end_point = "https://16wsllama.keinmal.top/v1/completions",
-          model = "qwen2.5-coder:0.5b",
+          model = "qwen2.5-coder:3b",
+          -- api_key = "WSL_OLLAMA_API_KEY",
+          -- end_point = "https://16wsllama.keinmal.top/v1/completions", -- from wsl on windows
+          -- model = "qwen2.5-coder:3b",
           optional = {
             max_tokens = 256, -- Maximum tokens to generate
             stop = { "\n\n" }, -- Stop at double newlines
