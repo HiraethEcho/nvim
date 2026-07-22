@@ -19,7 +19,7 @@ return {
   { -- "lowitea/aw-watcher.nvim",
     "lowitea/aw-watcher.nvim",
     event = "BufRead",
-    -- enabled = false,
+    enabled = false,
     cmd = "AWStart",
     config = function()
       require("aw_watcher").setup({})

@@ -1,5 +1,5 @@
 vim.lsp.enable("markdown")
-vim.lsp.enable("harper")
+-- vim.lsp.enable("harper")
 
 --[[ function _G.wrap_selected(wrapper)
   vim.cmd('normal! gv"ay')

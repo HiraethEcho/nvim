@@ -1,6 +1,5 @@
 return {
   { -- "milanglacier/minuet-ai.nvim",
-    -- this is too slow, not useful for now, but keep the config for later when local models are more viable
     "milanglacier/minuet-ai.nvim",
     -- enabled = false,
     dependencies = {
@@ -30,6 +29,7 @@ return {
       },
     },
   },
+  -- enabled
   { -- "carlos-algms/agentic.nvim",
     "carlos-algms/agentic.nvim",
     enabled = false,
