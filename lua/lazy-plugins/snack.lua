@@ -79,7 +79,7 @@ return {
           corner_top = "╭",
           corner_bottom = "╰",
         },
-        hl = { "SnacksIndent1", "SnacksIndent2", "SnacksIndent3", "SnacksIndent4", "SnacksIndent5", "SnacksIndent6", "SnacksIndent7", "SnacksIndent8", },
+        hl = { "RainbowRed", "RainbowOrange","RainbowYellow", "RainbowGreen", "RainbowBlue", "RainbowCyan",  "RainbowViolet"},
       },
     },
     input = { enabled = true },
@@ -103,10 +103,8 @@ return {
             },
           },
         },
-        buffers = { layout = { preset = "ivy" } },
-        colorschemes = { layout = { preset = "bottom" } },
       },
-      layout = { cycle = false },
+      layout = { preset = "ivy" , cycle = false },
       matcher = { frecency = true, history_bonus = true },
       win = {
         input = {

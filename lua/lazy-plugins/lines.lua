@@ -28,7 +28,7 @@ return {
       require("lualine").setup({
         extensions = { "quickfix" },
         options = {
-          theme = "OceanicNext",
+          -- theme = "OceanicNext",
           -- theme = "material",
           -- theme = "jellybeans",
           -- theme = "flow",

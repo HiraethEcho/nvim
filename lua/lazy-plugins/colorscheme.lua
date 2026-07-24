@@ -1,9 +1,5 @@
-vim.o.background = "dark"
 -- vim.o.background = "light"
-vim.cmd.colorscheme("habamax")
--- vim.cmd.colorscheme("industry")
--- vim.cmd.colorscheme("retrobox")
--- vim.cmd.colorscheme("unokai") no
+vim.cmd.colorscheme("paper")
 return {
   {
     "zitrocode/carvion.nvim",
