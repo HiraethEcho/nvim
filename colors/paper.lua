@@ -389,7 +389,7 @@ hi("@markup.link.url",   { fg = colors.fg_subtle, underline = true })
 hi("@markup.list",           { fg = colors.special })
 hi("@markup.list.checked",   { fg = colors.ok })
 hi("@markup.list.unchecked", { fg = colors.fg_subtle })
-hi("@markup.raw",            { fg = colors.fg, bg = colors.bg_dark })
+hi("@markup.raw",            { fg = colors.constant, bg = colors.bg_dark })
 hi("@markup.quote",          { fg = colors.fg_subtle, italic = true })
 
 hi("@markup.math",              { fg = colors.special })
