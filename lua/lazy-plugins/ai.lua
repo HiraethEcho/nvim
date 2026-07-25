@@ -1,7 +1,9 @@
+if true then return {} end
 return {
+  -- disabled
   { -- "milanglacier/minuet-ai.nvim",
     "milanglacier/minuet-ai.nvim",
-    -- enabled = false,
+    enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -19,7 +21,6 @@ return {
           model = "qwen2.5-coder:3b",
           -- api_key = "WSL_OLLAMA_API_KEY",
           -- end_point = "https://16wsllama.keinmal.top/v1/completions", -- from wsl on windows
-          -- model = "qwen2.5-coder:3b",
           optional = {
             max_tokens = 256, -- Maximum tokens to generate
             stop = { "\n\n" }, -- Stop at double newlines
@@ -29,7 +30,6 @@ return {
       },
     },
   },
-  -- enabled
   { -- "carlos-algms/agentic.nvim",
     "carlos-algms/agentic.nvim",
     enabled = false,

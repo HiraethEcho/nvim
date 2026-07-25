@@ -6,15 +6,13 @@ return {
     version = "*",
     dependencies = {
       "fang2hou/blink-copilot",
-      "milanglacier/minuet-ai.nvim",
+      -- "milanglacier/minuet-ai.nvim",
       "L3MON4D3/LuaSnip",
     },
     opts = {
       sources = {
-        -- default = { "snippets", "lsp", "path", "buffer" },
-        -- default = { "snippets", "lsp", "path", "buffer", "minuet" },
-        -- default = { "snippets", "lsp", "path", "buffer", "copilot" },
-        default = { "snippets", "lsp", "path", "buffer", "copilot", "minuet" },
+        default = { "snippets", "lsp", "path", "buffer" },
+        -- default = { "snippets", "lsp", "path", "buffer", "copilot", "minuet" },
         providers = {
           snippets = { score_offset = 200 },
           buffer = { score_offset = 100, opts = { get_bufnrs = vim.api.nvim_list_bufs } },
