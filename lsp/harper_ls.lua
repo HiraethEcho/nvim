@@ -1,7 +1,6 @@
 return {
   cmd = { 'harper-ls', '--stdio' },
   filetypes = {
-    -- 'lua',
     'markdown',
     'typst',
     'latex',

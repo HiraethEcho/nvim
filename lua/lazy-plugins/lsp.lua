@@ -1,19 +1,7 @@
 return {
   { -- "neovim/nvim-lspconfig",
     "neovim/nvim-lspconfig",
-    -- event = { "BufReadPost", "BufNewFile" },
-    -- lazy=false,
-    -- cmd = "LspStart",
-    keys = {
-      { "<leader>ll", "<cmd>LspStart<cr>", desc = "Start lsp" },
-      { "<leader>ls", "<cmd>LspStop<cr>", desc = "stop lsp" },
-      { "<leader>li", "<cmd>LspInfo<cr>", desc = "lsp info" },
-      { "<leader>lL", "<cmd>LspRestart<cr>", desc = "Restart lsp" },
-    },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-    },
+    cmd = "LspStart",
     opts = {},
   },
   { -- "williamboman/mason.nvim",

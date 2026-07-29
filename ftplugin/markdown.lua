@@ -1,5 +1,5 @@
-vim.lsp.enable("markdown")
--- vim.lsp.enable("harper")
+vim.lsp.enable("marksman")
+vim.lsp.enable("harper_ls")
 
 --[[ function _G.wrap_selected(wrapper)
   vim.cmd('normal! gv"ay')
@@ -7,5 +7,4 @@ vim.lsp.enable("markdown")
   vim.fn.setreg("a", wrapper .. selected .. wrapper, vim.fn.getregtype("a"))
   vim.cmd('normal!  gv"ap')
 end ]]
-
 -- vim.api.nvim_set_keymap("v", "<C-i>", ':<C-u>lua wrap_selected("*")<CR>', { noremap = true, silent = true })

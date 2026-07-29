@@ -1,1 +1,2 @@
-vim.lsp.enable('css')
+-- vim.lsp.enable('cssls')
+vim.lsp.enable("biome")

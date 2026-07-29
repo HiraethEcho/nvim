@@ -1,7 +1,7 @@
 -- vim.o.background = "light"
 vim.cmd.colorscheme("paper")
 return {
-  {
+  { -- "zitrocode/carvion.nvim",
     "zitrocode/carvion.nvim",
     opts = {
       transparent = false,
@@ -15,14 +15,14 @@ return {
       },
     },
   },
-  {
+  { -- "ricardoraposo/nightwolf.nvim",
     "ricardoraposo/nightwolf.nvim",
     opts = {
       theme = "dark-gray", -- 'black', 'dark-blue', 'gray', 'dark-gray', 'light'
       italic = true,
     },
   },
-  {
+  { -- "jpwol/thorn.nvim",
     "jpwol/thorn.nvim",
     opts = {
       background = "cold", -- options are 'warm' and 'cold'
@@ -41,11 +41,11 @@ return {
       transparent = true, -- transparent background
     },
   },
-  {
+  { -- "mcauley-penney/techbase.nvim",
     "mcauley-penney/techbase.nvim",
     opts = { italic_comments = true, transparent = true },
   },
-  {
+  { -- "V4N1LLA-1CE/xcodedark.nvim",
     "V4N1LLA-1CE/xcodedark.nvim",
     opts = {
       transparent = true,
@@ -61,7 +61,7 @@ return {
       },
     },
   },
-  {
+  { -- "AlexvZyl/nordic.nvim",
     "AlexvZyl/nordic.nvim",
     -- enabled = false,
     -- event = "VimEnter",
@@ -113,7 +113,7 @@ return {
       -- vim.cmd.colorscheme 'nordic'
     end,
   },
-  {
+  { -- "rose-pine/neovim",
     "rose-pine/neovim",
     -- cmd = "colorscheme",
     -- enabled = false,
@@ -140,7 +140,7 @@ return {
       -- vim.cmd("colorscheme rose-pine-dawn")
     end,
   },
-  {
+  { -- "projekt0n/github-nvim-theme",
     "projekt0n/github-nvim-theme",
     name = "github-theme",
     opts = {
@@ -159,89 +159,74 @@ return {
       },
     },
   },
-  {
+  { -- "shaunsingh/nord.nvim",
+    "shaunsingh/nord.nvim",
+    opts = {},
+  },
+  { -- "EdenEast/nightfox.nvim",
+    "EdenEast/nightfox.nvim",
+    opts = {
+      options = {
+        dim_inactive = true, -- Non focused panes set to alternative background
+        module_default = true, -- Default enable value for modules
+        colorblind = {
+          enable = true, -- Enable colorblind support
+          simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
+        },
+        styles = { -- Style to be applied to different syntax groups
+          -- bold
+          -- underline
+          -- undercurl  curly underline
+          -- underdouble  double underline
+          -- underdotted  dotted underline
+          -- underdashed  dashed underline
+          -- strikethrough
+          -- reverse
+          -- inverse    same as reverse
+          -- italic
+          -- standout
+          -- altfont
+          -- nocombine  override attributes instead of combining them
+          -- NONE   no attributes used (used to reset it)
+          comments = "italic", -- Value is any valid attr-list value `:help attr-list`
+          conditionals = "italic",
+          constants = "bold",
+          functions = "bold,italic",
+          keywords = "italic",
+          numbers = "italic",
+          operators = "NONE",
+          strings = "underdotted",
+          types = "NONE",
+          variables = "NONE",
+        },
+      },
+    },
+  },
+  { -- "neanias/everforest-nvim",
     "neanias/everforest-nvim",
-    -- enabled = false,
+    enabled = false,
     -- lazy = false,
     -- cmd = "colorscheme",
     version = false,
     -- event = "VimEnter",
-    config = function()
-      require("everforest").setup({
-        ---Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
-        background = "soft",
-        italics = true,
-        ---By default, the colour of the sign column background is the same as the as normal text
-        ---background, but you can use a grey background by setting this to `"grey"`.
-        sign_column_background = "grey",
-        ---The contrast of line numbers, indent lines, etc. Options are `"high"` or
-        ---`"low"` (default).
-        ui_contrast = "high",
-        dim_inactive_windows = true,
-        diagnostic_text_highlight = true,
-        ---Which colour the diagnostic text should be. Options are `"grey"` or `"coloured"` (default)
-        diagnostic_virtual_text = "coloured",
-        diagnostic_line_highlight = true,
-        float_style = "bright",
-      })
-      -- require("everforest").load()
-    end,
-  },
-  {
-    "shaunsingh/nord.nvim",
-    --Lua:
-    -- event = "BufRead",
-    -- event = "VimEnter",
-    config = function()
-      vim.cmd([[colorscheme nord]])
-    end,
-  },
-  {
-    "EdenEast/nightfox.nvim",
-    -- event = "VimEnter",
-    -- event = "BufRead",
-    config = function()
-      require("nightfox").setup({
-        options = {
-          dim_inactive = true, -- Non focused panes set to alternative background
-          module_default = true, -- Default enable value for modules
-          colorblind = {
-            enable = true, -- Enable colorblind support
-            simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
-          },
-          styles = { -- Style to be applied to different syntax groups
-            -- bold
-            -- underline
-            -- undercurl  curly underline
-            -- underdouble  double underline
-            -- underdotted  dotted underline
-            -- underdashed  dashed underline
-            -- strikethrough
-            -- reverse
-            -- inverse    same as reverse
-            -- italic
-            -- standout
-            -- altfont
-            -- nocombine  override attributes instead of combining them
-            -- NONE   no attributes used (used to reset it)
-            comments = "italic", -- Value is any valid attr-list value `:help attr-list`
-            conditionals = "italic",
-            constants = "bold",
-            functions = "bold,italic",
-            keywords = "italic",
-            numbers = "italic",
-            operators = "NONE",
-            strings = "underdotted",
-            types = "NONE",
-            variables = "NONE",
-          },
-        },
-      })
-      -- setup must be called before loading
-      vim.cmd("colorscheme nightfox")
-    end,
+    opts = {
+      ---Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
+      background = "soft",
+      italics = true,
+      ---By default, the colour of the sign column background is the same as the as normal text
+      ---background, but you can use a grey background by setting this to `"grey"`.
+      sign_column_background = "grey",
+      ---The contrast of line numbers, indent lines, etc. Options are `"high"` or
+      ---`"low"` (default).
+      ui_contrast = "high",
+      dim_inactive_windows = true,
+      diagnostic_text_highlight = true,
+      ---Which colour the diagnostic text should be. Options are `"grey"` or `"coloured"` (default)
+      diagnostic_virtual_text = "coloured",
+      diagnostic_line_highlight = true,
+      float_style = "bright",
+    },
   },
   { "DonJulve/NeoCyberVim", config = true },
   { "echasnovski/mini.hues", version = false },
-  { "echasnovski/mini.base16", version = false },
 }

@@ -1,1 +1,1 @@
-vim.lsp.enable("bash")
+vim.lsp.enable("bashls")
