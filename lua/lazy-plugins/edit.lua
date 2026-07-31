@@ -77,6 +77,14 @@ return {
     },
     opts = { use_default_keymaps = false },
   },
+  { -- "Chiarandini/smart-enter.nvim",
+    "Chiarandini/smart-enter.nvim",
+    event = "InsertEnter",
+    opts = { filetypes = { markdown = { preset = "markdown" }, tex = { preset = "latex" } } },
+    config = function(_, opts)
+      require("smart_enter").setup(opts)
+    end,
+  },
   { -- "echasnovski/mini.align",
     "echasnovski/mini.align",
     enabled = false,
