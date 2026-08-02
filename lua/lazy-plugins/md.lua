@@ -44,7 +44,7 @@ return {
       html = { enabled = false },
       latex = { enabled = false },
       yaml = { enabled = false },
-      heading = { border = false, render_modes = true },
+      heading = { border = false, render_modes = false },
       bullet = { render_modes = false },
       anti_conceal = {
         ignore = {

@@ -1,5 +1,5 @@
 vim.lsp.enable("texlab")
-vim.lsp.enable("harper_ls")
+-- vim.lsp.enable("harper_ls")
 -- vim.lsp.enable("badness")
 vim.keymap.set("n", "<cr><cr>", "<cmd>TexlabBuild<cr>",
   { noremap = true, silent = true, buffer = bufnr, desc = "texlab build" })

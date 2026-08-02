@@ -18,6 +18,7 @@
   "fidget.nvim": { "branch": "main", "commit": "6f793b2bcd2d35e201c09520f698bb763220908a" },
   "flash.nvim": { "branch": "main", "commit": "b6346946d10d07998efee029fb0f7a593806d0cd" },
   "floatty.nvim": { "branch": "main", "commit": "e82ae3bbe46b8e28918bcf7b9f3d5c36304e0c9f" },
+  "flume.nvim": { "branch": "master", "commit": "2ed1aa0c003063fccf1b3c680870589d78ca12d4" },
   "github-theme": { "branch": "main", "commit": "c106c9472154d6b2c74b74565616b877ae8ed31d" },
   "gitsigns.nvim": { "branch": "main", "commit": "31d6fb2d618bca1482b9f274751ead5f03461408" },
   "grug-far.nvim": { "branch": "main", "commit": "6e05398cf6cad05b3fb46569db96b1ccfcbbd402" },
