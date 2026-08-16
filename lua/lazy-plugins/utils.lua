@@ -94,12 +94,6 @@ return {
           state = true,
         },
         {
-          name = "Copilot",
-          enable_cmd = "Copilot enable",
-          disable_cmd = "Copilot disable",
-          state = true, -- Initially enabled
-        },
-        {
           name = "Diagnostics",
           enable_cmd = "lua vim.diagnostic.enable()",
           disable_cmd = "lua vim.diagnostic.disable()",
