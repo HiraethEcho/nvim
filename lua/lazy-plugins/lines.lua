@@ -366,8 +366,7 @@ return {
       })
     end,
   },
-  {
-    -- "Isrothy/neominimap.nvim",
+  { -- "Isrothy/neominimap.nvim",
     "Isrothy/neominimap.nvim",
     version = "v3.*.*",
     enabled = false,
@@ -419,14 +418,16 @@ return {
   -- inside
   { -- "nvim-zh/colorful-winsep.nvim",
     "nvim-zh/colorful-winsep.nvim",
-    enabled = false,
-    config = true,
+    -- enabled = false,
+    opts = {
+      border = "single",
+    },
     event = { "BufRead", "BufNewFile" },
   },
   -- inside horizontal
   { -- "mvllow/modes.nvim",
     "mvllow/modes.nvim",
-    enabled = false,
+    -- enabled = false,
     tag = "v0.2.0",
     event = "InsertEnter",
     config = function()
@@ -439,7 +440,7 @@ return {
           visual = "#9745be",
         },
         -- Set opacity for cursorline and number background
-        line_opacity = 0.2,
+        line_opacity = 0.1,
       })
     end,
   },

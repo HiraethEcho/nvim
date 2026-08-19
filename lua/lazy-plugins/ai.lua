@@ -1,5 +1,100 @@
-if true then return {} end
 return {
+  {
+    "alex35mil/pi.nvim",
+    cmd = "Pi",
+    -- Optional: required only for `:PiPasteImage` (clipboard image paste).
+    -- dependencies = { "HakonHarnes/img-clip.nvim" },
+    -----@type pi.Options
+    opts = {
+      -- pi CLI invocation. Extra args are inserted before `--mode rpc`.
+      -- Args that conflict with RPC mode (`--mode`, `--print`, `--help`, etc.) are ignored.
+      -- cli = { bin = "pi", args = {} },
+      -- Preferred models for cycling and :PiSelectModel dialog.
+      -- Each entry is either a string (exact ID) or a table:
+      --   { match = "opus", latest = true }
+      --   { match = "gpt-5.3-codex", exact = true } or just "gpt-5.3-codex"
+      -- models = nil,
+      -- Spinner shown while the agent is working.
+      -- Preset name ("classic"|"robot"), array of frames (strings), or
+      -- { refresh_rate = ms, frames = { ... } }.
+      spinner = "robot",
+      -- Show thinking blocks by default.
+      show_thinking = false,
+      -- Chat panels
+      -- panels = { history = { title = "π" }, prompt = { title = "󰫽󰫿󰫼󰫺󰫽󰬁" }, attachments = { title = "󰫮󰬁󰬁󰫮󰫰󰫵󰫺󰫲󰫻󰬁󰬀" }, },
+      -- Chat layout
+      layout = {
+        -- Default layout when opening the chat: "side" or "float".
+        default = "side",
+        side = {
+          -- Side panel position: "right" or "bottom".
+          position = "right",
+          -- Width in columns when position is "right".
+          width = 80,
+          panels = {
+            -- Show winbars on each panel in side layout.
+            history = { winbar = true },
+            prompt = { winbar = true },
+            attachments = { winbar = true },
+          },
+        },
+      },
+      -- Status line in the prompt window
+      statusline = {
+        -- Components rendered in the prompt statusline. Entries are built-in component names, literal separators, or custom component functions.
+        layout = {
+          left = { "model", " ", "thinking" },
+          right = { "context", " ", "cache", " ", "cost", " ", "attention" },
+        },
+      },
+
+      -- Diff review
+      diff = {
+        -- How to show diff review keymap hints:
+        -- "dialog" or true (default): show compact "?=keymaps" and open an informational keymap dialog with ?.
+        -- "winbar": show full inline winbar hints.
+        -- false: hide hints and bind no help key.
+        keymap_hints = "dialog",
+        -- Keymaps active inside the diff review tab.
+        keys = {
+          accept = "<LocalLeader>da",
+          reject = "<LocalLeader>dr",
+          edit_note = "<LocalLeader>dn",
+          delete_note = "<LocalLeader>dx",
+          list_notes = "<LocalLeader>dN",
+          expand_context = "<LocalLeader>de",
+          shrink_context = "<LocalLeader>ds",
+        },
+      },
+      -- Selects, confirmation dialogs
+      dialog = {
+        border = "rounded",
+        -- Max size: fraction (<1) or columns/lines (>=1).
+        max_width = 0.8,
+        max_height = 0.8,
+        -- Sign text for the selected item.
+        indicator = "▸",
+        keys = {
+          -- Optional dialog keymaps; nil leaves built-in defaults in place.
+          confirm = nil,
+          cancel = nil,
+          next = nil,
+          prev = nil,
+        },
+      },
+      -- Zen mode for composing larger prompts
+      zen = {
+        -- Prompt width in columns. nil = textwidth if set, otherwise 80.
+        width = nil,
+        keys = {
+          -- Key to enter/exit zen mode.
+          toggle = nil,
+          -- Additional keys that only exit zen mode.
+          exit = nil,
+        },
+      },
+    },
+  },
   -- disabled
   { -- "milanglacier/minuet-ai.nvim",
     "milanglacier/minuet-ai.nvim",
