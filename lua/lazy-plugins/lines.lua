@@ -418,7 +418,7 @@ return {
   -- inside
   { -- "nvim-zh/colorful-winsep.nvim",
     "nvim-zh/colorful-winsep.nvim",
-    -- enabled = false,
+    enabled = false,
     opts = {
       border = "single",
     },
