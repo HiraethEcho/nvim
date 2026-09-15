@@ -1,3 +1,4 @@
+if true then return {} end
 return {
   { -- "smit4k/snapshot.nvim",
     enabled = false,
@@ -83,36 +84,6 @@ return {
       { "<leader>uP", "<cmd>Precognition Toggle<cr>", mode = "n", desc = "Toggle precognition" },
     },
     opts = {},
-  },
-  { -- "FluxxField/bionic-reading.nvim",
-    enabled = false,
-    "FluxxField/bionic-reading.nvim",
-    keys = {
-      { "<leader>ub", "<cmd>BRToggle<cr>", mode = { "n", "v" }, desc = "Toggle Bionic Read" },
-    },
-    opts = {
-      -- determines if the file types below will be
-      -- automatically highlighted on buffer open
-      auto_highlight = true,
-      -- the file types you want to highlight with
-      -- the node types you would like to target
-      -- using treesitter
-      file_types = {
-        ["text"] = "any", -- highlight any node
-        ["help"] = "any", -- highlight any node
-        ["markdown"] = "any",
-        -- EX: only highlights comments in lua files
-        ["lua"] = {
-          "comment",
-        },
-      },
-      -- Flag used to control if the user is prompted
-      -- if BRToggle is called on a file type that is not
-      -- explicitly defined above
-      prompt_user = true,
-      -- Enable or disable the use of treesitter
-      treesitter = true,
-    },
   },
   { -- "seandewar/actually-doom.nvim", -- what the fuck? why would I play DOOM in nvim?
     "seandewar/actually-doom.nvim", -- what the fuck? why would I play DOOM in nvim?

@@ -70,6 +70,12 @@ return {
     opts = {
       toggles = {
         {
+          name = "Bonic Reading",
+          enable_cmd = "BRToggle",
+          disable_cmd = "BRToggle",
+          state = false, -- Initially disabled
+        },
+        {
           name = "md fold",
           enable_cmd = "set foldlevel=2",
           disable_cmd = "set foldlevel=99",

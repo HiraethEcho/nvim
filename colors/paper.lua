@@ -541,15 +541,14 @@ hi("SnacksExplorerGitDeleted",  { fg = colors.error })
 hi("SnacksExplorerGitRenamed",  { fg = colors.info })
 
 -- ── yazi ───────────────────────────────────────────────────
-if style == "dark" then
-  hi("YaziNormal",  { link = "NormalFloat" })
-  hi("YaziBorder",  { link = "FloatBorder" })
-  hi("YaziTitle",   { link = "FloatTitle" })
-else
-  hi("YaziNormal",  { fg = colors.fg, bg = colors.bg_darker })
-  hi("YaziBorder",  { fg = colors.border })
-  hi("YaziTitle",   { fg = colors.keyword, bold = true })
-end
+-- yazi.nvim renders yazi inside a floating terminal window and maps its
+-- `NormalFloat`/`FloatBorder` to `YaziFloat`/`YaziFloatBorder` with
+-- `default = true` -- i.e. any definition we give here overrides the
+-- plugin's `link = Normal` fallback and is never clobbered.
+-- Without this, the yazi terminal inherits `Normal`'s background, so its
+-- (dark, noctalia) light text can end up washed out on a light backdrop.
+hi("YaziFloat",       { fg = colors.fg, bg = colors.bg_darker })
+hi("YaziFloatBorder", { fg = colors.border, bg = colors.bg_darker })
 
 -- ── custom highlights from plugin/highlight.lua ────────────
 hi("RainbowRed",    { fg = "#E06C75" })

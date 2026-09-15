@@ -22,7 +22,7 @@ opt.splitright = true -- Put new windows right of current
 opt.cursorline = false -- Enable highlighting of the current line
 opt.cursorcolumn = false -- Enable highlighting of the current column
 -- opt.colorcolumn = "80" -- Line length marker at 80 columns
-opt.scrolloff = 4 -- Lines of context
+opt.scrolloff = 15 -- Lines of context
 opt.sidescrolloff = 4 -- Columns of context
 opt.shortmess:append({ W = true, I = true, c = true })
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
@@ -75,4 +75,4 @@ opt.hidden = true -- 允许隐藏被修改过的buffer
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.autowrite = true -- Enable auto write
 
-
+opt.exrc = true

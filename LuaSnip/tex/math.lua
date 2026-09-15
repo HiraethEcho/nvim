@@ -10,8 +10,6 @@ end
 local maths =
   require("luasnip").extend_decorator.apply(s, { condition = tex.in_mathzone, show_condition = tex.in_mathzone })
 
--- local tex_utils=require("util.luasnip-helper").tex_utils
-
 local snip_bak = {
   s(
     { trig = "xym" },
