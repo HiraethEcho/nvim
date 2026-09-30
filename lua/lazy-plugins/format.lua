@@ -22,7 +22,7 @@ return {
           args = { "-w", "--config", vim.fn.expand("~") .. "/.config/cbfmt.toml", "$FILENAME" },
         },
         ["tex-fmt"] = {
-          args = { "--nowrap" }, -- 例如，不自动换行
+          args = { "--nowrap" }, -- 不自动换行
         },
       },
       formatters_by_ft = {

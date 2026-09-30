@@ -4,7 +4,6 @@ return {
     cmd = "Pi",
     -- Optional: required only for `:PiPasteImage` (clipboard image paste).
     -- dependencies = { "HakonHarnes/img-clip.nvim" },
-    -----@type pi.Options
     opts = {
       -- pi CLI invocation. Extra args are inserted before `--mode rpc`.
       -- Args that conflict with RPC mode (`--mode`, `--print`, `--help`, etc.) are ignored.

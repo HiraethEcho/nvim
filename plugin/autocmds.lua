@@ -88,7 +88,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
---[[ vim.api.nvim_create_autocmd("LspProgress", {
+vim.api.nvim_create_autocmd("LspProgress", {
   callback = function(ev)
     local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
     vim.notify(vim.lsp.status(), "info", {
@@ -100,12 +100,13 @@ vim.api.nvim_create_autocmd("BufReadPost", {
       end,
     })
   end,
-}) ]]
+})
 
 vim.api.nvim_create_autocmd("InsertEnter", {
   callback = function()
     -- vim.diagnostic.config({ virtual_text = false })
-    vim.lsp.enable("copilot_ls")
+    vim.lsp.enable("copilot")
+    -- vim.lsp.enable("copilot_ls")
   end,
 })
 

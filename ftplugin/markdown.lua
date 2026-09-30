@@ -1,5 +1,5 @@
 vim.lsp.enable("marksman")
-vim.lsp.enable("harper_ls")
+-- vim.lsp.enable("harper_ls")
 
 --[[ function _G.wrap_selected(wrapper)
   vim.cmd('normal! gv"ay')

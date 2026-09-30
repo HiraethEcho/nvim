@@ -5,13 +5,20 @@ return {
     event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
     dependencies = {
-      "fang2hou/blink-copilot",
       -- "milanglacier/minuet-ai.nvim",
       "L3MON4D3/LuaSnip",
+      {
+        "fang2hou/blink-copilot",
+        opts = {
+          max_completions = 1, -- Global default for max completions
+          max_attempts = 2, -- Global default for max attempts
+        },
+      },
     },
     opts = {
       sources = {
-        default = { "snippets", "lsp", "path", "buffer" },
+        -- default = { "snippets", "lsp", "path", "buffer" },
+        default = { "snippets", "lsp", "path", "buffer", "copilot" },
         -- default = { "snippets", "lsp", "path", "buffer", "copilot", "minuet" },
         providers = {
           snippets = { score_offset = 200 },
