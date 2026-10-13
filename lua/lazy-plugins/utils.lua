@@ -82,6 +82,18 @@ return {
           state = false, -- Initially disabled
         },
         {
+          name = "minimap",
+          enable_cmd = "ScrollMinimapToggle",
+          disable_cmd = "ScrollMiniMapToggle",
+          state = false, -- Initially enabled
+        },
+        {
+          name = "scroll",
+          enable_cmd = "ScrollEnable",
+          disable_cmd = "ScrollDisable",
+          state = false, -- Initially enabled
+        },
+        {
           name = "colorcolumn",
           enable_cmd = "set cc=80",
           disable_cmd = "set cc=0",
@@ -113,6 +125,7 @@ return {
       },
     },
   },
+  { "nvzone/showkeys", cmd = "ShowkeysToggle" },
   -- disable
   { -- "ingur/floatty.nvim",
     "ingur/floatty.nvim",

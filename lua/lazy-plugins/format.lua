@@ -34,7 +34,9 @@ return {
         sh = { "shfmt" },
         lua = { "stylua" },
         markdown = { "prettier", "cbfmt" },
-        python = { "ruff" },
+        -- "ruff_format" 不是 "ruff"：后者在本版 conform 里已改名成 ruff_fix，
+        -- 跑的是 `ruff check --fix`，只修 lint 不排版，所以看起来「格式化不生效」
+        python = { "ruff_format" },
         javascript = { "biome" },
         typescript = { "biome" },
         json = { "biome" },

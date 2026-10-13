@@ -32,4 +32,19 @@ return {
   filetypes = { 'python' },
   root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' },
   settings = {},
+  offset_encoding = 'utf-16',
+  init_options = {
+    settings = {
+      -- 服务器设置放这里，例如：
+      -- configurationPreference = 'filesystemFirst',
+      -- fixAll = true,
+      -- organizeImports = true,
+    },
+  },
+  on_attach = function(client, bufnr)
+    -- 关键：关闭 hover，让 Pyright 负责悬浮文档
+    client.server_capabilities.hoverProvider = false
+    -- 可选：如果不想让 Ruff 提供补全，也可以关闭
+    -- client.server_capabilities.completionProvider = nil
+  end,
 }
