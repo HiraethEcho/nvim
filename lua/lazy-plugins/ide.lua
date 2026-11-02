@@ -15,6 +15,8 @@ return {
   {
     "nghiant03/jove.nvim",
     version = "v*",
+    event = { "BufReadPre *.ipynb", "BufNewFile *.ipynb" },
+    filetypes = { "json", "ipynb", "py" },
     cmd = { "Jove", "JoveReload" },
     opts = {
       auto_kernel = true,
@@ -25,7 +27,7 @@ return {
       auto_export_outputs = true, -- merge session outputs into the notebook on save
       persist_exec_counts = true, -- persist kernel execution counts into the notebook
       elapsed = true, -- show per-cell elapsed execution time
-      auto_reload = false, -- auto-reload when the notebook changes on disk
+      auto_reload = true, -- auto-reload when the notebook changes on disk
       cell_motions = true, -- map cell motions
       signs = {
         queued = "…", -- gutter sign: queued for execution
@@ -33,29 +35,9 @@ return {
         ok = "✓", -- gutter sign: finished successfully
         error = "✗", -- gutter sign: finished with an error
       },
-      output = {
-        max_lines = 50, -- inline output truncation limit
-        images = true, -- render images via snacks.image when available
-        image_max_width = 80, -- cap rendered image width in terminal cells
-        image_max_height = 40, -- cap rendered image height in terminal cells
-        header = true, -- draw the Output top frame
-        guide = "▎ ", -- per-line inner output rail
-        inside_border = false, -- render output inside the cell border instead of its own bordered block below it
-        hl = nil, -- output background tint
-      },
       variables = {
         auto_refresh = true, -- refresh the variables inspector on idle
         size = 0.25, -- sidebar size as a fraction of the screen
-      },
-      ui = {
-        conceal_headers = true, -- conceal cell headers
-        active_cell = true, -- highlight the active cell
-        exec_counts = true, -- show per-cell execution counts
-        elapsed = true, -- show per-cell elapsed time
-        borders = true, -- draw a closing line below each cell
-        border_hl = nil, -- cell border highlight
-        window_mode = "vsplit", -- all Jove viewers: "vsplit" (right), "hsplit" (below), or "float"
-        window_overrides = {}, -- optional per-view modes: sidebar, output, inspect, webview
       },
       lsp = {
         auto_attach = false, -- start the servers in `servers` on notebook open

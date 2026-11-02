@@ -172,7 +172,7 @@ return {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           },
           lualine_c = {
-            {
+            --[[ {
               "buffers",
               show_filename_only = true, -- Shows shortened relative path when set to false.
               hide_filename_extension = true,
@@ -186,7 +186,7 @@ return {
                 newfile = "", -- Text to show for newly created file before first write
                 alternate_file = "", -- Text to show to identify the alternate file
               },
-            },
+            }, ]]
             --[[ {
               "windows",
               show_filename_only = true, -- Shows shortened relative path when set to false.

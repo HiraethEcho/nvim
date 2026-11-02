@@ -1,5 +1,4 @@
--- paper: a warm, low-contrast colorscheme
--- feels like reading on real paper, easy on the eyes
+-- paper: a calm, low-contrast colorscheme inspired by cool gray A4 paper
 -- supports light and dark backgrounds via vim.o.background
 
 local style = vim.o.background or "light"
@@ -43,38 +42,38 @@ if style == "dark" then
   }
 else
   colors = {
-    bg        = "#d3cfc8",
-    bg_dark   = "#c8c4c0",
-    bg_darker = "#c2beb9",
-    bg_float  = "#d8d4cd",
-    fg        = "#333028",
-    fg_dim    = "#45403a",
-    fg_subtle = "#656058",
-    fg_faint  = "#908b82",
+    bg        = "#c6c9cc",
+    bg_dark   = "#bcbfc2",
+    bg_darker = "#b2b6ba",
+    bg_float  = "#ccced1",
+    fg        = "#30343a",
+    fg_dim    = "#444a51",
+    fg_subtle = "#626a73",
+    fg_faint  = "#858b91",
 
-    string    = "#5a6a52",
-    keyword   = "#4a5270",
-    func      = "#5a4a3a",
-    number    = "#6a5a3a",
-    type      = "#3a5a6a",
-    constant  = "#4a6a52",
-    special   = "#5a526a",
-    operator  = "#4a5a5a",
+    string    = "#40584a",
+    keyword   = "#3e526e",
+    func      = "#5b5147",
+    number    = "#655740",
+    type      = "#3b5960",
+    constant  = "#48594b",
+    special   = "#5c5068",
+    operator  = "#43565a",
 
-    border    = "#a09888",
-    selection = "#c8c4ba",
-    search    = "#d2ceb8",
-    incsearch = "#c0b898",
+    border    = "#92979c",
+    selection = "#b9bec3",
+    search    = "#bfc3bb",
+    incsearch = "#aeb7bd",
 
-    error     = "#723a3a",
-    warn      = "#726a3a",
-    info      = "#3a4a72",
-    hint      = "#3a6a6a",
-    ok        = "#3a6a3a",
+    error     = "#783d45",
+    warn      = "#695638",
+    info      = "#394f75",
+    hint      = "#345b61",
+    ok        = "#385c40",
 
-    add       = "#cdd5c5",
-    change    = "#d5d0c0",
-    delete    = "#d5c5c5",
+    add       = "#b9c5bd",
+    change    = "#c4c3b9",
+    delete    = "#cdbdc0",
   }
 end
 
@@ -105,6 +104,44 @@ if vim.fn.exists("syntax_on") then
 end
 
 vim.o.termguicolors = true
+
+-- Terminal applications such as yazi use ANSI colors rather than Neovim
+-- highlight groups. Give the light palette darker ANSI colors for contrast.
+if style == "dark" then
+  vim.g.terminal_color_0 = "#3B4252"
+  vim.g.terminal_color_1 = "#BF616A"
+  vim.g.terminal_color_2 = "#A3BE8C"
+  vim.g.terminal_color_3 = "#EBCB8B"
+  vim.g.terminal_color_4 = "#81A1C1"
+  vim.g.terminal_color_5 = "#B48EAD"
+  vim.g.terminal_color_6 = "#88C0D0"
+  vim.g.terminal_color_7 = "#E5E9F0"
+  vim.g.terminal_color_8 = "#4C566A"
+  vim.g.terminal_color_9 = "#BF616A"
+  vim.g.terminal_color_10 = "#A3BE8C"
+  vim.g.terminal_color_11 = "#EBCB8B"
+  vim.g.terminal_color_12 = "#81A1C1"
+  vim.g.terminal_color_13 = "#B48EAD"
+  vim.g.terminal_color_14 = "#88C0D0"
+  vim.g.terminal_color_15 = "#ECEFF4"
+else
+  vim.g.terminal_color_0 = "#444a51"
+  vim.g.terminal_color_1 = "#843f48"
+  vim.g.terminal_color_2 = "#3d6746"
+  vim.g.terminal_color_3 = "#765a32"
+  vim.g.terminal_color_4 = "#3d5682"
+  vim.g.terminal_color_5 = "#665574"
+  vim.g.terminal_color_6 = "#35646b"
+  vim.g.terminal_color_7 = "#c6c9cc"
+  vim.g.terminal_color_8 = "#626a73"
+  vim.g.terminal_color_9 = "#843f48"
+  vim.g.terminal_color_10 = "#3d6746"
+  vim.g.terminal_color_11 = "#765a32"
+  vim.g.terminal_color_12 = "#3d5682"
+  vim.g.terminal_color_13 = "#665574"
+  vim.g.terminal_color_14 = "#35646b"
+  vim.g.terminal_color_15 = "#30343a"
+end
 vim.g.colors_name = "paper"
 vim.o.background = style
 
@@ -397,9 +434,9 @@ hi("@markup.environment",       { fg = colors.special })
 hi("@markup.environment.name",  { fg = colors.keyword })
 
 -- ── blink.cmp ──────────────────────────────────────────────
-hi("BlinkCmpMenu",            { fg = colors.fg, bg = style == "dark" and "#3e3e42" or "#c5c0b8" })
+hi("BlinkCmpMenu",            { fg = colors.fg, bg = style == "dark" and "#3e3e42" or "#b8bdc1" })
 hi("BlinkCmpMenuBorder",      { fg = colors.border })
-hi("BlinkCmpMenuSelection",   { fg = colors.fg, bg = style == "dark" and "#4c4c52" or "#b5b0a8", bold = true })
+hi("BlinkCmpMenuSelection",   { fg = colors.fg, bg = style == "dark" and "#4c4c52" or "#aab1b7", bold = true })
 hi("BlinkCmpLabel",           { fg = colors.fg })
 hi("BlinkCmpLabelMatch",      { fg = colors.keyword, bold = true })
 hi("BlinkCmpLabelDescription",{ fg = colors.fg_dim })
@@ -446,7 +483,7 @@ hi("WhichKey",          { fg = colors.keyword })
 hi("WhichKeyDesc",      { fg = colors.fg })
 hi("WhichKeySeparator", { fg = colors.fg_faint })
 hi("WhichKeyGroup",     { fg = colors.type })
-hi("WhichKeyFloat",     { fg = colors.fg, bg = style == "dark" and "#303035" or "#e8e5e0" })
+hi("WhichKeyFloat",     { fg = colors.fg, bg = style == "dark" and "#303035" or colors.bg_float })
 hi("WhichKeyBorder",    { fg = colors.border })
 
 -- ── lualine ────────────────────────────────────────────────
@@ -485,35 +522,35 @@ if style == "dark" then
 else
   -- light: brighter paper tones
   hi("lualine_a_normal",      { fg = colors.bg, bg = colors.fg_dim })
-  hi("lualine_b_normal",      { fg = colors.fg, bg = "#d8d6d0" })
-  hi("lualine_c_normal",      { fg = colors.fg, bg = "#e0ded8" })
+  hi("lualine_b_normal",      { fg = colors.fg, bg = colors.bg_dark })
+  hi("lualine_c_normal",      { fg = colors.fg, bg = colors.bg_float })
 
-  hi("lualine_a_insert",      { fg = colors.bg, bg = "#4a7a52" })
-  hi("lualine_b_insert",      { fg = colors.fg, bg = "#d8d6d0" })
-  hi("lualine_c_insert",      { fg = colors.fg, bg = "#e0ded8" })
+  hi("lualine_a_insert",      { fg = colors.bg, bg = "#4d6752" })
+  hi("lualine_b_insert",      { fg = colors.fg, bg = colors.bg_dark })
+  hi("lualine_c_insert",      { fg = colors.fg, bg = colors.bg_float })
 
-  hi("lualine_a_visual",      { fg = colors.bg, bg = "#526088" })
-  hi("lualine_b_visual",      { fg = colors.fg, bg = "#d8d6d0" })
-  hi("lualine_c_visual",      { fg = colors.fg, bg = "#e0ded8" })
+  hi("lualine_a_visual",      { fg = colors.bg, bg = "#515b70" })
+  hi("lualine_b_visual",      { fg = colors.fg, bg = colors.bg_dark })
+  hi("lualine_c_visual",      { fg = colors.fg, bg = colors.bg_float })
 
-  hi("lualine_a_replace",     { fg = colors.bg, bg = "#884a4a" })
-  hi("lualine_b_replace",     { fg = colors.fg, bg = "#d8d6d0" })
-  hi("lualine_c_replace",     { fg = colors.fg, bg = "#e0ded8" })
+  hi("lualine_a_replace",     { fg = colors.bg, bg = "#70464a" })
+  hi("lualine_b_replace",     { fg = colors.fg, bg = colors.bg_dark })
+  hi("lualine_c_replace",     { fg = colors.fg, bg = colors.bg_float })
 
-  hi("lualine_a_command",     { fg = colors.bg, bg = "#4a5a88" })
-  hi("lualine_b_command",     { fg = colors.fg, bg = "#d8d6d0" })
-  hi("lualine_c_command",     { fg = colors.fg, bg = "#e0ded8" })
+  hi("lualine_a_command",     { fg = colors.bg, bg = "#4d586f" })
+  hi("lualine_b_command",     { fg = colors.fg, bg = colors.bg_dark })
+  hi("lualine_c_command",     { fg = colors.fg, bg = colors.bg_float })
 
-  hi("lualine_a_terminal",    { fg = colors.bg, bg = "#4a6a6a" })
-  hi("lualine_b_terminal",    { fg = colors.fg, bg = "#d8d6d0" })
-  hi("lualine_c_terminal",    { fg = colors.fg, bg = "#e0ded8" })
+  hi("lualine_a_terminal",    { fg = colors.bg, bg = "#4d6265" })
+  hi("lualine_b_terminal",    { fg = colors.fg, bg = colors.bg_dark })
+  hi("lualine_c_terminal",    { fg = colors.fg, bg = colors.bg_float })
 
   hi("lualine_a_inactive",    { fg = colors.fg_subtle, bg = colors.bg_darker })
   hi("lualine_b_inactive",    { fg = colors.fg_subtle, bg = colors.bg_darker })
   hi("lualine_c_inactive",    { fg = colors.fg_subtle, bg = colors.bg_darker })
 
-  hi("lualine_transitional_a_normal", { fg = colors.fg_dim, bg = "#d8d6d0" })
-  hi("lualine_transitional_b_normal", { fg = colors.fg, bg = "#e0ded8" })
+  hi("lualine_transitional_a_normal", { fg = colors.fg_dim, bg = colors.bg_dark })
+  hi("lualine_transitional_b_normal", { fg = colors.fg, bg = colors.bg_float })
 end
 
 -- ── mini.starter ───────────────────────────────────────────
@@ -551,11 +588,11 @@ hi("YaziFloat",       { fg = colors.fg, bg = colors.bg_darker })
 hi("YaziFloatBorder", { fg = colors.border, bg = colors.bg_darker })
 
 -- ── custom highlights from plugin/highlight.lua ────────────
-hi("RainbowRed",    { fg = "#E06C75" })
-hi("RainbowYellow", { fg = "#E5C07B" })
-hi("RainbowBlue",   { fg = "#61AFEF" })
-hi("RainbowOrange", { fg = "#D19A66" })
-hi("RainbowGreen",  { fg = "#98C379" })
-hi("RainbowViolet", { fg = "#C678DD" })
-hi("RainbowCyan",   { fg = "#56B6C2" })
+hi("RainbowRed",    { fg = style == "dark" and "#E06C75" or "#984b54" })
+hi("RainbowYellow", { fg = style == "dark" and "#E5C07B" or "#806334" })
+hi("RainbowBlue",   { fg = style == "dark" and "#61AFEF" or "#3d5682" })
+hi("RainbowOrange", { fg = style == "dark" and "#D19A66" or "#805b39" })
+hi("RainbowGreen",  { fg = style == "dark" and "#98C379" or "#3d6746" })
+hi("RainbowViolet", { fg = style == "dark" and "#C678DD" or "#705180" })
+hi("RainbowCyan",   { fg = style == "dark" and "#56B6C2" or "#35646b" })
 hi("SearchCountVirtualText", { fg = "#688af4", bold = true })
