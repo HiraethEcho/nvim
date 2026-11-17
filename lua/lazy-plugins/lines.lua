@@ -28,10 +28,9 @@ return {
       require("lualine").setup({
         extensions = { "quickfix" },
         options = {
-          -- theme = "OceanicNext",
+          theme = "OceanicNext",
           -- theme = "material",
           -- theme = "jellybeans",
-          -- theme = "flow",
           -- component_separators = { left = "", right = "" },
           -- section_separators = { left = "", right = "" },
           -- section_separators = { left = '', right = '' },
@@ -48,14 +47,6 @@ return {
         },
         sections = {
           lualine_a = {
-            -- { "fancy_cwd", substitute_home = true },
-            -- { "fancy_branch" },
-            -- "filetype"
-            -- "branch",
-            -- "fancy_lsp_servers",
-          },
-          lualine_b = {
-            -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
               file_status = true, -- Displays file status (readonly status, modified status)
@@ -68,45 +59,20 @@ return {
                 newfile = "", -- Text to show for newly created file before first write
               },
             },
+            -- { "fancy_cwd", substitute_home = true },
+            -- { "fancy_branch" },
+            -- "filetype"
+            -- "branch",
+            -- "fancy_lsp_servers",
+          },
+          lualine_b = {
+            -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           },
           lualine_c = {
             -- { "fancy_diff" },
             "diff",
           },
-          lualine_x = {
-            --[[ {
-              function()
-                if not vim.g.loaded_mcphub then
-                  return "󰐻 -"
-                end
-                local count = vim.g.mcphub_servers_count or 0
-                local status = vim.g.mcphub_status or "stopped"
-                local executing = vim.g.mcphub_executing
-                if status == "stopped" then
-                  return "󰐻 -"
-                end
-                if executing or status == "starting" or status == "restarting" then
-                  local frames = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-                  local frame = math.floor(vim.loop.now() / 100) % #frames + 1
-                  return "󰐻 " .. frames[frame]
-                end
-                return "󰐻 " .. count
-              end,
-              color = function()
-                if not vim.g.loaded_mcphub then
-                  return { fg = "#18181f" } -- Gray for not loaded
-                end
-                local status = vim.g.mcphub_status or "stopped"
-                if status == "ready" or status == "restarted" then
-                  return { fg = "#50fa7b" } -- Green for connected
-                elseif status == "starting" or status == "restarting" then
-                  return { fg = "#ffb86c" } -- Orange for connecting
-                else
-                  return { fg = "#ff5555" } -- Red for error/stopped
-                end
-              end,
-            }, ]]
-          },
+          lualine_x = {},
           -- lualine_y = { "filetype" },
           lualine_y = {
             -- "lsp_status",
@@ -156,7 +122,6 @@ return {
           lualine_a = {
             {
               "tabs",
-              max_length = vim.o.columns / 3, -- Maximum width of tabs component.
               mode = 1, -- 0: Shows tab_nr
               symbols = {
                 modified = "", -- Text to show when the file is modified.
@@ -172,7 +137,7 @@ return {
             -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           },
           lualine_c = {
-            --[[ {
+            {
               "buffers",
               show_filename_only = true, -- Shows shortened relative path when set to false.
               hide_filename_extension = true,
@@ -186,7 +151,7 @@ return {
                 newfile = "", -- Text to show for newly created file before first write
                 alternate_file = "", -- Text to show to identify the alternate file
               },
-            }, ]]
+            },
             --[[ {
               "windows",
               show_filename_only = true, -- Shows shortened relative path when set to false.

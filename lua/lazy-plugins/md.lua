@@ -82,8 +82,17 @@ return {
     config = true,
   },
   {
+    "ywsrock/nvim-md-preview",
+    build = ":MdPreviewInstall",
+    keys = {
+      { "<leader>mP", "<cmd>MarkdownPreview<cr>", desc = "Live Preview" },
+    },
+    opt = {},
+  },
+  {
     "brianhuster/live-preview.nvim",
     -- lazy = false,
+    enabled = false,
     dependencies = {
       "folke/snacks.nvim",
     },

@@ -14,6 +14,7 @@ return {
   },
   {
     "nghiant03/jove.nvim",
+    enabled = false,
     version = "v*",
     event = { "BufReadPre *.ipynb", "BufNewFile *.ipynb" },
     filetypes = { "json", "ipynb", "py" },
